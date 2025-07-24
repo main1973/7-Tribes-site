@@ -10,7 +10,12 @@
       background: #0d0d0d;  
       color: #fff;  
       line-height: 1.6;  
-    }  
+    }  <section class="hero-section">
+  <div class="overlay">
+    <h1>7 Tribes - Crypto for the Culture</h1>
+    <p>Join the movement. Build the future.</p>
+  </div>
+</section>
     header {  
       background: #121212;  
       padding: 20px;  
@@ -75,6 +80,29 @@
 .hero p {
   font-size: 1.3em;
   margin: 10px 0 20px;
+}
+#heroVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.hero-section .overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 10px;
 }
   
 </head>  
