@@ -1,75 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7 Tribes - Crypto for the Culture</title>
   <style>
     body, html {
       margin: 0;
       padding: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       color: white;
-      background: url('hero-bg-7tribes.jpg') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 1.5rem;
-      margin-bottom: 40px;
-    }
-
-    .video-section {
-      text-align: center;
-      padding: 50px 20px;
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    .video-section video {
-      max-width: 100%;
-      height: auto;
-      border: 2px solid #fff;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 10px;
       background-color: #000;
-      font-size: 0.9rem;
-    }
+    }.hero {
+  height: 100vh;
+  background: url('assets/hero-bg-7tribes.jpg') no-repeat center center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero .overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0 0 20px;
+  color: gold;
+}
+
+.hero p {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+}
+
+.video-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #111;
+}
+
+.video-section h2 {
+  font-size: 2rem;
+  color: gold;
+}
+
+.video-section video {
+  max-width: 90%;
+  height: auto;
+  border: 2px solid #fff;
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+footer {
+  background-color: #000;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
   </style>
 </head>
-
 <body>
   <section class="hero">
-    <h1>7 Tribes</h1>
-    <p>Crypto for the Culture</p>
-    <p>Empowering the Black community through blockchain technology.</p>
-  </section>
-
-  <section class="video-section">
+    <div class="overlay">
+      <h1>7 Tribes</h1>
+      <p>Crypto for the Culture</p>
+      <p>Empowering the Black community through blockchain technology.</p>
+    </div>
+  </section>  <section class="video-section">
     <h2>Our Journey</h2>
     <video controls>
-      <source src="promo-7tribes.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      <source src="assets/promo-7tribes.mp4" type="video/mp4">
+      Your browser does not support this video.
     </video>
-  </section>
-
-  <footer>
+  </section>  <footer>
     <p>&copy; 2025 7 Tribes. All rights reserved.</p>
   </footer>
 </body>
-
 </html>
