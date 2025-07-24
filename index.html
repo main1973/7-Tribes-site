@@ -20,18 +20,15 @@
       font-size: 2.5em;  
       margin-bottom: 5px;  
     }  
-    nav a {  
-      margin: 0 15px;  
-      color: #fff;  
-      text-decoration: none;  
-    }  
-    section {  
-      padding: 40px 20px;  
-      max-width: 900px;  
-      margin: auto;  
-    }  
-    h2 {  
-      color: #00cc99;  
+ <section class="hero">
+  <div class="hero-content">
+    <img src="images/7tribes-logo.png" alt="7 Tribes Logo" class="logo" />
+    <h1>7 Tribes</h1>
+    <p>Crypto for the Culture. Apparel. Wealth. Legacy.</p>
+    <a href="#join" class="btn">Join the Movement</a>
+  </div>
+</section>
+
     }  
     footer {  
       background: #121212;  
@@ -53,7 +50,33 @@
     .btn:hover {  
       background: #00b386;  
     }  
-  </style>  
+  </style>.hero {
+  background: linear-gradient(to right, #0d0d0d, #1a1a1a);
+  text-align: center;
+  padding: 80px 20px;
+  color: #fff;
+}
+
+.hero .hero-content {
+  max-width: 800px;
+  margin: auto;
+}
+
+.hero img.logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: 3em;
+  margin: 0;
+}
+
+.hero p {
+  font-size: 1.3em;
+  margin: 10px 0 20px;
+}
+  
 </head>  
 <body>  
   <header>  
