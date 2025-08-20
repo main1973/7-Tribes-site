@@ -62,3 +62,124 @@ li {
 .cta h2 {
   color: #fff;
 }
+/* Header styles */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 20px;
+  background-color: #000; /* fallback behind logo */
+}
+
+header .logo img {
+  height: 60px; /* adjust as needed */
+  margin-right: 15px;
+}
+
+header h1 {
+  color: white;
+  font-size: 24px;
+}
+
+/* Banner styles */
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+/* About, Investment, Participation sections */
+section {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+section h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #222;
+  text-align: center;
+}
+
+section p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #444;
+  text-align: center;
+}
+
+.investment ul, .participation ol {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+/* Section background styles */
+.about {
+  background: #f4f4f4;
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.investment {
+  background: #fff;
+  border-left: 6px solid #0066cc;
+  border-radius: 8px;
+  padding: 40px 20px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.participation {
+  background: linear-gradient(135deg, #0066cc, #00aaff);
+  color: white;
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.participation h2 {
+  color: #fff;
+}
+
+.participation ol li {
+  margin: 12px 0;
+}
+/* Section background styles */
+.about {
+  background: #f4f4f4;
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.investment {
+  background: #fff;
+  border-left: 6px solid #0066cc;
+  border-radius: 8px;
+  padding: 40px 20px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.participation {
+  background: linear-gradient(135deg, #0066cc, #00aaff);
+  color: white;
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.participation h2 {
+  color: #fff;
+}
+
+.participation ol li {
+  margin: 12px 0;
