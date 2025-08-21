@@ -415,3 +415,105 @@ section { max-width: 900px; margin: 36px auto; padding: 20px; } @media (max-widt
 @media (max-width: 768px){
   .logo { width: 150px; }
 }
+/* ========== 7Tribes Global Styles ========== */
+:root{
+  --bg:#f7f7f9; --card:#ffffff; --text:#222; --muted:#555;
+  --cta:#FF9900; --cta-hover:#e68a00;
+  --accent:#0066cc; --accent2:#00aaff;
+  --shadow:0 6px 18px rgba(0,0,0,.12);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0; font-family:Arial, sans-serif; line-height:1.6;
+  background:var(--bg); color:var(--text);
+}
+
+/* ========== Hero (Banner + Centered Logo) ========== */
+header.hero{
+  position:relative; text-align:center; background:#000;
+}
+header.hero .banner{
+  width:100%; height:auto; display:block; opacity:.96;
+}
+/* subtle gradient overlay so logo pops */
+header.hero::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.55) 80%);
+  pointer-events:none;
+}
+.logo-container{
+  position:absolute; top:55%; left:50%; transform:translate(-50%, -50%);
+}
+.logo-container .logo{
+  width:180px; height:auto; opacity:.98;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+}
+
+/* ========== Primary CTA: Etsy button ========== */
+.shop-tab{ text-align:center; margin:28px 0 16px; }
+.etsy-btn{
+  display:inline-block; background:var(--cta); color:#fff;
+  padding:12px 28px; border-radius:28px; text-decoration:none;
+  font-weight:700; font-size:18px; box-shadow:var(--shadow);
+  transition: transform .12s ease, background .25s ease;
+}
+.etsy-btn:hover{ background:var(--cta-hover); transform:translateY(-1px); }
+
+/* ========== Card Sections (About / Why / Investment / Participate) ========== */
+section.card{
+  max-width:960px; margin:32px auto; padding:24px;
+  background:var(--card); border-radius:12px; box-shadow:var(--shadow);
+}
+h1,h2{ margin:0 0 10px; }
+h1{ font-size:28px; }
+h2{ font-size:24px; }
+p{ color:var(--muted); margin:10px 0 0; }
+
+.list{ padding-left:20px; margin-top:8px; }
+.list li{ margin:8px 0; }
+
+/* ========== Participation (gradient emphasis) ========== */
+.participation{
+  background:linear-gradient(135deg, var(--accent), var(--accent2));
+  color:#fff;
+}
+.participation h2,
+.participation p,
+.participation ol{ color:#fff; }
+.participation ol{ padding-left:22px; }
+
+/* ========== Social Buttons ========== */
+.social-links{ text-align:center; margin:18px 0 8px; }
+.social-button{
+  display:inline-block; margin:6px 8px; padding:10px 20px;
+  border-radius:24px; text-decoration:none; color:#fff; font-weight:700;
+  font-size:16px; box-shadow:var(--shadow); transition:background .25s ease;
+}
+.social-button i{ margin-right:8px; }
+.social-button.telegram{ background:#0088cc; }
+.social-button.telegram:hover{ background:#006fa1; }
+.social-button.twitter{ background:#000; }
+.social-button.twitter:hover{ background:#333; }
+
+/* ========== Wallet Connect ========== */
+.wallet-connect{ text-align:center; margin-top:16px; }
+.wallet-connect button{
+  background:#ffcc00; color:#000; padding:12px 25px; border:none;
+  border-radius:30px; font-weight:bold; cursor:pointer; transition:.25s;
+  box-shadow:var(--shadow);
+}
+.wallet-connect button:hover{ background:#e6b800; }
+#wallet-address, #token-balance{ margin-top:8px; font-weight:600; }
+
+/* ========== Footer ========== */
+footer{
+  text-align:center; color:#aaa; padding:24px 12px;
+}
+
+/* ========== Mobile Tweaks ========== */
+@media (max-width: 768px){
+  .logo-container .logo{ width:150px; }
+  section.card{ margin:22px auto; padding:18px; }
+  .etsy-btn{ font-size:16px; padding:12px 22px; }
+}
