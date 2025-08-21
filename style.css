@@ -360,3 +360,58 @@ section { max-width: 900px; margin: 36px auto; padding: 20px; } @media (max-widt
   margin-top: 10px;
   font-weight: 500;
 }
+/* HERO: banner + centered overlay logo */
+.hero {
+  position: relative;
+  text-align: center;
+}
+
+.banner {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Center the logo over the banner */
+.logo-container {
+  position: absolute;
+  top: 55%;                 /* tweak 50–60% to sit nicely over art */
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo {
+  width: 180px;             /* adjust 140–220px to taste */
+  height: auto;
+  opacity: 0.95;            /* slight blend; change 0.85–1.0 */
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35));
+}
+
+/* Centered Etsy button under hero */
+.shop-tab {
+  text-align: center;
+  margin: 22px 0 10px;
+}
+
+.etsy-btn {
+  display: inline-block;
+  background: #FF9900;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 28px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  transition: transform .12s ease, background .25s ease;
+}
+
+.etsy-btn:hover {
+  background: #e68a00;
+  transform: translateY(-1px);
+}
+
+/* Mobile tweak */
+@media (max-width: 768px){
+  .logo { width: 150px; }
+}
