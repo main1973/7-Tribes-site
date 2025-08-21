@@ -202,3 +202,92 @@ section p {
   width: 120px;   /* adjust logo size */
   height: auto;
 }
+.store-section {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.store-button {
+  display: inline-block;
+  background: #ff6600;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+}
+
+.store-button:hover {
+  background: #cc5200;
+}
+.social-links {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.social-button {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+}
+
+.social-button.telegram {
+  background: #0088cc;
+}
+
+.social-button.telegram:hover {
+  background: #006fa1;
+}
+
+.social-button.twitter {
+  background: #000;
+}
+
+.social-button.twitter:hover {
+  background: #333;
+}
+.social-links {
+  margin-top: 15px;
+}
+
+.social-button {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.social-button i {
+  margin-right: 8px;
+}
+
+.social-button.telegram {
+  background: #0088cc;
+}
+
+.social-button.telegram:hover {
+  background: #006fa1;
+}
+
+.social-button.twitter {
+  background: #000000;
+}
+
+.social-button.twitter:hover {
+  background: #333333;
+}
