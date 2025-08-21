@@ -183,3 +183,22 @@ section p {
 
 .participation ol li {
   margin: 12px 0;
+.banner {
+  position: relative;
+  width: 100%;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.logo-on-banner {
+  position: absolute;
+  bottom: 20px;   /* distance from bottom of banner */
+  left: 50%;
+  transform: translateX(-50%); /* centers horizontally */
+  width: 120px;   /* adjust logo size */
+  height: auto;
+}
