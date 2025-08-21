@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>7Tribes (7TRB) – Community & Unity Token</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.ico">
-<link rel="apple-touch-icon" href="images/icon-192.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0a0a23">
+
+  <!-- Social preview (optional but nice) -->
+  <meta name="description" content="7Tribes (7TRB) — a community-powered token for unity, empowerment, and ownership."/>
+  <meta property="og:title" content="7Tribes (7TRB) – Community & Unity Token"/>
+  <meta property="og:description" content="Join the movement. Build together. Own together."/>
+  <meta property="og:image" content="images/banner.png"/>
+  <meta property="og:type" content="website"/>
+
+  <!-- Manifest + favicons -->
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
+  <link rel="apple-touch-icon" href="images/icon-192.png"/>
+  <meta name="theme-color" content="#FFD700"/>
+
   <!-- Icons for Telegram/X -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
     :root{
-      --bg:#f7f7f9;
-      --card:#ffffff;
-      --text:#222;
-      --muted:#555;
-      --brand:#0a0a23;
-      --cta:#FF9900;
-      --cta-hover:#e68a00;
-      --accent:#0066cc;
-      --accent-2:#00aaff;
-      --shadow: 0 6px 18px rgba(0,0,0,.12);
+      --bg:#f7f7f9; --card:#ffffff; --text:#222; --muted:#555;
+      --brand:#0a0a23; --cta:#FF9900; --cta-hover:#e68a00;
+      --accent:#0066cc; --accent2:#00aaff; --shadow:0 6px 18px rgba(0,0,0,.12);
     }
-
     *{box-sizing:border-box}
-    body{
-      margin:0; font-family: Arial, sans-serif; line-height:1.6;
-      background:var(--bg); color:var(--text);
-    }
+    body{ margin:0; font-family:Arial, sans-serif; line-height:1.6; background:var(--bg); color:var(--text); }
 
     /* HERO (banner with centered overlay logo) */
-    header.hero{position:relative; text-align:center; background:#000}
-    header.hero .banner{width:100%; height:auto; display:block; opacity:.95}
-    .logo-container{
-      position:absolute; top:55%; left:50%; transform:translate(-50%, -50%);
-    }
+    header.hero{ position:relative; text-align:center; background:#000; }
+    header.hero .banner{ width:100%; height:auto; display:block; opacity:.96; }
+    .logo-container{ position:absolute; top:55%; left:50%; transform:translate(-50%,-50%); }
     .logo-container .logo{
       width:180px; height:auto; opacity:.98;
       filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
@@ -58,22 +55,19 @@
       max-width:960px; margin:32px auto; padding:24px;
       background:var(--card); border-radius:12px; box-shadow:var(--shadow);
     }
-    h1,h2{margin:0 0 10px}
-    h1{font-size:28px}
-    h2{font-size:24px}
-    p{color:var(--muted); margin:10px 0 0}
+    h1,h2{ margin:0 0 10px; }
+    h1{ font-size:28px; }
+    h2{ font-size:24px; }
+    p{ color:var(--muted); margin:10px 0 0; }
 
     /* Investment list */
-    .list{padding-left:20px; margin-top:8px}
-    .list li{margin:8px 0}
+    .list{ padding-left:20px; margin-top:8px; }
+    .list li{ margin:8px 0; }
 
-    /* Participation box with gradient */
-    .participation{
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color:#fff;
-    }
-    .participation h2, .participation p, .participation ol{color:#fff}
-    .participation ol{padding-left:22px}
+    /* Participation (gradient) */
+    .participation{ background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#fff; }
+    .participation h2, .participation p, .participation ol{ color:#fff; }
+    .participation ol{ padding-left:22px; }
 
     /* Social buttons */
     .social-links{ text-align:center; margin:18px 0 8px; }
@@ -83,10 +77,8 @@
       font-size:16px; box-shadow:var(--shadow); transition:background .25s ease;
     }
     .social-button i{ margin-right:8px; }
-    .telegram{ background:#0088cc; }
-    .telegram:hover{ background:#006fa1; }
-    .twitter{ background:#000; }
-    .twitter:hover{ background:#333; }
+    .telegram{ background:#0088cc; } .telegram:hover{ background:#006fa1; }
+    .twitter{ background:#000; } .twitter:hover{ background:#333; }
 
     /* Wallet connect */
     .wallet-connect{ text-align:center; margin-top:16px; }
@@ -98,7 +90,6 @@
     .wallet-connect button:hover{ background:#e6b800; }
     #wallet-address, #token-balance{ margin-top:8px; font-weight:600; }
 
-    /* Footer (optional) */
     footer{ text-align:center; color:#aaa; padding:24px 12px; }
 
     /* Mobile */
@@ -113,8 +104,10 @@
 
   <!-- HERO -->
   <header class="hero">
+    <!-- Replace with your image: images/banner.png -->
     <img src="images/banner.png" alt="7Tribes Banner" class="banner">
     <div class="logo-container">
+      <!-- Replace with your image: images/logo.png -->
       <img src="images/logo.png" alt="7Tribes Logo" class="logo">
     </div>
   </header>
@@ -199,7 +192,6 @@
 
     async function connectWallet(){
       if(!window.ethereum){ alert("Please install MetaMask to connect your wallet."); return; }
-
       try{
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
