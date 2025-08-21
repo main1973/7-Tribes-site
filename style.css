@@ -1,421 +1,6 @@
-/* GLOBAL STYLES */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background: #f9f9f9;
-  color: #333;
-}
+/* 7Tribes Website Styles - Fixed version */
 
-/* HEADER */
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: #000;
-}
-
-header img {
-  height: 80px;
-}
-
-/* BANNER */
-.banner img {
-  width: 100%;
-  display: block;
-  margin: 0 auto;
-}
-
-/* SECTIONS */
-section {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-h1, h2 {
-  color: #000;
-}
-
-/* LISTS */
-ul {
-  padding-left: 20px;
-}
-
-li {
-  margin-bottom: 8px;
-}
-
-/* CALL TO ACTION */
-.cta {
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 40px 20px;
-  border-radius: 8px;
-}
-
-.cta h2 {
-  color: #fff;
-}
-/* Header styles */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 10px 20px;
-  background-color: #000; /* fallback behind logo */
-}
-
-header .logo img {
-  height: 60px; /* adjust as needed */
-  margin-right: 15px;
-}
-
-header h1 {
-  color: white;
-  font-size: 24px;
-}
-
-/* Banner styles */
-.banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-/* About, Investment, Participation sections */
-section {
-  padding: 40px 20px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-section h2 {
-  font-size: 28px;
-  margin-bottom: 15px;
-  color: #222;
-  text-align: center;
-}
-
-section p {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #444;
-  text-align: center;
-}
-
-.investment ul, .participation ol {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #333;
-  margin-top: 10px;
-  padding-left: 20px;
-}
-/* Section background styles */
-.about {
-  background: #f4f4f4;
-  border-radius: 12px;
-  padding: 40px 20px;
-  margin: 40px auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.investment {
-  background: #fff;
-  border-left: 6px solid #0066cc;
-  border-radius: 8px;
-  padding: 40px 20px;
-  margin: 40px auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.participation {
-  background: linear-gradient(135deg, #0066cc, #00aaff);
-  color: white;
-  border-radius: 12px;
-  padding: 40px 20px;
-  margin: 40px auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.participation h2 {
-  color: #fff;
-}
-
-.participation ol li {
-  margin: 12px 0;
-}
-/* Section background styles */
-.about {
-  background: #f4f4f4;
-  border-radius: 12px;
-  padding: 40px 20px;
-  margin: 40px auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.investment {
-  background: #fff;
-  border-left: 6px solid #0066cc;
-  border-radius: 8px;
-  padding: 40px 20px;
-  margin: 40px auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.participation {
-  background: linear-gradient(135deg, #0066cc, #00aaff);
-  color: white;
-  border-radius: 12px;
-  padding: 40px 20px;
-  margin: 40px auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.participation h2 {
-  color: #fff;
-}
-
-.participation ol li {
-  margin: 12px 0;
-.banner {
-  position: relative;
-  width: 100%;
-}
-
-.banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.logo-on-banner {
-  position: absolute;
-  bottom: 20px;   /* distance from bottom of banner */
-  left: 50%;
-  transform: translateX(-50%); /* centers horizontally */
-  width: 120px;   /* adjust logo size */
-  height: auto;
-}
-.store-section {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.store-button {
-  display: inline-block;
-  background: #ff6600;
-  color: #fff;
-  padding: 14px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.3s;
-  box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
-}
-
-.store-button:hover {
-  background: #cc5200;
-}
-.social-links {
-  text-align: center;
-  margin: 30px 0;
-}
-
-.social-button {
-  display: inline-block;
-  margin: 10px;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff;
-  transition: 0.3s;
-  box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
-}
-
-.social-button.telegram {
-  background: #0088cc;
-}
-
-.social-button.telegram:hover {
-  background: #006fa1;
-}
-
-.social-button.twitter {
-  background: #000;
-}
-
-.social-button.twitter:hover {
-  background: #333;
-}
-.social-links {
-  margin-top: 15px;
-}
-
-.social-button {
-  display: inline-block;
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 25px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.social-button i {
-  margin-right: 8px;
-}
-
-.social-button.telegram {
-  background: #0088cc;
-}
-
-.social-button.telegram:hover {
-  background: #006fa1;
-}
-
-.social-button.twitter {
-  background: #000000;
-}
-
-.social-button.twitter:hover {
-  background: #333333;
-
-}
-.social-button i { margin-right: 8px;
-   .social-links { 
-  margin-top: 15px; 
-  text-align: center;      /* centers buttons */
-}
-.social-button {
-  display: inline-block;
-  margin: 6px 8px;
-  padding: 10px 20px;
-  border-radius: 24px;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  transition: background .25s ease;
-}
-.social-button i { margin-right: 8px; }
-.social-button.telegram { background:#0088cc; }
-.social-button.telegram:hover { background:#006fa1; }
-.social-button.twitter { background:#000; }
-.social-button.twitter:hover { background:#333; } .store-section { text-align:center; margin: 28px 0; }
-.store-button {
-  display:inline-block; background:#ff6600; color:#fff; 
-  padding:14px 28px; border-radius:10px; text-decoration:none; 
-  font-weight:700; font-size:18px; box-shadow:0 4px 10px rgba(0,0,0,.15);
-  transition: transform .12s ease, background .25s ease;
-}
-.store-button:hover { background:#cc5200; transform: translateY(-1px); }    header { 
-  display:flex; align-items:center; justify-content:center; 
-  padding:16px 20px; background:#000; 
-}
-header .logo { height:64px; width:auto; }
-
-.banner { position:relative; }
-.banner img { width:100%; height:auto; display:block; }
-.logo-on-banner { /* only if you’re overlaying the logo on the banner */
-  position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
-  width:120px; height:auto;
-}
-section { max-width: 900px; margin: 36px auto; padding: 20px; } @media (max-width: 768px){
-  header .logo { height:52px; }
-  .store-button { font-size:16px; padding:12px 22px; }
-  section { margin: 28px auto; padding: 18px; }
-}      
-.wallet-connect {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.wallet-connect button {
-  background: #ffcc00;
-  color: #000;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.wallet-connect button:hover {
-  background: #e6b800;
-}
-
-#wallet-address, #token-balance {
-  margin-top: 10px;
-  font-weight: 500;
-}
-/* HERO: banner + centered overlay logo */
-.hero {
-  position: relative;
-  text-align: center;
-}
-
-.banner {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Center the logo over the banner */
-.logo-container {
-  position: absolute;
-  top: 55%;                 /* tweak 50–60% to sit nicely over art */
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.logo {
-  width: 180px;             /* adjust 140–220px to taste */
-  height: auto;
-  opacity: 0.95;            /* slight blend; change 0.85–1.0 */
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35));
-}
-
-/* Centered Etsy button under hero */
-.shop-tab {
-  text-align: center;
-  margin: 22px 0 10px;
-}
-
-.etsy-btn {
-  display: inline-block;
-  background: #FF9900;
-  color: #fff;
-  padding: 12px 28px;
-  border-radius: 28px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 18px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  transition: transform .12s ease, background .25s ease;
-}
-
-.etsy-btn:hover {
-  background: #e68a00;
-  transform: translateY(-1px);
-}
-
-/* Mobile tweak */
-@media (max-width: 768px){
-  .logo { width: 150px; }
-}
-/* ========== 7Tribes Global Styles ========== */
+/* Root Variables */
 :root{
   --bg:#f7f7f9; --card:#ffffff; --text:#222; --muted:#555;
   --cta:#FF9900; --cta-hover:#e68a00;
@@ -429,38 +14,41 @@ body{
   background:var(--bg); color:var(--text);
 }
 
-/* ========== Hero (Banner + Centered Logo) ========== */
+/* Hero Section */
 header.hero{
   position:relative; text-align:center; background:#000;
 }
 header.hero .banner{
   width:100%; height:auto; display:block; opacity:.96;
 }
-/* subtle gradient overlay so logo pops */
 header.hero::after{
   content:""; position:absolute; inset:0;
   background:linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.55) 80%);
   pointer-events:none;
 }
 .logo-container{
-  position:absolute; top:55%; left:50%; transform:translate(-50%, -50%);
+  position:absolute; top:55%; left:50%; transform:translate(-50%,-50%);
 }
 .logo-container .logo{
   width:180px; height:auto; opacity:.98;
   filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
 }
 
-/* ========== Primary CTA: Etsy button ========== */
+/* Etsy Button */
 .shop-tab{ text-align:center; margin:28px 0 16px; }
 .etsy-btn{
-  display:inline-block; background:var(--cta); color:#fff;
-  padding:12px 28px; border-radius:28px; text-decoration:none;
-  font-weight:700; font-size:18px; box-shadow:var(--shadow);
+  display:inline-block;
+  background:var(--cta); color:#fff;
+  padding:12px 28px;
+  border-radius:28px;
+  text-decoration:none;
+  font-weight:700; font-size:18px;
+  box-shadow:var(--shadow);
   transition: transform .12s ease, background .25s ease;
 }
 .etsy-btn:hover{ background:var(--cta-hover); transform:translateY(-1px); }
 
-/* ========== Card Sections (About / Why / Investment / Participate) ========== */
+/* Card Sections */
 section.card{
   max-width:960px; margin:32px auto; padding:24px;
   background:var(--card); border-radius:12px; box-shadow:var(--shadow);
@@ -473,66 +61,15 @@ p{ color:var(--muted); margin:10px 0 0; }
 .list{ padding-left:20px; margin-top:8px; }
 .list li{ margin:8px 0; }
 
-/* ========== Participation (gradient emphasis) ========== */
+/* Participation Section */
 .participation{
   background:linear-gradient(135deg, var(--accent), var(--accent2));
   color:#fff;
 }
-.participation h2,
-.participation p,
-.participation ol{ color:#fff; }
+.participation h2, .participation p, .participation ol{ color:#fff; }
 .participation ol{ padding-left:22px; }
 
-/* ========== Social Buttons ========== */
-.social-links{ text-align:center; margin:18px 0 8px; }
-.social-button{
-  display:inline-block; margin:6px 8px; padding:10px 20px;
-  border-radius:24px; text-decoration:none; color:#fff; font-weight:700;
-  font-size:16px; box-shadow:var(--shadow); transition:background .25s ease;
-}
-.social-button i{ margin-right:8px; }
-.social-button.telegram{ background:#0088cc; }
-.social-button.telegram:hover{ background:#006fa1; }
-.social-button.twitter{ background:#000; }
-.social-button.twitter:hover{ background:#333; }
-
-/* ========== Wallet Connect ========== */
-.wallet-connect{ text-align:center; margin-top:16px; }
-.wallet-connect button{
-  background:#ffcc00; color:#000; padding:12px 25px; border:none;
-  border-radius:30px; font-weight:bold; cursor:pointer; transition:.25s;
-  box-shadow:var(--shadow);
-}
-.wallet-connect button:hover{ background:#e6b800; }
-#wallet-address, #token-balance{ margin-top:8px; font-weight:600; }
-
-/* ========== Footer ========== */
-footer{
-  text-align:center; color:#aaa; padding:24px 12px;
-}
-
-/* ========== Mobile Tweaks ========== */
-@media (max-width: 768px){
-  .logo-container .logo{ width:150px; }
-  section.card{ margin:22px auto; padding:18px; }
-  .etsy-btn{ font-size:16px; padding:12px 22px; }
-}
-                  /* Etsy button */
-.etsy-btn{
-  display:inline-block;
-  background:#FF9900;
-  color:#fff;
-  padding:12px 28px;
-  border-radius:28px;
-  text-decoration:none;
-  font-weight:700;
-  font-size:18px;
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
-  transition: transform .12s ease, background .25s ease;
-}
-.etsy-btn:hover{ background:#e68a00; transform:translateY(-1px); }
-
-/* Social buttons */
+/* Social Buttons */
 .social-links{ text-align:center; margin:18px 0 8px; }
 .social-button{
   display:inline-block;
@@ -543,23 +80,35 @@ footer{
   color:#fff;
   font-weight:700;
   font-size:16px;
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  box-shadow:var(--shadow);
 }
+.social-button i{ margin-right:8px; }
 .social-button.telegram{ background:#0088cc; }
 .social-button.telegram:hover{ background:#006fa1; }
 .social-button.twitter{ background:#000; }
 .social-button.twitter:hover{ background:#333; }
 
-/* Wallet button centered */
+/* Wallet Connect */
 .wallet-connect{ text-align:center; margin-top:16px; }
 .wallet-connect button{
-  background:#ffcc00;
-  color:#000;
+  background:#ffcc00; color:#000;
   padding:12px 25px;
-  border:none;
-  border-radius:30px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  border:none; border-radius:30px;
+  font-weight:bold; cursor:pointer;
+  box-shadow:var(--shadow);
+  transition: background .25s ease;
 }
 .wallet-connect button:hover{ background:#e6b800; }
+#wallet-address, #token-balance{
+  margin-top:8px; font-weight:600;
+}
+
+/* Footer */
+footer{ text-align:center; color:#aaa; padding:24px 12px; }
+
+/* Mobile */
+@media (max-width:768px){
+  .logo-container .logo{ width:150px; }
+  section.card{ margin:22px auto; padding:18px; }
+  .etsy-btn{ font-size:16px; padding:12px 22px; }
+}
