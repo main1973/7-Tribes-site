@@ -64,7 +64,11 @@
       <li>Contribute to the funding goal when live (Juicebox/DEX).</li>
       <li>Share 7Tribes with your network—spread the word.</li>
       <li>Engage in governance & project decisions.</li>
-      <li>Hold 7TRB to support the long-term mission.</li>
+      <li>Hold 7TRB to support the long-term mission.</li><div class="wallet-connect">
+  <button onclick="connectWallet()">🔗 Connect Wallet</button>
+  <p id="wallet-address"></p>
+  <p id="token-balance"></p>
+      </div>
     </ol>
 
     <!-- Social buttons centered -->
@@ -77,6 +81,42 @@
       </a>
     </div>
   </section>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+<script>
+  const tokenAddress = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D"; // 7TRB contract
+  const tokenABI = [
+    "function balanceOf(address owner) view returns (uint256)",
+    "function decimals() view returns (uint8)",
+    "function symbol() view returns (string)"
+  ];
+
+  async function connectWallet() {
+    if (window.ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const account = await signer.getAddress();
+        document.getElementById("wallet-address").innerText = "Connected: " + account;
+
+        // Load 7TRB contract
+        const contract = new ethers.Contract(tokenAddress, tokenABI, provider);
+        const decimals = await contract.decimals();
+        const symbol = await contract.symbol();
+        const balance = await contract.balanceOf(account);
+
+        // Format balance
+        const formattedBalance = ethers.utils.formatUnits(balance, decimals);
+        document.getElementById("token-balance").innerText = 
+          `Your Balance: ${formattedBalance} ${symbol}`;
+      } catch (err) {
+        alert("Connection failed: " + err.message);
+      }
+    } else {
+      alert("Please install MetaMask to connect your wallet!");
+    }
+  }
+</script>
 
 </body>
 </html>
