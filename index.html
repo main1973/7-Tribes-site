@@ -5,107 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>7Tribes (7TRB) – Community & Unity Token</title>
 
+  <!-- Social preview (optional) -->
   <meta name="description" content="7Tribes (7TRB) — a community-powered token for unity, empowerment, and ownership."/>
   <meta property="og:title" content="7Tribes (7TRB) – Community & Unity Token"/>
   <meta property="og:description" content="Join the movement. Build together. Own together."/>
   <meta property="og:image" content="images/banner.png"/>
   <meta property="og:type" content="website"/>
 
+  <!-- PWA / Icons -->
   <link rel="manifest" href="manifest.json"/>
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
   <link rel="apple-touch-icon" href="images/icon-192.png"/>
   <meta name="theme-color" content="#FFD700"/>
 
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Font Awesome for Telegram/X icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <style>
-    :root{
-      --bg:#f7f7f9; --card:#ffffff; --text:#222; --muted:#555;
-      --cta:#FF9900; --cta-hover:#e68a00; --accent:#0066cc; --accent2:#00aaff;
-      --shadow:0 6px 18px rgba(0,0,0,.12);
-    }
-    *{box-sizing:border-box}
-    body{ margin:0; font-family:Arial, sans-serif; line-height:1.6; background:var(--bg); color:var(--text); }
-
-    /* HERO */
-    header.hero{ position:relative; text-align:center; background:#000; }
-    header.hero .banner{ width:100%; height:auto; display:block; opacity:.96; }
-    header.hero::after{
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.55) 80%);
-      pointer-events:none;
-    }
-    .logo-container{ position:absolute; top:55%; left:50%; transform:translate(-50%,-50%); }
-    .logo-container .logo{
-      width:180px; height:auto; opacity:.98;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
-    }
-
-    /* CTA */
-    .shop-tab{ text-align:center; margin:28px 0 16px; }
-    .etsy-btn{
-      display:inline-block; background:var(--cta); color:#fff;
-      padding:12px 28px; border-radius:28px; text-decoration:none;
-      font-weight:700; font-size:18px; box-shadow:var(--shadow);
-      transition: transform .12s ease, background .25s ease;
-    }
-    .etsy-btn:hover{ background:var(--cta-hover); transform:translateY(-1px); }
-
-    /* Cards */
-    section.card{
-      max-width:960px; margin:32px auto; padding:24px;
-      background:var(--card); border-radius:12px; box-shadow:var(--shadow);
-    }
-    h1,h2{ margin:0 0 10px; }
-    h1{ font-size:28px; }
-    h2{ font-size:24px; }
-    p{ color:var(--muted); margin:10px 0 0; }
-
-    .list{ padding-left:20px; margin-top:8px; }
-    .list li{ margin:8px 0; }
-
-    /* Participation */
-    .participation{
-      background:linear-gradient(135deg, var(--accent), var(--accent2));
-      color:#fff;
-    }
-    .participation h2, .participation p, .participation ol{ color:#fff; }
-    .participation ol{ padding-left:22px; }
-
-    /* Socials */
-    .social-links{ text-align:center; margin:18px 0 8px; }
-    .social-button{
-      display:inline-block; margin:6px 8px; padding:10px 20px;
-      border-radius:24px; text-decoration:none; color:#fff; font-weight:700;
-      font-size:16px; box-shadow:var(--shadow); transition:background .25s ease;
-    }
-    .social-button i{ margin-right:8px; }
-    .telegram{ background:#0088cc; } .telegram:hover{ background:#006fa1; }
-    .twitter{ background:#000; } .twitter:hover{ background:#333; }
-
-    /* Wallet */
-    .wallet-connect{ text-align:center; margin-top:16px; }
-    .wallet-connect button{
-      background:#ffcc00; color:#000; padding:12px 25px; border:none;
-      border-radius:30px; font-weight:bold; cursor:pointer; transition:.25s;
-      box-shadow:var(--shadow);
-    }
-    .wallet-connect button:hover{ background:#e6b800; }
-    #wallet-address, #token-balance{ margin-top:8px; font-weight:600; }
-
-    footer{ text-align:center; color:#aaa; padding:24px 12px; }
-
-    @media (max-width:768px){
-      .logo-container .logo{ width:150px; }
-      section.card{ margin:22px auto; padding:18px; }
-      .etsy-btn{ font-size:16px; padding:12px 22px; }
-    }
-  </style>
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- HERO -->
+  <!-- HERO: banner with centered overlay logo -->
   <header class="hero">
     <img src="images/banner.png" alt="7Tribes Banner" class="banner">
     <div class="logo-container">
@@ -113,7 +34,7 @@
     </div>
   </header>
 
-  <!-- Etsy CTA -->
+  <!-- Primary CTA: Etsy -->
   <div class="shop-tab">
     <a href="https://mainhouseoasis.etsy.com" target="_blank" class="etsy-btn">
       🛒 Shop 7Tribes on Etsy
@@ -132,6 +53,23 @@
       Success depends on participation—builders, investors, and supporters working together to
       circulate value inside the community. Every voice and every contribution matters.
     </p>
+  </section>
+
+  <!-- WHY PEOPLE MATTER -->
+  <section class="card">
+    <h2>Why We Need People for 7Tribes to Succeed</h2>
+    <p>
+      Technology doesn’t create value by itself—people do. A token without a community has no
+      real utility or momentum. Every holder, builder, and supporter strengthens the movement.
+    </p>
+    <ul class="list">
+      <li><strong>Liquidity:</strong> More holders and traders make 7TRB more stable and usable.</li>
+      <li><strong>Awareness:</strong> New supporters expand our reach to builders, partners, and investors.</li>
+      <li><strong>Participation:</strong> Community members guide decisions and help shape the roadmap.</li>
+      <li><strong>Circulation:</strong> Using 7TRB in commerce, donations, and trading keeps value in the ecosystem.</li>
+      <li><strong>Resilience:</strong> A united community can weather market swings and grow long-term.</li>
+    </ul>
+    <p><em>Without people, there is no Tribe. With you, 7TRB becomes unstoppable.</em></p>
   </section>
 
   <!-- INVESTMENT BREAKDOWN -->
@@ -158,6 +96,7 @@
       <li>Hold 7TRB to support the long-term mission.</li>
     </ol>
 
+    <!-- Social buttons -->
     <div class="social-links">
       <a href="https://t.me/SevenTribesCrypto" target="_blank" class="social-button telegram">
         <i class="fab fa-telegram"></i> Join us on Telegram
@@ -167,6 +106,7 @@
       </a>
     </div>
 
+    <!-- Wallet connect + 7TRB balance -->
     <div class="wallet-connect">
       <button onclick="connectWallet()">🔗 Connect Wallet</button>
       <div id="wallet-address"></div>
@@ -178,32 +118,8 @@
     © 2025 7Tribes (7TRB) — Community • Unity • Ownership
   </footer>
 
-  <!-- Ethers.js + Wallet -->
+  <!-- Ethers.js + your wallet logic -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
-  <script>
-    const TOKEN_ADDRESS = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D";
-    const TOKEN_ABI = [
-      "function balanceOf(address owner) view returns (uint256)",
-      "function decimals() view returns (uint8)",
-      "function symbol() view returns (string)"
-    ];
-    async function connectWallet(){
-      if(!window.ethereum){ alert("Please install MetaMask to connect your wallet."); return; }
-      try{
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
-        const signer = provider.getSigner();
-        const account = await signer.getAddress();
-        document.getElementById("wallet-address").innerText = "Connected: " + account;
-
-        const contract = new ethers.Contract(TOKEN_ADDRESS, TOKEN_ABI, provider);
-        const [decimals, symbol, rawBal] = await Promise.all([
-          contract.decimals(), contract.symbol(), contract.balanceOf(account)
-        ]);
-        const balance = ethers.utils.formatUnits(rawBal, decimals);
-        document.getElementById("token-balance").innerText = `Your Balance: ${balance} ${symbol}`;
-      }catch(err){ alert("Connection failed: " + (err?.message || err)); }
-    }
-  </script>
+  <script src="wallet.js"></script>
 </body>
 </html>
