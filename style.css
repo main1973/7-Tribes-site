@@ -290,4 +290,49 @@ section p {
 
 .social-button.twitter:hover {
   background: #333333;
+
 }
+.social-button i { margin-right: 8px;
+   .social-links { 
+  margin-top: 15px; 
+  text-align: center;      /* centers buttons */
+}
+.social-button {
+  display: inline-block;
+  margin: 6px 8px;
+  padding: 10px 20px;
+  border-radius: 24px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  transition: background .25s ease;
+}
+.social-button i { margin-right: 8px; }
+.social-button.telegram { background:#0088cc; }
+.social-button.telegram:hover { background:#006fa1; }
+.social-button.twitter { background:#000; }
+.social-button.twitter:hover { background:#333; } .store-section { text-align:center; margin: 28px 0; }
+.store-button {
+  display:inline-block; background:#ff6600; color:#fff; 
+  padding:14px 28px; border-radius:10px; text-decoration:none; 
+  font-weight:700; font-size:18px; box-shadow:0 4px 10px rgba(0,0,0,.15);
+  transition: transform .12s ease, background .25s ease;
+}
+.store-button:hover { background:#cc5200; transform: translateY(-1px); }    header { 
+  display:flex; align-items:center; justify-content:center; 
+  padding:16px 20px; background:#000; 
+}
+header .logo { height:64px; width:auto; }
+
+.banner { position:relative; }
+.banner img { width:100%; height:auto; display:block; }
+.logo-on-banner { /* only if you’re overlaying the logo on the banner */
+  position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+  width:120px; height:auto;
+}
+section { max-width: 900px; margin: 36px auto; padding: 20px; } @media (max-width: 768px){
+  header .logo { height:52px; }
+  .store-button { font-size:16px; padding:12px 22px; }
+  section { margin: 28px auto; padding: 18px; }
+}      
