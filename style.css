@@ -517,3 +517,49 @@ footer{
   section.card{ margin:22px auto; padding:18px; }
   .etsy-btn{ font-size:16px; padding:12px 22px; }
 }
+                  /* Etsy button */
+.etsy-btn{
+  display:inline-block;
+  background:#FF9900;
+  color:#fff;
+  padding:12px 28px;
+  border-radius:28px;
+  text-decoration:none;
+  font-weight:700;
+  font-size:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  transition: transform .12s ease, background .25s ease;
+}
+.etsy-btn:hover{ background:#e68a00; transform:translateY(-1px); }
+
+/* Social buttons */
+.social-links{ text-align:center; margin:18px 0 8px; }
+.social-button{
+  display:inline-block;
+  margin:6px 8px;
+  padding:10px 20px;
+  border-radius:24px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:700;
+  font-size:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+}
+.social-button.telegram{ background:#0088cc; }
+.social-button.telegram:hover{ background:#006fa1; }
+.social-button.twitter{ background:#000; }
+.social-button.twitter:hover{ background:#333; }
+
+/* Wallet button centered */
+.wallet-connect{ text-align:center; margin-top:16px; }
+.wallet-connect button{
+  background:#ffcc00;
+  color:#000;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+}
+.wallet-connect button:hover{ background:#e6b800; }
