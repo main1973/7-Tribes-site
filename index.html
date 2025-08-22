@@ -39,7 +39,7 @@
   <link rel="apple-touch-icon" href="images/icon-192.png"/>
   <meta name="theme-color" content="#FFD700"/>
 
-  <!-- Icons (Telegram/X) -->
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <!-- Styles -->
@@ -57,7 +57,6 @@
       <a href="#participation">Participate</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#partners">Partners</a>
-      <a href="#social">Social</a>
       <a href="#docs">Docs</a>
       <a href="#contact">Contact</a>
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
@@ -89,19 +88,9 @@
 
   <!-- KPI INFO BOXES -->
   <section class="card kpis fade-up">
-    <div class="kpi">
-      <div class="kpi-label">Total Supply</div>
-      <div class="kpi-value">1,000,000</div>
-      <div class="kpi-sub">7TRB</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Chain</div>
-      <div class="kpi-value">Ethereum</div>
-      <div class="kpi-sub">ERC-20</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Contract</div>
-      <div class="kpi-value small">0xD816...c0D</div>
+    <div class="kpi"><div class="kpi-label">Total Supply</div><div class="kpi-value">1,000,000</div><div class="kpi-sub">7TRB</div></div>
+    <div class="kpi"><div class="kpi-label">Chain</div><div class="kpi-value">Ethereum</div><div class="kpi-sub">ERC-20</div></div>
+    <div class="kpi"><div class="kpi-label">Contract</div><div class="kpi-value small">0xD816...c0D</div>
       <div class="kpi-sub"><a href="https://etherscan.io/token/0xD81641716926F6D55dC5AF6929dbE046bBf43c0D" target="_blank">View on Etherscan</a></div>
     </div>
   </section>
@@ -180,32 +169,13 @@
     <h2>Partners & Mentions</h2>
     <p>We’re building with great people and platforms.</p>
     <div class="partner-grid">
-      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-1.png" alt="Partner 1"></a>
-      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-2.png" alt="Partner 2"></a>
-      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-3.png" alt="Partner 3"></a>
-      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-4.png" alt="Partner 4"></a>
-      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-5.png" alt="Partner 5"></a>
+      <a href="#" class="partner"><img src="images/partners/partner-1.png" alt="Partner 1"></a>
+      <a href="#" class="partner"><img src="images/partners/partner-2.png" alt="Partner 2"></a>
+      <a href="#" class="partner"><img src="images/partners/partner-3.png" alt="Partner 3"></a>
+      <a href="#" class="partner"><img src="images/partners/partner-4.png" alt="Partner 4"></a>
+      <a href="#" class="partner"><img src="images/partners/partner-5.png" alt="Partner 5"></a>
     </div>
   </section>
-
-  <!-- SOCIAL FEEDS -->
-  <section class="card fade-up" id="social">
-    <h2>Latest Updates</h2>
-    <div class="social-embed">
-      <div class="social-col">
-        <a class="twitter-timeline" data-height="480" href="https://twitter.com/7Tribescrypto?ref_src=twsrc%5Etfw">Tweets by @7Tribescrypto</a>
-      </div>
-      <div class="social-col">
-        <iframe
-          src="https://t.me/s/SevenTribesCrypto"
-          title="Telegram channel"
-          width="100%" height="480" frameborder="0"
-          style="background:#fff; border:1px solid #eaeaea; border-radius:12px">
-        </iframe>
-      </div>
-    </div>
-  </section>
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
   <!-- FAQ -->
   <section class="card fade-up" id="faq">
@@ -218,7 +188,6 @@
   <!-- DOCUMENTS -->
   <section class="card fade-up" id="docs">
     <h2>Documents</h2>
-    <p>Review our core references and share with your network.</p>
     <ul class="list">
       <li>📄 <a href="docs/7TRB-Whitepaper.pdf" target="_blank">7TRB Whitepaper (PDF)</a></li>
       <li>📊 <a href="docs/7TRB-Tokenomics.pdf" target="_blank">Tokenomics Summary (PDF)</a></li>
@@ -228,7 +197,6 @@
   <!-- NEWSLETTER -->
   <section class="card fade-up" id="newsletter">
     <h2>Get Updates</h2>
-    <p>Join our mailing list for launch, listings, and governance announcements.</p>
     <form action="https://buttondown.email/api/emails/embed-subscribe/yourlist" method="post" target="_blank">
       <input type="email" name="email" placeholder="you@example.com" required class="input">
       <button type="submit" class="etsy-btn">Subscribe</button>
@@ -255,7 +223,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
   <script src="wallet.js?v=9"></script>
 
-  <!-- Scroll animations + Smooth scroll + Back-to-Top + Theme toggle -->
+  <!-- Scroll animations + Back-to-Top + Theme toggle -->
   <button id="toTop" aria-label="Back to top">↑</button>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -266,7 +234,7 @@
       }, { threshold: 0.12 });
       items.forEach(el => io.observe(el));
 
-      // Smooth scroll for same-page links
+      // Smooth scroll
       document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
           const id = a.getAttribute('href');
@@ -279,18 +247,17 @@
 
       // Back-to-top button
       const toTop = document.getElementById('toTop');
-      const showAt = 400;
       window.addEventListener('scroll', () => {
-        if (window.scrollY > showAt) toTop.classList.add('show');
+        if (window.scrollY > 400) toTop.classList.add('show');
         else toTop.classList.remove('show');
       });
       toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-      // Connect Wallet bind
+      // Connect Wallet
       const btn = document.getElementById('connect-btn');
       if (btn && typeof window.connectWallet === 'function') btn.addEventListener('click', window.connectWallet);
 
-      // Theme toggle (light/dark)
+      // Theme toggle
       const key = "theme";
       const saved = localStorage.getItem(key);
       if (saved) document.documentElement.setAttribute("data-theme", saved);
@@ -309,8 +276,5 @@
       }
     });
   </script>
-
-  <!-- X widgets (for the timeline) -->
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>
