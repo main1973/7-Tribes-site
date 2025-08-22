@@ -17,32 +17,52 @@
   <meta name="twitter:description" content="Join the movement. Build together. Own together.">
   <meta name="twitter:image" content="images/banner.png">
 
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"7Tribes",
+    "url":"https://main1973.github.io/7-Tribes-site/",
+    "logo":"https://main1973.github.io/7-Tribes-site/images/logo.png",
+    "sameAs":[
+      "https://x.com/7Tribescrypto",
+      "https://t.me/SevenTribesCrypto",
+      "https://mainhouseoasis.etsy.com"
+    ]
+  }
+  </script>
+
   <!-- PWA / Icons -->
   <link rel="manifest" href="manifest.json"/>
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
   <link rel="apple-touch-icon" href="images/icon-192.png"/>
   <meta name="theme-color" content="#FFD700"/>
 
-  <!-- Icons -->
+  <!-- Icons (Telegram/X) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<!-- STICKY NAV -->
-<nav class="topnav">
-  <a class="brand" href="#">7Tribes</a>
-  <div class="links">
-    <a href="#about">About</a>
-    <a href="#why">Why People</a>
-    <a href="#investment">Investment</a>
-    <a href="#participation">Participate</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#docs">Docs</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+
+  <!-- STICKY NAV -->
+  <nav class="topnav">
+    <a class="brand" href="#">7Tribes</a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#why">Why People</a>
+      <a href="#investment">Investment</a>
+      <a href="#participation">Participate</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#partners">Partners</a>
+      <a href="#social">Social</a>
+      <a href="#docs">Docs</a>
+      <a href="#contact">Contact</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
 
   <!-- HERO -->
   <header class="hero">
@@ -50,8 +70,6 @@
     <div class="logo-container">
       <img src="images/logo.png" alt="7Tribes Logo" class="logo" width="300" height="300">
     </div>
-
-    <!-- Sub-hero pitch -->
     <div class="sub-hero fade-up">
       <h1>7Tribes (7TRB)</h1>
       <p>Community • Unity • Ownership — a token built to empower people together.</p>
@@ -89,7 +107,7 @@
   </section>
 
   <!-- ABOUT -->
-<section class="card" id="about">
+  <section class="card fade-up" id="about">
     <h2>About 7Tribes (7TRB)</h2>
     <p>
       7Tribes is a community-powered movement built on unity, innovation, and economic empowerment.
@@ -103,7 +121,7 @@
   </section>
 
   <!-- WHY PEOPLE MATTER -->
-  <section class="card" id="why">
+  <section class="card fade-up" id="why">
     <h2>Why We Need People for 7Tribes to Succeed</h2>
     <ul class="list">
       <li><strong>Liquidity:</strong> More holders and traders make 7TRB more stable and usable.</li>
@@ -115,7 +133,7 @@
   </section>
 
   <!-- INVESTMENT BREAKDOWN -->
-  <section class="card" id="investment">
+  <section class="card fade-up" id="investment">
     <h2>Investment Breakdown</h2>
     <ul class="list">
       <li><strong>40%</strong> — Liquidity for 7TRB launch</li>
@@ -128,7 +146,7 @@
   </section>
 
   <!-- PARTICIPATION -->
-  <section class="card participation" id="participation">
+  <section class="card participation fade-up" id="participation">
     <h2>How to Participate</h2>
     <ol>
       <li>Join our community channels & stay informed.</li>
@@ -137,8 +155,6 @@
       <li>Engage in governance & project decisions.</li>
       <li>Hold 7TRB to support the long-term mission.</li>
     </ol>
-
-    <!-- Wallet readout -->
     <div class="wallet-readout">
       <div id="wallet-network"></div>
       <div id="wallet-address"></div>
@@ -149,30 +165,50 @@
   </section>
 
   <!-- ROADMAP -->
-  <section class="card" id="roadmap">
+  <section class="card fade-up" id="roadmap">
     <h2>Roadmap</h2>
     <div class="roadmap">
-      <div class="rm-tile">
-        <h3>Phase 1</h3>
-        <p>Core site, wallet connect, docs, brand launch.</p>
-      </div>
-      <div class="rm-tile">
-        <h3>Phase 2</h3>
-        <p>Liquidity, listings, community campaigns, Telegram growth.</p>
-      </div>
-      <div class="rm-tile">
-        <h3>Phase 3</h3>
-        <p>Utility partners, commerce pilots, grants.</p>
-      </div>
-      <div class="rm-tile">
-        <h3>Phase 4</h3>
-        <p>Governance tooling, events, multi-chain strategy.</p>
-      </div>
+      <div class="rm-tile"><h3>Phase 1</h3><p>Core site, wallet connect, docs, brand launch.</p></div>
+      <div class="rm-tile"><h3>Phase 2</h3><p>Liquidity, listings, community campaigns, Telegram growth.</p></div>
+      <div class="rm-tile"><h3>Phase 3</h3><p>Utility partners, commerce pilots, grants.</p></div>
+      <div class="rm-tile"><h3>Phase 4</h3><p>Governance tooling, events, multi-chain strategy.</p></div>
     </div>
   </section>
 
+  <!-- PARTNERS / PRESS -->
+  <section class="card fade-up" id="partners">
+    <h2>Partners & Mentions</h2>
+    <p>We’re building with great people and platforms.</p>
+    <div class="partner-grid">
+      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-1.png" alt="Partner 1"></a>
+      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-2.png" alt="Partner 2"></a>
+      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-3.png" alt="Partner 3"></a>
+      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-4.png" alt="Partner 4"></a>
+      <a href="#" target="_blank" class="partner"><img src="images/partners/partner-5.png" alt="Partner 5"></a>
+    </div>
+  </section>
+
+  <!-- SOCIAL FEEDS -->
+  <section class="card fade-up" id="social">
+    <h2>Latest Updates</h2>
+    <div class="social-embed">
+      <div class="social-col">
+        <a class="twitter-timeline" data-height="480" href="https://twitter.com/7Tribescrypto?ref_src=twsrc%5Etfw">Tweets by @7Tribescrypto</a>
+      </div>
+      <div class="social-col">
+        <iframe
+          src="https://t.me/s/SevenTribesCrypto"
+          title="Telegram channel"
+          width="100%" height="480" frameborder="0"
+          style="background:#fff; border:1px solid #eaeaea; border-radius:12px">
+        </iframe>
+      </div>
+    </div>
+  </section>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
   <!-- FAQ -->
-  <section class="card/" id="faq">
+  <section class="card fade-up" id="faq">
     <h2>FAQ</h2>
     <details><summary>What is 7TRB?</summary><p>7TRB is an ERC-20 community token focused on unity, empowerment, and shared ownership.</p></details>
     <details><summary>How do I get 7TRB?</summary><p>Connect your wallet on Ethereum. Follow announcements for liquidity and listings.</p></details>
@@ -180,7 +216,7 @@
   </section>
 
   <!-- DOCUMENTS -->
-  <section class="card" id="docs">
+  <section class="card fade-up" id="docs">
     <h2>Documents</h2>
     <p>Review our core references and share with your network.</p>
     <ul class="list">
@@ -190,7 +226,7 @@
   </section>
 
   <!-- NEWSLETTER -->
-  <section class="card" id="newsletter">
+  <section class="card fade-up" id="newsletter">
     <h2>Get Updates</h2>
     <p>Join our mailing list for launch, listings, and governance announcements.</p>
     <form action="https://buttondown.email/api/emails/embed-subscribe/yourlist" method="post" target="_blank">
@@ -200,7 +236,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="card" id="contact">
+  <section class="card fade-up" id="contact">
     <h2>Contact</h2>
     <form action="https://formspree.io/f/yourid" method="POST">
       <input type="text" name="name" placeholder="Your name" required class="input">
@@ -217,51 +253,64 @@
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-  <script src="wallet.js?v=8"></script>
+  <script src="wallet.js?v=9"></script>
 
-  <!-- Scroll animations (tiny, no dependency) -->
+  <!-- Scroll animations + Smooth scroll + Back-to-Top + Theme toggle -->
+  <button id="toTop" aria-label="Back to top">↑</button>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Scroll-in animation
       const items = document.querySelectorAll('.fade-up');
       const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) e.target.classList.add('in');
-        });
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
       }, { threshold: 0.12 });
       items.forEach(el => io.observe(el));
 
+      // Smooth scroll for same-page links
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const id = a.getAttribute('href');
+          if (id && id.length > 1) {
+            e.preventDefault();
+            document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Back-to-top button
+      const toTop = document.getElementById('toTop');
+      const showAt = 400;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > showAt) toTop.classList.add('show');
+        else toTop.classList.remove('show');
+      });
+      toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Connect Wallet bind
       const btn = document.getElementById('connect-btn');
-      if (btn && typeof window.connectWallet === 'function') {
-        btn.addEventListener('click', window.connectWallet);
+      if (btn && typeof window.connectWallet === 'function') btn.addEventListener('click', window.connectWallet);
+
+      // Theme toggle (light/dark)
+      const key = "theme";
+      const saved = localStorage.getItem(key);
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      const tbtn = document.getElementById("theme-toggle");
+      function iconFor(mode){ return (mode === "light") ? "🌙" : "☀️"; }
+      if (tbtn){
+        const now = document.documentElement.getAttribute("data-theme") || "dark";
+        tbtn.textContent = iconFor(now);
+        tbtn.addEventListener("click", () => {
+          const cur = document.documentElement.getAttribute("data-theme") || "dark";
+          const next = (cur === "light") ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem(key, next);
+          tbtn.textContent = iconFor(next);
+        });
       }
     });
   </script>
-  <!-- BACK TO TOP -->
-<button id="toTop" aria-label="Back to top">↑</button>
 
-<script>
-  // Smooth scroll for same-page links
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href');
-        if (id.length > 1) {
-          e.preventDefault();
-          document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // Back-to-top show/hide
-    const toTop = document.getElementById('toTop');
-    const showAt = 400;
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > showAt) { toTop.classList.add('show'); }
-      else { toTop.classList.remove('show'); }
-    });
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  });
-</script>
-
+  <!-- X widgets (for the timeline) -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>
