@@ -14,7 +14,10 @@
     .etsy-btn,.social-button,.wallet-connect button{
       display:inline-block;padding:12px 20px;border-radius:28px;
       text-decoration:none;font-weight:700;border:none;cursor:pointer
-    }
+    }<p style="text-align:center;color:#777;margin:6px 0;">
+  Network required: <strong>Ethereum Mainnet</strong>
+</p>
+
     .etsy-btn{background:#FF9900;color:#fff}
     .social-button.telegram{background:#0088cc;color:#fff}
     .social-button.twitter{background:#000;color:#fff}
@@ -57,12 +60,18 @@
         console.error(e);
       }
     }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+<script src="wallet.js?v=6"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('connect-btn');
+    if (btn && typeof window.connectWallet === 'function') {
+      btn.addEventListener('click', window.connectWallet);
+    }
+  });
+</script>
 
-    // Safe bind AFTER the script has loaded
-    document.addEventListener('DOMContentLoaded', function(){
-      const btn = document.getElementById('connect-btn');
-      if(btn) btn.addEventListener('click', minimalConnect);
-    });
-  </script>
+
+   
 </body>
 </html>
