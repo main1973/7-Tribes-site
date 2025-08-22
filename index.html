@@ -109,11 +109,10 @@
     © 2025 7Tribes (7TRB) — Community • Unity • Ownership
   </footer>
 
- <!-- Load ethers.js first -->
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+<!-- Load ethers.js (UMD build ensures window.ethers is defined) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
 
-<!-- Then load your wallet logic -->
-<script src="wallet.js"></script>
-
+<!-- Load your wallet logic -->
+<script src="wallet.js?v=2"></script>
 </body>
 </html>
