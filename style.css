@@ -1,239 +1,112 @@
-/* 7Tribes Website Styles - Fixed version */
+/* =========================
+   7Tribes – Global Styles
+   ========================= */
 
-/* Root Variables */
+/* THEME VARIABLES */
 :root{
-  --bg:#f7f7f9; --card:#ffffff; --text:#222; --muted:#555;
-  --cta:#FF9900; --cta-hover:#e68a00;
-  --accent:#0066cc; --accent2:#00aaff;
-  --shadow:0 6px 18px rgba(0,0,0,.12);
+  --bg: #0d0d0d;
+  --text: #111;
+  --card-bg: #ffffff;
+  --card-border: #eaeaea;
+  --primary: #ffd700;
+  --accent: #0f1b2e;
+  --accent2: #1d3f72;
+  --muted: #777;
 }
 
-*{ box-sizing:border-box; }
-body{
-  margin:0; font-family:Arial, sans-serif; line-height:1.6;
-  background:var(--bg); color:var(--text);
+html, body{
+  margin:0; padding:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color:#111;
 }
 
-/* Hero Section */
-header.hero{
-  position:relative; text-align:center; background:#000;
+/* Base containers */
+.actions-row{
+  display:flex; flex-wrap:wrap; gap:12px;
+  justify-content:center; align-items:center;
+  margin:18px auto; padding:0 12px;
 }
-header.hero .banner{
-  width:100%; height:auto; display:block; opacity:.96;
+.card{
+  max-width:1100px; margin:16px auto; padding:22px;
+  background: var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
 }
-header.hero::after{
-  content:""; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.55) 80%);
-  pointer-events:none;
-}
-.logo-container{
-  position:absolute; top:55%; left:50%; transform:translate(-50%,-50%);
-}
-.logo-container .logo{
-  width:180px; height:auto; opacity:.98;
-  filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
-}
-
-/* Etsy Button */
-.shop-tab{ text-align:center; margin:28px 0 16px; }
-.etsy-btn{
-  display:inline-block;
-  background:var(--cta); color:#fff;
-  padding:12px 28px;
-  border-radius:28px;
-  text-decoration:none;
-  font-weight:700; font-size:18px;
-  box-shadow:var(--shadow);
-  transition: transform .12s ease, background .25s ease;
-}
-.etsy-btn:hover{ background:var(--cta-hover); transform:translateY(-1px); }
-
-/* Card Sections */
-section.card{
-  max-width:960px; margin:32px auto; padding:24px;
-  background:var(--card); border-radius:12px; box-shadow:var(--shadow);
-}
-h1,h2{ margin:0 0 10px; }
-h1{ font-size:28px; }
-h2{ font-size:24px; }
-p{ color:var(--muted); margin:10px 0 0; }
-
-.list{ padding-left:20px; margin-top:8px; }
+.list{ padding-left:18px; }
 .list li{ margin:8px 0; }
 
-/* Participation Section */
-.participation{
-  background:linear-gradient(135deg, var(--accent), var(--accent2));
-  color:#fff;
+/* Buttons */
+.etsy-btn, .social-button, .wallet-connect button, .outline-btn{
+  display:inline-block; padding:12px 18px; border-radius:28px;
+  text-decoration:none; font-weight:700; cursor:pointer; border:none;
 }
-.participation h2, .participation p, .participation ol{ color:#fff; }
-.participation ol{ padding-left:22px; }
+.etsy-btn{ background:#ff9900; color:#fff; }
+.etsy-btn:hover{ filter:brightness(.95); }
+.social-button.telegram{ background:#0088cc; color:#fff; }
+.social-button.twitter{ background:#000; color:#fff; }
+.wallet-connect button{ background: var(--primary); color:#000; }
+.outline-btn{
+  background:transparent; border:2px solid var(--primary); color:#222;
+}
+.outline-btn:hover{ background:#fff5bf; }
 
-/* Social Buttons */
-.social-links{ text-align:center; margin:18px 0 8px; }
-.social-button{
-  display:inline-block;
-  margin:6px 8px;
-  padding:10px 20px;
-  border-radius:24px;
-  text-decoration:none;
-  color:#fff;
-  font-weight:700;
-  font-size:16px;
-  box-shadow:var(--shadow);
-}
-.social-button i{ margin-right:8px; }
-.social-button.telegram{ background:#0088cc; }
-.social-button.telegram:hover{ background:#006fa1; }
-.social-button.twitter{ background:#000; }
-.social-button.twitter:hover{ background:#333; }
-
-/* Wallet Connect */
-.wallet-connect{ text-align:center; margin-top:16px; }
-.wallet-connect button{
-  background:#ffcc00; color:#000;
-  padding:12px 25px;
-  border:none; border-radius:30px;
-  font-weight:bold; cursor:pointer;
-  box-shadow:var(--shadow);
-  transition: background .25s ease;
-}
-.wallet-connect button:hover{ background:#e6b800; }
-#wallet-address, #token-balance{
-  margin-top:8px; font-weight:600;
+/* Inputs */
+.input, form input, form textarea{
+  width:100%; padding:12px; border-radius:8px;
+  border:1px solid #ddd; margin-top:10px; box-sizing:border-box;
 }
 
-/* Footer */
-footer{ text-align:center; color:#aaa; padding:24px 12px; }
+/* Focus/accessibility */
+a:focus, button:focus, input:focus, textarea:focus{
+  outline:3px solid #00aaff; outline-offset:2px;
+}
+/* Large tap targets */
+button, .etsy-btn, .social-button{ min-height:44px; }
 
-/* Mobile */
+/* Sticky Top Navigation */
+.topnav{
+  position: sticky; top: 0; z-index: 999;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:10px 16px;
+  background: rgba(0,0,0,.7); backdrop-filter: blur(6px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.topnav .brand{
+  color: var(--primary); font-weight:800; letter-spacing:.3px; text-decoration:none;
+}
+.topnav .links a{
+  color:#fff; text-decoration:none; margin-left:14px; font-weight:600; opacity:.9;
+}
+.topnav .links a:hover{ opacity:1; text-decoration:underline; }
+.theme-toggle{
+  margin-left:10px; border:1px solid rgba(255,255,255,.25);
+  background:transparent; color:#fff; border-radius:8px; padding:6px 10px; cursor:pointer;
+}
+
+/* Light theme */
+html[data-theme="light"]{
+  --bg:#f7f8fb;
+  --text:#111;
+  --card-bg:#ffffff;
+  --card-border:#dfe3ea;
+}
+html[data-theme="light"] .theme-toggle{ color:#111; border-color: rgba(0,0,0,.2); }
+
+/* Hero */
+.hero{ position:relative; margin-top:6px; }
+.hero .banner{
+  width:100%; height:auto; max-height:360px; object-fit:cover; display:block;
+}
 @media (max-width:768px){
-  .logo-container .logo{ width:150px; }
-  section.card{ margin:22px auto; padding:18px; }
-  .etsy-btn{ font-size:16px; padding:12px 22px; }
+  .hero .banner{ max-height:220px; }
 }
-/* ===== Hero sizing fixes ===== */
-
-/* Trim the banner height so it doesn't push content off-screen */
-header.hero .banner {
-  width: 100%;
-  height: auto;
-  max-height: 400px;           /* adjust 350–450px to taste */
-  object-fit: cover;           /* keeps it nicely cropped */
-  display: block;
+.logo-container{
+  position:absolute; left:50%; top:40%;
+  transform:translate(-50%,-50%); text-align:center;
 }
-
-/* Reduce logo size so it doesn't dominate the hero */
-.logo-container .logo {
-  width: 140px;                /* was 180px — smaller so it sits clean */
-  height: auto;
-}
-
-/* Optional: lift the logo a touch if it feels too low */
-.logo-container {
-  top: 52%;                    /* was 55%; try 48–55% range */
-}
-
-/* Add comfortable spacing below the hero + CTA */
-.shop-tab {
-  text-align: center;
-  margin: 24px 0 20px;         /* a bit more breathing room */
-}
-
-/* Make sure sections aren't hiding under anything */
-section.card {
-  position: relative;
-  z-index: 1;
-}
-
-/* ===== Mobile tweaks ===== */
-@media (max-width: 768px) {
-  header.hero .banner {
-    max-height: 250px;         /* shorter hero on phones */
-    object-position: center;   /* keep focal area centered */
-  }
-  .logo-container .logo {
-    width: 100px;              /* smaller logo on phones */
-  }
-  .logo-container {
-    top: 50%;                  /* center a bit higher on small screens */
-  }
-}
-/* ---- visibility hotfixes (add at bottom of style.css) ---- */
-header.hero { position: relative; z-index: 0; }
-header.hero::after { z-index: 0; }              /* overlay stays inside hero only */
-
-section.card { position: relative; z-index: 1; } /* cards stack above hero area */
-#participation { display: block !important; }    /* belt-and-suspenders */
-
-#participation { 
-  border: 2px solid rgba(255, 215, 0, 0.35);     /* temp visual aid */
-  padding: 24px; border-radius: 12px; 
-}
-/* remove that border after you confirm it’s visible */
-/* ===== Quick Actions row (Etsy + socials + Connect) ===== */
-.actions-row{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  margin:22px 0 10px;
-}
-
-/* Keep cards above hero overlay, just in case */
-header.hero{ position:relative; z-index:0; }
-header.hero::after{ z-index:0; }
-section.card{ position:relative; z-index:1; }
-
-/* Hero size constraints so sections are visible */
-header.hero .banner{
-  max-height:400px; object-fit:cover; width:100%;
-}
-.logo-container .logo{ width:140px; }
-@media (max-width:768px){
-  header.hero .banner{ max-height:250px; }
-  .logo-container .logo{ width:100px; }
-}
-/* --- Participation visibility hotfix --- */
-.participation{
-  /* keep your existing gradient */
-  background: linear-gradient(135deg, var(--accent), var(--accent2)) !important;
-  /* fallback color to avoid white-on-white if gradient fails */
-  background-color: #0a66cc !important;
-  color: #fff !important;
-}
-
-/* keep cards above hero overlay just in case */
-header.hero{ position: relative; z-index: 0; }
-header.hero::after{ z-index: 0; }
-section.card{ position: relative; z-index: 1; }
-
-/* optional: temporary border so you can SEE the section during debug */
-#participation { border: 2px solid rgba(255, 215, 0, .35); }
-/* FAQ collapsibles */
-#faq details { border:1px solid #e6e6e6; border-radius:10px; padding:12px 14px; margin:10px 0; background:#fff; }
-#faq summary { cursor:pointer; font-weight:700; }
-#faq details[open] { background:#f9fbff; border-color:#dce8ff; }
-#faq p { margin:8px 0 0; }
-
-/* Focus rings for keyboard users */
-a:focus, button:focus, input:focus, textarea:focus { outline:3px solid #00aaff; outline-offset:2px; }
-
-/* Large tap targets on mobile */
-button, .etsy-btn, .social-button { min-height:44px; }
-
-/* Reduce layout shift: ensure hero sizing stays stable */
-header.hero .banner { max-height: 360px; }
-@media (max-width:768px){
-  header.hero .banner { max-height: 220px; }
-}
-
-/* Keep cards above hero overlay */
-header.hero{ position:relative; z-index:0; }
-header.hero::after{ z-index:0; }
-section.card{ position:relative; z-index:1; }
-/* Sub-hero text over banner */
+.logo{ width:220px; height:auto; border-radius:16px; }
 .sub-hero{
   position:absolute; left:50%; bottom:18px; transform:translateX(-50%);
   text-align:center; color:#fff; padding:10px 16px;
@@ -242,10 +115,9 @@ section.card{ position:relative; z-index:1; }
 .sub-hero h1{ margin:0 0 4px; font-size:28px; }
 .sub-hero p{ margin:0; opacity:.9; }
 
-/* Actions row spacing + network hint */
-.net-hint{ text-align:center; color:#777; margin:6px 0 18px; }
+.net-hint{ text-align:center; color:var(--muted); margin:6px 0 18px; }
 
-/* KPI grid */
+/* KPI boxes */
 .kpis{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
 .kpi{
   background:#0f1b2e; color:#fff; border-radius:14px; padding:18px;
@@ -257,10 +129,16 @@ section.card{ position:relative; z-index:1; }
 .kpi .kpi-sub{ font-size:13px; margin-top:6px; opacity:.9; }
 .kpi a{ color:#8fd3ff; text-decoration:none; }
 .kpi a:hover{ text-decoration:underline; }
+@media (max-width: 900px){ .kpis{ grid-template-columns: 1fr; } }
 
-@media (max-width: 900px){
-  .kpis{ grid-template-columns: 1fr; }
+/* Participation (gradient card) */
+.participation{
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color:#fff;
 }
+.participation h2, .participation p, .participation li{ color:#fff; }
+.wallet-readout{ text-align:center; margin-top:12px; }
+#wallet-network, #wallet-address, #token-balance{ margin:6px 0; font-weight:600; }
 
 /* Roadmap tiles */
 .roadmap{
@@ -278,55 +156,39 @@ section.card{ position:relative; z-index:1; }
   .roadmap{ grid-template-columns: 1fr; }
 }
 
-/* Inputs (newsletter/contact) */
-.input{
-  width:100%; padding:12px; border-radius:8px; border:1px solid #ddd; margin-top:10px;
+/* Partners / Press */
+.partner-grid{
+  display:grid; grid-template-columns: repeat(6, 1fr);
+  gap:16px; align-items:center; justify-items:center;
 }
+.partner img{ max-width:140px; max-height:54px; opacity:.9; transition:opacity .2s ease, transform .2s ease; }
+.partner:hover img{ opacity:1; transform: scale(1.03); }
+@media (max-width:1100px){ .partner-grid{ grid-template-columns: repeat(4,1fr); } }
+@media (max-width:700px){  .partner-grid{ grid-template-columns: repeat(2,1fr); } }
 
-/* Outline utility button */
-.outline-btn{
-  display:inline-block; margin-top:6px; padding:10px 18px; border-radius:22px;
-  background:transparent; border:2px solid #ffd700; color:#222; cursor:pointer;
-}
-.outline-btn:hover{ background:#fff5bf; }
+/* FAQ collapsibles */
+#faq details { border:1px solid #e6e6e6; border-radius:10px; padding:12px 14px; margin:10px 0; background:#fff; }
+#faq summary { cursor:pointer; font-weight:700; }
+#faq details[open] { background:#f9fbff; border-color:#dce8ff; }
+#faq p { margin:8px 0 0; }
 
-/* Scroll-in animation */
-.fade-up{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
-.fade-up.in{ opacity:1; transform: translateY(0); }
-/* ===== Sticky Top Navigation ===== */
-.topnav{
-  position: sticky; top: 0; z-index: 999;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 10px 16px; background: rgba(0,0,0,.7); backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.topnav .brand{
-  color: #ffd700; font-weight: 800; letter-spacing: .3px; text-decoration: none;
-}
-.topnav .links a{
-  color:#fff; text-decoration:none; margin-left:14px; font-weight:600; opacity:.9;
-}
-.topnav .links a:hover{ opacity:1; text-decoration:underline; }
-@media (max-width: 820px){
-  .topnav{ flex-wrap: wrap; gap: 8px; }
-  .topnav .links{ width:100%; display:flex; flex-wrap:wrap; gap:10px; }
-  .topnav .links a{ margin:0; }
-}
+/* Keep cards above hero overlay */
+header.hero{ position:relative; z-index:0; }
+header.hero::after{ z-index:0; }
+section.card{ position:relative; z-index:1; }
 
-/* Give hero a tiny offset so it doesn't hide under sticky nav */
-.hero{ margin-top: 6px; }
-
-/* ===== Back-to-Top Button ===== */
+/* Back-to-Top Button */
 #toTop{
   position: fixed; right: 16px; bottom: 16px;
   width: 44px; height: 44px; border-radius: 50%;
   border: none; cursor: pointer; font-size: 18px; font-weight: 800;
-  background: #ffd700; color:#000; box-shadow: 0 10px 24px rgba(0,0,0,.22);
+  background: var(--primary); color:#000; box-shadow: 0 10px 24px rgba(0,0,0,.22);
   opacity:0; transform: translateY(12px); pointer-events: none;
   transition: opacity .25s ease, transform .25s ease, box-shadow .25s ease;
 }
 #toTop.show{ opacity:1; transform: translateY(0); pointer-events:auto; }
 #toTop:hover{ box-shadow: 0 12px 28px rgba(0,0,0,.28); }
 
-/* Optional: smooth scrolling for browsers that support CSS behavior */
-html{ scroll-behavior: smooth; }
+/* Scroll-in animation */
+.fade-up{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.fade-up.in{ opacity:1; transform: translateY(0); }
