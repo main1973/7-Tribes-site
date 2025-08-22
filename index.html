@@ -40,10 +40,9 @@
     <a href="https://x.com/7Tribescrypto" target="_blank" class="social-button twitter">
       <i class="fab fa-x-twitter"></i> X (Twitter)
     </a>
-    <div class="wallet-connect">
-      <button onclick="connectWallet()">🔗 Connect Wallet</button>
-    </div>
-  </div>
+ <button id="connect-btn">🔗 Connect Wallet</button>
+<div id="wallet-address"></div>
+<div id="token-balance"></div>
 
   <!-- ABOUT -->
   <section class="card">
@@ -107,12 +106,17 @@
   <!-- FOOTER -->
   <footer>
     © 2025 7Tribes (7TRB) — Community • Unity • Ownership
-  </footer>
-
-<!-- Load ethers.js -->
+  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-
-<!-- Load wallet logic (after ethers.js) -->
-<script src="wallet.js?v=3"></script>
+<script src="wallet.js?v=4"></script>
+<script>
+  // Safe bind after wallet.js is loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('connect-btn');
+    if (btn && typeof window.connectWallet === 'function') {
+      btn.addEventListener('click', window.connectWallet);
+    }
+  });
+</script>
 </body>
 </html>
