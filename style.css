@@ -233,3 +233,63 @@ header.hero .banner { max-height: 360px; }
 header.hero{ position:relative; z-index:0; }
 header.hero::after{ z-index:0; }
 section.card{ position:relative; z-index:1; }
+/* Sub-hero text over banner */
+.sub-hero{
+  position:absolute; left:50%; bottom:18px; transform:translateX(-50%);
+  text-align:center; color:#fff; padding:10px 16px;
+  background: rgba(0,0,0,.35); border-radius:12px; backdrop-filter: blur(4px);
+}
+.sub-hero h1{ margin:0 0 4px; font-size:28px; }
+.sub-hero p{ margin:0; opacity:.9; }
+
+/* Actions row spacing + network hint */
+.net-hint{ text-align:center; color:#777; margin:6px 0 18px; }
+
+/* KPI grid */
+.kpis{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+.kpi{
+  background:#0f1b2e; color:#fff; border-radius:14px; padding:18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+.kpi .kpi-label{ font-size:13px; opacity:.85; }
+.kpi .kpi-value{ font-size:28px; font-weight:800; margin-top:4px; }
+.kpi .kpi-value.small{ font-size:18px; word-break: break-all; }
+.kpi .kpi-sub{ font-size:13px; margin-top:6px; opacity:.9; }
+.kpi a{ color:#8fd3ff; text-decoration:none; }
+.kpi a:hover{ text-decoration:underline; }
+
+@media (max-width: 900px){
+  .kpis{ grid-template-columns: 1fr; }
+}
+
+/* Roadmap tiles */
+.roadmap{
+  display:grid; grid-template-columns: repeat(4, 1fr); gap:14px;
+}
+.rm-tile{
+  background:#fff; border-radius:12px; padding:16px;
+  border:1px solid #eaeaea; box-shadow: 0 8px 20px rgba(0,0,0,.06);
+}
+.rm-tile h3{ margin:0 0 6px; font-size:18px; }
+@media (max-width: 900px){
+  .roadmap{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px){
+  .roadmap{ grid-template-columns: 1fr; }
+}
+
+/* Inputs (newsletter/contact) */
+.input{
+  width:100%; padding:12px; border-radius:8px; border:1px solid #ddd; margin-top:10px;
+}
+
+/* Outline utility button */
+.outline-btn{
+  display:inline-block; margin-top:6px; padding:10px 18px; border-radius:22px;
+  background:transparent; border:2px solid #ffd700; color:#222; cursor:pointer;
+}
+.outline-btn:hover{ background:#fff5bf; }
+
+/* Scroll-in animation */
+.fade-up{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.fade-up.in{ opacity:1; transform: translateY(0); }
