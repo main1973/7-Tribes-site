@@ -171,3 +171,27 @@ section.card { position: relative; z-index: 1; } /* cards stack above hero area 
   padding: 24px; border-radius: 12px; 
 }
 /* remove that border after you confirm it’s visible */
+/* ===== Quick Actions row (Etsy + socials + Connect) ===== */
+.actions-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:22px 0 10px;
+}
+
+/* Keep cards above hero overlay, just in case */
+header.hero{ position:relative; z-index:0; }
+header.hero::after{ z-index:0; }
+section.card{ position:relative; z-index:1; }
+
+/* Hero size constraints so sections are visible */
+header.hero .banner{
+  max-height:400px; object-fit:cover; width:100%;
+}
+.logo-container .logo{ width:140px; }
+@media (max-width:768px){
+  header.hero .banner{ max-height:250px; }
+  .logo-container .logo{ width:100px; }
+}
