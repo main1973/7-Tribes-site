@@ -30,6 +30,19 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+<!-- STICKY NAV -->
+<nav class="topnav">
+  <a class="brand" href="#">7Tribes</a>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#why">Why People</a>
+    <a href="#investment">Investment</a>
+    <a href="#participation">Participate</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#docs">Docs</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
   <!-- HERO -->
   <header class="hero">
@@ -223,5 +236,32 @@
       }
     });
   </script>
+  <!-- BACK TO TOP -->
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+  // Smooth scroll for same-page links
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Back-to-top show/hide
+    const toTop = document.getElementById('toTop');
+    const showAt = 400;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > showAt) { toTop.classList.add('show'); }
+      else { toTop.classList.remove('show'); }
+    });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  });
+</script>
+
 </body>
 </html>
