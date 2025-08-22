@@ -5,23 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>7Tribes (7TRB) – Community & Unity Token</title>
 
+  <!-- Social preview -->
   <meta name="description" content="7Tribes (7TRB) — a community-powered token for unity, empowerment, and ownership."/>
   <meta property="og:title" content="7Tribes (7TRB) – Community & Unity Token"/>
   <meta property="og:description" content="Join the movement. Build together. Own together."/>
   <meta property="og:image" content="images/banner.png"/>
   <meta property="og:type" content="website"/>
 
+  <!-- PWA / Icons -->
   <link rel="manifest" href="manifest.json"/>
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
   <link rel="apple-touch-icon" href="images/icon-192.png"/>
   <meta name="theme-color" content="#FFD700"/>
 
+  <!-- Icons for Telegram/X -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- External stylesheet -->
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- HERO -->
+  <!-- HERO: banner with centered overlay logo -->
   <header class="hero">
     <img src="images/banner.png" alt="7Tribes Banner" class="banner">
     <div class="logo-container">
@@ -29,7 +34,7 @@
     </div>
   </header>
 
-  <!-- QUICK ACTIONS (Etsy + socials + Connect Wallet) -->
+  <!-- QUICK ACTIONS: Etsy + socials + Connect Wallet -->
   <div class="actions-row">
     <a href="https://mainhouseoasis.etsy.com" target="_blank" class="etsy-btn">
       🛒 Shop 7Tribes on Etsy
@@ -40,9 +45,10 @@
     <a href="https://x.com/7Tribescrypto" target="_blank" class="social-button twitter">
       <i class="fab fa-x-twitter"></i> X (Twitter)
     </a>
- <button id="connect-btn">🔗 Connect Wallet</button>
-<div id="wallet-address"></div>
-<div id="token-balance"></div>
+    <div class="wallet-connect">
+      <button id="connect-btn">🔗 Connect Wallet</button>
+    </div>
+  </div>
 
   <!-- ABOUT -->
   <section class="card">
@@ -87,36 +93,39 @@
     </ul>
     <p><em>Total estimated launch range: $3,000 – $5,000</em></p>
   </section>
-  
-<section class="card participation" id="participation">
-  <h2>How to Participate</h2>
-  <ol>
-    <li>Join our community channels & stay informed.</li>
-    <li>Contribute to funding when live (Juicebox/DEX/LP).</li>
-    <li>Share 7Tribes with your network—spread the word.</li>
-    <li>Engage in governance & project decisions.</li>
-    <li>Hold 7TRB to support the long-term mission.</li>
-  </ol>
 
-  <div style="text-align:center; margin-top:12px;">
-    <div id="wallet-address"></div>
-    <div id="token-balance"></div>
-  </div>
-</section>
+  <!-- PARTICIPATION (steps; wallet readout displays here after connect) -->
+  <section class="card participation" id="participation">
+    <h2>How to Participate</h2>
+    <ol>
+      <li>Join our community channels & stay informed.</li>
+      <li>Contribute to funding when live (Juicebox/DEX/LP).</li>
+      <li>Share 7Tribes with your network—spread the word.</li>
+      <li>Engage in governance & project decisions.</li>
+      <li>Hold 7TRB to support the long-term mission.</li>
+    </ol>
+
+    <div class="wallet-readout" style="text-align:center; margin-top:12px;">
+      <div id="wallet-address"></div>
+      <div id="token-balance"></div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     © 2025 7Tribes (7TRB) — Community • Unity • Ownership
-  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-<script src="wallet.js?v=4"></script>
-<script>
-  // Safe bind after wallet.js is loaded
-  document.addEventListener('DOMContentLoaded', function () {
-    var btn = document.getElementById('connect-btn');
-    if (btn && typeof window.connectWallet === 'function') {
-      btn.addEventListener('click', window.connectWallet);
-    }
-  });
-</script>
+  </footer>
+
+  <!-- Scripts: ethers.js first, then wallet.js, then bind the button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+  <script src="wallet.js?v=5"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var btn = document.getElementById('connect-btn');
+      if (btn && typeof window.connectWallet === 'function') {
+        btn.addEventListener('click', window.connectWallet);
+      }
+    });
+  </script>
 </body>
 </html>
