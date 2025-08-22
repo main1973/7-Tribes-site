@@ -195,3 +195,19 @@ header.hero .banner{
   header.hero .banner{ max-height:250px; }
   .logo-container .logo{ width:100px; }
 }
+/* --- Participation visibility hotfix --- */
+.participation{
+  /* keep your existing gradient */
+  background: linear-gradient(135deg, var(--accent), var(--accent2)) !important;
+  /* fallback color to avoid white-on-white if gradient fails */
+  background-color: #0a66cc !important;
+  color: #fff !important;
+}
+
+/* keep cards above hero overlay just in case */
+header.hero{ position: relative; z-index: 0; }
+header.hero::after{ z-index: 0; }
+section.card{ position: relative; z-index: 1; }
+
+/* optional: temporary border so you can SEE the section during debug */
+#participation { border: 2px solid rgba(255, 215, 0, .35); }
