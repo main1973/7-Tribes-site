@@ -1,12 +1,11 @@
-/* ===== 7TRB wallet connect with network switching =====
-   How to choose your chain:
-   - For Ethereum Mainnet:   set CONFIG.NETWORK = "ethereum"
-   - For BSC Mainnet:        set CONFIG.NETWORK = "bsc"
-   - For Sepolia testnet:    set CONFIG.NETWORK = "sepolia"
-*/
+/* wallet.js v4 — with network switch + debug logs */
 
+console.log("[wallet.js] script loaded");
+
+// --- CONFIG ---
+// If 7TRB is on BSC, set NETWORK to "bsc"; if on Ethereum mainnet, set "ethereum"
 const CONFIG = {
-  NETWORK: "ethereum", // <-- CHANGE HERE if needed: "ethereum" | "bsc" | "sepolia"
+  NETWORK: "ethereum", // change to "bsc" if your token is on BSC
   TOKEN_ADDRESS: "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D",
   TOKEN_ABI: [
     "function name() view returns (string)",
@@ -28,13 +27,6 @@ const CONFIG = {
       rpcUrls: ["https://bsc-dataseed.binance.org/"],
       nativeCurrency: { name: "BNB", symbol: "BNB", decimals: 18 },
       blockExplorerUrls: ["https://bscscan.com/"]
-    },
-    sepolia: {
-      chainId: "0xaa36a7",
-      chainName: "Sepolia Test Network",
-      rpcUrls: ["https://rpc.sepolia.org"],
-      nativeCurrency: { name: "Sepolia ETH", symbol: "ETH", decimals: 18 },
-      blockExplorerUrls: ["https://sepolia.etherscan.io/"]
     }
   }
 };
@@ -42,20 +34,23 @@ const CONFIG = {
 async function ensureCorrectNetwork(provider) {
   const desired = CONFIG.CHAINS[CONFIG.NETWORK];
   const current = await provider.send("eth_chainId", []);
+  console.log("[wallet.js] current chain:", current, "desired:", desired.chainId);
 
   if (current.toLowerCase() === desired.chainId.toLowerCase()) return true;
 
-  // Try to switch first
   try {
     await provider.send("wallet_switchEthereumChain", [{ chainId: desired.chainId }]);
+    console.log("[wallet.js] switched to desired chain");
     return true;
   } catch (switchErr) {
-    // If the chain is not added in MetaMask, add it
+    console.warn("[wallet.js] switch error:", switchErr);
     if (switchErr && switchErr.code === 4902) {
       try {
         await provider.send("wallet_addEthereumChain", [desired]);
+        console.log("[wallet.js] chain added, switched");
         return true;
       } catch (addErr) {
+        console.error("[wallet.js] add chain error:", addErr);
         alert("Please approve network add/switch in MetaMask to continue.");
         return false;
       }
@@ -66,28 +61,31 @@ async function ensureCorrectNetwork(provider) {
   }
 }
 
+// expose globally
 window.connectWallet = async function connectWallet() {
-  if (!window.ethereum) {
-    alert("Please install MetaMask to connect your wallet.");
-    return;
-  }
-
   try {
-    // Ensure ethers is present (in case the page cached a bad load)
+    console.log("[wallet.js] connectWallet clicked");
+
+    if (!window.ethereum) {
+      alert("Please install MetaMask to connect your wallet.");
+      return;
+    }
     if (!window.ethers) {
-      alert("Ethers library not loaded. Refresh the page and try again.");
+      alert("Ethers not loaded. Hard refresh the page and try again.");
       return;
     }
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
+    console.log("[wallet.js] accounts requested");
 
-    // Enforce the correct network for the token
+    // Enforce the correct network (change CONFIG.NETWORK if needed)
     const ok = await ensureCorrectNetwork(provider);
     if (!ok) return;
 
     const signer = provider.getSigner();
     const account = await signer.getAddress();
+    console.log("[wallet.js] connected account:", account);
 
     const addrEl = document.getElementById("wallet-address");
     if (addrEl) addrEl.innerText = "Connected: " + account;
@@ -100,11 +98,12 @@ window.connectWallet = async function connectWallet() {
       contract.balanceOf(account)
     ]);
     const balance = ethers.utils.formatUnits(rawBalance, decimals);
+    console.log("[wallet.js] token:", symbol, "decimals:", decimals, "balance:", balance);
 
     const balEl = document.getElementById("token-balance");
     if (balEl) balEl.innerText = `Your Balance: ${balance} ${symbol}`;
   } catch (err) {
-    console.error(err);
+    console.error("[wallet.js] error:", err);
     alert("Connection failed: " + (err?.message || err));
   }
 };
