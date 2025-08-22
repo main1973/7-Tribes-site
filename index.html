@@ -3,128 +3,65 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>7Tribes (7TRB) – Community & Unity Token</title>
+  <title>7Tribes (7TRB) – Safe Mode Test</title>
 
-  <!-- Social preview -->
-  <meta name="description" content="7Tribes (7TRB) — a community-powered token for unity, empowerment, and ownership."/>
-  <meta property="og:title" content="7Tribes (7TRB) – Community & Unity Token"/>
-  <meta property="og:description" content="Join the movement. Build together. Own together."/>
-  <meta property="og:image" content="images/banner.png"/>
-  <meta property="og:type" content="website"/>
-
-  <!-- PWA / Icons -->
-  <link rel="manifest" href="manifest.json"/>
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
-  <link rel="apple-touch-icon" href="images/icon-192.png"/>
-  <meta name="theme-color" content="#FFD700"/>
-
-  <!-- Icons for Telegram/X -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  <!-- External stylesheet -->
   <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    /* minimal fallback so the button is visible even if style.css fails */
+    .card{max-width:960px;margin:20px auto;padding:20px;background:#fff;border-radius:12px}
+    .actions-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:18px 0}
+    .etsy-btn,.social-button,.wallet-connect button{
+      display:inline-block;padding:12px 20px;border-radius:28px;
+      text-decoration:none;font-weight:700;border:none;cursor:pointer
+    }
+    .etsy-btn{background:#FF9900;color:#fff}
+    .social-button.telegram{background:#0088cc;color:#fff}
+    .social-button.twitter{background:#000;color:#fff}
+    .wallet-connect button{background:#ffcc00;color:#000}
+    #wallet-address,#token-balance{margin-top:8px;font-weight:600;text-align:center}
+  </style>
 </head>
 <body>
 
-  <!-- HERO: banner with centered overlay logo -->
-  <header class="hero">
-    <img src="images/banner.png" alt="7Tribes Banner" class="banner">
-    <div class="logo-container">
-      <img src="images/logo.png" alt="7Tribes Logo" class="logo">
-    </div>
-  </header>
-
-  <!-- QUICK ACTIONS: Etsy + socials + Connect Wallet -->
-  <div class="actions-row">
-    <a href="https://mainhouseoasis.etsy.com" target="_blank" class="etsy-btn">
-      🛒 Shop 7Tribes on Etsy
-    </a>
-    <a href="https://t.me/SevenTribesCrypto" target="_blank" class="social-button telegram">
-      <i class="fab fa-telegram"></i> Telegram
-    </a>
-    <a href="https://x.com/7Tribescrypto" target="_blank" class="social-button twitter">
-      <i class="fab fa-x-twitter"></i> X (Twitter)
-    </a>
-    <div class="wallet-connect">
-      <button id="connect-btn">🔗 Connect Wallet</button>
-    </div>
-  </div>
-
-  <!-- ABOUT -->
   <section class="card">
-    <h1>About 7Tribes (7TRB)</h1>
-    <p>
-      7Tribes is a community-powered movement built on unity, innovation, and economic empowerment.
-      Our mission is to create financial independence through the 7TRB token, driven by people who
-      want to see change and growth for future generations.
-    </p>
-    <p>
-      Success depends on participation—builders, investors, and supporters working together to
-      circulate value inside the community. Every voice and every contribution matters.
-    </p>
-  </section>
-
-  <!-- WHY PEOPLE MATTER -->
-  <section class="card">
-    <h2>Why We Need People for 7Tribes to Succeed</h2>
-    <p>
-      Technology doesn’t create value by itself—people do. A token without a community has no
-      real utility or momentum. Every holder, builder, and supporter strengthens the movement.
-    </p>
-    <ul class="list">
-      <li><strong>Liquidity:</strong> More holders and traders make 7TRB more stable and usable.</li>
-      <li><strong>Awareness:</strong> New supporters expand our reach to builders, partners, and investors.</li>
-      <li><strong>Participation:</strong> Community members guide decisions and help shape the roadmap.</li>
-      <li><strong>Circulation:</strong> Using 7TRB in commerce, donations, and trading keeps value in the ecosystem.</li>
-      <li><strong>Resilience:</strong> A united community can weather market swings and grow long-term.</li>
-    </ul>
-    <p><em>Without people, there is no Tribe. With you, 7TRB becomes unstoppable.</em></p>
-  </section>
-
-  <!-- INVESTMENT BREAKDOWN -->
-  <section class="card">
-    <h2>Investment Breakdown</h2>
-    <ul class="list">
-      <li><strong>40%</strong> — Liquidity for 7TRB launch</li>
-      <li><strong>20%</strong> — Marketing & awareness campaigns</li>
-      <li><strong>20%</strong> — Community development & tools</li>
-      <li><strong>10%</strong> — Partnerships & exchange listings</li>
-      <li><strong>10%</strong> — Operations & team support</li>
-    </ul>
-    <p><em>Total estimated launch range: $3,000 – $5,000</em></p>
-  </section>
-
-  <!-- PARTICIPATION (steps; wallet readout displays here after connect) -->
-  <section class="card participation" id="participation">
-    <h2>How to Participate</h2>
-    <ol>
-      <li>Join our community channels & stay informed.</li>
-      <li>Contribute to funding when live (Juicebox/DEX/LP).</li>
-      <li>Share 7Tribes with your network—spread the word.</li>
-      <li>Engage in governance & project decisions.</li>
-      <li>Hold 7TRB to support the long-term mission.</li>
-    </ol>
-
-    <div class="wallet-readout" style="text-align:center; margin-top:12px;">
-      <div id="wallet-address"></div>
-      <div id="token-balance"></div>
+    <h2>Connection Test</h2>
+    <p>Click the button below. You should see a MetaMask popup. After approving, your address should appear.</p>
+    <div class="actions-row">
+      <div class="wallet-connect">
+        <button id="connect-btn">🔗 Connect Wallet</button>
+      </div>
     </div>
+    <div id="wallet-address"></div>
+    <div id="token-balance"></div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2025 7Tribes (7TRB) — Community • Unity • Ownership
-  </footer>
-
-  <!-- Scripts: ethers.js first, then wallet.js, then bind the button -->
+  <!-- Load ethers UMD (guarantees window.ethers) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-  <script src="wallet.js?v=5"></script>
+
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var btn = document.getElementById('connect-btn');
-      if (btn && typeof window.connectWallet === 'function') {
-        btn.addEventListener('click', window.connectWallet);
+    // Minimal, address-only connect (no ABI yet)
+    async function minimalConnect(){
+      try{
+        if(!window.ethereum){ alert("Please install MetaMask."); return; }
+        if(!window.ethers){ alert("Ethers failed to load. Refresh and try again."); return; }
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const account = await signer.getAddress();
+
+        document.getElementById("wallet-address").innerText = "Connected: " + account;
+      }catch(e){
+        alert("Connect error: " + (e?.message || e));
+        console.error(e);
       }
+    }
+
+    // Safe bind AFTER the script has loaded
+    document.addEventListener('DOMContentLoaded', function(){
+      const btn = document.getElementById('connect-btn');
+      if(btn) btn.addEventListener('click', minimalConnect);
     });
   </script>
 </body>
