@@ -112,3 +112,50 @@ footer{ text-align:center; color:#aaa; padding:24px 12px; }
   section.card{ margin:22px auto; padding:18px; }
   .etsy-btn{ font-size:16px; padding:12px 22px; }
 }
+/* ===== Hero sizing fixes ===== */
+
+/* Trim the banner height so it doesn't push content off-screen */
+header.hero .banner {
+  width: 100%;
+  height: auto;
+  max-height: 400px;           /* adjust 350–450px to taste */
+  object-fit: cover;           /* keeps it nicely cropped */
+  display: block;
+}
+
+/* Reduce logo size so it doesn't dominate the hero */
+.logo-container .logo {
+  width: 140px;                /* was 180px — smaller so it sits clean */
+  height: auto;
+}
+
+/* Optional: lift the logo a touch if it feels too low */
+.logo-container {
+  top: 52%;                    /* was 55%; try 48–55% range */
+}
+
+/* Add comfortable spacing below the hero + CTA */
+.shop-tab {
+  text-align: center;
+  margin: 24px 0 20px;         /* a bit more breathing room */
+}
+
+/* Make sure sections aren't hiding under anything */
+section.card {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Mobile tweaks ===== */
+@media (max-width: 768px) {
+  header.hero .banner {
+    max-height: 250px;         /* shorter hero on phones */
+    object-position: center;   /* keep focal area centered */
+  }
+  .logo-container .logo {
+    width: 100px;              /* smaller logo on phones */
+  }
+  .logo-container {
+    top: 50%;                  /* center a bit higher on small screens */
+  }
+}
