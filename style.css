@@ -211,3 +211,25 @@ section.card{ position: relative; z-index: 1; }
 
 /* optional: temporary border so you can SEE the section during debug */
 #participation { border: 2px solid rgba(255, 215, 0, .35); }
+/* FAQ collapsibles */
+#faq details { border:1px solid #e6e6e6; border-radius:10px; padding:12px 14px; margin:10px 0; background:#fff; }
+#faq summary { cursor:pointer; font-weight:700; }
+#faq details[open] { background:#f9fbff; border-color:#dce8ff; }
+#faq p { margin:8px 0 0; }
+
+/* Focus rings for keyboard users */
+a:focus, button:focus, input:focus, textarea:focus { outline:3px solid #00aaff; outline-offset:2px; }
+
+/* Large tap targets on mobile */
+button, .etsy-btn, .social-button { min-height:44px; }
+
+/* Reduce layout shift: ensure hero sizing stays stable */
+header.hero .banner { max-height: 360px; }
+@media (max-width:768px){
+  header.hero .banner { max-height: 220px; }
+}
+
+/* Keep cards above hero overlay */
+header.hero{ position:relative; z-index:0; }
+header.hero::after{ z-index:0; }
+section.card{ position:relative; z-index:1; }
