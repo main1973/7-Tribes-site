@@ -44,6 +44,9 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css"/>
+
+  <!-- OPTIONAL: privacy-friendly analytics (uncomment + set your domain) -->
+  <!-- <script defer data-domain="main1973.github.io" src="https://plausible.io/js/script.js"></script> -->
 </head>
 <body>
 
@@ -51,6 +54,7 @@
   <nav class="topnav">
     <a class="brand" href="#">7Tribes</a>
     <div class="links">
+      <a href="#join">Join</a>
       <a href="#about">About</a>
       <a href="#why">Why People</a>
       <a href="#investment">Investment</a>
@@ -95,6 +99,34 @@
     </div>
   </section>
 
+  <!-- JOIN (flyer tracking + email signup) -->
+  <section class="card fade-up" id="join">
+    <h2>Join the Tribe</h2>
+    <p>Get project updates, calls to action, and early drops. We respect your inbox.</p>
+
+    <!-- micro stats row -->
+    <div class="mini-stats">
+      <div class="mini-stat">
+        <div class="mini-label">Source</div>
+        <div class="mini-value" id="sourceTag">direct</div>
+      </div>
+      <div class="mini-stat">
+        <div class="mini-label">This Visit</div>
+        <div class="mini-value" id="visitStamp">—</div>
+      </div>
+    </div>
+
+    <!-- Replace action with your provider endpoint (Formspree/Brevo/Mailchimp) -->
+    <form id="joinForm" action="https://formspree.io/f/yourid" method="POST" class="join-form">
+      <input type="email" name="email" placeholder="your@email.com" required class="input" />
+      <!-- Hidden fields store flyer tag + path for your list -->
+      <input type="hidden" name="source" id="srcField" />
+      <input type="hidden" name="landing_path" id="pathField" />
+      <button type="submit" class="etsy-btn">Get Updates</button>
+      <p class="fineprint">Sign up earns +5 CP (Contribution Points). Perks, not payouts. <a href="#transparency">Learn more</a>.</p>
+    </form>
+  </section>
+
   <!-- ABOUT -->
   <section class="card fade-up" id="about">
     <h2>About 7Tribes (7TRB)</h2>
@@ -112,95 +144,7 @@
   <!-- WHY PEOPLE MATTER -->
   <section class="card fade-up" id="why">
     <h2>Why We Need People for 7Tribes to Succeed</h2>
-    <ul class="list">
-      <li><strong>Liquidity:</strong> More holders and traders make 7TRB more stable and usable.</li>
-      <li><strong>Awareness:</strong> New supporters expand our reach to builders, partners, and investors.</li>
-      <li><strong>Participation:</strong> Community members guide decisions and help shape the roadmap.</li>
-      <li><strong>Circulation:</strong> Using 7TRB in commerce, donations, and trading keeps value in the ecosystem.</li>
-      <li><strong>Resilience:</strong> A united community can weather market swings and grow long-term.</li>
-    </ul>
-  </section>
-
-  <!-- INVESTMENT BREAKDOWN -->
-  <section class="card fade-up" id="investment">
-    <h2>Investment Breakdown</h2>
-    <ul class="list">
-      <li><strong>40%</strong> — Liquidity for 7TRB launch</li>
-      <li><strong>20%</strong> — Marketing & awareness campaigns</li>
-      <li><strong>20%</strong> — Community development & tools</li>
-      <li><strong>10%</strong> — Partnerships & exchange listings</li>
-      <li><strong>10%</strong> — Operations & team support</li>
-    </ul>
-    <p><em>Total estimated launch range: $3,000 – $5,000</em></p>
-  </section>
-
-  <!-- PARTICIPATION -->
-  <section class="card participation fade-up" id="participation">
-    <h2>How to Participate</h2>
-    <ol>
-      <li>Join our community channels & stay informed.</li>
-      <li>Contribute to funding when live (Juicebox/DEX/LP).</li>
-      <li>Share 7Tribes with your network—spread the word.</li>
-      <li>Engage in governance & project decisions.</li>
-      <li>Hold 7TRB to support the long-term mission.</li>
-    </ol>
-    <div class="wallet-readout">
-      <div id="wallet-network"></div>
-      <div id="wallet-address"></div>
-      <button id="copy-addr" class="outline-btn">Copy Address</button>
-      <div id="token-balance"></div>
-      <button id="add-token" class="outline-btn">Add 7TRB to MetaMask</button>
-    </div>
-  </section>
-
-  <!-- ROADMAP -->
-  <section class="card fade-up" id="roadmap">
-    <h2>Roadmap</h2>
-    <div class="roadmap">
-      <div class="rm-tile"><h3>Phase 1</h3><p>Core site, wallet connect, docs, brand launch.</p></div>
-      <div class="rm-tile"><h3>Phase 2</h3><p>Liquidity, listings, community campaigns, Telegram growth.</p></div>
-      <div class="rm-tile"><h3>Phase 3</h3><p>Utility partners, commerce pilots, grants.</p></div>
-      <div class="rm-tile"><h3>Phase 4</h3><p>Governance tooling, events, multi-chain strategy.</p></div>
-    </div>
-  </section>
-
-  <!-- PARTNERS / PRESS -->
-  <section class="card fade-up" id="partners">
-    <h2>Partners & Mentions</h2>
-    <p>We’re building with great people and platforms.</p>
-    <div class="partner-grid">
-      <a href="#" class="partner"><img src="images/partners/partner-1.png" alt="Partner 1"></a>
-      <a href="#" class="partner"><img src="images/partners/partner-2.png" alt="Partner 2"></a>
-      <a href="#" class="partner"><img src="images/partners/partner-3.png" alt="Partner 3"></a>
-      <a href="#" class="partner"><img src="images/partners/partner-4.png" alt="Partner 4"></a>
-      <a href="#" class="partner"><img src="images/partners/partner-5.png" alt="Partner 5"></a>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="card fade-up" id="faq">
-    <h2>FAQ</h2>
-    <details><summary>What is 7TRB?</summary><p>7TRB is an ERC-20 community token focused on unity, empowerment, and shared ownership.</p></details>
-    <details><summary>How do I get 7TRB?</summary><p>Connect your wallet on Ethereum. Follow announcements for liquidity and listings.</p></details>
-    <details><summary>Is there a roadmap?</summary><p>Yes—see the Roadmap above. We’ll publish updates as milestones are met.</p></details>
-  </section>
-
-  <!-- DOCUMENTS -->
-  <section class="card fade-up" id="docs">
-    <h2>Documents</h2>
-    <ul class="list">
-      <li>📄 <a href="docs/7TRB-Whitepaper.pdf" target="_blank">7TRB Whitepaper (PDF)</a></li>
-      <li>📊 <a href="docs/7TRB-Tokenomics.pdf" target="_blank">Tokenomics Summary (PDF)</a></li>
-    </ul>
-  </section>
-
-  <!-- NEWSLETTER -->
-  <section class="card fade-up" id="newsletter">
-    <h2>Get Updates</h2>
-    <form action="https://buttondown.email/api/emails/embed-subscribe/yourlist" method="post" target="_blank">
-      <input type="email" name="email" placeholder="you@example.com" required class="input">
-      <button type="submit" class="etsy-btn">Subscribe</button>
-    </form>
+    <p>Ownership = responsibility. Spend some to power today. Hold some to build tomorrow. Teach one, bring two.</p>
   </section>
 
   <!-- CONTACT -->
@@ -223,7 +167,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
   <script src="wallet.js?v=9"></script>
 
-  <!-- Scroll animations + Back-to-Top + Theme toggle -->
+  <!-- Scroll animations + Back-to-Top + Theme toggle + flyer tracking -->
   <button id="toTop" aria-label="Back to top">↑</button>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -272,6 +216,31 @@
           document.documentElement.setAttribute("data-theme", next);
           localStorage.setItem(key, next);
           tbtn.textContent = iconFor(next);
+        });
+      }
+
+      // --- Flyer source tracking + signup capture ---
+      const params = new URLSearchParams(location.search);
+      const src = params.get('src') || params.get('utm_source') || 'direct';
+      const campaign = params.get('utm_campaign') || 'flyer';
+
+      const srcField = document.getElementById('srcField');
+      const pathField = document.getElementById('pathField');
+      const sourceTag = document.getElementById('sourceTag');
+      const visitStamp = document.getElementById('visitStamp');
+
+      if (srcField) srcField.value = src;
+      if (pathField) pathField.value = location.pathname + location.search;
+      if (sourceTag) sourceTag.textContent = src;
+      if (visitStamp) visitStamp.textContent = new Date().toLocaleString();
+
+      // OPTIONAL: Plausible custom events (uncomment if using)
+      // if (window.plausible) plausible('Flyer Join Page', { props: { src, campaign } });
+
+      const joinForm = document.getElementById('joinForm');
+      if (joinForm) {
+        joinForm.addEventListener('submit', () => {
+          // if (window.plausible) plausible('Email Signup', { props: { src, campaign } });
         });
       }
     });
