@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>7Tribes — Live Dashboard</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  body{max-width:1000px;margin:auto;padding:20px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:12px 0}
+  .card{border:1px solid #222;border-radius:12px;padding:14px;background:#111;color:#eee}
+  .label{font-size:12px;opacity:.7}
+  .value{font-size:28px;font-weight:800}
+  .bar{height:10px;background:#222;border-radius:999px;overflow:hidden;margin-top:8px}
+  .bar>i{display:block;height:100%;background:#FFD700;width:0%}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  table{width:100%;border-collapse:collapse}
+  td,th{border-bottom:1px solid #222;padding:8px;text-align:left}
+  .muted{opacity:.7;font-size:12px}
+</style>
+</head>
+<body>
+  <h1>7Tribes — Live Transparency</h1>
+  <p class="muted">Wallets, votes, budgets — all visible. Updated <span id="updatedAt">—</span>.</p>
+
+  <div class="kpis">
+    <div class="card"><div class="label">Holders</div><div class="value" id="holders">—</div><div class="bar"><i id="holdersBar"></i></div></div>
+    <div class="card"><div class="label">Merchants</div><div class="value" id="merchants">—</div><div class="bar"><i id="merchantsBar"></i></div></div>
+    <div class="card"><div class="label">Treasury (USD)</div><div class="value" id="treasury">—</div><div class="bar"><i id="treasuryBar"></i></div></div>
+    <div class="card"><div class="label">Spend vs Save (30d)</div><div class="value" id="spendSave">—</div><div class="bar"><i id="spendBar"></i></div></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="label">Treasury 30/90 day trend</div>
+      <canvas id="treasuryChart" height="140"></canvas>
+    </div>
+    <div class="card">
+      <div class="label">Projects pipeline</div>
+      <table>
+        <thead><tr><th>Status</th><th>Count</th></tr></thead>
+        <tbody id="projRows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <div class="label" style="margin-bottom:6px">Merchant directory (sample)</div>
+    <table>
+      <thead><tr><th>Name</th><th>City</th><th>Since</th><th>Monthly 7TRB</th></tr></thead>
+      <tbody id="merchRows"></tbody>
+    </table>
+  </div>
+
+  <p class="muted" style="margin-top:10px">
+    Wallets: <a href="https://etherscan.io/address/YOUR_TREASURY_ADDRESS" target="_blank">Etherscan</a>
+    · Governance: <a href="https://snapshot.org/#/YOUR_SPACE" target="_blank">Snapshot</a>
+    · Reports: <a href="transparency.html">Monthly statements</a>
+  </p>
+
+<script>
+(async function(){
+  // Load goals + metrics
+  const [goals, metrics] = await Promise.all([
+    fetch('data/goals.json').then(r=>r.json()),
+    fetch('data/metrics.json').then(r=>r.json())
+  ]);
+
+  // Updated at
+  document.getElementById('updatedAt').textContent =
+    new Date(metrics.updated_at).toLocaleString();
+
+  // Helpers
+  const pct = (val, g) => Math.min(100, Math.round((val / (g.stretch||g.goal||1)) * 100));
+
+  // KPIs + progress bars
+  const setBar = (id, p) => document.getElementById(id).style.width = p + '%';
+  document.getElementById('holders').textContent = metrics.holders.toLocaleString();
+  setBar('holdersBar', pct(metrics.holders, goals.holders));
+
+  document.getElementById('merchants').textContent = metrics.merchants.toString();
+  setBar('merchantsBar', pct(metrics.merchants, goals.merchants));
+
+  document.getElementById('treasury').textContent = '$' + Math.round(metrics.treasury_usd).toLocaleString();
+  setBar('treasuryBar', pct(metrics.treasury_usd, goals.treasury_usd));
+
+  const spentPct = Math.round((metrics.spent_pct_30d || 0) * 100);
+  document.getElementById('spendSave').textContent = spentPct + '% spent / ' + (100 - spentPct) + '% saved';
+  setBar('spendBar', Math.max(0, Math.min(100, spentPct)));
+
+  // Projects table
+  const pr = metrics.projects || {};
+  const projRows = document.getElementById('projRows');
+  [['Proposed', pr.proposed], ['Approved', pr.approved], ['Funded', pr.funded], ['Delivered', pr.delivered]].forEach(([k,v])=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${k}</td><td>${v ?? 0}</td>`;
+    projRows.appendChild(tr);
+  });
+
+  // Merchant list
+  try{
+    const merchants = await fetch('data/merchants.json').then(r=>r.json());
+    const mbody = document.getElementById('merchRows');
+    merchants.forEach(m=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><a href="${m.url||'#'}" target="_blank">${m.name}</a></td>
+                      <td>${m.city||''}</td><td>${m.since||''}</td><td>${m.monthly_volume||0}</td>`;
+      mbody.appendChild(tr);
+    });
+  }catch(e){ /* optional */ }
+
+  // OPTIONAL: live treasury from Etherscan (replace address)
+  // const addr = 'YOUR_TREASURY_ADDRESS';
+  // const res = await fetch(`https://api.etherscan.io/api?module=account&action=balance&address=${addr}&tag=latest&apikey=YOUR_KEY`).then(r=>r.json());
+  // if(res.status==='1'){ /* convert wei to USD via your rate, then update DOM */ }
+})();
+</script>
+</body>
+</html>
