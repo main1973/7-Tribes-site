@@ -119,3 +119,20 @@ function toISODate(d = new Date()) {
   console.error('Updater failed:', err);
   process.exit(1);
 });
+// after fetching Etherscan:
+if (balRes.status !== '1' || !balRes.result) {
+  console.warn('Etherscan returned non-OK:', balRes);
+  // fallback: keep last treasury_usd, just update timestamp
+  metrics.updated_at = toISODate();
+  writeJsonPretty(METRICS_PATH, metrics);
+  process.exit(0); // don’t fail the workflow
+}
+// after fetching CoinGecko:
+const ethUsd = Number(priceRes?.ethereum?.usd);
+if (!Number.isFinite(ethUsd) || ethUsd <= 0) {
+  console.warn('CoinGecko price missing, using last known USD value if present.');
+  // If no price, skip USD recalc (keep previous treasury_usd), just update timestamp
+  metrics.updated_at = toISODate();
+  writeJsonPretty(METRICS_PATH, metrics);
+  process.exit(0);
+}
