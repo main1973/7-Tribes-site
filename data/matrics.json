@@ -1,17 +1,20 @@
 {
   "updated_at": "2025-09-23T12:00:00Z",
-  "holders": 820,
-  "active_wallets_30d": 211,
-  "merchants": 12,
-  "treasury_usd": 42850,
-  "inflow_30d_usd": 9720,
-  "outflow_30d_usd": 6120,
-  "spent_pct_30d": 0.39,
-  "projects": { "proposed": 7, "approved": 5, "funded": 3, "delivered": 1 },
+  "holders": 320,
+  "active_wallets_30d": 145,
+  "treasury_usd": 7850,
   "treasury_series": [
-    ["2025-09-01", 32000],
-    ["2025-09-10", 38100],
-    ["2025-09-20", 41000],
-    ["2025-09-23", 42850]
-  ]
+    ["2025-09-01", 3000],
+    ["2025-09-08", 5200],
+    ["2025-09-15", 7100],
+    ["2025-09-22", 7850]
+  ],
+  "spent_pct_30d": 0.35,
+  "projects": {
+    "proposed": 4,
+    "approved": 2,
+    "funded": 1,
+    "delivered": 0
+  },
+  "merchants": 7
 }
