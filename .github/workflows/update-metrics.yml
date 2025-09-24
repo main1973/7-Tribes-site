@@ -44,4 +44,4 @@ jobs:
           git add data/metrics.json
           git commit -m "chore: refresh metrics [skip ci]" || echo "No changes to commit"
           git push
-run: node scripts/update_metrics.js
+
