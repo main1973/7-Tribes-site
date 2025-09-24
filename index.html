@@ -34,7 +34,7 @@
   </script>
 
   <!-- PWA / Icons -->
-  <link rel="manifest" href="manifest.json"/>
+  <link rel="manifest" href="manifest.json?v=2"/>
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
   <link rel="apple-touch-icon" href="images/icon-192.png"/>
   <meta name="theme-color" content="#FFD700"/>
@@ -42,11 +42,36 @@
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <!-- Styles -->
+  <!-- Base Styles -->
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- OPTIONAL: privacy-friendly analytics (uncomment + set your domain) -->
-  <!-- <script defer data-domain="main1973.github.io" src="https://plausible.io/js/script.js"></script> -->
+  <!-- Make fade effects JS-aware to avoid blank screens -->
+  <script>document.documentElement.classList.add('js')</script>
+
+  <!-- Tiny inline safety styles so forms are visible even if external CSS changes -->
+  <style>
+    /* Only hide before animation if JS is running */
+    .js .fade-up { opacity: 0; transform: translateY(8px); transition: opacity .4s, transform .4s; }
+    .js .fade-up.in { opacity: 1; transform: none; }
+
+    /* Join form input visible on dark themes */
+    #join .join-form .input {
+      display:block; width:100%; max-width:520px; margin:.5rem 0;
+      padding:12px 14px; border-radius:12px; border:1px solid #2a2a2f;
+      background:#0f0f13; color:#fff;
+    }
+    #join .join-form .input::placeholder { color:#a2a2aa; }
+
+    /* Mini stats row */
+    .mini-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin:.5rem 0 1rem}
+    .mini-stat{border:1px solid #222;border-radius:12px;padding:.6rem .8rem;background:#0f0f13}
+    .mini-label{font-size:.75rem;opacity:.7}
+    .mini-value{font-weight:800}
+    .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .kpi .small{font-size:.9rem}
+    .actions-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center}
+    .net-hint{text-align:center;opacity:.7}
+  </style>
 </head>
 <body>
 
@@ -54,15 +79,15 @@
   <nav class="topnav">
     <a class="brand" href="#">7Tribes</a>
     <div class="links">
-      <a href="dashboard.html">Dashboard</a>
-     <a href="#join">Join</a>
+      <a href="#join">Join</a>
       <a href="#about">About</a>
       <a href="#why">Why People</a>
-      <a href="#investment">Investment</a>/
+      <a href="#investment">Investment</a>
       <a href="#participation">Participate</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#partners">Partners</a>
       <a href="#docs">Docs</a>
+      <a href="dashboard.html">Dashboard</a>
       <a href="#contact">Contact</a>
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
     </div>
@@ -92,10 +117,20 @@
   <p class="net-hint">Network required: <strong>Ethereum Mainnet</strong></p>
 
   <!-- KPI INFO BOXES -->
-  <section class="card kpis fade-up">
-    <div class="kpi"><div class="kpi-label">Total Supply</div><div class="kpi-value">1,000,000</div><div class="kpi-sub">7TRB</div></div>
-    <div class="kpi"><div class="kpi-label">Chain</div><div class="kpi-value">Ethereum</div><div class="kpi-sub">ERC-20</div></div>
-    <div class="kpi"><div class="kpi-label">Contract</div><div class="kpi-value small">0xD816...c0D</div>
+  <section class="card kpis fade-up" aria-label="Token quick facts">
+    <div class="kpi">
+      <div class="kpi-label">Total Supply</div>
+      <div class="kpi-value">1,000,000</div>
+      <div class="kpi-sub">7TRB</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Chain</div>
+      <div class="kpi-value">Ethereum</div>
+      <div class="kpi-sub">ERC-20</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Contract</div>
+      <div class="kpi-value small">0xD816...c0D</div>
       <div class="kpi-sub"><a href="https://etherscan.io/token/0xD81641716926F6D55dC5AF6929dbE046bBf43c0D" target="_blank">View on Etherscan</a></div>
     </div>
   </section>
@@ -105,26 +140,19 @@
     <h2>Join the Tribe</h2>
     <p>Get project updates, calls to action, and early drops. We respect your inbox.</p>
 
-    <!-- micro stats row -->
     <div class="mini-stats">
-      <div class="mini-stat">
-        <div class="mini-label">Source</div>
-        <div class="mini-value" id="sourceTag">direct</div>
-      </div>
-      <div class="mini-stat">
-        <div class="mini-label">This Visit</div>
-        <div class="mini-value" id="visitStamp">—</div>
-      </div>
+      <div class="mini-stat"><div class="mini-label">Source</div><div class="mini-value" id="sourceTag">direct</div></div>
+      <div class="mini-stat"><div class="mini-label">This Visit</div><div class="mini-value" id="visitStamp">—</div></div>
     </div>
 
-    <!-- Replace action with your provider endpoint (Formspree/Brevo/Mailchimp) -->
+    <!-- Replace action with your real provider endpoint -->
     <form id="joinForm" action="https://formspree.io/f/yourid" method="POST" class="join-form">
-      <input type="email" name="email" placeholder="your@email.com" required class="input" />
-      <!-- Hidden fields store flyer tag + path for your list -->
+      <input class="input" type="email" name="email" placeholder="you@example.com" required />
+      <!-- Hidden fields capture flyer tag + path -->
       <input type="hidden" name="source" id="srcField" />
       <input type="hidden" name="landing_path" id="pathField" />
       <button type="submit" class="etsy-btn">Get Updates</button>
-      <p class="fineprint">Sign up earns +5 CP (Contribution Points). Perks, not payouts. <a href="#transparency">Learn more</a>.</p>
+      <p class="fineprint">Sign up earns +5 CP (Contribution Points). Perks, not payouts. <a href="dashboard.html">See transparency</a>.</p>
     </form>
   </section>
 
@@ -142,7 +170,7 @@
     </p>
   </section>
 
-   <!-- WHY PEOPLE MATTER -->
+  <!-- WHY PEOPLE MATTER -->
   <section class="card fade-up" id="why">
     <h2>Why We Need People for 7Tribes to Succeed</h2>
     <p>Ownership = responsibility. Spend some to power today. Hold some to build tomorrow. Teach one, bring two.</p>
@@ -151,23 +179,23 @@
   <!-- INVESTMENT -->
   <section class="card fade-up" id="investment">
     <h2>Investment</h2>
-    <p>Use 7TRB as both tool and store of value. Target policy: spend 30% to power projects and merchants; hold 70% for long-term growth.</p>
+    <p><strong>Policy:</strong> Spend 30% to power projects and merchants; hold 70% for long-term community wealth. A token that never moves dies; a token that only moves drains. We do both.</p>
   </section>
 
   <!-- PARTICIPATE -->
   <section class="card fade-up" id="participation">
     <h2>Participate</h2>
     <ul>
-      <li>Circulate: buy from Tribe merchants, fund projects.</li>
-      <li>Contribute: share, teach, onboard.</li>
-      <li>Create: propose builds, volunteer skills.</li>
-      <li>Govern: read proposals, vote, track funds.</li>
+      <li><strong>Circulate:</strong> buy from Tribe merchants, fund projects.</li>
+      <li><strong>Contribute:</strong> share, teach, onboard.</li>
+      <li><strong>Create:</strong> propose builds, volunteer skills.</li>
+      <li><strong>Govern:</strong> read proposals, vote, track funds.</li>
     </ul>
   </section>
 
   <!-- ROADMAP -->
   <section class="card fade-up" id="roadmap">
-    <h2>Roadmap (90-Day)</h2>
+    <h2>Roadmap (First 90 Days)</h2>
     <ul>
       <li>Day 1–30: 500 holders, 5 merchants, 1 pilot project.</li>
       <li>Day 31–60: 1,000 holders, 15 merchants, 3 projects.</li>
@@ -197,7 +225,7 @@
     <h2>Contact</h2>
     <form action="https://formspree.io/f/yourid" method="POST">
       <input type="text" name="name" placeholder="Your name" required class="input">
-      <input type="email" name="email" placeholder="your@email.com" required class="input">
+      <input type="email" name="email" placeholder="you@example.com" required class="input">
       <textarea name="message" rows="5" placeholder="How can we help?" required class="input"></textarea>
       <button type="submit" class="etsy-btn">Send</button>
     </form>
@@ -208,3 +236,88 @@
     © 2025 7Tribes (7TRB) — Community • Unity • Ownership
   </footer>
 
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+  <script src="wallet.js?v=9"></script>
+
+  <!-- Scroll animations + Back-to-Top + Theme toggle + flyer tracking -->
+  <button id="toTop" aria-label="Back to top">↑</button>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Scroll-in animation (safe: works only if .js present)
+      const items = document.querySelectorAll('.fade-up');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+      }, { threshold: 0.12 });
+      items.forEach(el => io.observe(el));
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const id = a.getAttribute('href');
+          if (id && id.length > 1) {
+            e.preventDefault();
+            document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Back-to-top button
+      const toTop = document.getElementById('toTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) toTop.classList.add('show');
+        else toTop.classList.remove('show');
+      });
+      toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Connect Wallet
+      const btn = document.getElementById('connect-btn');
+      if (btn && typeof window.connectWallet === 'function') btn.addEventListener('click', window.connectWallet);
+
+      // Theme toggle
+      const key = "theme";
+      const saved = localStorage.getItem(key);
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      const tbtn = document.getElementById("theme-toggle");
+      function iconFor(mode){ return (mode === "light") ? "🌙" : "☀️"; }
+      if (tbtn){
+        const now = document.documentElement.getAttribute("data-theme") || "dark";
+        tbtn.textContent = iconFor(now);
+        tbtn.addEventListener("click", () => {
+          const cur = document.documentElement.getAttribute("data-theme") || "dark";
+          const next = (cur === "light") ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem(key, next);
+          tbtn.textContent = iconFor(next);
+        });
+      }
+
+      // Flyer source tracking
+      const params = new URLSearchParams(location.search);
+      const src = params.get('src') || params.get('utm_source') || 'direct';
+      const campaign = params.get('utm_campaign') || 'flyer';
+
+      const srcField = document.getElementById('srcField');
+      const pathField = document.getElementById('pathField');
+      const sourceTag = document.getElementById('sourceTag');
+      const visitStamp = document.getElementById('visitStamp');
+
+      if (srcField) srcField.value = src;
+      if (pathField) pathField.value = location.pathname + location.search;
+      if (sourceTag) sourceTag.textContent = src;
+      if (visitStamp) visitStamp.textContent = new Date().toLocaleString();
+
+      // OPTIONAL: Plausible custom events (uncomment if using Plausible)
+      // if (window.plausible) plausible('Flyer Join Page', { props: { src, campaign } });
+
+      const joinForm = document.getElementById('joinForm');
+      if (joinForm) {
+        joinForm.addEventListener('submit', () => {
+          // if (window.plausible) plausible('Email Signup', { props: { src, campaign } });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+   
