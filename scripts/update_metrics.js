@@ -72,22 +72,52 @@ function toISODate(d = new Date()) {
   const merchantsList = readJsonSafe(MERCHANTS_PATH, []);
   const merchantsCount = Array.isArray(merchantsList) ? merchantsList.length : 0;
 
-  // 2) Fetch ETH balance (wei)
+  // 2) Fetch ETH balance (wei) from Etherscan
   const balUrl =
     `https://api.etherscan.io/api?module=account&action=balance&address=${TREASURY_ADDRESS}` +
     `&tag=latest&apikey=${ETHERSCAN_API_KEY}`;
-  const balRes = await fetchJson(balUrl);
-  if (balRes.status !== '1') {
-    throw new Error(`Etherscan error: ${JSON.stringify(balRes)}`);
+  let balRes;
+  try {
+    balRes = await fetchJson(balUrl);
+  } catch (e) {
+    console.warn('Etherscan request failed:', e.message);
+    // fail-soft: just bump timestamp and exit OK
+    metrics.updated_at = toISODate();
+    writeJsonPretty(METRICS_PATH, metrics);
+    console.log('Wrote metrics with updated timestamp only (Etherscan down).');
+    return;
   }
-  const balanceWei = BigInt(balRes.result);                 // string → BigInt
+  if (balRes.status !== '1' || !balRes.result) {
+    console.warn('Etherscan returned non-OK:', balRes);
+    metrics.updated_at = toISODate();
+    writeJsonPretty(METRICS_PATH, metrics);
+    console.log('Wrote metrics with updated timestamp only (bad Etherscan status).');
+    return;
+  }
+  const balanceWei = BigInt(balRes.result); // string → BigInt
   const ETH_DECIMALS = 10n ** 18n;
   const balanceETH = Number(balanceWei) / Number(ETH_DECIMALS);
 
-  // 3) Fetch ETH price (USD)
+  // 3) Fetch ETH price (USD) from CoinGecko
   const priceUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd';
-  const priceRes = await fetchJson(priceUrl);
-  const ethUsd = Number(priceRes?.ethereum?.usd || 0);
+  let priceRes;
+  try {
+    priceRes = await fetchJson(priceUrl);
+  } catch (e) {
+    console.warn('CoinGecko request failed:', e.message);
+    metrics.updated_at = toISODate();
+    writeJsonPretty(METRICS_PATH, metrics);
+    console.log('Wrote metrics with updated timestamp only (CoinGecko down).');
+    return;
+  }
+  const ethUsd = Number(priceRes?.ethereum?.usd);
+  if (!Number.isFinite(ethUsd) || ethUsd <= 0) {
+    console.warn('CoinGecko price missing/invalid:', priceRes);
+    metrics.updated_at = toISODate();
+    writeJsonPretty(METRICS_PATH, metrics);
+    console.log('Wrote metrics with updated timestamp only (invalid price).');
+    return;
+  }
 
   // 4) Compute treasury USD
   const treasuryUsd = Math.round(balanceETH * ethUsd);
@@ -98,7 +128,7 @@ function toISODate(d = new Date()) {
   metrics.treasury_usd = treasuryUsd;
   metrics.merchants = merchantsCount;
 
-  // Append/replace last point in treasury_series for "today"
+  // Append/replace today's point in treasury_series
   const today = new Date().toISOString().slice(0, 10);
   const series = Array.isArray(metrics.treasury_series) ? metrics.treasury_series : [];
   const last = series[series.length - 1];
@@ -107,32 +137,15 @@ function toISODate(d = new Date()) {
   } else {
     series.push([today, treasuryUsd]);
   }
-  metrics.treasury_series = series.slice(-120); // keep last ~120 points (about 4 months daily)
+  metrics.treasury_series = series.slice(-120); // keep last ~120 points
 
   // 6) Save
   writeJsonPretty(METRICS_PATH, metrics);
 
-  console.log(`Updated metrics.json @ ${nowISO}`);
+  console.log(`✅ Updated metrics.json @ ${nowISO}`);
   console.log(`Treasury ≈ $${treasuryUsd.toLocaleString()} (ETH=${balanceETH.toFixed(4)} at $${ethUsd})`);
   console.log(`Merchants: ${merchantsCount}`);
 })().catch((err) => {
   console.error('Updater failed:', err);
   process.exit(1);
 });
-// after fetching Etherscan:
-if (balRes.status !== '1' || !balRes.result) {
-  console.warn('Etherscan returned non-OK:', balRes);
-  // fallback: keep last treasury_usd, just update timestamp
-  metrics.updated_at = toISODate();
-  writeJsonPretty(METRICS_PATH, metrics);
-  process.exit(0); // don’t fail the workflow
-}
-// after fetching CoinGecko:
-const ethUsd = Number(priceRes?.ethereum?.usd);
-if (!Number.isFinite(ethUsd) || ethUsd <= 0) {
-  console.warn('CoinGecko price missing, using last known USD value if present.');
-  // If no price, skip USD recalc (keep previous treasury_usd), just update timestamp
-  metrics.updated_at = toISODate();
-  writeJsonPretty(METRICS_PATH, metrics);
-  process.exit(0);
-}
