@@ -1,120 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>7Tribes — Live Dashboard</title>
-<link rel="stylesheet" href="style.css" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<style>
-  body{max-width:1000px;margin:auto;padding:20px}
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:12px 0}
-  .card{border:1px solid #222;border-radius:12px;padding:14px;background:#111;color:#eee}
-  .label{font-size:12px;opacity:.7}
-  .value{font-size:28px;font-weight:800}
-  .bar{height:10px;background:#222;border-radius:999px;overflow:hidden;margin-top:8px}
-  .bar>i{display:block;height:100%;background:#FFD700;width:0%}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-  table{width:100%;border-collapse:collapse}
-  td,th{border-bottom:1px solid #222;padding:8px;text-align:left}
-  .muted{opacity:.7;font-size:12px}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>7Tribes — Live Dashboard</title>
+
+  <!-- Optional: use your main stylesheet if you want -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Chart.js for the line chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    /* Minimal self-contained styles (safe even without style.css) */
+    :root { --bg:#0b0b0c; --card:#121214; --text:#eaeaea; --muted:#a1a1a6; --accent:#FFD700; --border:#222; }
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif}
+    .wrap{max-width:1080px;margin:auto;padding:20px}
+    h1{margin:.2rem 0 0.5rem;font-size:clamp(26px,4vw,36px)}
+    p.muted{color:var(--muted);margin:0 0 1rem}
+    .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px}
+    .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+    .value{font-size:28px;font-weight:800}
+    .bar{height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden;margin-top:8px}
+    .bar>i{display:block;height:100%;background:var(--accent);width:0%}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:10px;border-bottom:1px solid var(--border)}
+    th{color:var(--muted);text-align:left}
+    a{color:var(--accent);text-decoration:none}
+    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .nav a{color:var(--accent)}
+    .pill{display:inline-block;background:#1b1b1f;border:1px solid var(--border);color:var(--muted);padding:6px 10px;border-radius:999px;font-size:12px}
+    @media (max-width:900px){.cards{grid-template-columns:repeat(2,1fr)} .grid{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
-  <h1>7Tribes — Live Transparency</h1>
-  <p class="muted">Wallets, votes, budgets — all visible. Updated <span id="updatedAt">—</span>.</p>
-
-  <div class="kpis">
-    <div class="card"><div class="label">Holders</div><div class="value" id="holders">—</div><div class="bar"><i id="holdersBar"></i></div></div>
-    <div class="card"><div class="label">Merchants</div><div class="value" id="merchants">—</div><div class="bar"><i id="merchantsBar"></i></div></div>
-    <div class="card"><div class="label">Treasury (USD)</div><div class="value" id="treasury">—</div><div class="bar"><i id="treasuryBar"></i></div></div>
-    <div class="card"><div class="label">Spend vs Save (30d)</div><div class="value" id="spendSave">—</div><div class="bar"><i id="spendBar"></i></div></div>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <div class="label">Treasury 30/90 day trend</div>
-      <canvas id="treasuryChart" height="140"></canvas>
+  <div class="wrap">
+    <div class="nav">
+      <h1>7Tribes — Live Transparency</h1>
+      <a href="index.html">← Back to site</a>
     </div>
-    <div class="card">
-      <div class="label">Projects pipeline</div>
+    <p class="muted">Wallets, votes, budgets — all visible. Updated <span id="updatedAt">—</span>.</p>
+
+    <!-- KPI cards -->
+    <section class="cards" aria-label="KPIs">
+      <div class="card">
+        <div class="label">Holders</div>
+        <div class="value" id="holders">—</div>
+        <div class="bar"><i id="holdersBar"></i></div>
+      </div>
+      <div class="card">
+        <div class="label">Active wallets (30d)</div>
+        <div class="value" id="active">—</div>
+        <div class="pill" id="activeNote">data</div>
+      </div>
+      <div class="card">
+        <div class="label">Treasury (USD)</div>
+        <div class="value" id="treasury">—</div>
+        <div class="bar"><i id="treasuryBar"></i></div>
+      </div>
+      <div class="card">
+        <div class="label">Spend vs Save (30d)</div>
+        <div class="value" id="spendSave">—</div>
+        <div class="bar"><i id="spendBar"></i></div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <div class="label" style="margin-bottom:6px">Treasury trend</div>
+        <canvas id="treasuryChart" height="140" aria-label="Treasury time series"></canvas>
+      </section>
+
+      <section class="card">
+        <div class="label" style="margin-bottom:6px">Projects pipeline</div>
+        <table>
+          <thead><tr><th>Status</th><th>Count</th></tr></thead>
+          <tbody id="projRows"></tbody>
+        </table>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:12px">
+      <div class="label" style="margin-bottom:6px">Merchant directory</div>
       <table>
-        <thead><tr><th>Status</th><th>Count</th></tr></thead>
-        <tbody id="projRows"></tbody>
+        <thead><tr><th>Name</th><th>City</th><th>Since</th><th>Monthly 7TRB</th></tr></thead>
+        <tbody id="merchRows"></tbody>
       </table>
-    </div>
+    </section>
+
+    <p class="muted" style="margin-top:10px">
+      Wallets: <a href="https://etherscan.io/address/YOUR_TREASURY_ADDRESS" target="_blank" rel="noopener">Etherscan</a>
+      · Governance: <a href="#" target="_blank" rel="noopener">Snapshot (add link)</a>
+      · Reports: <a href="transparency.html">Monthly statements</a>
+    </p>
   </div>
 
-  <div class="card" style="margin-top:12px">
-    <div class="label" style="margin-bottom:6px">Merchant directory (sample)</div>
-    <table>
-      <thead><tr><th>Name</th><th>City</th><th>Since</th><th>Monthly 7TRB</th></tr></thead>
-      <tbody id="merchRows"></tbody>
-    </table>
-  </div>
+  <script>
+    (async function(){
+      // Load JSONs (must exist in /data/)
+      async function safeJson(url){ try{ const r=await fetch(url,{cache:'no-store'}); if(!r.ok) throw new Error(url+': '+r.status); return r.json(); } catch(e){ console.warn('Fetch failed:', e); return null; } }
 
-  <p class="muted" style="margin-top:10px">
-    Wallets: <a href="https://etherscan.io/address/YOUR_TREASURY_ADDRESS" target="_blank">Etherscan</a>
-    · Governance: <a href="https://snapshot.org/#/YOUR_SPACE" target="_blank">Snapshot</a>
-    · Reports: <a href="transparency.html">Monthly statements</a>
-  </p>
+      const [goals, metrics, merchants] = await Promise.all([
+        safeJson('data/goals.json'),
+        safeJson('data/metrics.json'),
+        safeJson('data/merchants.json')
+      ]);
 
-<script>
-(async function(){
-  // Load goals + metrics
-  const [goals, metrics] = await Promise.all([
-    fetch('data/goals.json').then(r=>r.json()),
-    fetch('data/metrics.json').then(r=>r.json())
-  ]);
+      // Guard: if metrics missing, show a friendly message
+      if(!metrics){
+        document.getElementById('updatedAt').textContent = '— (awaiting data/metrics.json)';
+        document.getElementById('holders').textContent = '—';
+        document.getElementById('treasury').textContent = '—';
+        document.getElementById('spendSave').textContent = '—';
+        return;
+      }
 
-  // Updated at
-  document.getElementById('updatedAt').textContent =
-    new Date(metrics.updated_at).toLocaleString();
+      // Updated at
+      document.getElementById('updatedAt').textContent = new Date(metrics.updated_at).toLocaleString();
 
-  // Helpers
-  const pct = (val, g) => Math.min(100, Math.round((val / (g.stretch||g.goal||1)) * 100));
+      // Helpers
+      const pct = (val, g) => {
+        if(!g) return 0;
+        const denom = (g.stretch || g.goal || 1);
+        return Math.max(0, Math.min(100, Math.round((val / denom) * 100)));
+      };
+      const setBar = (id, p) => { const el=document.getElementById(id); if(el) el.style.width = p + '%'; };
 
-  // KPIs + progress bars
-  const setBar = (id, p) => document.getElementById(id).style.width = p + '%';
-  document.getElementById('holders').textContent = metrics.holders.toLocaleString();
-  setBar('holdersBar', pct(metrics.holders, goals.holders));
+      // Holders + progress
+      document.getElementById('holders').textContent = (metrics.holders ?? 0).toLocaleString();
+      setBar('holdersBar', pct(metrics.holders ?? 0, goals && goals.holders));
 
-  document.getElementById('merchants').textContent = metrics.merchants.toString();
-  setBar('merchantsBar', pct(metrics.merchants, goals.merchants));
+      // Active wallets
+      document.getElementById('active').textContent = (metrics.active_wallets_30d ?? 0).toLocaleString();
+      document.getElementById('activeNote').textContent = 'rolling 30 days';
 
-  document.getElementById('treasury').textContent = '$' + Math.round(metrics.treasury_usd).toLocaleString();
-  setBar('treasuryBar', pct(metrics.treasury_usd, goals.treasury_usd));
+      // Treasury + progress
+      const tUSD = Math.round(metrics.treasury_usd ?? 0);
+      document.getElementById('treasury').textContent = '$' + tUSD.toLocaleString();
+      setBar('treasuryBar', pct(tUSD, goals && goals.treasury_usd));
 
-  const spentPct = Math.round((metrics.spent_pct_30d || 0) * 100);
-  document.getElementById('spendSave').textContent = spentPct + '% spent / ' + (100 - spentPct) + '% saved';
-  setBar('spendBar', Math.max(0, Math.min(100, spentPct)));
+      // Spend vs save
+      const spentPct = Math.round(((metrics.spent_pct_30d ?? 0) * 100));
+      document.getElementById('spendSave').textContent = spentPct + '% spent / ' + (100 - spentPct) + '% saved';
+      setBar('spendBar', Math.max(0, Math.min(100, spentPct)));
 
-  // Projects table
-  const pr = metrics.projects || {};
-  const projRows = document.getElementById('projRows');
-  [['Proposed', pr.proposed], ['Approved', pr.approved], ['Funded', pr.funded], ['Delivered', pr.delivered]].forEach(([k,v])=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${k}</td><td>${v ?? 0}</td>`;
-    projRows.appendChild(tr);
-  });
+      // Projects pipeline
+      const pr = metrics.projects || {};
+      const projRows = document.getElementById('projRows');
+      [['Proposed', pr.proposed], ['Approved', pr.approved], ['Funded', pr.funded], ['Delivered', pr.delivered]]
+        .forEach(([k,v])=>{
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${k}</td><td>${v ?? 0}</td>`;
+          projRows.appendChild(tr);
+        });
 
-  // Merchant list
-  try{
-    const merchants = await fetch('data/merchants.json').then(r=>r.json());
-    const mbody = document.getElementById('merchRows');
-    merchants.forEach(m=>{
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td><a href="${m.url||'#'}" target="_blank">${m.name}</a></td>
-                      <td>${m.city||''}</td><td>${m.since||''}</td><td>${m.monthly_volume||0}</td>`;
-      mbody.appendChild(tr);
-    });
-  }catch(e){ /* optional */ }
+      // Merchant list
+      if(Array.isArray(merchants)){
+        const mbody = document.getElementById('merchRows');
+        merchants.forEach(m=>{
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${m.url ? `<a href="${m.url}" target="_blank" rel="noopener">${m.name}</a>` : m.name}</td>
+                          <td>${m.city||''}</td>
+                          <td>${m.since||''}</td>
+                          <td>${m.monthly_volume ?? 0}</td>`;
+          mbody.appendChild(tr);
+        });
+      }
 
-  // OPTIONAL: live treasury from Etherscan (replace address)
-  // const addr = 'YOUR_TREASURY_ADDRESS';
-  // const res = await fetch(`https://api.etherscan.io/api?module=account&action=balance&address=${addr}&tag=latest&apikey=YOUR_KEY`).then(r=>r.json());
-  // if(res.status==='1'){ /* convert wei to USD via your rate, then update DOM */ }
-})();
-</script>
+      // Treasury chart
+      const series = metrics.treasury_series || [];
+      const labels = series.map(x=>x[0]);
+      const data = series.map(x=>x[1]);
+      const ctx = document.getElementById('treasuryChart');
+      if(ctx && labels.length){
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{ label: 'Treasury (USD)', data, borderColor: '#FFD700', tension: 0.25 }]
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: { x: { grid: { color:'#222' } }, y: { grid: { color:'#222' } } }
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
