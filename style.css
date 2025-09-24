@@ -192,3 +192,18 @@ section.card{ position:relative; z-index:1; }
 /* Scroll-in animation */
 .fade-up{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
 .fade-up.in{ opacity:1; transform: translateY(0); }
+/* Ensure Join form input is visible */
+#join .join-form .input {
+  display:block;
+  width:100%;
+  max-width:520px;
+  margin:.5rem 0;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid #2a2a2f;
+  background:#0f0f13;
+  color:#fff;
+}
+#join .join-form .input::placeholder {
+  color:#a2a2aa;
+}
