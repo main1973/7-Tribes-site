@@ -1,4 +1,23 @@
 [
-  { "name": "Sunrise Market", "city": "Detroit, MI", "url": "https://example.com", "since": "2025-09-01", "monthly_volume": 420 },
-  { "name": "Unity Cuts",     "city": "Detroit, MI", "url": "https://example.com", "since": "2025-09-08", "monthly_volume": 270 }
+  {
+    "name": "Unity Cafe",
+    "city": "Detroit",
+    "since": "2025-08",
+    "monthly_volume": 250,
+    "url": "https://unitycafe.example.com"
+  },
+  {
+    "name": "Roots Market",
+    "city": "Chicago",
+    "since": "2025-07",
+    "monthly_volume": 420,
+    "url": "https://rootsmarket.example.com"
+  },
+  {
+    "name": "Tribe Print Shop",
+    "city": "Atlanta",
+    "since": "2025-09",
+    "monthly_volume": 160,
+    "url": "https://tribeprint.example.com"
+  }
 ]
