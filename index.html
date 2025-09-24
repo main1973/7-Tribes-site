@@ -142,10 +142,54 @@
     </p>
   </section>
 
-  <!-- WHY PEOPLE MATTER -->
+   <!-- WHY PEOPLE MATTER -->
   <section class="card fade-up" id="why">
     <h2>Why We Need People for 7Tribes to Succeed</h2>
     <p>Ownership = responsibility. Spend some to power today. Hold some to build tomorrow. Teach one, bring two.</p>
+  </section>
+
+  <!-- INVESTMENT -->
+  <section class="card fade-up" id="investment">
+    <h2>Investment</h2>
+    <p>Use 7TRB as both tool and store of value. Target policy: spend 30% to power projects and merchants; hold 70% for long-term growth.</p>
+  </section>
+
+  <!-- PARTICIPATE -->
+  <section class="card fade-up" id="participation">
+    <h2>Participate</h2>
+    <ul>
+      <li>Circulate: buy from Tribe merchants, fund projects.</li>
+      <li>Contribute: share, teach, onboard.</li>
+      <li>Create: propose builds, volunteer skills.</li>
+      <li>Govern: read proposals, vote, track funds.</li>
+    </ul>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="card fade-up" id="roadmap">
+    <h2>Roadmap (90-Day)</h2>
+    <ul>
+      <li>Day 1–30: 500 holders, 5 merchants, 1 pilot project.</li>
+      <li>Day 31–60: 1,000 holders, 15 merchants, 3 projects.</li>
+      <li>Day 61–90: 2,000 holders, 30 merchants, 6 projects.</li>
+    </ul>
+    <p>Track live progress on the <a href="dashboard.html">Dashboard</a>.</p>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="card fade-up" id="partners">
+    <h2>Partners</h2>
+    <p>We’re onboarding local merchants, co-ops, and service providers. Want to accept 7TRB? <a href="#contact">Contact us</a>.</p>
+  </section>
+
+  <!-- DOCS -->
+  <section class="card fade-up" id="docs">
+    <h2>Docs</h2>
+    <ul>
+      <li><a href="whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a></li>
+      <li><a href="tokenomics.pdf" target="_blank" rel="noopener">Tokenomics</a></li>
+      <li><a href="dashboard.html">Transparency Dashboard</a></li>
+    </ul>
   </section>
 
   <!-- CONTACT -->
@@ -164,87 +208,3 @@
     © 2025 7Tribes (7TRB) — Community • Unity • Ownership
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-  <script src="wallet.js?v=9"></script>
-
-  <!-- Scroll animations + Back-to-Top + Theme toggle + flyer tracking -->
-  <button id="toTop" aria-label="Back to top">↑</button>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Scroll-in animation
-      const items = document.querySelectorAll('.fade-up');
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-      }, { threshold: 0.12 });
-      items.forEach(el => io.observe(el));
-
-      // Smooth scroll
-      document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-          const id = a.getAttribute('href');
-          if (id && id.length > 1) {
-            e.preventDefault();
-            document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-
-      // Back-to-top button
-      const toTop = document.getElementById('toTop');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 400) toTop.classList.add('show');
-        else toTop.classList.remove('show');
-      });
-      toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-      // Connect Wallet
-      const btn = document.getElementById('connect-btn');
-      if (btn && typeof window.connectWallet === 'function') btn.addEventListener('click', window.connectWallet);
-
-      // Theme toggle
-      const key = "theme";
-      const saved = localStorage.getItem(key);
-      if (saved) document.documentElement.setAttribute("data-theme", saved);
-      const tbtn = document.getElementById("theme-toggle");
-      function iconFor(mode){ return (mode === "light") ? "🌙" : "☀️"; }
-      if (tbtn){
-        const now = document.documentElement.getAttribute("data-theme") || "dark";
-        tbtn.textContent = iconFor(now);
-        tbtn.addEventListener("click", () => {
-          const cur = document.documentElement.getAttribute("data-theme") || "dark";
-          const next = (cur === "light") ? "dark" : "light";
-          document.documentElement.setAttribute("data-theme", next);
-          localStorage.setItem(key, next);
-          tbtn.textContent = iconFor(next);
-        });
-      }
-
-      // --- Flyer source tracking + signup capture ---
-      const params = new URLSearchParams(location.search);
-      const src = params.get('src') || params.get('utm_source') || 'direct';
-      const campaign = params.get('utm_campaign') || 'flyer';
-
-      const srcField = document.getElementById('srcField');
-      const pathField = document.getElementById('pathField');
-      const sourceTag = document.getElementById('sourceTag');
-      const visitStamp = document.getElementById('visitStamp');
-
-      if (srcField) srcField.value = src;
-      if (pathField) pathField.value = location.pathname + location.search;
-      if (sourceTag) sourceTag.textContent = src;
-      if (visitStamp) visitStamp.textContent = new Date().toLocaleString();
-
-      // OPTIONAL: Plausible custom events (uncomment if using)
-      // if (window.plausible) plausible('Flyer Join Page', { props: { src, campaign } });
-
-      const joinForm = document.getElementById('joinForm');
-      if (joinForm) {
-        joinForm.addEventListener('submit', () => {
-          // if (window.plausible) plausible('Email Signup', { props: { src, campaign } });
-        });
-      }
-    });
-  </script>
-</body>
-</html>
