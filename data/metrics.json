@@ -1,8 +1,8 @@
 {
-  "updated_at": "2025-09-24T16:35:42Z",
+  "updated_at": "2025-09-25T05:27:56Z",
   "holders": 320,
   "active_wallets_30d": 145,
-  "treasury_usd": 44,
+  "treasury_usd": 43,
   "treasury_series": [
     [
       "2025-09-01",
@@ -23,6 +23,10 @@
     [
       "2025-09-24",
       44
+    ],
+    [
+      "2025-09-25",
+      43
     ]
   ],
   "spent_pct_30d": 0.35,
