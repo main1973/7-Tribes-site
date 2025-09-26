@@ -13,27 +13,46 @@
     input,select{background:#0f0f13;color:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
     table{width:100%;border-collapse:collapse}
     th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left}
-    th{color:var(--muted)}
+    th{color:var(--muted);user-select:none;cursor:pointer}
     a{color:var(--accent);text-decoration:none}
+    .row{display:flex;justify-content:space-between;align-items:center}
+    .pill{display:inline-block;background:#1b1b1f;border:1px solid var(--border);color:var(--muted);padding:6px 10px;border-radius:999px;font-size:12px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div style="display:flex;justify-content:space-between;align-items:center">
+    <div class="row">
       <h1 style="margin:0">7Tribes Merchants</h1>
       <a href="index.html">← Back</a>
     </div>
     <p style="color:#a1a1a6">Shops and services that accept 7TRB.</p>
 
     <div class="card">
-      <div class="controls">
-        <input id="q" type="text" placeholder="Search by name or city"/>
-        <select id="city"><option value="">All cities</option></select>
+      <div class="row" style="margin-bottom:8px">
+        <div>
+          <span class="pill" id="countPill">— merchants</span>
+          <span class="pill" id="cityPill">— cities</span>
+        </div>
+        <div class="controls">
+          <input id="q" type="text" placeholder="Search by name or city"/>
+          <select id="city"><option value="">All cities</option></select>
+        </div>
       </div>
-      <table>
-        <thead><tr><th>Name</th><th>City</th><th>Since</th><th>Monthly 7TRB</th></tr></thead>
-        <tbody id="rows"></tbody>
+
+      <table aria-describedby="dirNote">
+        <caption class="sr-only">Directory of 7TRB-accepting merchants</caption>
+        <thead>
+          <tr>
+            <th data-key="name">Name</th>
+            <th data-key="city">City</th>
+            <th data-key="since">Since</th>
+            <th data-key="monthly_volume" style="width:160px">Monthly 7TRB</th>
+          </tr>
+        </thead>
+        <tbody id="rows"><tr><td colspan="4">Loading…</td></tr></tbody>
       </table>
+      <p id="dirNote" class="sr-only">Sortable table. Click headers to sort.</p>
     </div>
 
     <p style="margin-top:12px">Want to join the directory? <a href="propose.html">Apply to accept 7TRB →</a></p>
@@ -41,33 +60,91 @@
 
   <script>
   (async function(){
-    const res=await fetch('data/merchants.json',{cache:'no-store'});
-    const list=await res.json();
-    const rows=document.getElementById('rows');
-    const q=document.getElementById('q');
-    const citySel=document.getElementById('city');
+    const rows = document.getElementById('rows');
+    const q = document.getElementById('q');
+    const citySel = document.getElementById('city');
+    const countPill = document.getElementById('countPill');
+    const cityPill = document.getElementById('cityPill');
+    const headers = [...document.querySelectorAll('th[data-key]')];
 
-    // Fill city filter
-    Array.from(new Set(list.map(x=>x.city).filter(Boolean))).sort().forEach(c=>{
-      const o=document.createElement('option'); o.value=c; o.textContent=c; citySel.appendChild(o);
-    });
+    function fmtNum(n){ const v=Number(n||0); return v.toLocaleString(); }
 
-    function render(){
-      const term=(q.value||'').toLowerCase();
-      const city=citySel.value||'';
-      rows.innerHTML='';
-      list.filter(x=>{
-        const hit=(x.name?.toLowerCase().includes(term)||x.city?.toLowerCase().includes(term));
-        const cityOk=city? x.city===city : true;
-        return hit && cityOk;
-      }).forEach(x=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML=`<td>${x.url?`<a href="${x.url}" target="_blank" rel="noopener">${x.name}</a>`:x.name}</td>
-                      <td>${x.city||''}</td><td>${x.since||''}</td><td>${x.monthly_volume??0}</td>`;
-        rows.appendChild(tr);
+    async function loadList(){
+      try{
+        const r = await fetch('data/merchants.json',{cache:'no-store'});
+        if(!r.ok) throw new Error('data/merchants.json not found');
+        return await r.json();
+      }catch(e){
+        rows.innerHTML = `<tr><td colspan="4">⚠️ ${e.message}</td></tr>`;
+        return [];
+      }
+    }
+
+    const list = await loadList();
+
+    // populate city filter
+    const cities = Array.from(new Set(list.map(x=>x.city).filter(Boolean))).sort();
+    cities.forEach(c=>{ const o=document.createElement('option'); o.value=c; o.textContent=c; citySel.appendChild(o); });
+
+    // state
+    let sortKey = 'name';
+    let sortDir = 1; // 1 asc, -1 desc
+
+    function sorted(items){
+      return items.slice().sort((a,b)=>{
+        const A = (a[sortKey] ?? '').toString().toLowerCase();
+        const B = (b[sortKey] ?? '').toString().toLowerCase();
+        if(sortKey === 'monthly_volume'){
+          return (Number(a[sortKey]||0) - Number(b[sortKey]||0)) * sortDir;
+        }
+        if(A < B) return -1*sortDir;
+        if(A > B) return  1*sortDir;
+        return 0;
       });
     }
-    q.addEventListener('input',render); citySel.addEventListener('change',render);
+
+    function render(){
+      const term = (q.value||'').toLowerCase();
+      const city = citySel.value||'';
+      const filtered = list.filter(x=>{
+        const hit = (x.name?.toLowerCase().includes(term) || x.city?.toLowerCase().includes(term));
+        const cityOk = city ? x.city===city : true;
+        return hit && cityOk;
+      });
+
+      // pills
+      countPill.textContent = `${filtered.length} merchants`;
+      cityPill.textContent = `${new Set(filtered.map(x=>x.city).filter(Boolean)).size} cities`;
+
+      rows.innerHTML='';
+      sorted(filtered).forEach(x=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${x.url?`<a href="${x.url}" target="_blank" rel="noopener">${x.name}</a>`: (x.name||'')}</td>
+          <td>${x.city||''}</td>
+          <td>${x.since||''}</td>
+          <td>${fmtNum(x.monthly_volume)}</td>
+        `;
+        rows.appendChild(tr);
+      });
+      if(!rows.children.length){
+        rows.innerHTML = '<tr><td colspan="4">No matches.</td></tr>';
+      }
+    }
+
+    // header sorting
+    headers.forEach(th=>{
+      th.addEventListener('click', ()=>{
+        const key = th.getAttribute('data-key');
+        if(sortKey === key) sortDir *= -1; else { sortKey = key; sortDir = 1; }
+        headers.forEach(h=>h.style.textDecoration='none');
+        th.style.textDecoration = 'underline';
+        render();
+      });
+    });
+
+    q.addEventListener('input', render);
+    citySel.addEventListener('change', render);
     render();
   })();
   </script>
