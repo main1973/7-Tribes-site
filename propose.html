@@ -5,20 +5,84 @@
   <title>7Tribes — Submit a Project / Merchant</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    :root{--bg:#0b0b0c;--text:#eaeaea}
+    :root{--bg:#0b0b0c;--card:#121214;--text:#eaeaea;--muted:#a1a1a6;--border:#222;--accent:#FFD700}
     body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif}
     .wrap{max-width:980px;margin:auto;padding:20px}
-    iframe{width:100%;height:80vh;border:0;border-radius:12px}
-    a{color:#FFD700;text-decoration:none}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .row{display:flex;justify-content:space-between;align-items:center}
+    .btn{display:inline-block;background:var(--accent);color:#000;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+    .muted{color:var(--muted)}
+    iframe{width:100%;height:80vh;border:0;border-radius:12px;background:#0f0f13}
+    .fallback{display:none;margin-top:12px;border:1px dashed var(--border);border-radius:12px;padding:14px}
+    .hint{font-size:12px;color:var(--muted);margin-top:8px}
+    .error{color:#ff6b6b}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Submit a Project or Apply as a Merchant</h1>
-    <p>We review weekly. Approved projects/merchants will appear on the Dashboard and Directory.</p>
-    <p><a href="index.html">← Back to site</a></p>
-    <!-- Replace the src with your live Google Form link -->
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf-placeholder/viewform?embedded=true">Loading…</iframe>
+    <div class="row">
+      <h1 style="margin:0">Submit a Project or Apply as a Merchant</h1>
+      <a href="index.html" style="color:var(--accent)">← Back</a>
+    </div>
+    <p class="muted">We review weekly. Approved projects/merchants will appear on the Dashboard and Directory.</p>
+
+    <div class="card">
+      <!-- ✅ SET THESE TWO URLs -->
+      <script>
+        // Replace both with your real Google Form links
+        const FORM_EMBED_URL  = "https://docs.google.com/forms/d/e/REPLACE_ME/viewform?embedded=true";
+        const FORM_DIRECT_URL = "https://docs.google.com/forms/d/e/REPLACE_ME/viewform";
+      </script>
+
+      <iframe id="gform" title="7Tribes Submission Form" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      <div id="fallback" class="fallback">
+        <p class="error"><strong>Couldn’t load the embedded form.</strong></p>
+        <p class="muted">This can happen if the link is wrong, the form is private, or a content blocker is active.</p>
+        <p>
+          <a id="openDirect" class="btn" target="_blank" rel="noopener">Open Form in New Tab</a>
+        </p>
+        <p class="hint">Admin hint: check the embed URL, make sure the form is shared to “Anyone with the link”, and that it uses <code>https</code>.</p>
+      </div>
+
+      <p class="hint">Privacy note: submissions go directly to Google Forms under your account.</p>
+    </div>
+
+    <p class="muted" style="margin-top:12px">
+      Prefer email? Write us at <a href="mailto:team@7tribes.example" style="color:var(--accent)">team@7tribes.example</a>.
+    </p>
   </div>
+
+  <script>
+    (function(){
+      const iframe = document.getElementById('gform');
+      const fb = document.getElementById('fallback');
+      const openBtn = document.getElementById('openDirect');
+
+      // Set URLs
+      iframe.src = FORM_EMBED_URL;
+      openBtn.href = FORM_DIRECT_URL;
+
+      let loaded = false;
+      const timer = setTimeout(() => {
+        if (!loaded) { fb.style.display = 'block'; }
+      }, 3500); // show fallback if not loaded within 3.5s
+
+      iframe.addEventListener('load', () => {
+        loaded = true;
+        clearTimeout(timer);
+        // If the embed URL is obviously not set, show fallback anyway
+        if (FORM_EMBED_URL.includes('REPLACE_ME')) {
+          fb.style.display = 'block';
+        }
+      });
+
+      iframe.addEventListener('error', () => {
+        loaded = false;
+        clearTimeout(timer);
+        fb.style.display = 'block';
+      });
+    })();
+  </script>
 </body>
 </html>
