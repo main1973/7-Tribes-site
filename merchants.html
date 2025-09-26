@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>7Tribes — Merchants Directory</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    :root{--bg:#0b0b0c;--card:#121214;--text:#eaeaea;--muted:#a1a1a6;--border:#222;--accent:#FFD700}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif}
+    .wrap{max-width:1080px;margin:auto;padding:20px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 14px}
+    input,select{background:#0f0f13;color:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left}
+    th{color:var(--muted)}
+    a{color:var(--accent);text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h1 style="margin:0">7Tribes Merchants</h1>
+      <a href="index.html">← Back</a>
+    </div>
+    <p style="color:#a1a1a6">Shops and services that accept 7TRB.</p>
+
+    <div class="card">
+      <div class="controls">
+        <input id="q" type="text" placeholder="Search by name or city"/>
+        <select id="city"><option value="">All cities</option></select>
+      </div>
+      <table>
+        <thead><tr><th>Name</th><th>City</th><th>Since</th><th>Monthly 7TRB</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:12px">Want to join the directory? <a href="propose.html">Apply to accept 7TRB →</a></p>
+  </div>
+
+  <script>
+  (async function(){
+    const res=await fetch('data/merchants.json',{cache:'no-store'});
+    const list=await res.json();
+    const rows=document.getElementById('rows');
+    const q=document.getElementById('q');
+    const citySel=document.getElementById('city');
+
+    // Fill city filter
+    Array.from(new Set(list.map(x=>x.city).filter(Boolean))).sort().forEach(c=>{
+      const o=document.createElement('option'); o.value=c; o.textContent=c; citySel.appendChild(o);
+    });
+
+    function render(){
+      const term=(q.value||'').toLowerCase();
+      const city=citySel.value||'';
+      rows.innerHTML='';
+      list.filter(x=>{
+        const hit=(x.name?.toLowerCase().includes(term)||x.city?.toLowerCase().includes(term));
+        const cityOk=city? x.city===city : true;
+        return hit && cityOk;
+      }).forEach(x=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${x.url?`<a href="${x.url}" target="_blank" rel="noopener">${x.name}</a>`:x.name}</td>
+                      <td>${x.city||''}</td><td>${x.since||''}</td><td>${x.monthly_volume??0}</td>`;
+        rows.appendChild(tr);
+      });
+    }
+    q.addEventListener('input',render); citySel.addEventListener('change',render);
+    render();
+  })();
+  </script>
+</body>
+</html>
