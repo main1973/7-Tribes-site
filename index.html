@@ -209,6 +209,13 @@
         const res=await fetch(f.action,{method:'POST',body:data,headers:{'Accept':'application/json'}});
         f.reset();
         alert(res.ok?'✅ Thanks—check your inbox soon.':'⚠️ Submission failed. Try again.');
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+      .catch(err => console.warn('SW register failed:', err));
+  }
+</script>  
       });
     });
   </script>
