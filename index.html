@@ -212,13 +212,11 @@
         alert(res.ok?'✅ Thanks—check your inbox soon.':'⚠️ Submission failed. Try again.');  
       });
     });
-  </script>
   <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js')
       .catch(err => console.warn('SW register failed:', err));
   }
 </script>
-
 </body>
 </html>
