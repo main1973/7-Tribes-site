@@ -9,59 +9,95 @@
     body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif}
     .wrap{max-width:980px;margin:auto;padding:20px}
     .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px}
+    .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .pill{display:inline-block;background:#1b1b1f;border:1px solid var(--border);color:var(--muted);padding:6px 10px;border-radius:999px;font-size:12px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+    input{background:#0f0f13;color:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
     table{width:100%;border-collapse:collapse}
     th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left}
     th{color:var(--muted)}
-    .controls{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
-    input{background:#0f0f13;color:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
-    .pill{display:inline-block;background:#1b1b1f;border:1px solid var(--border);color:var(--muted);padding:6px 10px;border-radius:999px;font-size:12px}
+    a{color:var(--accent);text-decoration:none}
+    .bar{height:8px;background:#1a1a1d;border-radius:999px;overflow:hidden}
+    .bar>i{display:block;height:100%;background:var(--accent);width:0%}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h1 style="margin:0">Referrals Leaderboard <span id="updated" class="pill">—</span></h1>
+    <div class="row">
+      <h1 style="margin:0">Referrals Leaderboard</h1>
       <a href="index.html">← Back</a>
     </div>
-    <p style="color:#a1a1a6">Counting signups by <code>source</code> (your flyer tags). Update <code>data/referrals.json</code> to refresh this page.</p>
+    <p style="color:#a1a1a6">Counts by flyer/source tag (e.g., <code>?src=barbershop</code>). Update <code>data/referrals.json</code> to refresh.</p>
 
     <div class="card">
-      <div class="controls">
-        <input id="q" type="text" placeholder="Search tag (e.g., barbershop, church, park)"/>
+      <div class="row" style="margin-bottom:8px">
+        <div>
+          <span class="pill" id="updated">Updated —</span>
+          <span class="pill" id="total">Total —</span>
+          <span class="pill" id="unique">Sources —</span>
+        </div>
+        <div class="controls">
+          <input id="q" type="text" placeholder="Search tag… (barbershop, church, park)"/>
+        </div>
       </div>
       <table>
-        <thead><tr><th>Source Tag</th><th>Signups</th><th>Last Seen</th></tr></thead>
-        <tbody id="rows"></tbody>
+        <thead>
+          <tr><th>Source Tag</th><th style="width:110px">Signups</th><th>Last Seen</th><th>Progress</th></tr>
+        </thead>
+        <tbody id="rows"><tr><td colspan="4">Loading…</td></tr></tbody>
       </table>
     </div>
   </div>
 
   <script>
   (async function(){
+    const rows = document.getElementById('rows');
+    const q = document.getElementById('q');
+    const updated = document.getElementById('updated');
+    const total = document.getElementById('total');
+    const unique = document.getElementById('unique');
+
     async function load(){
-      const r = await fetch('data/referrals.json', { cache:'no-store' });
-      if(!r.ok){ document.getElementById('rows').innerHTML = '<tr><td colspan="3">No data/referrals.json yet.</td></tr>'; return; }
-      const data = await r.json(); // [{source:"barbershop", count:12, last_seen:"2025-09-25T12:00:00Z"}, ...]
-      const q = document.getElementById('q'); const rows = document.getElementById('rows');
+      try{
+        const r = await fetch('data/referrals.json', { cache:'no-store' });
+        if(!r.ok) throw new Error('No data/referrals.json yet');
+        const data = await r.json(); // {updated_at, items:[{source,count,last_seen}]}
 
-      document.getElementById('updated').textContent = 'Updated ' + (data.updated_at ? new Date(data.updated_at).toLocaleString() : '—');
+        const items = Array.isArray(data.items) ? data.items : [];
+        const sum = items.reduce((s,x)=>s+(x.count||0),0);
+        updated.textContent = 'Updated ' + (data.updated_at ? new Date(data.updated_at).toLocaleString() : '—');
+        total.textContent = 'Total ' + sum;
+        unique.textContent = 'Sources ' + items.length;
 
-      function render(){
-        const term = (q.value||'').toLowerCase();
-        rows.innerHTML = '';
-        [...(data.items||[])].filter(x => x.source.toLowerCase().includes(term))
-          .sort((a,b)=> (b.count||0)-(a.count||0))
-          .forEach(x=>{
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${x.source}</td><td>${x.count||0}</td><td>${x.last_seen? new Date(x.last_seen).toLocaleString():''}</td>`;
-            rows.appendChild(tr);
-          });
-        if(!rows.children.length){ rows.innerHTML = '<tr><td colspan="3">No matches.</td></tr>'; }
+        function render(){
+          const term = (q.value||'').toLowerCase();
+          const max = Math.max(1, ...items.map(x=>x.count||0));
+          rows.innerHTML = '';
+          items
+            .filter(x => x.source.toLowerCase().includes(term))
+            .sort((a,b)=> (b.count||0)-(a.count||0))
+            .forEach(x=>{
+              const pct = Math.round(((x.count||0)/max)*100);
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td><code>${x.source}</code></td>
+                <td><strong>${x.count||0}</strong></td>
+                <td>${x.last_seen ? new Date(x.last_seen).toLocaleString() : ''}</td>
+                <td><div class="bar"><i style="width:${pct}%"></i></div></td>
+              `;
+              rows.appendChild(tr);
+            });
+          if(!rows.children.length){
+            rows.innerHTML = '<tr><td colspan="4">No matches.</td></tr>';
+          }
+        }
+        q.addEventListener('input', render);
+        render();
+      }catch(e){
+        rows.innerHTML = `<tr><td colspan="4">⚠️ ${e.message}</td></tr>`;
       }
-      q.addEventListener('input', render);
-      render();
     }
-    load().catch(()=>{ document.getElementById('rows').innerHTML = '<tr><td colspan="3">Error loading referrals.</td></tr>';});
+    load();
   })();
   </script>
 </body>
