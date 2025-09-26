@@ -54,8 +54,8 @@
       <a href="dashboard.html">Dashboard</a>
       <a href="merchants.html">Merchants</a>
       <a href="referrals.html">Referrals</a>
-       <a href="#contact">Contact</a>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <a href="#contact">Contact</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
     </div>
   </nav>
 
@@ -116,36 +116,6 @@
 
   <section class="card fade-up" id="investment">
     <h2>Investment</h2>
-    <p><strong>Policy:</strong> Spend 30% to power projects and merchants; hold 70% for long-term community wealth.</p>
-  </section>
-
-  <section class="card fade-up" id="participation">
-    <h2>Participate</h2>
-    <ul>
-      <li><strong>Circulate:</strong> buy from Tribe merchants, fund projects.</li>
-      <li><strong>Contribute:</strong> share, teach, onboard.</li>
-      <li><strong>Create:</strong> propose builds, volunteer skills.</li>
-      <li><strong>Govern:</strong> read proposals, vote, track funds.</li>
-    </ul>
-  </section>
-
-  <section class="card fade-up" id="roadmap">
-    <h2>Roadmap (First 90 Days)</h2>
-    <ul>
-      <li>Day 1–30: 500 holders, 5 merchants, 1 pilot project.</li>
-      <li>Day 31–60: 1,000 holders, 15 merchants, 3 projects.</li>
-      <li>Day 61–90: 2,000 holders, 30 merchants, 6 projects.</li>
-    </ul>
-    <p>Track live progress on the <a href="dashboard.html">Dashboard</a>.</p>
-  </section>
-
-  <section class="card fade-up" id="partners">
-    <h2>Partners</h2>
-    <p>We’re onboarding local merchants, co-ops, and service providers. Want to accept 7TRB? <a href="merchants.html">See directory</a>.</p>
-  </section>
-
-  <section class="card fade-up" id="docs">
-    <h2>Docs</h2>
     <ul>
       <li><a href="whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a></li>
       <li><a href="tokenomics.pdf" target="_blank" rel="noopener">Tokenomics</a></li>
@@ -209,14 +179,15 @@
         const data=new FormData(f);
         const res=await fetch(f.action,{method:'POST',body:data,headers:{'Accept':'application/json'}});
         f.reset();
-        alert(res.ok?'✅ Thanks—check your inbox soon.':'⚠️ Submission failed. Try again.');  
+        alert(res.ok?'✅ Thanks—check your inbox soon.':'⚠️ Submission failed. Try again.');
       });
     });
+  </script>
   <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js')
-      .catch(err => console.warn('SW register failed:', err));
-  }
-</script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .catch(err => console.warn('SW register failed:', err));
+    }
+  </script>
 </body>
 </html>
