@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>7Tribes — Referrals Leaderboard</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    :root{--bg:#0b0b0c;--card:#121214;--text:#eaeaea;--muted:#a1a1a6;--border:#222;--accent:#FFD700}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif}
+    .wrap{max-width:980px;margin:auto;padding:20px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left}
+    th{color:var(--muted)}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+    input{background:#0f0f13;color:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+    .pill{display:inline-block;background:#1b1b1f;border:1px solid var(--border);color:var(--muted);padding:6px 10px;border-radius:999px;font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h1 style="margin:0">Referrals Leaderboard <span id="updated" class="pill">—</span></h1>
+      <a href="index.html">← Back</a>
+    </div>
+    <p style="color:#a1a1a6">Counting signups by <code>source</code> (your flyer tags). Update <code>data/referrals.json</code> to refresh this page.</p>
+
+    <div class="card">
+      <div class="controls">
+        <input id="q" type="text" placeholder="Search tag (e.g., barbershop, church, park)"/>
+      </div>
+      <table>
+        <thead><tr><th>Source Tag</th><th>Signups</th><th>Last Seen</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+  (async function(){
+    async function load(){
+      const r = await fetch('data/referrals.json', { cache:'no-store' });
+      if(!r.ok){ document.getElementById('rows').innerHTML = '<tr><td colspan="3">No data/referrals.json yet.</td></tr>'; return; }
+      const data = await r.json(); // [{source:"barbershop", count:12, last_seen:"2025-09-25T12:00:00Z"}, ...]
+      const q = document.getElementById('q'); const rows = document.getElementById('rows');
+
+      document.getElementById('updated').textContent = 'Updated ' + (data.updated_at ? new Date(data.updated_at).toLocaleString() : '—');
+
+      function render(){
+        const term = (q.value||'').toLowerCase();
+        rows.innerHTML = '';
+        [...(data.items||[])].filter(x => x.source.toLowerCase().includes(term))
+          .sort((a,b)=> (b.count||0)-(a.count||0))
+          .forEach(x=>{
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${x.source}</td><td>${x.count||0}</td><td>${x.last_seen? new Date(x.last_seen).toLocaleString():''}</td>`;
+            rows.appendChild(tr);
+          });
+        if(!rows.children.length){ rows.innerHTML = '<tr><td colspan="3">No matches.</td></tr>'; }
+      }
+      q.addEventListener('input', render);
+      render();
+    }
+    load().catch(()=>{ document.getElementById('rows').innerHTML = '<tr><td colspan="3">Error loading referrals.</td></tr>';});
+  })();
+  </script>
+</body>
+</html>
