@@ -1,23 +1,12 @@
 {
-  "name": "7Tribes (7TRB)",
-  "short_name": "7Tribes",
-  "description": "7Tribes (7TRB) — Community • Unity • Ownership. A people-powered crypto movement.",
-  "start_url": "/7-Tribes-site/dashboard.html",
-  "scope": "/7-Tribes-site/",
+  "name": "7Tribes",
+  "short_name": "7TRB",
+  "start_url": "/7-Tribes-site/",
   "display": "standalone",
-  "background_color": "#0b0b0c",
+  "background_color": "#000000",
   "theme_color": "#FFD700",
-  "orientation": "portrait",
   "icons": [
-    {
-      "src": "images/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "images/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" }
   ]
 }
