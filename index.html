@@ -213,12 +213,18 @@
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
   <script src="wallet.js?v=9"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toTop=document.getElementById('toTop');
-      window.addEventListener('scroll',()=>{ if(window.scrollY>400) toTop.classList.add('show'); else toTop.classList.remove('show'); });
-    });
-  </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toTop = document.getElementById('toTop');
+    if (toTop) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) toTop.classList.add('show');
+        else toTop.classList.remove('show');
+      });
+      toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+  });
+</script>
   <button id="toTop" aria-label="Back to top">↑</button>
 </body>
 </html>
