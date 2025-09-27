@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>7Tribes (7TRB) – Community & Unity Token</title>
 
-  <!-- Google Search Console -->
-  <meta name="google-site-verification" content="eSI4e0hGGMKUgimBoFgdykRr1pQGGyTWjNGaoXqouC4" />
-
-  <!-- Canonical + SEO -->
+  <!-- SEO -->
   <link rel="canonical" href="https://main1973.github.io/7-Tribes-site/">
   <meta name="description" content="7Tribes (7TRB) — a community-powered token for unity, empowerment, and ownership."/>
   <meta property="og:title" content="7Tribes (7TRB) – Community & Unity Token"/>
@@ -18,38 +15,39 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="7Tribes (7TRB) – Community & Unity Token">
   <meta name="twitter:description" content="Join the movement. Build together. Own together.">
-  <meta name="twitter:image" content="images/banner.png">
+  <meta name="twitter:image" content="images/banner.png"/>
 
-  <!-- JSON-LD -->
+  <!-- Schema -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"7Tribes","url":"https://main1973.github.io/7-Tribes-site/","logo":"https://main1973.github.io/7-Tribes-site/images/logo.png","sameAs":["https://x.com/7Tribescrypto","https://t.me/SevenTribesCrypto","https://mainhouseoasis.etsy.com"]}
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"7Tribes",
+    "url":"https://main1973.github.io/7-Tribes-site/",
+    "logo":"https://main1973.github.io/7-Tribes-site/images/logo.png",
+    "sameAs":[
+      "https://x.com/7Tribescrypto",
+      "https://t.me/SevenTribesCrypto",
+      "https://mainhouseoasis.etsy.com"
+    ]
+  }
   </script>
 
-  <!-- PWA / Icons -->
+  <!-- Icons -->
   <link rel="manifest" href="manifest.json?v=3"/>
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
   <link rel="apple-touch-icon" href="images/icon-192.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png"/>
   <meta name="theme-color" content="#FFD700"/>
 
-  <!-- Styles -->
+  <!-- Fonts & Styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="style.css"/>
   <script>document.documentElement.classList.add('js')</script>
-  <style>
-    .js .fade-up{opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
-    .js .fade-up.in{opacity:1;transform:none}
-    #join .join-form .input{display:block;width:100%;max-width:520px;margin:.5rem 0;padding:12px 14px;border-radius:12px;border:1px solid #2a2a2f;background:#0f0f13;color:#fff}
-    #join .join-form .input::placeholder{color:#a2a2aa}
-    .mini-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin:.5rem 0 1rem}
-    .mini-stat{border:1px solid #222;border-radius:12px;padding:.6rem .8rem;background:#0f0f13}
-    .mini-label{font-size:.75rem;opacity:.7}.mini-value{font-weight:800}
-    .actions-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center}
-    .net-hint{text-align:center;opacity:.7}
-  </style>
 </head>
 <body>
 
-  <!-- STICKY NAV -->
+  <!-- NAV -->
   <nav class="topnav">
     <a class="brand" href="#">7Tribes</a>
     <div class="links">
@@ -81,7 +79,7 @@
     </div>
   </header>
 
-  <!-- QUICK ACTIONS -->
+  <!-- ACTIONS -->
   <div class="actions-row fade-up">
     <a href="https://mainhouseoasis.etsy.com" target="_blank" class="etsy-btn">🛒 Shop 7Tribes on Etsy</a>
     <a href="https://t.me/SevenTribesCrypto" target="_blank" class="social-button telegram"><i class="fab fa-telegram"></i> Telegram</a>
@@ -105,16 +103,11 @@
   <section class="card fade-up" id="join">
     <h2>Join the Tribe</h2>
     <p>Get project updates, calls to action, and early drops. We respect your inbox.</p>
-    <div class="mini-stats">
-      <div class="mini-stat"><div class="mini-label">Source</div><div class="mini-value" id="sourceTag">direct</div></div>
-      <div class="mini-stat"><div class="mini-label">This Visit</div><div class="mini-value" id="visitStamp">—</div></div>
-    </div>
     <form id="joinForm" action="https://formspree.io/f/yourid" method="POST" class="join-form">
       <input class="input" type="email" name="email" placeholder="you@example.com" required />
       <input type="hidden" name="source" id="srcField" />
       <input type="hidden" name="landing_path" id="pathField" />
       <button type="submit" class="etsy-btn">Get Updates</button>
-      <p class="fineprint">Sign up earns +5 CP (Contribution Points). Perks, not payouts. <a href="dashboard.html">See transparency</a>.</p>
     </form>
   </section>
 
@@ -151,70 +144,17 @@
     </form>
   </section>
 
+  <!-- FOOTER -->
   <footer>© 2025 7Tribes (7TRB) — Community • Unity • Ownership</footer>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
   <script src="wallet.js?v=9"></script>
-
-  <!-- Back-to-Top + Page JS -->
-  <button id="toTop" aria-label="Back to top">↑</button>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Scroll-in animation
-      const items = document.querySelectorAll('.fade-up');
-      const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
-      items.forEach(el=>io.observe(el));
-
-      // Smooth scroll
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click',e=>{
-          const id=a.getAttribute('href'); if(id && id.length>1){e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'});}
-        });
-      });
-
-      // Back-to-top
       const toTop=document.getElementById('toTop');
       window.addEventListener('scroll',()=>{ if(window.scrollY>400) toTop.classList.add('show'); else toTop.classList.remove('show'); });
-      toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-
-      // Wallet connect
-      const btn=document.getElementById('connect-btn'); if(btn && typeof window.connectWallet==='function') btn.addEventListener('click',window.connectWallet);
-
-      // Theme toggle
-      const key="theme"; const saved=localStorage.getItem(key); if(saved) document.documentElement.setAttribute("data-theme",saved);
-      const tbtn=document.getElementById("theme-toggle");
-      function iconFor(m){return(m==="light")?"🌙":"☀️";}
-      if(tbtn){ const now=document.documentElement.getAttribute("data-theme")||"dark"; tbtn.textContent=iconFor(now);
-        tbtn.addEventListener("click",()=>{const cur=document.documentElement.getAttribute("data-theme")||"dark"; const next=(cur==="light")?"dark":"light"; document.documentElement.setAttribute("data-theme",next); localStorage.setItem(key,next); tbtn.textContent=iconFor(next);});
-      }
-
-      // Flyer tracking
-      const params=new URLSearchParams(location.search);
-      const src=params.get('src')||params.get('utm_source')||'direct';
-      document.getElementById('sourceTag').textContent=src;
-      document.getElementById('visitStamp').textContent=new Date().toLocaleString();
-      document.getElementById('srcField').value=src;
-      document.getElementById('pathField').value=location.pathname+location.search;
-
-      // Join AJAX submit
-      const f=document.getElementById('joinForm');
-      f?.addEventListener('submit',async(e)=>{
-        e.preventDefault();
-        const data=new FormData(f);
-        const res=await fetch(f.action,{method:'POST',body:data,headers:{'Accept':'application/json'}});
-        f.reset();
-        alert(res.ok?'✅ Thanks—check your inbox soon.':'⚠️ Submission failed. Try again.');
-      });
     });
-  </script>
-
-  <!-- Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js')
-        .catch(err => console.warn('SW register failed:', err));
-    }
   </script>
 </body>
 </html>
