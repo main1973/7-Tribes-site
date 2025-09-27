@@ -26,16 +26,16 @@
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
   <link rel="apple-touch-icon" href="images/icon-192.png"/>
   <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png"/>
-  <link rel="manifest" href="manifest.json?v=4"/>
+  <link rel="manifest" href="manifest.json?v=5"/>
   <meta name="theme-color" content="#FFD700"/>
 
   <!-- Styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="style.css"/>
-  <script>document.documentElement.classList.add('js')</script>
 
+  <!-- Minimal safety helpers -->
+  <script>document.documentElement.classList.add('js')</script>
   <style>
-    /* minimal safety UI */
     .js .fade-up{opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
     .js .fade-up.in{opacity:1;transform:none}
     .actions-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center}
@@ -72,8 +72,12 @@
       <a href="#join">Join</a>
       <a href="#about">About</a>
       <a href="#purpose">Purpose</a>
-      <a href="#why">Why People</a>
-      <a href="#investment">Investment</a>
+      <a href="#possibilities">Possibilities</a>
+      <a href="#crypto101">Crypto 101</a>
+      <a href="#howto">How to Use</a>
+      <a href="#participation">Participate</a>
+      <a href="#builders">Builders</a>
+      <a href="#roadmap">Roadmap</a>
       <a href="dashboard.html">Dashboard</a>
       <a href="merchants.html">Merchants</a>
       <a href="referrals.html">Referrals</a>
@@ -143,20 +147,106 @@
     </ul>
   </section>
 
-  <!-- WHY PEOPLE -->
-  <section class="card fade-up" id="why">
-    <h2>Why People Matter</h2>
-    <p>Ownership = responsibility. Spend some to power today; hold some to build tomorrow. Teach one, bring two.</p>
+  <!-- POSSIBILITIES -->
+  <section class="card fade-up" id="possibilities">
+    <h2>The Possibilities</h2>
+    <ul>
+      <li><strong>10,000 people × $20</strong> staked = <strong>$200,000</strong> to fund listings and first projects.</li>
+      <li><strong>100,000 monthly users</strong> paying merchants → steady demand and real cashflow.</li>
+      <li>Regional hubs, recurring grants—our economy, at our pace.</li>
+    </ul>
   </section>
 
-  <!-- INVESTMENT -->
-  <section class="card fade-up" id="investment">
-    <h2>Investment</h2>
-    <ul>
-      <li><a href="whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a></li>
-      <li><a href="tokenomics.pdf" target="_blank" rel="noopener">Tokenomics</a></li>
-      <li><a href="dashboard.html">Transparency Dashboard</a></li>
-    </ul>
+  <!-- CRYPTO 101 -->
+  <section class="card fade-up" id="crypto101">
+    <h2>Crypto 101 — Doubts & Answers</h2>
+    <details open>
+      <summary><strong>What makes a coin go up or down?</strong></summary>
+      <p><strong>Supply & demand.</strong> More buyers than sellers → up. More sellers than buyers → down.
+         Utility, trust, scarcity, and news amplify moves.</p>
+    </details>
+    <details>
+      <summary><strong>Is crypto safe?</strong></summary>
+      <p>It’s digital money on a public ledger—anyone can check the receipts. You are your own bank:
+         protect your wallet and recovery phrase.</p>
+    </details>
+    <details>
+      <summary><strong>Isn’t it all scams?</strong></summary>
+      <p>Some coins are hype. 7TRB ties value to real use: merchants, community projects, and a
+         <a href="dashboard.html">transparency dashboard</a> you can verify.</p>
+    </details>
+    <details>
+      <summary><strong>What if a billionaire buys it all or dumps?</strong></summary>
+      <p>Defenses: wide distribution, community treasury & votes, steady real-world use, and liquidity.
+         Power stays with people, not whales.</p>
+    </details>
+    <details>
+      <summary><strong>Why Ethereum?</strong></summary>
+      <p>Most proven smart-contract network. Gas fees exist, but reliability and security matter for
+         long-term community money.</p>
+    </details>
+  </section>
+
+  <!-- HOW TO USE -->
+  <section class="card fade-up" id="howto">
+    <h2>How to Use 7TRB</h2>
+    <ol>
+      <li><strong>Get a wallet:</strong> MetaMask or Trust Wallet.</li>
+      <li><strong>Network:</strong> Ethereum Mainnet; keep a little ETH for gas.</li>
+      <li><strong>Add 7TRB:</strong> Contract <code>0xD816...c0D</code> (verify on <a href="https://etherscan.io/token/0xD81641716926F6D55dC5AF6929dbE046bBf43c0D" target="_blank" rel="noopener">Etherscan</a>).</li>
+      <li><strong>Spend:</strong> Pay merchants in the <a href="merchants.html">directory</a> or P2P.</li>
+      <li><strong>Support:</strong> Propose work, vote budgets, post receipts in Telegram.</li>
+    </ol>
+  </section>
+
+  <!-- PARTICIPATION -->
+  <section class="card fade-up" id="participation">
+    <h2>How to Participate</h2>
+    <ol>
+      <li><strong>Buy 7TRB, then move.</strong> Hold a base for tomorrow; <em>spend some</em> with merchants today.</li>
+      <li><strong>Join the chat.</strong> Calls to action in <a href="https://t.me/SevenTribesCrypto" target="_blank" rel="noopener">Telegram</a>.</li>
+      <li><strong>Recruit smart.</strong> Share links with <code>?src=YOURTAG</code> so growth is counted.</li>
+      <li><strong>Propose work.</strong> Scope, budget, timeline, owners. <a href="propose.html">Submit here →</a></li>
+      <li><strong>Show your receipts.</strong> Contribute back—teach, mentor, or sponsor the next project.</li>
+    </ol>
+  </section>
+
+  <!-- BUILDERS -->
+  <section class="card fade-up" id="builders">
+    <h2>Builders Wanted</h2>
+    <p>We need committed people, not spectators.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+      <div class="card" style="border:1px solid #222">
+        <h3>Engineering</h3><p>Web (JS), automation, smart-contract ops.</p>
+      </div>
+      <div class="card" style="border:1px solid #222">
+        <h3>Design</h3><p>Brand, web, motion, UX polish.</p>
+      </div>
+      <div class="card" style="border:1px solid #222">
+        <h3>Community</h3><p>Events, moderation, onboarding flows.</p>
+      </div>
+      <div class="card" style="border:1px solid #222">
+        <h3>Biz / Legal</h3><p>Partnerships, compliance, grants.</p>
+      </div>
+      <div class="card" style="border:1px solid #222">
+        <h3>Content</h3><p>Video, docs, social campaigns.</p>
+      </div>
+    </div>
+    <p style="margin-top:10px"><a class="etsy-btn" href="propose.html">Apply to Contribute →</a></p>
+    <div id="rolesWrap" style="margin-top:10px"></div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="card fade-up" id="roadmap">
+    <h2>Roadmap & Funding Targets</h2>
+    <p class="fineprint">Live targets load from <code>data/goals.json</code>. Listing budget is tracked publicly.</p>
+    <div id="goalsWrap">
+      <!-- Fallback static (shown if JSON missing) -->
+      <div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><strong>Holders</strong><span>0 / 1,000</span></div><div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden"><i style="display:block;height:100%;background:#FFD700;width:0%"></i></div></div>
+      <div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><strong>Merchants</strong><span>0 / 50</span></div><div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden"><i style="display:block;height:100%;background:#FFD700;width:0%"></i></div></div>
+      <div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><strong>Projects Delivered</strong><span>0 / 3</span></div><div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden"><i style="display:block;height:100%;background:#FFD700;width:0%"></i></div></div>
+      <div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><strong>Exchange Listing Budget (USD)</strong><span>$0 / $50,000</span></div><div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden"><i style="display:block;height:100%;background:#FFD700;width:0%"></i></div></div>
+    </div>
   </section>
 
   <!-- CONTACT -->
@@ -206,8 +296,8 @@
   </script>
 
   <script>
-  // Page interactivity: animations, smooth scroll, back-to-top, theme toggle, join form
-  document.addEventListener('DOMContentLoaded', () => {
+  // Page interactivity: animations, smooth scroll, back-to-top, theme toggle, join form, goals+roles
+  document.addEventListener('DOMContentLoaded', async () => {
     // Scroll-in animation
     const items = document.querySelectorAll('.fade-up');
     const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
@@ -235,7 +325,7 @@
       tbtn.addEventListener("click",()=>{const cur=document.documentElement.getAttribute("data-theme")||"dark"; const next=(cur==="light")?"dark":"light"; document.documentElement.setAttribute("data-theme",next); localStorage.setItem(key,next); tbtn.textContent=iconFor(next);});
     }
 
-    // Join form (AJAX)
+    // Join form (AJAX) + UTM/source tagging
     const f=document.getElementById('joinForm');
     f?.addEventListener('submit',async(e)=>{
       e.preventDefault();
@@ -244,11 +334,59 @@
       f.reset();
       alert(res.ok?'✅ Thanks—check your inbox soon.':'⚠️ Submission failed. Try again.');
     });
-
-    // UTM/source tagging
     const params=new URLSearchParams(location.search);
     document.getElementById('srcField').value = params.get('src')||params.get('utm_source')||'direct';
     document.getElementById('pathField').value = location.pathname+location.search;
+
+    // Load goals.json (Roadmap)
+    try{
+      const r = await fetch('data/goals.json',{cache:'no-store'});
+      if(r.ok){
+        const g = await r.json();
+        const wrap = document.getElementById('goalsWrap');
+        function pct(v,goal){const d=(goal?.goal||goal?.stretch||1); return Math.max(0,Math.min(100,Math.round((Number(v||0)/Number(d))*100))); }
+        function row(label, val, goal){
+          const cur = Number(val||0);
+          const tgt = (goal?.goal||goal?.stretch||0);
+          const p = pct(cur, goal);
+          return `
+            <div style="margin:10px 0">
+              <div style="display:flex;justify-content:space-between"><strong>${label}</strong><span>${cur.toLocaleString()} / ${tgt.toLocaleString()}</span></div>
+              <div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden">
+                <i style="display:block;height:100%;background:#FFD700;width:${p}%"></i>
+              </div>
+            </div>`;
+        }
+        wrap.innerHTML = [
+          row('Holders', g.holders?.current, g.holders),
+          row('Merchants', g.merchants?.current, g.merchants),
+          row('Projects Delivered', g.projects_delivered?.current, g.projects_delivered),
+          row('Exchange Listing Budget (USD)', g.exchange_listing_usd?.current, g.exchange_listing_usd)
+        ].join('');
+      }
+    }catch(e){ /* fallback stays */ }
+
+    // Load contributors.json (Builders)
+    try{
+      const r2 = await fetch('data/contributors.json',{cache:'no-store'});
+      if(r2.ok){
+        const d = await r2.json();
+        const roles = d.roles||[];
+        if(roles.length){
+          const out = roles.map(x=>`
+            <div style="border:1px solid #222;border-radius:12px;padding:10px;margin:8px 0;background:#0f0f13">
+              <strong>${x.name}</strong>
+              <div class="fineprint">${x.blurb||''}</div>
+              <div class="fineprint">Needed now: <strong>${x.needed||0}</strong></div>
+            </div>
+          `).join('');
+          document.getElementById('rolesWrap').innerHTML = `
+            <h3 style="margin-top:1rem">Open Roles</h3>
+            ${out}
+          `;
+        }
+      }
+    }catch(e){ /* ignore */ }
   });
   </script>
 </body>
