@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <meta name="google-site-verification" content="eSI4e0hGGMKUgimBoFgdykRr1pQGGyTWjNGaoXqouC4" />
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>7Tribes (7TRB) – Community & Unity Token</title>
 
+  <!-- Google Search Console -->
+  <meta name="google-site-verification" content="eSI4e0hGGMKUgimBoFgdykRr1pQGGyTWjNGaoXqouC4" />
+
+  <!-- Canonical + SEO -->
   <link rel="canonical" href="https://main1973.github.io/7-Tribes-site/">
   <meta name="description" content="7Tribes (7TRB) — a community-powered token for unity, empowerment, and ownership."/>
   <meta property="og:title" content="7Tribes (7TRB) – Community & Unity Token"/>
@@ -17,14 +20,18 @@
   <meta name="twitter:description" content="Join the movement. Build together. Own together.">
   <meta name="twitter:image" content="images/banner.png">
 
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Organization","name":"7Tribes","url":"https://main1973.github.io/7-Tribes-site/","logo":"https://main1973.github.io/7-Tribes-site/images/logo.png","sameAs":["https://x.com/7Tribescrypto","https://t.me/SevenTribesCrypto","https://mainhouseoasis.etsy.com"]}
   </script>
 
+  <!-- PWA / Icons -->
   <link rel="manifest" href="manifest.json?v=3"/>
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
   <link rel="apple-touch-icon" href="images/icon-192.png"/>
   <meta name="theme-color" content="#FFD700"/>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="style.css"/>
   <script>document.documentElement.classList.add('js')</script>
@@ -41,6 +48,8 @@
   </style>
 </head>
 <body>
+
+  <!-- STICKY NAV -->
   <nav class="topnav">
     <a class="brand" href="#">7Tribes</a>
     <div class="links">
@@ -60,6 +69,7 @@
     </div>
   </nav>
 
+  <!-- HERO -->
   <header class="hero">
     <img src="images/banner.png" alt="7Tribes Banner" class="banner" width="1600" height="600">
     <div class="logo-container">
@@ -71,6 +81,7 @@
     </div>
   </header>
 
+  <!-- QUICK ACTIONS -->
   <div class="actions-row fade-up">
     <a href="https://mainhouseoasis.etsy.com" target="_blank" class="etsy-btn">🛒 Shop 7Tribes on Etsy</a>
     <a href="https://t.me/SevenTribesCrypto" target="_blank" class="social-button telegram"><i class="fab fa-telegram"></i> Telegram</a>
@@ -81,6 +92,7 @@
   </div>
   <p class="net-hint">Network required: <strong>Ethereum Mainnet</strong></p>
 
+  <!-- KPIs -->
   <section class="card kpis fade-up" aria-label="Token quick facts">
     <div class="kpi"><div class="kpi-label">Total Supply</div><div class="kpi-value">1,000,000</div><div class="kpi-sub">7TRB</div></div>
     <div class="kpi"><div class="kpi-label">Chain</div><div class="kpi-value">Ethereum</div><div class="kpi-sub">ERC-20</div></div>
@@ -89,6 +101,7 @@
     </div>
   </section>
 
+  <!-- JOIN -->
   <section class="card fade-up" id="join">
     <h2>Join the Tribe</h2>
     <p>Get project updates, calls to action, and early drops. We respect your inbox.</p>
@@ -105,16 +118,19 @@
     </form>
   </section>
 
+  <!-- ABOUT -->
   <section class="card fade-up" id="about">
     <h2>About 7Tribes (7TRB)</h2>
     <p>7Tribes is a community-powered movement built on unity, innovation, and economic empowerment. Success depends on participation—builders, investors, and supporters circulating value inside the community.</p>
   </section>
 
+  <!-- WHY -->
   <section class="card fade-up" id="why">
     <h2>Why We Need People for 7Tribes to Succeed</h2>
     <p>Ownership = responsibility. Spend some to power today. Hold some to build tomorrow. Teach one, bring two.</p>
   </section>
 
+  <!-- INVESTMENT -->
   <section class="card fade-up" id="investment">
     <h2>Investment</h2>
     <ul>
@@ -124,6 +140,7 @@
     </ul>
   </section>
 
+  <!-- CONTACT -->
   <section class="card fade-up" id="contact">
     <h2>Contact</h2>
     <form action="https://formspree.io/f/yourid" method="POST">
@@ -136,28 +153,35 @@
 
   <footer>© 2025 7Tribes (7TRB) — Community • Unity • Ownership</footer>
 
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
   <script src="wallet.js?v=9"></script>
 
+  <!-- Back-to-Top + Page JS -->
   <button id="toTop" aria-label="Back to top">↑</button>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Scroll-in animation
       const items = document.querySelectorAll('.fade-up');
       const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
       items.forEach(el=>io.observe(el));
 
+      // Smooth scroll
       document.querySelectorAll('a[href^="#"]').forEach(a=>{
         a.addEventListener('click',e=>{
           const id=a.getAttribute('href'); if(id && id.length>1){e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'});}
         });
       });
 
+      // Back-to-top
       const toTop=document.getElementById('toTop');
       window.addEventListener('scroll',()=>{ if(window.scrollY>400) toTop.classList.add('show'); else toTop.classList.remove('show'); });
       toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
+      // Wallet connect
       const btn=document.getElementById('connect-btn'); if(btn && typeof window.connectWallet==='function') btn.addEventListener('click',window.connectWallet);
 
+      // Theme toggle
       const key="theme"; const saved=localStorage.getItem(key); if(saved) document.documentElement.setAttribute("data-theme",saved);
       const tbtn=document.getElementById("theme-toggle");
       function iconFor(m){return(m==="light")?"🌙":"☀️";}
@@ -173,7 +197,7 @@
       document.getElementById('srcField').value=src;
       document.getElementById('pathField').value=location.pathname+location.search;
 
-      // Join AJAX submit (success alert)
+      // Join AJAX submit
       const f=document.getElementById('joinForm');
       f?.addEventListener('submit',async(e)=>{
         e.preventDefault();
@@ -184,6 +208,8 @@
       });
     });
   </script>
+
+  <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./service-worker.js')
