@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>7Tribes — Learn, FAQ & Safety</title>
+  <meta name="description" content="Crypto 101, safety, myths, how-to, glossary, and community standards for 7Tribes."/>
+  <meta name="theme-color" content="#FFD700"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body{background:#0b0b0c;color:#eaeaea;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;margin:0}
+    .wrap{max-width:1040px;margin:auto;padding:20px}
+    .card{background:#121214;border:1px solid #222;border-radius:14px;padding:16px;margin:14px 0}
+    h1,h2,h3{color:#FFD700;margin:.2rem 0 .6rem}
+    .sub{color:#a1a1a6}
+    a{color:#FFD700;text-decoration:none}
+    details{border:1px solid #222;border-radius:12px;padding:10px;background:#0f0f13;margin:.5rem 0}
+    details>summary{cursor:pointer;font-weight:700}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    code{background:#1a1a1d;border:1px solid #222;border-radius:6px;padding:1px 6px}
+    .pill{display:inline-block;background:#0f0f13;border:1px solid #222;color:#a1a1a6;padding:6px 10px;border-radius:999px;font-size:.8rem;margin-right:6px}
+    .callout{border-left:4px solid #FFD700;padding:10px;background:#0f0f13;border-radius:10px}
+  </style>
+</head>
+<body>
+  <nav class="topnav">
+    <a class="brand" href="index.html">7Tribes</a>
+    <div class="links">
+      <a href="index.html#purpose">Purpose</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="merchants.html">Merchants</a>
+      <a href="propose.html">Propose</a>
+      <a href="#faq">FAQ</a>
+      <a href="#safety">Safety</a>
+      <a href="#howto">How-To</a>
+      <a href="#glossary">Glossary</a>
+      <a href="#code">Code</a>
+    </div>
+  </nav>
+
+  <header class="wrap">
+    <div class="card">
+      <h1>Learn 7Tribes</h1>
+      <p class="sub">Crypto basics, real risks, how to use 7TRB, and the culture we’re building.</p>
+      <div>
+        <span class="pill">Transparent</span>
+        <span class="pill">No hype</span>
+        <span class="pill">Action > Talk</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- CRYPTO 101 (Expanded) -->
+    <section id="faq" class="card">
+      <h2>Crypto 101 — Doubts & Answers</h2>
+
+      <h3>1) What makes a coin go up or down?</h3>
+      <p>Short answer: <strong>supply + demand</strong>.</p>
+      <ul>
+        <li>More buyers than sellers → <strong>price up</strong>.</li>
+        <li>More sellers than buyers → <strong>price down</strong>.</li>
+      </ul>
+      <p><strong>Also matters:</strong> utility (can you use it), trust (transparent devs/treasury), scarcity (fixed supply), and news/hype/fear.</p>
+
+      <h3>2) What if a billionaire buys it all?</h3>
+      <p>That’s a <strong>whale attack</strong>. Defenses we emphasize:</p>
+      <ul>
+        <li><strong>Wide distribution:</strong> more holders, less control per wallet.</li>
+        <li><strong>Community treasury + voting:</strong> no one outsider dominates direction.</li>
+        <li><strong>Liquidity pools:</strong> better absorption of big buys/sells.</li>
+        <li><strong>Social defense:</strong> in an extreme abuse, communities can fork—whales know this.</li>
+      </ul>
+
+      <h3>3) What if they dump it cheap?</h3>
+      <p>That’s price manipulation. Thin markets are fragile. We counter with:</p>
+      <ul>
+        <li><strong>Real usage:</strong> merchants + projects = baseline demand.</li>
+        <li><strong>Lots of holders:</strong> dilution of whale power.</li>
+        <li><strong>Radical transparency:</strong> live dashboard; receipts over rhetoric.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Street version:</strong> 1 guy owning 10 houses can play landlord. 10,000 families owning their homes? No single landlord can crash it. Same idea here.
+      </div>
+    </section>
+
+    <!-- MYTHS -->
+    <section class="card">
+      <h2>Common Myths (Debunked)</h2>
+      <details open>
+        <summary><strong>“Crypto is all scams.”</strong></summary>
+        <p>Some is. 7TRB ties value to work you can verify: merchants, funded projects, and a public dashboard. If you can’t verify it, don’t trust it.</p>
+      </details>
+      <details>
+        <summary><strong>“If I lose my phone, I lose my crypto.”</strong></summary>
+        <p>Your wallet is recovered with your <strong>seed phrase</strong>. Store it offline. Phone lost ≠ coins lost.</p>
+      </details>
+      <details>
+        <summary><strong>“It’s anonymous crime money.”</strong></summary>
+        <p>Blockchains are public ledgers. Transactions are traceable. Good opsec matters, but it’s not a shadow realm.</p>
+      </details>
+      <details>
+        <summary><strong>“Crypto is illegal.”</strong></summary>
+        <p>Laws vary by country, but owning/using crypto is legal in most places. We don’t give legal/tax advice—know your local rules.</p>
+      </details>
+    </section>
+
+    <!-- SAFETY -->
+    <section id="safety" class="card">
+      <h2>Safety & Wallet Security</h2>
+      <div class="grid">
+        <div class="card" style="border:1px solid #222">
+          <h3>Seed Phrase Rules</h3>
+          <ul>
+            <li>Write it <strong>on paper</strong>. Store offline. Never screenshot.</li>
+            <li>Never share it. No admin or “support” needs it. Ever.</li>
+            <li>Consider two copies in separate safe spots.</li>
+          </ul>
+        </div>
+        <div class="card" style="border:1px solid #222">
+          <h3>Device Hygiene</h3>
+          <ul>
+            <li>Update your OS & browser.</li>
+            <li>Use a password manager + 2FA for accounts.</li>
+            <li>Bookmark official links (this site, Etherscan contract page).</li>
+          </ul>
+        </div>
+        <div class="card" style="border:1px solid #222">
+          <h3>Scam Radar</h3>
+          <ul>
+            <li>Too-good-to-be-true “airdrops”.</li>
+            <li>DMs offering help. Fake support.</li>
+            <li>Clone websites (check URL carefully).</li>
+          </ul>
+        </div>
+        <div class="card" style="border:1px solid #222">
+          <h3>Best Practice</h3>
+          <ul>
+            <li>Small first test transactions.</li>
+            <li>Hardware wallet for larger holdings (Ledger/Trezor).</li>
+            <li>Verify contract: <a href="https://etherscan.io/token/0xD81641716926F6D55dC5AF6929dbE046bBf43c0D" target="_blank" rel="noopener">Etherscan</a>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW-TO -->
+    <section id="howto" class="card">
+      <h2>How to Use 7TRB</h2>
+      <ol>
+        <li><strong>Install a Wallet:</strong> MetaMask or Trust Wallet.</li>
+        <li><strong>Select Network:</strong> Ethereum Mainnet; keep a little ETH for gas.</li>
+        <li><strong>Add 7TRB:</strong> use contract <code>0xD816...c0D</code> (verify on Etherscan).</li>
+        <li><strong>Acquire 7TRB:</strong> swap ETH→7TRB on the listed DEX/CEX when available (check announcements).</li>
+        <li><strong>Spend 7TRB:</strong> pay merchants in the <a href="merchants.html">directory</a> or peer-to-peer.</li>
+        <li><strong>Contribute:</strong> propose work, vote budgets, show receipts in Telegram.</li>
+        <li><strong>Cash Out (optional):</strong> swap 7TRB→ETH, then ETH→fiat via your exchange/bank (fees and local laws apply).</li>
+      </ol>
+      <p class="sub">Need help? Join <a href="https://t.me/SevenTribesCrypto" target="_blank" rel="noopener">Telegram</a> for live onboarding.</p>
+    </section>
+
+    <!-- GLOSSARY -->
+    <section id="glossary" class="card">
+      <h2>Glossary (Plain Language)</h2>
+      <div class="grid">
+        <div class="card" style="border:1px solid #222">
+          <h3>Wallet</h3><p>An app that holds your keys. It’s your account. Protect your seed phrase.</p>
+          <h3>Gas</h3><p>The small ETH fee to run a transaction on Ethereum.</p>
+          <h3>DEX / CEX</h3><p>Decentralized or centralized exchange where you trade coins.</p>
+        </div>
+        <div class="card" style="border:1px solid #222">
+          <h3>Liquidity</h3><p>How easy it is to buy/sell without moving price.</p>
+          <h3>Treasury</h3><p>Community funds controlled by proposals/votes.</p>
+          <h3>DAO</h3><p>Community governance: proposals + votes = action.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEGAL / RISK -->
+    <section class="card">
+      <h2>Legal & Risk Disclosure</h2>
+      <ul>
+        <li><strong>No promises:</strong> 7TRB is community-driven. Value can go up or down.</li>
+        <li><strong>Not financial advice:</strong> do your own research; consider your risk tolerance.</li>
+        <li><strong>Tax & laws:</strong> rules differ by country. You’re responsible for compliance.</li>
+        <li><strong>Security:</strong> you are your own bank—protect your wallet/keys.</li>
+      </ul>
+      <p class="sub">Questions about compliance or taxes? Talk to a qualified professional in your area.</p>
+    </section>
+
+    <!-- COMMUNITY CODE -->
+    <section id="code" class="card">
+      <h2>Community Code & Pledge</h2>
+      <ul>
+        <li><strong>Receipts over rhetoric:</strong> show proof of work and impact.</li>
+        <li><strong>No harassment or hate:</strong> build with respect or don’t build at all.</li>
+        <li><strong>Teach one, bring two:</strong> onboard people with patience.</li>
+        <li><strong>If you benefit, contribute:</strong> time, talent, capital, or mentorship.</li>
+      </ul>
+      <p class="callout">Pledge: <em>“I won’t just hold a token. I’ll hold a responsibility.”</em></p>
+    </section>
+
+    <!-- QUICK LINKS -->
+    <section class="card">
+      <h2>Quick Links</h2>
+      <ul>
+        <li><a href="dashboard.html">Live Transparency Dashboard</a></li>
+        <li><a href="merchants.html">Merchants Directory</a></li>
+        <li><a href="propose.html">Propose a Project / Apply to Build</a></li>
+        <li><a href="index.html#participation">How to Participate</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="wrap" style="text-align:center;opacity:.7">
+    © 2025 7Tribes (7TRB) — Community • Unity • Ownership
+  </footer>
+</body>
+</html>
