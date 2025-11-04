@@ -1,486 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>7Tribes (7TRB) – Community • Unity • Ownership</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>7TRB • 7Tribes Unity Token</title>
+<meta name="description" content="7TRB — Community-owned tech and transparent token economy. Community • Unity • Ownership." />
 
-  <!-- SEO -->
-  <link rel="canonical" href="https://main1973.github.io/7-Tribes-site/">
-  <meta name="description" content="7Tribes (7TRB): a community-powered token for unity, empowerment, and ownership."/>
-  <meta property="og:title" content="7Tribes (7TRB) – Community & Unity Token"/>
-  <meta property="og:description" content="Join the movement. Build together. Own together."/>
-  <meta property="og:image" content="images/banner.png"/>
-  <meta property="og:type" content="website"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="7Tribes (7TRB) – Community & Unity Token"/>
-  <meta name="twitter:description" content="Join the movement. Build together. Own together."/>
-  <meta name="twitter:image" content="images/banner.png"/>
+<style>
+  :root{
+    --bg:#0a0a0a;        /* site background */
+    --bg-2:#0f1012;      /* card background */
+    --ink:#e9e9e9;       /* primary text */
+    --muted:#b8b8b8;     /* secondary text */
+    --line:#1e1f22;      /* borders */
+    --gold:#b78e2a;      /* darker gold */
+    --gold-2:#8f6e1f;    /* deeper gold */
+    --panel:#121316;     /* panels */
+    --radius:16px;
+    --shadow:0 10px 28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  img{max-width:100%;height:auto;display:block}
+  a{color:var(--ink);text-decoration:none}
+  .container{max-width:1120px;margin:0 auto;padding:0 20px}
+  .section{padding:72px 0;border-top:1px solid var(--line)}
+  .heading{font-weight:800;letter-spacing:.4px;margin:0 0 10px}
+  .eyebrow{color:var(--gold);font-size:.82rem;text-transform:uppercase;letter-spacing:.18rem}
+  .muted{color:var(--muted)}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);margin:30px 0}
+  .grid{display:grid;gap:20px}
+  .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);transition:.25s}
+  .card:hover{border-color:var(--gold-2);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+  .soft{background:#0c0c0d;border:1px solid #151517}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.05rem;border:1px solid var(--gold);border-radius:999px;color:var(--ink);transition:.25s}
+  .btn:hover{background:var(--gold);color:#111;transform:translateY(-1px)}
+  .cta{background:var(--gold);color:#111;border-color:var(--gold)}
+  .pill{display:inline-block;padding:.25rem .6rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.85rem}
 
-  <!-- Schema -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"7Tribes","url":"https://main1973.github.io/7-Tribes-site/","logo":"https://main1973.github.io/7-Tribes-site/images/logo.png","sameAs":["https://x.com/7Tribescrypto","https://t.me/SevenTribesCrypto","https://mainhouseoasis.etsy.com"]}
-  </script>
+  /* Header */
+  header{position:sticky;top:0;z-index:40;background:rgba(10,10,10,.72);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+  .nav .links{display:flex;gap:16px}
+  .nav a{opacity:.9;font-weight:600}
+  .nav a:hover{opacity:1}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{width:40px;height:40px}
+  .brand .name{font-weight:900;letter-spacing:.6px}
+  .brand .name b{color:var(--gold)}
 
-  <!-- Icons / PWA -->
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"/>
-  <link rel="apple-touch-icon" href="images/icon-192.png"/>
-  <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png"/>
-  <link rel="manifest" href="manifest.json?v=5"/>
-  <meta name="theme-color" content="#FFD700"/>
+  /* Hero */
+  .hero{position:relative;overflow:hidden}
+  .ring{position:absolute;inset:-220px auto auto 50%;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(183,142,42,.16),transparent 60%);filter:blur(6px);animation:pulse 7s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.45;transform:translateX(-50%) scale(1)}50%{opacity:.75;transform:translateX(-50%) scale(1.06)}}
+  .hero-inner{padding:90px 0 64px;display:grid;gap:22px}
+  .hero h1{font-size:clamp(1.9rem,3.4vw,3.1rem);margin:0;font-weight:900}
+  .hero p{max-width:780px;margin:6px 0 10px}
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="stylesheet" href="style.css"/>
+  /* Side-by-side blocks */
+  .two{display:grid;gap:18px;grid-template-columns:1.1fr .9fr}
+  .panel{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
 
-  <!-- Minimal safety helpers -->
-  <script>document.documentElement.classList.add('js')</script>
-  <style>
-    .js .fade-up{opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
-    .js .fade-up.in{opacity:1;transform:none}
-    .actions-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center}
-    .net-hint{text-align:center;opacity:.7}
-    .join-form .input{display:block;width:100%;max-width:520px;margin:.5rem 0;padding:12px 14px;border-radius:12px;border:1px solid #2a2a2f;background:#0f0f13;color:#fff}
-    .join-form .input::placeholder{color:#a2a2aa}
-    #toTop{position:fixed;right:16px;bottom:16px;opacity:0;pointer-events:none;transition:opacity .2s}
-    #toTop.show{opacity:1;pointer-events:auto}
-  </style>
+  /* Builders */
+  .builder-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .builder{border:1px solid rgba(183,142,42,.45);background:
+    linear-gradient(180deg,rgba(183,142,42,.06),transparent 35%),var(--panel)}
+  .builder:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 10px 26px rgba(183,142,42,.15)}
+
+  /* Motion (No Denominations) */
+  .motion{position:relative;min-height:360px;border-radius:var(--radius);overflow:hidden;background:linear-gradient(180deg,#0e0e10,#0a0a0a)}
+  .bills{position:absolute;left:-8%;top:18%;width:58%;opacity:.16;filter:grayscale(1) contrast(1.1) brightness(.9)}
+  .bills::before{
+    content:"$1  $5  $10  $20  $50  $100";
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;
+    letter-spacing:.35rem;font-weight:800;font-size:2.2rem;color:#dcdcdc;opacity:.12
+  }
+  .streams{position:absolute;right:-10%;top:0;width:65%;height:100%;
+    background:
+      repeating-linear-gradient(105deg,transparent 0 28px,rgba(183,142,42,.12) 28px 30px),
+      radial-gradient(ellipse at 20% 50%,rgba(183,142,42,.25),transparent 60%),
+      radial-gradient(ellipse at 60% 50%,rgba(143,110,31,.22),transparent 60%);
+    mix-blend:screen;animation:flow 12s linear infinite}
+  @keyframes flow{from{transform:translateX(0)}to{transform:translateX(-10%)}}
+
+  /* Transparency */
+  .stat-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .stat{padding:16px;border-radius:12px;background:var(--panel);border:1px solid var(--line)}
+  .stat .k{font-size:1.6rem;font-weight:800}
+  .bar{height:12px;border-radius:999px;background:#151515;border:1px solid #1e1e1e;overflow:hidden}
+  .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-2));width:0;transition:width 1s ease}
+  .alloc .card{min-height:92px}
+
+  /* Merch + TikTok */
+  .product{padding:16px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
+  .price{color:#f5d37a;font-weight:800}
+  .btn-tiktok{
+    display:inline-block;padding:12px 22px;border-radius:999px;color:#fff;font-weight:800;
+    background:linear-gradient(135deg,#25F4EE,#FE2C55);box-shadow:0 0 20px rgba(254,44,85,.35);
+    transition:.3s
+  }
+  .btn-tiktok:hover{box-shadow:0 0 30px rgba(37,244,238,.55);transform:translateY(-2px)}
+  .tiktok-link{color:#ddd;border-bottom:2px solid transparent}
+  .tiktok-link:hover{border-image:linear-gradient(135deg,#25F4EE,#FE2C55) 1;border-bottom:2px solid}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:28px 0 60px}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .mini{width:30px;height:30px}
+
+  /* Responsive */
+  @media (max-width:980px){ .two{grid-template-columns:1fr} }
+  @media (max-width:820px){
+    .nav .links{display:none}
+    .section{padding:64px 0}
+  }
+</style>
+
+<script>
+  // Smooth scroll
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href^="#"]'); if(!a) return;
+    const id=a.getAttribute('href'); const el=document.querySelector(id);
+    if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+  });
+
+  // Animate allocation bars on reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.querySelectorAll('[data-pct]').forEach(b=>{ b.style.width = b.dataset.pct + '%'; });
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:.3});
+  window.addEventListener('DOMContentLoaded',()=>{
+    document.querySelectorAll('.alloc').forEach(el=>io.observe(el));
+  });
+</script>
 </head>
 <body>
 
-  <!-- Hot patch: kill old SW + surface JS errors -->
-  <script>
-  (function(){
-    if (navigator.serviceWorker) {
-      navigator.serviceWorker.getRegistrations()
-        .then(rs => rs.forEach(r => r.unregister()))
-        .finally(() => { if (window.caches?.keys) caches.keys().then(keys => keys.forEach(k => caches.delete(k))); });
-    }
-    window.onerror = (msg) => {
-      const pre = document.createElement('pre');
-      pre.style = 'white-space:pre-wrap;background:#3b1d1d;padding:12px;border-radius:10px;color:#fff;margin:0 0 10px';
-      pre.textContent = 'JS error: ' + msg;
-      document.body.prepend(pre);
-    };
-  })();
-  </script>
-
-  <!-- NAV -->
-  <nav class="topnav">
- <a class="brand" href="#">7Tribes</a>
-    <div class="links">
-      <a href="#join">Join</a>
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <img src="images/logo.png" alt="7Tribes Unity Token logo" />
+      <div class="name">7<b>TRB</b></div>
+    </div>
+    <nav class="links">
       <a href="#about">About</a>
-      <a href="#purpose">Purpose</a>
-      <a href="#possibilities">Possibilities</>
-      <a href="#crypto101">Crypto 101</a>
-      <a href="#howto">How to Use</a>
-      <a href="#participation">Participate</a>
-      <a href="#builders">Builders</a>
       <a href="#roadmap">Roadmap</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="merchants.html">Merchants</a>
-      <a href="referrals.html">Referrals</a>
-      <a href="learn.html">Learn</a>
-      <a href="#contact">Contact</a>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
-    </div>
-  </nav>
+      <a href="#crypto101">Crypto 101</a>
+      <a href="#transparency">Transparency</a>
+      <a href="#merch">Merch</a>
+      <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+    </nav>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <header class="hero">
-    <img src="images/banner.png" alt="7Tribes Banner" class="banner" width="1600" height="600">
-    <div class="logo-container">
-      <img src="images/logo.png" alt="7Tribes Logo" class="logo" width="300" height="300">
-    </div>
-    <div class="sub-hero fade-up">
-      <h1>7Tribes (7TRB)</h1>
-      <p>Community • Unity • Ownership — a token built to empower people together.</p>
-    </div>
-  </header>
-
-  <!-- QUICK ACTIONS -->
-  <div class="actions-row fade-up">
-    <a href="https://mainhouseoasis.etsy.com" target="_blank" class="etsy-btn">🛒 Shop 7Tribes on Etsy</a>
-    <a href="learn.html" class="etsy-btn">📖 Start Here: Learn Crypto</a>
-    <a href="https://t.me/SevenTribesCrypto" target="_blank" class="social-button telegram"><i class="fab fa-telegram"></i> Telegram</a>
-    <a href="https://x.com/7Tribescrypto" target="_blank" class="social-button twitter"><i class="fab fa-x-twitter"></i> X (Twitter)</a>
-    <div class="wallet-connect">
-      <button id="connect-btn">🔗 Connect Wallet</button>
+<!-- HERO -->
+<section class="hero section" id="home">
+  <div class="ring" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <span class="eyebrow">Community • Unity • Ownership</span>
+    <h1>7Tribes Unity Token (7TRB)</h1>
+    <p class="muted">We’re building a community-owned economy. No denominations, only motion. Value grows when we build, spend, and reinvest together.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn cta" href="#transparency">View the Plan</a>
+      <a class="btn" href="#builders">Become a Builder</a>
+      <a class="btn" href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Join Telegram</a>
     </div>
   </div>
-  <p class="net-hint">Network required: <strong>Ethereum Mainnet</strong></p>
+</section>
 
-  <!-- KPIs -->
-  <section class="card kpis fade-up" aria-label="Token quick facts">
-    <div class="kpi"><div class="kpi-label">Total Supply</div><div class="kpi-value">1,000,000</div><div class="kpi-sub">7TRB</div></div>
-    <div class="kpi"><div class="kpi-label">Chain</div><div class="kpi-value">Ethereum</div><div class="kpi-sub">ERC-20</div></div>
-    <div class="kpi"><div class="kpi-label">Contract</div><div class="kpi-value small">0xD816...c0D</div>
-      <div class="kpi-sub"><a href="https://etherscan.io/token/0xD81641716926F6D55dC5AF6929dbE046bBf43c0D" target="_blank" rel="noopener">View on Etherscan</a></div>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container two">
+    <div class="panel">
+      <span class="eyebrow">About 7Tribes</span>
+      <h2 class="heading">Redirecting the flow</h2>
+      <p class="muted">
+        <!-- TODO: Paste your exact "About 7Tribes" paragraph here (why the name matters, redirecting value into the community). -->
+        7Tribes channels value back into the people who create it—circulating locally, funding projects, and growing together.
+      </p>
     </div>
-  </section>
-
-  <!-- JOIN -->
-  <section class="card fade-up" id="join">
-    <h2>Join the Tribe</h2>
-    <p>Get project updates, calls to action, and early drops. We respect your inbox.</p>
-    <form id="joinForm" action="https://formspree.io/f/yourid" method="POST" class="join-form">
-      <input class="input" type="email" name="email" placeholder="you@example.com" required />
-      <input type="hidden" name="source" id="srcField" />
-      <input type="hidden" name="landing_path" id="pathField" />
-      <button type="submit" class="etsy-btn">Get Updates</button>
-    </form>
-  </section>
-
-  <!-- ABOUT -->
- <section class="card fade-up" id="about">
-  <h2>About 7Tribes (7TRB)</h2>
-  <p>
-    7Tribes isn’t just a token — it’s a blueprint for independence. It was created with one
-    goal: <strong>redirect the flow of money back into the people’s hands</strong>.
-    Instead of watching wealth leak out into banks, corporations, and gatekeepers,
-    7TRB keeps value moving inside the community that built it.
-  </p>
-
-  <h3>Why the Name “7Tribes”?</h3>
-  <p>
-    The number 7 represents completion, unity, and power across cultures.
-    Tribes are about people — families, builders, hustlers, farmers,
-    creators — all moving as one. Together, 7Tribes means
-    <em>many individuals forming one unstoppable collective</em>.
-  </p>
-
-  <h3>Why People Matter</h3>
-  <p>
-    A token without people is just code on a blockchain. 7Tribes works only if
-    people join, participate, and take responsibility. That means:
-  </p>
-  <ul>
-    <li>Holding some 7TRB for the future.</li>
-    <li>Spending some with merchants to grow the local economy.</li>
-    <li>Bringing in new voices — every sign-up strengthens the network.</li>
-    <li>Voting on projects and proposals that matter most.</li>
-  </ul>
-
-  <h3>What 7Tribes Can Unlock</h3>
-  <p>
-    Imagine the power of thousands of wallets linked together:
-  </p>
-  <ul>
-    <li><strong>Community Projects</strong> — gardens, solar grids, housing, schools.</li>
-    <li><strong>Merchants & Business Growth</strong> — small shops thriving without banks.</li>
-    <li><strong>Jobs & Skills</strong> — developers, marketers, farmers, and artists paid directly in 7TRB.</li>
-    <li><strong>Self-Ownership</strong> — no gatekeepers, no rent to supremacy, no middlemen.</li>
-  </ul>
-
-  <h3>The Cause & Effect</h3>
-  <p>
-    When people choose 7Tribes, two things happen:
-  </p>
-  <ol>
-    <li><strong>The Old System Weakens</strong> — less money flowing into banks and corporations.</li>
-    <li><strong>A New System Grows</strong> — stronger communities, new projects, and collective wealth.</li>
-  </ol>
-
-  <p>
-    The more we build inside, the less we depend outside. That’s how change actually sticks.
-  </p>
-</section>
-  <!-- PURPOSE -->
-  <section class="card fade-up" id="purpose">
-    <h2>Our Purpose</h2>
-    <p>7Tribes isn’t just a token—it’s a contract between people. Every trade, every shirt bought, every coin held feeds the community, not billionaires. We make decisions together and recycle value into local projects.</p>
-    <ul>
-      <li><strong>Redirect the flow:</strong> from corporations → to neighbors, merchants, and builders.</li>
-      <li><strong>Turn believers into builders:</strong> propose work, vote budgets, show receipts.</li>
-      <li><strong>Unity = power:</strong> people → token → projects → growth → stronger people.</li>
-    </ul>
-  </section>
-
-  <!-- POSSIBILITIES -->
- <section class="card fade-up" id="possibilities">
-  <h2>Possibilities with 7Tribes</h2>
-  <p>
-    The power of 7TRB is not in the code, but in the choices people make with it.
-    The more we circulate it, the more doors open:
-  </p>
-  <ul>
-    <li><strong>Local Wealth</strong> — 7TRB spent at local shops stays in the neighborhood.</li>
-    <li><strong>Community Projects</strong> — schools, gardens, solar grids, housing,
-        all funded transparently from shared wallets.</li>
-    <li><strong>Jobs</strong> — developers, artists, marketers, and workers paid directly in 7TRB.</li>
-    <li><strong>Global Links</strong> — a system designed here, usable anywhere,
-        connecting communities across borders.</li>
-  </ul>
-  <p>
-    The bigger the tribe, the stronger the effect.
-  </p>
-</section>
-      <li><strong>10,000 people × $20</strong> staked = <strong>$200,000</strong> to fund listings and first projects.</li>
-      <li><strong>100,000 monthly users</strong> paying merchants → steady demand and real cashflow.</li>
-      <li>Regional hubs, recurring grants—our economy, at our pace.</li>
-    </ul>
-  </section>
-
-  <!-- CRYPTO 101 -->
-  <section class="card fade-up" id="crypto101">
-    <h2>Crypto 101 — Doubts & Answers</h2>
-    <details open>
-      <summary><strong>What makes a coin go up or down?</strong></summary>
-      <p><strong>Supply & demand.</strong> More buyers than sellers → up. More sellers than buyers → down.
-         Utility, trust, scarcity, and news amplify moves.</p>
-    </details>
-    <details>
-      <summary><strong>Is crypto safe?</strong></summary>
-      <p>It’s digital money on a public ledger—anyone can check the receipts. You are your own bank:
-         protect your wallet and recovery phrase.</p>
-    </details>
-    <details>
-      <summary><strong>Isn’t it all scams?</strong></summary>
-      <p>Some coins are hype. 7TRB ties value to real use: merchants, community projects, and a
-         <a href="dashboard.html">transparency dashboard</a> you can verify.</p>
-    </details>
-    <details>
-      <summary><strong>What if a billionaire buys it all or dumps?</strong></summary>
-      <p>Defenses: wide distribution, community treasury & votes, steady real-world use, and liquidity.
-         Power stays with people, not whales.</p>
-    </details>
-    <details>
-      <summary><strong>Why Ethereum?</strong></summary>
-      <p>Most proven smart-contract network. Gas fees exist, but reliability and security matter for
-         long-term community money.</p>
-    </details>
-  </section>
-
-  <!-- HOW TO USE -->
-  <section class="card fade-up" id="howto">
-    <h2>How to Use 7TRB</h2>
-    <ol>
-      <li><strong>Get a wallet:</strong> MetaMask or Trust Wallet.</li>
-      <li><strong>Network:</strong> Ethereum Mainnet; keep a little ETH for gas.</li>
-      <li><strong>Add 7TRB:</strong> Contract <code>0xD816...c0D</code> (verify on <a href="https://etherscan.io/token/0xD81641716926F6D55dC5AF6929dbE046bBf43c0D" target="_blank" rel="noopener">Etherscan</a>).</li>
-      <li><strong>Spend:</strong> Pay merchants in the <a href="merchants.html">directory</a> or P2P.</li>
-      <li><strong>Support:</strong> Propose work, vote budgets, post receipts in Telegram.</li>
-    </ol>
-  </section>
-
-  <!-- PARTICIPATION -->
-<section class="card fade-up" id="participation">
-  <h2>Participation</h2>
-  <p>
-    7Tribes only works if people <em>do more than hold the coin</em>.
-    Everyone has a role:
-  </p>
-  <ul>
-    <li><strong>Investors</strong> — hold 7TRB for the future, to grow with the community.</li>
-    <li><strong>Spenders</strong> — use 7TRB with merchants, keeping value in the circle.</li>
-    <li><strong>Builders</strong> — coders, designers, farmers, shop owners, and hustlers who accept or create projects funded by 7TRB.</li>
-    <li><strong>Connectors</strong> — share the message, onboard new wallets, and grow the base.</li>
-    <li><strong>Voters</strong> — every token = a voice in what gets funded.</li>
-  </ul>
-  <p>
-    Participation = responsibility. This is not passive investing.
-    If you hold 7TRB, you’ve joined a tribe with work to do.
-  </p>
+    <div class="panel">
+      <span class="eyebrow">Why the name matters</span>
+      <p class="muted">
+        <!-- TODO: Your “why the name matters” copy -->
+        Seven as structure and rhythm—seven days, continents, colors—designed for unity across difference.
+      </p>
+    </div>
+  </div>
 </section>
 
-  <!-- BUILDERS -->
-  <section class="card fade-up" id="builders">
-    <h2>Builders Wanted</h2>
-    <p>We need committed people, not spectators.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-      <div class="card" style="border:1px solid #222">
-        <h3>Engineering</h3><p>Web (JS), automation, smart-contract ops.</p>
+<!-- PURPOSE & POSSIBILITIES -->
+<section id="purpose" class="section" style="background:#0d0e10;border-top:1px solid var(--line);">
+  <div class="container grid grid-2">
+    <div class="card soft">
+      <span class="eyebrow">Purpose</span>
+      <h3 class="heading">What we exist to do</h3>
+      <p class="muted">
+        <!-- TODO: Paste your Purpose text -->
+        Build transparent systems so everyday work turns into shared wealth.
+      </p>
+    </div>
+    <div class="card soft">
+      <span class="eyebrow">Possibilities</span>
+      <h3 class="heading">What becomes possible</h3>
+      <p class="muted">
+        <!-- TODO: Paste your Possibilities text -->
+        Local merchants, shared tools, funded dreams—measured on a public dashboard.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="section">
+  <div class="container">
+    <span class="eyebrow">Roadmap</span>
+    <h2 class="heading">From proof to scale</h2>
+    <div class="grid grid-3" style="margin-top:10px">
+      <div class="card">
+        <b>Phase 1 — Infrastructure</b>
+        <p class="muted">
+          <!-- TODO: your Phase 1 copy -->
+          Publish transparency, launch site, seed partners.
+        </p>
+        <span class="pill">Now</span>
       </div>
-      <div class="card" style="border:1px solid #222">
-        <h3>Design</h3><p>Brand, web, motion, UX polish.</p>
+      <div class="card">
+        <b>Phase 2 — Community</b>
+        <p class="muted">
+          <!-- TODO -->
+          Onboard holders, merchants, creators. Monthly reports.
+        </p>
+        <span class="pill">Next</span>
       </div>
-      <div class="card" style="border:1px solid #222">
-        <h3>Community</h3><p>Events, moderation, onboarding flows.</p>
-      </div>
-      <div class="card" style="border:1px solid #222">
-        <h3>Biz / Legal</h3><p>Partnerships, compliance, grants.</p>
-      </div>
-      <div class="card" style="border:1px solid #222">
-        <h3>Content</h3><p>Video, docs, social campaigns.</p>
+      <div class="card">
+        <b>Phase 3 — Scale</b>
+        <p class="muted">
+          <!-- TODO -->
+          DAO conversion, global presence, Legacy Fund.
+        </p>
+        <span class="pill">Soon</span>
       </div>
     </div>
-    <p style="margin-top:10px"><a class="etsy-btn" href="propose.html">Apply to Contribute →</a></p>
-    <div id="rolesWrap" style="margin-top:10px"></div>
-  </section>
-
-  <!-- ROADMAP -->
-  <section class="card fade-up" id="roadmap">
-    <h2>Roadmap & Funding Targets</h2>
-    <section class="card fade-up" id="roadmap">
-  <h2>Roadmap</h2>
-  <ol>
-    <li><strong>Foundation</strong> — launch the token, create the dashboard,
-        start with first merchants and sign-ups.</li>
-    <li><strong>Adoption</strong> — onboard hundreds of holders, circulate
-        tokens in real-world shops, and grow the referral network.</li>
-    <li><strong>Expansion</strong> — fund first community projects (gardens,
-        co-ops, solar, housing) and track results on the dashboard.</li>
-    <li><strong>Exchange Listings</strong> — raise required liquidity to list
-        7TRB on major exchanges so anyone can buy in.</li>
-    <li><strong>Scale</strong> — thousands of holders, dozens of projects,
-        and regional hubs powered by 7TRB.</li>
-  </ol>
-  <p>
-    Each stage requires <strong>numbers, trust, and consistent participation</strong>.
-    This is not “someday” — it’s a path we build step by step, together.
-  </p>
+  </div>
 </section>
 
-    <p class="fineprint">Live targets load from <code>data/goals.json</code>. Listing budget is tracked publicly.</p>
-    <div id="goalsWrap">
-      <!-- Fallback static (shown if JSON missing) -->
-      <div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><strong>Holders</strong><span>0 / 1,000</span></div><div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden"><i style="display:block;height:100%;background:#FFD700;width:0%"></i></div></div>
-      <div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><strong>Merchants</strong><span>0 / 50</span></div><div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden"><i style="display:block;height:100%;background:#FFD700;width:0%"></i></div></div>
-      <div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><strong>Projects Delivered</strong><span>0 / 3</span></div><div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden"><i style="display:block;height:100%;background:#FFD700;width:0%"></i></div></div>
-      <div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><strong>Exchange Listing Budget (USD)</strong><span>$0 / $50,000</span></div><div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden"><i style="display:block;height:100%;background:#FFD700;width:0%"></i></div></div>
+<!-- CRYPTO 101 -->
+<section id="crypto101" class="section" style="background:#0d0e10">
+  <div class="container">
+    <span class="eyebrow">Crypto 101</span>
+    <h2 class="heading">Start simple. Stay safe.</h2>
+    <div class="grid grid-2" style="margin-top:10px">
+      <div class="card soft">
+        <b>Wallet basics</b>
+        <p class="muted">
+          <!-- TODO: your Wallet 101 content -->
+          Self-custody, seed phrases, hardware wallets, and avoiding scams.
+        </p>
+      </div>
+      <div class="card soft">
+        <b>On-chain mindset</b>
+        <p class="muted">
+          <!-- TODO: your “how to think on-chain” content -->
+          Transparency, fees (gas), and verifying addresses before you sign.
+        </p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section class="card fade-up" id="contact">
-    <h2>Contact</h2>
-    <form action="https://formspree.io/f/yourid" method="POST">
-      <input type="text" name="name" placeholder="Your name" required class="input">
-      <input type="email" name="email" placeholder="you@example.com" required class="input">
-      <textarea name="message" rows="5" placeholder="How can we help?" required class="input"></textarea>
-      <button type="submit" class="etsy-btn">Send</button>
-    </form>
-  </section>
+<!-- HOW TO USE + PARTICIPATION -->
+<section id="howto" class="section">
+  <div class="container grid grid-2">
+    <div class="card">
+      <span class="eyebrow">How to Use 7Tribes</span>
+      <h3 class="heading">Four moves, one loop</h3>
+      <ol class="muted" style="margin-top:6px">
+        <li>Get 7TRB (campaigns or wallet-to-wallet).</li>
+        <li>Circulate it—buy, trade, fund projects inside the tribe.</li>
+        <li>Track your impact in the dashboard.</li>
+        <li>Vote on proposals and reinvestment cycles.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Participation</span>
+      <h3 class="heading">Movement = gains</h3>
+      <p class="muted">
+        Participation is the engine. Every transaction feeds the community pool. Holding alone doesn’t build wealth—movement does. Participation = responsibility.
+      </p>
+    </div>
+  </div>
+</section>
 
-  <footer>© 2025 7Tribes (7TRB) — Community • Unity • Ownership</footer>
+<!-- BUILDERS -->
+<section id="builders" class="section">
+  <div class="container">
+    <span class="eyebrow">Builders Wanted</span>
+    <h2 class="heading">Value isn’t printed — it’s built.</h2>
+    <p class="muted">Pick a lane and help the network move.</p>
+    <div class="divider"></div>
+    <div class="grid builder-grid">
+      <div class="card builder">
+        <h4>Engineering</h4>
+        <p class="muted">Web, automations, smart-contract ops, GitHub pipelines.</p>
+      </div>
+      <div class="card builder">
+        <h4>Design</h4>
+        <p class="muted">Brand, web, motion, UX polish across the experience.</p>
+      </div>
+      <div class="card builder">
+        <h4>Biz / Legal</h4>
+        <p class="muted">Partnerships, compliance, grants, reporting.</p>
+      </div>
+      <div class="card builder">
+        <h4>Content</h4>
+        <p class="muted">Video, docs, social education, campaigns.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Back-to-top -->
-  <button id="toTop" aria-label="Back to top">↑</button>
+<!-- NO DENOMINATIONS / ONLY MOTION -->
+<section id="motion" class="section">
+  <div class="container">
+    <span class="eyebrow">No Denominations • Only Motion</span>
+    <div class="motion card" style="margin-top:10px">
+      <div class="bills" aria-hidden="true"></div>
+      <div class="streams" aria-hidden="true"></div>
+      <div style="position:relative;padding:26px">
+        <h3 class="heading">We’re not stacking bills — we’re growing motion.</h3>
+        <p class="muted">Old money sits in ranks: 1, 5, 10, 20, 50, 100. 7TRB has no classes. Each token is equal—the difference is what you do with it. Gains come from circulation, not inflation.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-  <script>
-  // Safe wallet connect (no MetaMask = no crash)
-  (function () {
-    const MM_INSTALL = "https://metamask.io/download/";
-    function short(a){return a?a.slice(0,6)+"…"+a.slice(-4):"";}
+<!-- TRANSPARENCY / BUSINESS PLAN -->
+<section id="transparency" class="section" style="background:#0d0e10">
+  <div class="container">
+    <span class="eyebrow">Transparency Hub</span>
+    <h2 class="heading">Business plan • Costs • Profit flow • Exits</h2>
+    <p class="muted">Plain numbers first. Charts now. API feeds later.</p>
 
-    window.connectWallet = async function () {
-      try {
-        if (!window.ethereum) { window.open(MM_INSTALL,"_blank","noopener"); return; }
-        const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-        await provider.send("eth_requestAccounts", []);
-        const signer  = provider.getSigner();
-        const address = await signer.getAddress();
-        const wrap = document.querySelector(".wallet-connect");
-        if (wrap) wrap.innerHTML = `✅ Connected: <strong>${short(address)}</strong>`;
-        window.ethereum.on?.("accountsChanged",()=>location.reload());
-        window.ethereum.on?.("chainChanged",()=>location.reload());
-      } catch (e) {
-        console.warn("Wallet connect failed:", e);
-      }
-    };
-    document.addEventListener("DOMContentLoaded", () => {
-      const btn = document.getElementById("connect-btn");
-      if (btn && !window.ethereum) btn.textContent = "Install MetaMask";
-    });
-  })();
-  </script>
+    <div class="grid stat-grid" style="margin-top:14px">
+      <div class="stat">
+        <div class="muted">Community Wallet</div>
+        <div class="k">0x123…789</div>
+        <div class="muted">Live balance feed (coming)</div>
+      </div>
+      <div class="stat">
+        <div class="muted">Fixed Supply</div>
+        <div class="k">1,000,000 7TRB</div>
+        <div class="muted">Equal units. No denominations.</div>
+      </div>
+      <div class="stat">
+        <div class="muted">Reinvestment Pool</div>
+        <div class="k">25%</div>
+        <div class="muted">Locked for growth cycles</div>
+      </div>
+      <div class="stat">
+        <div class="muted">Holders</div>
+        <div class="k">—</div>
+        <div class="muted">Target: 1,000</div>
+      </div>
+    </div>
 
-  <script>
-  // Page interactivity: animations, smooth scroll, back-to-top, theme toggle, join form, goals+roles
-  document.addEventListener('DOMContentLoaded', async () => {
-    // Scroll-in animation
-    const items = document.querySelectorAll('.fade-up');
-    const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
-    items.forEach(el=>io.observe(el));
+    <div class="divider"></div>
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const id=a.getAttribute('href'); if(id && id.length>1){e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'});}
-      });
-    });
+    <!-- Allocation bars -->
+    <h3 class="heading" style="margin-bottom:6px">Cost & Profit Breakdown</h3>
+    <div class="grid alloc" style="gap:14px">
+      <div class="card">
+        <div>Product Creation <span class="muted">(25%)</span></div>
+        <div class="bar" style="margin-top:8px"><span data-pct="25"></span></div>
+        <small class="muted">Merch & digital tools</small>
+      </div>
+      <div class="card">
+        <div>Tech Development <span class="muted">(15%)</span></div>
+        <div class="bar" style="margin-top:8px"><span data-pct="15"></span></div>
+        <small class="muted">Smart contracts, hosting</small>
+      </div>
+      <div class="card">
+        <div>Marketing & Community <span class="muted">(20%)</span></div>
+        <div class="bar" style="margin-top:8px"><span data-pct="20"></span></div>
+        <small class="muted">Creators, ads, growth</small>
+      </div>
+      <div class="card">
+        <div>Reserves / Treasury <span class="muted">(25%)</span></div>
+        <div class="bar" style="margin-top:8px"><span data-pct="25"></span></div>
+        <small class="muted">Liquidity & stability</small>
+      </div>
+      <div class="card">
+        <div>Team & Operations <span class="muted">(15%)</span></div>
+        <div class="bar" style="margin-top:8px"><span data-pct="15"></span></div>
+        <small class="muted">Legal, accounting, admin</small>
+      </div>
+    </div>
 
-    // Back to top (null-safe)
-    const toTop=document.getElementById('toTop');
-    if (toTop){
-      window.addEventListener('scroll',()=>{ if(window.scrollY>400) toTop.classList.add('show'); else toTop.classList.remove('show'); });
-      toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-    }
+    <div class="divider"></div>
 
-    // Theme toggle
-    const key="theme"; const saved=localStorage.getItem(key); if(saved) document.documentElement.setAttribute("data-theme",saved);
-    const tbtn=document.getElementById("theme-toggle");
-    function iconFor(m){return(m==="light")?"🌙":"☀️";}
-    if(tbtn){ const now=document.documentElement.getAttribute("data-theme")||"dark"; tbtn.textContent=iconFor(now);
-      tbtn.addEventListener("click",()=>{const cur=document.documentElement.getAttribute("data-theme")||"dark"; const next=(cur==="light")?"dark":"light"; document.documentElement.setAttribute("data-theme",next); localStorage.setItem(key,next); tbtn.textContent=iconFor(next);});
-    }
+    <!-- Profit Flow -->
+    <div class="grid grid-2">
+      <div class="card">
+        <b>Profit Flow</b>
+        <p class="muted">Treasury 50% • Community 25% • Reinvestment 15% • Team 10%</p>
+      </div>
+      <div class="card">
+        <b>Exit Options</b>
+        <p class="muted">Sell on exchange/P2P • Buyback requests (7–14d, liquidity dependent) • Unstake at preset cycles (rules on-chain)</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Join form (AJAX) + UTM/source tagging
-    const f=document.getElementById('joinForm');
-    f?.addEventListener('submit',async(e)=>{
-      e.preventDefault();
-      const data=new FormData(f);
-      const res=await fetch(f.action,{method:'POST',body:data,headers:{'Accept':'application/json'}});
-      f.reset();
-      alert(res.ok?'✅ Thanks—check your inbox soon.':'⚠️ Submission failed. Try again.');
-    });
-    const params=new URLSearchParams(location.search);
-    document.getElementById('srcField').value = params.get('src')||params.get('utm_source')||'direct';
-    document.getElementById('pathField').value = location.pathname+location.search;
+<!-- DASHBOARD PREVIEW -->
+<section id="dashboard" class="section">
+  <div class="container">
+    <span class="eyebrow">Live Dashboard (Preview)</span>
+    <h2 class="heading">Movement, not promises</h2>
+    <div class="grid grid-3" style="margin-top:10px">
+      <div class="card">
+        <b>Circulation</b>
+        <p class="muted">Snapshot of weekly 7TRB movement across wallets.</p>
+      </div>
+      <div class="card">
+        <b>Treasury</b>
+        <p class="muted">Reserve levels, buybacks, and reinvestment allocations.</p>
+      </div>
+      <div class="card">
+        <b>Community Pool</b>
+        <p class="muted">Grants, rewards, and funded projects.</p>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <a class="btn" href="/dashboard">Open Full Dashboard</a>
+    </div>
+  </div>
+</section>
 
-    // Load goals.json (Roadmap)
-    try{
-      const r = await fetch('data/goals.json',{cache:'no-store'});
-      if(r.ok){
-        const g = await r.json();
-        const wrap = document.getElementById('goalsWrap');
-        function pct(v,goal){const d=(goal?.goal||goal?.stretch||1); return Math.max(0,Math.min(100,Math.round((Number(v||0)/Number(d))*100))); }
-        function row(label, val, goal){
-          const cur = Number(val||0);
-          const tgt = (goal?.goal||goal?.stretch||0);
-          const p = pct(cur, goal);
-          return `
-            <div style="margin:10px 0">
-              <div style="display:flex;justify-content:space-between"><strong>${label}</strong><span>${cur.toLocaleString()} / ${tgt.toLocaleString()}</span></div>
-              <div class="bar" style="height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden">
-                <i style="display:block;height:100%;background:#FFD700;width:${p}%"></i>
-              </div>
-            </div>`;
-        }
-        wrap.innerHTML = [
-          row('Holders', g.holders?.current, g.holders),
-          row('Merchants', g.merchants?.current, g.merchants),
-          row('Projects Delivered', g.projects_delivered?.current, g.projects_delivered),
-          row('Exchange Listing Budget (USD)', g.exchange_listing_usd?.current, g.exchange_listing_usd)
-        ].join('');
-      }
-    }catch(e){ /* fallback stays */ }
+<!-- MERCH (with TikTok CTA) -->
+<section id="merch" class="section" style="background:#0d0e10">
+  <div class="container">
+    <span class="eyebrow">Merch</span>
+    <h2 class="heading">Community-powered gear</h2>
 
-    // Load contributors.json (Builders)
-    try{
-      const r2 = await fetch('data/contributors.json',{cache:'no-store'});
-      if(r2.ok){
-        const d = await r2.json();
-        const roles = d.roles||[];
-        if(roles.length){
-          const out = roles.map(x=>`
-            <div style="border:1px solid #222;border-radius:12px;padding:10px;margin:8px 0;background:#0f0f13">
-              <strong>${x.name}</strong>
-              <div class="fineprint">${x.blurb||''}</div>
-              <div class="fineprint">Needed now: <strong>${x.needed||0}</strong></div>
-            </div>
-          `).join('');
-          document.getElementById('rolesWrap').innerHTML = `
-            <h3 style="margin-top:1rem">Open Roles</h3>
-            ${out}
-          `;
-        }
-      }
-    }catch(e){ /* ignore */ }
-  });
-  </script>
+    <div class="grid grid-3" style="margin-top:10px">
+      <div class="product">
+        <img src="https://via.placeholder.com/640x430.png?text=7TRB+Classic+Tee" alt="7TRB Classic Tee" />
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+          <b>Classic Tee</b><span class="price">$22</span>
+        </div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/640x430.png?text=7TRB+Premium+Hoodie" alt="7TRB Premium Hoodie" />
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+          <b>Premium Hoodie</b><span class="price">$32</span>
+        </div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/640x430.png?text=7TRB+Cap" alt="7TRB Cap" />
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+          <b>Signature Cap</b><span class="price">$18</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <a href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener" class="btn-tiktok">
+        🛍️ Check out Main House’s shop on TikTok!
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container foot">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img class="mini" src="images/logo.png" alt="7TRB logo small" />
+      <div class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+      <a href="#transparency">Transparency</a>
+      <a href="#merch">Merch</a>
+      <a class="tiktok-link" href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
+      <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
