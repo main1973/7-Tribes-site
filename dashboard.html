@@ -72,7 +72,6 @@
 
   <script>
   (async function(){
-     document.getElementById('lastAge').textContent = `Last updated ${hrs.toFixed(1)} hours ago`;
     async function safeJson(u){try{const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw new Error(u+': '+r.status);return r.json()}catch(e){console.warn('Fetch failed:',e);return null}}
 
     const [goals, metrics, merchants] = await Promise.all([
@@ -85,7 +84,7 @@
    const upd=new Date(metrics.updated_at); document.getElementById('updatedAt').textContent=upd.toLocaleString();
     const hrs=(Date.now()-upd.getTime())/36e5; const dot=document.getElementById('freshDot');
     dot.style.background=hrs<=24?'#22c55e':(hrs<=72?'#f59e0b':'#ef4444'); dot.title=`Data age: ${hrs.toFixed(1)}h`;
-
+     document.getElementById('lastAge').textContent = `Last updated ${hrs.toFixed(1)} hours ago`;
     const pct=(v,g)=>{if(!g)return 0;const d=(g.stretch||g.goal||1);return Math.max(0,Math.min(100,Math.round((v/d)*100)))};
     const setBar=(id,p)=>{const el=document.getElementById(id); if(el) el.style.width=p+'%'};
 
