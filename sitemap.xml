@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://main1973.github.io/7-Tribes-site/</loc></url>
-  <url><loc>https://main1973.github.io/7-Tribes-site/dashboard.html</loc></url>
-  <url><loc>https://main1973.github.io/7-Tribes-site/merchants.html</loc></url>
-  <url><loc>https://main1973.github.io/7-Tribes-site/referrals.html</loc></url>
-  <url><loc>https://main1973.github.io/7-Tribes-site/propose.html</loc></url>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://7trb.com/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://7trb.com/learn.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://7trb.com/dashboard.html</loc>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
