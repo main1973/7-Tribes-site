@@ -43,7 +43,7 @@
       Updated <span id="updatedAt">—</span>
       <span id="freshDot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#999;margin-left:8px;vertical-align:middle" title="Data age"></span>
     </p>
-
+    <p id="lastAge" style="color:#888;margin:-10px 0 10px;font-size:.9rem"></p>
     <section class="cards" aria-label="KPIs">
       <div class="card"><div class="label">Holders</div><div class="value" id="holders">—</div><div class="bar"><i id="holdersBar"></i></div></div>
       <div class="card"><div class="label">Active wallets (30d)</div><div class="value" id="active">—</div><div class="label" id="activeNote">rolling 30 days</div></div>
@@ -81,8 +81,8 @@
     ]);
 
     if(!metrics){document.getElementById('updatedAt').textContent='— (awaiting data/metrics.json)';return}
-
-    const upd=new Date(metrics.updated_at); document.getElementById('updatedAt').textContent=upd.toLocaleString();
+    document.getElementById('lastAge').textContent = `Last updated ${hrs.toFixed(1)} hours ago`;
+   const upd=new Date(metrics.updated_at); document.getElementById('updatedAt').textContent=upd.toLocaleString();
     const hrs=(Date.now()-upd.getTime())/36e5; const dot=document.getElementById('freshDot');
     dot.style.background=hrs<=24?'#22c55e':(hrs<=72?'#f59e0b':'#ef4444'); dot.title=`Data age: ${hrs.toFixed(1)}h`;
 
