@@ -4,82 +4,122 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>7Tribes Unity Token (7TRB)</title>
-<meta name="description" content="7Tribes — Community • Unity • Ownership. A people-powered token with transparency, merchants, builders, and real use." />
-<link rel="icon" href="images/logo.png">
+<meta name="description" content="7Tribes — Community • Unity • Ownership. A people-powered token with transparency, builders, and real use." />
+<link rel="icon" href="images/logo.png" />
+
 <style>
   :root{
-    --bg:#0e0f12;
-    --card:#15171d;
-    --card-2:#111318;
-    --ink:#f7f8fa;
-    --muted:#c7c9ce;
-    --gold:#c5a24a;          /* darker gold as requested */
+    --bg:#0d0f12;
+    --panel:#11141a;
+    --panel-2:#0e1015;
+    --ink:#f5f7fb;
+    --muted:#c3c8d4;
+    --line:#242a36;
+    --gold:#b8912f;
+    --gold-2:#8f6e1f;
     --gold-bright:#ffd56b;
-    --line:#242834;
-    --ok:#25F4EE;            /* TikTok cyan */
-    --pop:#FE2C55;           /* TikTok pink */
-    --shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 18px 60px rgba(0,0,0,.45);
-    --radius:16px;
-    --radius-lg:22px;
-    --edge:1px solid rgba(255,255,255,.06);
+    --ok:#25F4EE;        /* TikTok cyan */
+    --pop:#FE2C55;       /* TikTok pink */
+    --radius:18px;
+    --radius-lg:24px;
+    --shadow:0 18px 60px rgba(0,0,0,.45);
   }
+
   *{box-sizing:border-box}
-  html,body{background:var(--bg);color:var(--ink);margin:0;font:16px/1.55 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  img{max-width:100%;display:block}
   a{color:var(--gold-bright);text-decoration:none}
-  .wrap{max-width:1152px;margin:auto;padding:24px}
-  header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(14,15,18,.9),rgba(14,15,18,.6) 70%,transparent);backdrop-filter:saturate(1.1) blur(6px)}
-  nav{display:flex;align-items:center;gap:18px;justify-content:space-between;padding:10px 0}
-  .brand{display:flex;align-items:center;gap:12px}
-  .brand img{width:44px;height:44px;border-radius:50%;object-fit:cover}
-  .brand b{letter-spacing:.6px}
-  .links{display:flex;flex-wrap:wrap;gap:18px}
+  .wrap{max-width:1160px;margin:0 auto;padding:24px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,rgba(13,15,18,.94),rgba(13,15,18,.70),transparent);backdrop-filter:blur(6px);border-bottom:1px solid #171b23}
+  nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px 0}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand img{width:96px;height:96px;object-fit:cover;border-radius:50%;border:1px solid rgba(255,255,255,.08);box-shadow:0 10px 40px rgba(0,0,0,.5)}
+  .brand b{font-size:1.4rem;letter-spacing:.06em}
+  .links{display:flex;flex-wrap:wrap;gap:16px}
   .links a{opacity:.9}
   .links a:hover{opacity:1}
-  .cta{display:flex;gap:10px;flex-wrap:wrap}
-  .btn{border-radius:999px;padding:10px 16px;font-weight:600;border:1px solid transparent;display:inline-flex;align-items:center;gap:8px}
-  .btn.gold{background:linear-gradient(180deg,var(--gold),#9a7f34);color:#0b0c0f;border-color:#caa64f}
-  .btn.ghost{border:1px solid #2a2f3b;background:transparent;color:var(--ink)}
-  .btn.tiktok{background:linear-gradient(90deg,var(--ok),var(--pop));color:#0b0c0f;border:none}
-  .hero{padding:48px 0 24px}
-  .heroCard{background:radial-gradient(1200px 480px at 10% -10%,rgba(197,162,74,.22),transparent 48%), linear-gradient(180deg, #0f1116, #0b0c10);border-radius:var(--radius-lg);border:var(--edge);box-shadow:var(--shadow);padding:28px;display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:center}
-  .hero .logo{width:110px;height:110px;border-radius:50%;background:#0c0d12 url('images/logo.png') center/cover no-repeat;border:1px solid rgba(255,255,255,.08);box-shadow:0 10px 40px rgba(0,0,0,.5)}
-  .hero h1{font-size:clamp(28px,4.4vw,44px);line-height:1.1;margin:0 0 10px}
-  .hero p{color:var(--muted);margin:0 0 18px}
-  .tagline{letter-spacing:.22em;color:#d9bf77;text-transform:uppercase;font-weight:700;font-size:.78rem;margin-bottom:8px}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:10px 16px;border-radius:999px;font-weight:700;border:1px solid transparent}
+  .btn.gold{background:linear-gradient(180deg,var(--gold),var(--gold-2));color:#0a0b0f;border-color:#caa64f}
+  .btn.ghost{border:1px solid #2a2f3b;color:var(--ink)}
+  .btn.tiktok{background:linear-gradient(90deg,var(--ok),var(--pop));color:#0a0b0f;border:none;box-shadow:0 0 20px rgba(254,44,85,.28)}
+  .btn.tiktok:hover{box-shadow:0 0 30px rgba(37,244,238,.48);transform:translateY(-2px)}
+
+  /* Section title with motion lines */
+  .section{padding:70px 0}
+  .title{
+    position:relative;margin:0 0 14px;font-size:clamp(24px,3.2vw,34px);letter-spacing:.02em
+  }
+  .title::before{
+    content:"";position:absolute;left:-16px;right:-16px;top:-26px;height:56px;border-radius:20px;
+    background:
+      repeating-linear-gradient(110deg, rgba(184,145,47,.16) 0 2px, transparent 2px 16px),
+      radial-gradient(1200px 300px at 10% 0%, rgba(184,145,47,.14), transparent 60%);
+    mask:linear-gradient(180deg,transparent,rgba(0,0,0,.9) 15%, rgba(0,0,0,.9) 85%, transparent);
+    animation:flow 9s linear infinite;pointer-events:none
+  }
+  @keyframes flow{to{transform:translateX(180px)}}
+
+  /* Animated gold trim box */
+  .box{
+    position:relative;background:linear-gradient(180deg,var(--panel),var(--panel-2));border-radius:var(--radius-lg);
+    padding:22px;border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow);overflow:hidden
+  }
+  .box::after{
+    content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;
+    background:conic-gradient(from 0deg, rgba(184,145,47,.0), rgba(184,145,47,.55), rgba(184,145,47,.0) 60%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;mask-composite: exclude;
+    animation:spin 8s linear infinite;pointer-events:none;opacity:.65
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .muted{color:var(--muted)}
   .grid{display:grid;gap:18px}
   .two{grid-template-columns:repeat(2,minmax(0,1fr))}
   .three{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .card{background:linear-gradient(180deg,var(--card),var(--card-2));border:var(--edge);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
-  .card h3{margin:0 0 8px;font-size:1.1rem}
-  .card p{margin:0;color:var(--muted)}
-  .divider{height:1px;background:linear-gradient(90deg,transparent,#303542,transparent);margin:28px 0}
-  .section h2{margin:0 0 12px;font-size:clamp(22px,3.2vw,30px)}
-  ul{margin:10px 0 0 18px;color:var(--muted)}
-  li{margin:6px 0}
-  .roadmap .phase{position:relative;padding-bottom:16px}
-  .phase .chip{display:inline-block;border-radius:999px;padding:6px 10px;border:1px solid rgba(255,255,255,.08);color:#c9d0df;background:#12141a}
-  .bar{height:8px;background:#1a1e28;border-radius:999px;overflow:hidden;border:1px solid #2a2f3b}
-  .bar>i{display:block;height:100%;width:var(--pct,25%);background:linear-gradient(90deg,var(--gold),#8d7330)}
-  .motion{position:relative;overflow:hidden}
-  .motion:before{content:"";position:absolute;inset:0;border-radius:var(--radius);background:
-    repeating-linear-gradient(105deg, rgba(197,162,74,.13) 0 2px, transparent 2px 14px);
-    mask:linear-gradient(180deg,transparent,rgba(0,0,0,.9) 16%, rgba(0,0,0,.9) 84%, transparent);
-    animation:flow 8s linear infinite}
-  @keyframes flow{to{transform:translateX(140px)}}
-  .motion h3{margin:0 0 8px}
+  .four{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,#2b3140,transparent);margin:28px 0}
+
+  /* Hero card */
+  .heroCard{display:grid;gap:22px;grid-template-columns:120px 1fr;align-items:center}
+  .heroLogo{width:110px;height:110px;border-radius:50%;background:#0c0d12 url('images/logo.png') center/cover no-repeat;border:1px solid rgba(255,255,255,.08);box-shadow:0 10px 40px rgba(0,0,0,.5)}
+  .tag{letter-spacing:.22em;color:#d9bf77;text-transform:uppercase;font-weight:800;font-size:.78rem}
+  .big{font-size:clamp(26px,3.6vw,42px);line-height:1.2;margin:6px 0 10px}
+
+  /* Mini stats */
   .mini{display:grid;gap:12px;grid-template-columns:repeat(4,minmax(0,1fr))}
-  .mini .stat{padding:14px;border-radius:14px;background:#12141a;border:1px solid #262b36}
-  .stat b{display:block;font-size:1.1rem}
-  .merch .item{display:flex;flex-direction:column;gap:10px}
-  .price{margin-top:auto;color:#dcdfe6;font-weight:700}
-  footer{margin-top:36px;border-top:1px solid #242834;background:#0c0d12}
-  footer .cols{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr));padding:18px 0}
-  footer a{color:#aab2c3}
-  /* responsive */
-  @media (max-width: 860px){
-    .two,.three,.mini{grid-template-columns:1fr}
-    .heroCard{grid-template-columns:80px 1fr}
-    .hero .logo{width:80px;height:80px}
+  .stat{background:#12141a;border:1px solid #252a36;border-radius:16px;padding:14px}
+  .stat b{font-size:1.1rem}
+
+  /* Join the Tribe form */
+  .join-form{display:flex;gap:10px;flex-wrap:wrap}
+  .join-form input{
+    flex:1 1 260px;background:#0f1116;border:1px solid #262c39;border-radius:999px;color:#fff;padding:12px 14px;outline:none
+  }
+
+  /* Back to Top: floating breathing logo */
+  #toTop{
+    position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;
+    background:#0c0d12 url('images/logo.png') center/cover no-repeat;border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 0 0 0 rgba(184,145,47,.45);opacity:0;visibility:hidden;cursor:pointer;z-index:60;
+    transition:opacity .25s, visibility .25s, transform .2s;
+    animation:breath 3.2s ease-in-out infinite;
+  }
+  #toTop:hover{transform:translateY(-2px)}
+  @keyframes breath{
+    0%,100%{box-shadow:0 0 0 0 rgba(184,145,47,.38)}
+    50%{box-shadow:0 0 22px 6px rgba(184,145,47,.28)}
+  }
+  #toTop.show{opacity:1;visibility:visible}
+
+  /* Responsive */
+  @media (max-width:940px){
+    .two,.three,.four,.mini{grid-template-columns:1fr}
+    .brand img{width:76px;height:76px}
+    .heroCard{grid-template-columns:84px 1fr}
+    .heroLogo{width:84px;height:84px}
   }
 </style>
 </head>
@@ -89,18 +129,18 @@
   <div class="wrap">
     <nav>
       <div class="brand">
-        <img src="images/logo.png" alt="7TRB logo">
+        <img src="images/logo.png" alt="7TRB logo" />
         <b>7TRB</b>
       </div>
       <div class="links">
         <a href="#about">About</a>
+        <a href="#purpose">Purpose</a>
         <a href="#roadmap">Roadmap</a>
-        <a href="learn.html">Crypto 101</a>
         <a href="#transparency">Transparency</a>
-        <a href="#merch">Merch</a>
-        <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+        <a href="learn.html">Crypto 101</a>
+        <a href="#join">Join</a>
       </div>
-      <div class="cta">
+      <div>
         <a class="btn tiktok" href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
       </div>
     </nav>
@@ -108,217 +148,232 @@
 </header>
 
 <main class="wrap">
-  <!-- HERO -->
-  <section class="hero">
-    <div class="heroCard">
-      <div class="logo" aria-hidden="true"></div>
-      <div>
-        <div class="tagline">COMMUNITY • UNITY • OWNERSHIP</div>
-        <h1>7Tribes Unity Token (7TRB)</h1>
-        <p>We’re building a community-owned economy. <b>No denominations, only motion.</b> Value grows when we build, spend, and reinvest together.</p>
-        <div class="cta">
-          <a class="btn gold" href="#plan">View the Plan</a>
-          <a class="btn ghost" href="#builders">Become a Builder</a>
-          <a class="btn ghost" href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Join Telegram</a>
+
+  <!-- HERO: No Denominations / Only Motion -->
+  <section class="section" id="motion">
+    <h2 class="title">No Denominations • Only Motion</h2>
+    <div class="box">
+      <div class="heroCard">
+        <div class="heroLogo" aria-hidden="true"></div>
+        <div>
+          <div class="tag">COMMUNITY • UNITY • OWNERSHIP</div>
+          <h1 class="big">We’re not stacking bills — we’re growing motion.</h1>
+          <p class="muted">Old money sits in ranks: 1, 5, 10, 20, 50, 100. 7TRB has no classes. Each token is equal — the difference is what you do with it. Gains come from circulation, not inflation.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+            <a class="btn gold" href="#transparency">View the Plan</a>
+            <a class="btn ghost" href="#builders">Become a Builder</a>
+          </div>
         </div>
+      </div>
+
+      <div class="mini" style="margin-top:16px">
+        <div class="stat"><span class="muted">Active wallets (30d)</span><b>—</b></div>
+        <div class="stat"><span class="muted">Transactions (30d)</span><b>—</b></div>
+        <div class="stat"><span class="muted">Merchants</span><b>—</b></div>
+        <div class="stat"><span class="muted">Reinvestment pool</span><b>25%</b></div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <div class="divider"></div>
-  <section id="about" class="section">
-    <h2>About 7Tribes</h2>
-    <div class="grid two">
-      <article class="card">
-        <h3>Redirecting the flow</h3>
-        <p>7Tribes channels value back into the people who create it—circulating locally, funding projects, and growing together.</p>
+  <section class="section" id="about">
+    <h2 class="title">About 7Tribes (7TRB)</h2>
+    <div class="box">
+      <p class="muted">
+        7Tribes isn't just a token - it's a blueprint for independence. It was created with one goal: redirect the flow of money back into the people's hands. Instead of watching wealth leak out into banks, corporations, and gatekeepers, 7TRB keeps value moving inside the community that built it
+      </p>
+    </div>
+
+    <div class="grid two" style="margin-top:18px">
+      <article class="box">
+        <h3 style="margin-top:0">Why the Name "7Tribes"?</h3>
+        <p class="muted">
+          The number 7 represents completion, unity, and power across cultures. Tribes are about people - families, builders, hustlers, farmers, creators - all moving as one. Together, 7Tribes means many individuals forming one unstoppable collective.
+        </p>
       </article>
-      <article class="card">
-        <h3>Why the name matters</h3>
-        <p>Seven as structure and rhythm—seven days, continents, colors—designed for unity across difference.</p>
+      <article class="box">
+        <h3 style="margin-top:0">Why People Matter</h3>
+        <p class="muted" style="margin:0 0 8px">A token without people is just code on a blockchain. 7Tribes works only if people join, participate, and take responsibility. That means:</p>
+        <ul class="muted" style="margin:0 0 0 18px">
+          <li>Holding some 7TRB for the future.</li>
+          <li>Spending some with merchants to grow the local economy</li>
+          <li>Bringing in new voices - every sign-up strengthens the network.</li>
+          <li>Voting on projects and proposals that matter most.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="box" style="margin-top:18px">
+      <h3 style="margin-top:0">What 7Tribes Can Unlock</h3>
+      <p class="muted">Imagine the power of thousands of wallets linked together:</p>
+      <!-- If you have bullets for this, paste below -->
+    </div>
+  </section>
+
+  <!-- PURPOSE -->
+  <section class="section" id="purpose">
+    <h2 class="title">Our Purpose</h2>
+    <div class="box">
+      <p class="muted" style="margin:0 0 8px">
+        7Tribes isn't iust a token-it's a contract petween people. Every trade, every shirt bought every coin held feeds the community, not billionaires. We make decisions together and recycle value into local projects.
+      </p>
+      <ul class="muted" style="margin:0 0 0 18px">
+        <li><b>Redirect the flow:</b> from corporations -> to neighbors, merchants, and builders.</li>
+        <li><b>Turn believers into builders:</b> propose work, vote budgets, show receipts.</li>
+        <li><b>Unity = power:</b> people -> token -> projects -> growth -> stronger people.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- POSSIBILITIES -->
+  <section class="section" id="possibilities">
+    <h2 class="title">Possibilities with 7Tribes</h2>
+    <div class="box">
+      <p class="muted" style="margin:0 0 8px">
+        The power of 7TRB is not in the code, but in the choices people make with it. The more we circulate it, the more doors open:
+      </p>
+      <ul class="muted" style="margin:0 0 0 18px">
+        <li><b>Local Wealth</b> - 7TRB spent at local shops stays in the neighborhood</li>
+        <li><b>Community Projects</b> - schools, gardens solar grids, housing, all funded transparently from shared wallets.</li>
+        <li><b>Jobs</b> - developers, artists, marketers and workers paid directly in 7TRB</li>
+        <li><b>Global Links</b> - a svstem designed here, usable anywhere, connecting communities across borders.</li>
+      </ul>
+      <p class="muted" style="margin-top:8px">The bigger the tribe, the stronger the effect</p>
+    </div>
+  </section>
+
+  <!-- ROADMAP (fill exact text later if you want) -->
+  <section class="section" id="roadmap">
+    <h2 class="title">Roadmap</h2>
+    <div class="grid three">
+      <article class="box">
+        <h3 style="margin:0 0 6px">Phase 1 — Infrastructure</h3>
+        <p class="muted"><!-- TODO: paste your exact Phase 1 text here --></p>
+      </article>
+      <article class="box">
+        <h3 style="margin:0 0 6px">Phase 2 — Community</h3>
+        <p class="muted"><!-- TODO: paste your exact Phase 2 text here --></p>
+      </article>
+      <article class="box">
+        <h3 style="margin:0 0 6px">Phase 3 — Scale</h3>
+        <p class="muted"><!-- TODO: paste your exact Phase 3 text here --></p>
+      </article>
+    </div>
+    <div class="grid two" style="margin-top:18px">
+      <article class="box">
+        <h3 style="margin:0 0 6px">Phase 4 — Global Presence</h3>
+        <p class="muted"><!-- TODO: paste your Phase 4 text --></p>
+      </article>
+      <article class="box">
+        <h3 style="margin:0 0 6px">Phase 5 — Legacy Fund</h3>
+        <p class="muted"><!-- TODO: paste your Phase 5 text --></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- TRANSPARENCY HUB (token info stays here) -->
+  <section class="section" id="transparency">
+    <h2 class="title">Transparency Hub</h2>
+    <div class="grid two">
+      <article class="box">
+        <h3 style="margin-top:0">Token & Supply</h3>
+        <p class="muted">
+          <!-- TODO: paste your exact token details (supply, chain, contract link) -->
+          <!-- Example: Fixed Supply: 1,000,000 7TRB • Chain: Ethereum • Contract: <a href="#">0x…</a> -->
+        </p>
+      </article>
+      <article class="box">
+        <h3 style="margin-top:0">Cost & Profit Breakdown</h3>
+        <p class="muted">Product 25% • Tech 15% • Marketing 20% • Treasury 25% • Team 15%</p>
+        <p class="muted">Profit Flow: Treasury 50% • Community 25% • Reinvestment 15% • Team 10%</p>
       </article>
     </div>
 
     <div class="grid two" style="margin-top:18px">
-      <article class="card">
-        <h3>Why People Matter</h3>
-        <ul>
-          <li><b>Hold</b> some 7TRB for the future.</li>
-          <li><b>Spend</b> with merchants to grow the local economy.</li>
-          <li><b>Bring new voices</b>—every sign-up strengthens the network.</li>
-          <li><b>Vote</b> on projects and proposals that matter most.</li>
-        </ul>
+      <article class="box">
+        <h3 style="margin-top:0">Exit Options</h3>
+        <p class="muted">Sell on exchange/P2P • Buyback requests (7–14d, liquidity dependent) • Unstake at preset cycles (rules on-chain)</p>
       </article>
-      <article class="card">
-        <h3>What 7Tribes Can Unlock</h3>
-        <ul>
-          <li>Community projects—gardens, solar, housing.</li>
-          <li>Jobs for creators, devs, marketers, shop owners.</li>
-          <li>Transparent tools and a public dashboard.</li>
-          <li>Links across cities and borders.</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- PURPOSE & POSSIBILITIES -->
-  <div class="divider"></div>
-  <section class="section">
-    <h2>Purpose & Possibilities</h2>
-    <div class="grid two">
-      <article class="card">
-        <h3>What we exist to do</h3>
-        <p>Build transparent systems so everyday work turns into shared wealth.</p>
-        <ul>
-          <li><b>Redirect the flow:</b> from corporations → neighbors, merchants, builders.</li>
-          <li><b>Believers → builders:</b> propose work, vote budgets, show receipts.</li>
-          <li><b>Unity = power:</b> people → token → projects → growth → stronger people.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>What becomes possible</h3>
-        <p>Local merchants, shared tools, funded dreams—measured on a public dashboard. The bigger the tribe, the stronger the effect.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ROADMAP -->
-  <div class="divider" id="roadmap"></div>
-  <section class="section roadmap">
-    <h2>From proof to scale</h2>
-    <div class="grid three">
-      <article class="card phase">
-        <span class="chip">Phase 1 — Infrastructure</span>
-        <p>Publish transparency, launch site, seed partners.</p>
-      </article>
-      <article class="card phase">
-        <span class="chip">Phase 2 — Community</span>
-        <p>Onboard holders, merchants, creators. Monthly reports.</p>
-      </article>
-      <article class="card phase">
-        <span class="chip">Phase 3 — Scale</span>
-        <p>DAO conversion, global presence, Legacy Fund.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- HOW TO + PARTICIPATION -->
-  <div class="divider"></div>
-  <section class="section" id="howto">
-    <div class="grid two">
-      <article class="card">
-        <h3>How to Use 7TRB — four moves, one loop</h3>
-        <ol style="margin:8px 0 0 20px;color:var(--muted)">
-          <li>Get 7TRB (campaigns or wallet-to-wallet).</li>
-          <li>Circulate it—buy, trade, fund projects inside the tribe.</li>
-          <li>Track your impact in the dashboard.</li>
-          <li>Vote on proposals and reinvestment cycles.</li>
-        </ol>
-      </article>
-      <article class="card">
-        <h3>Participation = gains</h3>
-        <p>Participation is the engine. Every transaction feeds the community pool. Holding alone doesn’t build wealth—<b>movement</b> does.</p>
-        <p style="margin-top:8px">Everyone has a lane: <b>Investors</b>, <b>Spenders</b>, <b>Builders</b>, <b>Connectors</b>, and <b>Voters</b>.</p>
+      <article class="box">
+        <h3 style="margin-top:0">Live Dashboard</h3>
+        <p class="muted">Circulation • Treasury • Community Pool</p>
+        <a class="btn gold" href="dashboard.html">Open Full Dashboard</a>
       </article>
     </div>
   </section>
 
   <!-- BUILDERS -->
-  <div class="divider" id="builders"></div>
-  <section class="section">
-    <h2>Builders Wanted</h2>
-    <p class="muted">We need committed people, not spectators. Pick a lane and help the network move.</p>
-    <div class="grid four three" style="margin-top:12px">
-      <article class="card"><h3>Engineering</h3><p>Web, automations, smart-contract ops, GitHub pipelines.</p></article>
-      <article class="card"><h3>Design</h3><p>Brand, web, motion, UX polish across the experience.</p></article>
-      <article class="card"><h3>Biz / Legal</h3><p>Partnerships, compliance, grants, reporting.</p></article>
-      <article class="card"><h3>Content</h3><p>Video, docs, social education, campaigns.</p></article>
-    </div>
-    <div style="margin-top:12px" class="cta">
-      <a class="btn gold" href="propose.html">Apply to Contribute →</a>
-    </div>
-  </section>
-
-  <!-- NO DENOMINATIONS -->
-  <div class="divider"></div>
-  <section class="section">
-    <div class="card motion">
-      <h3>We’re not stacking bills — we’re growing motion.</h3>
-      <p class="muted">Old money sits in ranks: 1, 5, 10, 20, 50, 100. 7TRB has no classes. Each token is equal— the difference is what you do with it. <b>Gains come from circulation, not inflation.</b></p>
-      <div class="grid mini" style="margin-top:14px">
-        <div class="stat"><span>Active wallets (30d)</span><b>—</b></div>
-        <div class="stat"><span>Transactions (30d)</span><b>—</b></div>
-        <div class="stat"><span>Merchants</span><b>—</b></div>
-        <div class="stat"><span>Reinvestment pool</span><b>25%</b></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRANSPARENCY -->
-  <div class="divider" id="transparency"></div>
-  <section class="section" id="plan">
-    <h2>Transparency Hub (Preview)</h2>
-    <p class="muted">Plain numbers first. Charts now; live API feeds later.</p>
-    <div class="grid four three" style="margin-top:10px">
-      <article class="card"><h3>Community Wallet</h3><p><code>0x123…789</code><br><span class="muted">Live balance feed (coming)</span></p></article>
-      <article class="card"><h3>Fixed Supply</h3><p><b>1,000,000 7TRB</b><br><span class="muted">Equal units. No denominations.</span></p></article>
-      <article class="card"><h3>Reinvestment Pool</h3><p><b>25%</b><br><span class="muted">Locked for growth cycles.</span></p></article>
-      <article class="card"><h3>Holders</h3><p><span class="muted">Target 1,000</span></p></article>
-    </div>
-
-    <div class="grid four three" style="margin-top:12px">
-      <article class="card"><h3>Product Creation (25%)</h3><div class="bar" style="--pct:25%"><i></i></div><p class="muted">Merch & digital tools</p></article>
-      <article class="card"><h3>Tech Development (15%)</h3><div class="bar" style="--pct:15%"><i></i></div><p class="muted">Smart contracts, hosting</p></article>
-      <article class="card"><h3>Marketing & Community (20%)</h3><div class="bar" style="--pct:20%"><i></i></div><p class="muted">Creators, ads, growth</p></article>
-      <article class="card"><h3>Reserves / Treasury (25%)</h3><div class="bar" style="--pct:25%"><i></i></div><p class="muted">Liquidity & stability</p></article>
-      <article class="card"><h3>Team & Operations (15%)</h3><div class="bar" style="--pct:15%"><i></i></div><p class="muted">Legal, accounting, admin</p></article>
-    </div>
-
-    <div class="grid two" style="margin-top:12px">
-      <article class="card"><h3>Profit Flow</h3><p class="muted">Treasury 50% • Community 25% • Reinvestment 15% • Team 10%</p></article>
-      <article class="card"><h3>Exit Options</h3><p class="muted">Sell on exchange/P2P • Buyback requests (7–14d, liquidity dependent) • Unstake at preset cycles (rules on-chain)</p></article>
-    </div>
-
-    <div class="card" style="margin-top:12px">
-      <h3>Live Dashboard</h3>
-      <p class="muted">Circulation snapshot • Treasury • Community Pool.</p>
-      <a class="btn gold" href="dashboard.html">Open Full Dashboard</a>
+  <section class="section" id="builders">
+    <h2 class="title">Builders Wanted</h2>
+    <div class="grid four">
+      <article class="box"><h3 style="margin-top:0">Engineering</h3><p class="muted">Web, automations, smart-contract ops, GitHub pipelines.</p></article>
+      <article class="box"><h3 style="margin-top:0">Design</h3><p class="muted">Brand, web, motion, UX polish across the experience.</p></article>
+      <article class="box"><h3 style="margin-top:0">Biz / Legal</h3><p class="muted">Partnerships, compliance, grants, reporting.</p></article>
+      <article class="box"><h3 style="margin-top:0">Content</h3><p class="muted">Video, docs, social education, campaigns.</p></article>
     </div>
   </section>
 
   <!-- MERCH -->
-  <div class="divider" id="merch"></div>
-  <section class="section merch">
-    <h2>Community-powered gear</h2>
-    <div class="grid three" style="margin-top:12px">
-      <article class="card item">
-        <h3>Classic Tee</h3><p class="muted">7TRB Classic Tee</p><div class="price">$22</div>
-      </article>
-      <article class="card item">
-        <h3>Premium Hoodie</h3><p class="muted">7TRB Premium Hoodie</p><div class="price">$32</div>
-      </article>
-      <article class="card item">
-        <h3>Signature Cap</h3><p class="muted">7TRB Cap</p><div class="price">$18</div>
-      </article>
-    </div>
-    <div class="cta" style="margin-top:14px">
+  <section class="section" id="merch">
+    <h2 class="title">Community-powered gear</h2>
+    <div class="box">
+      <p class="muted" style="margin:0 0 10px">Rep the movement. Every purchase fuels builders and projects.</p>
       <a class="btn tiktok" href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener">🛍️ Check out Main House’s shop on TikTok!</a>
     </div>
   </section>
+
+  <!-- JOIN THE TRIBE -->
+  <section class="section" id="join">
+    <h2 class="title">Join the Tribe</h2>
+    <div class="box">
+      <p class="muted" style="margin-top:0">Get updates, drops, and builder calls.</p>
+      <form class="join-form" action="mailto:info@7trb.com" method="post" enctype="text/plain">
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <button class="btn gold" type="submit">Get Email Updates</button>
+      </form>
+      <div style="margin-top:12px">
+        <a class="btn tiktok" href="https://chat.whatsapp.com/FSrGZMxoqsD7C4bO6lKn34" target="_blank" rel="noopener">Join the WhatsApp Group</a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    <div class="cols">
-      <div>
-        <b>7Tribes</b><br/><span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
-      </div>
-      <div><a href="dashboard.html">Transparency</a> • <a href="#merch">Merch</a> • <a href="learn.html">Crypto 101</a></div>
-      <div><a href="https://github.com/main1973/7" target="_blank" rel="noopener">GitHub</a> • <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a></div>
+<footer style="border-top:1px solid var(--line);background:#0b0d12">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img src="images/logo.png" alt="7TRB small" style="width:36px;height:36px;border-radius:50%" />
+      <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a href="learn.html">Crypto 101</a>
+      <a href="#transparency">Transparency</a>
+      <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
     </div>
   </div>
 </footer>
+
+<!-- Back to Top button -->
+<button id="toTop" aria-label="Back to top"></button>
+
+<script>
+  // Smooth scroll for same-page anchors
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href^="#"]');
+    if(!a) return;
+    const id=a.getAttribute('href');
+    const el=document.querySelector(id);
+    if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+  });
+
+  // Back to top show/hide + smooth scroll
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) toTop.classList.add('show'); else toTop.classList.remove('show');
+  });
+  toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+</script>
 
 </body>
 </html>
