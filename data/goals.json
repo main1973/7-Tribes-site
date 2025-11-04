@@ -1,17 +1,4 @@
 {
-  "holders": {
-    "floor": 500,
-    "goal": 1000,
-    "stretch": 2000
-  },
-  "treasury_usd": {
-    "floor": 5000,
-    "goal": 20000,
-    "stretch": 50000
-  },
-  "merchants": {
-    "floor": 5,
-    "goal": 15,
-    "stretch": 30
-  }
+  "holders": { "goal": 1000 },
+  "treasury_usd": { "goal": 50000 }
 }
