@@ -1,5 +1,5 @@
 {
-  "updated_at": "2025-11-04T00:00:00Z",
+  "updated_at": "2025-11-05T05:30:38Z",
   "holders": 0,
   "active_wallets_30d": 0,
   "treasury_usd": 0,
@@ -11,8 +11,17 @@
     "delivered": 0
   },
   "treasury_series": [
-    ["Oct", 0],
-    ["Nov", 0],
-    ["Dec", 0]
+    [
+      "Oct",
+      0
+    ],
+    [
+      "Nov",
+      0
+    ],
+    [
+      "Dec",
+      0
+    ]
   ]
 }
