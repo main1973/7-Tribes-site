@@ -1,3 +1,7 @@
+console.log("wallet.js loaded ✅");
+
+// Load Web3Modal and Ethers from CDN dynamically
+(async function() {
 // Load Web3Modal and Ethers from CDN dynamically
 (async function() {
   // Dynamically load the required scripts if not already loaded
