@@ -79,11 +79,12 @@
   <script>
   (async function(){
     async function safeJson(u){try{const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw new Error(u+': '+r.status);return r.json()}catch(e){console.warn('Fetch failed:',e);return null}}
-
-    const [goals, metrics, merchants] = await Promise.all([
-      safeJson('data/goals.json'),
-      safeJson('data/metrics.json'),
-      safeJson('data/merchants.json')
+   const [goals, metrics, merchants, referrals] = await Promise.all([
+  safeJson('data/goals.json'),
+  safeJson('data/metrics.json'),
+  safeJson('data/merchants.json'),
+  safeJson('data/referrals.json')
+])
     ]);
 
     if(!metrics){document.getElementById('updatedAt').textContent='— (awaiting data/metrics.json)';return}
