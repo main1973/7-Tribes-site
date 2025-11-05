@@ -104,16 +104,18 @@
 setBar('holdersBar', pct(metrics.holders??0, goals&&goals.holders));
 
 document.getElementById('active').textContent=(metrics.active_wallets_30d??0).toLocaleString();
-document.getElementById('holders').textContent=(metrics.holders??0).toLocaleString();
-setBar('holdersBar', pct(metrics.holders??0, goals&&goals.holders));
+document.getElementById('holders').textContent = (metrics.holders ?? 0).toLocaleString();
+setBar('holdersBar', pct(metrics.holders ?? 0, goals && goals.holders));
 
-document.getElementById('active').textContent=(metrics.active_wallets_30d??0).toLocaleString();
+document.getElementById('active').textContent = (metrics.active_wallets_30d ?? 0).toLocaleString();
 
+// new referrals card update
 if (referrals && referrals.total !== undefined) {
   document.getElementById('referrals').textContent = referrals.total.toLocaleString();
 } else {
   document.getElementById('referrals').textContent = 0;
 }
+
 t='$'+tUSD.toLocaleString(); 
     setBar('treasuryBar', pct(tUSD, goals&&goals.treasury_usd));
 
