@@ -713,6 +713,9 @@
 </div>
     <div style="display:flex;align-items:center;gap:10px">
       <img src="images/logo.png" alt="7TRB small" style="width:36px;height:36px;border-radius:50%" />
+      <img src="images/icon-192.png" 
+     alt="7TRB Footer Icon" 
+     style="width:60px;height:60px;border-radius:50%;margin-right:8px;box-shadow:0 0 15px rgba(255,215,0,0.3)">
       <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
     </div>
     <div style="display:flex;gap:14px;flex-wrap:wrap">
@@ -720,6 +723,27 @@
       <a href="#transparency">Transparency</a>
       <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
       <a href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
+         footer {
+  position: relative;
+  background: radial-gradient(circle at center, rgba(255,215,0,0.08), #0b0d12 80%);
+  border-top: 1px solid rgba(255,215,0,0.25);
+  box-shadow: 0 -4px 25px rgba(255,215,0,0.1);
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,215,0,0.06), transparent 70%);
+  opacity: 0.6;
+  animation: footerGlow 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes footerGlow {
+  0%,100% {opacity:0.4;}
+  50% {opacity:0.8;}
+} 
     </div>
   </div>
 </footer>
