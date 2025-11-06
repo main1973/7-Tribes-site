@@ -147,7 +147,28 @@
   .two{grid-template-columns:repeat(2,minmax(0,1fr))}
   .three{grid-template-columns:repeat(3,minmax(0,1fr))}
   .four{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .divider{height:1px;background:linear-gradient(90deg,transparent,#2b3140,transparent);margin:28px 0}
+  .divider {
+  height: 2px;
+  margin: 40px auto;
+  width: 80%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,215,0,0.4),
+    rgba(255,215,0,0.7),
+    rgba(255,215,0,0.4),
+    transparent
+  );
+  box-shadow: 0 0 15px rgba(255,215,0,0.2);
+  animation: divideGlow 8s ease-in-out infinite;
+}
+
+@keyframes divideGlow {
+  0%,100% {opacity:0.8; box-shadow:0 0 15px rgba(255,215,0,0.2);}
+  50% {opacity:1; box-shadow:0 0 25px rgba(255,215,0,0.4);}
+}
+
 
   /* Hero card */
   .heroCard{display:grid;gap:22px;grid-template-columns:120px 1fr;align-items:center}
