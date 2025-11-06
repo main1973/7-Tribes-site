@@ -209,6 +209,27 @@
     .heroCard{grid-template-columns:84px 1fr}
     .heroLogo{width:84px;height:84px}
   }
+             footer {
+  position: relative;
+  background: radial-gradient(circle at center, rgba(255,215,0,0.08), #0b0d12 80%);
+  border-top: 1px solid rgba(255,215,0,0.25);
+  box-shadow: 0 -4px 25px rgba(255,215,0,0.1);
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,215,0,0.06), transparent 70%);
+  opacity: 0.6;
+  animation: footerGlow 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes footerGlow {
+  0%,100% {opacity:0.4;}
+  50% {opacity:0.8;}
+}
 </style>
 </head>
 <body>
@@ -707,27 +728,6 @@
 </main>
 
 <footer style="border-top:1px solid var(--line);background:#0b0d12">
-           footer {
-  position: relative;
-  background: radial-gradient(circle at center, rgba(255,215,0,0.08), #0b0d12 80%);
-  border-top: 1px solid rgba(255,215,0,0.25);
-  box-shadow: 0 -4px 25px rgba(255,215,0,0.1);
-}
-
-footer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(255,215,0,0.06), transparent 70%);
-  opacity: 0.6;
-  animation: footerGlow 8s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes footerGlow {
-  0%,100% {opacity:0.4;}
-  50% {opacity:0.8;}
-}
   <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
     <div style="margin-top:12px;text-align:center">
   <img src="https://visitor-badge.laobi.icu/badge?page_id=7trb.com&left_color=gold&right_color=black&left_text=Visitors" alt="7TRB visitor count" />
