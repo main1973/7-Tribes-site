@@ -1,257 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) — keep your GA4 ID -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-3ENCBC9RT3');
-  </script>
-
   <meta charset="utf-8" />
-  <script>
-  // redirect if dashboard tries to load as homepage
-  if (window.location.pathname === '/' || window.location.pathname === '/dashboard.html') {
-    const ref = document.referrer || '';
-    if (!ref.includes('index.html')) {
-      window.location.href = 'index.html';
-    }
-  }
-</script>
-  <script>
-  if (window.top !== window.self) {
-    window.top.location = window.location.href;
-  }
-</script>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>7Tribes — Live Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7Tribes — Community Metrics Dashboard</title>
   <link rel="icon" href="images/logo.png" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Force open as its own page -->
+  <script>
+    if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
+      window.location.href = "index.html";
+    }
+  </script>
 
   <style>
-    :root{
-      --bg:#0b0b0c;--card:#121214;--text:#eaeaea;--muted:#a1a1a6;
-      --accent:#FFD700;--border:#222
+    body {
+      margin: 0;
+      background: #0b0b0c;
+      color: #f5f7fb;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      text-align: center;
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif}
-    .wrap{max-width:1080px;margin:auto;padding:20px}
-    .cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px}
-    .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-    .value{font-size:28px;font-weight:800}
-    .bar{height:10px;background:#1a1a1d;border-radius:999px;overflow:hidden;margin-top:8px}
-    .bar>i{display:block;height:100%;background:var(--accent);width:0%}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-    table{width:100%;border-collapse:collapse;font-size:14px}
-    th,td{padding:10px;border-bottom:1px solid var(--border)}
-    th{text-align:left;color:var(--muted)}
-    a{color:var(--accent);text-decoration:none}
-    @media (max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}}
-    @media (max-width:900px){.cards{grid-template-columns:repeat(2,1fr)} .grid{grid-template-columns:1fr}}
+    header {
+      background: #11141a;
+      padding: 20px;
+      border-bottom: 1px solid #222;
+    }
+    header h1 {
+      color: #FFD700;
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    a.back {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 8px;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: linear-gradient(180deg,#11141a,#0e1015);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+    }
+    .metric {
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 12px;
+      background: #12141a;
+      border: 1px solid #2b2f3b;
+    }
+    .metric h3 {
+      color: #FFD700;
+      margin: 0 0 8px;
+    }
   </style>
 </head>
+
 <body>
-  <button id="connectBtn" style="
-   <div id="walletBalance" style="margin-top:10px;color:#FFD700;font-weight:600;">
-  <!-- 7TRB balance will appear here -->
-</div> 
-  position:fixed;right:20px;top:20px;
-  background:#FFD700;color:#111;
-  font-weight:700;border:none;
-  padding:10px 18px;border-radius:30px;
-  cursor:pointer;box-shadow:0 0 12px rgba(255,215,0,.3);z-index:50;">
-  Connect Wallet
-  </button>
-  <div class="wrap">
-    <div style="display:flex;align-items:center;gap:10px;justify-content:space-between">
-      <h1 style="margin:0">7Tribes — Live Transparency</h1>
-      <a href="index.html">← Back</a>
+  <header>
+    <h1>7Tribes — Live Community Metrics</h1>
+    <a href="index.html" class="back">← Back to Main Site</a>
+  </header>
+
+  <main>
+    <div class="metric">
+      <h3>Active Wallets (30d)</h3>
+      <p id="activeWallets">—</p>
     </div>
-
-    <p style="color:#a1a1a6;margin:.3rem 0 .4rem">
-      Updated <span id="updatedAt">—</span>
-      <span id="freshDot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#999;margin-left:8px;vertical-align:middle" title="Data age"></span>
-    </p>
-    <p id="lastAge" style="color:#888;margin:-6px 0 12px;font-size:.9rem"></p>
-
-    <!-- KPI CARDS -->
-    <section class="cards" aria-label="KPIs">
-      <div class="card">
-        <div class="label">Holders</div>
-        <div class="value" id="holders">—</div>
-        <div class="bar"><i id="holdersBar"></i></div>
-      </div>
-
-      <div class="card">
-        <div class="label">Active wallets (30d)</div>
-        <div class="value" id="active">—</div>
-        <div class="label">rolling 30 days</div>
-      </div>
-
-      <div class="card">
-        <div class="label">Treasury (USD)</div>
-        <div class="value" id="treasury">—</div>
-        <div class="bar"><i id="treasuryBar"></i></div>
-      </div>
-
-      <div class="card">
-        <div class="label">Spend vs Save (30d)</div>
-        <div class="value" id="spendSave">—</div>
-        <div class="bar"><i id="spendBar"></i></div>
-      </div>
-
-      <div class="card">
-        <div class="label">Referrals (30d)</div>
-        <div class="value" id="referrals">—</div>
-        <div class="label" id="referralsNote">verified sign-ups</div>
-      </div>
-    </section>
-
-    <!-- CHART + PROJECTS -->
-    <div class="grid">
-      <section class="card">
-        <div class="label" style="margin-bottom:6px">Treasury trend</div>
-        <canvas id="treasuryChart" height="140" aria-label="Treasury time series"></canvas>
-      </section>
-
-      <section class="card">
-        <div class="label" style="margin-bottom:6px">Projects pipeline</div>
-        <table>
-          <thead><tr><th>Status</th><th>Count</th></tr></thead>
-          <tbody id="projRows"></tbody>
-        </table>
-      </section>
+    <div class="metric">
+      <h3>Treasury Balance (USD)</h3>
+      <p id="treasuryBalance">—</p>
     </div>
-
-    <!-- MERCHANTS -->
-    <section class="card" style="margin-top:12px">
-      <div class="label" style="margin-bottom:6px">Merchant directory</div>
-      <table>
-        <thead><tr><th>Name</th><th>City</th><th>Since</th><th>Monthly 7TRB</th></tr></thead>
-        <tbody id="merchRows"></tbody>
-      </table>
-      <p style="margin-top:10px"><a href="merchants.html">View all merchants →</a></p>
-    </section>
-  </div>
+    <div class="metric">
+      <h3>Community Projects</h3>
+      <p id="communityProjects">—</p>
+    </div>
+    <div class="metric">
+      <h3>Verified Merchants</h3>
+      <p id="merchantCount">—</p>
+    </div>
+  </main>
 
   <script>
-  (async function(){
-    // helper to fetch JSON safely (no crash on 404)
-    async function safeJson(u){
-      try{
-        const r = await fetch(u,{cache:'no-store'});
-        if(!r.ok) throw new Error(u+': '+r.status);
-        return r.json();
-      }catch(e){
-        console.warn('Fetch failed:', e);
-        return null;
-      }
-    }
-
-    // load all data files
-    const [goals, metrics, merchants, referrals] = await Promise.all([
-      safeJson('data/goals.json'),
-      safeJson('data/metrics.json'),
-      safeJson('data/merchants.json'),
-      safeJson('data/referrals.json')
-    ]);
-
-    // no metrics? show hint and stop
-    if(!metrics){
-      document.getElementById('updatedAt').textContent = '— (awaiting data/metrics.json)';
-      return;
-    }
-
-    // timestamp + freshness
-    const upd = new Date(metrics.updated_at);
-    document.getElementById('updatedAt').textContent = upd.toLocaleString();
-    const hrs = (Date.now() - upd.getTime()) / 36e5;
-    const dot = document.getElementById('freshDot');
-    dot.style.background = hrs <= 24 ? '#22c55e' : (hrs <= 72 ? '#f59e0b' : '#ef4444');
-    dot.title = `Data age: ${hrs.toFixed(1)}h`;
-    document.getElementById('lastAge').textContent = `Last updated ${hrs.toFixed(1)} hours ago`;
-
-    // progress helpers
-    const pct = (v,g)=>{ if(!g) return 0; const d=(g.stretch||g.goal||1);
-      return Math.max(0,Math.min(100,Math.round((v/d)*100))); };
-    const setBar = (id,p)=>{ const el=document.getElementById(id); if(el) el.style.width=p+'%'; };
-
-    // holders + bar
-    document.getElementById('holders').textContent = (metrics.holders ?? 0).toLocaleString();
-    setBar('holdersBar', pct(metrics.holders ?? 0, goals && goals.holders));
-
-    // active wallets
-    document.getElementById('active').textContent = (metrics.active_wallets_30d ?? 0).toLocaleString();
-
-    // referrals (new)
-    if (referrals && referrals.total !== undefined) {
-      document.getElementById('referrals').textContent = referrals.total.toLocaleString();
-    } else {
-      document.getElementById('referrals').textContent = 0;
-    }
-
-    // treasury + bar
-    const tUSD = Math.round(metrics.treasury_usd ?? 0);
-    document.getElementById('treasury').textContent = '$' + tUSD.toLocaleString();
-    setBar('treasuryBar', pct(tUSD, goals && goals.treasury_usd));
-
-    // spend vs save
-    const spentPct = Math.round(((metrics.spent_pct_30d ?? 0) * 100));
-    document.getElementById('spendSave').textContent = `${spentPct}% spent / ${100 - spentPct}% saved`;
-    setBar('spendBar', Math.max(0, Math.min(100, spentPct)));
-
-    // projects table
-    const pr = metrics.projects || {};
-    const body = document.getElementById('projRows');
-    [['Proposed',pr.proposed],['Approved',pr.approved],['Funded',pr.funded],['Delivered',pr.delivered]]
-      .forEach(([k,v])=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML = `<td>${k}</td><td>${v ?? 0}</td>`;
-        body.appendChild(tr);
-      });
-
-    // merchants table
-    if (Array.isArray(merchants)) {
-      const mBody = document.getElementById('merchRows');
-      merchants.forEach(x=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML = `
-          <td>${x.url?`<a href="${x.url}" target="_blank" rel="noopener">${x.name}</a>`:x.name}</td>
-          <td>${x.city || ''}</td>
-          <td>${x.since || ''}</td>
-          <td>${x.monthly_volume ?? 0}</td>`;
-        mBody.appendChild(tr);
-      });
-    }
-
-    // chart
-    const series = metrics.treasury_series || [];
-    const labels = series.map(x=>x[0]);
-    const data = series.map(x=>x[1]);
-    const ctx = document.getElementById('treasuryChart');
-    if (ctx && labels.length){
-      new Chart(ctx,{
-        type:'line',
-        data:{labels,datasets:[{label:'Treasury (USD)',data,tension:.25,borderColor:'#FFD700'}]},
-        options:{plugins:{legend:{display:false}},scales:{x:{grid:{color:'#222'}},y:{grid:{color:'#222'}}}}
-      });
-    }
-  })();
+    // demo data placeholder until live blockchain feed connected
+    const metrics = {
+      activeWallets: 138,
+      treasuryBalance: 22500,
+      communityProjects: 12,
+      merchantCount: 7
+    };
+    document.getElementById("activeWallets").textContent = metrics.activeWallets.toLocaleString();
+    document.getElementById("treasuryBalance").textContent = "$" + metrics.treasuryBalance.toLocaleString();
+    document.getElementById("communityProjects").textContent = metrics.communityProjects;
+    document.getElementById("merchantCount").textContent = metrics.merchantCount;
   </script>
-
-  <!-- Optional SW (safe to leave) -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js')
-        .catch(err => console.warn('SW register failed:', err));
-  <!-- Wallet connect -->
-  <script src="https://cdn.jsdelivr.net/npm/web3modal@1.9.12/dist/index.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.min.js"></script>
-  <script src="wallet.js"></script>
 </body>
 </html>
