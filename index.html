@@ -230,6 +230,11 @@ footer::before {
   0%,100% {opacity:0.4;}
   50% {opacity:0.8;}
 }
+  @keyframes glowPulse {
+  0%,100% { filter:drop-shadow(0 0 10px rgba(0,238,255,0.25)); opacity:0.9; }
+  50% { filter:drop-shadow(0 0 28px rgba(0,238,255,0.6)); opacity:1; }
+}
+
 </style>
 </head>
 <body>
@@ -435,6 +440,13 @@ footer::before {
     <div>
       <article class="box">
         <h3 style="margin-top:0">⚡ Powered by Alkebuleum</h3>
+        <div style="text-align:center;margin-bottom:14px;">
+  <img src="images/alkebuleum.png" alt="Alkebuleum Symbol"
+       style="width:70%;max-width:400px;border-radius:12px;opacity:0.95;
+              filter:drop-shadow(0 0 20px rgba(0,238,255,0.4));
+              animation: glowPulse 8s ease-in-out infinite;">
+</div>
+
         <p class="muted">
           Alkebuleum is the decentralized network where 7TRB lives.
           Its native coin, <b>$AKE</b>, fuels every transaction as the chain’s gas token — value
