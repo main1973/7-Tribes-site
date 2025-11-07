@@ -1,42 +1,23 @@
-console.log("wallet.js loaded ✅");
-
-// Load Web3Modal and Ethers from CDN dynamically
-(async function() {
-// Load Web3Modal and Ethers from CDN dynamically
-(async function() {
-  // Dynamically load the required scripts if not already loaded
-  if (!window.Web3Modal) {
-    await import('https://cdn.jsdelivr.net/npm/web3modal@1.9.12/dist/index.min.js');
-  }
-  if (!window.ethers) {
-    await import('https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js');
-  }
-
-  const providerOptions = {};
-  const web3Modal = new window.Web3Modal.default({
-    cacheProvider: true,
-    providerOptions
-  });
-
-  const connectBtn = document.getElementById('connectBtn');
-  let provider;
-
-  async function connectWallet() {
+// wallet.js
+async function connectWallet() {
+  if (typeof window.ethereum !== 'undefined') {
     try {
-      const instance = await web3Modal.connect();
-      provider = new ethers.providers.Web3Provider(instance);
-      const signer = provider.getSigner();
-      const address = await signer.getAddress();
-      const short = address.slice(0, 6) + '...' + address.slice(-4);
-
-      connectBtn.textContent = 'Connected: ' + short;
-      connectBtn.title = address; // tooltip shows full address
-      connectBtn.disabled = true;
-      connectBtn.style.opacity = '0.85';
-    } catch (err) {
-      console.warn('Wallet connect canceled or failed:', err);
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+      const btn = document.getElementById('connectBtn');
+      btn.textContent = account.slice(0, 6) + '...' + account.slice(-4);
+      btn.style.background = 'linear-gradient(90deg, #FFD700, #b8912f)';
+      console.log('Connected:', account);
+    } catch (error) {
+      console.error('Connection rejected:', error);
+      alert('Wallet connection request was denied.');
     }
+  } else {
+    alert('No wallet found. Please install MetaMask or a compatible Web3 wallet.');
   }
+}
 
-  connectBtn.addEventListener('click', connectWallet);
-})();
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('connectBtn');
+  if (btn) btn.addEventListener('click', connectWallet);
+});
