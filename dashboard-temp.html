@@ -12,6 +12,15 @@
 
   <meta charset="utf-8" />
   <script>
+  // redirect if dashboard tries to load as homepage
+  if (window.location.pathname === '/' || window.location.pathname === '/dashboard.html') {
+    const ref = document.referrer || '';
+    if (!ref.includes('index.html')) {
+      window.location.href = 'index.html';
+    }
+  }
+</script>
+  <script>
   if (window.top !== window.self) {
     window.top.location = window.location.href;
   }
