@@ -65,7 +65,10 @@
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <button id="connectBtn" class="cta">Connect Wallet</button>
         <a href="index.html" class="ghost" style="padding:10px 14px;border-radius:30px;text-decoration:none">← Back</a>
-      </div>
+        <p style="color:#FFD700;font-weight:600;margin:6px 0;">
+  Treasury Wallet: <b>0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</b>
+</p>
+     </div>
     </div>
   </header>
 
@@ -145,6 +148,7 @@
   const TOKEN_ADDRESS = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D"; // 7TRB contract
   const TOKEN_DECIMALS = 18;
   const TOKEN_SYMBOL = "7TRB";
+  const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB"; // AmVault Treasury Wallet
 
   // ---- Helpers ----
   async function safeJson(u){
