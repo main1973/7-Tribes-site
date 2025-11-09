@@ -242,6 +242,30 @@ footer::before {
   0%,100% { box-shadow: 0 0 0 0 rgba(255,215,0,.35); }
   50% { box-shadow: 0 0 18px 6px rgba(255,215,0,.25); }
 }
+  /* Wallet promo */
+.promo {
+  max-width: 1160px;
+  margin: 60px auto 40px;
+  padding: 28px 18px;
+  text-align: center;
+  background: linear-gradient(180deg,#0b0b0c,#111);
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(255,215,0,.08);
+}
+.promo h2 { color:#FFD700; font-size:2.2rem; margin:0 0 10px; }
+.promo p  { color:#cfcfcf; margin:0 0 20px; }
+
+/* Make the banner image behave */
+.promo img {
+  display:block;
+  width: 100%;
+  max-width: 980px;
+  height:auto;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 0 22px rgba(255,215,0,.12);
+  object-fit: contain;
+}
 </style>
 </head>
 <body>
@@ -278,18 +302,7 @@ footer::before {
 </div>
 </header>
 
-<!-- 7TRB Wallet Promo Banner -->
-<section style="text-align:center;margin:80px 0;padding:40px 20px;
-  background:linear-gradient(180deg,#0b0b0c,#111);
-  border-radius:16px;box-shadow:0 0 30px rgba(255,215,0,0.08)">
-  <h2 style="color:#FFD700;font-size:2.2rem;margin-bottom:20px;">7TRB Wallet Is Here</h2>
-  <p style="color:#ccc;font-size:1.1rem;margin-bottom:30px;">
-    Secure. Simple. Built for motion.<br>Tap into your tribe and move value instantly.
-  </p>
-  <img src="images/7trb_wallet_banner.png" alt="7TRB Wallet"
-       style="max-width:95%;border-radius:12px;box-shadow:0 0 25px rgba(255,215,0,0.15)">
-</section>
- 
+</section> 
 <main class="wrap">
   <!-- HERO / MOTION SECTION -->
 <section class="section" id="motion">
