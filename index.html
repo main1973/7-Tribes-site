@@ -265,6 +265,28 @@ footer::before {
   align-items: center;
   padding-bottom: 20px;
 }
+  .promo-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 60px 0;
+}
+
+.promo-row img {
+  width: 45%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.promo-row img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.25);
+}
 </style>
 </head>
 <body>
