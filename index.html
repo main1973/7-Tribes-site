@@ -313,33 +313,27 @@ footer::before {
 </head>
 <body>
 
-<header>
-</setion>
-  </nav> <!-- close the nav early --> 
-<div class="detroit-banner">
-  <h2>Detroit Made 2 Make Detroit</h2>
-  <div>
-      <div>
-      </section>
-       <p style="margin-top:20px;color:#ccc;">
-  🛍️ Check out <a href="https://vt.tiktok.com/ZTMtY4tah/?page=TikTokShop" target="_blank" 
-  style="color:#FFD700;text-decoration:none;font-weight:600;">Main House’s Shop on TikTok</a>
-</p>
-        
-</section> 
-<main class="wrap">
-  <div class="wrap">
-    <nav>
-      <div class="brand">
-        <img src="images/logo.png" alt="7TRB logo" />
-        <b>7TRB</b>
+<header style="position:relative; width:100%; z-index:10; background:#0b0b0c; box-shadow:0 2px 10px rgba(0,0,0,0.4);">
+  <!-- Banner background -->
+  <div class="header-banner">
+    <img src="images/welcome1.png" alt="Welcome to the Future 7TRB Banner">
+  </div>
+
+  <!-- Main Navigation -->
+  <div class="wrap" style="position:relative; z-index:2; padding:20px 0;">
+    <nav style="display:flex; justify-content:space-between; align-items:center;">
+      <!-- Left: Brand -->
+      <div class="brand" style="display:flex; align-items:center; gap:10px;">
+        <img src="images/logo.png" alt="7TRB logo" style="width:72px; height:72px; border-radius:50%; border:1px solid rgba(255,255,255,0.1);">
+        <b style="font-size:1.6rem;">7TRB</b>
       </div>
 
-      <div class="links">
+      <!-- Center: Navigation Links -->
+      <div class="links" style="display:flex; flex-wrap:wrap; gap:18px; justify-content:center;">
         <a href="#about">About</a>
         <a href="#purpose">Purpose</a>
         <a href="#transparency">Transparency</a>
-        <a href="#value">How It Builds Value</a>
+        <a href="#value">Value</a>
         <a href="#get7trb">Get 7TRB</a>
         <a href="#builders">Builders</a>
         <a href="#roadmap">Roadmap</a>
@@ -348,18 +342,29 @@ footer::before {
       </div>
     </nav>
   </div>
+
+  <!-- Buttons row below header -->
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin:20px auto; max-width:1160px; padding:0 20px;">
+    <!-- TikTok Button -->
+    <a class="btn tiktok" href="https://vt.tiktok.com/ZTMtY4tah/?page=TikTokShop" target="_blank"
+       style="padding:10px 18px; border-radius:6px; background:linear-gradient(90deg,#25F4EE,#FE2C55);
+              color:#0a0b0f; font-weight:600; text-decoration:none;">
+      TikTok Shop
+    </a>
+
+    <!-- Detroit Message -->
+    <h2 style="color:#FFD700; font-size:1.6rem; text-align:center; margin:10px 0;">Detroit Made 2 Make Detroit</h2>
+
+    <!-- Dashboard Button -->
+    <a href="dashboard.html" class="btn gold"
+       style="padding:10px 18px; border-radius:6px;
+              background:linear-gradient(90deg,#FFD700,#b8912f);
+              color:#111; font-weight:600; text-decoration:none;">
+      Open Dashboard
+    </a>
+  </div>
 </header>
 
-    
-      <a href="dashboard.html" class="btn gold" 
-   style="margin-left:auto;padding:10px 18px;border-radius:6px;
-          background:linear-gradient(90deg,#FFD700,#b8912f);
-          color:#111;font-weight:600;text-decoration:none;">
-   Open Dashboard
-</a>
-  </div>
-</div>
-</header>
   
 
   <!-- HERO / MOTION SECTION -->
