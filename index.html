@@ -254,17 +254,18 @@ footer::before {
 }
 .promo h2 { color:#FFD700; font-size:2.2rem; margin:0 0 10px; }
 .promo p  { color:#cfcfcf; margin:0 0 20px; }
-
-/* Make the banner image behave */
-.promo img {
-  display:block;
-  width: 100%;
-  max-width: 980px;
-  height:auto;
-  margin: 0 auto;
-  border-radius: 12px;
-  box-shadow: 0 0 22px rgba(255,215,0,.12);
-  object-fit: contain;
+}
+img[src*="7trb_wallet_ad"],
+img[src*="7trb_wallet_banner"],
+img[src*="7trb_vs_usd"],
+img[src*="7trb_join"] {
+  max-width: 70%;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
+}
 }
 </style>
 </head>
