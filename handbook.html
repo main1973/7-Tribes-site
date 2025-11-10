@@ -64,6 +64,26 @@ h1{font-size:clamp(26px,4vw,40px);margin:0}
 .footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);text-align:center}
 .print-hint{font-size:.9rem;color:#c9c9c9}
 @media (max-width:960px){.hero{grid-template-columns:1fr}}
+  details summary {
+  cursor: pointer;
+  position: relative;
+  padding-right: 26px; /* room for arrow */
+  list-style: none;
+  color: var(--gold);
+}
+
+details summary::after {
+  content: "▾"; /* small arrow */
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--gold);
+  transition: transform 0.3s ease;
+}
+
+details[open] summary::after {
+  transform: rotate(-180deg);
+}
 </style>
 </head>
 <body>
