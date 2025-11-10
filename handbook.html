@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>7TRB Field Manual — For the People, By the People</title>
+<link rel="icon" href="images/logo.png" />
+<style>
+:root{
+  --bg:#0b0b0c; --panel:#11141a; --panel2:#0e1015; --ink:#eaeaea; --muted:#a9afbb;
+  --gold:#ffd56b; --gold2:#b8912f; --line:#2a2f3b; --radius:18px; --shadow:0 18px 60px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:var(--gold);text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1100px;margin:0 auto;padding:20px}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:10px 16px;border-radius:999px;font-weight:700;border:1px solid transparent;cursor:pointer}
+.btn.gold{background:linear-gradient(90deg,var(--gold),var(--gold2));color:#111}
+.btn.ghost{border:1px solid var(--line);color:var(--ink);background:transparent}
+.btn.block{width:100%;justify-content:center}
+.header{
+  position:relative; isolation:isolate; overflow:hidden; border-bottom:1px solid var(--line);
+  background: radial-gradient(1200px 300px at 10% 0%, rgba(184,145,47,.14), transparent 60%);
+}
+.header .banner{
+  position:absolute; inset:0; opacity:.15; filter:contrast(110%) brightness(90%);
+  background:url('images/welcome_banner.png') center/cover no-repeat;
+  z-index:-1;
+}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:60px;height:60px;border-radius:50%;border:1px solid rgba(255,255,255,.08)}
+h1{font-size:clamp(26px,4vw,40px);margin:0}
+.small{color:var(--muted);font-size:.95rem}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero{
+  display:grid; gap:18px; grid-template-columns:1.1fr .9fr; align-items:center; padding:10px 0 26px;
+}
+.card{
+  position:relative;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); overflow:hidden;
+}
+.card::after{
+  content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none; opacity:.7;
+  padding:1px; background:linear-gradient(90deg,rgba(255,215,0,.25),rgba(184,145,47,.6),rgba(255,215,0,.25));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude;
+}
+.title{position:relative;margin:0 0 12px;font-size:clamp(22px,3vw,30px)}
+.muted{color:var(--muted)}
+.grid{display:grid;gap:18px}
+.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.section{padding:42px 0}
+.divider{height:2px;margin:26px auto;width:86%;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(255,215,0,.45),transparent)}
+.kv{display:flex;gap:10px;flex-wrap:wrap}
+.badge{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--gold);font-weight:700}
+.accordion .item{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#0f1116,#0c0d12)}
+.accordion summary{cursor:pointer;list-style:none;padding:14px 16px;font-weight:700}
+.accordion summary::-webkit-details-marker{display:none}
+.accordion .content{padding:0 16px 16px;color:var(--muted)}
+.callout{border-left:3px solid var(--gold); padding:12px 14px; background:#0d0f12; border-radius:10px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);text-align:center}
+.print-hint{font-size:.9rem;color:#c9c9c9}
+@media (max-width:960px){.hero{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="banner" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <img src="images/logo.png" alt="7TRB logo">
+        <div>
+          <h1>7TRB Field Manual</h1>
+          <div class="small">For the People • By the People • Built for Motion</div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="index.html" class="btn ghost">← Back to Site</a>
+        <button class="btn gold" onclick="window.print()">⬇︎ Save / Print</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="card">
+        <h2 class="title">The Movement of Value</h2>
+        <p class="muted">We don’t wait for permission. 7TRB puts ownership back in the hands of the people who build, buy, and believe. Value grows through circulation — members, builders, merchants — moving as one.</p>
+        <div class="kv">
+          <span class="badge">Community</span>
+          <span class="badge">Unity</span>
+          <span class="badge">Ownership</span>
+          <span class="badge">On-Chain</span>
+        </div>
+        <div class="cta-row" style="margin-top:14px">
+          <a class="btn gold" href="https://chat.whatsapp.com/FSrGZMxoqsD7C4bO6lKn3" target="_blank" rel="noopener">Join the Tribe</a>
+          <a class="btn ghost" href="dashboard.html">Open Dashboard</a>
+          <a class="btn ghost" href="learn.html">Crypto 101</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/7trb_join_the_tribe.png" alt="Join the Tribe">
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Chapter 1 -->
+  <section class="section" id="vision">
+    <h2 class="title">Chapter 1 — The Vision</h2>
+    <div class="card">
+      <p class="muted">We were never meant to beg for access. 7TRB re-routes value to the communities that generate it. Every wallet, every trade, every purchase becomes a receipt of power returning home.</p>
+      <div class="divider"></div>
+      <div class="grid two">
+        <div>
+          <h3>Detroit → Liberia → Global</h3>
+          <p class="muted">Start local. Prove it. Then scale. Detroit pilots the model. Alkebuleum powers the chain. Africa unlocks continental motion, beginning with Liberia.</p>
+        </div>
+        <div class="callout">
+          <b>Quick Actions</b>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li>Create/Connect wallet (AmVault/MetaMask)</li>
+            <li>Join WhatsApp to coordinate</li>
+            <li>Pick your role: Member, Builder, Merchant</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter 2 -->
+  <section class="section" id="how">
+    <h2 class="title">Chapter 2 — How It Works</h2>
+    <div class="card">
+      <div class="grid three">
+        <div>
+          <h3>Members</h3>
+          <p class="muted">Hold some 7TRB, spend some, bring one new person. Motion compounds.</p>
+        </div>
+        <div>
+          <h3>Builders</h3>
+          <p class="muted">Propose projects, ship work, get paid in 7TRB from the DAO.</p>
+        </div>
+        <div>
+          <h3>Merchants</h3>
+          <p class="muted">Accept 7TRB, get buyback support from Treasury, recycle back into local spend.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <details class="accordion item">
+        <summary>Why motion beats speculation</summary>
+        <div class="content">
+          Price follows utility. The more we circulate 7TRB (goods, services, projects), the stronger the floor and the story.
+        </div>
+      </details>
+      <div style="height:10px"></div>
+      <details class="accordion item">
+        <summary>Treasury flywheel</summary>
+        <div class="content">
+          Treasury funds builders, supports merchant buybacks, and stakes liquidity. That stabilizes price and keeps value in-network.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Chapter 3 -->
+  <section class="section" id="join">
+    <h2 class="title">Chapter 3 — Join the Economy</h2>
+    <div class="card">
+      <div class="grid two">
+        <div>
+          <h3>Start here</h3>
+          <ol class="muted" style="margin-left:18px">
+            <li>Connect Wallet (AmVault or MetaMask)</li>
+            <li>Join WhatsApp for calls & drops</li>
+            <li>Pick a task this week. Deliver something small.</li>
+          </ol>
+          <div class="cta-row" style="margin-top:10px">
+            <a class="btn gold" href="https://amvault.net" target="_blank" rel="noopener">Create Wallet</a>
+            <a class="btn ghost" href="https://chat.whatsapp.com/FSrGZMxoqsD7C4bO6lKn3" target="_blank" rel="noopener">Join WhatsApp</a>
+          </div>
+        </div>
+        <div>
+          <h3>Earn 7TRB</h3>
+          <ul class="muted" style="margin-left:18px">
+            <li>Referral: verified signup bounties (coming)</li>
+            <li>Builder tasks: dev, design, content, ops</li>
+            <li>Merchant rewards: accept 7TRB at checkout</li>
+          </ul>
+          <p class="muted">All flows visible in the Transparency Hub and Dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter 4 -->
+  <section class="section" id="blueprint">
+    <h2 class="title">Chapter 4 — The Blueprint</h2>
+    <div class="card">
+      <p class="muted">Cap supply. Grow utility. Keep circulation inside the tribe. When Alkebuleum DEX is live, pair with $AKE and deepen liquidity. Detroit pilots → Liberia scales → partners replicate.</p>
+      <div class="divider"></div>
+      <div class="grid two">
+        <div>
+          <h3>Launch Milestones</h3>
+          <ul class="muted" style="margin-left:18px">
+            <li>✅ Website + Transparency Hub</li>
+            <li>✅ Live Dashboard shell</li>
+            <li>🟨 On-chain deploy to Alkebuleum</li>
+            <li>🟨 Merchant onboarding kit</li>
+            <li>🟨 Referral + rewards logic</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Governance Basics</h3>
+          <ul class="muted" style="margin-left:18px">
+            <li>Simple proposals → public votes</li>
+            <li>Receipts on-chain; payouts traceable</li>
+            <li>Quarterly treasury report</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call -->
+  <section class="section" id="call">
+    <h2 class="title">This is where it begins</h2>
+    <div class="card">
+      <p class="muted">Not another coin. A culture, on chain. If you want in, move with us — even small steps count. Circulation is power.</p>
+      <div class="cta-row" style="margin-top:10px">
+        <a class="btn gold" href="dashboard.html">Open Dashboard</a>
+        <a class="btn ghost" href="index.html#transparency">Transparency Hub</a>
+        <a class="btn ghost" href="https://chat.whatsapp.com/FSrGZMxoqsD7C4bO6lKn3" target="_blank" rel="noopener">Join WhatsApp</a>
+      </div>
+      <p class="print-hint" style="margin-top:10px">Tip: Use the “Save / Print” button at the top to export this manual as a PDF.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <img src="images/logo.png" alt="7TRB" style="width:38px;height:38px;border-radius:50%;opacity:.9">
+    <div style="margin-top:8px">© 2025 7Tribes • Mainhouse Oasis LLC</div>
+  </div>
+</footer>
+
+</body>
+</html>
