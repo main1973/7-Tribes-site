@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>7TRB Wallet</title>
+  <link rel="icon" href="images/logo.png" />
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <style>
+    :root{--bg:#0b0b0c;--card:#11141a;--line:#222;--ink:#eaeaea;--muted:#a1a1a6;--gold:#FFD700}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .wrap{max-width:920px;margin:auto;padding:20px}
+    header{border-bottom:1px solid var(--line);background:#0e0f12}
+    h1{margin:0;font-size:24px}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .btn{display:inline-flex;gap:.5rem;align-items:center;background:linear-gradient(90deg,var(--gold),#b8912f);color:#111;
+         padding:10px 14px;border:none;border-radius:999px;font-weight:800;cursor:pointer}
+    .ghost{background:transparent;border:1px solid #2b2f3b;color:var(--ink)}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .grid{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    label{font-size:.9rem;color:var(--muted)} input,select{width:100%;padding:10px;border-radius:10px;border:1px solid #2a2a2e;background:#0d0f12;color:#fff}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .small{font-size:.92rem;color:var(--muted)}
+    .value{font-size:22px;font-weight:800}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    canvas{max-width:100%}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap row" style="justify-content:space-between;padding:14px 20px">
+    <div class="row">
+      <img src="images/logo.png" alt="7TRB" style="width:42px;height:42px;border-radius:50%">
+      <h1>7TRB Wallet</h1>
+    </div>
+    <div class="row">
+      <button id="connectBtn" class="btn">Connect Wallet</button>
+      <a href="index.html" class="btn ghost">← Back</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:16px">
+
+  <!-- Network & token helpers -->
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div>
+        <div class="small">Network</div>
+        <div id="netLabel" class="value">—</div>
+      </div>
+      <div class="row">
+        <button id="addAlke" class="btn ghost">Add Alkebuleum</button>
+        <button id="switchAlke" class="btn ghost">Switch to Alkebuleum</button>
+        <button id="watch7TRB" class="btn ghost">Add 7TRB to Wallet</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Balances -->
+    <section class="card">
+      <div class="small">Your Address</div>
+      <div id="addr" class="mono">—</div>
+      <div class="small" style="margin-top:8px">QR for receiving</div>
+      <canvas id="qr" style="background:#0d0f12;border:1px solid #1f1f23;border-radius:10px"></canvas>
+      <div class="row" style="margin-top:10px">
+        <button id="copyAddr" class="btn ghost">Copy Address</button>
+      </div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+      <div class="grid">
+        <div>
+          <div class="small">Gas Token</div>
+          <div id="gasBal" class="value">—</div>
+          <div class="small" id="gasSym">AKE/ETH</div>
+        </div>
+        <div>
+          <div class="small">7TRB Balance</div>
+          <div id="trbBal" class="value">—</div>
+          <div class="small">token</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Send -->
+    <section class="card">
+      <h3 style="margin:0 0 10px">Send 7TRB</h3>
+      <div style="display:grid;gap:10px">
+        <div>
+          <label>Recipient</label>
+          <input id="to" placeholder="0x… address">
+        </div>
+        <div>
+          <label>Amount (7TRB)</label>
+          <input id="amt" placeholder="0.0" inputmode="decimal">
+        </div>
+        <button id="send" class="btn">Send</button>
+        <div id="txMsg" class="small"></div>
+      </div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+      <div class="small">Note: You need a little <b>AKE</b> (on Alkebuleum) or <b>ETH</b> (on Ethereum) for gas.</div>
+    </section>
+  </div>
+
+  <!-- Explorer links -->
+  <div class="card" style="margin-top:12px">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <div class="small">Quick Links</div>
+      <div class="row">
+        <a id="explorerAcct" class="btn ghost" target="_blank" rel="noopener">Open Address in Explorer</a>
+        <a id="explorerToken" class="btn ghost" target="_blank" rel="noopener">Open 7TRB in Explorer</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="js/wallet.js"></script>
+</body>
+</html>
