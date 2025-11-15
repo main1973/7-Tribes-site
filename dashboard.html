@@ -142,14 +142,14 @@
       </section>
     </div>
   </div>
+  // ---- Config for wallet/token (ALKEBULEUM) ----
+const ALKE_RPC       = "https://rpc.alkebuleum.com";
+const TOKEN_ADDRESS  = "0xdf7ce67dB19142672c4193d969cdD9975A5A6038"; // 7TRB on Alkebuleum
+const TOKEN_DECIMALS = 18;
+const TOKEN_SYMBOL   = "7TRB";
 
-  <script>
-  // ---- Config for wallet/token ----
-  const TOKEN_ADDRESS = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D"; // 7TRB contract
-  const TOKEN_DECIMALS = 18;
-  const TOKEN_SYMBOL = "7TRB";
-  const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB"; // AmVault Treasury Wallet
-
+// AmVault Treasury wallet on Alkebuleum
+const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB";
   // ---- Helpers ----
   async function safeJson(u){
     try{
@@ -262,9 +262,11 @@
    Works in MetaMask + Mobile
 -------------------------------- */
 
-const TOKEN_ADDRESS = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D";  // Ethereum 7TRB
+// ---- Config for wallet/token ----
+const TOKEN_ADDRESS = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D"; // 7TRB contract
 const TOKEN_DECIMALS = 18;
 const TOKEN_SYMBOL = "7TRB";
+const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB"; // AmVault Treasury Wallet
 
 /** Make connect button pretty */
 function updateButton(account) {
@@ -358,9 +360,11 @@ if (window.ethereum) {
    Works in MetaMask + Mobile
 -------------------------------- */
 
-const TOKEN_ADDRESS = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D";  // Ethereum 7TRB
+// ---- Config for wallet/token ----
+const TOKEN_ADDRESS = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D"; // 7TRB contract
 const TOKEN_DECIMALS = 18;
 const TOKEN_SYMBOL = "7TRB";
+const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB"; // AmVault Treasury Wallet
 
 /** Make connect button pretty */
 function updateButton(account) {
@@ -377,24 +381,35 @@ function updateButton(account) {
 }
 
 /** Fetch 7TRB balance USING THE USER'S WALLET PROVIDER */
-async function showBalance(account) {
-  if (!account) return;
-
-  try {
-    const provider = new ethers.BrowserProvider(window.ethereum);
+async function showBalance(account){
+  try{
+    // Read from Alkebuleum, not Ethereum
+    const provider = new ethers.JsonRpcProvider(ALKE_RPC);
     const contract = new ethers.Contract(
       TOKEN_ADDRESS,
       ["function balanceOf(address) view returns (uint256)"],
       provider
     );
 
+    // User balance (on ALKE 7TRB contract)
     const raw = await contract.balanceOf(account);
-    const balance = Number(raw) / 10 ** TOKEN_DECIMALS;
+    const formatted = Number(raw) / 10 ** TOKEN_DECIMALS;
 
-    document.getElementById("walletBalance").textContent =
-      `Your Balance: ${balance.toFixed(3)} ${TOKEN_SYMBOL}`;
-  } catch (err) {
-    console.error("Balance error:", err);
+    const el = document.getElementById('walletBalance');
+    el.textContent = `Your 7TRB (Alkebuleum): ${formatted.toFixed(3)} ${TOKEN_SYMBOL}`;
+
+    // Also show Treasury balance
+    if (account.toLowerCase() !== TREASURY_WALLET.toLowerCase()) {
+      const treasuryBalance = await contract.balanceOf(TREASURY_WALLET);
+      const tFormatted = Number(treasuryBalance) / 10 ** TOKEN_DECIMALS;
+      const treasuryDiv = document.createElement("div");
+      treasuryDiv.style.color = "#FFD700";
+      treasuryDiv.style.fontWeight = "600";
+      treasuryDiv.textContent = `Treasury (Alkebuleum): ${tFormatted.toFixed(3)} ${TOKEN_SYMBOL}`;
+      el.parentNode.insertBefore(treasuryDiv, el.nextSibling);
+    }
+  } catch (err){
+    console.error('Balance fetch failed (Alkebuleum):', err);
   }
 }
 
