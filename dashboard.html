@@ -3,14 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>7Tribes Dashboard — ALKEBULEUM Network</title>
+  <title>7Tribes — Live Community Metrics</title>
   <link rel="icon" href="images/logo.png" />
 
-  <!-- Chart.js + Ethers.js + Leaflet -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Guard: if someone hits root by mistake -->
+  <script>
+    if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
+      // stay safe
+    }
+  </script>
+
+  <!-- Libs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <style>
@@ -18,25 +24,30 @@
       --bg:#0b0b0c;
       --card:#121214;
       --text:#eaeaea;
-      --muted:#9ea0a6;
+      --muted:#a1a1a6;
       --accent:#FFD700;
       --border:#222;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;
+    }
+    header{
+      background:#11141a;
+      border-bottom:1px solid var(--border);
+    }
+    .wrap{max-width:1080px;margin:auto;padding:18px}
+    h1{margin:0}
     a{color:var(--accent);text-decoration:none}
 
-    header{background:#11141a;border-bottom:1px solid var(--border)}
-    .wrap{max-width:1080px;margin:auto;padding:18px}
-
-    h1{margin:0;font-size:1.4rem}
-
-    /* Cards */
     .cards{
       display:grid;
-      grid-template-columns:repeat(5,1fr);
+      grid-template-columns:repeat(5,minmax(0,1fr));
       gap:12px;
-      margin-top:16px;
+      margin-top:12px;
     }
     .card{
       background:var(--card);
@@ -44,227 +55,178 @@
       border-radius:14px;
       padding:14px;
     }
-    .label{font-size:12px;color:var(--muted);text-transform:uppercase}
-    .value{font-size:28px;font-weight:800}
+    .label{
+      font-size:12px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .value{
+      font-size:28px;
+      font-weight:800;
+    }
+    .bar{
+      height:10px;
+      background:#1a1a1d;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:8px;
+    }
+    .bar>i{
+      display:block;
+      height:100%;
+      background:var(--accent);
+      width:0%;
+      transition:width .4s ease;
+    }
 
-    .bar{height:10px;background:#1a1a1d;border-radius:999px;margin-top:8px}
-    .bar i{display:block;height:100%;background:var(--accent);width:0%}
-
-    /* Grid blocks */
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-    table{width:100%;border-collapse:collapse;font-size:14px}
-    td,th{padding:10px;border-bottom:1px solid var(--border)}
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:14px;
+    }
+    th,td{
+      padding:10px;
+      border-bottom:1px solid var(--border);
+    }
     th{text-align:left;color:var(--muted)}
 
-    /* Map */
-    #map{height:320px;border-radius:12px;border:1px solid var(--border)}
+    #map{
+      height:320px;
+      border-radius:12px;
+      border:1px solid var(--border);
+    }
 
-    /* Buttons */
     .cta{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
       background:linear-gradient(90deg,#FFD700,#b8912f);
       color:#111;
       font-weight:700;
       border:none;
-      padding:10px 16px;
+      padding:10px 18px;
       border-radius:30px;
       cursor:pointer;
       box-shadow:0 0 12px rgba(255,215,0,.25);
     }
+    .ghost{
+      background:transparent;
+      color:var(--text);
+      border:1px solid #2b2f3b;
+    }
 
-    @media(max-width:900px){
-      .cards{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:1100px){
+      .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media (max-width:900px){
+      .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
       .grid{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .cards{grid-template-columns:1fr}
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="images/logo.png" alt="7TRB" style="width:36px;height:36px;border-radius:50%">
+        <h1>Live Community Metrics</h1>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <button id="connectBtn" class="cta">Connect Wallet</button>
+        <a href="index.html" class="ghost" style="padding:10px 14px;border-radius:30px;text-decoration:none">← Back</a>
+        <p style="color:#FFD700;font-weight:600;margin:6px 0;">
+          Treasury: <b>0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</b>
+        </p>
+      </div>
+    </div>
+  </header>
 
-<header>
-  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
-    <div style="display:flex;align-items:center;gap:10px;">
-      <img src="images/logo.png" style="width:36px;height:36px;border-radius:50%">
-      <h1>7Tribes • Community Metrics</h1>
+  <div class="wrap">
+    <p style="color:#a1a1a6;margin:.3rem 0 .7rem">
+      Updated <span id="updatedAt">—</span>
+      <span id="freshDot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#999;margin-left:8px;vertical-align:middle" title="Data age"></span>
+    </p>
+
+    <div id="walletBalance" style="margin:-2px 0 10px;color:#FFD700;font-weight:600"></div>
+
+    <!-- KPI CARDS -->
+    <section class="cards" aria-label="KPIs">
+      <div class="card">
+        <div class="label">Holders</div>
+        <div class="value" id="holders">—</div>
+        <div class="bar"><i id="holdersBar"></i></div>
+      </div>
+      <div class="card">
+        <div class="label">Active wallets (30d)</div>
+        <div class="value" id="active">—</div>
+        <div class="label">rolling 30 days</div>
+      </div>
+      <div class="card">
+        <div class="label">Treasury (USD est)</div>
+        <div class="value" id="treasury">—</div>
+        <div class="bar"><i id="treasuryBar"></i></div>
+      </div>
+      <div class="card">
+        <div class="label">Spend vs Save (30d)</div>
+        <div class="value" id="spendSave">—</div>
+        <div class="bar"><i id="spendBar"></i></div>
+      </div>
+      <div class="card">
+        <div class="label">Referrals (30d)</div>
+        <div class="value" id="referrals">—</div>
+        <div class="label" id="referralsNote">by source</div>
+      </div>
+    </section>
+
+    <!-- CHART + PROJECTS -->
+    <div class="grid">
+      <section class="card">
+        <div class="label" style="margin-bottom:6px">Treasury trend</div>
+        <canvas id="treasuryChart" height="140" aria-label="Treasury time series"></canvas>
+      </section>
+
+      <section class="card">
+        <div class="label" style="margin-bottom:6px">Projects pipeline</div>
+        <table>
+          <thead><tr><th>Status</th><th>Count</th></tr></thead>
+          <tbody id="projRows"></tbody>
+        </table>
+      </section>
     </div>
 
-    <button id="connectBtn" class="cta">Connect Wallet</button>
+    <!-- MERCHANT MAP + DIRECTORY -->
+    <div class="grid" style="margin-top:12px">
+      <section class="card">
+        <div class="label" style="margin-bottom:6px">Merchant map</div>
+        <div id="map"></div>
+        <div id="mapNotice" class="label" style="margin-top:8px;display:none">
+          Add <code>lat</code> and <code>lng</code> to merchants.json to enable pins.
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="label" style="margin-bottom:6px">Merchant directory</div>
+        <table>
+          <thead><tr><th>Name</th><th>City</th><th>Since</th><th>Monthly 7TRB</th></tr></thead>
+          <tbody id="merchRows"></tbody>
+        </table>
+        <!-- You can later link to a dedicated merchants.html -->
+      </section>
+    </div>
   </div>
-</header>
 
-<div class="wrap">
-
-  <div id="walletBalance" style="margin-top:10px;font-weight:600;color:#FFD700"></div>
-
-  <!-- KPI CARDS -->
-  <section class="cards">
-    <div class="card">
-      <div class="label">Holders</div>
-      <div class="value" id="holders">—</div>
-      <div class="bar"><i id="holdersBar"></i></div>
-    </div>
-
-    <div class="card">
-      <div class="label">Active Wallets</div>
-      <div class="value" id="active">—</div>
-    </div>
-
-    <div class="card">
-      <div class="label">Treasury (7TRB)</div>
-      <div class="value" id="treasury">—</div>
-    </div>
-
-    <div class="card">
-      <div class="label">Spend vs Save</div>
-      <div class="value" id="spendSave">—</div>
-      <div class="bar"><i id="spendBar"></i></div>
-    </div>
-
-    <div class="card">
-      <div class="label">Referrals</div>
-      <div class="value" id="referrals">—</div>
-    </div>
-  </section>
-
-  <!-- CHART + PROJECTS -->
-  <div class="grid">
-    <div class="card">
-      <div class="label">Treasury Trend</div>
-      <canvas id="treasuryChart" height="140"></canvas>
-    </div>
-
-    <div class="card">
-      <div class="label">Projects</div>
-      <table><tbody id="projRows"></tbody></table>
-    </div>
-  </div>
-
-  <!-- MERCHANT MAP -->
-  <div class="grid" style="margin-top:20px">
-    <div class="card">
-      <div class="label">Merchant Map</div>
-      <div id="map"></div>
-      <div id="mapNotice" class="label" style="margin-top:8px;display:none">Add lat/lng in merchants.json</div>
-    </div>
-
-    <div class="card">
-      <div class="label">Merchant Directory</div>
-      <table><tbody id="merchRows"></tbody></table>
-    </div>
-  </div>
-
-</div>
-
-<script>
-/* ------------------------------------------
-   7TRB DASHBOARD — ALKEBULEUM NETWORK
--------------------------------------------*/
-
-// CHAIN SETTINGS
-const ALKE_RPC = "https://rpc.alkebuleum.com";
-
-// 7TRB CONTRACT ON ALKE
-const TOKEN_ADDRESS = "0xdf7ce67dB19142672c4193d969cdD9975A5A6038";
-const TOKEN_DECIMALS = 18;
-const TOKEN_SYMBOL = "7TRB";
-
-// TREASURY WALLET
-const TREASURY = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB";
-
-// ----- CONNECT WALLET -----
-function updateBtn(addr){
-  const btn = document.getElementById("connectBtn");
-  btn.textContent = addr ? addr.slice(0,6)+"..."+addr.slice(-4) : "Connect Wallet";
-}
-
-async function connectWallet(){
-  if(!window.ethereum){ alert("MetaMask required."); return; }
-  try{
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const accounts = await provider.send("eth_requestAccounts", []);
-    updateBtn(accounts[0]);
-    showBalance(accounts[0]);
-  }catch(err){
-    console.error(err);
-  }
-}
-
-async function showBalance(addr){
-  const provider = new ethers.JsonRpcProvider(ALKE_RPC);
-  const contract = new ethers.Contract(TOKEN_ADDRESS, ["function balanceOf(address) view returns(uint256)"], provider);
-
-  const bal = await contract.balanceOf(addr);
-  const display = Number(bal)/10**TOKEN_DECIMALS;
-  document.getElementById("walletBalance").textContent =
-    `Your Balance: ${display.toFixed(3)} ${TOKEN_SYMBOL}`;
-}
-
-document.getElementById("connectBtn").onclick = connectWallet;
-
-/* -------------- LOAD METRICS -------------- */
-async function safeJson(path){
-  try{
-    const r = await fetch(path);
-    return r.json();
-  }catch(e){
-    return null;
-  }
-}
-
-(async()=>{
-
-  const metrics = await safeJson("data/metrics.json");
-  const merchants = await safeJson("data/merchants.json");
-
-  if(!metrics) return;
-
-  document.getElementById("holders").textContent = metrics.holders;
-  document.getElementById("active").textContent = metrics.active_wallets_30d;
-  document.getElementById("referrals").textContent = metrics.referrals ?? 0;
-
-  // Spend/save
-  const pct = Math.round(metrics.spent_pct_30d*100);
-  document.getElementById("spendSave").textContent = pct+"% spent";
-  document.getElementById("spendBar").style.width = pct+"%";
-
-  // Projects
-  const pr = metrics.projects || {};
-  const p = document.getElementById("projRows");
-  ["proposed","approved","funded","delivered"].forEach(k=>{
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${k}</td><td>${pr[k]||0}</td>`;
-    p.appendChild(tr);
-  });
-
-  // TREASURY TREND CHART
-  if(metrics.treasury_series){
-    const series = metrics.treasury_series;
-    new Chart(document.getElementById("treasuryChart"),{
-      type:"line",
-      data:{
-        labels:series.map(s=>s[0]),
-        datasets:[{data:series.map(s=>s[1]),borderColor:"#FFD700",tension:0.3}]
-      },
-      options:{plugins:{legend:{display:false}}}
-    });
-  }
-
-  // MERCHANT MAP
-  if(Array.isArray(merchants) && merchants.some(m=>m.lat && m.lng)){
-    const map = L.map("map").setView([42.33,-83.04], 4);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
-
-    merchants.forEach(m=>{
-      if(m.lat && m.lng){
-        L.marker([m.lat,m.lng]).addTo(map).bindPopup(`<b>${m.name}</b><br>${m.city}`);
-      }
-    });
-  } else {
-    document.getElementById("mapNotice").style.display="block";
-  }
-
-})();
-</script>
-
+  <!-- Dashboard logic -->
+  <script src="dashboard.js"></script>
 </body>
 </html>
