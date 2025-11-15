@@ -1,4 +1,8 @@
 {
-  "holders": { "goal": 1000 },
-  "treasury_usd": { "goal": 50000 }
+  "holders": {
+    "goal": 1000
+  },
+  "treasury_usd": {
+    "goal": 10000
+  }
 }
