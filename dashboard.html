@@ -256,90 +256,7 @@ const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB";
     }catch(e){ console.warn('Map init failed:', e); }
   })();
 
-  <script>
-/* -------------------------------
-   7TRB DASHBOARD WALLET HANDLER
-   Works in MetaMask + Mobile
--------------------------------- */
-
-// ---- Config for wallet/token ----
-const TOKEN_ADDRESS = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D"; // 7TRB contract
-const TOKEN_DECIMALS = 18;
-const TOKEN_SYMBOL = "7TRB";
-const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB"; // AmVault Treasury Wallet
-
-/** Make connect button pretty */
-function updateButton(account) {
-  const btn = document.getElementById("connectBtn");
-  if (!btn) return;
-
-  if (account) {
-    btn.textContent = account.slice(0, 6) + "..." + account.slice(-4);
-    btn.style.background = "linear-gradient(90deg,#FFD700,#b8912f)";
-  } else {
-    btn.textContent = "Connect Wallet";
-    btn.style.background = "";
-  }
-}
-
-/** Fetch 7TRB balance USING THE USER'S WALLET PROVIDER */
-async function showBalance(account) {
-  if (!account) return;
-
-  try {
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const contract = new ethers.Contract(
-      TOKEN_ADDRESS,
-      ["function balanceOf(address) view returns (uint256)"],
-      provider
-    );
-
-    const raw = await contract.balanceOf(account);
-    const balance = Number(raw) / 10 ** TOKEN_DECIMALS;
-
-    document.getElementById("walletBalance").textContent =
-      `Your Balance: ${balance.toFixed(3)} ${TOKEN_SYMBOL}`;
-  } catch (err) {
-    console.error("Balance error:", err);
-  }
-}
-
-/** Connect wallet */
-async function connectWallet() {
-  if (!window.ethereum) {
-    alert("No wallet found. Use MetaMask or a Web3 browser.");
-    return;
-  }
-
-  try {
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const accounts = await provider.send("eth_requestAccounts", []);
-    const account = accounts[0];
-
-    updateButton(account);
-    showBalance(account);
-
-  } catch (err) {
-    console.error("Connect error:", err);
-    alert("Wallet connection failed.");
-  }
-}
-
-/** Auto-connect if already authorized */
-async function checkConnection() {
-  if (!window.ethereum) return;
-
-  try {
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const accounts = await provider.send("eth_accounts", []);
-
-    if (accounts.length > 0) {
-      updateButton(accounts[0]);
-      showBalance(accounts[0]);
-    }
-  } catch (err) {
-    console.error("Auto-connect error:", err);
-  }
+  <
 }
 
 /** Listen for account changes */
@@ -354,25 +271,91 @@ if (window.ethereum) {
     }
   });
 }
-<script>
-/* -------------------------------
-   7TRB DASHBOARD WALLET HANDLER
-   Works in MetaMask + Mobile
--------------------------------- */
+<
+  <script>
+/* ============================================================
+   7TRB Dashboard Script (CLEAN + FIXED + ALKEBULEUM-READY)
+   ============================================================ */
 
-// ---- Config for wallet/token ----
-const TOKEN_ADDRESS = "0xD81641716926F6D55dC5AF6929dbE046bBf43c0D"; // 7TRB contract
+const ALKE_RPC       = "https://rpc.alkebuleum.com";
+const TOKEN_ADDRESS  = "0xdf7ce67dB19142672c4193d969cdD9975A5A6038"; 
 const TOKEN_DECIMALS = 18;
-const TOKEN_SYMBOL = "7TRB";
-const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB"; // AmVault Treasury Wallet
+const TOKEN_SYMBOL   = "7TRB";
+const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB";
 
-/** Make connect button pretty */
-function updateButton(account) {
-  const btn = document.getElementById("connectBtn");
-  if (!btn) return;
+/* ------------------------------
+   SAFE JSON FETCHER
+------------------------------ */
+async function safeJson(u){
+  try{
+    const r = await fetch(u, { cache:'no-store' });
+    if(!r.ok) throw new Error(u+': '+r.status);
+    return r.json();
+  }catch(e){
+    console.warn("Fetch failed:", e);
+    return null;
+  }
+}
 
-  if (account) {
-    btn.textContent = account.slice(0, 6) + "..." + account.slice(-4);
+/* ------------------------------
+   COMMUNITY DATA LOADER
+------------------------------ */
+(async function(){
+  const [goals, metrics, merchants, referrals] = await Promise.all([
+    safeJson('data/goals.json'),
+    safeJson('data/metrics.json'),
+    safeJson('data/merchants.json'),
+    safeJson('data/referrals.json')
+  ]);
+
+  if (!metrics) return;
+
+  // Timestamp
+  const upd=new Date(metrics.updated_at); 
+  document.getElementById('updatedAt').textContent=upd.toLocaleString();
+
+  // KPIs
+  document.getElementById('holders').textContent = (metrics.holders ?? 0).toLocaleString();
+  document.getElementById('active').textContent = (metrics.active_wallets_30d ?? 0).toLocaleString();
+  document.getElementById('treasury').textContent = "$" + (metrics.treasury_usd ?? 0).toLocaleString();
+
+  // Projects table
+  const pr = metrics.projects || {};
+  const body = document.getElementById('projRows');
+  [['Proposed',pr.proposed],['Approved',pr.approved],['Funded',pr.funded],['Delivered',pr.delivered]]
+    .forEach(([k,v])=>{
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td>${k}</td><td>${v??0}</td>`;
+      body.appendChild(tr);
+    });
+
+  // Merchants table
+  if (Array.isArray(merchants)) {
+    const m=document.getElementById('merchRows');
+    merchants.forEach(x=>{
+      const tr=document.createElement('tr');
+      tr.innerHTML=`
+        <td>${x.url ? `<a href="${x.url}" target="_blank" rel="noopener">${x.name}</a>` : x.name}</td>
+        <td>${x.city||''}</td>
+        <td>${x.since||''}</td>
+        <td>${x.monthly_volume??0}</td>`;
+      m.appendChild(tr);
+    });
+  }
+})();
+</script>
+
+<script>
+/* ============================================================
+   WALLET CONNECT (ALKEBULEUM)
+   ============================================================ */
+
+function updateButton(account){
+  const btn=document.getElementById('connectBtn');
+  if(!btn) return;
+
+  if(account){
+    btn.textContent = account.slice(0,6)+'...'+account.slice(-4);
     btn.style.background = "linear-gradient(90deg,#FFD700,#b8912f)";
   } else {
     btn.textContent = "Connect Wallet";
@@ -380,10 +363,8 @@ function updateButton(account) {
   }
 }
 
-/** Fetch 7TRB balance USING THE USER'S WALLET PROVIDER */
 async function showBalance(account){
   try{
-    // Read from Alkebuleum, not Ethereum
     const provider = new ethers.JsonRpcProvider(ALKE_RPC);
     const contract = new ethers.Contract(
       TOKEN_ADDRESS,
@@ -391,81 +372,65 @@ async function showBalance(account){
       provider
     );
 
-    // User balance (on ALKE 7TRB contract)
     const raw = await contract.balanceOf(account);
     const formatted = Number(raw) / 10 ** TOKEN_DECIMALS;
 
     const el = document.getElementById('walletBalance');
-    el.textContent = `Your 7TRB (Alkebuleum): ${formatted.toFixed(3)} ${TOKEN_SYMBOL}`;
+    el.textContent = `Your 7TRB (Alkebuleum): ${formatted.toFixed(4)} ${TOKEN_SYMBOL}`;
 
-    // Also show Treasury balance
-    if (account.toLowerCase() !== TREASURY_WALLET.toLowerCase()) {
-      const treasuryBalance = await contract.balanceOf(TREASURY_WALLET);
-      const tFormatted = Number(treasuryBalance) / 10 ** TOKEN_DECIMALS;
-      const treasuryDiv = document.createElement("div");
-      treasuryDiv.style.color = "#FFD700";
-      treasuryDiv.style.fontWeight = "600";
-      treasuryDiv.textContent = `Treasury (Alkebuleum): ${tFormatted.toFixed(3)} ${TOKEN_SYMBOL}`;
-      el.parentNode.insertBefore(treasuryDiv, el.nextSibling);
-    }
-  } catch (err){
-    console.error('Balance fetch failed (Alkebuleum):', err);
+    const tRaw = await contract.balanceOf(TREASURY_WALLET);
+    const tFmt = Number(tRaw) / 10 ** TOKEN_DECIMALS;
+    el.innerHTML += `<br>Treasury: ${tFmt.toFixed(4)} ${TOKEN_SYMBOL}`;
+
+  }catch(e){ 
+    console.error("Balance error:", e);
   }
 }
 
-/** Connect wallet */
-async function connectWallet() {
-  if (!window.ethereum) {
-    alert("No wallet found. Use MetaMask or a Web3 browser.");
+async function connectWallet(){
+  if(!window.ethereum){ 
+    alert("No wallet detected. Install MetaMask.");
     return;
   }
 
-  try {
+  try{
     const provider = new ethers.BrowserProvider(window.ethereum);
     const accounts = await provider.send("eth_requestAccounts", []);
-    const account = accounts[0];
-
-    updateButton(account);
-    showBalance(account);
-
-  } catch (err) {
-    console.error("Connect error:", err);
-    alert("Wallet connection failed.");
+    updateButton(accounts[0]);
+    showBalance(accounts[0]);
+  }catch(e){
+    console.error("Connect failed:", e);
   }
 }
 
-/** Auto-connect if already authorized */
-async function checkConnection() {
-  if (!window.ethereum) return;
+async function checkConnection(){
+  if(!window.ethereum) return;
 
-  try {
+  try{
     const provider = new ethers.BrowserProvider(window.ethereum);
     const accounts = await provider.send("eth_accounts", []);
-
-    if (accounts.length > 0) {
+    if(accounts.length){
       updateButton(accounts[0]);
       showBalance(accounts[0]);
     }
-  } catch (err) {
-    console.error("Auto-connect error:", err);
+  }catch(e){
+    console.error("Auto-connect failed:", e);
   }
 }
 
-/** Listen for account changes */
-if (window.ethereum) {
-  ethereum.on("accountsChanged", (accounts) => {
-    if (accounts.length === 0) {
+if(window.ethereum){
+  ethereum.on("accountsChanged", (acc)=>{
+    if(acc.length){
+      updateButton(acc[0]);
+      showBalance(acc[0]);
+    }else{
       updateButton(null);
       document.getElementById("walletBalance").textContent = "";
-    } else {
-      updateButton(accounts[0]);
-      showBalance(accounts[0]);
     }
   });
 }
 
-/** Init */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", ()=>{
   document.getElementById("connectBtn").addEventListener("click", connectWallet);
   checkConnection();
 });
