@@ -1,3 +1,10 @@
 [
-  { "name": "—", "city": "", "since": "", "monthly_volume": 0 }
+  {
+    "name": "MainHouse Merch",
+    "city": "Detroit",
+    "since": "2025",
+    "monthly_volume": 0,
+    "lat": 42.3314,
+    "lng": -83.0458
+  }
 ]
