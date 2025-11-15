@@ -1,9 +1,9 @@
 {
-  "updated_at": "2025-11-15T05:00:00Z",
+  "updated_at": "2025-11-14T05:30:04Z",
   "holders": 0,
   "active_wallets_30d": 0,
   "treasury_usd": 0,
-  "spent_pct_30d": 0.15,
+  "spent_pct_30d": 0,
   "projects": {
     "proposed": 0,
     "approved": 0,
@@ -11,7 +11,8 @@
     "delivered": 0
   },
   "treasury_series": [
-    ["Day 1", 0],
-    ["Day 2", 0]
+    ["Oct", 0],
+    ["Nov", 0],
+    ["Dec", 0]
   ]
 }
