@@ -38,6 +38,7 @@ async function switchToAlkebuleum() {
   }
 }
 async function connectWallet(){
+  await switchToAlkebuleum();
   const status = $("status");
   if(typeof window.ethereum === "undefined"){
     alert("No wallet found. Open this page inside MetaMask / a Web3 wallet browser.");
