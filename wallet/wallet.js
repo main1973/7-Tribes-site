@@ -15,7 +15,28 @@ const $ = (id) => document.getElementById(id);
 function short(addr){
   return addr ? addr.slice(0,6) + "..." + addr.slice(-4) : "—";
 }
+async function switchToAlkebuleum() {
+  const params = {
+    chainId: "0x39F8E",
+    chainName: "Alkebuleum Mainnet",
+    nativeCurrency: {
+      name: "Alkebuleum Token",
+      symbol: "AKE",
+      decimals: 18
+    },
+    rpcUrls: ["https://rpc.alkebuleum.com"],
+    blockExplorerUrls: ["https://explorer.alkebuleum.com"]
+  };
 
+  try {
+    await ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [params]
+    });
+  } catch (err) {
+    console.error("Failed to add/switch to Alkebuleum:", err);
+  }
+}
 async function connectWallet(){
   const status = $("status");
   if(typeof window.ethereum === "undefined"){
