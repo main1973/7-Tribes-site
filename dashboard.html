@@ -6,19 +6,13 @@
   <title>7Tribes — Live Community Metrics</title>
   <link rel="icon" href="images/logo.png" />
 
-  <!-- Guard: if someone hits root by mistake -->
-  <script>
-    if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
-      // stay safe
-    }
-  </script>
-
-  <!-- Libs -->
+  <!-- Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+  <!-- Styles -->
   <style>
     :root{
       --bg:#0b0b0c;
@@ -27,44 +21,69 @@
       --muted:#a1a1a6;
       --accent:#FFD700;
       --border:#222;
+      --green:#43a047;
+      --yellow:#fbc02d;
+      --red:#e53935;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
       background:var(--bg);
       color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;
+      font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
     }
+
     header{
       background:#11141a;
       border-bottom:1px solid var(--border);
     }
-    .wrap{max-width:1080px;margin:auto;padding:18px}
+
+    .wrap{
+      max-width:1080px;
+      margin:auto;
+      padding:18px;
+    }
+
     h1{margin:0}
     a{color:var(--accent);text-decoration:none}
 
+    /* Status dots */
+    #networkDot, #walletDot {
+      display:inline-block;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      margin-left:6px;
+    }
+
+    /* KPI Cards */
     .cards{
       display:grid;
       grid-template-columns:repeat(5,minmax(0,1fr));
       gap:12px;
       margin-top:12px;
     }
+
     .card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:14px;
       padding:14px;
     }
+
     .label{
       font-size:12px;
       color:var(--muted);
       text-transform:uppercase;
       letter-spacing:.04em;
     }
+
     .value{
       font-size:28px;
       font-weight:800;
     }
+
     .bar{
       height:10px;
       background:#1a1a1d;
@@ -72,6 +91,7 @@
       overflow:hidden;
       margin-top:8px;
     }
+
     .bar>i{
       display:block;
       height:100%;
@@ -80,21 +100,25 @@
       transition:width .4s ease;
     }
 
+    /* Grid layout */
     .grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:12px;
     }
+
     table{
       width:100%;
       border-collapse:collapse;
       font-size:14px;
     }
+
     th,td{
       padding:10px;
       border-bottom:1px solid var(--border);
     }
+
     th{text-align:left;color:var(--muted)}
 
     #map{
@@ -116,10 +140,24 @@
       cursor:pointer;
       box-shadow:0 0 12px rgba(255,215,0,.25);
     }
+
     .ghost{
       background:transparent;
       color:var(--text);
       border:1px solid #2b2f3b;
+      padding:10px 14px;
+      border-radius:30px;
+    }
+
+    #systemBanner{
+      text-align:center;
+      background:#0f1c13;
+      padding:10px;
+      color:#43a047;
+      font-weight:700;
+      margin-bottom:15px;
+      border-bottom:1px solid #1c3a29;
+      display:none;
     }
 
     @media (max-width:1100px){
@@ -136,68 +174,90 @@
 </head>
 
 <body>
+
+  <!-- ONLINE SYSTEM BANNER -->
+  <div id="systemBanner">SYSTEM ONLINE — 7TRB DASHBOARD ACTIVE</div>
+
+  <!-- HEADER -->
   <header>
-    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      
       <div style="display:flex;align-items:center;gap:10px">
         <img src="images/logo.png" alt="7TRB" style="width:36px;height:36px;border-radius:50%">
-        <h1>Live Community Metrics</h1>
+        <h1>
+          7TRB Dashboard 
+          <span id="networkDot" title="Network Status" style="background:var(--red);"></span>
+          <span id="walletDot" title="Wallet Status" style="background:var(--red);"></span>
+        </h1>
       </div>
+
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <button id="connectBtn" class="cta">Connect Wallet</button>
-        <a href="index.html" class="ghost" style="padding:10px 14px;border-radius:30px;text-decoration:none">← Back</a>
-        <p style="color:#FFD700;font-weight:600;margin:6px 0;">
-          Treasury: <b>0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</b>
-        </p>
+        <a href="index.html" class="ghost">← Back</a>
       </div>
     </div>
   </header>
 
   <div class="wrap">
+
+    <!-- Timestamp -->
     <p style="color:#a1a1a6;margin:.3rem 0 .7rem">
       Updated <span id="updatedAt">—</span>
-      <span id="freshDot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#999;margin-left:8px;vertical-align:middle" title="Data age"></span>
     </p>
 
-    <div id="walletBalance" style="margin:-2px 0 10px;color:#FFD700;font-weight:600"></div>
+    <!-- WALLET INFO -->
+    <div id="walletBalance" style="margin:8px 0 12px;color:#FFD700;font-weight:600"></div>
+    <div id="tokenBalance" style="margin-bottom:14px;color:#FFD700;font-weight:600"></div>
+
+    <!-- CONTRACT ADDRESSES -->
+    <div class="card" style="margin-bottom:18px;">
+      <div class="label">Smart Contracts</div>
+      <p style="margin:6px 0;">
+        <b>Treasury Contract:</b><br>
+        <span style="color:#FFD700;">0xdf7ce67dB19142672c4193d969cdD9975A5A6038</span>
+      </p>
+      <p style="margin:6px 0;">
+        <b>7TRB Token Contract:</b><br>
+        <span id="tokenContract" style="color:#FFD700;">TBA</span>
+      </p>
+    </div>
 
     <!-- KPI CARDS -->
-    <section class="cards" aria-label="KPIs">
+    <section class="cards">
       <div class="card">
         <div class="label">Holders</div>
         <div class="value" id="holders">—</div>
         <div class="bar"><i id="holdersBar"></i></div>
       </div>
       <div class="card">
-        <div class="label">Active wallets (30d)</div>
+        <div class="label">Active (30d)</div>
         <div class="value" id="active">—</div>
-        <div class="label">rolling 30 days</div>
       </div>
       <div class="card">
-        <div class="label">Treasury (USD est)</div>
+        <div class="label">Treasury (USD)</div>
         <div class="value" id="treasury">—</div>
         <div class="bar"><i id="treasuryBar"></i></div>
       </div>
       <div class="card">
-        <div class="label">Spend vs Save (30d)</div>
+        <div class="label">Spend vs Save</div>
         <div class="value" id="spendSave">—</div>
         <div class="bar"><i id="spendBar"></i></div>
       </div>
       <div class="card">
         <div class="label">Referrals (30d)</div>
         <div class="value" id="referrals">—</div>
-        <div class="label" id="referralsNote">by source</div>
       </div>
     </section>
 
     <!-- CHART + PROJECTS -->
     <div class="grid">
       <section class="card">
-        <div class="label" style="margin-bottom:6px">Treasury trend</div>
-        <canvas id="treasuryChart" height="140" aria-label="Treasury time series"></canvas>
+        <div class="label">Treasury trend</div>
+        <canvas id="treasuryChart" height="140"></canvas>
       </section>
 
       <section class="card">
-        <div class="label" style="margin-bottom:6px">Projects pipeline</div>
+        <div class="label">Projects pipeline</div>
         <table>
           <thead><tr><th>Status</th><th>Count</th></tr></thead>
           <tbody id="projRows"></tbody>
@@ -205,28 +265,70 @@
       </section>
     </div>
 
-    <!-- MERCHANT MAP + DIRECTORY -->
+    <!-- MERCHANTS -->
     <div class="grid" style="margin-top:12px">
       <section class="card">
-        <div class="label" style="margin-bottom:6px">Merchant map</div>
+        <div class="label">Merchant map</div>
         <div id="map"></div>
-        <div id="mapNotice" class="label" style="margin-top:8px;display:none">
-          Add <code>lat</code> and <code>lng</code> to merchants.json to enable pins.
-        </div>
       </section>
 
       <section class="card">
-        <div class="label" style="margin-bottom:6px">Merchant directory</div>
+        <div class="label">Merchant directory</div>
         <table>
           <thead><tr><th>Name</th><th>City</th><th>Since</th><th>Monthly 7TRB</th></tr></thead>
           <tbody id="merchRows"></tbody>
         </table>
-        <!-- You can later link to a dedicated merchants.html -->
       </section>
     </div>
+
   </div>
 
-  <!-- Dashboard logic -->
+  <!-- WALLET SCRIPT -->
+  <script>
+    const ALK_CHAIN_HEX = "0x3a006"; /* Replace when final chainId confirmed */
+
+    async function connectWallet() {
+      if (!window.ethereum) {
+        alert("No wallet found. Open inside MetaMask browser.");
+        return;
+      }
+
+      try {
+        const accounts = await ethereum.request({ method:"eth_requestAccounts" });
+        const wallet = accounts[0];
+
+        // Show wallet
+        document.getElementById("walletBalance").textContent = 
+          "Wallet Connected: " + wallet;
+
+        // Wallet green
+        document.getElementById("walletDot").style.background = "#43a047";
+
+        // Chain detection
+        const chainId = await ethereum.request({ method:"eth_chainId" });
+
+        if (chainId === ALK_CHAIN_HEX) {
+          document.getElementById("networkDot").style.background = "#43a047"; // green
+          document.getElementById("systemBanner").style.display = "block";
+        } else {
+          document.getElementById("networkDot").style.background = "#fbc02d"; // yellow
+          document.getElementById("systemBanner").style.display = "none";
+        }
+
+      } catch (err) {
+        console.error(err);
+        alert("Wallet connection failed.");
+      }
+    }
+  </script>
+
+  <!-- Dashboard Logic -->
   <script src="dashboard.js"></script>
+
+  <!-- Button Handler -->
+  <script>
+    document.getElementById("connectBtn").addEventListener("click", connectWallet);
+  </script>
+
 </body>
-</html>
+  </html>
