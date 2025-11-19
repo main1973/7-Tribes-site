@@ -221,7 +221,23 @@
         <span id="tokenContract" style="color:#FFD700;">TBA</span>
       </p>
     </div>
+<!-- DEX PANEL -->
+<section class="card" style="margin-bottom:18px; border-left:4px solid var(--accent);">
+  <div class="label" style="margin-bottom:6px;">Alkebuleum DEX</div>
 
+  <p id="dexStatus" style="color:#fbc02d; font-weight:600; margin-bottom:10px;">
+    🔄 DEX Status: <span style="color:#fbc02d;">COMING SOON</span>
+  </p>
+
+  <div style="display:flex; gap:10px; flex-wrap:wrap;">
+    <button class="cta" onclick="openDexSwap()" style="flex:1;min-width:120px;">Swap 7TRB ↔ AKE</button>
+    <button class="cta" onclick="openDexLiquidity()" style="flex:1;min-width:120px;">Liquidity Pool</button>
+  </div>
+
+  <p style="margin-top:10px; color:var(--muted); font-size:12px;">
+    Once the Alkebuleum DEX launches, these actions will activate instantly.
+  </p>
+</section>
     <!-- KPI CARDS -->
     <section class="cards">
       <div class="card">
@@ -329,6 +345,34 @@
   <script>
     document.getElementById("connectBtn").addEventListener("click", connectWallet);
   </script>
+<script>
+  // DEX placeholders until Alkebuleum goes live
+  const DEX_URL = "https://dex.alkebuleum.com";  // Replace when official
+  const SWAP_PATH = "/swap?token=7TRB";          
+  const LP_PATH = "/liquidity?pool=7TRB-AKE";    
 
+  function openDexSwap() {
+    window.open(DEX_URL + SWAP_PATH, "_blank");
+  }
+
+  function openDexLiquidity() {
+    window.open(DEX_URL + LP_PATH, "_blank");
+  }
+
+  // Auto-detect when DEX goes live (turns status green)
+  async function checkDexLive() {
+    try {
+      const response = await fetch(DEX_URL, { method: "HEAD" });
+      if (response.ok) {
+        document.getElementById("dexStatus").innerHTML =
+          "🟢 DEX Status: <span style='color:#43a047;'>ONLINE</span>";
+      }
+    } catch (err) {
+      // stays yellow until launch
+    }
+  }
+
+  checkDexLive();
+</script>
 </body>
   </html>
