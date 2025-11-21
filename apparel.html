@@ -1,41 +1,152 @@
-<nav style="padding:20px; text-align:center; font-size:20px;">
-  <a href="index.html" style="margin: 0 20px;">7TRB</a>
-  <a href="apparel.html" style="margin: 0 20px;">Apparel</a>
-  <a href="digital.html" style="margin: 0 20px;">Digital Products</a>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>7Tribes Apparel</title>
+
 <style>
-.product {
-  width: 300px;
-  display: inline-block;
-  margin: 20px;
-  text-align: center;
-}
+    body {
+        background-color: #000;
+        color: #FFD700;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
 
-.product img {
-  width: 100%;
-  border-radius: 10px;
-}
+    nav {
+        background: #111;
+        padding: 20px;
+    }
 
-a {
-  text-decoration:none;
-  display:inline-block;
-  padding:10px 20px;
-  margin-top:10px;
-  background:black;
-  color:white;
-  border-radius:5px;
-}
+    nav a {
+        color: #FFD700;
+        text-decoration: none;
+        margin: 0 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    h1 {
+        margin-top: 30px;
+        font-size: 40px;
+        letter-spacing: 2px;
+    }
+
+    h2 {
+        margin-top: 40px;
+        font-size: 32px;
+        color: #FFD700;
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 30px auto;
+        width: 90%;
+    }
+
+    .product-card {
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 10px;
+        width: 300px;
+        margin: 20px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid #333;
+    }
+
+    .product-title {
+        margin-top: 15px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #FFD700;
+    }
+
+    .buy-btn {
+        display: inline-block;
+        margin-top: 15px;
+        background: #FFD700;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .buy-btn:hover {
+        background: #e5c100;
+    }
 </style>
-<h1 style="text-align:center;">7Tribes Apparel</h1>
 
-<div class="product">
-  <img src="images/apparel/hoodie1.png" alt="Community Is Power Hoodie">
-  <h3>Community Is Power</h3>
-  <a href="https://mainhouseoasis.etsy.com" target="_blank">Buy on Etsy</a>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">7TRB</a>
+    <a href="apparel.html">Apparel</a>
+    <a href="digital.html">Digital Products</a>
+</nav>
+
+<h1>7Tribes Apparel</h1>
+
+
+<!-- HOODIES SECTION -->
+<h2>Hoodies</h2>
+<div class="container">
+
+    <!-- Hoodie 1–10 -->
+    <div class="product-card"><img src="images/apparel/hoodie1.jpeg"><div class="product-title">Hoodie 1</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy on Etsy</a></div>
+    <div class="product-card"><img src="images/apparel/hoodie2.jpeg"><div class="product-title">Hoodie 2</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy on Etsy</a></div>
+    <div class="product-card"><img src="images/apparel/hoodie3.jpeg"><div class="product-title">Hoodie 3</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/hoodie4.jpeg"><div class="product-title">Hoodie 4</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/hoodie5.jpeg"><div class="product-title">Hoodie 5</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/hoodie6.jpeg"><div class="product-title">Hoodie 6</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/hoodie7.jpeg"><div class="product-title">Hoodie 7</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/hoodie8.jpeg"><div class="product-title">Hoodie 8</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/hoodie9.jpeg"><div class="product-title">Hoodie 9</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/hoodie10.jpeg"><div class="product-title">Hoodie 10</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+
 </div>
 
-<div class="product">
-  <img src="images/apparel/hoodie2.png" alt="We Move As One Hoodie">
-  <h3>We Move As One</h3>
-  <a href="https://mainhouseoasis.etsy.com" target="_blank">Buy on Etsy</a>
+
+<!-- SHIRTS SECTION -->
+<h2>Shirts</h2>
+<div class="container">
+
+    <!-- Shirt 1–15 -->
+    <div class="product-card"><img src="images/apparel/shirt1.jpeg"><div class="product-title">Shirt 1</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt2.jpeg"><div class="product-title">Shirt 2</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt3.jpeg"><div class="product-title">Shirt 3</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt4.jpeg"><div class="product-title">Shirt 4</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt5.jpeg"><div class="product-title">Shirt 5</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt6.jpeg"><div class="product-title">Shirt 6</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt7.jpeg"><div class="product-title">Shirt 7</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt8.jpeg"><div class="product-title">Shirt 8</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt9.jpeg"><div class="product-title">Shirt 9</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt10.jpeg"><div class="product-title">Shirt 10</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt11.jpeg"><div class="product-title">Shirt 11</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt12.jpeg"><div class="product-title">Shirt 12</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt13.jpeg"><div class="product-title">Shirt 13</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt14.jpeg"><div class="product-title">Shirt 14</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card"><img src="images/apparel/shirt15.jpeg"><div class="product-title">Shirt 15</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+
 </div>
+
+</body>
+</html>
