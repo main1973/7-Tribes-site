@@ -1,471 +1,1471 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>7TRB • 7Tribes Unity Token</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
+<nav style="padding:20px; text-align:center; font-size:20px;">
+  <a href="index.html" style="margin: 0 20px;">7TRB</a>
+  <a href="apparel.html" style="margin: 0 20px;">Apparel</a>
+  <a href="digital.html" style="margin: 0 20px;">Digital Products</a>
+</nav>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="7TRB is a people-owned currency built on the Alkebuleum network — designed for Detroit, Africa, and the global tribe." />
 
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="7TRB • The People’s Currency" />
-  <meta property="og:description" content="Community • Unity • Ownership — value in motion, not in vaults." />
-  <meta property="og:url" content="https://7trb.com/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="images/7trb-hero.jpg" />
+  <title>7Tribes Unity Token (7TRB)</title>
+  <meta name="google-site-verification" content="J13STEzRChDz488QqKA5yP2eoiZ-FQNDUzuok6B2RHM" />
+  <meta name="description" content="7Tribes — Community • Unity • Ownership. A people-powered token with transparency, builders, and real use." />
+  <link rel="icon" href="images/logo.png" />
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json" />
+  <style>
+    :root{
+      --bg:#0f0a05;
+      --panel:#1a1208;
+      --panel-2:#120c06;
+      --ink:#fff7e6;
+      --muted:#d4c3a1;
+      --line:#3b2b17;
+      --gold:#e7b852;
+      --gold-2:#b8831b;
+      --gold-bright:#ffdd7a;
+      --ok:#25F4EE;
+      --pop:#FE2C55;
+      --radius:18px;
+      --radius-lg:24px;
+      --shadow:0 18px 60px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box;}
+    html,body{
+      margin:0;
+      background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
+      color:var(--ink);
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    img{max-width:100%;display:block}
+    a{color:var(--gold-bright);text-decoration:none}
+    a:hover{opacity:.9}
+    .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+
+    /* Generic layout helpers */
+    .section{padding:70px 0}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:18px}
+    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .four{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+    .title{
+      position:relative;
+      margin:0 0 18px;
+      font-size:clamp(24px,3.2vw,34px);
+      letter-spacing:.02em;
+      color:var(--gold-bright);
+    }
+    .title::before{
+      content:"";
+      position:absolute;
+      left:-16px;right:-16px;top:-26px;height:56px;border-radius:20px;
+      background:
+        repeating-linear-gradient(110deg, rgba(231,184,82,.22) 0 2px, transparent 2px 16px),
+        radial-gradient(1200px 300px at 10% 0%, rgba(231,184,82,.18), transparent 60%);
+      mask:linear-gradient(180deg,transparent,rgba(0,0,0,.9) 15%, rgba(0,0,0,.9) 85%, transparent);
+      animation:flow 9s linear infinite;
+      pointer-events:none;
+      opacity:.8;
+    }
+    @keyframes flow{to{transform:translateX(180px)}}
+
+    /* Card / box */
+    .box{
+      position:relative;
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:22px;
+      border:1px solid rgba(255,215,122,0.4);
+      box-shadow:0 18px 50px rgba(0,0,0,.6);
+      overflow:hidden;
+    }
+    .box::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:2px;
+      background:linear-gradient(90deg,rgba(255,215,122,.6),rgba(184,131,31,.8),rgba(255,215,122,.6));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.65;
+    }
+
+    .divider{
+      height:2px;
+      margin:32px auto;
+      width:82%;
+      border-radius:999px;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,215,122,0.4),
+        rgba(255,215,122,0.9),
+        rgba(255,215,122,0.4),
+        transparent
+      );
+      box-shadow:0 0 16px rgba(255,215,122,0.35);
+      animation:divideGlow 8s ease-in-out infinite;
+    }
+    @keyframes divideGlow{
+      0%,100%{opacity:.9;box-shadow:0 0 16px rgba(255,215,122,0.35);}
+      50%{opacity:1;box-shadow:0 0 24px rgba(255,215,122,0.55);}
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:700;
+      border:1px solid transparent;
+      cursor:pointer;
+      font-size:.95rem;
+      white-space:nowrap;
+    }
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#130b03;
+      border-color:rgba(255,215,122,.7);
+      box-shadow:0 0 18px rgba(255,215,122,.35);
+      position:relative;
+      animation:pulse 3.5s ease-in-out infinite;
+    }
+    .btn.ghost{
+      border:1px solid rgba(255,215,122,.35);
+      color:var(--ink);
+      background:transparent;
+    }
+    .btn.tiktok{
+      background:linear-gradient(90deg,var(--ok),var(--pop));
+      color:#0a0b0f;
+      border:none;
+      box-shadow:0 0 20px rgba(254,44,85,.28);
+    }
+    .btn.tiktok:hover{box-shadow:0 0 30px rgba(37,244,238,.48);transform:translateY(-2px);}
+    @keyframes pulse{
+      0%,100%{box-shadow:0 0 0 0 rgba(255,215,122,.35);}
+      50%{box-shadow:0 0 18px 6px rgba(255,215,122,.35);}
+    }
+
+    /* Header / Banner */
+    .site-header{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,215,122,0.2);
+    }
+    .hero-banner{
+      width:100%;
+      height:440px;
+      background:url('images/welcome_banner.png') center/cover no-repeat;
+      position:relative;
+    }
+    .hero-banner::before{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.65));
+    }
+    .header-inner{
+      position:relative;
+      z-index:2;
+      max-width:1160px;
+      margin:0 auto;
+      padding:22px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .brand img{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.2);
+      box-shadow:0 10px 30px rgba(0,0,0,.6);
+    }
+    .brand b{
+      font-size:1.6rem;
+      color:var(--gold-bright);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      color:var(--gold-bright);
+      font-size:.9rem;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .banner-text{
+      position:absolute;
+      left:50%;
+      bottom:38px;
+      transform:translateX(-50%);
+      text-align:center;
+      z-index:2;
+      padding:0 16px;
+    }
+    .banner-text h1{
+      margin:0;
+      color:var(--gold-bright);
+      font-size:clamp(24px,3vw,34px);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .banner-text p{
+      margin:8px 0 0;
+      color:#fff7e6;
+      font-size:.98rem;
+    }
+
+    /* Row under header */
+    .header-row{
+      background:linear-gradient(90deg,#261608,#110804);
+      border-bottom:1px solid rgba(255,215,122,.25);
+    }
+    .header-row-inner{
+      max-width:1160px;
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .header-row h2{
+      margin:0;
+      font-size:1.2rem;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      text-align:center;
+      flex:1 1 auto;
+    }
+    .about-7tribes-block {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: rgba(255, 215, 0, 0.03);
+  border-left: 3px solid #f7d774;
+  border-radius: 12px;
+}
+
+.about-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: #f7d774;
+  margin-bottom: 25px;
+}
+
+.about-text {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: #eaeaea;
+}
+
+.about-highlight p {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f7d774;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.closing-line {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 20px;
+  line-height: 1.8;
+  color: #fff;
+}
+
+    /* Wallet + Handbook */
+    .wallet-handbook{
+      text-align:center;
+    }
+    .wallet-handbook-row{
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      gap:32px;
+      margin-top:26px;
+    }
+    .wallet-card{
+      flex:1;
+      min-width:280px;
+      max-width:420px;
+    }
+    .wallet-card img{
+      border-radius:14px;
+      box-shadow:0 0 28px rgba(255,215,122,0.25);
+    }
+    .value-comparison {
+  margin-top: 60px;
+  padding: 40px 20px;
+  background: rgba(255, 215, 0, 0.03);
+  border-left: 3px solid #f7d774;
+  border-radius: 12px;
+}
+
+.possibility-title {
+  font-size: 32px;
+  color: #f7d774;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.possibility-sub {
+  text-align: center;
+  max-width: 750px;
+  font-size: 18px;
+  margin: 0 auto 40px;
+  opacity: 0.9;
+}
+
+    /* Promo row */
+    .promo-row{
+      max-width:1160px;
+      margin:0 auto 40px;
+      padding:0 20px 20px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:24px;
+      justify-content:center;
+      align-items:flex-start;
+    }
+    .promo-card{
+      flex:1 1 320px;
+      max-width:520px;
+      text-align:center;
+    }
+
+    /* Join form */
+    .join-form{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .join-form input{
+      flex:1 1 260px;
+      background:#140e08;
+      border:1px solid rgba(255,215,122,.35);
+      border-radius:999px;
+      color:#fff7e6;
+      padding:12px 14px;
+      outline:none;
+    }
+
+    /* Back to top */
+    #toTop{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:#0c0d12 url('images/logo.png') center/cover no-repeat;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 0 0 0 rgba(231,184,82,.45);
+      opacity:0;
+      visibility:hidden;
+      cursor:pointer;
+      z-index:60;
+      transition:opacity .25s, visibility .25s, transform .2s;
+      animation:breath 3.2s ease-in-out infinite;
+    }
+    #toTop.show{opacity:1;visibility:visible;}
+    #toTop:hover{transform:translateY(-2px);}
+    @keyframes breath{
+      0%,100%{box-shadow:0 0 0 0 rgba(231,184,82,.38);}
+      50%{box-shadow:0 0 22px 6px rgba(231,184,82,.32);}
+    }
+
+    /* Footer */
+    footer{
+      position:relative;
+      background:radial-gradient(circle at center, rgba(255,215,122,.2), #090604 78%);
+      border-top:1px solid rgba(255,215,122,.35);
+      box-shadow:0 -6px 30px rgba(0,0,0,.7);
+      padding:20px 0;
+    }
+    footer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at center, rgba(255,215,122,0.14), transparent 70%);
+      opacity:0.6;
+      animation:footerGlow 8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes footerGlow{
+      0%,100%{opacity:0.4;}
+      50%{opacity:0.8;}
+    }
+
+    /* Responsive */
+    @media (max-width:900px){
+      .header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .nav-links{
+        justify-content:flex-start;
+      }
+      .header-row-inner{
+        flex-direction:column;
+        align-items:stretch;
+        text-align:center;
+      }
+      .header-row h2{
+        order:-1;
+      }
+    }
+    @media (max-width:700px){
+      .hero-banner{
+        height:360px;
+      }
+      .brand img{
+        width:62px;height:62px;
+      }
+    }
+    @media (max-width:600px){
+      .two,.three,.four{grid-template-columns:1fr;}
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Top Navigation -->
-  <nav class="topnav">
-    <a href="index.html" class="brand">7TRB</a>
-    <div class="links">
-      <a href="apparel.html">Apparel</a>
-      <a href="digital.html">Digital Products</a>
-      <a href="#about">About</a>
-      <a href="#purpose">Purpose</a>
-      <a href="#transparency">Transparency</a>
-      <a href="#value">Value</a>
-      <a href="#get7trb">Get 7TRB</a>
-      <a href="#builders">Builders</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="learn.html">Crypto 101</a>
+<header class="site-header">
+  <!-- Banner -->
+  <div class="hero-banner">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="images/welcome_banner.png" alt="7TRB logo">
+        <b>7TRB</b>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#purpose">Purpose</a>
+        <a href="#transparency">Transparency</a>
+        <a href="#value">Value</a>
+        <a href="#get7trb">Get 7TRB</a>
+        <a href="#builders">Builders</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="learn.html">Crypto 101</a>
+      </nav>
     </div>
-  </nav>
 
-  <!-- HERO -->
-  <header class="hero">
-    <img src="images/7trb-hero.jpg" alt="7TRB Unity Token" class="banner" />
-    <div class="logo-container">
-      <img src="images/7trb-logo.png" alt="7TRB Logo" class="logo" />
-    </div>
-    <div class="sub-hero">
-      <h1>WELCOME TO 7TRIBES</h1>
+    <div class="banner-text">
+      <h1>Welcome to 7Tribes</h1>
       <p>Community • Unity • Ownership — value in motion, not in vaults.</p>
     </div>
-  </header>
+  </div>
 
-  <p class="net-hint">Detroit Made • Building for Detroit &amp; Beyond</p>
+  <!-- Row below header -->
+  <div class="header-row">
+    <div class="header-row-inner">
+      <a class="btn tiktok" href="https://vt.tiktok.com/ZTMtY4tah/?page=TikTokShop" target="_blank" rel="noopener">
+        TikTok Shop
+      </a>
 
-  <!-- QUICK ACTIONS -->
-  <section class="card fade-up">
-    <div class="actions-row">
-      <a href="https://www.tiktok.com" class="social-button" target="_blank" rel="noopener">TikTok Shop</a>
-      <a href="dashboard.html" class="outline-btn">Open Dashboard</a>
+      <h2>Detroit Made • Building for Detroit & Beyond</h2>
+
+      <a href="dashboard.html" class="btn gold">
+        Open Dashboard
+      </a>
     </div>
-  </section>
+  </div>
+</header>
 
-  <!-- WALLET & HANDBOOK (TOP) -->
-  <section class="card fade-up" id="wallet">
-    <h2>7TRB Wallet &amp; Handbook</h2>
-    <p>Tools for motion and mindset. One moves value, one moves people.</p>
+<main>
 
-    <div class="roadmap">
-      <!-- Wallet card -->
-      <div class="rm-tile">
-        <h3>7TRB Wallet</h3>
-        <p>Your digital gateway to send, hold, and circulate 7TRB across the tribe.</p>
-        <p><strong>7trb.com/wallet</strong> (AmVault on Alkebuleum)</p>
-        <a href="wallet.html" class="etsy-btn">Open 7TRB Wallet</a>
-      </div>
+  <!-- WALLET + HANDBOOK -->
+  <section class="section wallet-handbook" id="wallet-handbook">
+    <div class="wrap">
+      <h2 class="title">7TRB Wallet & Handbook</h2>
+      <p class="muted" style="max-width:700px;margin:0 auto 26px;">
+        Tools for motion and mindset. One moves value, one moves people.
+      </p>
 
-      <!-- Handbook card -->
-      <div class="rm-tile">
-        <h3>7TRB Handbook</h3>
-        <p>The field manual for a people-owned economy — purpose, playbook, and power.</p>
-        <p>
-          <a href="handbook.html" class="outline-btn">📘 Open 7TRB Handbook</a>
-        </p>
-        <p>
-          <a href="docs/7TRB_Field_Manual.pdf" class="outline-btn">⬇︎ Download Field Manual (PDF)</a>
-        </p>
+      <div class="wallet-handbook-row">
+        <div class="wallet-card">
+          <img src="images/7trb_wallet_ad.png" alt="7TRB Wallet">
+          <p class="muted" style="margin-top:12px;">
+            Your digital gateway to send, hold, and circulate 7TRB across the tribe.
+          </p>
+          <a href="wallet/index.html" class="btn gold"
+            >Open 7TRB Wallet
+          </a>
+      
+        </div>
+
+        <div class="wallet-card">
+          <img src="images/handbook.png" alt="7TRB Handbook">
+          <p class="muted" style="margin-top:12px;">
+            The field manual for a people-owned economy — purpose, playbook, and power.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:8px;">
+            <a href="handbook.html" class="btn gold">
+              📘 Open 7TRB Handbook
+            </a>
+            <a class="btn ghost"
+               href="docs/7TRB_Field_Manual.pdf"
+               download="7TRB_Field_Manual.pdf"
+               target="_blank" rel="noopener">
+              ⬇︎ Download Field Manual (PDF)
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section class="card fade-up" id="about">
-    <h2>About 7Tribes (7TRB)</h2>
-    <p>7Tribes isn't just a token — it's a blueprint for independence. The mission is simple: redirect the flow of money back into the people's hands. Instead of watching wealth leak out into banks, corporations, and gatekeepers, 7TRB keeps value moving inside the community that built it.</p>
+  <section class="section" id="about">
+    <div class="wrap">
+      <h2 class="title">About 7Tribes (7TRB)</h2>
+      <div class="box">
+        <p class="muted">
+          7Tribes isn't just a token — it's a blueprint for independence. The mission is simple:
+          redirect the flow of money back into the people's hands. Instead of watching wealth leak
+          out into banks, corporations, and gatekeepers, 7TRB keeps value moving inside the
+          community that built it.
+          <div class="about-7tribes-block">
 
-    <h3>The People’s Currency for a New Era</h3>
-    <p>7TRB is more than a token — it’s a movement. In a world where the U.S. dollar runs on trust in governments, and Bitcoin runs on trust in code, 7TRB runs on trust in people.</p>
-    <p>This is currency built from community, fueled by culture, and strengthened by real-world circulation.</p>
-    <p>While old financial systems argue over power, and the digital gold rush chases speculation, 7TRB grows from something deeper: unity, usage, and ownership.</p>
-    <p>No institutions. No gatekeepers. No middlemen. Just a tribe committed to building its own value — one wallet, one product, one connection at a time.</p>
+  <h2 class="about-title">The People’s Currency for a New Era</h2>
 
-    <p><strong>Dollar = Stability.<br>
-    Bitcoin = Security.<br>
-    7TRB = Potential.</strong></p>
+  <p class="about-text">
+    7TRB is more than a token — it’s a movement.  
+    In a world where the U.S. dollar runs on trust in governments,  
+    and Bitcoin runs on trust in code,  
+    <strong>7TRB runs on trust in people.</strong>
+  </p>
 
-    <p>The future won’t be controlled from the top — it will be built from the community outward. 7TRB is leading that shift: a people-powered economic engine ready to circulate, scale, and uplift.</p>
+  <p class="about-text">
+    This is currency built from community,  
+    fueled by culture,  
+    and strengthened by real-world circulation.
+  </p>
 
-    <p><strong>Welcome to 7Tribes.<br>
-    Welcome to the new standard.<br>
-    Welcome to the people’s currency.</strong></p>
+  <p class="about-text">
+    While old financial systems argue over power,  
+    and the digital gold rush chases speculation,  
+    <strong>7TRB grows from something deeper:</strong>  
+    unity, usage, and ownership.
+  </p>
+
+  <p class="about-text">
+    No institutions.  
+    No gatekeepers.  
+    No middlemen.  
+    Just a tribe committed to building its own value —  
+    one wallet, one product, one connection at a time.
+  </p>
+
+  <div class="about-highlight">
+    <p><strong>Dollar = Stability.</strong></p>
+    <p><strong>Bitcoin = Security.</strong></p>
+    <p><strong>7TRB = Potential.</strong></p>
+  </div>
+
+  <p class="about-text">
+    The future won’t be controlled from the top —  
+    it will be built from the community outward.  
+    7TRB is leading that shift:  
+    a people-powered economic engine ready to circulate, scale, and uplift.
+  </p>
+
+  <p class="about-text closing-line">
+    <strong>Welcome to 7Tribes.</strong><br>
+    <strong>Welcome to the new standard.</strong><br>
+    <strong>Welcome to the people’s currency.</strong>
+  </p>
+
+          </div>
+        </p>
+      </div>
+
+      <div class="grid two" style="margin-top:18px;">
+        <article class="box" style="text-align:center;">
+          <img src="images/7continents.jpg" alt="7 Continents, 1 Tribe"
+               style="width:100%;border-radius:14px;box-shadow:0 0 30px rgba(255,215,122,0.3);margin-bottom:18px;object-fit:cover;">
+
+          <h3 style="margin-top:0;color:var(--gold-bright);">Why the Name "7Tribes"?</h3>
+          <p class="muted" style="max-width:680px;margin:0 auto;">
+            The number 7 represents completion, unity, and power across cultures.
+            Tribes are about people — families, builders, hustlers, farmers, creators —
+            moving as one. 7Tribes = many individuals forming one unstoppable collective.
+          </p>
+        </article>
+
+        <article class="box">
+          <h3 style="margin-top:0">Why People Matter</h3>
+          <p class="muted" style="margin:0 0 8px;">
+            A token without people is just code on a blockchain. 7Tribes only works if people
+            join, participate, and take responsibility. That means:
+          </p>
+          <ul class="muted" style="margin:0 0 0 18px;">
+            <li>Holding some 7TRB for the future.</li>
+            <li>Spending some with merchants to grow the local economy.</li>
+            <li>Bringing in new voices — every sign-up strengthens the network.</li>
+            <li>Voting on projects and proposals that matter most.</li>
+          </ul>
+          <p class="muted" style="margin-top:8px;">
+            Together, that unlocks what 7Tribes can become — a living network where every wallet,
+            trade, and purchase builds real community wealth.
+          </p>
+
+          <div class="divider"></div>
+
+          <div>
+            <h3 style="margin-top:0;">Build Before You Fund</h3>
+            <p class="muted">
+              Before 7Tribes can move serious money, it needs serious people — members who believe,
+              builders who create, and merchants who circulate value. The coin’s power comes from
+              circulation, not speculation.
+            </p>
+            <h4 style="color:var(--gold-bright);margin-bottom:6px;">Growth Formula (Starter Targets)</h4>
+          </div>
+
+          <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:15px;">
+            <thead>
+              <tr style="color:var(--gold-bright);text-align:left;">
+                <th>Role</th>
+                <th>Target Count</th>
+                <th>Contribution</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody style="color:var(--ink);">
+              <tr><td>Members</td><td>500</td><td>$25</td><td><b>$12,500</b></td></tr>
+              <tr><td>Builders</td><td>100</td><td>$50</td><td><b>$5,000</b></td></tr>
+              <tr><td>Merchants</td><td>50</td><td>$100</td><td><b>$5,000</b></td></tr>
+              <tr style="color:var(--gold-bright);font-weight:700;">
+                <td>Total Starting Pool</td><td>—</td><td>—</td><td>$22,500</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="muted" style="margin-top:14px;">
+            That’s enough to build early infrastructure — websites, marketing, liquidity, and DAO setup —
+            without outside investors. Every 100 verified members adds credibility. Every merchant accepting
+            7TRB adds token velocity. Every funded builder adds project capacity.
+          </p>
+        </article>
+      </div>
+    </div>
   </section>
 
-  <!-- 7 CONTINENTS / PEOPLE / STARTER POOL -->
-  <section class="card fade-up">
-    <h2>7 Continents, 1 Tribe</h2>
+  <hr style="border:none;border-top:1px solid rgba(255,215,122,0.25);margin:40px auto;width:80%;">
 
-    <h3>Why the Name "7Tribes"?</h3>
-    <p>The number 7 represents completion, unity, and power across cultures. Tribes are about people — families, builders, hustlers, farmers, creators — moving as one. 7Tribes = many individuals forming one unstoppable collective.</p>
+  <!-- ON-CHAIN / ALKEBULEUM -->
+  <section class="section" id="chain-and-network">
+    <div class="wrap">
+      <h2 class="title">On-Chain Integration & Powered by Alkebuleum</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:flex-start;">
+        <div>
+          <article class="box">
+            <div style="display:flex;flex-direction:column;gap:24px;margin-top:8px;">
+              <div>
+                <h3>⚙️ 1. You’re on-chain, not just “on a website.”</h3>
+                <p class="muted">
+                  Once 7TRB’s smart contract is deployed to Alkebuleum’s mainnet, every transfer,
+                  balance, and DAO vote lives permanently on their blockchain ledger — no middlemen,
+                  no banks, no centralized servers.
+                </p>
+              </div>
 
-    <h3>Why People Matter</h3>
-    <p>A token without people is just code on a blockchain. 7Tribes only works if people join, participate, and take responsibility. That means:</p>
-    <ul class="list">
-      <li>Holding some 7TRB for the future.</li>
-      <li>Spending some with merchants to grow the local economy.</li>
-      <li>Bringing in new voices — every sign-up strengthens the network.</li>
-      <li>Voting on projects and proposals that matter most.</li>
-    </ul>
-    <p>Together, that unlocks what 7Tribes can become — a living network where every wallet, trade, and purchase builds real community wealth.</p>
+              <div class="divider"></div>
 
-    <h3>Build Before You Fund</h3>
-    <p>Before 7Tribes can move serious money, it needs serious people — members who believe, builders who create, and merchants who circulate value. The coin’s power comes from circulation, not speculation.</p>
+              <div>
+                <h3>🧩 2. DEX & Ecosystem Integration</h3>
+                <p class="muted">
+                  When Alkebuleum’s DEX (JollofSwap) is live, 7TRB can trade peer-to-peer, pair with
+                  $AKE or stable tokens, and plug into liquidity pools, staking, and swaps. That’s
+                  visibility + utility in one.
+                </p>
+              </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Role</th>
-          <th>Target Count</th>
-          <th>Contribution</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Members</td>
-          <td>500</td>
-          <td>$25</td>
-          <td>$12,500</td>
-        </tr>
-        <tr>
-          <td>Builders</td>
-          <td>100</td>
-          <td>$50</td>
-          <td>$5,000</td>
-        </tr>
-        <tr>
-          <td>Merchants</td>
-          <td>50</td>
-          <td>$100</td>
-          <td>$5,000</td>
-        </tr>
-        <tr>
-          <td><strong>Total Starting Pool</strong></td>
-          <td>—</td>
-          <td>—</td>
-          <td><strong>$22,500</strong></td>
-        </tr>
-      </tbody>
-    </table>
+              <div class="divider"></div>
 
-    <p>That’s enough to build early infrastructure — websites, marketing, liquidity, and DAO setup — without outside investors. Every 100 verified members adds credibility. Every merchant accepting 7TRB adds token velocity. Every funded builder adds project capacity.</p>
+              <div>
+                <h3>🏗️ 3. Verified Network Project</h3>
+                <p class="muted">
+                  Deploying on Alkebuleum positions 7Tribes as a founding community token. You show up
+                  in explorers and dashboards — giving devs, partners, and supporters real visibility.
+                </p>
+              </div>
+
+              <div class="divider"></div>
+
+              <div>
+                <h3>💰 4. Independent, Community-Owned</h3>
+                <p class="muted">
+                  Alkebuleum provides the rails, but 7TRB is your economy. The brand, DAO, treasury,
+                  and mission stay community-driven. Chain = infrastructure; tribe = power.
+                </p>
+              </div>
+
+              <p class="muted" style="margin-top:18px;">
+                <b>In short:</b><br>
+                Ethereum = the testbed.<br>
+                Alkebuleum = the home base.<br>
+                7Tribes = the movement that circulates the value.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div>
+          <article class="box">
+            <h3 style="margin-top:0">⚡ Powered by Alkebuleum</h3>
+            <div style="text-align:center;margin-bottom:14px;">
+              <img src="images/alkebuleum.png" alt="Alkebuleum Symbol"
+                   style="width:70%;max-width:400px;border-radius:12px;opacity:0.96;
+                          filter:drop-shadow(0 0 20px rgba(0,238,255,0.55));">
+            </div>
+
+            <p class="muted">
+              Alkebuleum is the decentralized network where 7TRB lives. Its native coin, <b>$AKE</b>,
+              fuels every transaction as the chain’s gas token — value grows with real network use.
+            </p>
+            <p class="muted">
+              The first challenge Alkebuleum tackles is <b>digital identity</b> through
+              <a href="https://amvault.net" target="_blank" rel="noopener">AmVault</a>, the ecosystem’s
+              secure account and wallet manager. Verified AmVault accounts link real people and projects,
+              powering transparent governance and finance.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <section id="field-manual" style="padding: 50px; background: #000; color: #fff; font-family: Arial, sans-serif;">
+  <h1 style="text-align:center; color:#d4af37; font-size:44px; margin-bottom:10px;">
+    7TRB FIELD MANUAL
+  </h1>
+  <p style="text-align:center; font-size:18px; color:#bbb; margin-bottom:50px;">
+    A Practical Guide for Tribes, Builders, Merchants & the 7Tribes Economy
+  </p>
+
+  <!-- Accordion Container -->
+  <div style="max-width:900px; margin:0 auto;">
+
+    <!-- SECTION TEMPLATE -->
+    <style>
+      .fm-box {
+        background:#111;
+        border:1px solid #333;
+        margin-bottom:15px;
+        border-radius:6px;
+        overflow:hidden;
+      }
+      .fm-header {
+        padding:15px 20px;
+        cursor:pointer;
+        background:#111;
+        font-size:20px;
+        border-bottom:1px solid #222;
+        color:#d4af37;
+      }
+      .fm-content {
+        display:none;
+        padding:20px;
+        color:#eee;
+        font-size:16px;
+        line-height:1.5;
+      }
+    </style>
+
+    <script>
+      function toggleFM(num){
+        let box = document.getElementById("fm"+num);
+        box.style.display = box.style.display === "block" ? "none" : "block";
+      }
+    </script>
+
+    <!-- SECTION 1 -->
+    <div class="fm-box">
+      <div class="fm-header" onclick="toggleFM(1)">
+        ⭐ SECTION 1 — What 7TRB Is
+      </div>
+      <div class="fm-content" id="fm1">
+        <p>7TRB is a community-powered currency designed to circulate wealth inside tribes. It funds builders, supports merchants, and strengthens local economies through transparency and trust.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="fm-box">
+      <div class="fm-header" onclick="toggleFM(2)">⭐ SECTION 2 — Building Your Tribe</div>
+      <div class="fm-content" id="fm2">
+        <h3 style="color:#d4af37;">Step 1 — Gather Your People</h3>
+        <ul>
+          <li>Start with 5–20 committed members.</li>
+          <li>Create a group (WhatsApp, Telegram, Discord, FB).</li>
+          <li>Choose a mission and a tribe name.</li>
+        </ul>
+
+        <h3 style="color:#d4af37;">Step 2 — Name & Territory</h3>
+        <p>Pick a tribe name. Define your area: neighborhood, city, church, or online niche.</p>
+
+        <h3 style="color:#d4af37;">Step 3 — Simple Tribe Rules</h3>
+        <ul>
+          <li>Voting method</li>
+          <li>Monthly meeting rhythm</li>
+          <li>What qualifies as a tribe project</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="fm-box">
+      <div class="fm-header" onclick="toggleFM(3)">⭐ SECTION 3 — Tribe Leadership Structure</div>
+      <div class="fm-content" id="fm3">
+        <h3 style="color:#d4af37;">Core Roles</h3>
+        <ul>
+          <li><b>Tribe Coordinator</b> – runs meetings & communication</li>
+          <li><b>Tribe Treasurer</b> – manages wallet & treasury</li>
+          <li><b>Tribe Recorder</b> – handles votes, notes, and updates</li>
+        </ul>
+
+        <h3 style="color:#d4af37;">Optional Roles</h3>
+        <ul>
+          <li>Merchant Lead</li>
+          <li>Builder Lead</li>
+          <li>Outreach / Media Lead</li>
+        </ul>
+
+        <h3 style="color:#d4af37;">Elections</h3>
+        <p>Nominate → Vote → 3–6 month terms → Rotate or re-elect.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="fm-box">
+      <div class="fm-header" onclick="toggleFM(4)">⭐ SECTION 4 — Builders & Project Funding</div>
+      <div class="fm-content" id="fm4">
+        <h3 style="color:#d4af37;">How to Launch a Project</h3>
+        <ol>
+          <li>Create a proposal.</li>
+          <li>Submit to tribe.</li>
+          <li>Discuss & vote.</li>
+          <li>Receive funds in USD/7TRB.</li>
+          <li>Report progress until delivered.</li>
+        </ol>
+        <p>Project Pipeline: <b>Proposed → Approved → Funded → Delivered</b>.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="fm-box">
+      <div class="fm-header" onclick="toggleFM(5)">⭐ SECTION 5 — Merchants: Joining the 7TRB Economy</div>
+      <div class="fm-content" id="fm5">
+        <h3 style="color:#d4af37;">Onboarding</h3>
+        <ul>
+          <li>Create wallet</li>
+          <li>Submit merchant form</li>
+          <li>Add 7TRB Accepted badge or sign</li>
+        </ul>
+
+        <h3 style="color:#d4af37;">Merchant Use Cases</h3>
+        <ul>
+          <li>Partial payments</li>
+          <li>Loyalty rewards</li>
+          <li>Tribe-only discounts</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="fm-box">
+      <div class="fm-header" onclick="toggleFM(6)">⭐ SECTION 6 — Merchant Cash-Out (Redemption)</div>
+      <div class="fm-content" id="fm6">
+        <p>Merchants can redeem 7TRB through the tribe treasury:</p>
+        <ul>
+          <li>Send 7TRB to treasury</li>
+          <li>Receive USD back</li>
+          <li>Ratio decided by tribe: even, discounted, or hybrid</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 7 -->
+    <div class="fm-box">
+      <div class="fm-header" onclick="toggleFM(7)">⭐ SECTION 7 — Dashboard Guide</div>
+      <div class="fm-content" id="fm7">
+        <ul>
+          <li><b>Holders:</b> size of community</li>
+          <li><b>Active Wallets:</b> movement</li>
+          <li><b>Treasury:</b> community war chest</li>
+          <li><b>Spent %:</b> spending pace</li>
+          <li><b>Pipeline:</b> Proposed → Approved → Funded → Delivered</li>
+          <li><b>Merchant Metrics:</b> adoption strength</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    </section>
+  </div>
+</section>
+
+  <!-- PURPOSE -->
+  <section class="section" id="purpose">
+    <div class="wrap">
+      <h2 class="title">Our Purpose</h2>
+      <div class="box">
+        <p class="muted" style="margin:0 0 8px;">
+          7Tribes isn't just a token — it's a contract between people. Every trade, every shirt bought,
+          every coin held feeds the community, not billionaires. Decisions are made together and value
+          recycles into local projects.
+        </p>
+        <ul class="muted" style="margin:0 0 0 18px;">
+          <li><b>Redirect the flow:</b> from corporations → to neighbors, merchants, and builders.</li>
+          <li><b>Turn believers into builders:</b> propose work, vote budgets, show receipts.</li>
+          <li><b>Unity = power:</b> people → token → projects → growth → stronger people.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <!-- HOW 7TRB BUILDS VALUE -->
-  <section class="card fade-up" id="value">
-    <h2>🚀 How 7TRB Builds Value</h2>
-    <p>The strength of 7TRB doesn’t come from hype — it comes from movement. Here’s how the 7Tribes economy grows stronger, richer, and more resilient over time:</p>
+  <!-- POSSIBILITIES -->
+  <section class="section" id="possibilities">
+    <div class="wrap">
+      <h2 class="title">Possibilities with 7Tribes</h2>
+      <div class="box">
+        <p class="muted" style="margin:0 0 8px;">
+          The power of 7TRB is not in the code, but in the choices people make with it. The more we
+          circulate it, the more doors open:
+        </p>
+        <ul class="muted" style="margin:0 0 0 18px;">
+          <li><b>Local Wealth:</b> 7TRB spent at local shops stays in the neighborhood.</li>
+          <li><b>Community Projects:</b> schools, gardens, solar grids, housing — funded transparently from shared wallets.</li>
+          <li><b>Jobs:</b> developers, artists, marketers, and workers paid directly in 7TRB.</li>
+          <li><b>Global Links:</b> a system designed here, usable anywhere, connecting communities across borders.</li>
+        </ul>
+        <p class="muted" style="margin-top:8px;">
+          The bigger the tribe, the stronger the effect.
+          
+          <div class="possibility-block value-comparison">
+  <h2 class="possibility-title">Dollar vs Bitcoin vs 7TRB — What Truly Backs a Currency?</h2>
 
-    <h3>💰 1. Value comes from circulation, not sitting still.</h3>
-    <p>A currency gains power when it moves. When 7TRB is used to buy goods, fund projects, support builders, or reward tribe members, the ecosystem speeds up. Movement creates demand. Demand creates value.</p>
+  <p class="possibility-sub">
+    Every currency has a heartbeat — the Dollar runs on governments, Bitcoin runs on math, 
+    and 7TRB runs on us. This is where economics becomes community.
+  </p>
 
-    <h3>⚙️ 2. Liquidity + demand = the price foundation.</h3>
-    <p>Once 7TRB is active on a DEX within the Alkebuleum network, trading pairs form around $AKE and future stable options. More buyers strengthen price; sell pressure cools it down. The community treasury can help stabilize the price by supporting liquidity or buying dips.</p>
+  <div class="comparison-grid">
 
-    <h3>🌍 3. Scarcity strengthens long-term value.</h3>
-    <p>With a fixed supply of 1,000,000 tokens, every action matters. Tokens spent, staked, locked, or redeemed increase scarcity — giving each remaining token more power over time.</p>
+    <!-- USD -->
+    <div class="card usd">
+      <h3>💵 U.S. Dollar</h3>
+      <p class="tagline">“The OG Centralized Crypto”</p>
+      <ul>
+        <li><strong>Backed by:</strong> Government, taxes, global demand</li>
+        <li><strong>Drivers:</strong> Interest rates, trade, velocity</li>
+        <li><strong>Truth:</strong> 90% digital — powered by trust + motion.</li>
+      </ul>
+    </div>
 
-    <h3>🤝 4. Utility is the engine of sustainability.</h3>
-    <p>7TRB becomes more valuable as it becomes more useful. When people use it to shop with merchants, launch Detroit + diaspora projects, unlock rewards, or power community ventures — that’s real economic weight. Utility becomes the backbone of value.</p>
+    <!-- Bitcoin -->
+    <div class="card btc">
+      <h3>₿ Bitcoin</h3>
+      <p class="tagline">“Digital Gold of the Internet”</p>
+      <ul>
+        <li><strong>Backed by:</strong> Code, cryptography, global consensus</li>
+        <li><strong>Drivers:</strong> Scarcity, halvings, sentiment</li>
+        <li><strong>Truth:</strong> Math-made money — no middlemen.</li>
+      </ul>
+    </div>
 
-    <h3>🔒 5. Holding 7TRB = holding community power.</h3>
-    <p>Holding 7TRB unlocks governance rights, voting power, early access to projects, and future perks. As the tribe grows — more merchants, more builders, more movement — every token you hold represents a larger share of a bigger engine.</p>
+    <!-- 7TRB -->
+    <div class="card trb">
+      <h3>🟡 7TRB</h3>
+      <p class="tagline">“The People’s Economic Engine”</p>
+      <ul>
+        <li><strong>Backed by:</strong> Community, circulation, real use</li>
+        <li><strong>Drivers:</strong> Holders, movement, ecosystem strength</li>
+        <li><strong>Truth:</strong> Value powered by culture + unity.</li>
+      </ul>
+    </div>
 
-    <p><strong>🌱 The Tribe Moves → The Value Moves</strong><br>
-    When people join, build, shop, and circulate 7TRB, the currency becomes a living engine. More members. More merchants. More builders. More movement. More value. This is how a people’s currency becomes powerful.</p>
-  </section>
+  </div>
 
-  <!-- HOW TO GET 7TRB -->
-  <section class="card fade-up" id="get7trb">
-    <h2>How to Get 7TRB</h2>
-    <p>7Tribes was built for the people — no middlemen, no big exchanges required. Here’s how to start holding 7TRB:</p>
-
-    <h3>🪙 1. Claim or Earn It</h3>
-    <p>Early community members and builders can earn 7TRB through projects, campaigns, and contributions. When the DAO launches, verified builders will be able to claim starter tokens from the community pool.</p>
-
-    <h3>💼 2. Buy on a DEX</h3>
-    <p>To buy 7TRB, you’ll need a wallet that supports the Alkebuleum network.</p>
-    <ol class="list">
-      <li><strong>Download a wallet:</strong> Use AmVault or any Alkebuleum-compatible wallet as more options become available.</li>
-      <li><strong>Add funds:</strong> Purchase a small amount of $AKE — the native Alkebuleum token used for swaps and gas fees.</li>
-      <li><strong>Connect to the DEX:</strong> Visit JollofSwap (or the official Alkebuleum DEX once live) and connect your wallet.</li>
-      <li><strong>Swap into 7TRB:</strong> Paste the official 7TRB contract address from this website, confirm the swap, and complete the trade.</li>
-    </ol>
-
-    <p>You can also support 7Tribes directly through Juicebox (Mission 162). Every contribution fuels development and community expansion.</p>
-
-    <h3>💡 Wallet Help</h3>
-    <ul class="list">
-      <li><strong>Gas fees:</strong> All transactions on Alkebuleum require a small amount of $AKE.</li>
-      <li><strong>Security:</strong> Never share your seed phrase or private keys under any circumstance.</li>
-      <li><strong>Networks:</strong> When Alkebuleum becomes fully open to users, add the official network settings in your wallet.</li>
-      <li><strong>Verification:</strong> Always check the 7TRB contract address from this site before performing swaps.</li>
-    </ul>
-
-    <h3>🛍️ 3. Shop with Merchants</h3>
-    <p>Use 7TRB to buy from verified merchants and online shops that accept it. Every time you spend, you’re helping build token velocity and local economic power.</p>
-
-    <h3>🏗️ 4. Build and Get Paid</h3>
-    <p>Developers, designers, marketers, and creators can join the builder network. Projects funded through the DAO will pay contributors directly in 7TRB.</p>
-
-    <h3>🔒 5. Hold for Governance</h3>
-    <p>The more you hold and participate, the more weight your vote carries. 7TRB is not just currency — it’s your share of voice in what gets built.</p>
-
-    <p><strong>However you get it — claim, earn, buy, or trade — every token in motion strengthens the tribe.</strong></p>
-  </section>
-
-  <!-- ON-CHAIN INTEGRATION -->
-  <section class="card fade-up" id="onchain">
-    <h2>On-Chain Integration &amp; Powered by Alkebuleum</h2>
-
-    <h3>⚙️ 1. You’re on-chain, not just “on a website.”</h3>
-    <p>Once 7TRB’s smart contract is deployed to Alkebuleum’s mainnet, every transfer, balance, and DAO vote lives permanently on their blockchain ledger — no middlemen, no banks, no centralized servers.</p>
-
-    <h3>🧩 2. DEX &amp; Ecosystem Integration</h3>
-    <p>When Alkebuleum’s DEX (JollofSwap) is live, 7TRB can trade peer-to-peer, pair with $AKE or stable tokens, and plug into liquidity pools, staking, and swaps. That’s visibility + utility in one.</p>
-
-    <h3>🏗️ 3. Verified Network Project</h3>
-    <p>Deploying on Alkebuleum positions 7Tribes as a founding community token. You show up in explorers and dashboards — giving devs, partners, and supporters real visibility.</p>
-
-    <h3>💰 4. Independent, Community-Owned</h3>
-    <p>Alkebuleum provides the rails, but 7TRB is your economy. The brand, DAO, treasury, and mission stay community-driven. Chain = infrastructure; tribe = power.</p>
-
-    <p><strong>Alkebuleum = the home base.<br>
-    7Tribes = the movement that circulates the value.</strong></p>
-
-    <p><em>Powered by Alkebuleum.</em></p>
-  </section>
-
-  <!-- FIELD MANUAL SECTION (DEEP DIVE FOR INVESTORS) -->
-  <section class="card fade-up" id="field-manual">
-    <h2>7TRB FIELD MANUAL</h2>
-    <p>A Practical Guide for Tribes, Builders, Merchants &amp; the 7Tribes Economy</p>
-
-    <ul class="list">
-      <li>⭐ SECTION 1 — What 7TRB Is</li>
-      <li>⭐ SECTION 2 — Building Your Tribe</li>
-      <li>⭐ SECTION 3 — Tribe Leadership Structure</li>
-      <li>⭐ SECTION 4 — Builders &amp; Project Funding</li>
-      <li>⭐ SECTION 5 — Merchants: Joining the 7TRB Economy</li>
-      <li>⭐ SECTION 6 — Merchant Cash-Out (Redemption)</li>
-      <li>⭐ SECTION 7 — Dashboard Guide</li>
-    </ul>
-
+  <div class="footer-text">
     <p>
-      <a href="handbook.html" class="etsy-btn">Open 7TRB Handbook</a>
-      <a href="docs/7TRB_Field_Manual.pdf" class="outline-btn">Download Field Manual (PDF)</a>
+      <strong>Takeaway:</strong><br>
+      Dollar = Government-backed.  
+      Bitcoin = Code-backed.  
+      7TRB = Community-backed.  
+      <br><br>
+      Three currencies. Three engines of belief.  
+      7TRB stands at the intersection of culture, technology, and possibility.
     </p>
-  </section>
-
-  <!-- PURPOSE & POSSIBILITIES -->
-  <section class="card fade-up" id="purpose">
-    <h2>Our Purpose</h2>
-    <p>7Tribes isn't just a token — it's a contract between people. Every trade, every shirt bought, every coin held feeds the community, not billionaires. Decisions are made together and value recycles into local projects.</p>
-    <ul class="list">
-      <li><strong>Redirect the flow:</strong> from corporations → to neighbors, merchants, and builders.</li>
-      <li><strong>Turn believers into builders:</strong> propose work, vote budgets, show receipts.</li>
-      <li><strong>Unity = power:</strong> people → token → projects → growth → stronger people.</li>
-    </ul>
-
-    <h3>Possibilities with 7Tribes</h3>
-    <p>The power of 7TRB is not in the code, but in the choices people make with it. The more we circulate it, the more doors open:</p>
-    <ul class="list">
-      <li><strong>Local Wealth:</strong> 7TRB spent at local shops stays in the neighborhood.</li>
-      <li><strong>Community Projects:</strong> schools, gardens, solar grids, housing — funded transparently from shared wallets.</li>
-      <li><strong>Jobs:</strong> developers, artists, marketers, and workers paid directly in 7TRB.</li>
-      <li><strong>Global Links:</strong> a system designed here, usable anywhere, connecting communities across borders.</li>
-    </ul>
-    <p>The bigger the tribe, the stronger the effect.</p>
-  </section>
-
-  <!-- DOLLAR vs BITCOIN vs 7TRB -->
-  <section class="card fade-up">
-    <h2>Dollar vs Bitcoin vs 7TRB — What Truly Backs a Currency?</h2>
-    <p>Every currency has a heartbeat — the Dollar runs on governments, Bitcoin runs on math, and 7TRB runs on us. This is where economics becomes community.</p>
-
-    <h3>💵 U.S. Dollar — “The OG Centralized Crypto”</h3>
-    <ul class="list">
-      <li><strong>Backed by:</strong> Government, taxes, global demand</li>
-      <li><strong>Drivers:</strong> Interest rates, trade, velocity</li>
-      <li><strong>Truth:</strong> 90% digital — powered by trust + motion.</li>
-    </ul>
-
-    <h3>₿ Bitcoin — “Digital Gold of the Internet”</h3>
-    <ul class="list">
-      <li><strong>Backed by:</strong> Code, cryptography, global consensus</li>
-      <li><strong>Drivers:</strong> Scarcity, halvings, sentiment</li>
-      <li><strong>Truth:</strong> Math-made money — no middlemen.</li>
-    </ul>
-
-    <h3>🟡 7TRB — “The People’s Economic Engine”</h3>
-    <ul class="list">
-      <li><strong>Backed by:</strong> Community, circulation, real use</li>
-      <li><strong>Drivers:</strong> Holders, movement, ecosystem strength</li>
-      <li><strong>Truth:</strong> Value powered by culture + unity.</li>
-    </ul>
-
-    <p><strong>Dollar = Government-backed. Bitcoin = Code-backed. 7TRB = Community-backed.</strong></p>
-    <p>Three currencies. Three engines of belief. 7TRB stands at the intersection of culture, technology, and possibility.</p>
+  </div>
+          </div>
+        </p>
+      </div>
+    </div>
   </section>
 
   <!-- ROADMAP -->
-  <section class="card fade-up" id="roadmap">
-    <h2>Roadmap</h2>
-    <div class="roadmap">
-      <div class="rm-tile">
-        <h3>Phase 1 — Infrastructure</h3>
-        <p>Token, website, wallet, and transparency foundation.</p>
+  <section class="section" id="roadmap">
+    <div class="wrap">
+      <h2 class="title">Roadmap</h2>
+      <div class="grid three">
+        <article class="box">
+          <h3 style="margin:0 0 6px;">Phase 1 — Infrastructure</h3>
+          <p class="muted">Token, website, wallet, and transparency foundation.</p>
+        </article>
+        <article class="box">
+          <h3 style="margin:0 0 6px;">Phase 2 — Community</h3>
+          <p class="muted">Member onboarding, builders network, merchant pilots.</p>
+        </article>
+        <article class="box">
+          <h3 style="margin:0 0 6px;">Phase 3 — Scale</h3>
+          <p class="muted">DEX integration, liquidity growth, tools for everyday use.</p>
+        </article>
       </div>
-      <div class="rm-tile">
-        <h3>Phase 2 — Community</h3>
-        <p>Member onboarding, builders network, merchant pilots.</p>
-      </div>
-      <div class="rm-tile">
-        <h3>Phase 3 — Scale</h3>
-        <p>DEX integration, liquidity growth, tools for everyday use.</p>
-      </div>
-      <div class="rm-tile">
-        <h3>Phase 4 — Global Presence</h3>
-        <p>African + diaspora pilots, cross-tribe projects, multi-region hubs.</p>
-      </div>
-      <div class="rm-tile">
-        <h3>Phase 5 — Legacy Fund</h3>
-        <p>Long-term treasury and generational projects backed by 7TRB.</p>
+      <div class="grid two" style="margin-top:18px;">
+        <article class="box">
+          <h3 style="margin:0 0 6px;">Phase 4 — Global Presence</h3>
+          <p class="muted">African + diaspora pilots, cross-tribe projects, multi-region hubs.</p>
+        </article>
+        <article class="box">
+          <h3 style="margin:0 0 6px;">Phase 5 — Legacy Fund</h3>
+          <p class="muted">Long-term treasury and generational projects backed by 7TRB.</p>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- TRANSPARENCY HUB -->
-  <section class="card fade-up" id="transparency">
-    <h2>Transparency Hub</h2>
+  <section class="section" id="transparency">
+    <div class="wrap">
+      <h2 class="title">Transparency Hub</h2>
 
-    <h3>Token &amp; Supply</h3>
-    <ul class="list">
-      <li><strong>Total Supply:</strong> 1,000,000 7TRB</li>
-      <li><strong>Chain:</strong> Alkebuleum Mainnet</li>
-      <li><strong>Contract:</strong> 0xdf7ce67dB19142672c4193d969cdD9975A5A6038</li>
-      <li><strong>Decimals:</strong> 18 • <strong>Symbol:</strong> 7TRB</li>
-      <li><strong>Purpose:</strong> community-owned utility and reward token powering the 7Tribes ecosystem.</li>
-    </ul>
+      <!-- Token Summary -->
+      <div class="box" style="margin-bottom:20px;">
+        <h3 style="color:var(--gold-bright);margin-top:0;">Token & Supply</h3>
+        <p class="muted">
+  <strong>Total Supply:</strong> 1,000,000 7TRB
+</p>
 
-    <h3>Cost &amp; Profit Breakdown</h3>
-    <p><strong>Product:</strong> 25%  |  <strong>Tech:</strong> 15%  |  <strong>Marketing:</strong> 20%  |  <strong>Treasury:</strong> 25%  |  <strong>Team:</strong> 15%</p>
-    <p><strong>Profit Flow:</strong> Treasury 50% • Community 25% • Reinvestment 15% • Team 10%</p>
+<p class="muted">
+  <strong>Chain:</strong> Alkebuleum Mainnet
+</p>
 
-    <p><a href="docs/7TRB_Treasury_Charter.pdf" class="outline-btn">📘 Liquidity &amp; Treasury Guide</a></p>
-
-    <h3>Exit Options</h3>
-    <ul class="list">
-      <li>Sell on exchange/P2P</li>
-      <li>Buyback requests (7–14d, liquidity dependent)</li>
-      <li>Unstake at preset cycles (rules on-chain)</li>
-    </ul>
-  </section>
-
-  <!-- BUILDERS WANTED -->
-  <section class="card fade-up" id="builders">
-    <h2>Builders Wanted</h2>
-    <p>We’re assembling a cross-border builder network. Bring skills, not titles.</p>
-
-    <div class="roadmap">
-      <div class="rm-tile">
-        <h3>Engineering</h3>
-        <p>Web, automations, smart-contract operations, and GitHub pipelines.</p>
+<p class="muted" style="margin-bottom:15px;">
+  <strong>Contract:</strong>
+  <a href="https://explorer.alkebuleum.com/address/0xdf7ce67dB19142672c4193d969cdD9975A5A6038"
+     target="_blank"
+     style="color:#FFD700; text-decoration:none;">
+    0xdf7ce67dB19142672c4193d969cdD9975A5A6038 🔗
+  </a>
+</p>
+        </p>
+        <p class="muted"><b>Decimals:</b> 18  •  <b>Symbol:</b> 7TRB</p>
+        <p class="muted" style="margin-top:10px;">
+          <em>Purpose: community-owned utility and reward token powering the 7Tribes ecosystem.</em>
+        </p>
       </div>
-      <div class="rm-tile">
-        <h3>Design</h3>
-        <p>Brand, web, motion, and UX polish across the experience.</p>
+
+      <!-- Cost + Liquidity Guide aligned right -->
+      <div class="box" style="margin-bottom:20px;">
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;justify-content:space-between;">
+          <div style="min-width:220px;flex:1;">
+            <h3 style="color:var(--gold-bright);margin-top:0;">Cost & Profit Breakdown</h3>
+            <p class="muted">
+              <b>Product:</b> 25% &nbsp;|&nbsp;
+              <b>Tech:</b> 15% &nbsp;|&nbsp;
+              <b>Marketing:</b> 20% &nbsp;|&nbsp;
+              <b>Treasury:</b> 25% &nbsp;|&nbsp;
+              <b>Team:</b> 15%
+            </p>
+            <p class="muted" style="margin-top:6px;">
+              <b>Profit Flow:</b>
+              Treasury 50% • Community 25% • Reinvestment 15% • Team 10%
+            </p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;flex:0 0 auto;">
+            <a href="docs/7TRB_Liquidity_Guide.pdf"
+               target="_blank"
+               class="btn gold"
+               style="border-radius:8px;">
+              📘 Liquidity Guide
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="rm-tile">
-        <h3>Biz / Legal</h3>
-        <p>Partnerships, compliance, grants, and reporting.</p>
-      </div>
-      <div class="rm-tile">
-        <h3>Content</h3>
-        <p>Video, docs, social education, and campaigns.</p>
+
+      <!-- Exit Options -->
+      <div class="box">
+        <h3 style="color:var(--gold-bright);margin-top:0;">Exit Options</h3>
+        <p class="muted">
+          • Sell on exchange/P2P  
+          • Buyback requests (7–14d, liquidity dependent)  
+          • Unstake at preset cycles (rules on-chain)
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- COMMUNITY-POWERED GEAR -->
-  <section class="card fade-up">
-    <h2>Community-Powered Gear</h2>
-    <p>Rep the movement. Every purchase fuels builders and projects.</p>
-    <p>
-      <a href="https://www.tiktok.com" class="etsy-btn" target="_blank" rel="noopener">
-        🛍️ Check out Main House’s shop on TikTok
-      </a>
-    </p>
+  
+  <!-- HOW 7TRB BUILDS VALUE -->
+<section class="section" id="value">
+  <div class="wrap">
+
+    <h2 class="title">
+      <span style="font-size:28px;">🚀</span> How 7TRB Builds Value
+    </h2>
+
+    <article class="box">
+      <p class="muted" style="line-height:1.7;">
+        The strength of 7TRB doesn’t come from hype — it comes from movement.  
+        Here’s how the 7Tribes economy grows stronger, richer, and more resilient over time:
+      </p>
+    </article>
+
+    <article class="box">
+      <h3 style="color:#d4af37;">💰 1. Value comes from circulation, not sitting still.</h3>
+      <p class="muted" style="line-height:1.7;">
+        A currency gains power when it moves. When 7TRB is used to buy goods, fund projects, 
+        support builders, or reward tribe members, the ecosystem speeds up.  
+        Movement creates demand.  
+        Demand creates value.
+      </p>
+    </article>
+
+    <article class="box">
+      <h3 style="color:#d4af37;">⚙️ 2. Liquidity + demand = the price foundation.</h3>
+      <p class="muted" style="line-height:1.7;">
+        Once 7TRB is active on a DEX within the Alkebuleum network, trading pairs form around 
+        <b>$AKE</b> and future stable options.  
+        More buyers strengthen price; sell pressure cools it down.  
+        The community treasury can help stabilize the price by supporting liquidity or buying dips.
+      </p>
+    </article>
+
+    <article class="box">
+      <h3 style="color:#d4af37;">🌍 3. Scarcity strengthens long-term value.</h3>
+      <p class="muted" style="line-height:1.7;">
+        With a fixed supply of <b>1,000,000 tokens</b>, every action matters.  
+        Tokens spent, staked, locked, or redeemed increase scarcity —  
+        giving each remaining token more power over time.
+      </p>
+    </article>
+
+    <article class="box">
+      <h3 style="color:#d4af37;">🤝 4. Utility is the engine of sustainability.</h3>
+      <p class="muted" style="line-height:1.7;">
+        7TRB becomes more valuable as it becomes more useful.  
+        When people use it to shop with merchants, launch Detroit + diaspora projects, 
+        unlock rewards, or power community ventures — that’s real economic weight.  
+        Utility becomes the backbone of value.
+      </p>
+    </article>
+
+    <article class="box">
+      <h3 style="color:#d4af37;">🔒 5. Holding 7TRB = holding community power.</h3>
+      <p class="muted" style="line-height:1.7;">
+        Holding 7TRB unlocks governance rights, voting power, early access to projects, 
+        and future perks.  
+        As the tribe grows — more merchants, more builders, more movement — every token 
+        you hold represents a larger share of a bigger engine.
+      </p>
+    </article>
+
+    <article class="box">
+      <h3 style="color:#d4af37;">🌱 The Tribe Moves → The Value Moves</h3>
+      <p class="muted" style="line-height:1.7;">
+        When people join, build, shop, and circulate 7TRB, the currency becomes a living engine.  
+        More members.  
+        More merchants.  
+        More builders.  
+        More movement.  
+        More value.  
+        This is how a people’s currency becomes powerful.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+  <!-- HOW TO GET 7TRB -->
+  <section class="section" id="get7trb">
+    <div class="wrap">
+      <h2 class="title">How to Get 7TRB</h2>
+      <div class="box">
+        <p class="muted" style="margin-top:0;">
+          7Tribes was built for the people — no middlemen, no big exchanges required. Here’s how to
+          start holding 7TRB:
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:24px;margin-top:16px;">
+          <div>
+            <h3>🪙 1. Claim or Earn It</h3>
+            <p class="muted">
+              Early community members and builders can earn 7TRB through projects, campaigns, and
+              contributions. When the DAO launches, verified builders will be able to claim starter
+              tokens from the community pool.
+            </p>
+          </div>
+
+          <div class="divider"></div>
+
+          <div>
+            <!-- STEP 2 - BUY 7TRB ON A DEX -->
+<article class="box">
+  <h3 style="margin-top:0;">💼 2. Buy on a DEX</h3>
+
+  <p class="muted">
+    To buy 7TRB, you’ll need a wallet that supports the 
+    <span style="color:#d4af37; font-weight:bold;">Alkebuleum network</span>.
+  </p>
+
+  <ol class="muted" style="margin-left:20px; line-height:1.6;">
+    <li>
+      <b>Download a wallet:</b>  
+      Use <b>AmVault</b> or any Alkebuleum-compatible wallet as more options become available.
+    </li>
+
+    <li>
+      <b>Add funds:</b>  
+      Purchase a small amount of <b>$AKE</b> — the native Alkebuleum token used for swaps and gas fees.
+    </li>
+
+    <li>
+      <b>Connect to the DEX:</b>  
+      Visit <b>JollofSwap</b> (or the official Alkebuleum DEX once live) and connect your wallet.
+    </li>
+
+    <li>
+      <b>Swap into 7TRB:</b>  
+      Paste the <b>official 7TRB contract address</b> from this website, confirm the swap, and complete the trade.
+    </li>
+  </ol>
+
+  <p class="muted" style="margin-top:12px;">
+    You can also support 7Tribes directly through 
+    <a href="https://juicebox.money" target="_blank" style="color:#d4af37;">
+      Juicebox (Mission 162)
+    </a>.  
+    Every contribution fuels development and community expansion.
+  </p>
+</article>
+
+<!-- WALLET HELP BOX -->
+<article class="box" style="margin-top:20px;">
+  <h3 style="margin-top:0;">💡 Wallet Help</h3>
+
+  <ul class="muted" style="line-height:1.6; padding-left:20px;">
+    <li>
+      <b>Gas fees:</b>  
+      All transactions on Alkebuleum require a small amount of <b>$AKE</b>.
+    </li>
+
+    <li>
+      <b>Security:</b>  
+      Never share your <b>seed phrase</b> or private keys under any circumstance.
+    </li>
+
+    <li>
+      <b>Networks:</b>  
+      When Alkebuleum becomes fully open to users, add the official network settings in your wallet.
+    </li>
+
+    <li>
+      <b>Verification:</b>  
+      Always check the <b>7TRB contract address</b> from this site before performing swaps.
+    </li>
+  </ul>
+</article>
+          <div class="divider"></div>
+
+          <div>
+            <h3>🛍️ 3. Shop with Merchants</h3>
+            <p class="muted">
+              Use 7TRB to buy from verified merchants and online shops that accept it. Every time you
+              spend, you’re helping build token velocity and local economic power.
+            </p>
+          </div>
+
+          <div class="divider"></div>
+
+          <div>
+            <h3>🏗️ 4. Build and Get Paid</h3>
+            <p class="muted">
+              Developers, designers, marketers, and creators can join the builder network. Projects
+              funded through the DAO will pay contributors directly in 7TRB.
+            </p>
+          </div>
+
+          <div class="divider"></div>
+
+          <div>
+            <h3>🔒 5. Hold for Governance</h3>
+            <p class="muted">
+              The more you hold and participate, the more weight your vote carries. 7TRB is not just
+              currency — it’s your share of voice in what gets built.
+            </p>
+          </div>
+        </div>
+
+        <p class="muted" style="margin-top:24px;">
+          However you get it — claim, earn, buy, or trade — every token in motion strengthens the tribe.
+        </p>
+      </div>
+    </div>
   </section>
 
-  <!-- JOIN THE TRIBE -->
-  <section class="card fade-up" id="join">
-    <h2>Join the Tribe</h2>
-    <p>Get updates, drops, and builder calls straight to your inbox.</p>
-
-    <form class="join-form" action="https://formspree.io/f/your-endpoint" method="POST">
-      <input type="email" name="email" placeholder="your@email.com" class="input" required />
-      <button type="submit" class="etsy-btn">Get Email Updates</button>
-    </form>
-
-    <p style="margin-top:12px;">
-      <a href="https://t.me/SevenTribeowner" class="outline-btn" target="_blank" rel="noopener">
-        Join the WhatsApp / Telegram Group
-      </a>
-    </p>
+  <!-- BUILDERS -->
+  <section class="section" id="builders">
+    <div class="wrap">
+      <h2 class="title">Builders Wanted</h2>
+      <div class="grid four">
+        <article class="box">
+          <h3 style="margin-top:0;">Engineering</h3>
+          <p class="muted">Web, automations, smart-contract operations, and GitHub pipelines.</p>
+        </article>
+        <article class="box">
+          <h3 style="margin-top:0;">Design</h3>
+          <p class="muted">Brand, web, motion, and UX polish across the experience.</p>
+        </article>
+        <article class="box">
+          <h3 style="margin-top:0;">Biz / Legal</h3>
+          <p class="muted">Partnerships, compliance, grants, and reporting.</p>
+        </article>
+        <article class="box">
+          <h3 style="margin-top:0;">Content</h3>
+          <p class="muted">Video, docs, social education, and campaigns.</p>
+        </article>
+      </div>
+    </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="card fade-up" style="text-align:center;">
-    <p id="visitor-count">7TRB visitor count</p>
-    <p>© 2025 7Tribes • Mainhouse Oasis LLC</p>
-    <p>
-      <a href="learn.html">Crypto 101</a> •
-      <a href="#transparency">Transparency</a> •
-      <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a> •
-      <a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok Shop</a>
-    </p>
-  </footer>
+  <!-- MERCH -->
+  <section class="section" id="merch">
+    <div class="wrap">
+      <h2 class="title">Community-Powered Gear</h2>
+      <div class="box">
+        <p class="muted" style="margin:0 0 10px;">
+          Rep the movement. Every purchase fuels builders and projects.
+        </p>
+        <a class="btn tiktok"
+           href="https://vt.tiktok.com/ZTMphc6oD/?page=TikTokShop"
+           target="_blank" rel="noopener">
+          🛍️ Check out Main House’s shop on TikTok
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <!-- Back to Top -->
-  <button id="toTop">↑</button>
+  <!-- JOIN -->
+  <section class="section" id="join">
+    <div class="wrap">
+      <h2 class="title">Join the Tribe</h2>
+      <div class="box">
+        <p class="muted" style="margin-top:0;">
+          Get updates, drops, and builder calls straight to your inbox.
+        </p>
+        <form class="join-form" action="https://formspree.io/f/xnnokrvl" method="POST">
+          <input type="email" name="email" placeholder="your@email.com" required />
+          <button class="btn gold" type="submit">Get Email Updates</button>
+        </form>
+        <div style="margin-top:12px;">
+          <a class="btn tiktok"
+             href="https://chat.whatsapp.com/FSrGZMxoqsD7C4bO6lKn34"
+             target="_blank" rel="noopener">
+            Join the WhatsApp Group
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    // Back-to-top button
-    const toTop = document.getElementById('toTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
-        toTop.classList.add('show');
-      } else {
-        toTop.classList.remove('show');
-      }
-    });
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</main>
 
-    // Fade-up animation
-    const observers = document.querySelectorAll('.fade-up');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('in');
-      });
-    }, { threshold: 0.1 });
-    observers.forEach(el => io.observe(el));
-  </script>
+<footer>
+  <div class="wrap" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+    <div style="margin-top:8px;text-align:center;">
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=7trb.com&left_color=gold&right_color=black&left_text=Visitors"
+           alt="7TRB visitor count" />
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <img src="images/logo.png" alt="7TRB small" style="width:36px;height:36px;border-radius:50%;" />
+      <img src="images/icon-192.png"
+           alt="7TRB Footer Icon"
+           style="width:60px;height:60px;border-radius:50%;margin-right:8px;
+                  box-shadow:0 0 15px rgba(255,215,122,0.4);" />
+      <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="learn.html">Crypto 101</a>
+      <a href="#transparency">Transparency</a>
+      <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="toTop" aria-label="Back to top"></button>
+
+<script>
+  // Smooth scroll for same-page anchors
+  document.addEventListener('click',e=>{
+    const a = e.target.closest('a[href^="#"]');
+    if(!a) return;
+    const id = a.getAttribute('href');
+    const el = document.querySelector(id);
+    if(el){
+      e.preventDefault();
+      el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+
+  // Back to top
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) toTop.classList.add('show');
+    else toTop.classList.remove('show');
+  });
+  toTop.addEventListener('click', () =>
+    window.scrollTo({top:0, behavior:'smooth'})
+  );
+</script>
+
 </body>
-  </html>
+            </html>
