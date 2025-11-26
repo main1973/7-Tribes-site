@@ -207,3 +207,82 @@ section.card{ position:relative; z-index:1; }
 #join .join-form .input::placeholder {
   color:#a2a2aa;
 }
+/* =========================
+   7TRB Premium Gold Theme
+   ========================= */
+
+:root{
+  --bg: #050508;
+  --text: #f7f3e8;
+  --card-bg: #15100c;
+  --card-border: #3b2a14;
+  --primary: #f6c453;
+  --accent: #231309;
+  --accent2: #5c3b14;
+  --muted: #b7a892;
+}
+
+html, body{
+  background: radial-gradient(circle at top, #2b1a0a 0, #050508 55%, #000 100%);
+  color: var(--text);
+}
+
+/* Cards: deep gold glass */
+.card{
+  background: radial-gradient(circle at top left, rgba(246,196,83,0.12), transparent 55%),
+              rgba(10,6,3,0.96);
+  border: 1px solid rgba(246,196,83,0.30);
+  color: var(--text);
+}
+
+/* Top nav */
+.topnav{
+  background: rgba(0,0,0,0.92);
+  border-bottom: 1px solid rgba(246,196,83,0.35);
+}
+.topnav .links a{ color:#f7f3e8; }
+
+/* Buttons */
+.etsy-btn{
+  background: linear-gradient(135deg,#f6c453,#ffdd80);
+  color:#221308;
+}
+.outline-btn{
+  border-color: #f6c453;
+  color:#f7f3e8;
+}
+.outline-btn:hover{
+  background: rgba(246,196,83,0.12);
+}
+
+/* Hero overlay text */
+.sub-hero{
+  background: linear-gradient(120deg, rgba(0,0,0,0.85), rgba(35,19,9,0.9));
+}
+
+/* Tables & lists in dark cards */
+table{
+  width:100%;
+  border-collapse: collapse;
+  margin-top:14px;
+  font-size:0.95rem;
+}
+table th, table td{
+  border:1px solid #3b2a14;
+  padding:8px 10px;
+}
+table th{
+  background:#231309;
+  color:#f6c453;
+}
+table tr:nth-child(even){
+  background:#120c08;
+}
+
+/* Footer */
+footer.card{
+  background:#050508;
+  border-top:1px solid rgba(246,196,83,0.3);
+}
+footer a{ color:#f6c453; text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
