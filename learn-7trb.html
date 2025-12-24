@@ -1,201 +1,533 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-3ENCBC9RT3');
-  </script>  <meta charset="utf-8" />
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
+
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7TRB — Structure First.</title>
-  <meta name="google-site-verification" content="J13STEzRChDz488QqKA5yP2eoiZ-FQNDUzuok6B2RHM" />
-  <meta name="description" content="7TRB is a tribe-based circulation system. Learn the basics, see how 7TRB works, and start building." />
-  <link rel="icon" href="images/logo.png" />  <style>
+  <title>7TRB Field Manual — How 7TRB Works</title>
+  <meta name="description" content="The 7TRB operating manual: tribes, treasury, wallets, merchants, redemption, builders, and metrics." />
+  <link rel="icon" href="images/logo.png" />
+
+  <style>
     :root{
       --bg:#0f0a05; --panel:#1a1208; --panel-2:#120c06; --ink:#fff7e6; --muted:#d4c3a1; --line:#3b2b17;
       --gold:#e7b852; --gold-2:#b8831b; --gold-bright:#ffdd7a; --ok:#25F4EE; --pop:#FE2C55;
       --radius:18px; --radius-lg:24px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    html,body{
+      margin:0;
+      background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
+      color:var(--ink);
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
     a{color:var(--gold-bright);text-decoration:none}
     a:hover{opacity:.9}
     img{max-width:100%;display:block}
     .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+    .section{padding:44px 0}
+    .muted{color:var(--muted)}
+    .title{
+      margin:0 0 14px;
+      font-size:clamp(22px,3vw,30px);
+      letter-spacing:.08em;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+    }
+    .box{
+      position:relative;
+      background:linear-gradient(180deg,var(--panel),var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:22px;
+      border:1px solid rgba(255,215,122,0.35);
+      box-shadow:0 18px 50px rgba(0,0,0,.6);
+      overflow:hidden;
+    }
+    .box::after{
+      content:"";
+      position:absolute; inset:0; border-radius:inherit; padding:2px;
+      background:linear-gradient(90deg,rgba(255,215,122,.55),rgba(184,131,31,.75),rgba(255,215,122,.55));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor; mask-composite:exclude;
+      pointer-events:none; opacity:.45;
+    }
+    .divider{
+      height:2px;margin:18px auto;width:86%;border-radius:999px;
+      background:linear-gradient(90deg,transparent,rgba(255,215,122,0.35),rgba(255,215,122,0.85),rgba(255,215,122,0.35),transparent);
+      box-shadow:0 0 16px rgba(255,215,122,0.28);
+    }
+    .grid{display:grid;gap:16px}
+    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.two,.three{grid-template-columns:1fr}}
 
-    /* Header / hero */
-    header.site-header{position:relative;width:100%;overflow:hidden;border-bottom:1px solid rgba(255,215,122,0.2)}
-    .hero-banner{width:100%;height:420px;background:url('images/welcome_banner.png') center/cover no-repeat;position:relative}
-    .hero-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.65))}
-    .header-inner{position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    /* Header */
+    .site-header{position:relative;width:100%;overflow:hidden;border-bottom:1px solid rgba(255,215,122,0.2)}
+    .hero-banner{width:100%;height:320px;background:url('images/welcome_banner.png') center/cover no-repeat;position:relative}
+    .hero-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.60),rgba(0,0,0,.30),rgba(0,0,0,.70))}
+    .header-inner{
+      position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:18px 20px;
+      display:flex;justify-content:space-between;align-items:center;gap:16px;
+    }
     .brand{display:flex;align-items:center;gap:12px}
-    .brand img{width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 30px rgba(0,0,0,.6)}
-    .brand b{font-size:1.5rem;color:var(--gold-bright);letter-spacing:.12em;text-transform:uppercase}
+    .brand img{width:62px;height:62px;border-radius:50%;border:1px solid rgba(255,255,255,.18);box-shadow:0 10px 30px rgba(0,0,0,.6)}
+    .brand b{font-size:1.4rem;color:var(--gold-bright);letter-spacing:.12em;text-transform:uppercase}
     .nav-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
     .nav-links a{color:var(--gold-bright);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
-    .banner-text{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);text-align:center;z-index:2;padding:0 16px}
-    .banner-text h1{margin:0;font-size:clamp(24px,3vw,34px);color:var(--gold-bright);letter-spacing:.14em;text-transform:uppercase}
-    .banner-text p{margin:8px 0 0;color:#fff7e6;font-size:.98rem;max-width:78ch}
+    .banner-text{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);text-align:center;z-index:2;padding:0 16px}
+    .banner-text h1{margin:0;color:var(--gold-bright);font-size:clamp(22px,3vw,32px);letter-spacing:.14em;text-transform:uppercase}
+    .banner-text p{margin:8px 0 0;color:#fff7e6;font-size:.98rem;max-width:80ch}
 
-    /* Row below header */
     .header-row{background:linear-gradient(90deg,#261608,#110804);border-bottom:1px solid rgba(255,215,122,.25)}
-    .header-row-inner{max-width:1160px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-
-    /* Sections */
-    .section{padding:44px 0}
-    .box{position:relative;background:linear-gradient(180deg, var(--panel), var(--panel-2));border-radius:var(--radius-lg);padding:22px;border:1px solid rgba(255,215,122,0.35);box-shadow:0 18px 50px rgba(0,0,0,.6);overflow:hidden}
-    .box::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;background:linear-gradient(90deg,rgba(255,215,122,.55),rgba(184,131,31,.75),rgba(255,215,122,.55));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.45}
-    .title{margin:0 0 14px;font-size:clamp(22px,3vw,30px);letter-spacing:.08em;color:var(--gold-bright);text-transform:uppercase}
-    .muted{color:var(--muted)}
-    .divider{height:2px;margin:20px auto;width:86%;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(255,215,122,0.35),rgba(255,215,122,0.85),rgba(255,215,122,0.35),transparent);box-shadow:0 0 16px rgba(255,215,122,0.28)}
+    .header-row-inner{
+      max-width:1160px;margin:0 auto;padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    }
 
     /* Buttons */
     .btn{display:inline-flex;align-items:center;gap:.6rem;padding:10px 16px;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;font-size:.95rem;white-space:nowrap}
     .btn.gold{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#130b03;border-color:rgba(255,215,122,.7);box-shadow:0 0 18px rgba(255,215,122,.35)}
     .btn.ghost{border:1px solid rgba(255,215,122,.35);color:var(--ink);background:transparent}
-    .btn.tiktok{background:linear-gradient(90deg,var(--ok),var(--pop));color:#0a0b0f;border:none;box-shadow:0 0 20px rgba(254,44,85,.28)}
 
-    /* Grid */
-    .grid{display:grid;gap:16px}
-    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:900px){.header-inner{flex-direction:column;align-items:flex-start}.nav-links{justify-content:flex-start}.three{grid-template-columns:1fr}.hero-banner{height:360px}}
+    /* TOC pills */
+    .pills{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{
+      display:inline-flex;align-items:center;gap:.5rem;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,215,122,.30);
+      background:rgba(0,0,0,.18);
+      color:var(--ink);
+      font-weight:800;
+      font-size:.9rem;
+    }
 
-    /* Footer */
-    footer{position:relative;background:radial-gradient(circle at center, rgba(255,215,122,.2), #090604 78%);border-top:1px solid rgba(255,215,122,.35);box-shadow:0 -6px 30px rgba(0,0,0,.7);padding:20px 0}
-  </style></head>
-<body><header class="site-header">
+    /* Accordion */
+    details{
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,215,122,.18);
+      border-radius:16px;
+      padding:12px 14px;
+      margin:10px 0;
+    }
+    summary{cursor:pointer;font-weight:900;color:var(--gold-bright);letter-spacing:.02em}
+    code{
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(255,215,122,.18);
+      padding:2px 6px;border-radius:8px;
+      color:var(--gold-bright);
+    }
+
+    /* Back to top */
+    #toTop{
+      position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;
+      background:#0c0d12 url('images/logo.png') center/cover no-repeat;
+      border:1px solid rgba(255,255,255,.08);
+      opacity:0;visibility:hidden;cursor:pointer;z-index:60;
+      transition:opacity .25s, visibility .25s, transform .2s;
+      box-shadow:0 0 22px rgba(231,184,82,.28);
+    }
+    #toTop.show{opacity:1;visibility:visible;}
+    #toTop:hover{transform:translateY(-2px);}
+
+    footer{
+      position:relative;
+      background:radial-gradient(circle at center, rgba(255,215,122,.18), #090604 78%);
+      border-top:1px solid rgba(255,215,122,.28);
+      box-shadow:0 -6px 30px rgba(0,0,0,.7);
+      padding:20px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
   <div class="hero-banner">
     <div class="header-inner">
       <div class="brand">
-        <img src="images/welcome_banner.png" alt="7TRB logo" />
+        <img src="images/logo.png" alt="7TRB logo" />
         <b>7TRB</b>
       </div>
       <nav class="nav-links">
+        <a href="index.html">Home</a>
         <a href="learn.html">Learn (Basics)</a>
-        <a href="learn-7trb.html">How 7TRB Works</a>
+        <a href="#field-manual">Manual</a>
+        <a href="#start-tribe">Start a Tribe</a>
+        <a href="#treasury">Treasury</a>
+        <a href="#merchants">Merchants</a>
         <a href="wallet/index.html">Wallet</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="investor.html">Investors</a>
-        <a href="apparel.html">Apparel</a>
-        <a href="digital.html">Digital</a>
-        <a href="#join">Join</a>
       </nav>
     </div>
+
     <div class="banner-text">
-      <h1>Structure First.</h1>
-      <p>7TRB is a tribe-based circulation system — value in motion, not in vaults.</p>
-    </div>
-  </div>  <div class="header-row">
-    <div class="header-row-inner">
-      <a class="btn tiktok" href="https://vt.tiktok.com/ZTMtY4tah/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
-      <span class="muted" style="text-transform:uppercase;letter-spacing:.08em">Detroit Made • Building for Detroit & Beyond</span>
-      <a href="dashboard.html" class="btn gold">Open Dashboard</a>
+      <h1>7TRB Field Manual</h1>
+      <p>Structure-first operating guide: tribes, wallets, treasury, merchants, redemption, builders, and metrics.</p>
     </div>
   </div>
-</header><main>
-  <!-- ROUTER (home stays tight) -->
-  <section class="section" id="start">
-    <div class="wrap">
-      <div class="box" style="text-align:center">
-        <h2 class="title" style="margin-top:0">Start Here</h2>
-        <p class="muted" style="max-width:900px;margin:0 auto 14px">
-          The homepage is the front door. Learning lives on the Learn pages. If you’re new, start with basics.
-          If you’re ready, open the 7TRB Field Manual and build the system correctly.
-        </p>
-        <div class="divider"></div>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <a class="btn ghost" href="learn.html">Learn (Crypto 101)</a>
-          <a class="btn gold" href="learn-7trb.html">Open Field Manual</a>
-          <a class="btn ghost" href="wallet/index.html">Open Wallet</a>
-        </div>
-      </div>
+
+  <div class="header-row">
+    <div class="header-row-inner">
+      <a class="btn ghost" href="index.html">← Back to Home</a>
+      <span class="muted" style="text-transform:uppercase;letter-spacing:.08em">Receipts over rhetoric</span>
+      <a class="btn gold" href="#start-tribe">Start a Tribe →</a>
     </div>
-  </section>  <!-- THREE DEEP-LINK CARDS (now land on exact sections) -->  <section class="section">
-    <div class="wrap">
-      <div class="grid three">
-        <article class="box">
-          <h3 class="title" style="font-size:20px;margin-top:0">Start a Tribe</h3>
-          <p class="muted">Minimum setup: mission, roles, rules, treasury, meetings, conflict, exit. No structure, no token.</p>
-          <p><a class="btn gold" href="learn-7trb.html#start-tribe">Go →</a></p>
-        </article>
-        <article class="box">
-          <h3 class="title" style="font-size:20px;margin-top:0">Merchants</h3>
-          <p class="muted">How businesses accept 7TRB, manage redemption, and keep value circulating without speculation.</p>
-          <p><a class="btn gold" href="learn-7trb.html#merchants">Go →</a></p>
-        </article>
-        <article class="box">
-          <h3 class="title" style="font-size:20px;margin-top:0">Treasury</h3>
-          <p class="muted">Receipts, reporting cadence, purpose-bound spending. Trust is built on proof.</p>
-          <p><a class="btn gold" href="learn-7trb.html#treasury">Go →</a></p>
-        </article>
-      </div>
-    </div>
-  </section>  <!-- FIELD MANUAL TEASER -->  <section class="section" id="field-manual-preview">
-    <div class="wrap">
-      <div class="box" style="text-align:center">
-        <h2 class="title" style="margin-top:0">7TRB Field Manual</h2>
-        <p class="muted" style="max-width:900px;margin:0 auto 14px">Wallets, treasury, tribes, builders, merchants, redemption, and metrics — explained like a real operating guide.</p>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <a class="btn gold" href="learn-7trb.html#field-manual">Open Manual Sections</a>
-          <a class="btn ghost" href="docs/7TRB_Field_Manual.pdf" target="_blank" rel="noopener">Download PDF</a>
-        </div>
-      </div>
-    </div>
-  </section>  <!-- WALLET / DASHBOARD / JOIN (tight) -->  <section class="section" id="tools">
-    <div class="wrap">
-      <div class="grid three">
-        <article class="box" style="text-align:center">
-          <img src="images/7trb_wallet_ad.png" alt="7TRB Wallet" style="border-radius:14px;margin-bottom:10px" />
-          <p class="muted">Hold, send, and circulate 7TRB responsibly.</p>
-          <p><a class="btn gold" href="wallet/index.html">Open Wallet</a></p>
-        </article>
-        <article class="box" style="text-align:center">
-          <img src="images/handbook.png" alt="7TRB Handbook" style="border-radius:14px;margin-bottom:10px" />
-          <p class="muted">Read the playbook before you play the game.</p>
-          <p><a class="btn gold" href="learn-7trb.html">Open Manual</a></p>
-        </article>
-        <article class="box" style="text-align:center">
-          <img src="images/7continents.jpg" alt="7 Continents, 1 Tribe" style="border-radius:14px;margin-bottom:10px" />
-          <p class="muted">Track holders, treasury, activity, and project pipeline.</p>
-          <p><a class="btn gold" href="dashboard.html">Open Dashboard</a></p>
-        </article>
-      </div>
-    </div>
-  </section>  <!-- JOIN -->  <section class="section" id="join">
+  </div>
+</header>
+
+<main>
+
+  <!-- TABLE OF CONTENTS -->
+  <section class="section" id="field-manual">
     <div class="wrap">
       <div class="box">
-        <h2 class="title" style="margin-top:0">Join the Tribe</h2>
-        <p class="muted">Get updates, drops, and builder calls.</p>
-        <form style="display:flex;gap:10px;flex-wrap:wrap" action="https://formspree.io/f/xnnokrvl" method="POST">
-          <input type="email" name="email" placeholder="your@email.com" required style="flex:1 1 260px;background:#140e08;border:1px solid rgba(255,215,122,.35);border-radius:999px;color:#fff7e6;padding:12px 14px;outline:none" />
-          <button class="btn gold" type="submit">Get Email Updates</button>
-        </form>
-        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn tiktok" href="https://chat.whatsapp.com/FSrGZMxoqsD7C4bO6lKn34" target="_blank" rel="noopener">Join the WhatsApp Group</a>
+        <h2 class="title" style="margin-top:0">Manual Contents</h2>
+        <p class="muted" style="max-width:92ch;margin:0 0 12px">
+          This is the “how it actually works” page. Home stays tight. This page stays complete.
+        </p>
+        <div class="pills">
+          <a class="pill" href="#what-is-7trb">What 7TRB Is</a>
+          <a class="pill" href="#wallets">Wallets</a>
+          <a class="pill" href="#start-tribe">Start a Tribe</a>
+          <a class="pill" href="#treasury">Treasury</a>
+          <a class="pill" href="#builders">Builders</a>
+          <a class="pill" href="#merchants">Merchants</a>
+          <a class="pill" href="#redemption">Redemption</a>
+          <a class="pill" href="#metrics">Dashboard Metrics</a>
         </div>
       </div>
     </div>
   </section>
-</main><footer>
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-    <div style="margin-top:8px;text-align:center">
-      <img src="https://visitor-badge.laobi.icu/badge?page_id=7trb.com&left_color=gold&right_color=black&left_text=Visitors" alt="7TRB visitor count" />
+
+  <!-- WHAT 7TRB IS -->
+  <section class="section" id="what-is-7trb">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">1) What 7TRB Is</h2>
+        <p class="muted">
+          7TRB isn’t “get rich.” It’s a circulation system. The goal is to keep value moving inside a network of people and businesses:
+          members → merchants → builders → community projects → back to members.
+        </p>
+        <div class="divider"></div>
+        <details open>
+          <summary>What makes 7TRB different?</summary>
+          <p class="muted">
+            Most tokens chase price. 7TRB chases <b>utility + proof</b>:
+            a public treasury, receipts, merchant acceptance, and funded work you can verify.
+          </p>
+        </details>
+        <details>
+          <summary>What must be true for 7TRB to grow?</summary>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li>Many holders (wide distribution).</li>
+            <li>Real use (merchant network + projects).</li>
+            <li>Transparent treasury (reports + receipts).</li>
+            <li>Rules (so people trust the system).</li>
+          </ul>
+        </details>
+      </div>
     </div>
+  </section>
+
+  <!-- WALLETS -->
+  <section class="section" id="wallets">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">2) Wallets (Personal + Tribe)</h2>
+
+        <details open>
+          <summary>Personal wallet (member)</summary>
+          <p class="muted">
+            Your personal wallet is where you hold and spend your 7TRB. Treat it like a debit card + vault.
+            <b>Seed phrase = master key.</b> Never screenshot it. Never share it.
+          </p>
+        </details>
+
+        <details>
+          <summary>Tribe Treasury wallet (community funds)</summary>
+          <p class="muted">
+            The tribe treasury is not “one person’s wallet.” It is a shared asset governed by rules.
+            Best practice is <b>multi-sig</b> (requires multiple approvals) or a treasury contract once ready.
+          </p>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li><b>Small tribes:</b> multi-sig + monthly reporting.</li>
+            <li><b>Growing tribes:</b> treasury contract + on-chain proposals/votes.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Safety rules</summary>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li>No one “from support” will ever need your seed phrase.</li>
+            <li>Test small transfers first.</li>
+            <li>Only use contract/explorer links from your official site.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- START A TRIBE -->
+  <section class="section" id="start-tribe">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">3) Start a Tribe (Step-by-Step)</h2>
+        <p class="muted">
+          A tribe is a small economic unit with rules. Without rules, it becomes drama. This is the minimum viable structure.
+        </p>
+
+        <details open>
+          <summary>Step 1 — Gather the core (5–20 people)</summary>
+          <p class="muted">
+            Start with disciplined people, not hype people. You want folks who show up, vote, and contribute.
+            Create a group chat (WhatsApp/Telegram) and set a weekly or bi-weekly meeting rhythm.
+          </p>
+        </details>
+
+        <details>
+          <summary>Step 2 — Choose a mission + territory</summary>
+          <p class="muted">
+            Pick one sentence that explains why this tribe exists (example: “Build a local merchant loop in Detroit”).
+            Territory can be a neighborhood, city, church network, or online community.
+          </p>
+        </details>
+
+        <details>
+          <summary>Step 3 — Assign roles (non-negotiable)</summary>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li><b>Coordinator:</b> runs meetings + communication.</li>
+            <li><b>Treasurer:</b> manages treasury process (not “owns” it).</li>
+            <li><b>Recorder:</b> logs votes, decisions, and publishes updates.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Step 4 — Write the rules (simple, enforceable)</summary>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li>Membership dues (amount + due date + late policy).</li>
+            <li>Voting method (simple majority, quorum required, etc.).</li>
+            <li>What counts as a tribe project.</li>
+            <li>Conflict policy (warnings → suspension → removal).</li>
+            <li>Exit policy (how members leave, what happens to dues).</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- TREASURY -->
+  <section class="section" id="treasury">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">4) Treasury (Trust is Built Here)</h2>
+        <p class="muted">
+          The treasury is the engine. If treasury is sloppy, the whole project looks like a hustle. This is how you run it clean.
+        </p>
+
+        <details open>
+          <summary>Treasury basics</summary>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li><b>Purpose-bound:</b> treasury money has categories (operations, merchant support, builder grants, emergency).</li>
+            <li><b>Reporting cadence:</b> weekly mini-update + monthly full report.</li>
+            <li><b>Receipts:</b> no receipt = no reimbursement.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>How spending gets approved</summary>
+          <p class="muted">
+            Use a simple pipeline: <b>Proposal → Discussion → Vote → Fund → Deliver → Report</b>.
+            Start small. Force proof. Grow trust.
+          </p>
+        </details>
+
+        <details>
+          <summary>USD vs 7TRB in the treasury</summary>
+          <p class="muted">
+            Early on, tribes usually keep a mix: some stable value (USD/stable) for predictable expenses,
+            and 7TRB for internal incentives, rewards, and merchant circulation.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILDERS -->
+  <section class="section" id="builders">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">5) Builders (Work → Proof → Payment)</h2>
+        <p class="muted">
+          Builders are how the ecosystem becomes real. No builders = no products, no tools, no growth.
+        </p>
+
+        <details open>
+          <summary>How a builder gets funded</summary>
+          <ol class="muted" style="margin:8px 0 0 20px">
+            <li>Submit a proposal (scope + budget + timeline).</li>
+            <li>Tribe discusses (what’s the ROI to the community?).</li>
+            <li>Vote approval (and set deliverables).</li>
+            <li>Fund in milestones (not all at once).</li>
+            <li>Deliver + report. Receipt culture only.</li>
+          </ol>
+        </details>
+
+        <details>
+          <summary>Pay structure (practical)</summary>
+          <p class="muted">
+            Use milestone payments: 30% start, 40% mid, 30% completion — or whatever fits.
+            The rule is: <b>payment follows verified progress</b>.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- MERCHANTS -->
+  <section class="section" id="merchants">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">6) Merchants (Where Circulation Becomes Real)</h2>
+
+        <details open>
+          <summary>Merchant onboarding (simple)</summary>
+          <ol class="muted" style="margin:8px 0 0 20px">
+            <li>Create a merchant wallet (separate from personal wallet).</li>
+            <li>Agree to acceptance rules (partial payments allowed, refund policy, redemption policy).</li>
+            <li>Get listed in the merchant directory (name, city, category, contact).</li>
+            <li>Display “7TRB Accepted” signage (online + in-store).</li>
+          </ol>
+        </details>
+
+        <details>
+          <summary>How payments work (cash + card + 7TRB)</summary>
+          <p class="muted">
+            Keep it realistic: customers can pay in <b>cash/card</b> like normal, and use <b>7TRB</b> as a partial payment or loyalty layer.
+            The goal is not to force 100% crypto transactions — the goal is to create repeat circulation.
+          </p>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li><b>Option A:</b> “Up to 20% of bill in 7TRB.”</li>
+            <li><b>Option B:</b> “Pay full in USD, earn 7TRB rewards.”</li>
+            <li><b>Option C:</b> “Tribe discount if you pay a portion in 7TRB.”</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- REDEMPTION -->
+  <section class="section" id="redemption">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">7) Merchant Redemption (Cash-Out Rules)</h2>
+        <p class="muted">
+          Merchants need a clear exit, or they won’t accept it. Redemption must be rule-based so it doesn’t drain the system.
+        </p>
+
+        <details open>
+          <summary>Three sane redemption models</summary>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li><b>Model 1 (Best early):</b> Partial redemption with limits (weekly cap).</li>
+            <li><b>Model 2:</b> Discounted redemption (merchant gets 90% USD value) to protect treasury.</li>
+            <li><b>Model 3:</b> Swap + liquidity route (DEX) when liquidity is strong.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Why limits matter</summary>
+          <p class="muted">
+            If merchants can instantly dump unlimited 7TRB for USD, you create a bank-run machine.
+            Limits protect the treasury and push merchants to also <b>recirculate</b> (pay suppliers, buy services, sponsor builders).
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <section class="section" id="metrics">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">8) Dashboard Metrics (What to Track)</h2>
+
+        <details open>
+          <summary>The KPIs that actually matter</summary>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li><b>Holders:</b> distribution strength.</li>
+            <li><b>Active wallets (30d):</b> real movement.</li>
+            <li><b>Treasury balance:</b> runway + stability.</li>
+            <li><b>Spent % (30d):</b> circulation speed.</li>
+            <li><b>Project pipeline:</b> proposed → approved → funded → delivered.</li>
+            <li><b>Merchant volume:</b> adoption strength.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Rule of thumb</summary>
+          <p class="muted">
+            Price is loud. <b>Usage is real.</b> Build usage first and the value has something to stand on.
+          </p>
+        </details>
+
+        <div class="divider"></div>
+
+        <p class="muted" style="margin:0">
+          Want the basics page? Go to <a href="learn.html"><b>Learn (Crypto 101)</b></a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:10px">
-      <img src="images/logo.png" alt="7TRB small" style="width:36px;height:36px;border-radius:50%" />
-      <img src="images/icon-192.png" alt="7TRB Footer Icon" style="width:60px;height:60px;border-radius:50%;margin-right:8px;box-shadow:0 0 15px rgba(255,215,122,0.4)" />
+      <img src="images/logo.png" alt="7TRB" style="width:36px;height:36px;border-radius:50%" />
       <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
     </div>
     <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a href="index.html">Home</a>
       <a href="learn.html">Learn (Basics)</a>
-      <a href="learn-7trb.html">How 7TRB Works</a>
-      <a href="investor.html">Investors</a>
+      <a href="#field-manual">Manual Top</a>
       <a href="wallet/index.html">Wallet</a>
       <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
-      <a href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
     </div>
   </div>
-</footer></body>
+</footer>
+
+<button id="toTop" aria-label="Back to top"></button>
+
+<script>
+  // Smooth scroll for same-page anchors
+  document.addEventListener('click',e=>{
+    const a = e.target.closest('a[href^="#"]');
+    if(!a) return;
+    const id = a.getAttribute('href');
+    const el = document.querySelector(id);
+    if(el){
+      e.preventDefault();
+      el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+
+  // Back to top
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) toTop.classList.add('show');
+    else toTop.classList.remove('show');
+  });
+  toTop.addEventListener('click', () =>
+    window.scrollTo({top:0, behavior:'smooth'})
+  );
+</script>
+
+</body>
 </html>
