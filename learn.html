@@ -2,241 +2,457 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
 
-  gtag('config', 'G-3ENCBC9RT3');
-</script>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Learn 7Tribes — Crypto 101</title>
-<link rel="icon" href="images/logo.png">
-<style>
-  :root{
-    --bg:#0e0f12; --card:#15171d; --card-2:#111318; --ink:#f7f8fa; --muted:#c7c9ce;
-    --gold:#c5a24a; --edge:1px solid rgba(255,255,255,.06); --radius:16px; --shadow:0 18px 60px rgba(0,0,0,.45);
-  }
-   
-  *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;}
-  a{color:#ffd56b;text-decoration:none}
-  header{position:sticky;top:0;background:linear-gradient(180deg,rgba(14,15,18,.92),transparent);backdrop-filter:blur(6px)}
-  .wrap{max-width:980px;margin:auto;padding:22px}
-  nav{display:flex;align-items:center;gap:16px;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px}
-  .brand img{width:36px;height:36px;border-radius:50%}
-  h1{margin:14px 0 6px}
-  .lead{color:var(--muted)}
-  .card{background:linear-gradient(180deg,var(--card),var(--card-2));border:var(--edge);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:14px 0}
-  h2{margin:20px 0 8px}
-  h3{margin:12px 0 6px}
-  ul{margin:8px 0 0 18px;color:var(--muted)}
-  li{margin:6px 0}
-     .gold-trim {
-  position: relative;
-  background: linear-gradient(180deg, #11141a, #0e1015);
-  border-radius: 20px;
-  padding: 24px;
-  border: 1px solid rgba(255, 215, 0, 0.25);
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.1);
-  overflow: hidden;
-  animation: goldBreath 8s ease-in-out infinite;
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learn (Basics) — Crypto 101</title>
+  <meta name="description" content="Crypto basics, real risks, wallets, gas, liquidity, and why circulation matters — so you can understand 7TRB with clarity." />
+  <link rel="icon" href="images/logo.png" />
 
-.gold-trim::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(90deg, rgba(255,215,0,.3), rgba(184,145,47,.6), rgba(255,215,0,.3));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0.75;
-}
+  <style>
+    :root{
+      --bg:#0f0a05;
+      --panel:#1a1208;
+      --panel-2:#120c06;
+      --ink:#fff7e6;
+      --muted:#d4c3a1;
+      --line:#3b2b17;
+      --gold:#e7b852;
+      --gold-2:#b8831b;
+      --gold-bright:#ffdd7a;
+      --ok:#25F4EE;
+      --pop:#FE2C55;
+      --radius:18px;
+      --radius-lg:24px;
+    }
 
-@keyframes goldBreath {
-  0%,100% {
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.08);
-    border-color: rgba(255, 215, 0, 0.25);
-  }
-  50% {
-    box-shadow: 0 0 45px rgba(255, 215, 0, 0.25);
-    border-color: rgba(255, 215, 0, 0.5);
-  }
-}
-  .faq>details{margin:8px 0;border:var(--edge);border-radius:12px;padding:14px;background:#12141a}
-  .faq summary{cursor:pointer;font-weight:700}
-  .grid{display:grid;gap:14px}
-  .two{grid-template-columns:repeat(2,minmax(0,1fr))}
-  @media (max-width:860px){.two{grid-template-columns:1fr}}
-</style>
+    *{box-sizing:border-box;}
+    html,body{
+      margin:0;
+      background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
+      color:var(--ink);
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    img{max-width:100%;display:block}
+    a{color:var(--gold-bright);text-decoration:none}
+    a:hover{opacity:.9}
+    .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+
+    /* Header / Banner */
+    .site-header{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,215,122,0.2);
+    }
+    .hero-banner{
+      width:100%;
+      height:340px;
+      background:url('images/welcome_banner.png') center/cover no-repeat;
+      position:relative;
+    }
+    .hero-banner::before{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.60),rgba(0,0,0,.30),rgba(0,0,0,.70));
+    }
+    .header-inner{
+      position:relative;
+      z-index:2;
+      max-width:1160px;
+      margin:0 auto;
+      padding:18px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .brand img{
+      width:62px;height:62px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 10px 30px rgba(0,0,0,.6);
+    }
+    .brand b{
+      font-size:1.4rem;
+      color:var(--gold-bright);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .nav-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      color:var(--gold-bright);
+      font-size:.85rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .banner-text{
+      position:absolute;
+      left:50%;
+      bottom:26px;
+      transform:translateX(-50%);
+      text-align:center;
+      z-index:2;
+      padding:0 16px;
+    }
+    .banner-text h1{
+      margin:0;
+      color:var(--gold-bright);
+      font-size:clamp(22px,3vw,32px);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .banner-text p{
+      margin:8px 0 0;
+      color:#fff7e6;
+      font-size:.98rem;
+      max-width:78ch;
+    }
+
+    /* Row under header */
+    .header-row{
+      background:linear-gradient(90deg,#261608,#110804);
+      border-bottom:1px solid rgba(255,215,122,.25);
+    }
+    .header-row-inner{
+      max-width:1160px;
+      margin:0 auto;
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;align-items:center;gap:.6rem;
+      padding:10px 16px;border-radius:999px;
+      font-weight:800;border:1px solid transparent;
+      cursor:pointer;font-size:.95rem;white-space:nowrap;
+    }
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#130b03;
+      border-color:rgba(255,215,122,.7);
+      box-shadow:0 0 18px rgba(255,215,122,.35);
+    }
+    .btn.ghost{
+      border:1px solid rgba(255,215,122,.35);
+      color:var(--ink);
+      background:transparent;
+    }
+
+    /* Sections / Cards */
+    .section{padding:44px 0}
+    .muted{color:var(--muted)}
+    .title{
+      margin:0 0 14px;
+      font-size:clamp(22px,3vw,30px);
+      letter-spacing:.08em;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+    }
+    .box{
+      position:relative;
+      background:linear-gradient(180deg,var(--panel),var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:22px;
+      border:1px solid rgba(255,215,122,0.35);
+      box-shadow:0 18px 50px rgba(0,0,0,.6);
+      overflow:hidden;
+    }
+    .box::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:2px;
+      background:linear-gradient(90deg,rgba(255,215,122,.55),rgba(184,131,31,.75),rgba(255,215,122,.55));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.45;
+    }
+    .divider{
+      height:2px;margin:20px auto;width:86%;
+      border-radius:999px;
+      background:linear-gradient(90deg,transparent,rgba(255,215,122,0.35),rgba(255,215,122,0.85),rgba(255,215,122,0.35),transparent);
+      box-shadow:0 0 16px rgba(255,215,122,0.28);
+    }
+
+    .grid{display:grid;gap:16px}
+    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width:900px){
+      .header-inner{flex-direction:column;align-items:flex-start}
+      .nav-links{justify-content:flex-start}
+      .two{grid-template-columns:1fr}
+      .hero-banner{height:300px}
+    }
+
+    /* Accordion */
+    details{
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,215,122,.18);
+      border-radius:16px;
+      padding:12px 14px;
+      margin:10px 0;
+    }
+    summary{cursor:pointer;font-weight:900;color:var(--gold-bright);letter-spacing:.02em}
+
+    code{
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(255,215,122,.18);
+      padding:2px 6px;border-radius:8px;
+      color:var(--gold-bright);
+    }
+
+    footer{
+      position:relative;
+      background:radial-gradient(circle at center, rgba(255,215,122,.18), #090604 78%);
+      border-top:1px solid rgba(255,215,122,.28);
+      box-shadow:0 -6px 30px rgba(0,0,0,.7);
+      padding:20px 0;
+    }
+  </style>
 </head>
-<body>
-  <section style="max-width:980px;margin:0 auto;padding:28px 18px;">
-  <h1 style="margin:0 0 8px;font-size:34px;line-height:1.1;">Learn (Basics) — Crypto 101</h1>
-  <p style="margin:0 0 14px;color:#666;max-width:70ch;">
-    This page teaches the fundamentals: money, crypto, blockchains, and why circulation matters.
-    If you already understand the basics and want the <b>7TRB operating system</b> (wallets, treasury, tribes, merchants, circulation), go here:
-  </p>
 
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
-    <a href="learn-7trb.html" style="display:inline-block;padding:10px 14px;border:1px solid #b08d57;border-radius:12px;text-decoration:none;color:#b08d57;font-weight:800;">
-      How 7TRB Works →
-    </a>
-    <a href="index.html" style="display:inline-block;padding:10px 14px;border:1px solid #111;border-radius:12px;text-decoration:none;color:#111;font-weight:800;">
-      Back to Home
-    </a>
+<body>
+
+<header class="site-header">
+  <div class="hero-banner">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="images/logo.png" alt="7TRB logo" />
+        <b>7TRB</b>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn (Basics)</a>
+        <a href="learn-7trb.html">How 7TRB Works</a>
+        <a href="wallet/index.html">Wallet</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+    </div>
+
+    <div class="banner-text">
+      <h1>Learn (Basics)</h1>
+      <p>Crypto 101 — money, wallets, risks, and why circulation matters. Learn here, then apply it in the 7TRB Field Manual.</p>
+    </div>
   </div>
 
-  <p style="margin:14px 0 0;color:#777;font-size:14px;">
-    <b>Note:</b> 7TRB is not hype and not a promise. It’s a structure-first system. Learn the basics here, then apply them on the 7TRB page.
-  </p>
-</section>
-
-<hr style="border:none;border-top:1px solid #e6e6e6;margin:0;">
-<header>
-  <div class="wrap">
-    <nav>
-      <div class="brand">
-        <img src="images/logo.png" alt="7TRB logo"><b>7TRB</b>
-      </div>
-      <div><a href="index.html">← Back to Home</a></div>
-    </nav>
+  <div class="header-row">
+    <div class="header-row-inner">
+      <a class="btn ghost" href="index.html">← Back to Home</a>
+      <span class="muted" style="text-transform:uppercase;letter-spacing:.08em">No hype • Just fundamentals</span>
+      <a class="btn gold" href="learn-7trb.html">How 7TRB Works →</a>
+    </div>
   </div>
 </header>
-</div>
-<main class="wrap">
-    <div class="gold-trim">
-  <!-- your current text or elements here -->
-  <h1>Learn 7Tribes</h1>
-  <p class="lead">Crypto basics, real risks, how to use 7TRB, and the culture we’re building. Transparent. No hype. Action &gt; talk.</p>
-  <div class="card">
-    <h2>Best Practice</h2>
-    <ul>
-      <li>Small first test transactions.</li>
-      <li>Hardware wallet for larger holdings (Ledger/Trezor).</li>
-      <li>Verify contract on Etherscan.</li>
-    </ul>
-  </div>
 
-  <section class="card">
-    <h2>How to Use 7TRB</h2>
-    <ol style="margin:6px 0 0 20px;color:var(--muted)">
-      <li><b>Install a wallet:</b> MetaMask or Trust Wallet.</li>
-      <li><b>Select Network:</b> Ethereum Mainnet; keep a little ETH for gas.</li>
-      <li><b>Add 7TRB:</b> use contract <code>0xD816...c0D</code> (verify on Etherscan).</li>
-      <li><b>Acquire 7TRB:</b> swap ETH→7TRB on the listed DEX/CEX when available (check announcements).</li>
-      <li><b>Spend 7TRB:</b> pay merchants in the directory or P2P.</li>
-      <li><b>Contribute:</b> propose work, vote budgets, show receipts in Telegram.</li>
-      <li><b>Cash Out (optional):</b> swap 7TRB→ETH, then ETH→fiat via your exchange/bank (fees & local laws apply).</li>
-    </ol>
-    <p style="margin-top:10px">Need help? Join <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a> for live onboarding.</p>
+<main>
+
+  <!-- ROUTER NOTE -->
+  <section class="section">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">Before We Start</h2>
+        <p class="muted" style="max-width:92ch;margin:0">
+          This page teaches fundamentals. If you want the <b>7TRB operating system</b> (wallets, treasury, tribes, merchants, circulation),
+          go to <a href="learn-7trb.html"><b>How 7TRB Works</b></a>.
+        </p>
+      </div>
+    </div>
   </section>
 
-  <section class="card">
-    <h2>Crypto 101 — Doubts & Answers</h2>
-    <div class="faq">
-      <details open>
-        <summary>1) What makes a coin go up or down?</summary>
-        <ul>
-          <li>Short answer: <b>supply + demand</b>.</li>
-          <li>More buyers than sellers → price up. More sellers than buyers → price down.</li>
-          <li><i>Also matters:</i> utility (can you use it), trust (transparent devs/treasury), scarcity (fixed supply), and news/hype/fear.</li>
+  <!-- BEST PRACTICE -->
+  <section class="section">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">Best Practice</h2>
+        <ul class="muted" style="margin:0 0 0 18px">
+          <li><b>Test small first:</b> send a tiny transaction before doing anything big.</li>
+          <li><b>Protect the keys:</b> store seed phrase offline. Never screenshot. Never DM it.</li>
+          <li><b>Verify contracts:</b> use the official explorer link from this website — don’t trust random DMs.</li>
         </ul>
-      </details>
-      <details>
-        <summary>2) What if a billionaire buys it all?</summary>
-        <ul>
-          <li>That’s a whale attack. We counter with: wide distribution, community treasury + voting, liquidity pools, and social defense (in extremes, communities can fork).</li>
-        </ul>
-      </details>
-      <details>
-        <summary>3) What if they dump it cheap?</summary>
-        <ul>
-          <li>That’s price manipulation. Thin markets are fragile. We counter with real usage (merchants + projects), lots of holders (dilution of whale power), and radical transparency (live dashboard; receipts over rhetoric).</li>
-        </ul>
-        <div class="card" style="margin:10px 0;background:#0f1116">
-          <b>Street version:</b> 1 guy owning 10 houses can play landlord. 10,000 families owning their homes? No single landlord can crash it. Same idea here.
+        <div class="divider"></div>
+        <p class="muted" style="margin:0">
+          If you can’t verify it, don’t trust it. That’s the whole survival rule.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW CRYPTO WORKS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">Crypto 101 — The Core Ideas</h2>
+
+        <details open>
+          <summary>1) What is crypto?</summary>
+          <p class="muted">Crypto is money on a public ledger. Instead of a bank keeping the records, a network keeps the records.</p>
+        </details>
+
+        <details>
+          <summary>2) What is a blockchain?</summary>
+          <p class="muted">A blockchain is a public database of transactions. Once recorded, it’s extremely hard to change. That’s the “trust layer.”</p>
+        </details>
+
+        <details>
+          <summary>3) What makes a coin go up or down?</summary>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li><b>Supply + demand</b> is the main driver.</li>
+            <li>Thin liquidity = price can move wildly.</li>
+            <li>Utility (real use), trust (transparency), and distribution (not whale-owned) matter long term.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>4) What’s “gas”?</summary>
+          <p class="muted">Gas is the small network fee to process transactions. Every chain has a gas token (ETH on Ethereum, $AKE on Alkebuleum).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO USE 7TRB (BASICS VERSION) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">How to Use 7TRB (Basics)</h2>
+        <p class="muted" style="margin-top:0;max-width:92ch">
+          This is the “quick start.” The full setup (treasury rules, merchants, redemption) is in the Field Manual page.
+        </p>
+
+        <ol class="muted" style="margin:10px 0 0 20px">
+          <li><b>Install a wallet:</b> use AmVault (Alkebuleum ecosystem) or another supported wallet.</li>
+          <li><b>Add the right network:</b> make sure you’re on the chain where 7TRB lives.</li>
+          <li><b>Get gas:</b> keep a little gas token for transactions (example: $AKE on Alkebuleum).</li>
+          <li><b>Add 7TRB token:</b> use the official contract address from the <a href="index.html#transparency"><b>Transparency</b></a> section / explorer link.</li>
+          <li><b>Use it:</b> earn, spend with merchants, or contribute to projects.</li>
+        </ol>
+
+        <div class="divider"></div>
+
+        <p class="muted" style="margin:0">
+          Want the real operating system? Go here: <a href="learn-7trb.html"><b>How 7TRB Works →</b></a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MYTHS + SAFETY -->
+  <section class="section">
+    <div class="wrap">
+      <div class="grid two">
+
+        <div class="box">
+          <h2 class="title" style="margin-top:0">Safety & Wallet Security</h2>
+
+          <h3 style="margin:10px 0 6px;color:var(--gold-bright)">Seed Phrase Rules</h3>
+          <ul class="muted" style="margin:0 0 0 18px">
+            <li>Write it on paper. Store offline. Never screenshot.</li>
+            <li>Never share it. No admin, no support, nobody needs it.</li>
+            <li>Consider 2 copies in separate safe places.</li>
+          </ul>
+
+          <h3 style="margin:12px 0 6px;color:var(--gold-bright)">Scam Radar</h3>
+          <ul class="muted" style="margin:0 0 0 18px">
+            <li>Random DMs offering “help.”</li>
+            <li>Fake airdrops / fake support forms.</li>
+            <li>Clone websites — always check the URL.</li>
+          </ul>
         </div>
-      </details>
+
+        <div class="box">
+          <h2 class="title" style="margin-top:0">Common Myths</h2>
+
+          <details open>
+            <summary>“Crypto is all scams.”</summary>
+            <p class="muted">Scams are real. The defense is verification + transparency. If you can’t verify it, don’t touch it.</p>
+          </details>
+
+          <details>
+            <summary>“If I lose my phone, I lose my crypto.”</summary>
+            <p class="muted">You recover the wallet with your seed phrase. Phone lost ≠ coins lost.</p>
+          </details>
+
+          <details>
+            <summary>“It’s anonymous crime money.”</summary>
+            <p class="muted">Most chains are public ledgers. Transactions are traceable. Don’t confuse “addresses” with “invisible.”</p>
+          </details>
+
+          <details>
+            <summary>“Crypto is illegal.”</summary>
+            <p class="muted">Rules vary by country/state. This isn’t legal/tax advice — you’re responsible for local compliance.</p>
+          </details>
+
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <section class="card">
-    <h2>Common Myths (Debunked)</h2>
-    <div class="faq">
-      <details open><summary>“Crypto is all scams.”</summary>
-        <p>7TRB ties value to work you can verify: merchants, funded projects, and a public dashboard. If you can’t verify it, don’t trust it.</p>
-      </details>
-      <details><summary>“If I lose my phone, I lose my crypto.”</summary>
-        <p>Your wallet is recovered with your <b>seed phrase</b>. Store it offline. Phone lost ≠ coins lost.</p>
-      </details>
-      <details><summary>“It’s anonymous crime money.”</summary>
-        <p>Blockchains are public ledgers. Transactions are traceable. Good opsec matters, but it’s not a shadow realm.</p>
-      </details>
-      <details><summary>“Crypto is illegal.”</summary>
-        <p>Laws vary by country, but owning/using crypto is legal in most places. We don’t give legal/tax advice—know your local rules.</p>
-      </details>
+  <!-- GLOSSARY -->
+  <section class="section">
+    <div class="wrap">
+      <div class="box">
+        <h2 class="title" style="margin-top:0">Glossary (Plain Language)</h2>
+        <p class="muted"><b>Wallet</b> — An app that holds your keys (your access). Protect the seed phrase.</p>
+        <p class="muted"><b>Gas</b> — Network fee to run transactions.</p>
+        <p class="muted"><b>DEX / CEX</b> — Places to trade (decentralized vs centralized exchange).</p>
+        <p class="muted"><b>Liquidity</b> — How easily something buys/sells without wild price changes.</p>
+        <p class="muted"><b>Treasury</b> — Community funds controlled by rules + voting.</p>
+        <p class="muted"><b>DAO</b> — Governance system: proposals + votes = action.</p>
+
+        <div class="divider"></div>
+
+        <h3 style="margin:0 0 6px;color:var(--gold-bright)">Risk Disclosure</h3>
+        <ul class="muted" style="margin:0 0 0 18px">
+          <li><b>No promises:</b> value can go up or down.</li>
+          <li><b>Not financial advice:</b> do your own research.</li>
+          <li><b>You are your own bank:</b> security is your responsibility.</li>
+        </ul>
+      </div>
     </div>
-  </section>
-
-  <section class="grid two">
-    <article class="card">
-      <h2>Safety & Wallet Security</h2>
-      <h3>Seed Phrase Rules</h3>
-      <ul>
-        <li>Write it <b>on paper</b>. Store offline. Never screenshot.</li>
-        <li>Never share it. No admin or “support” needs it. Ever.</li>
-        <li>Consider two copies in separate safe spots.</li>
-      </ul>
-      <h3>Device Hygiene</h3>
-      <ul>
-        <li>Update your OS & browser.</li>
-        <li>Use a password manager + 2FA.</li>
-        <li>Bookmark official links (this site, Etherscan contract page).</li>
-      </ul>
-      <h3>Scam Radar</h3>
-      <ul>
-        <li>Too-good-to-be-true “airdrops”.</li>
-        <li>DMs offering help. Fake support.</li>
-        <li>Clone websites (check URL carefully).</li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <h2>Glossary (Plain Language)</h2>
-      <p><b>Wallet</b> — An app that holds your keys. It’s your account. Protect your seed phrase.</p>
-      <p><b>Gas</b> — The small ETH fee to run a transaction on Ethereum.</p>
-      <p><b>DEX / CEX</b> — Decentralized or centralized exchange where you trade coins.</p>
-      <p><b>Liquidity</b> — How easy it is to buy/sell without moving price.</p>
-      <p><b>Treasury</b> — Community funds controlled by proposals/votes.</p>
-      <p><b>DAO</b> — Community governance: proposals + votes = action.</p>
-
-      <h2>Legal & Risk Disclosure</h2>
-      <ul>
-        <li><b>No promises:</b> 7TRB is community-driven. Value can go up or down.</li>
-        <li><b>Not financial advice:</b> do your own research; consider your risk tolerance.</li>
-        <li><b>Tax & laws:</b> rules differ by country. You’re responsible for compliance.</li>
-        <li><b>Security:</b> you are your own bank—protect your wallet/keys.</li>
-      </ul>
-
-      <h2>Community Code & Pledge</h2>
-      <ul>
-        <li><b>Receipts over rhetoric:</b> show proof of work and impact.</li>
-        <li><b>No harassment or hate:</b> build with respect or don’t build at all.</li>
-        <li><b>Teach one, bring two:</b> onboard people with patience.</li>
-        <li><b>If you benefit, contribute:</b> time, talent, capital, or mentorship.</li>
-      </ul>
-      <div class="card" style="background:#0f1116"><i>Pledge:</i> “I won’t just hold a token. I’ll hold a responsibility.”</div>
-    </article>
   </section>
 
 </main>
+
+<footer>
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img src="images/logo.png" alt="7TRB" style="width:36px;height:36px;border-radius:50%" />
+      <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a href="index.html">Home</a>
+      <a href="learn-7trb.html">How 7TRB Works</a>
+      <a href="wallet/index.html">Wallet</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
