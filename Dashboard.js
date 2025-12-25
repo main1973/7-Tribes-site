@@ -37,10 +37,10 @@ const setBar = (id, p) => {
 // ---------- metrics + tables ----------
 (async function initDashboard(){
   const [goals, metrics, merchants, referrals] = await Promise.all([
-    safeJson("data/goals.json"),
-    safeJson("data/metrics.json"),
-    safeJson("data/merchants.json"),
-    safeJson("data/referrals.json")
+    safeJson("/data/goals.json"),
+safeJson("/data/metrics.json"), 
+safeJson("/data/merchants.json"),
+safeJson("/data/referrals.json")
   ]);
 
   if(!metrics){
