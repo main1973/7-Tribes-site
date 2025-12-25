@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Styles -->
   <style>
     :root{
       --bg:#0b0b0c;
@@ -37,6 +36,9 @@
     header{
       background:#11141a;
       border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:50;
     }
 
     .wrap{
@@ -45,16 +47,27 @@
       padding:18px;
     }
 
-    h1{margin:0}
+    h1{margin:0;font-size:18px}
     a{color:var(--accent);text-decoration:none}
 
     /* Status dots */
     #networkDot, #walletDot {
       display:inline-block;
-      width:12px;
-      height:12px;
+      width:10px;
+      height:10px;
       border-radius:50%;
       margin-left:6px;
+      background:var(--red);
+      vertical-align:middle;
+    }
+    #freshDot{
+      display:inline-block;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#999;
+      margin-left:6px;
+      vertical-align:middle;
     }
 
     /* KPI Cards */
@@ -77,6 +90,7 @@
       color:var(--muted);
       text-transform:uppercase;
       letter-spacing:.04em;
+      margin-bottom:6px;
     }
 
     .value{
@@ -100,7 +114,6 @@
       transition:width .4s ease;
     }
 
-    /* Grid layout */
     .grid{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -119,12 +132,13 @@
       border-bottom:1px solid var(--border);
     }
 
-    th{text-align:left;color:var(--muted)}
+    th{text-align:left;color:var(--muted);font-weight:600}
 
     #map{
       height:320px;
       border-radius:12px;
       border:1px solid var(--border);
+      overflow:hidden;
     }
 
     .cta{
@@ -133,12 +147,13 @@
       gap:.5rem;
       background:linear-gradient(90deg,#FFD700,#b8912f);
       color:#111;
-      font-weight:700;
+      font-weight:800;
       border:none;
-      padding:10px 18px;
+      padding:10px 16px;
       border-radius:30px;
       cursor:pointer;
-      box-shadow:0 0 12px rgba(255,215,0,.25);
+      box-shadow:0 0 12px rgba(255,215,0,.20);
+      white-space:nowrap;
     }
 
     .ghost{
@@ -147,6 +162,7 @@
       border:1px solid #2b2f3b;
       padding:10px 14px;
       border-radius:30px;
+      white-space:nowrap;
     }
 
     #systemBanner{
@@ -154,11 +170,12 @@
       background:#0f1c13;
       padding:10px;
       color:#43a047;
-      font-weight:700;
-      margin-bottom:15px;
+      font-weight:800;
       border-bottom:1px solid #1c3a29;
       display:none;
     }
+
+    .muted{color:var(--muted)}
 
     @media (max-width:1100px){
       .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -175,20 +192,22 @@
 
 <body>
 
-  <!-- ONLINE SYSTEM BANNER -->
   <div id="systemBanner">SYSTEM ONLINE — 7TRB DASHBOARD ACTIVE</div>
 
-  <!-- HEADER -->
   <header>
-    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap">
-      
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:10px">
-        <img src="images/logo.png" alt="7TRB" style="width:36px;height:36px;border-radius:50%">
-        <h1>
-          7TRB Dashboard 
-          <span id="networkDot" title="Network Status" style="background:var(--red);"></span>
-          <span id="walletDot" title="Wallet Status" style="background:var(--red);"></span>
-        </h1>
+        <img src="images/logo.png" alt="7TRB" style="width:34px;height:34px;border-radius:50%">
+        <div>
+          <h1>
+            7TRB Dashboard
+            <span id="networkDot" title="Network Status"></span>
+            <span id="walletDot" title="Wallet Status"></span>
+          </h1>
+          <div class="muted" style="font-size:12px;margin-top:2px">
+            Public metrics + on-chain balances (read-only)
+          </div>
+        </div>
       </div>
 
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
@@ -200,18 +219,18 @@
 
   <div class="wrap">
 
-    <!-- Timestamp -->
-    <p style="color:#a1a1a6;margin:.3rem 0 .7rem">
+    <p class="muted" style="margin:.3rem 0 .7rem">
       Updated <span id="updatedAt">—</span>
+      <span id="freshDot" title="Data freshness"></span>
     </p>
 
     <!-- WALLET INFO -->
-    <div id="walletBalance" style="margin:8px 0 12px;color:#FFD700;font-weight:600"></div>
-    <div id="tokenBalance" style="margin-bottom:14px;color:#FFD700;font-weight:600"></div>
+    <div id="walletBalance" style="margin:8px 0 8px;color:#FFD700;font-weight:700"></div>
+    <div id="tokenBalance" style="margin:0 0 14px;color:#FFD700;font-weight:700"></div>
 
-    <!-- CONTRACT ADDRESSES -->
-    <div class="card" style="margin-bottom:18px;">
-      <div class="label">Smart Contracts</div>
+    <!-- CONTRACT PANEL -->
+    <div class="card" style="margin-bottom:12px;">
+      <div class="label">Smart contracts</div>
       <p style="margin:6px 0;">
         <b>Treasury Contract:</b><br>
         <span style="color:#FFD700;">0xdf7ce67dB19142672c4193d969cdD9975A5A6038</span>
@@ -221,23 +240,25 @@
         <span id="tokenContract" style="color:#FFD700;">TBA</span>
       </p>
     </div>
-<!-- DEX PANEL -->
-<section class="card" style="margin-bottom:18px; border-left:4px solid var(--accent);">
-  <div class="label" style="margin-bottom:6px;">Alkebuleum DEX</div>
 
-  <p id="dexStatus" style="color:#fbc02d; font-weight:600; margin-bottom:10px;">
-    🔄 DEX Status: <span style="color:#fbc02d;">COMING SOON</span>
-  </p>
+    <!-- DEX PANEL -->
+    <section class="card" style="margin-bottom:12px; border-left:4px solid var(--accent);">
+      <div class="label" style="margin-bottom:6px;">Alkebuleum DEX</div>
 
-  <div style="display:flex; gap:10px; flex-wrap:wrap;">
-    <button class="cta" onclick="openDexSwap()" style="flex:1;min-width:120px;">Swap 7TRB ↔ AKE</button>
-    <button class="cta" onclick="openDexLiquidity()" style="flex:1;min-width:120px;">Liquidity Pool</button>
-  </div>
+      <p id="dexStatus" style="color:#fbc02d; font-weight:800; margin:0 0 10px;">
+        🔄 DEX Status: <span style="color:#fbc02d;">COMING SOON</span>
+      </p>
 
-  <p style="margin-top:10px; color:var(--muted); font-size:12px;">
-    Once the Alkebuleum DEX launches, these actions will activate instantly.
-  </p>
-</section>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="cta" type="button" onclick="openDexSwap()" style="flex:1;min-width:150px;">Swap 7TRB ↔ AKE</button>
+        <button class="cta" type="button" onclick="openDexLiquidity()" style="flex:1;min-width:150px;">Liquidity Pool</button>
+      </div>
+
+      <p class="muted" style="margin:10px 0 0; font-size:12px;">
+        Once the DEX launches, these buttons will route to the official swap + pool pages.
+      </p>
+    </section>
+
     <!-- KPI CARDS -->
     <section class="cards">
       <div class="card">
@@ -245,23 +266,28 @@
         <div class="value" id="holders">—</div>
         <div class="bar"><i id="holdersBar"></i></div>
       </div>
+
       <div class="card">
         <div class="label">Active (30d)</div>
         <div class="value" id="active">—</div>
       </div>
+
       <div class="card">
         <div class="label">Treasury (USD)</div>
         <div class="value" id="treasury">—</div>
         <div class="bar"><i id="treasuryBar"></i></div>
       </div>
+
       <div class="card">
         <div class="label">Spend vs Save</div>
         <div class="value" id="spendSave">—</div>
         <div class="bar"><i id="spendBar"></i></div>
       </div>
+
       <div class="card">
         <div class="label">Referrals (30d)</div>
         <div class="value" id="referrals">—</div>
+        <div class="muted" id="referralsNote" style="font-size:12px;margin-top:6px;"></div>
       </div>
     </section>
 
@@ -286,6 +312,11 @@
       <section class="card">
         <div class="label">Merchant map</div>
         <div id="map"></div>
+
+        <div id="mapNotice"
+             style="display:none;color:#a1a1a6;font-size:12px;margin-top:10px;">
+          Map disabled — add <code>lat</code> and <code>lng</code> in <code>data/merchants.json</code>.
+        </div>
       </section>
 
       <section class="card">
@@ -299,80 +330,28 @@
 
   </div>
 
-  <!-- WALLET SCRIPT -->
+  <!-- DEX helpers -->
   <script>
-    const ALK_CHAIN_HEX = "0x3a006"; /* Replace when final chainId confirmed */
+    const DEX_URL = "https://dex.alkebuleum.com";   // replace when official
+    const SWAP_PATH = "/swap?token=7TRB";
+    const LP_PATH = "/liquidity?pool=7TRB-AKE";
 
-    async function connectWallet() {
-      if (!window.ethereum) {
-        alert("No wallet found. Open inside MetaMask browser.");
-        return;
-      }
+    function openDexSwap(){ window.open(DEX_URL + SWAP_PATH, "_blank"); }
+    function openDexLiquidity(){ window.open(DEX_URL + LP_PATH, "_blank"); }
 
-      try {
-        const accounts = await ethereum.request({ method:"eth_requestAccounts" });
-        const wallet = accounts[0];
-
-        // Show wallet
-        document.getElementById("walletBalance").textContent = 
-          "Wallet Connected: " + wallet;
-
-        // Wallet green
-        document.getElementById("walletDot").style.background = "#43a047";
-
-        // Chain detection
-        const chainId = await ethereum.request({ method:"eth_chainId" });
-
-        if (chainId === ALK_CHAIN_HEX) {
-          document.getElementById("networkDot").style.background = "#43a047"; // green
-          document.getElementById("systemBanner").style.display = "block";
-        } else {
-          document.getElementById("networkDot").style.background = "#fbc02d"; // yellow
-          document.getElementById("systemBanner").style.display = "none";
+    async function checkDexLive(){
+      try{
+        const res = await fetch(DEX_URL, { method:"HEAD" });
+        if(res.ok){
+          const el = document.getElementById("dexStatus");
+          if(el) el.innerHTML = "🟢 DEX Status: <span style='color:#43a047;'>ONLINE</span>";
         }
-
-      } catch (err) {
-        console.error(err);
-        alert("Wallet connection failed.");
-      }
+      }catch(e){}
     }
+    checkDexLive();
   </script>
 
-  <!-- Dashboard Logic -->
+  <!-- Your dashboard logic -->
   <script src="dashboard.js"></script>
-
-  <!-- Button Handler -->
-  <script>
-    document.getElementById("connectBtn").addEventListener("click", connectWallet);
-  </script>
-<script>
-  // DEX placeholders until Alkebuleum goes live
-  const DEX_URL = "https://dex.alkebuleum.com";  // Replace when official
-  const SWAP_PATH = "/swap?token=7TRB";          
-  const LP_PATH = "/liquidity?pool=7TRB-AKE";    
-
-  function openDexSwap() {
-    window.open(DEX_URL + SWAP_PATH, "_blank");
-  }
-
-  function openDexLiquidity() {
-    window.open(DEX_URL + LP_PATH, "_blank");
-  }
-
-  // Auto-detect when DEX goes live (turns status green)
-  async function checkDexLive() {
-    try {
-      const response = await fetch(DEX_URL, { method: "HEAD" });
-      if (response.ok) {
-        document.getElementById("dexStatus").innerHTML =
-          "🟢 DEX Status: <span style='color:#43a047;'>ONLINE</span>";
-      }
-    } catch (err) {
-      // stays yellow until launch
-    }
-  }
-
-  checkDexLive();
-</script>
 </body>
-  </html>
+</html>
