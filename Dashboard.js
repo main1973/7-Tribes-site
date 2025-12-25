@@ -34,56 +34,52 @@ const setBar = (id, p) => {
   if(el) el.style.width = p + "%";
 };
 
+function setText(id, txt){
+  const el = document.getElementById(id);
+  if(el) el.textContent = txt;
+}
+
 // ---------- metrics + tables ----------
 (async function initDashboard(){
   const [goals, metrics, merchants, referrals] = await Promise.all([
     safeJson("data/goals.json"),
-safeJson("data/metrics.json"),
-safeJson("data/merchants.json"),
-safeJson("data/referrals.json")
+    safeJson("data/metrics.json"),
+    safeJson("data/merchants.json"),
+    safeJson("data/referrals.json")
   ]);
 
   if(!metrics){
-    const ua = document.getElementById("updatedAt");
-    if (ua) ua.textContent = "— (awaiting data/metrics.json)";
+    setText("updatedAt", "— (awaiting data/metrics.json)");
     return;
   }
 
   // timestamp / freshness
   const upd = metrics.updated_at ? new Date(metrics.updated_at) : null;
-  const ua = document.getElementById("updatedAt");
-  if (ua) ua.textContent = (upd && !isNaN(upd)) ? upd.toLocaleString() : "—";
+  setText("updatedAt", (upd && !isNaN(upd)) ? upd.toLocaleString() : "—");
 
-  <span id="freshDot"
-  style="display:inline-block;
-         width:10px;
-         height:10px;
-         border-radius:50%;
-         background:#999;
-         margin-left:6px;"
-  title="Data freshness">
-</span>
+  const freshDot = document.getElementById("freshDot");
+  if (freshDot && upd && !isNaN(upd)){
+    const hrs = (Date.now() - upd.getTime()) / 36e5;
+    freshDot.style.background = hrs <= 24 ? "#22c55e" : (hrs <= 72 ? "#f59e0b" : "#ef4444");
+    freshDot.title = `Data age: ${hrs.toFixed(1)}h`;
   }
 
   // KPIs
   const holders = metrics.holders ?? 0;
-  const hEl = document.getElementById("holders");
-  if (hEl) hEl.textContent = holders.toLocaleString();
+  setText("holders", holders.toLocaleString());
   setBar("holdersBar", pct(holders, goals && goals.holders));
 
   const active = metrics.active_wallets_30d ?? 0;
-  const aEl = document.getElementById("active");
-  if (aEl) aEl.textContent = active.toLocaleString();
+  setText("active", active.toLocaleString());
 
   const tUSD = Math.round(metrics.treasury_usd ?? 0);
-  const tEl = document.getElementById("treasury");
-  if (tEl) tEl.textContent = "$" + tUSD.toLocaleString();
+  setText("treasury", "$" + tUSD.toLocaleString());
   setBar("treasuryBar", pct(tUSD, goals && goals.treasury_usd));
 
-  // ✅ spent_pct_30d treated as 0–100 percent
+  // If your metrics.spent_pct_30d is 0–1, change the next line to:
+  // const spentPct = Math.round((metrics.spent_pct_30d ?? 0) * 100);
   const spentPct = Math.round(metrics.spent_pct_30d ?? 0);
-  const ss = document.getElementById("spendSave");
-  if (ss) ss.textContent = `${spentPct}% spent / ${100 - spentPct}% saved`;
+  setText("spendSave", `${spentPct}% spent / ${100 - spentPct}% saved`);
   setBar("spendBar", Math.max(0, Math.min(100, spentPct)));
 
   // referrals.json (items[])
@@ -91,11 +87,8 @@ safeJson("data/referrals.json")
   if(referrals && Array.isArray(referrals.items)){
     totalRefs = referrals.items.reduce((sum, r) => sum + (r.count || 0), 0);
   }
-  const rEl = document.getElementById("referrals");
-  if (rEl) rEl.textContent = totalRefs.toLocaleString();
-
-  const rNote = document.getElementById("referralsNote");
-  if (rNote) rNote.textContent = "from tracked sources";
+  setText("referrals", totalRefs.toLocaleString());
+  setText("referralsNote", "from tracked sources");
 
   // projects table
   const pr = metrics.projects || {};
@@ -136,8 +129,8 @@ safeJson("data/referrals.json")
   const series = metrics.treasury_series || [];
   const labels = series.map(x => x[0]);
   const data = series.map(x => x[1]);
-
   const ctx = document.getElementById("treasuryChart");
+
   if(ctx && labels.length && window.Chart){
     new Chart(ctx, {
       type: "line",
@@ -164,21 +157,19 @@ safeJson("data/referrals.json")
 
   // Map
   try{
+    const mapNotice = document.getElementById("mapNotice");
     const hasGeo = Array.isArray(merchants) &&
-                   merchants.some(m => typeof m.lat === "number" && typeof m.lng === "number");
-<div id="mapNotice"
-  style="display:none;
-         font-size:13px;
-         color:#a1a1a6;
-         margin-bottom:8px;">
-  No merchant locations yet.
-</div>
+      merchants.some(m => typeof m.lat === "number" && typeof m.lng === "number");
+
     if(!hasGeo){
-  console.warn("No merchant geo data yet.");
-  return;
+      if(mapNotice) mapNotice.style.display = "block";
+      return;
     }
 
+    if(mapNotice) mapNotice.style.display = "none";
+
     const map = L.map("map", { zoomControl:true, scrollWheelZoom:false });
+
     const points = merchants.filter(m => typeof m.lat === "number" && typeof m.lng === "number");
     const latlngs = points.map(m => [m.lat, m.lng]);
 
@@ -199,7 +190,6 @@ safeJson("data/referrals.json")
         );
     });
 
-    // ✅ fit bounds without creating duplicate markers
     if(latlngs.length > 1){
       map.fitBounds(latlngs, { padding:[20,20] });
     } else if (latlngs.length === 1){
@@ -211,7 +201,7 @@ safeJson("data/referrals.json")
   }
 })();
 
-// ---------- wallet connect + 7TRB balance (Alkebuleum) ----------
+// ---------- wallet connect + balances ----------
 function updateButton(account){
   const btn = document.getElementById("connectBtn");
   if(!btn) return;
@@ -219,9 +209,13 @@ function updateButton(account){
   if(account){
     btn.textContent = account.slice(0,6) + "..." + account.slice(-4);
     btn.style.background = "linear-gradient(90deg,#FFD700,#b8912f)";
+    const wd = document.getElementById("walletDot");
+    if(wd) wd.style.background = "#43a047";
   }else{
     btn.textContent = "Connect Wallet";
     btn.style.background = "";
+    const wd = document.getElementById("walletDot");
+    if(wd) wd.style.background = "#e53935";
   }
 }
 
@@ -238,15 +232,15 @@ async function showBalance(account){
 
     const raw = await contract.balanceOf(account);
     const userBal = Number(ethers.formatUnits(raw, TOKEN_DECIMALS));
-
-    const el = document.getElementById("walletBalance");
-    if (el) el.textContent = `Your 7TRB (Alkebuleum): ${userBal.toFixed(3)} ${TOKEN_SYMBOL}`;
+    setText("walletBalance", `Your 7TRB (Alkebuleum): ${userBal.toFixed(3)} ${TOKEN_SYMBOL}`);
 
     const tRaw = await contract.balanceOf(TREASURY_WALLET);
     const tBal = Number(ethers.formatUnits(tRaw, TOKEN_DECIMALS));
+    setText("treasuryBalance", `Treasury 7TRB (on-chain): ${tBal.toFixed(3)} ${TOKEN_SYMBOL}`);
 
-    const tEl = document.getElementById("tokenBalance");
-    if (tEl) tEl.textContent = `Treasury 7TRB (on-chain): ${tBal.toFixed(3)} ${TOKEN_SYMBOL}`;
+    // Fill label fields if present
+    setText("tokenContract", TOKEN_ADDRESS);
+    setText("treasuryAddress", TREASURY_WALLET);
 
   }catch(err){
     console.error("Alkebuleum balance fetch failed:", err);
@@ -288,10 +282,8 @@ if(typeof window.ethereum !== "undefined"){
   window.ethereum.on("accountsChanged", (accounts) => {
     if(!accounts.length){
       updateButton(null);
-      const el = document.getElementById("walletBalance");
-      const tEl = document.getElementById("tokenBalance");
-      if(el) el.textContent = "";
-      if(tEl) tEl.textContent = "";
+      setText("walletBalance", "");
+      setText("treasuryBalance", "");
     }else{
       updateButton(accounts[0]);
       showBalance(accounts[0]);
