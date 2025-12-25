@@ -166,7 +166,13 @@ safeJson("data/referrals.json")
   try{
     const hasGeo = Array.isArray(merchants) &&
                    merchants.some(m => typeof m.lat === "number" && typeof m.lng === "number");
-
+<div id="mapNotice"
+  style="display:none;
+         font-size:13px;
+         color:#a1a1a6;
+         margin-bottom:8px;">
+  No merchant locations yet.
+</div>
     if(!hasGeo){
   console.warn("No merchant geo data yet.");
   return;
