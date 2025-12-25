@@ -54,11 +54,15 @@ safeJson("data/referrals.json")
   const ua = document.getElementById("updatedAt");
   if (ua) ua.textContent = (upd && !isNaN(upd)) ? upd.toLocaleString() : "—";
 
-  const dot = document.getElementById("freshDot");
-  if(dot && upd && !isNaN(upd)){
-    const hrs = (Date.now() - upd.getTime()) / 36e5;
-    dot.style.background = hrs <= 24 ? "#22c55e" : (hrs <= 72 ? "#f59e0b" : "#ef4444");
-    dot.title = `Data age: ${hrs.toFixed(1)}h`;
+  <span id="freshDot"
+  style="display:inline-block;
+         width:10px;
+         height:10px;
+         border-radius:50%;
+         background:#999;
+         margin-left:6px;"
+  title="Data freshness">
+</span>
   }
 
   // KPIs
