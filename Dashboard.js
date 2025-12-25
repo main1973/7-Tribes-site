@@ -1,280 +1,238 @@
-// ----------------------------
-// 7TRB Dashboard Logic
-// ----------------------------
+// dashboard.js — 7TRB Dashboard Logic
+// Uses:
+//  - data/metrics.json
+//  - data/merchants.json
+// Updates DOM ids found in dashboard.html
 
-// Alkebuleum config
-const ALKE_RPC       = "https://rpc.alkebuleum.com";
-const TOKEN_ADDRESS  = "0xdf7ce67dB19142672c4193d969cdD9975A5A6038"; // 7TRB on Alkebuleum
-const TOKEN_DECIMALS = 18;
-const TOKEN_SYMBOL   = "7TRB";
+(async function () {
+  // ---------- helpers ----------
+  const $ = (id) => document.getElementById(id);
 
-// AmVault treasury on Alkebuleum
-const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB";
-
-// ---------- helpers ----------
-async function safeJson(url){
-  try{
-    const res = await fetch(url, { cache: "no-store" });
-    if(!res.ok) throw new Error(`${url}: ${res.status}`);
-    return res.json();
-  }catch(err){
-    console.warn("Fetch failed:", url, err);
-    return null;
+  function fmtNum(n) {
+    const v = Number(n || 0);
+    return v.toLocaleString();
   }
-}
 
-const pct = (v, g) => {
-  if(!g) return 0;
-  const d = g.stretch || g.goal || 1;
-  return Math.max(0, Math.min(100, Math.round((v / d) * 100)));
-};
+  function fmtMoney(n) {
+    const v = Number(n || 0);
+    return "$" + v.toLocaleString();
+  }
 
-const setBar = (id, p) => {
-  const el = document.getElementById(id);
-  if(el) el.style.width = p + "%";
-};
+  function safeText(el, value) {
+    if (!el) return;
+    el.textContent = value;
+  }
 
-// ---------- metrics + tables ----------
-(async function initDashboard(){
-  const [goals, metrics, merchants, referrals] = await Promise.all([
-    safeJson("data/goals.json"),
-    safeJson("data/metrics.json"),
-    safeJson("data/merchants.json"),
-    safeJson("data/referrals.json")
-  ]);
+  async function loadJson(path) {
+    const r = await fetch(path, { cache: "no-store" });
+    if (!r.ok) throw new Error(`${path} not found`);
+    return r.json();
+  }
 
-  if(!metrics){
-    document.getElementById("updatedAt").textContent = "— (awaiting data/metrics.json)";
+  // ---------- load data ----------
+  let metrics, merchants;
+
+  try {
+    [metrics, merchants] = await Promise.all([
+      loadJson("data/metrics.json"),
+      loadJson("data/merchants.json"),
+    ]);
+  } catch (e) {
+    console.error(e);
+    // minimal fail-safe UI
+    safeText($("updatedAt"), "—");
+    safeText($("holders"), "0");
+    safeText($("active"), "0");
+    safeText($("treasury"), "$0");
+    safeText($("spendSave"), "0%");
+    safeText($("referrals"), "0");
+    const merchRows = $("merchRows");
+    if (merchRows) merchRows.innerHTML = `<tr><td colspan="4">⚠️ ${e.message}</td></tr>`;
     return;
   }
 
-  // timestamp / freshness
-  const upd = new Date(metrics.updated_at);
-  document.getElementById("updatedAt").textContent = upd.toLocaleString();
-  const hrs = (Date.now() - upd.getTime()) / 36e5;
-  const dot = document.getElementById("freshDot");
-  dot.style.background = hrs <= 24 ? "#22c55e" : (hrs <= 72 ? "#f59e0b" : "#ef4444");
-  dot.title = `Data age: ${hrs.toFixed(1)}h`;
+  // ---------- merchant derived stats ----------
+  const merchantCount = Array.isArray(merchants) ? merchants.length : 0;
 
-  // KPIs
-  const holders = metrics.holders ?? 0;
-  document.getElementById("holders").textContent = holders.toLocaleString();
-  setBar("holdersBar", pct(holders, goals && goals.holders));
+  const citySet = new Set(
+    (merchants || [])
+      .map((m) => (m.city || "").trim())
+      .filter(Boolean)
+  );
+  const cityCount = citySet.size;
 
-  const active = metrics.active_wallets_30d ?? 0;
-  document.getElementById("active").textContent = active.toLocaleString();
+  const merchantMonthlyVolume = (merchants || []).reduce(
+    (sum, m) => sum + Number(m.monthly_volume || 0),
+    0
+  );
 
-  const tUSD = Math.round(metrics.treasury_usd ?? 0);
-  document.getElementById("treasury").textContent = "$" + tUSD.toLocaleString();
-  setBar("treasuryBar", pct(tUSD, goals && goals.treasury_usd));
+  // OPTIONAL: inject merchant-derived numbers into metrics object (in-memory only)
+  metrics.merchants = merchantCount;
+  metrics.merchant_cities = cityCount;
+  metrics.merchant_volume_monthly = merchantMonthlyVolume;
 
-  const spentFrac = metrics.spent_pct_30d ?? 0;
-  const spentPct = Math.round(spentFrac * 100);
-  document.getElementById("spendSave").textContent =
-    `${spentPct}% spent / ${100 - spentPct}% saved`;
-  setBar("spendBar", Math.max(0, Math.min(100, spentPct)));
-
-  // referrals.json (your format has items[])
-  let totalRefs = 0;
-  if(referrals && Array.isArray(referrals.items)){
-    totalRefs = referrals.items.reduce((sum, r) => sum + (r.count || 0), 0);
+  // ---------- render timestamp ----------
+  // metrics.updated_at already exists
+  if ($("updatedAt")) {
+    const d = metrics.updated_at ? new Date(metrics.updated_at) : null;
+    safeText($("updatedAt"), d && !isNaN(d) ? d.toLocaleString() : "—");
   }
-  document.getElementById("referrals").textContent = totalRefs.toLocaleString();
-  document.getElementById("referralsNote").textContent = "from tracked sources";
 
-  // projects table
-  const pr = metrics.projects || {};
-  const projBody = document.getElementById("projRows");
-  [
-    ["Proposed", pr.proposed],
-    ["Approved", pr.approved],
-    ["Funded", pr.funded],
-    ["Delivered", pr.delivered]
-  ].forEach(([label, val]) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${label}</td><td>${val ?? 0}</td>`;
-    projBody.appendChild(tr);
-  });
+  // ---------- KPI cards ----------
+  safeText($("holders"), fmtNum(metrics.holders));
+  safeText($("active"), fmtNum(metrics.active_wallets_30d));
+  safeText($("treasury"), fmtMoney(metrics.treasury_usd));
 
-  // merchants table
-  if(Array.isArray(merchants)){
-    const mBody = document.getElementById("merchRows");
-    merchants.forEach(m => {
+  // spent_pct_30d is a percent number (0-100)
+  safeText($("spendSave"), `${Number(metrics.spent_pct_30d || 0).toFixed(0)}%`);
+
+  // You currently have "Referrals (30d)" in HTML.
+  // If you haven't added referrals in metrics.json yet, we can repurpose it:
+  // Show merchant count until referrals are implemented.
+  safeText($("referrals"), fmtNum(metrics.referrals_30d ?? metrics.merchants ?? 0));
+
+  // ---------- progress bars ----------
+  // goals.json is optional; if you have it, we use it. If not, bars still work at 0.
+  let goals = null;
+  try {
+    goals = await loadJson("data/goals.json");
+  } catch (_) {}
+
+  const holdersGoal = goals?.holders?.goal || 0;
+  const treasuryGoal = goals?.treasury_usd?.goal || 0;
+
+  // holders bar
+  if ($("holdersBar")) {
+    const pct = holdersGoal ? Math.min(100, (metrics.holders / holdersGoal) * 100) : 0;
+    $("holdersBar").style.width = `${pct}%`;
+  }
+
+  // treasury bar
+  if ($("treasuryBar")) {
+    const pct = treasuryGoal ? Math.min(100, (metrics.treasury_usd / treasuryGoal) * 100) : 0;
+    $("treasuryBar").style.width = `${pct}%`;
+  }
+
+  // spend bar (spent_pct_30d)
+  if ($("spendBar")) {
+    const pct = Math.max(0, Math.min(100, Number(metrics.spent_pct_30d || 0)));
+    $("spendBar").style.width = `${pct}%`;
+  }
+
+  // ---------- projects pipeline table ----------
+  const projRows = $("projRows");
+  if (projRows) {
+    const p = metrics.projects || {};
+    const rows = [
+      ["Proposed", p.proposed ?? 0],
+      ["Approved", p.approved ?? 0],
+      ["Funded", p.funded ?? 0],
+      ["Delivered", p.delivered ?? 0],
+    ];
+    projRows.innerHTML = rows
+      .map(([k, v]) => `<tr><td>${k}</td><td>${fmtNum(v)}</td></tr>`)
+      .join("");
+  }
+
+  // ---------- treasury chart ----------
+  try {
+    const series = metrics.treasury_series || [];
+    const labels = series.map((x) => x[0]);
+    const values = series.map((x) => Number(x[1] || 0));
+
+    const ctx = document.getElementById("treasuryChart");
+    if (ctx && window.Chart) {
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Treasury (USD)",
+              data: values,
+              tension: 0.35,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { ticks: { callback: (v) => "$" + v } },
+          },
+        },
+      });
+    }
+  } catch (e) {
+    console.error("Chart error:", e);
+  }
+
+  // ---------- merchant table ----------
+  const merchRows = $("merchRows");
+  if (merchRows) {
+    const list = Array.isArray(merchants) ? merchants : [];
+    merchRows.innerHTML = "";
+
+    list.forEach((m) => {
+      const name = m.url
+        ? `<a href="${m.url}" target="_blank" rel="noopener">${m.name || ""}</a>`
+        : (m.name || "");
+
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${m.url ? `<a href="${m.url}" target="_blank" rel="noopener">${m.name}</a>` : (m.name || "—")}</td>
+        <td>${name}</td>
         <td>${m.city || ""}</td>
         <td>${m.since || ""}</td>
-        <td>${m.monthly_volume ?? 0}</td>
+        <td>${fmtNum(m.monthly_volume)}</td>
       `;
-      mBody.appendChild(tr);
+      merchRows.appendChild(tr);
     });
+
+    if (!merchRows.children.length) {
+      merchRows.innerHTML = `<tr><td colspan="4">No merchants yet.</td></tr>`;
+    }
   }
 
-  // treasury chart
-  const series = metrics.treasury_series || [];
-  const labels = series.map(x => x[0]);
-  const data = series.map(x => x[1]);
+  // ---------- merchant map ----------
+  try {
+    const mapEl = document.getElementById("map");
+    if (mapEl && window.L) {
+      // default to Detroit
+      const map = L.map("map").setView([42.3314, -83.0458], 11);
 
-  const ctx = document.getElementById("treasuryChart");
-  if(ctx && labels.length){
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels,
-        datasets: [{
-          label: "Treasury (USD est)",
-          data,
-          tension: 0.25,
-          borderColor: "#FFD700",
-          borderWidth: 2,
-          pointRadius: 0
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { color: "#222" } },
-          y: { grid: { color: "#222" } }
-        }
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap",
+      }).addTo(map);
+
+      const list = Array.isArray(merchants) ? merchants : [];
+
+      list.forEach((m) => {
+        const lat = Number(m.lat);
+        const lng = Number(m.lng);
+        if (!isFinite(lat) || !isFinite(lng)) return;
+
+        const popup = `
+          <b>${m.name || "Merchant"}</b><br/>
+          ${m.city || ""}<br/>
+          Monthly 7TRB: ${fmtNum(m.monthly_volume)}<br/>
+          ${m.url ? `<a href="${m.url}" target="_blank" rel="noopener">Visit</a>` : ""}
+        `;
+
+        L.marker([lat, lng]).addTo(map).bindPopup(popup);
+      });
+
+      // if we have at least one marker, fit bounds
+      const pts = list
+        .map((m) => [Number(m.lat), Number(m.lng)])
+        .filter(([a, b]) => isFinite(a) && isFinite(b));
+
+      if (pts.length > 0) {
+        const bounds = L.latLngBounds(pts);
+        map.fitBounds(bounds, { padding: [20, 20] });
       }
-    });
+    }
+  } catch (e) {
+    console.error("Map error:", e);
   }
 
-  // Map
-  try{
-    const hasGeo = Array.isArray(merchants) &&
-                   merchants.some(m => typeof m.lat === "number" && typeof m.lng === "number");
-
-    const mapNotice = document.getElementById("mapNotice");
-    if(!hasGeo){
-      mapNotice.style.display = "block";
-      return;
-    }
-
-    const map = L.map("map", { zoomControl:true, scrollWheelZoom:false });
-    const points = merchants.filter(m => typeof m.lat === "number" && typeof m.lng === "number");
-    const latlngs = points.map(m => [m.lat, m.lng]);
-
-    const avgLat = latlngs.reduce((s,p)=>s+p[0],0)/latlngs.length || 42.3314;
-    const avgLng = latlngs.reduce((s,p)=>s+p[1],0)/latlngs.length || -83.0458;
-
-    map.setView([avgLat, avgLng], 3);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:"© OpenStreetMap"
-    }).addTo(map);
-
-    points.forEach(m => {
-      L.marker([m.lat, m.lng]).addTo(map)
-        .bindPopup(
-          `<b>${m.name || "Merchant"}</b><br>${m.city || ""}` +
-          (m.url ? `<br><a href="${m.url}" target="_blank" rel="noopener">Website</a>` : "")
-        );
-    });
-
-    if(latlngs.length > 1){
-      const group = L.featureGroup(latlngs.map(ll => L.marker(ll)));
-      group.addTo(map);
-      map.fitBounds(group.getBounds(), { padding:[20,20] });
-    }
-  }catch(e){
-    console.warn("Map init failed:", e);
-  }
 })();
-
-// ---------- wallet connect + 7TRB balance (Alkebuleum) ----------
-function updateButton(account){
-  const btn = document.getElementById("connectBtn");
-  if(!btn) return;
-
-  if(account){
-    btn.textContent = account.slice(0,6) + "..." + account.slice(-4);
-    btn.style.background = "linear-gradient(90deg,#FFD700,#b8912f)";
-  }else{
-    btn.textContent = "Connect Wallet";
-    btn.style.background = "";
-  }
-}
-
-async function showBalance(account){
-  if(!account) return;
-
-  try{
-    // Read from Alkebuleum RPC (contract lives there)
-    const provider = new ethers.JsonRpcProvider(ALKE_RPC);
-    const contract = new ethers.Contract(
-      TOKEN_ADDRESS,
-      ["function balanceOf(address) view returns (uint256)"],
-      provider
-    );
-
-    const raw = await contract.balanceOf(account);
-    const userBal = Number(ethers.formatUnits(raw, TOKEN_DECIMALS));
-
-    const el = document.getElementById("walletBalance");
-    el.textContent = `Your 7TRB (Alkebuleum): ${userBal.toFixed(3)} ${TOKEN_SYMBOL}`;
-
-    // Treasury balance
-    const tRaw = await contract.balanceOf(TREASURY_WALLET);
-    const tBal = Number(ethers.formatUnits(tRaw, TOKEN_DECIMALS));
-    const tDiv = document.createElement("div");
-    tDiv.style.color = "#FFD700";
-    tDiv.style.fontWeight = "600";
-    tDiv.textContent = `Treasury 7TRB (on-chain): ${tBal.toFixed(3)} ${TOKEN_SYMBOL}`;
-    el.parentNode.insertBefore(tDiv, el.nextSibling);
-
-  }catch(err){
-    console.error("Alkebuleum balance fetch failed:", err);
-  }
-}
-
-async function connectWallet(){
-  if(typeof window.ethereum === "undefined"){
-    alert("No wallet found. Open this page in MetaMask or a Web3 browser.");
-    return;
-  }
-  try{
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const accounts = await provider.send("eth_requestAccounts", []);
-    const account = accounts[0];
-    updateButton(account);
-    showBalance(account);
-  }catch(err){
-    console.error("Connect error:", err);
-    alert("Wallet connection failed.");
-  }
-}
-
-async function checkConnection(){
-  if(typeof window.ethereum === "undefined") return;
-  try{
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const accounts = await provider.send("eth_accounts", []);
-    if(accounts.length){
-      updateButton(accounts[0]);
-      showBalance(accounts[0]);
-    }
-  }catch(err){
-    console.error("Auto-connect error:", err);
-  }
-}
-
-if(typeof window.ethereum !== "undefined"){
-  window.ethereum.on("accountsChanged", (accounts) => {
-    if(!accounts.length){
-      updateButton(null);
-      const el = document.getElementById("walletBalance");
-      if(el) el.textContent = "";
-    }else{
-      updateButton(accounts[0]);
-      showBalance(accounts[0]);
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("connectBtn");
-  if(btn) btn.addEventListener("click", connectWallet);
-  checkConnection();
-});
