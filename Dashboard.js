@@ -167,10 +167,9 @@ safeJson("data/referrals.json")
     const hasGeo = Array.isArray(merchants) &&
                    merchants.some(m => typeof m.lat === "number" && typeof m.lng === "number");
 
-    const mapNotice = document.getElementById("mapNotice");
     if(!hasGeo){
-      if (mapNotice) mapNotice.style.display = "block";
-      return;
+  console.warn("No merchant geo data yet.");
+  return;
     }
 
     const map = L.map("map", { zoomControl:true, scrollWheelZoom:false });
