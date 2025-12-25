@@ -1,88 +1,250 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
 
-  gtag('config', 'G-3ENCBC9RT3');
-</script>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>7Tribes — Submit a Project / Merchant</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7Tribes — Apply (Merchant / Project)</title>
+  <link rel="icon" href="images/logo.png" />
+
   <style>
-    :root{--bg:#0b0b0c;--card:#121214;--text:#eaeaea;--muted:#a1a1a6;--border:#222;--accent:#FFD700}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif}
-    .wrap{max-width:980px;margin:auto;padding:20px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
-    .row{display:flex;justify-content:space-between;align-items:center}
-    .btn{display:inline-block;background:var(--accent);color:#000;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
-    .muted{color:var(--muted)}
-    iframe{width:100%;height:80vh;border:0;border-radius:12px;background:#0f0f13}
-    .fallback{display:none;margin-top:12px;border:1px dashed var(--border);border-radius:12px;padding:14px}
-    .hint{font-size:12px;color:var(--muted);margin-top:8px}
-    .error{color:#ff6b6b}
+    :root{
+      --bg:#0b0603;
+      --panel:#14100a;
+      --panel2:#0f0b06;
+      --ink:#fff7e6;
+      --muted:#d4c3a1;
+      --line:#3b2b17;
+      --gold:#e7b852;
+      --gold2:#b8831b;
+      --radius:18px;
+      --shadow:0 18px 60px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;background:radial-gradient(circle at top, #2a1707 0, #0b0603 60%, #050201 100%);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:#ffdd7a;text-decoration:none}
+    a:hover{opacity:.9}
+
+    .wrap{max-width:980px;margin:0 auto;padding:18px}
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      background:linear-gradient(180deg, rgba(11,6,3,.92), rgba(11,6,3,.72), transparent);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(255,215,122,.15);
+    }
+    .topbar-inner{
+      max-width:980px;margin:0 auto;padding:12px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.12);box-shadow:0 10px 30px rgba(0,0,0,.6)}
+    .brand b{letter-spacing:.08em;text-transform:uppercase;color:#ffdd7a}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+      padding:10px 14px;border-radius:999px;font-weight:800;font-size:.95rem;
+      border:1px solid rgba(255,215,122,.35);background:transparent;color:var(--ink);
+      cursor:pointer;white-space:nowrap;
+    }
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold2));
+      color:#120b03;border-color:rgba(255,215,122,.7);
+      box-shadow:0 0 18px rgba(255,215,122,.28);
+    }
+    .btn.gold:hover{transform:translateY(-1px)}
+    .btn.ghost:hover{border-color:rgba(255,215,122,.55)}
+
+    .hero{
+      padding:22px 0 6px;
+      text-align:left;
+    }
+    .hero h1{
+      margin:0 0 6px;
+      font-size:clamp(22px,3.3vw,34px);
+      letter-spacing:.02em;
+      color:#ffdd7a;
+    }
+    .hero p{margin:0;color:var(--muted);max-width:72ch}
+
+    .card{
+      margin:16px 0;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border-radius:24px;
+      border:1px solid rgba(255,215,122,.35);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card::after{
+      content:"";
+      position:absolute;inset:0;
+      border-radius:inherit;
+      padding:2px;
+      background:linear-gradient(90deg,rgba(255,215,122,.55),rgba(184,131,31,.75),rgba(255,215,122,.55));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.55;
+    }
+    .card-inner{position:relative;z-index:2;padding:18px}
+    .meta{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .pill{
+      display:inline-block;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(255,215,122,.25);
+      color:var(--muted);
+      font-size:12px;
+      background:rgba(0,0,0,.18);
+    }
+
+    /* iframe */
+    .frame-wrap{
+      border-radius:16px;
+      border:1px solid rgba(255,215,122,.18);
+      background:#0f0b06;
+      overflow:hidden;
+    }
+    iframe{
+      width:100%;
+      min-height:88vh;
+      border:0;
+      display:block;
+    }
+
+    .divider{
+      height:2px;margin:14px 0;
+      background:linear-gradient(90deg, transparent, rgba(255,215,122,.25), rgba(255,215,122,.7), rgba(255,215,122,.25), transparent);
+      border-radius:999px;
+      box-shadow:0 0 16px rgba(255,215,122,.18);
+    }
+
+    .hint{margin:10px 0 0;color:var(--muted);font-size:13px}
+    .warn{
+      display:none;
+      margin-top:12px;
+      padding:14px;
+      border:1px dashed rgba(255,215,122,.35);
+      border-radius:16px;
+      background:rgba(0,0,0,.22);
+    }
+    .warn b{color:#ffdd7a}
+    .warn p{margin:8px 0;color:var(--muted)}
+    footer{padding:22px 0 40px;color:var(--muted);font-size:13px}
+
+    @media (max-width:520px){
+      .btn{width:100%}
+    }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="row">
-      <h1 style="margin:0">Submit a Project or Apply as a Merchant</h1>
-      <a href="index.html" style="color:var(--accent)">← Back</a>
-    </div>
-    <p class="muted">We review weekly. Approved projects/merchants will appear on the Dashboard and Directory.</p>
 
-    <div class="card">
-      <!-- ✅ SET THESE TWO URLs -->
-      <script>
-        const FORM_EMBED_URL  = "https://docs.google.com/forms/d/e/1FAIpQLSe3B_J7r6cwq-Mh2AU2M97Y1_b-1Dn5lQ2qPTlJinaxCtpADA/viewform?embedded=true";
-const FORM_DIRECT_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe3B_J7r6cwq-Mh2AU2M97Y1_b-1Dn5lQ2qPTlJinaxCtpADA/viewform";
-      </script>
-
-      <iframe id="gform" title="7Tribes Submission Form" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-      <div id="fallback" class="fallback">
-        <p class="error"><strong>Couldn’t load the embedded form.</strong></p>
-        <p class="muted">This can happen if the link is wrong, the form is private, or a content blocker is active.</p>
-        <p>
-          <a id="openDirect" class="btn" target="_blank" rel="noopener">Open Form in New Tab</a>
-        </p>
-        <p class="hint">Admin hint: check the embed URL, make sure the form is shared to “Anyone with the link”, and that it uses <code>https</code>.</p>
+  <!-- Sticky top bar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="images/logo.png" alt="7TRB logo">
+        <b>7Tribes</b>
       </div>
-
-      <p class="hint">Privacy note: submissions go directly to Google Forms under your account.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn ghost" href="index.html">← Back to Home</a>
+        <a class="btn gold" href="merchant.html">View Merchant Directory</a>
+      </div>
     </div>
-
-    <p class="muted" style="margin-top:12px">
-      Prefer email? Write us at <a href="mailto:team@7tribes.example" style="color:var(--accent)">team@7tribes.example</a>.
-    </p>
   </div>
+
+  <main class="wrap">
+
+    <section class="hero">
+      <h1>Apply: Merchant or Project</h1>
+      <p>
+        This form is the official intake for businesses that want to accept <b>7TRB</b> and builders who want to submit projects.
+        We review weekly. Approved submissions can appear on the <b>Dashboard</b> and in the <b>Merchant Directory</b>.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="card-inner">
+
+        <div class="meta">
+          <div>
+            <span class="pill">Intake Pipeline: Apply → Review → Approve → List → Circulate</span>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a id="openDirectTop" class="btn gold" target="_blank" rel="noopener">Open Form in New Tab</a>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ✅ URLs (already set to your live form) -->
+        <script>
+          const FORM_EMBED_URL  = "https://docs.google.com/forms/d/e/1FAIpQLSe3B_J7r6cwq-Mh2AU2M97Y1_b-1Dn5lQ2qPTlJinaxCtpADA/viewform?embedded=true";
+          const FORM_DIRECT_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe3B_J7r6cwq-Mh2AU2M97Y1_b-1Dn5lQ2qPTlJinaxCtpADA/viewform";
+        </script>
+
+        <div class="frame-wrap">
+          <iframe id="gform" title="7Tribes Application Form" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div id="fallback" class="warn">
+          <b>Couldn’t load the embedded form.</b>
+          <p>This is usually caused by a content blocker, a browser restriction, or the form being private.</p>
+          <p><a id="openDirect" class="btn gold" target="_blank" rel="noopener">Open Form in New Tab</a></p>
+          <p class="hint">Admin check: Form must be accessible to “Anyone with the link”.</p>
+        </div>
+
+        <p class="hint">
+          Privacy note: submissions go directly into your Google Forms responses. Never share seed phrases or private keys.
+        </p>
+
+      </div>
+    </section>
+
+    <footer>
+      Need help onboarding? Join Telegram:
+      <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">t.me/SevenTribeowner</a>
+      • © 2025 7Tribes • Mainhouse Oasis LLC
+    </footer>
+  </main>
 
   <script>
     (function(){
       const iframe = document.getElementById('gform');
       const fb = document.getElementById('fallback');
       const openBtn = document.getElementById('openDirect');
+      const openBtnTop = document.getElementById('openDirectTop');
 
-      // Set URLs
-      iframe.src = FORM_EMBED_URL;
+      // set buttons
       openBtn.href = FORM_DIRECT_URL;
+      openBtnTop.href = FORM_DIRECT_URL;
 
+      // load iframe
+      iframe.src = FORM_EMBED_URL;
+
+      // fallback if blocked
       let loaded = false;
       const timer = setTimeout(() => {
-        if (!loaded) { fb.style.display = 'block'; }
-      }, 3500); // show fallback if not loaded within 3.5s
+        if(!loaded) fb.style.display = 'block';
+      }, 3500);
 
       iframe.addEventListener('load', () => {
         loaded = true;
         clearTimeout(timer);
-        // If the embed URL is obviously not set, show fallback anyway
-        if (FORM_EMBED_URL.includes('REPLACE_ME')) {
-          fb.style.display = 'block';
-        }
+        if(FORM_EMBED_URL.includes('REPLACE_ME')) fb.style.display = 'block';
       });
 
       iframe.addEventListener('error', () => {
@@ -92,5 +254,6 @@ const FORM_DIRECT_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe3B_J7r6cwq-M
       });
     })();
   </script>
+
 </body>
 </html>
