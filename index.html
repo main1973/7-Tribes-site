@@ -1,77 +1,76 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>7TRB — Structure First.</title>
-<link rel="icon" href="images/logo.png" />
-<meta name="description" content="7TRB is a tribe-based circulation system. Learn the basics, see how 7TRB works, and start building." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7TRB — Structure First.</title>
+  <link rel="icon" href="images/logo.png" />
+  <meta name="description" content="7TRB is a tribe-based circulation system. Learn the basics, see how 7TRB works, and start building." />
 
-<!-- Google Tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3ENCBC9RT3');
-</script>
+  <!-- Google Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
 
-<style>
-:root{
-  --bg:#0f0a05; --panel:#1a1208; --panel-2:#120c06; --ink:#fff7e6; --muted:#d4c3a1;
-  --gold:#e7b852; --gold-2:#b8831b; --gold-bright:#ffdd7a; --ok:#25F4EE; --pop:#FE2C55;
-  --radius:18px; --radius-lg:24px;
-}
-*{box-sizing:border-box;}
-html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);}
-a{color:var(--gold-bright);text-decoration:none;}
-a:hover{opacity:.9;}
-img{max-width:100%;display:block;}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px;}
-h1,h2,h3{margin:0;}
+  <style>
+    :root{
+      --bg:#0f0a05; --panel:#1a1208; --panel-2:#120c06; --ink:#fff7e6; --muted:#d4c3a1; --line:#3b2b17;
+      --gold:#e7b852; --gold-2:#b8831b; --gold-bright:#ffdd7a; --ok:#25F4EE; --pop:#FE2C55;
+      --radius:18px; --radius-lg:24px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);}
+    a{color:var(--gold-bright);text-decoration:none;}
+    a:hover{opacity:.9;}
+    img{max-width:100%;display:block;}
+    .wrap{max-width:1160px;margin:0 auto;padding:0 20px;}
+    h1,h2,h3{margin:0;}
+    
+    /* Header / hero */
+    header.site-header{position:relative;width:100%;overflow:hidden;border-bottom:1px solid rgba(255,215,122,0.2);}
+    .hero-banner{width:100%;height:420px;background:url('images/welcome_banner.png') center/cover no-repeat;position:relative;}
+    .hero-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.65))}
+    .header-inner{position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 30px rgba(0,0,0,.6)}
+    .brand b{font-size:1.5rem;color:var(--gold-bright);letter-spacing:.12em;text-transform:uppercase}
+    .nav-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+    .nav-links a{color:var(--gold-bright);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+    .banner-text{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);text-align:center;z-index:2;padding:0 16px}
+    .banner-text h1{font-size:clamp(24px,3vw,34px);color:var(--gold-bright);letter-spacing:.14em;text-transform:uppercase;}
+    .banner-text p{margin:8px 0 0;color:#fff7e6;font-size:.98rem;max-width:78ch;}
 
-/* Header / hero */
-header.site-header{position:relative;width:100%;overflow:hidden;border-bottom:1px solid rgba(255,215,122,0.2);}
-.hero-banner{width:100%;height:420px;background:url('images/welcome_banner.png') center/cover no-repeat;position:relative;}
-.hero-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.65))}
-.header-inner{position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 30px rgba(0,0,0,.6)}
-.brand b{font-size:1.5rem;color:var(--gold-bright);letter-spacing:.12em;text-transform:uppercase}
-.nav-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
-.nav-links a{color:var(--gold-bright);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
-.banner-text{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);text-align:center;z-index:2;padding:0 16px}
-.banner-text h1{font-size:clamp(24px,3vw,34px);color:var(--gold-bright);letter-spacing:.14em;text-transform:uppercase;}
-.banner-text p{margin:8px 0 0;color:#fff7e6;font-size:.98rem;max-width:78ch;}
+    /* Sections */
+    .section{padding:44px 0;}
+    .box{position:relative;background:linear-gradient(180deg, var(--panel), var(--panel-2));border-radius:var(--radius-lg);padding:22px;border:1px solid rgba(255,215,122,0.35);box-shadow:0 18px 50px rgba(0,0,0,.6);overflow:hidden;}
+    .title{margin:0 0 14px;font-size:clamp(22px,3vw,30px);letter-spacing:.08em;color:var(--gold-bright);text-transform:uppercase}
+    .muted{color:var(--muted);}
+    .divider{height:2px;margin:20px auto;width:86%;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(255,215,122,0.35),rgba(255,215,122,0.85),rgba(255,215,122,0.35),transparent);box-shadow:0 0 16px rgba(255,215,122,0.28);}
 
-/* Sections */
-.section{padding:44px 0;}
-.box{position:relative;background:linear-gradient(180deg, var(--panel), var(--panel-2));border-radius:var(--radius-lg);padding:22px;border:1px solid rgba(255,215,122,0.35);box-shadow:0 18px 50px rgba(0,0,0,.6);overflow:hidden;}
-.title{margin:0 0 14px;font-size:clamp(22px,3vw,30px);letter-spacing:.08em;color:var(--gold-bright);text-transform:uppercase}
-.muted{color:var(--muted);}
-.divider{height:2px;margin:20px auto;width:86%;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(255,215,122,0.35),rgba(255,215,122,0.85),rgba(255,215,122,0.35),transparent);box-shadow:0 0 16px rgba(255,215,122,0.28);}
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:10px 16px;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;font-size:.95rem;white-space:nowrap}
+    .btn.gold{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#130b03;border-color:rgba(255,215,122,.7);box-shadow:0 0 18px rgba(255,215,122,.35)}
+    .btn.ghost{border:1px solid rgba(255,215,122,.35);color:var(--ink);background:transparent}
+    .btn.tiktok{background:linear-gradient(90deg,var(--ok),var(--pop));color:#0a0b0f;border:none;box-shadow:0 0 20px rgba(254,44,85,.28)}
 
-/* Buttons */
-.btn{display:inline-flex;align-items:center;gap:.6rem;padding:10px 16px;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;font-size:.95rem;white-space:nowrap}
-.btn.gold{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#130b03;border-color:rgba(255,215,122,.7);box-shadow:0 0 18px rgba(255,215,122,.35)}
-.btn.ghost{border:1px solid rgba(255,215,122,.35);color:var(--ink);background:transparent}
-.btn.tiktok{background:linear-gradient(90deg,var(--ok),var(--pop));color:#0a0b0f;border:none;box-shadow:0 0 20px rgba(254,44,85,.28)}
+    /* Grid */
+    .grid{display:grid;gap:16px}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.three{grid-template-columns:1fr}}
 
-/* Micro economy section */
-#micro-economy{position:relative;height:420px;background:linear-gradient(180deg,#0b0603,#120c06);margin:40px 0;border-radius:var(--radius-lg);overflow:hidden;}
-.node{position:absolute;width:120px;height:120px;border-radius:50%;border:2px solid var(--gold-bright);display:flex;align-items:center;justify-content:center;color:var(--gold-bright);font-weight:700;text-align:center;font-size:0.9rem;background:rgba(0,0,0,0.6);cursor:pointer;transition:transform 0.3s;}
-.node:hover{transform:scale(1.1);}
-.node::after{content:attr(data-tooltip);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);color:var(--gold-bright);padding:6px 10px;border-radius:8px;white-space:nowrap;font-size:0.8rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
-.node:hover::after{opacity:1;}
-.coin{position:absolute;width:28px;height:28px;background:var(--gold);border-radius:50%;box-shadow:0 4px 8px rgba(255,215,122,0.6);transition:all 1s ease-in-out;}
-.phase-label{color:var(--gold-bright);text-align:center;margin:8px 8px;font-weight:800;text-transform:uppercase;display:inline-block;}
-.arrow{position:absolute;width:60px;height:4px;background:var(--gold-bright);transform-origin:left center;transition:all 1s ease;}
-@media (max-width:900px){#micro-economy{height:360px;}}
+    /* Micro economy */
+    #micro-economy{position:relative;height:420px;background:linear-gradient(180deg,#0b0603,#120c06);margin:40px 0;border-radius:var(--radius-lg);overflow:hidden}
+    .node{position:absolute;width:120px;height:120px;border-radius:50%;border:2px solid var(--gold-bright);display:flex;align-items:center;justify-content:center;color:var(--gold-bright);font-weight:700;text-align:center;font-size:0.9rem;background:rgba(0,0,0,0.6);}
+    .coin{position:absolute;width:28px;height:28px;background:var(--gold);border-radius:50%;box-shadow:0 4px 8px rgba(255,215,122,0.6);}
+    .phase-label{color:var(--gold-bright);text-align:center;margin:8px 0 20px;font-weight:800;text-transform:uppercase;}
 
-</style>
+  </style>
 </head>
 <body>
-
 <header class="site-header">
   <div class="hero-banner">
     <div class="header-inner">
@@ -95,16 +94,16 @@ header.site-header{position:relative;width:100%;overflow:hidden;border-bottom:1p
 </header>
 
 <main class="wrap">
-  <!-- Micro Economy Scroll Animated with Arrows and Tooltips -->
+  <!-- Micro Economy Demo -->
   <section class="section" id="micro-economy-section">
     <h2 class="title">Family Micro Economy Flow</h2>
-    <p class="muted">See how families circulate 7TRB through merchants, treasury, and community.</p>
+    <p class="muted">Watch how 3 families circulate 7TRB through merchants, treasury, and the community.</p>
     <div id="micro-economy"></div>
     <div style="text-align:center;margin-top:16px;">
-      <span class="phase-label">3 Families</span>
-      <span class="phase-label">5 Families</span>
-      <span class="phase-label">10 Families</span>
-      <span class="phase-label">20 Families</span>
+      <span class="phase-label">Phase 1: 3 Families</span>
+      <span class="phase-label">Phase 2: 5 Families</span>
+      <span class="phase-label">Phase 3: 10 Families</span>
+      <span class="phase-label">Phase 4: 20 Families</span>
     </div>
   </section>
 
@@ -125,115 +124,47 @@ header.site-header{position:relative;width:100%;overflow:hidden;border-bottom:1p
   <span>© 2026 7TRB • Mainhouse Oasis LLC</span>
 </footer>
 
+<!-- Micro economy JS -->
 <script>
-// Node positions per phase with tooltips
 const micro = document.getElementById('micro-economy');
-const phases = [
-  {label:'3 Families', nodes:[
-    {id:'Family', x:80, y:150, count:3, tooltip:'Holds coins, spends locally, builds tribe.'},
-    {id:'Merchant', x:350, y:120, count:1, tooltip:'Accepts 7TRB, provides services, keeps value circulating.'},
-    {id:'Treasury', x:600, y:200, count:1, tooltip:'Stores receipts, funds projects, ensures trust.'},
-    {id:'Community', x:900, y:150, count:1, tooltip:'Collective network, reinforcing circulation.'}
-  ]},
-  {label:'5 Families', nodes:[
-    {id:'Family', x:80, y:150, count:5, tooltip:'Holds coins, spends locally, builds tribe.'},
-    {id:'Merchant', x:350, y:120, count:2, tooltip:'Accepts 7TRB, provides services, keeps value circulating.'},
-    {id:'Treasury', x:600, y:200, count:1, tooltip:'Stores receipts, funds projects, ensures trust.'},
-    {id:'Community', x:900, y:150, count:1, tooltip:'Collective network, reinforcing circulation.'}
-  ]},
-  {label:'10 Families', nodes:[
-    {id:'Family', x:80, y:150, count:10, tooltip:'Holds coins, spends locally, builds tribe.'},
-    {id:'Merchant', x:350, y:120, count:3, tooltip:'Accepts 7TRB, provides services, keeps value circulating.'},
-    {id:'Treasury', x:600, y:200, count:2, tooltip:'Stores receipts, funds projects, ensures trust.'},
-    {id:'Community', x:900, y:150, count:1, tooltip:'Collective network, reinforcing circulation.'}
-  ]},
-  {label:'20 Families', nodes:[
-    {id:'Family', x:80, y:150, count:20, tooltip:'Holds coins, spends locally, builds tribe.'},
-    {id:'Merchant', x:350, y:120, count:5, tooltip:'Accepts 7TRB, provides services, keeps value circulating.'},
-    {id:'Treasury', x:600, y:200, count:3, tooltip:'Stores receipts, funds projects, ensures trust.'},
-    {id:'Community', x:900, y:150, count:1, tooltip:'Collective network, reinforcing circulation.'}
-  ]}
+const nodesData = [
+  {id:'Family', x:80, y:150},
+  {id:'Merchant', x:350, y:120},
+  {id:'Treasury', x:600, y:200},
+  {id:'Community', x:900, y:150}
 ];
-
-let currentPhase=0;
-
-// Render phase with nodes and arrows
-function renderPhase(phaseIndex){
-  micro.innerHTML='';
-  const phase = phases[phaseIndex];
-  const createdNodes = [];
-
-  phase.nodes.forEach(n=>{
-    for(let i=0;i<n.count;i++){
-      const el = document.createElement('div');
-      el.className='node';
-      el.style.left = (n.x + Math.random()*60 - 30) + 'px';
-      el.style.top = (n.y + Math.random()*60 - 30) + 'px';
-      el.textContent = n.id;
-      el.setAttribute('data-tooltip', n.tooltip);
-      micro.appendChild(el);
-      createdNodes.push(el);
-    }
-  });
-
-  // Draw arrows connecting first nodes
-  for(let i=0;i<createdNodes.length-1;i++){
-    const from = createdNodes[i];
-    const to = createdNodes[i+1];
-    const arrow = document.createElement('div');
-    arrow.className='arrow';
-    const dx = to.offsetLeft - from.offsetLeft;
-    const dy = to.offsetTop - from.offsetTop;
-    const angle = Math.atan2(dy, dx) * 180/Math.PI;
-    arrow.style.width = Math.sqrt(dx*dx + dy*dy) + 'px';
-    arrow.style.left = from.offsetLeft + 'px';
-    arrow.style.top = from.offsetTop + 'px';
-    arrow.style.transform = `rotate(${angle}deg)`;
-    micro.appendChild(arrow);
-  }
-}
-
-// Scroll animation
-window.addEventListener('scroll', ()=>{
-  const sectionTop = micro.offsetTop;
-  const sectionHeight = micro.offsetHeight;
-  const scrollY = window.scrollY + window.innerHeight/2;
-  let phaseIndex = 0;
-  if(scrollY > sectionTop + sectionHeight*0.25) phaseIndex=1;
-  if(scrollY > sectionTop + sectionHeight*0.5) phaseIndex=2;
-  if(scrollY > sectionTop + sectionHeight*0.75) phaseIndex=3;
-  if(phaseIndex!==currentPhase){
-    currentPhase = phaseIndex;
-    renderPhase(currentPhase);
-  }
+// Create nodes
+nodesData.forEach(n=>{
+  const el = document.createElement('div');
+  el.className='node';
+  el.style.left = n.x+'px';
+  el.style.top = n.y+'px';
+  el.textContent = n.id;
+  micro.appendChild(el);
 });
 
-// Spawn moving coins
-function spawnCoins(){
-  const nodes = micro.querySelectorAll('.node');
-  if(nodes.length<2) return;
+// Coin animation
+function spawnCoin(){
   const coin = document.createElement('div');
   coin.className='coin';
-  const start = nodes[0];
-  coin.style.left = start.offsetLeft+'px';
-  coin.style.top = start.offsetTop+'px';
+  coin.style.left = nodesData[0].x+'px';
+  coin.style.top = nodesData[0].y+'px';
   micro.appendChild(coin);
 
   let step=0;
+  const steps=nodesData.length;
   const interval = setInterval(()=>{
     step++;
-    if(step>=nodes.length){step=0;}
-    const node = nodes[step];
-    coin.style.left = node.offsetLeft+'px';
-    coin.style.top = node.offsetTop+'px';
-  },800);
-
-  setTimeout(()=>micro.removeChild(coin), nodes.length*900);
+    if(step>=steps){step=0;}
+    const node = nodesData[step];
+    coin.style.transition='all 1.2s ease-in-out';
+    coin.style.left = node.x+'px';
+    coin.style.top = node.y+'px';
+  },1200);
 }
 
-setInterval(spawnCoins,500);
-renderPhase(currentPhase);
+// Spawn multiple coins for flow
+setInterval(spawnCoin, 800);
 </script>
-
 </body>
 </html>
