@@ -1,80 +1,77 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-3ENCBC9RT3');
-  </script>  
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7TRB — Structure First.</title>
-  <meta name="google-site-verification" content="J13STEzRChDz488QqKA5yP2eoiZ-FQNDUzuok6B2RHM" />
-  <meta name="description" content="7TRB is a tribe-based circulation system. Learn the basics, see how 7TRB works, and start building." />
-  <link rel="icon" href="images/logo.png" />  
-  <style>
-    :root{
-      --bg:#0f0a05; --panel:#1a1208; --panel-2:#120c06; --ink:#fff7e6; --muted:#d4c3a1; --line:#3b2b17;
-      --gold:#e7b852; --gold-2:#b8831b; --gold-bright:#ffdd7a; --ok:#25F4EE; --pop:#FE2C55;
-      --radius:18px; --radius-lg:24px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    a{color:var(--gold-bright);text-decoration:none}
-    a:hover{opacity:.9}
-    img{max-width:100%;display:block}
-    .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>7TRB — Structure First.</title>
+<link rel="icon" href="images/logo.png" />
+<meta name="description" content="7TRB is a tribe-based circulation system. Learn the basics, see how 7TRB works, and start building." />
 
-    /* Header / hero */
-    header.site-header{position:relative;width:100%;overflow:hidden;border-bottom:1px solid rgba(255,215,122,0.2)}
-    .hero-banner{width:100%;height:420px;background:url('images/welcome_banner.png') center/cover no-repeat;position:relative}
-    .hero-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.65))}
-    .header-inner{position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand img{width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 30px rgba(0,0,0,.6)}
-    .brand b{font-size:1.5rem;color:var(--gold-bright);letter-spacing:.12em;text-transform:uppercase}
-    .nav-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
-    .nav-links a{color:var(--gold-bright);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
-    .banner-text{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);text-align:center;z-index:2;padding:0 16px}
-    .banner-text h1{margin:0;font-size:clamp(24px,3vw,34px);color:var(--gold-bright);letter-spacing:.14em;text-transform:uppercase}
-    .banner-text p{margin:8px 0 0;color:#fff7e6;font-size:.98rem;max-width:78ch}
+<!-- Google Tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3ENCBC9RT3');
+</script>
 
-    /* Row below header */
-    .header-row{background:linear-gradient(90deg,#261608,#110804);border-bottom:1px solid rgba(255,215,122,.25)}
-    .header-row-inner{max-width:1160px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+<style>
+:root{
+  --bg:#0f0a05; --panel:#1a1208; --panel-2:#120c06; --ink:#fff7e6; --muted:#d4c3a1;
+  --gold:#e7b852; --gold-2:#b8831b; --gold-bright:#ffdd7a; --ok:#25F4EE; --pop:#FE2C55;
+  --radius:18px; --radius-lg:24px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);}
+a{color:var(--gold-bright);text-decoration:none;}
+a:hover{opacity:.9;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px;}
+h1,h2,h3{margin:0;}
 
-    /* Sections */
-    .section{padding:44px 0}
-    .box{position:relative;background:linear-gradient(180deg, var(--panel), var(--panel-2));border-radius:var(--radius-lg);padding:22px;border:1px solid rgba(255,215,122,0.35);box-shadow:0 18px 50px rgba(0,0,0,.6);overflow:hidden}
-    .box::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;background:linear-gradient(90deg,rgba(255,215,122,.55),rgba(184,131,31,.75),rgba(255,215,122,.55));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.45}
-    .title{margin:0 0 14px;font-size:clamp(22px,3vw,30px);letter-spacing:.08em;color:var(--gold-bright);text-transform:uppercase}
-    .muted{color:var(--muted)}
-    .divider{height:2px;margin:20px auto;width:86%;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(255,215,122,0.35),rgba(255,215,122,0.85),rgba(255,215,122,0.35),transparent);box-shadow:0 0 16px rgba(255,215,122,0.28)}
+/* Header / hero */
+header.site-header{position:relative;width:100%;overflow:hidden;border-bottom:1px solid rgba(255,215,122,0.2);}
+.hero-banner{width:100%;height:420px;background:url('images/welcome_banner.png') center/cover no-repeat;position:relative;}
+.hero-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.65))}
+.header-inner{position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 30px rgba(0,0,0,.6)}
+.brand b{font-size:1.5rem;color:var(--gold-bright);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.nav-links a{color:var(--gold-bright);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.banner-text{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);text-align:center;z-index:2;padding:0 16px}
+.banner-text h1{font-size:clamp(24px,3vw,34px);color:var(--gold-bright);letter-spacing:.14em;text-transform:uppercase;}
+.banner-text p{margin:8px 0 0;color:#fff7e6;font-size:.98rem;max-width:78ch;}
 
-    /* Buttons */
-    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:10px 16px;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;font-size:.95rem;white-space:nowrap}
-    .btn.gold{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#130b03;border-color:rgba(255,215,122,.7);box-shadow:0 0 18px rgba(255,215,122,.35)}
-    .btn.ghost{border:1px solid rgba(255,215,122,.35);color:var(--ink);background:transparent}
-    .btn.tiktok{background:linear-gradient(90deg,var(--ok),var(--pop));color:#0a0b0f;border:none;box-shadow:0 0 20px rgba(254,44,85,.28)}
+/* Sections */
+.section{padding:44px 0;}
+.box{position:relative;background:linear-gradient(180deg, var(--panel), var(--panel-2));border-radius:var(--radius-lg);padding:22px;border:1px solid rgba(255,215,122,0.35);box-shadow:0 18px 50px rgba(0,0,0,.6);overflow:hidden;}
+.title{margin:0 0 14px;font-size:clamp(22px,3vw,30px);letter-spacing:.08em;color:var(--gold-bright);text-transform:uppercase}
+.muted{color:var(--muted);}
+.divider{height:2px;margin:20px auto;width:86%;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(255,215,122,0.35),rgba(255,215,122,0.85),rgba(255,215,122,0.35),transparent);box-shadow:0 0 16px rgba(255,215,122,0.28);}
 
-    /* Grid */
-    .grid{display:grid;gap:16px}
-    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:900px){.header-inner{flex-direction:column;align-items:flex-start}.nav-links{justify-content:flex-start}.three{grid-template-columns:1fr}.hero-banner{height:360px}}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:10px 16px;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;font-size:.95rem;white-space:nowrap}
+.btn.gold{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#130b03;border-color:rgba(255,215,122,.7);box-shadow:0 0 18px rgba(255,215,122,.35)}
+.btn.ghost{border:1px solid rgba(255,215,122,.35);color:var(--ink);background:transparent}
+.btn.tiktok{background:linear-gradient(90deg,var(--ok),var(--pop));color:#0a0b0f;border:none;box-shadow:0 0 20px rgba(254,44,85,.28)}
 
-    /* Scroll section for circulation */
-    .scroll-section{display:flex;overflow-x:auto;gap:16px;padding:16px 0;scroll-snap-type:x mandatory}
-    .scroll-section::-webkit-scrollbar{display:none}
-    .scroll-card{flex:0 0 260px;background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid rgba(255,215,122,.35);border-radius:var(--radius-lg);padding:16px;scroll-snap-align:start;box-shadow:0 12px 28px rgba(0,0,0,.5)}
-    .scroll-card h3{margin-top:0;color:var(--gold-bright);letter-spacing:.06em;text-transform:uppercase;text-align:center}
-    .scroll-card p{margin:8px 0;font-size:.95rem;color:var(--muted);text-align:center}
+/* Micro economy section */
+#micro-economy{position:relative;height:420px;background:linear-gradient(180deg,#0b0603,#120c06);margin:40px 0;border-radius:var(--radius-lg);overflow:hidden;}
+.node{position:absolute;width:120px;height:120px;border-radius:50%;border:2px solid var(--gold-bright);display:flex;align-items:center;justify-content:center;color:var(--gold-bright);font-weight:700;text-align:center;font-size:0.9rem;background:rgba(0,0,0,0.6);cursor:pointer;transition:transform 0.3s;}
+.node:hover{transform:scale(1.1);}
+.node::after{content:attr(data-tooltip);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);color:var(--gold-bright);padding:6px 10px;border-radius:8px;white-space:nowrap;font-size:0.8rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.node:hover::after{opacity:1;}
+.coin{position:absolute;width:28px;height:28px;background:var(--gold);border-radius:50%;box-shadow:0 4px 8px rgba(255,215,122,0.6);transition:all 1s ease-in-out;}
+.phase-label{color:var(--gold-bright);text-align:center;margin:8px 8px;font-weight:800;text-transform:uppercase;display:inline-block;}
+.arrow{position:absolute;width:60px;height:4px;background:var(--gold-bright);transform-origin:left center;transition:all 1s ease;}
+@media (max-width:900px){#micro-economy{height:360px;}}
 
-    /* Footer */
-    footer{position:relative;background:radial-gradient(circle at center, rgba(255,215,122,.2), #090604 78%);border-top:1px solid rgba(255,215,122,.35);box-shadow:0 -6px 30px rgba(0,0,0,.7);padding:20px 0}
-  </style>
+</style>
 </head>
 <body>
+
 <header class="site-header">
   <div class="hero-banner">
     <div class="header-inner">
@@ -83,13 +80,10 @@
         <b>7TRB</b>
       </div>
       <nav class="nav-links">
-        <a href="learn.html">Learn (Basics)</a>
+        <a href="learn.html">Learn</a>
         <a href="learn-7trb.html">How 7TRB Works</a>
         <a href="wallet/index.html">Wallet</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="investor.html">Investors</a>
-        <a href="apparel.html">Apparel</a>
-        <a href="digital.html">Digital</a>
         <a href="#join">Join</a>
       </nav>
     </div>
@@ -98,103 +92,148 @@
       <p>7TRB is a tribe-based circulation system — value in motion, not in vaults.</p>
     </div>
   </div>
-  <div class="header-row">
-    <div class="header-row-inner">
-      <a class="btn tiktok" href="https://vt.tiktok.com/ZTMtY4tah/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
-      <span class="muted" style="text-transform:uppercase;letter-spacing:.08em">Detroit Made • Building for Detroit & Beyond</span>
-      <a href="dashboard.html" class="btn gold">Open Dashboard</a>
-    </div>
-  </div>
 </header>
 
-<main>
-  <!-- STARTER / HOME -->
-  <section class="section" id="start">
-    <div class="wrap">
-      <div class="box" style="text-align:center">
-        <h2 class="title" style="margin-top:0">Start Here</h2>
-        <p class="muted" style="max-width:900px;margin:0 auto 14px">
-          The homepage is the front door. Learning lives on the Learn pages. If you’re new, start with basics.
-          If you’re ready, open the 7TRB Field Manual and build the system correctly.
-        </p>
-        <div class="divider"></div>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <a class="btn ghost" href="learn.html">Learn (Crypto 101)</a>
-          <a class="btn gold" href="learn-7trb.html">Open Field Manual</a>
-          <a class="btn ghost" href="wallet/index.html">Open Wallet</a>
-        </div>
-      </div>
+<main class="wrap">
+  <!-- Micro Economy Scroll Animated with Arrows and Tooltips -->
+  <section class="section" id="micro-economy-section">
+    <h2 class="title">Family Micro Economy Flow</h2>
+    <p class="muted">See how families circulate 7TRB through merchants, treasury, and community.</p>
+    <div id="micro-economy"></div>
+    <div style="text-align:center;margin-top:16px;">
+      <span class="phase-label">3 Families</span>
+      <span class="phase-label">5 Families</span>
+      <span class="phase-label">10 Families</span>
+      <span class="phase-label">20 Families</span>
     </div>
   </section>
 
-  <!-- FAMILY STARTER KIT / MICRO ECONOMY -->
-  <section class="section" id="starter-kit">
-    <div class="wrap">
-      <h2 class="title" style="text-align:center">Family Micro-Economy Starter Kit</h2>
-      <p class="muted" style="text-align:center;max-width:800px;margin:0 auto 24px;">
-        Start small, grow big — 3 families can turn into 5, 10, 15, 20, showing how to build micro-economy families at a time.
-      </p>
-      <div class="grid three">
-        <div class="box" style="text-align:center"><h3>Phase 1 — 3 Families</h3><p class="muted">Setup roles, treasury, and start circulating 7TRB.</p></div>
-        <div class="box" style="text-align:center"><h3>Phase 2 — 5 Families</h3><p class="muted">Circulation grows; community projects funded.</p></div>
-        <div class="box" style="text-align:center"><h3>Phase 3 — 10 Families</h3><p class="muted">Local merchants see consistent 7TRB flow.</p></div>
-      </div>
+  <!-- Call to Action -->
+  <section class="section">
+    <div class="box" style="text-align:center;">
+      <h2 class="title">Join the Tribe</h2>
+      <p class="muted">Get updates, drops, and builder calls.</p>
+      <form style="display:flex;gap:10px;flex-wrap:wrap" action="https://formspree.io/f/xnnokrvl" method="POST">
+        <input type="email" name="email" placeholder="your@email.com" required style="flex:1 1 260px;background:#140e08;border:1px solid rgba(255,215,122,.35);border-radius:999px;color:#fff7e6;padding:12px 14px;outline:none" />
+        <button class="btn gold" type="submit">Get Email Updates</button>
+      </form>
     </div>
   </section>
-
-  <!-- 7TRB CIRCULATION FLOW -->
-  <section class="section" id="circulation-flow">
-    <div class="wrap">
-      <h2 class="title" style="text-align:center">How 7TRB Circulates</h2>
-      <p class="muted" style="text-align:center;max-width:800px;margin:0 auto 24px;">
-        See value move. Families spend → merchants receive → treasury reports → value flows back to the community.
-      </p>
-      <div class="scroll-section">
-        <div class="scroll-card">
-          <h3>Family</h3>
-          <p>Members hold 7TRB, exchange with each other, and spend locally.</p>
-          <p style="font-weight:bold; text-align:center;">➡</p>
-        </div>
-        <div class="scroll-card">
-          <h3>Merchant</h3>
-          <p>Merchants accept 7TRB, provide goods/services, and track circulation.</p>
-          <p style="font-weight:bold; text-align:center;">➡</p>
-        </div>
-        <div class="scroll-card">
-          <h3>Treasury</h3>
-          <p>Records incoming 7TRB, reports metrics, and funds projects.</p>
-          <p style="font-weight:bold; text-align:center;">➡</p>
-        </div>
-        <div class="scroll-card">
-          <h3>Community</h3>
-          <p>Funds return to families through local initiatives and new opportunities.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Rest of your homepage sections (Three cards, field manual, tools, join) remain unchanged -->
-
 </main>
-<footer>
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-    <div style="margin-top:8px;text-align:center">
-      <img src="https://visitor-badge.laobi.icu/badge?page_id=7trb.com&left_color=gold&right_color=black&left_text=Visitors" alt="7TRB visitor count" />
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <img src="images/logo.png" alt="7TRB small" style="width:36px;height:36px;border-radius:50%" />
-      <img src="images/icon-192.png" alt="7TRB Footer Icon" style="width:60px;height:60px;border-radius:50%;margin-right:8px;box-shadow:0 0 15px rgba(255,215,122,0.4)" />
-      <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
-    </div>
-    <div style="display:flex;gap:14px;flex-wrap:wrap">
-      <a href="learn.html">Learn (Basics)</a>
-      <a href="learn-7trb.html">How 7TRB Works</a>
-      <a href="investor.html">Investors</a>
-      <a href="wallet/index.html">Wallet</a>
-      <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
-      <a href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
-    </div>
-  </div>
+
+<footer style="text-align:center;padding:20px 0;color:var(--muted)">
+  <span>© 2026 7TRB • Mainhouse Oasis LLC</span>
 </footer>
+
+<script>
+// Node positions per phase with tooltips
+const micro = document.getElementById('micro-economy');
+const phases = [
+  {label:'3 Families', nodes:[
+    {id:'Family', x:80, y:150, count:3, tooltip:'Holds coins, spends locally, builds tribe.'},
+    {id:'Merchant', x:350, y:120, count:1, tooltip:'Accepts 7TRB, provides services, keeps value circulating.'},
+    {id:'Treasury', x:600, y:200, count:1, tooltip:'Stores receipts, funds projects, ensures trust.'},
+    {id:'Community', x:900, y:150, count:1, tooltip:'Collective network, reinforcing circulation.'}
+  ]},
+  {label:'5 Families', nodes:[
+    {id:'Family', x:80, y:150, count:5, tooltip:'Holds coins, spends locally, builds tribe.'},
+    {id:'Merchant', x:350, y:120, count:2, tooltip:'Accepts 7TRB, provides services, keeps value circulating.'},
+    {id:'Treasury', x:600, y:200, count:1, tooltip:'Stores receipts, funds projects, ensures trust.'},
+    {id:'Community', x:900, y:150, count:1, tooltip:'Collective network, reinforcing circulation.'}
+  ]},
+  {label:'10 Families', nodes:[
+    {id:'Family', x:80, y:150, count:10, tooltip:'Holds coins, spends locally, builds tribe.'},
+    {id:'Merchant', x:350, y:120, count:3, tooltip:'Accepts 7TRB, provides services, keeps value circulating.'},
+    {id:'Treasury', x:600, y:200, count:2, tooltip:'Stores receipts, funds projects, ensures trust.'},
+    {id:'Community', x:900, y:150, count:1, tooltip:'Collective network, reinforcing circulation.'}
+  ]},
+  {label:'20 Families', nodes:[
+    {id:'Family', x:80, y:150, count:20, tooltip:'Holds coins, spends locally, builds tribe.'},
+    {id:'Merchant', x:350, y:120, count:5, tooltip:'Accepts 7TRB, provides services, keeps value circulating.'},
+    {id:'Treasury', x:600, y:200, count:3, tooltip:'Stores receipts, funds projects, ensures trust.'},
+    {id:'Community', x:900, y:150, count:1, tooltip:'Collective network, reinforcing circulation.'}
+  ]}
+];
+
+let currentPhase=0;
+
+// Render phase with nodes and arrows
+function renderPhase(phaseIndex){
+  micro.innerHTML='';
+  const phase = phases[phaseIndex];
+  const createdNodes = [];
+
+  phase.nodes.forEach(n=>{
+    for(let i=0;i<n.count;i++){
+      const el = document.createElement('div');
+      el.className='node';
+      el.style.left = (n.x + Math.random()*60 - 30) + 'px';
+      el.style.top = (n.y + Math.random()*60 - 30) + 'px';
+      el.textContent = n.id;
+      el.setAttribute('data-tooltip', n.tooltip);
+      micro.appendChild(el);
+      createdNodes.push(el);
+    }
+  });
+
+  // Draw arrows connecting first nodes
+  for(let i=0;i<createdNodes.length-1;i++){
+    const from = createdNodes[i];
+    const to = createdNodes[i+1];
+    const arrow = document.createElement('div');
+    arrow.className='arrow';
+    const dx = to.offsetLeft - from.offsetLeft;
+    const dy = to.offsetTop - from.offsetTop;
+    const angle = Math.atan2(dy, dx) * 180/Math.PI;
+    arrow.style.width = Math.sqrt(dx*dx + dy*dy) + 'px';
+    arrow.style.left = from.offsetLeft + 'px';
+    arrow.style.top = from.offsetTop + 'px';
+    arrow.style.transform = `rotate(${angle}deg)`;
+    micro.appendChild(arrow);
+  }
+}
+
+// Scroll animation
+window.addEventListener('scroll', ()=>{
+  const sectionTop = micro.offsetTop;
+  const sectionHeight = micro.offsetHeight;
+  const scrollY = window.scrollY + window.innerHeight/2;
+  let phaseIndex = 0;
+  if(scrollY > sectionTop + sectionHeight*0.25) phaseIndex=1;
+  if(scrollY > sectionTop + sectionHeight*0.5) phaseIndex=2;
+  if(scrollY > sectionTop + sectionHeight*0.75) phaseIndex=3;
+  if(phaseIndex!==currentPhase){
+    currentPhase = phaseIndex;
+    renderPhase(currentPhase);
+  }
+});
+
+// Spawn moving coins
+function spawnCoins(){
+  const nodes = micro.querySelectorAll('.node');
+  if(nodes.length<2) return;
+  const coin = document.createElement('div');
+  coin.className='coin';
+  const start = nodes[0];
+  coin.style.left = start.offsetLeft+'px';
+  coin.style.top = start.offsetTop+'px';
+  micro.appendChild(coin);
+
+  let step=0;
+  const interval = setInterval(()=>{
+    step++;
+    if(step>=nodes.length){step=0;}
+    const node = nodes[step];
+    coin.style.left = node.offsetLeft+'px';
+    coin.style.top = node.offsetTop+'px';
+  },800);
+
+  setTimeout(()=>micro.removeChild(coin), nodes.length*900);
+}
+
+setInterval(spawnCoins,500);
+renderPhase(currentPhase);
+</script>
+
 </body>
 </html>
