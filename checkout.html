@@ -13,7 +13,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>7TRB Checkout</title>
-  <meta name="description" content="Checkout for 7TRB apparel with cash, hybrid, or 7TRB promo pricing." />
+  <meta name="description" content="Checkout for 7TRB apparel with cash, hybrid, or promo 7TRB pricing." />
   <link rel="icon" href="images/logo.png" />
 
   <style>
@@ -146,7 +146,7 @@
 
     .grid{
       display:grid;
-      grid-template-columns:1.1fr .9fr;
+      grid-template-columns:1.05fr .95fr;
       gap:18px;
     }
 
@@ -186,13 +186,13 @@
 
     .product-shell{
       display:grid;
-      grid-template-columns:240px 1fr;
+      grid-template-columns:260px 1fr;
       gap:18px;
       align-items:start;
     }
 
     .product-image{
-      height:240px;
+      height:320px;
       border-radius:18px;
       overflow:hidden;
       border:1px solid rgba(255,215,122,.14);
@@ -248,7 +248,7 @@
       background:rgba(255,255,255,.03);
       padding:14px;
       cursor:pointer;
-      transition:border-color .15s ease, transform .15s ease, background .15s ease;
+      transition:border-color .15s ease, transform .15s ease, background .15s ease, opacity .15s ease;
     }
 
     .lane:hover{
@@ -391,6 +391,35 @@
       font-size:.94rem;
     }
 
+    .wallet-box{
+      margin-top:14px;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,215,122,.18);
+      background:rgba(255,255,255,.03);
+      display:none;
+    }
+
+    .wallet-box strong{
+      color:var(--gold-bright);
+      display:block;
+      margin-bottom:8px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-size:.88rem;
+    }
+
+    .wallet-code{
+      word-break:break-all;
+      font-weight:700;
+      color:var(--ink);
+      background:#0b0805;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,215,122,.12);
+      margin:8px 0;
+    }
+
     .success{
       display:none;
       margin-top:16px;
@@ -462,8 +491,8 @@
       <span class="eyebrow">Wear the movement</span>
       <h1>Checkout</h1>
       <p>
-        Choose your pricing lane, confirm your order details, and move clean.
-        No extra clutter. No developer scraps hanging off the page.
+        Pick your pricing lane, confirm your order, and keep it moving.
+        Clean page. Clear totals. No junk hanging off the bottom like unfinished construction.
       </p>
     </div>
   </section>
@@ -520,7 +549,7 @@
                   <div class="lane-title">Hybrid</div>
                   <div class="lane-amount" id="laneHybridAmount">—</div>
                 </div>
-                <p>Part cash, part 7TRB. This is the bridge lane.</p>
+                <p>Part cash, part 7TRB. Bridge old money rails with the new system.</p>
               </div>
 
               <div class="lane" data-lane="promo">
@@ -528,7 +557,7 @@
                   <div class="lane-title">Promo</div>
                   <div class="lane-amount" id="lanePromoAmount">—</div>
                 </div>
-                <p>7TRB-only pricing where available. Utility over talk.</p>
+                <p>7TRB-only pricing where available. Utility over decoration.</p>
               </div>
             </div>
           </div>
@@ -596,15 +625,23 @@
             </div>
 
             <div class="notice" id="paymentNotice">
-              Standard lane is selected. If you want hybrid or promo, choose a different lane above.
-              This page currently prepares the order and payment intent. Plug in your actual cash processor or wallet payment flow next.
+              Standard lane is selected. This page currently captures the order and payment intent. Wire it to your payment processor, email, or Google Sheet next.
+            </div>
+
+            <div class="wallet-box" id="walletBox">
+              <strong>7TRB Payment Instructions</strong>
+              <div>Send payment to this wallet address:</div>
+              <div class="wallet-code" id="walletAddress">YOUR_7TRB_WALLET_ADDRESS</div>
+              <div class="muted" style="font-size:.92rem;">
+                After sending payment, submit the order so you can manually confirm it on your side.
+              </div>
             </div>
 
             <button class="btn gold full" type="submit">Submit Order</button>
           </form>
 
           <div id="successBox" class="success">
-            Order captured. Next step: connect this form to your payment flow, email, or order sheet so it stops being polite and starts closing.
+            Order captured. Next move is connecting this form to email, Google Sheets, Formspree, or a real payment flow so the engine actually closes sales.
           </div>
         </section>
 
@@ -629,6 +666,8 @@
   </footer>
 
   <script>
+    const TREASURY_WALLET = "YOUR_7TRB_WALLET_ADDRESS";
+
     const params = new URLSearchParams(window.location.search);
 
     const product = params.get('product') || '7TRB Product';
@@ -653,6 +692,8 @@
       summaryLane: document.getElementById('summaryLane'),
       summaryTotal: document.getElementById('summaryTotal'),
       paymentNotice: document.getElementById('paymentNotice'),
+      walletBox: document.getElementById('walletBox'),
+      walletAddress: document.getElementById('walletAddress'),
       successBox: document.getElementById('successBox'),
       form: document.getElementById('checkoutForm')
     };
@@ -661,6 +702,7 @@
     el.productDesc.textContent = desc;
     el.productImage.src = image;
     el.standardPrice.textContent = `$${cash}`;
+    el.walletAddress.textContent = TREASURY_WALLET;
 
     const hybridText = (hybridCash && hybrid7trb)
       ? `$${hybridCash} + ${hybrid7trb} 7TRB`
@@ -675,7 +717,6 @@
     el.laneStandardAmount.textContent = `$${cash}`;
     el.laneHybridAmount.textContent = hybridText;
     el.lanePromoAmount.textContent = promoText;
-
     el.summaryProduct.textContent = product;
 
     let selectedLane = 'standard';
@@ -694,12 +735,20 @@
 
     function laneNoticeText(lane) {
       if (lane === 'hybrid') {
-        return 'Hybrid lane selected. Buyer pays part cash and part 7TRB. Next step is wiring this to your real cash and wallet payment flow.';
+        return 'Hybrid lane selected. Buyer pays part cash and part 7TRB. Collect the cash portion through your normal method, and confirm the 7TRB payment manually.';
       }
       if (lane === 'promo') {
-        return 'Promo lane selected. Buyer pays in 7TRB only. Next step is wiring this to your actual wallet payment flow.';
+        return 'Promo lane selected. Buyer pays in 7TRB only. Use the wallet instructions below and confirm the transfer manually.';
       }
-      return 'Standard lane is selected. If you want hybrid or promo, choose a different lane above. This page currently prepares the order and payment intent. Plug in your actual cash processor or wallet payment flow next.';
+      return 'Standard lane is selected. This page currently captures the order and payment intent. Wire it to your payment processor, email, or Google Sheet next.';
+    }
+
+    function updateWalletBox(lane) {
+      if (lane === 'hybrid' || lane === 'promo') {
+        el.walletBox.style.display = 'block';
+      } else {
+        el.walletBox.style.display = 'none';
+      }
     }
 
     function updateSummary() {
@@ -707,6 +756,7 @@
       el.summaryLane.textContent = laneLabel;
       el.summaryTotal.textContent = laneTotalText(selectedLane);
       el.paymentNotice.textContent = laneNoticeText(selectedLane);
+      updateWalletBox(selectedLane);
     }
 
     const lanes = document.querySelectorAll('.lane');
@@ -751,4 +801,4 @@
     });
   </script>
 </body>
-</html>
+  </html>
