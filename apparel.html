@@ -12,8 +12,8 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7TRB Apparel — Wear the Movement</title>
-  <meta name="description" content="Shop 7TRB apparel with cash, hybrid, or promo pricing. Detroit-made style tied to community circulation." />
+  <title>7TRB Apparel — Message Tees</title>
+  <meta name="description" content="Shop 7TRB message apparel with standard, hybrid, and 7TRB promo pricing." />
   <link rel="icon" href="images/logo.png" />
 
   <style>
@@ -27,8 +27,6 @@
       --gold-2:#b8831b;
       --gold-bright:#ffdd7a;
       --line:#3b2b17;
-      --ok:#25F4EE;
-      --pop:#FE2C55;
       --radius:18px;
       --radius-lg:24px;
       --shadow:0 18px 50px rgba(0,0,0,.55);
@@ -41,6 +39,7 @@
       color:var(--ink);
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
+
     a{text-decoration:none;color:var(--gold-bright)}
     img{max-width:100%;display:block}
 
@@ -118,7 +117,7 @@
     }
 
     .hero-inner{
-      min-height:420px;
+      min-height:380px;
       display:grid;
       grid-template-columns:1.1fr .9fr;
       gap:24px;
@@ -294,7 +293,7 @@
     }
 
     .product-image{
-      height:260px;
+      height:300px;
       border-radius:18px;
       overflow:hidden;
       border:1px solid rgba(255,215,122,.14);
@@ -340,7 +339,7 @@
     .product-card p{
       margin:0 0 14px;
       color:var(--muted);
-      min-height:48px;
+      min-height:72px;
     }
 
     .price-box{
@@ -466,7 +465,7 @@
         <img src="images/logo.png" alt="7TRB logo" />
         <div>
           <strong>7TRB Apparel</strong>
-          <small>Wear the movement</small>
+          <small>Message tees with purpose</small>
         </div>
       </div>
 
@@ -484,14 +483,14 @@
     <div class="wrap hero-inner">
       <div>
         <span class="eyebrow">Organize • Build • Circulate</span>
-        <h1>Apparel With Utility</h1>
+        <h1>Wear the Message</h1>
         <p>
-          7TRB apparel is not just merch. It is a storefront for circulation. Buyers can pay cash,
-          split payment with 7TRB, or use full promo pricing where available.
+          These are not random tees. They are statements tied to real pressure, real pain, and a real alternative.
+          Every purchase pushes the 7TRB system forward.
         </p>
 
         <div class="hero-actions">
-          <a class="btn gold" href="#shop">Shop Apparel</a>
+          <a class="btn gold" href="#shop">Shop the Collection</a>
           <a class="btn ghost" href="checkout.html">Open Checkout</a>
         </div>
       </div>
@@ -500,30 +499,30 @@
         <div class="metric">
           <div>
             <div class="metric-label">Standard</div>
-            <div class="muted">Regular cash price</div>
+            <div class="muted">Regular cash pricing</div>
           </div>
-          <div class="metric-value">USD</div>
+          <div class="metric-value">$29.99</div>
         </div>
         <div class="metric">
           <div>
             <div class="metric-label">Hybrid</div>
             <div class="muted">Cash + 7TRB</div>
           </div>
-          <div class="metric-value">Split</div>
+          <div class="metric-value">$25 + 20 7TRB</div>
         </div>
         <div class="metric">
           <div>
             <div class="metric-label">Promo</div>
-            <div class="muted">7TRB-only where offered</div>
+            <div class="muted">7TRB-only lane</div>
           </div>
-          <div class="metric-value">Utility</div>
+          <div class="metric-value">30 7TRB</div>
         </div>
         <div class="metric">
           <div>
-            <div class="metric-label">Model</div>
-            <div class="muted">Merch tied to circulation</div>
+            <div class="metric-label">Purpose</div>
+            <div class="muted">Apparel that funds the ecosystem</div>
           </div>
-          <div class="metric-value">Detroit First</div>
+          <div class="metric-value">Movement</div>
         </div>
       </div>
     </div>
@@ -535,9 +534,9 @@
         <div class="cta-strip">
           <div>
             <strong style="display:block;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">
-              Cash, hybrid, or 7TRB promo pricing
+              Top message tees only
             </strong>
-            <span class="muted">Simple storefront. No builder notes hanging out in public like a loose shoelace.</span>
+            <span class="muted">Less clutter. More punch. The store should hit like a statement, not read like a warehouse sheet.</span>
           </div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;">
             <a class="btn gold" href="#shop">Browse Products</a>
@@ -550,114 +549,132 @@
     <section class="section" id="shop">
       <div class="wrap">
         <div class="section-box">
-          <h2 class="title">Shop 7TRB Apparel</h2>
+          <h2 class="title">Core Collection</h2>
           <p class="lead">
-            Start with a tight catalog. A small, clean store beats a messy warehouse every time.
-            Swap the sample images and prices with your real products as you load them in.
+            This collection focuses on your strongest message pieces. Keep the weak products off stage and let the heavy hitters do the selling.
           </p>
 
           <div class="filters">
             <button class="chip active" type="button" data-filter="all">All</button>
-            <button class="chip" type="button" data-filter="tees">Tees</button>
-            <button class="chip" type="button" data-filter="hoodies">Hoodies</button>
-            <button class="chip" type="button" data-filter="caps">Caps</button>
+            <button class="chip" type="button" data-filter="pain">Pain</button>
+            <button class="chip" type="button" data-filter="system">System</button>
+            <button class="chip" type="button" data-filter="identity">Identity</button>
           </div>
 
           <div class="product-grid" id="productGrid">
 
-            <article class="product-card" data-category="tees">
+            <article class="product-card" data-category="pain">
               <div class="product-image">
-                <img src="images/apparel/tee1.jpg" alt="Unity Tee" onerror="this.src='images/logo.png'">
+                <img src="images/taxed-to-death-tee.png" alt="Taxed To Death Tee" onerror="this.src='images/logo.png'">
               </div>
               <div class="badge-row">
+                <span class="badge">Pain</span>
                 <span class="badge">Tee</span>
-                <span class="badge">Detroit</span>
               </div>
-              <h3>Unity Tee</h3>
-              <p>Clean everyday shirt with 7TRB identity front and center.</p>
+              <h3>Taxed To Death Tee</h3>
+              <p>You earn it. They take it. Over and over. This shirt says what people already feel every payday.</p>
 
               <div class="price-box">
-                <div class="price-line">
-                  <strong>Standard</strong>
-                  <span>$30</span>
-                </div>
-                <div class="price-line">
-                  <strong>Hybrid</strong>
-                  <span>$20 + 20 7TRB</span>
-                </div>
-                <div class="price-line">
-                  <strong>Promo</strong>
-                  <span>30 7TRB</span>
-                </div>
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
               </div>
 
               <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Unity%20Tee&cash=30&hybrid_cash=20&hybrid_7trb=20&promo_7trb=30">Pay with 7TRB</a>
-                <a class="btn ghost" href="checkout.html?product=Unity%20Tee&cash=30">Cash Checkout</a>
+                <a class="btn gold" href="checkout.html?product=Taxed%20To%20Death%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/taxed-to-death-tee.png&desc=You%20earn%20it.%20They%20take%20it.%20Over%20and%20over.%20This%20shirt%20says%20what%20people%20already%20feel%20every%20payday.">Pay with 7TRB</a>
+                <a class="btn ghost" href="checkout.html?product=Taxed%20To%20Death%20Tee&cash=29.99&image=images/taxed-to-death-tee.png&desc=You%20earn%20it.%20They%20take%20it.%20Over%20and%20over.%20This%20shirt%20says%20what%20people%20already%20feel%20every%20payday.">Cash Checkout</a>
               </div>
             </article>
 
-            <article class="product-card" data-category="hoodies">
+            <article class="product-card" data-category="pain">
               <div class="product-image">
-                <img src="images/apparel/hoodie1.jpg" alt="Legacy Hoodie" onerror="this.src='images/logo.png'">
+                <img src="images/work-til-i-die-tee.png" alt="Work Til I Die Tee" onerror="this.src='images/logo.png'">
               </div>
               <div class="badge-row">
-                <span class="badge">Hoodie</span>
-                <span class="badge">Premium</span>
+                <span class="badge">Pain</span>
+                <span class="badge">Tee</span>
               </div>
-              <h3>Legacy Hoodie</h3>
-              <p>Heavyweight hoodie built for colder weather and louder statements.</p>
+              <h3>Work Til I Die? Tee</h3>
+              <p>Forty years of grind with no exit plan is not a dream. This tee questions the whole setup.</p>
 
               <div class="price-box">
-                <div class="price-line">
-                  <strong>Standard</strong>
-                  <span>$55</span>
-                </div>
-                <div class="price-line">
-                  <strong>Hybrid</strong>
-                  <span>$35 + 25 7TRB</span>
-                </div>
-                <div class="price-line">
-                  <strong>Promo</strong>
-                  <span>60 7TRB</span>
-                </div>
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
               </div>
 
               <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Legacy%20Hoodie&cash=55&hybrid_cash=35&hybrid_7trb=25&promo_7trb=60">Pay with 7TRB</a>
-                <a class="btn ghost" href="checkout.html?product=Legacy%20Hoodie&cash=55">Cash Checkout</a>
+                <a class="btn gold" href="checkout.html?product=Work%20Til%20I%20Die%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/work-til-i-die-tee.png&desc=Forty%20years%20of%20grind%20with%20no%20exit%20plan%20is%20not%20a%20dream.%20This%20tee%20questions%20the%20whole%20setup.">Pay with 7TRB</a>
+                <a class="btn ghost" href="checkout.html?product=Work%20Til%20I%20Die%20Tee&cash=29.99&image=images/work-til-i-die-tee.png&desc=Forty%20years%20of%20grind%20with%20no%20exit%20plan%20is%20not%20a%20dream.%20This%20tee%20questions%20the%20whole%20setup.">Cash Checkout</a>
               </div>
             </article>
 
-            <article class="product-card" data-category="caps">
+            <article class="product-card" data-category="system">
               <div class="product-image">
-                <img src="images/apparel/cap1.jpg" alt="Builder Cap" onerror="this.src='images/logo.png'">
+                <img src="images/economic-prison-break-tee.png" alt="Economic Prison Break Tee" onerror="this.src='images/logo.png'">
               </div>
               <div class="badge-row">
-                <span class="badge">Cap</span>
-                <span class="badge">Everyday</span>
+                <span class="badge">System</span>
+                <span class="badge">Tee</span>
               </div>
-              <h3>Builder Cap</h3>
-              <p>Simple cap for everyday wear with a clean 7TRB front mark.</p>
+              <h3>Economic Prison Break Tee</h3>
+              <p>This one is blunt for a reason. People feel trapped. This shirt turns that feeling into a signal.</p>
 
               <div class="price-box">
-                <div class="price-line">
-                  <strong>Standard</strong>
-                  <span>$25</span>
-                </div>
-                <div class="price-line">
-                  <strong>Hybrid</strong>
-                  <span>$15 + 15 7TRB</span>
-                </div>
-                <div class="price-line">
-                  <strong>Promo</strong>
-                  <span>25 7TRB</span>
-                </div>
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
               </div>
 
               <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Builder%20Cap&cash=25&hybrid_cash=15&hybrid_7trb=15&promo_7trb=25">Pay with 7TRB</a>
-                <a class="btn ghost" href="checkout.html?product=Builder%20Cap&cash=25">Cash Checkout</a>
+                <a class="btn gold" href="checkout.html?product=Economic%20Prison%20Break%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/economic-prison-break-tee.png&desc=This%20one%20is%20blunt%20for%20a%20reason.%20People%20feel%20trapped.%20This%20shirt%20turns%20that%20feeling%20into%20a%20signal.">Pay with 7TRB</a>
+                <a class="btn ghost" href="checkout.html?product=Economic%20Prison%20Break%20Tee&cash=29.99&image=images/economic-prison-break-tee.png&desc=This%20one%20is%20blunt%20for%20a%20reason.%20People%20feel%20trapped.%20This%20shirt%20turns%20that%20feeling%20into%20a%20signal.">Cash Checkout</a>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="pain">
+              <div class="product-image">
+                <img src="images/check-to-check-tee.png" alt="Check to Check Is Not Living Tee" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">Pain</span>
+                <span class="badge">Tee</span>
+              </div>
+              <h3>Check to Check Is Not Living Tee</h3>
+              <p>Survival mode is not the finish line. This tee says the quiet part out loud.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="checkout.html?product=Check%20to%20Check%20Is%20Not%20Living%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/check-to-check-tee.png&desc=Survival%20mode%20is%20not%20the%20finish%20line.%20This%20tee%20says%20the%20quiet%20part%20out%20loud.">Pay with 7TRB</a>
+                <a class="btn ghost" href="checkout.html?product=Check%20to%20Check%20Is%20Not%20Living%20Tee&cash=29.99&image=images/check-to-check-tee.png&desc=Survival%20mode%20is%20not%20the%20finish%20line.%20This%20tee%20says%20the%20quiet%20part%20out%20loud.">Cash Checkout</a>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="identity">
+              <div class="product-image">
+                <img src="images/community-culture-change-tee.png" alt="7TRB Community Culture Change Tee" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">Identity</span>
+                <span class="badge">Tee</span>
+              </div>
+              <h3>7TRB Community • Culture • Change Tee</h3>
+              <p>This is the cleaner identity piece. Less pain, more banner. Good for people who want the message without the punch in the throat.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="checkout.html?product=7TRB%20Community%20Culture%20Change%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/community-culture-change-tee.png&desc=This%20is%20the%20cleaner%20identity%20piece.%20Less%20pain,%20more%20banner.%20Good%20for%20people%20who%20want%20the%20message%20without%20the%20punch%20in%20the%20throat.">Pay with 7TRB</a>
+                <a class="btn ghost" href="checkout.html?product=7TRB%20Community%20Culture%20Change%20Tee&cash=29.99&image=images/community-culture-change-tee.png&desc=This%20is%20the%20cleaner%20identity%20piece.%20Less%20pain,%20more%20banner.%20Good%20for%20people%20who%20want%20the%20message%20without%20the%20punch%20in%20the%20throat.">Cash Checkout</a>
               </div>
             </article>
 
@@ -669,19 +686,19 @@
     <section class="section">
       <div class="wrap">
         <div class="section-box">
-          <h2 class="title">How Pricing Works</h2>
+          <h2 class="title">Why 7TRB Apparel?</h2>
           <div class="info-grid">
             <div class="info-card">
-              <h4>Standard</h4>
-              <p>Regular cash pricing for buyers who just want the product, simple and traditional.</p>
+              <h4>Identity</h4>
+              <p>These products carry ideas people already feel but rarely say out loud.</p>
             </div>
             <div class="info-card">
-              <h4>Hybrid</h4>
-              <p>Part cash, part 7TRB. This is the bridge between old money rails and the new circulation model.</p>
+              <h4>Utility</h4>
+              <p>Hybrid and promo pricing give 7TRB a job instead of leaving it as decoration.</p>
             </div>
             <div class="info-card">
-              <h4>Promo</h4>
-              <p>Special 7TRB pricing where available. Utility talks louder than slogans.</p>
+              <h4>Ecosystem</h4>
+              <p>Every purchase supports the wider system: awareness, onboarding, and circulation.</p>
             </div>
           </div>
 
@@ -700,7 +717,7 @@
             <strong style="display:block;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">
               Next cleanup move
             </strong>
-            <span class="muted">Make `checkout.html` read the URL parameters and auto-fill the selected product and pricing lane.</span>
+            <span class="muted">Once this page is live, the next smart move is wiring checkout submissions to email, Google Sheets, or a real payment flow.</span>
           </div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;">
             <a class="btn gold" href="checkout.html">Open Checkout</a>
@@ -746,4 +763,4 @@
     });
   </script>
 </body>
-                    </html>
+</html>
