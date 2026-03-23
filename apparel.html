@@ -1,156 +1,619 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>7Tribes Apparel</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7Tribes Apparel</title>
 
-<style>
-    body {
-        background-color: #000;
-        color: #FFD700;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-<nav style="padding:20px; text-align:center; font-size:20px; background:#111;">
-  <a href="index.html" style="margin:0 20px; color:#FFD700; text-decoration:none; font-weight:bold;">7TRB</a>
-  <a href="apparel.html" style="margin:0 20px; color:#FFD700; text-decoration:none; font-weight:bold;">Apparel</a>
-  <a href="digital.html" style="margin:0 20px; color:#FFD700; text-decoration:none; font-weight:bold;">Digital Products</a>
-</nav>
-    nav {
-        background: #111;
-        padding: 20px;
+  <style>
+    :root{
+      --bg:#000;
+      --panel:#111;
+      --panel-2:#161616;
+      --gold:#FFD700;
+      --gold-dark:#cfae00;
+      --text:#f5e7a1;
+      --line:#333;
+      --soft:#bbb;
     }
 
-    nav a {
-        color: #FFD700;
-        text-decoration: none;
-        margin: 0 20px;
-        font-size: 20px;
-        font-weight: bold;
+    *{box-sizing:border-box}
+
+    body{
+      background-color:var(--bg);
+      color:var(--gold);
+      font-family:Arial,sans-serif;
+      margin:0;
+      padding:0;
+      text-align:center;
     }
 
-    h1 {
-        margin-top: 30px;
-        font-size: 40px;
-        letter-spacing: 2px;
+    nav{
+      background:#111;
+      padding:20px;
+      border-bottom:1px solid #222;
+      position:sticky;
+      top:0;
+      z-index:10;
     }
 
-    h2 {
-        margin-top: 40px;
-        font-size: 32px;
-        color: #FFD700;
-        border-bottom: 1px solid #333;
-        padding-bottom: 10px;
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
+    nav a{
+      color:var(--gold);
+      text-decoration:none;
+      margin:0 18px;
+      font-size:18px;
+      font-weight:bold;
     }
 
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 30px auto;
-        width: 90%;
+    nav a:hover{
+      color:#fff0a6;
     }
 
-    .product-card {
-        background: #111;
-        border: 1px solid #333;
-        border-radius: 10px;
-        width: 300px;
-        margin: 20px;
-        padding: 20px;
-        text-align: center;
+    .hero{
+      padding:40px 20px 20px;
+      max-width:1000px;
+      margin:0 auto;
     }
 
-    .product-card img {
-        width: 100%;
-        height: 320px;
-        object-fit: cover;
-        border-radius: 10px;
-        border: 1px solid #333;
+    h1{
+      margin:0 0 12px;
+      font-size:42px;
+      letter-spacing:2px;
     }
 
-    .product-title {
-        margin-top: 15px;
-        font-size: 22px;
-        font-weight: bold;
-        color: #FFD700;
+    .hero p{
+      color:var(--text);
+      max-width:760px;
+      margin:0 auto 16px;
+      font-size:17px;
+      line-height:1.6;
     }
 
-    .buy-btn {
-        display: inline-block;
-        margin-top: 15px;
-        background: #FFD700;
-        color: #000;
-        padding: 10px 20px;
-        border-radius: 6px;
-        font-size: 18px;
-        font-weight: bold;
-        text-decoration: none;
+    .notice{
+      width:min(92%,1000px);
+      margin:0 auto 30px;
+      background:linear-gradient(180deg,#151515,#0d0d0d);
+      border:1px solid #2b2b2b;
+      border-radius:12px;
+      padding:18px;
+      color:var(--text);
     }
 
-    .buy-btn:hover {
-        background: #e5c100;
+    .notice strong{
+      color:var(--gold);
     }
-</style>
 
+    h2{
+      margin-top:40px;
+      font-size:32px;
+      color:var(--gold);
+      border-bottom:1px solid #333;
+      padding-bottom:10px;
+      width:80%;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .container{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin:30px auto;
+      width:92%;
+      max-width:1300px;
+      gap:6px;
+    }
+
+    .product-card{
+      background:linear-gradient(180deg,#111,#0b0b0b);
+      border:1px solid #333;
+      border-radius:12px;
+      width:300px;
+      margin:16px;
+      padding:20px;
+      text-align:center;
+      box-shadow:0 10px 25px rgba(0,0,0,.35);
+    }
+
+    .product-card img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid #333;
+      background:#000;
+    }
+
+    .product-title{
+      margin-top:15px;
+      font-size:22px;
+      font-weight:bold;
+      color:var(--gold);
+    }
+
+    .product-sub{
+      margin-top:8px;
+      font-size:14px;
+      color:var(--soft);
+      min-height:20px;
+    }
+
+    .price-box{
+      margin-top:14px;
+      padding:12px;
+      background:#0f0f0f;
+      border:1px solid #222;
+      border-radius:10px;
+      text-align:left;
+    }
+
+    .price-line{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      margin:6px 0;
+      color:var(--text);
+      font-size:15px;
+    }
+
+    .btn-row{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .buy-btn,
+    .trb-btn{
+      display:inline-block;
+      padding:11px 20px;
+      border-radius:8px;
+      font-size:17px;
+      font-weight:bold;
+      text-decoration:none;
+      transition:.2s ease;
+    }
+
+    .buy-btn{
+      background:var(--gold);
+      color:#000;
+    }
+
+    .buy-btn:hover{
+      background:#e5c100;
+    }
+
+    .trb-btn{
+      background:#000;
+      color:var(--gold);
+      border:1px solid var(--gold);
+    }
+
+    .trb-btn:hover{
+      background:#1a1a1a;
+    }
+
+    .footer-note{
+      max-width:900px;
+      margin:10px auto 40px;
+      color:var(--soft);
+      font-size:14px;
+      line-height:1.6;
+      padding:0 20px;
+    }
+
+    @media (max-width:768px){
+      nav a{
+        display:inline-block;
+        margin:8px 10px;
+        font-size:16px;
+      }
+
+      h1{
+        font-size:34px;
+      }
+
+      h2{
+        width:90%;
+        font-size:28px;
+      }
+
+      .product-card{
+        width:100%;
+        max-width:340px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
+  <nav>
     <a href="index.html">7TRB</a>
     <a href="apparel.html">Apparel</a>
     <a href="digital.html">Digital Products</a>
-</nav>
+    <a href="checkout.html">Pay with 7TRB</a>
+  </nav>
 
-<h1>7Tribes Apparel</h1>
+  <section class="hero">
+    <h1>7Tribes Apparel</h1>
+    <p>
+      Shop the 7Tribes apparel collection and support the brand through direct purchases.
+      You can still buy through Etsy, and selected items can also be purchased through the
+      7TRB checkout flow.
+    </p>
+  </section>
 
+  <div class="notice">
+    <strong>New:</strong> Some apparel can now be purchased through a hybrid checkout using
+    cash + 7TRB, or through a 7TRB promotional payment option. Click
+    <strong>Pay with 7TRB</strong> on any item to use the 7TRB checkout page.
+  </div>
 
-<!-- HOODIES SECTION -->
-<h2>Hoodies</h2>
-<div class="container">
+  <!-- HOODIES SECTION -->
+  <h2>Hoodies</h2>
+  <div class="container">
 
-    <!-- Hoodie 1–10 -->
-    <div class="product-card"><img src="images/apparel/hoodie1.jpeg"><div class="product-title">Hoodie 1</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy on Etsy</a></div>
-    <div class="product-card"><img src="images/apparel/hoodie2.jpeg"><div class="product-title">Hoodie 2</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy on Etsy</a></div>
-    <div class="product-card"><img src="images/apparel/hoodie3.jpeg"><div class="product-title">Hoodie 3</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/hoodie4.jpeg"><div class="product-title">Hoodie 4</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/hoodie5.jpeg"><div class="product-title">Hoodie 5</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/hoodie6.jpeg"><div class="product-title">Hoodie 6</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/hoodie7.jpeg"><div class="product-title">Hoodie 7</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/hoodie8.jpeg"><div class="product-title">Hoodie 8</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/hoodie9.jpeg"><div class="product-title">Hoodie 9</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/hoodie10.jpeg"><div class="product-title">Hoodie 10</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card">
+      <img src="images/apparel/hoodie1.jpeg" alt="Hoodie 1">
+      <div class="product-title">Hoodie 1</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
 
-</div>
+    <div class="product-card">
+      <img src="images/apparel/hoodie2.jpeg" alt="Hoodie 2">
+      <div class="product-title">Hoodie 2</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
 
+    <div class="product-card">
+      <img src="images/apparel/hoodie3.jpeg" alt="Hoodie 3">
+      <div class="product-title">Hoodie 3</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
 
-<!-- SHIRTS SECTION -->
-<h2>Shirts</h2>
-<div class="container">
+    <div class="product-card">
+      <img src="images/apparel/hoodie4.jpeg" alt="Hoodie 4">
+      <div class="product-title">Hoodie 4</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
 
-    <!-- Shirt 1–15 -->
-    <div class="product-card"><img src="images/apparel/shirt1.jpeg"><div class="product-title">Shirt 1</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt2.jpeg"><div class="product-title">Shirt 2</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt3.jpeg"><div class="product-title">Shirt 3</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt4.jpeg"><div class="product-title">Shirt 4</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt5.jpeg"><div class="product-title">Shirt 5</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt6.jpeg"><div class="product-title">Shirt 6</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt7.jpeg"><div class="product-title">Shirt 7</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt8.jpeg"><div class="product-title">Shirt 8</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt9.jpeg"><div class="product-title">Shirt 9</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt10.jpeg"><div class="product-title">Shirt 10</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt11.jpeg"><div class="product-title">Shirt 11</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt12.jpeg"><div class="product-title">Shirt 12</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt13.jpeg"><div class="product-title">Shirt 13</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt14.jpeg"><div class="product-title">Shirt 14</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
-    <div class="product-card"><img src="images/apparel/shirt15.jpeg"><div class="product-title">Shirt 15</div><a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank">Buy</a></div>
+    <div class="product-card">
+      <img src="images/apparel/hoodie5.jpeg" alt="Hoodie 5">
+      <div class="product-title">Hoodie 5</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
 
-</div>
+    <div class="product-card">
+      <img src="images/apparel/hoodie6.jpeg" alt="Hoodie 6">
+      <div class="product-title">Hoodie 6</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/hoodie7.jpeg" alt="Hoodie 7">
+      <div class="product-title">Hoodie 7</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/hoodie8.jpeg" alt="Hoodie 8">
+      <div class="product-title">Hoodie 8</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/hoodie9.jpeg" alt="Hoodie 9">
+      <div class="product-title">Hoodie 9</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/hoodie10.jpeg" alt="Hoodie 10">
+      <div class="product-title">Hoodie 10</div>
+      <div class="product-sub">7Tribes hoodie design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$35 + 35 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHIRTS SECTION -->
+  <h2>Shirts</h2>
+  <div class="container">
+
+    <div class="product-card">
+      <img src="images/apparel/shirt1.jpeg" alt="Shirt 1">
+      <div class="product-title">Shirt 1</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt2.jpeg" alt="Shirt 2">
+      <div class="product-title">Shirt 2</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt3.jpeg" alt="Shirt 3">
+      <div class="product-title">Shirt 3</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt4.jpeg" alt="Shirt 4">
+      <div class="product-title">Shirt 4</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt5.jpeg" alt="Shirt 5">
+      <div class="product-title">Shirt 5</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt6.jpeg" alt="Shirt 6">
+      <div class="product-title">Shirt 6</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt7.jpeg" alt="Shirt 7">
+      <div class="product-title">Shirt 7</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt8.jpeg" alt="Shirt 8">
+      <div class="product-title">Shirt 8</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt9.jpeg" alt="Shirt 9">
+      <div class="product-title">Shirt 9</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt10.jpeg" alt="Shirt 10">
+      <div class="product-title">Shirt 10</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt11.jpeg" alt="Shirt 11">
+      <div class="product-title">Shirt 11</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt12.jpeg" alt="Shirt 12">
+      <div class="product-title">Shirt 12</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt13.jpeg" alt="Shirt 13">
+      <div class="product-title">Shirt 13</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt14.jpeg" alt="Shirt 14">
+      <div class="product-title">Shirt 14</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/apparel/shirt15.jpeg" alt="Shirt 15">
+      <div class="product-title">Shirt 15</div>
+      <div class="product-sub">7Tribes shirt design</div>
+      <div class="price-box">
+        <div class="price-line"><span>Etsy Price</span><strong>See Etsy</strong></div>
+        <div class="price-line"><span>7TRB Hybrid</span><strong>$20 + 20 7TRB</strong></div>
+      </div>
+      <div class="btn-row">
+        <a class="buy-btn" href="https://mainhouseoasis.etsy.com" target="_blank" rel="noopener">Buy on Etsy</a>
+        <a class="trb-btn" href="checkout.html">Pay with 7TRB</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    Etsy remains your standard storefront. The 7TRB option gives you a direct community checkout path
+    that can support wallet-to-wallet purchases, promotional drops, and hybrid pricing.
+  </div>
 
 </body>
-</html>
+                                                           </html>
