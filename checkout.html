@@ -12,8 +12,8 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7TRB Apparel — Wear the Movement</title>
-  <meta name="description" content="Shop 7TRB apparel with cash, hybrid, or promo pricing. Detroit-made style tied to community circulation." />
+  <title>7TRB Checkout</title>
+  <meta name="description" content="Checkout for 7TRB apparel with cash, hybrid, or 7TRB promo pricing." />
   <link rel="icon" href="images/logo.png" />
 
   <style>
@@ -27,11 +27,10 @@
       --gold-2:#b8831b;
       --gold-bright:#ffdd7a;
       --line:#3b2b17;
-      --ok:#25F4EE;
-      --pop:#FE2C55;
       --radius:18px;
       --radius-lg:24px;
       --shadow:0 18px 50px rgba(0,0,0,.55);
+      --ok:#43a047;
     }
 
     *{box-sizing:border-box}
@@ -41,11 +40,12 @@
       color:var(--ink);
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
+
     a{text-decoration:none;color:var(--gold-bright)}
     img{max-width:100%;display:block}
 
     .wrap{
-      max-width:1180px;
+      max-width:1160px;
       margin:0 auto;
       padding:0 20px;
     }
@@ -87,12 +87,10 @@
       color:var(--gold-bright);
       text-transform:uppercase;
       letter-spacing:.12em;
-      font-size:1.15rem;
+      font-size:1.12rem;
     }
 
-    .brand small{
-      color:var(--muted);
-    }
+    .brand small{color:var(--muted)}
 
     .nav-links{
       display:flex;
@@ -109,21 +107,14 @@
     }
 
     .hero{
-      position:relative;
-      overflow:hidden;
-      border-bottom:1px solid rgba(255,215,122,.16);
+      border-bottom:1px solid rgba(255,215,122,.14);
       background:
-        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.28), rgba(0,0,0,.72)),
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.30), rgba(0,0,0,.72)),
         url('images/welcome_banner.png') center/cover no-repeat;
     }
 
     .hero-inner{
-      min-height:420px;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:24px;
-      align-items:center;
-      padding:48px 0;
+      padding:42px 0;
     }
 
     .eyebrow{
@@ -136,25 +127,201 @@
     }
 
     .hero h1{
-      margin:0 0 14px;
+      margin:0 0 10px;
       color:var(--gold-bright);
       text-transform:uppercase;
-      font-size:clamp(32px,5vw,58px);
-      line-height:1.04;
+      font-size:clamp(30px,5vw,54px);
+      line-height:1.05;
     }
 
     .hero p{
       margin:0;
       color:#fff4dd;
-      max-width:60ch;
-      font-size:1.04rem;
+      max-width:64ch;
     }
 
-    .hero-actions{
+    .section{
+      padding:40px 0;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+    }
+
+    .box{
+      position:relative;
+      background:linear-gradient(180deg, rgba(26,18,8,.96), rgba(18,12,6,.96));
+      border:1px solid rgba(255,215,122,.24);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      padding:22px;
+    }
+
+    .box::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:2px;
+      background:linear-gradient(90deg, rgba(255,215,122,.42), rgba(184,131,31,.68), rgba(255,215,122,.42));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.36;
+    }
+
+    .title{
+      margin:0 0 12px;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:clamp(22px,3vw,32px);
+    }
+
+    .muted{color:var(--muted)}
+
+    .product-shell{
+      display:grid;
+      grid-template-columns:240px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .product-image{
+      height:240px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,215,122,.14);
+      background:#0d0804;
       display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .product-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .detail-list{
+      display:grid;
       gap:12px;
-      flex-wrap:wrap;
-      margin-top:22px;
+      margin-top:12px;
+    }
+
+    .detail-row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:11px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,215,122,.12);
+      background:rgba(255,255,255,.03);
+    }
+
+    .detail-row strong{
+      color:var(--ink);
+      font-size:.95rem;
+    }
+
+    .detail-row span{
+      color:var(--gold-bright);
+      font-weight:800;
+      text-align:right;
+    }
+
+    .lane-options{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .lane{
+      position:relative;
+      border:1px solid rgba(255,215,122,.16);
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+      padding:14px;
+      cursor:pointer;
+      transition:border-color .15s ease, transform .15s ease, background .15s ease;
+    }
+
+    .lane:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,215,122,.34);
+    }
+
+    .lane.active{
+      border-color:rgba(255,215,122,.60);
+      background:linear-gradient(180deg, rgba(231,184,82,.14), rgba(184,131,31,.08));
+      box-shadow:0 0 18px rgba(255,215,122,.12);
+    }
+
+    .lane-top{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+      margin-bottom:8px;
+    }
+
+    .lane-title{
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-weight:800;
+      font-size:.95rem;
+    }
+
+    .lane-amount{
+      color:var(--gold-bright);
+      font-weight:900;
+      text-align:right;
+    }
+
+    .lane p{
+      margin:0;
+      color:var(--muted);
+      font-size:.94rem;
+    }
+
+    .form-grid{
+      display:grid;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .form-row{
+      display:grid;
+      gap:6px;
+    }
+
+    label{
+      color:var(--muted);
+      font-size:.9rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    input, select, textarea{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,215,122,.16);
+      background:#0f0a06;
+      color:var(--ink);
+      font:inherit;
+      outline:none;
+    }
+
+    textarea{
+      min-height:100px;
+      resize:vertical;
     }
 
     .btn{
@@ -169,6 +336,7 @@
       cursor:pointer;
       white-space:nowrap;
       transition:transform .15s ease;
+      font-size:.96rem;
     }
 
     .btn:hover{transform:translateY(-1px)}
@@ -185,239 +353,53 @@
       border-color:rgba(255,215,122,.28);
     }
 
-    .hero-card,
-    .section-box,
-    .product-card{
-      position:relative;
-      background:linear-gradient(180deg, rgba(26,18,8,.96), rgba(18,12,6,.96));
-      border:1px solid rgba(255,215,122,.24);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
+    .btn.full{width:100%}
+
+    .summary-card{
+      display:grid;
+      gap:12px;
     }
 
-    .hero-card::after,
-    .section-box::after,
-    .product-card::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:inherit;
-      padding:2px;
-      background:linear-gradient(90deg, rgba(255,215,122,.42), rgba(184,131,31,.68), rgba(255,215,122,.42));
-      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor;
-      mask-composite:exclude;
-      pointer-events:none;
-      opacity:.38;
-    }
-
-    .hero-card{
-      padding:22px;
-    }
-
-    .metric{
+    .summary-line{
       display:flex;
       justify-content:space-between;
       gap:12px;
-      padding:14px 0;
+      padding:10px 0;
       border-bottom:1px solid rgba(255,215,122,.10);
     }
 
-    .metric:last-child{border-bottom:none}
-    .metric-label{
+    .summary-line:last-child{border-bottom:none}
+    .summary-line strong{
       color:var(--muted);
       text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:.78rem;
+      letter-spacing:.06em;
+      font-size:.82rem;
     }
-    .metric-value{
+
+    .summary-line span{
       color:var(--gold-bright);
-      font-size:1.15rem;
       font-weight:800;
       text-align:right;
     }
 
-    .section{
-      padding:44px 0;
-    }
-
-    .section-box{
-      padding:24px;
-    }
-
-    .title{
-      margin:0 0 10px;
-      color:var(--gold-bright);
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:clamp(24px,3vw,34px);
-    }
-
-    .lead{
-      color:var(--muted);
-      max-width:78ch;
-    }
-
-    .filters{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:18px;
-    }
-
-    .chip{
-      padding:9px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,215,122,.20);
+    .notice{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,215,122,.14);
       background:rgba(255,255,255,.03);
-      color:var(--ink);
-      cursor:pointer;
+      color:var(--muted);
+      font-size:.94rem;
+    }
+
+    .success{
+      display:none;
+      margin-top:16px;
+      padding:14px;
+      border-radius:16px;
+      background:rgba(67,160,71,.12);
+      border:1px solid rgba(67,160,71,.35);
+      color:#dff5e3;
       font-weight:700;
-    }
-
-    .chip.active{
-      background:linear-gradient(90deg,var(--gold),var(--gold-2));
-      color:#130b03;
-      border-color:rgba(255,215,122,.55);
-    }
-
-    .product-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:18px;
-      margin-top:22px;
-    }
-
-    .product-card{
-      padding:16px;
-    }
-
-    .product-image{
-      height:260px;
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid rgba(255,215,122,.14);
-      background:#0d0804;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .product-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .badge-row{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin:14px 0 10px;
-    }
-
-    .badge{
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:.76rem;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      border:1px solid rgba(255,215,122,.18);
-      background:rgba(255,255,255,.03);
-      color:var(--gold-bright);
-    }
-
-    .product-card h3{
-      margin:0 0 8px;
-      color:var(--gold-bright);
-      text-transform:uppercase;
-      letter-spacing:.05em;
-      font-size:1.04rem;
-    }
-
-    .product-card p{
-      margin:0 0 14px;
-      color:var(--muted);
-      min-height:48px;
-    }
-
-    .price-box{
-      display:grid;
-      gap:10px;
-      margin-bottom:16px;
-    }
-
-    .price-line{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      align-items:center;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,215,122,.14);
-      background:rgba(255,255,255,.025);
-    }
-
-    .price-line strong{
-      color:var(--ink);
-      font-size:.94rem;
-    }
-
-    .price-line span{
-      color:var(--gold-bright);
-      font-weight:800;
-    }
-
-    .actions{
-      display:grid;
-      gap:10px;
-    }
-
-    .actions .btn{
-      width:100%;
-    }
-
-    .info-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:16px;
-      margin-top:20px;
-    }
-
-    .info-card{
-      padding:18px;
-      border-radius:18px;
-      border:1px solid rgba(255,215,122,.16);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-    }
-
-    .info-card h4{
-      margin:0 0 8px;
-      color:var(--gold-bright);
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      font-size:.94rem;
-    }
-
-    .info-card p{
-      margin:0;
-      color:var(--muted);
-      font-size:.95rem;
-    }
-
-    .cta-strip{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:18px;
-      flex-wrap:wrap;
-      padding:22px;
-      border-radius:24px;
-      border:1px solid rgba(255,215,122,.22);
-      background:linear-gradient(90deg, rgba(231,184,82,.12), rgba(184,131,31,.08));
-      box-shadow:var(--shadow);
     }
 
     footer{
@@ -441,12 +423,9 @@
       flex-wrap:wrap;
     }
 
-    .muted{color:var(--muted)}
-
-    @media (max-width:1000px){
-      .hero-inner,
-      .product-grid,
-      .info-grid{
+    @media (max-width:980px){
+      .grid,
+      .product-shell{
         grid-template-columns:1fr;
       }
     }
@@ -454,7 +433,6 @@
     @media (max-width:760px){
       .nav-links{gap:10px}
       .nav-links a{font-size:.8rem}
-      .hero-inner{min-height:auto;padding:42px 0}
     }
   </style>
 </head>
@@ -465,250 +443,173 @@
       <div class="brand">
         <img src="images/logo.png" alt="7TRB logo" />
         <div>
-          <strong>7TRB Apparel</strong>
-          <small>Wear the movement</small>
+          <strong>7TRB Checkout</strong>
+          <small>Cash • Hybrid • Promo</small>
         </div>
       </div>
 
       <nav class="nav-links">
         <a href="index.html">Home</a>
+        <a href="apparel.html">Apparel</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="digital.html">Digital</a>
-        <a href="learn.html">Learn</a>
-        <a href="checkout.html">Checkout</a>
+        <a href="https://amvault.net" target="_blank" rel="noopener">Wallet</a>
       </nav>
     </div>
   </header>
 
   <section class="hero">
     <div class="wrap hero-inner">
-      <div>
-        <span class="eyebrow">Organize • Build • Circulate</span>
-        <h1>Apparel With Utility</h1>
-        <p>
-          7TRB apparel is not just merch. It is a storefront for circulation. Buyers can pay cash,
-          split payment with 7TRB, or use full promo pricing where available.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn gold" href="#shop">Shop Apparel</a>
-          <a class="btn ghost" href="checkout.html">Open Checkout</a>
-        </div>
-      </div>
-
-      <div class="hero-card">
-        <div class="metric">
-          <div>
-            <div class="metric-label">Standard</div>
-            <div class="muted">Regular cash price</div>
-          </div>
-          <div class="metric-value">USD</div>
-        </div>
-        <div class="metric">
-          <div>
-            <div class="metric-label">Hybrid</div>
-            <div class="muted">Cash + 7TRB</div>
-          </div>
-          <div class="metric-value">Split</div>
-        </div>
-        <div class="metric">
-          <div>
-            <div class="metric-label">Promo</div>
-            <div class="muted">7TRB-only where offered</div>
-          </div>
-          <div class="metric-value">Utility</div>
-        </div>
-        <div class="metric">
-          <div>
-            <div class="metric-label">Model</div>
-            <div class="muted">Merch tied to circulation</div>
-          </div>
-          <div class="metric-value">Detroit First</div>
-        </div>
-      </div>
+      <span class="eyebrow">Wear the movement</span>
+      <h1>Checkout</h1>
+      <p>
+        Choose your pricing lane, confirm your order details, and move clean.
+        No extra clutter. No developer scraps hanging off the page.
+      </p>
     </div>
   </section>
 
-  <main>
-    <section class="section">
-      <div class="wrap">
-        <div class="cta-strip">
-          <div>
-            <strong style="display:block;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">
-              Cash, hybrid, or 7TRB promo pricing
-            </strong>
-            <span class="muted">Simple storefront. No builder notes hanging out in public like a loose shoelace.</span>
-          </div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <a class="btn gold" href="#shop">Browse Products</a>
-            <a class="btn ghost" href="checkout.html">Go to Checkout</a>
-          </div>
-        </div>
-      </div>
-    </section>
+  <main class="section">
+    <div class="wrap">
+      <div class="grid">
 
-    <section class="section" id="shop">
-      <div class="wrap">
-        <div class="section-box">
-          <h2 class="title">Shop 7TRB Apparel</h2>
-          <p class="lead">
-            Start with a tight catalog. A small, clean store beats a messy warehouse every time.
-            Swap the sample images and prices with your real products as you load them in.
-          </p>
+        <section class="box">
+          <h2 class="title">Selected Product</h2>
 
-          <div class="filters">
-            <button class="chip active" type="button" data-filter="all">All</button>
-            <button class="chip" type="button" data-filter="tees">Tees</button>
-            <button class="chip" type="button" data-filter="hoodies">Hoodies</button>
-            <button class="chip" type="button" data-filter="caps">Caps</button>
-          </div>
-
-          <div class="product-grid" id="productGrid">
-
-            <article class="product-card" data-category="tees">
-              <div class="product-image">
-                <img src="images/apparel/tee1.jpg" alt="Unity Tee" onerror="this.src='images/logo.png'">
-              </div>
-              <div class="badge-row">
-                <span class="badge">Tee</span>
-                <span class="badge">Detroit</span>
-              </div>
-              <h3>Unity Tee</h3>
-              <p>Clean everyday shirt with 7TRB identity front and center.</p>
-
-              <div class="price-box">
-                <div class="price-line">
-                  <strong>Standard</strong>
-                  <span>$30</span>
-                </div>
-                <div class="price-line">
-                  <strong>Hybrid</strong>
-                  <span>$20 + 20 7TRB</span>
-                </div>
-                <div class="price-line">
-                  <strong>Promo</strong>
-                  <span>30 7TRB</span>
-                </div>
-              </div>
-
-              <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Unity%20Tee&cash=30&hybrid_cash=20&hybrid_7trb=20&promo_7trb=30">Pay with 7TRB</a>
-                <a class="btn ghost" href="checkout.html?product=Unity%20Tee&cash=30">Cash Checkout</a>
-              </div>
-            </article>
-
-            <article class="product-card" data-category="hoodies">
-              <div class="product-image">
-                <img src="images/apparel/hoodie1.jpg" alt="Legacy Hoodie" onerror="this.src='images/logo.png'">
-              </div>
-              <div class="badge-row">
-                <span class="badge">Hoodie</span>
-                <span class="badge">Premium</span>
-              </div>
-              <h3>Legacy Hoodie</h3>
-              <p>Heavyweight hoodie built for colder weather and louder statements.</p>
-
-              <div class="price-box">
-                <div class="price-line">
-                  <strong>Standard</strong>
-                  <span>$55</span>
-                </div>
-                <div class="price-line">
-                  <strong>Hybrid</strong>
-                  <span>$35 + 25 7TRB</span>
-                </div>
-                <div class="price-line">
-                  <strong>Promo</strong>
-                  <span>60 7TRB</span>
-                </div>
-              </div>
-
-              <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Legacy%20Hoodie&cash=55&hybrid_cash=35&hybrid_7trb=25&promo_7trb=60">Pay with 7TRB</a>
-                <a class="btn ghost" href="checkout.html?product=Legacy%20Hoodie&cash=55">Cash Checkout</a>
-              </div>
-            </article>
-
-            <article class="product-card" data-category="caps">
-              <div class="product-image">
-                <img src="images/apparel/cap1.jpg" alt="Builder Cap" onerror="this.src='images/logo.png'">
-              </div>
-              <div class="badge-row">
-                <span class="badge">Cap</span>
-                <span class="badge">Everyday</span>
-              </div>
-              <h3>Builder Cap</h3>
-              <p>Simple cap for everyday wear with a clean 7TRB front mark.</p>
-
-              <div class="price-box">
-                <div class="price-line">
-                  <strong>Standard</strong>
-                  <span>$25</span>
-                </div>
-                <div class="price-line">
-                  <strong>Hybrid</strong>
-                  <span>$15 + 15 7TRB</span>
-                </div>
-                <div class="price-line">
-                  <strong>Promo</strong>
-                  <span>25 7TRB</span>
-                </div>
-              </div>
-
-              <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Builder%20Cap&cash=25&hybrid_cash=15&hybrid_7trb=15&promo_7trb=25">Pay with 7TRB</a>
-                <a class="btn ghost" href="checkout.html?product=Builder%20Cap&cash=25">Cash Checkout</a>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="section-box">
-          <h2 class="title">How Pricing Works</h2>
-          <div class="info-grid">
-            <div class="info-card">
-              <h4>Standard</h4>
-              <p>Regular cash pricing for buyers who just want the product, simple and traditional.</p>
+          <div class="product-shell">
+            <div class="product-image">
+              <img id="productImage" src="images/logo.png" alt="Selected product image" onerror="this.src='images/logo.png'">
             </div>
-            <div class="info-card">
-              <h4>Hybrid</h4>
-              <p>Part cash, part 7TRB. This is the bridge between old money rails and the new circulation model.</p>
-            </div>
-            <div class="info-card">
-              <h4>Promo</h4>
-              <p>Special 7TRB pricing where available. Utility talks louder than slogans.</p>
+
+            <div>
+              <h3 id="productName" style="margin:0 0 8px;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.05em;">7TRB Product</h3>
+              <p id="productDesc" class="muted" style="margin:0;">
+                Your selected item will appear here.
+              </p>
+
+              <div class="detail-list">
+                <div class="detail-row">
+                  <strong>Standard</strong>
+                  <span id="standardPrice">$0</span>
+                </div>
+                <div class="detail-row">
+                  <strong>Hybrid</strong>
+                  <span id="hybridPrice">—</span>
+                </div>
+                <div class="detail-row">
+                  <strong>Promo</strong>
+                  <span id="promoPrice">—</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
-            <a class="btn gold" href="https://amvault.net" target="_blank" rel="noopener">Get Wallet</a>
-            <a class="btn ghost" href="dashboard.html">View Dashboard</a>
-          </div>
-        </div>
-      </div>
-    </section>
+          <div style="margin-top:22px;">
+            <h3 style="margin:0 0 10px;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.06em;">Choose Pricing Lane</h3>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="cta-strip">
-          <div>
-            <strong style="display:block;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">
-              Next cleanup move
-            </strong>
-            <span class="muted">Make `checkout.html` read the URL parameters and auto-fill the selected product and pricing lane.</span>
+            <div class="lane-options">
+              <div class="lane active" data-lane="standard">
+                <div class="lane-top">
+                  <div class="lane-title">Standard</div>
+                  <div class="lane-amount" id="laneStandardAmount">$0</div>
+                </div>
+                <p>Regular cash checkout. Traditional lane. Straight and simple.</p>
+              </div>
+
+              <div class="lane" data-lane="hybrid">
+                <div class="lane-top">
+                  <div class="lane-title">Hybrid</div>
+                  <div class="lane-amount" id="laneHybridAmount">—</div>
+                </div>
+                <p>Part cash, part 7TRB. This is the bridge lane.</p>
+              </div>
+
+              <div class="lane" data-lane="promo">
+                <div class="lane-top">
+                  <div class="lane-title">Promo</div>
+                  <div class="lane-amount" id="lanePromoAmount">—</div>
+                </div>
+                <p>7TRB-only pricing where available. Utility over talk.</p>
+              </div>
+            </div>
           </div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <a class="btn gold" href="checkout.html">Open Checkout</a>
-            <a class="btn ghost" href="index.html">Back Home</a>
+
+          <div style="margin-top:22px;">
+            <a class="btn ghost" href="apparel.html">← Back to Apparel</a>
           </div>
-        </div>
+        </section>
+
+        <section class="box">
+          <h2 class="title">Order Details</h2>
+
+          <form id="checkoutForm" class="form-grid">
+            <div class="form-row">
+              <label for="buyerName">Full Name</label>
+              <input id="buyerName" name="buyerName" type="text" placeholder="Your full name" required>
+            </div>
+
+            <div class="form-row">
+              <label for="buyerEmail">Email</label>
+              <input id="buyerEmail" name="buyerEmail" type="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-row">
+              <label for="buyerPhone">Phone</label>
+              <input id="buyerPhone" name="buyerPhone" type="tel" placeholder="Optional">
+            </div>
+
+            <div class="form-row">
+              <label for="size">Size</label>
+              <select id="size" name="size" required>
+                <option value="">Choose size</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+                <option>2XL</option>
+                <option>3XL</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="shippingAddress">Shipping Address</label>
+              <textarea id="shippingAddress" name="shippingAddress" placeholder="Street, city, state, ZIP" required></textarea>
+            </div>
+
+            <div class="form-row">
+              <label for="notes">Order Notes</label>
+              <textarea id="notes" name="notes" placeholder="Optional notes"></textarea>
+            </div>
+
+            <div class="summary-card">
+              <div class="summary-line">
+                <strong>Product</strong>
+                <span id="summaryProduct">—</span>
+              </div>
+              <div class="summary-line">
+                <strong>Lane</strong>
+                <span id="summaryLane">Standard</span>
+              </div>
+              <div class="summary-line">
+                <strong>Total</strong>
+                <span id="summaryTotal">$0</span>
+              </div>
+            </div>
+
+            <div class="notice" id="paymentNotice">
+              Standard lane is selected. If you want hybrid or promo, choose a different lane above.
+              This page currently prepares the order and payment intent. Plug in your actual cash processor or wallet payment flow next.
+            </div>
+
+            <button class="btn gold full" type="submit">Submit Order</button>
+          </form>
+
+          <div id="successBox" class="success">
+            Order captured. Next step: connect this form to your payment flow, email, or order sheet so it stops being polite and starts closing.
+          </div>
+        </section>
+
       </div>
-    </section>
+    </div>
   </main>
 
   <footer>
@@ -720,29 +621,133 @@
 
       <div class="footer-links">
         <a href="index.html">Home</a>
+        <a href="apparel.html">Apparel</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="digital.html">Digital</a>
-        <a href="learn.html">Learn</a>
-        <a href="checkout.html">Checkout</a>
+        <a href="https://amvault.net" target="_blank" rel="noopener">Wallet</a>
       </div>
     </div>
   </footer>
 
   <script>
-    const chips = document.querySelectorAll('.chip');
-    const cards = document.querySelectorAll('.product-card');
+    const params = new URLSearchParams(window.location.search);
 
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
+    const product = params.get('product') || '7TRB Product';
+    const cash = params.get('cash') || '0';
+    const hybridCash = params.get('hybrid_cash');
+    const hybrid7trb = params.get('hybrid_7trb');
+    const promo7trb = params.get('promo_7trb');
+    const image = params.get('image') || 'images/logo.png';
+    const desc = params.get('desc') || 'Selected product from the 7TRB apparel page.';
 
-        const filter = chip.dataset.filter;
-        cards.forEach(card => {
-          const show = filter === 'all' || card.dataset.category === filter;
-          card.style.display = show ? '' : 'none';
-        });
+    const el = {
+      productName: document.getElementById('productName'),
+      productDesc: document.getElementById('productDesc'),
+      productImage: document.getElementById('productImage'),
+      standardPrice: document.getElementById('standardPrice'),
+      hybridPrice: document.getElementById('hybridPrice'),
+      promoPrice: document.getElementById('promoPrice'),
+      laneStandardAmount: document.getElementById('laneStandardAmount'),
+      laneHybridAmount: document.getElementById('laneHybridAmount'),
+      lanePromoAmount: document.getElementById('lanePromoAmount'),
+      summaryProduct: document.getElementById('summaryProduct'),
+      summaryLane: document.getElementById('summaryLane'),
+      summaryTotal: document.getElementById('summaryTotal'),
+      paymentNotice: document.getElementById('paymentNotice'),
+      successBox: document.getElementById('successBox'),
+      form: document.getElementById('checkoutForm')
+    };
+
+    el.productName.textContent = product;
+    el.productDesc.textContent = desc;
+    el.productImage.src = image;
+    el.standardPrice.textContent = `$${cash}`;
+
+    const hybridText = (hybridCash && hybrid7trb)
+      ? `$${hybridCash} + ${hybrid7trb} 7TRB`
+      : 'Not available';
+
+    const promoText = promo7trb
+      ? `${promo7trb} 7TRB`
+      : 'Not available';
+
+    el.hybridPrice.textContent = hybridText;
+    el.promoPrice.textContent = promoText;
+    el.laneStandardAmount.textContent = `$${cash}`;
+    el.laneHybridAmount.textContent = hybridText;
+    el.lanePromoAmount.textContent = promoText;
+
+    el.summaryProduct.textContent = product;
+
+    let selectedLane = 'standard';
+
+    function laneAvailable(lane) {
+      if (lane === 'hybrid') return !!(hybridCash && hybrid7trb);
+      if (lane === 'promo') return !!promo7trb;
+      return true;
+    }
+
+    function laneTotalText(lane) {
+      if (lane === 'hybrid') return hybridText;
+      if (lane === 'promo') return promoText;
+      return `$${cash}`;
+    }
+
+    function laneNoticeText(lane) {
+      if (lane === 'hybrid') {
+        return 'Hybrid lane selected. Buyer pays part cash and part 7TRB. Next step is wiring this to your real cash and wallet payment flow.';
+      }
+      if (lane === 'promo') {
+        return 'Promo lane selected. Buyer pays in 7TRB only. Next step is wiring this to your actual wallet payment flow.';
+      }
+      return 'Standard lane is selected. If you want hybrid or promo, choose a different lane above. This page currently prepares the order and payment intent. Plug in your actual cash processor or wallet payment flow next.';
+    }
+
+    function updateSummary() {
+      const laneLabel = selectedLane.charAt(0).toUpperCase() + selectedLane.slice(1);
+      el.summaryLane.textContent = laneLabel;
+      el.summaryTotal.textContent = laneTotalText(selectedLane);
+      el.paymentNotice.textContent = laneNoticeText(selectedLane);
+    }
+
+    const lanes = document.querySelectorAll('.lane');
+    lanes.forEach(lane => {
+      const laneType = lane.dataset.lane;
+
+      if (!laneAvailable(laneType)) {
+        lane.style.opacity = '0.45';
+      }
+
+      lane.addEventListener('click', () => {
+        if (!laneAvailable(laneType)) return;
+
+        lanes.forEach(item => item.classList.remove('active'));
+        lane.classList.add('active');
+        selectedLane = laneType;
+        updateSummary();
       });
+    });
+
+    updateSummary();
+
+    el.form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const order = {
+        product,
+        selectedLane,
+        total: laneTotalText(selectedLane),
+        buyerName: document.getElementById('buyerName').value,
+        buyerEmail: document.getElementById('buyerEmail').value,
+        buyerPhone: document.getElementById('buyerPhone').value,
+        size: document.getElementById('size').value,
+        shippingAddress: document.getElementById('shippingAddress').value,
+        notes: document.getElementById('notes').value
+      };
+
+      console.log('7TRB order captured:', order);
+
+      el.successBox.style.display = 'block';
+      el.form.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   </script>
 </body>
