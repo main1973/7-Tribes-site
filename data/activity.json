@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "type": "Resident Spend",
+      "date": "2026-03-31",
+      "description": "Resident wallet spent 25 7TRB with a local merchant."
+    },
+    {
+      "type": "Merchant Onboarded",
+      "date": "2026-03-30",
+      "description": "New Detroit-area merchant joined the 7TRB network."
+    },
+    {
+      "type": "Treasury Activity",
+      "date": "2026-03-29",
+      "description": "Treasury wallet balance updated and reflected on dashboard."
+    }
+  ]
+}
