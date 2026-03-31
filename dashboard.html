@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,470 +12,213 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7TRB Dashboard — Live Community Metrics</title>
-  <meta name="description" content="Public dashboard for 7TRB metrics, merchant activity, treasury visibility, and wallet balances." />
+  <title>7TRB Dashboard — Live System</title>
   <link rel="icon" href="images/logo.png" />
 
   <!-- Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <style>
-    :root{
-      --bg:#0b0b0c;
-      --card:#121214;
-      --card-2:#11141a;
-      --text:#eaeaea;
-      --muted:#a1a1a6;
-      --accent:#FFD700;
-      --accent-2:#b8912f;
-      --border:#222;
-      --green:#43a047;
-      --yellow:#fbc02d;
-      --red:#e53935;
-      --shadow:0 14px 40px rgba(0,0,0,.35);
-    }
-
-    *{box-sizing:border-box}
-
-    body{
+    body {
       margin:0;
-      background:radial-gradient(circle at top, #18110a 0, #0b0b0c 52%, #070708 100%);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-family:Arial, sans-serif;
+      background:#0b0b0c;
+      color:#fff;
     }
 
-    a{
-      color:var(--accent);
-      text-decoration:none;
-    }
+    .wrap { max-width:1100px; margin:auto; padding:20px; }
 
-    a:hover{
-      opacity:.92;
-    }
-
-    .wrap{
-      max-width:1100px;
-      margin:auto;
-      padding:18px;
-    }
-
-    header{
-      background:rgba(17,20,26,.92);
-      border-bottom:1px solid var(--border);
+    header {
+      background:#111;
+      border-bottom:1px solid #222;
       position:sticky;
       top:0;
-      z-index:50;
-      backdrop-filter:blur(10px);
+      z-index:100;
     }
 
-    .header-inner{
+    .header-inner {
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:12px;
+      align-items:center;
       flex-wrap:wrap;
     }
 
-    .brand{
+    .brand {
       display:flex;
       align-items:center;
       gap:10px;
     }
 
-    .brand img{
-      width:38px;
-      height:38px;
+    .brand img {
+      width:40px;
       border-radius:50%;
-      box-shadow:0 8px 24px rgba(0,0,0,.35);
     }
 
-    h1{
-      margin:0;
+    h1 {
       font-size:18px;
-      display:flex;
-      align-items:center;
-      gap:6px;
-      flex-wrap:wrap;
+      margin:0;
     }
 
-    .subhead{
-      color:var(--muted);
-      font-size:12px;
-      margin-top:2px;
-    }
-
-    #networkDot, #walletDot, #freshDot{
-      display:inline-block;
+    #networkDot, #walletDot {
       width:10px;
       height:10px;
       border-radius:50%;
-      vertical-align:middle;
-    }
-
-    #networkDot, #walletDot{
-      background:var(--red);
-    }
-
-    #freshDot{
-      background:#888;
+      display:inline-block;
+      background:red;
       margin-left:6px;
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:.5rem;
+    .btn {
       padding:10px 16px;
-      border-radius:999px;
-      font-weight:800;
-      border:1px solid transparent;
+      border-radius:20px;
+      border:none;
       cursor:pointer;
-      white-space:nowrap;
-      transition:transform .15s ease;
+      font-weight:bold;
     }
 
-    .btn:hover{transform:translateY(-1px)}
-
-    .btn.gold{
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    .gold {
+      background:linear-gradient(90deg,#FFD700,#b8912f);
       color:#111;
-      box-shadow:0 0 12px rgba(255,215,0,.22);
     }
 
-    .btn.ghost{
+    .ghost {
       background:transparent;
-      color:var(--text);
-      border-color:#2b2f3b;
+      border:1px solid #333;
+      color:#fff;
     }
 
-    #systemBanner{
-      text-align:center;
-      background:#0f1c13;
-      padding:10px;
-      color:#43a047;
-      font-weight:800;
-      border-bottom:1px solid #1c3a29;
-      display:none;
-      letter-spacing:.04em;
-    }
-
-    .muted{color:var(--muted)}
-
-    .wallet-strip{
-      display:grid;
-      gap:8px;
-      margin:10px 0 14px;
-    }
-
-    #walletBalance, #tokenBalance, #treasuryBalance{
-      color:var(--accent);
-      font-weight:700;
-      word-break:break-word;
-    }
-
-    .panel{
-      background:linear-gradient(180deg,var(--card),#0f1012);
-      border:1px solid var(--border);
-      border-radius:16px;
+    .panel, .card {
+      background:#121214;
+      border:1px solid #222;
+      border-radius:12px;
       padding:14px;
-      box-shadow:var(--shadow);
-    }
-
-    .label{
-      font-size:12px;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.05em;
-      margin-bottom:6px;
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(5,minmax(0,1fr));
-      gap:12px;
       margin-top:12px;
     }
 
-    .card{
-      background:linear-gradient(180deg,var(--card),#101113);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:14px;
-      box-shadow:var(--shadow);
-    }
-
-    .value{
-      font-size:28px;
-      font-weight:800;
-      line-height:1.1;
-    }
-
-    .bar{
-      height:10px;
-      background:#1a1a1d;
-      border-radius:999px;
-      overflow:hidden;
-      margin-top:8px;
-    }
-
-    .bar > i{
-      display:block;
-      height:100%;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      width:0%;
-      transition:width .4s ease;
-    }
-
-    .grid{
+    .cards {
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:12px;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
     }
 
-    table{
+    .value {
+      font-size:24px;
+      font-weight:bold;
+    }
+
+    #map { height:300px; }
+
+    table {
       width:100%;
       border-collapse:collapse;
-      font-size:14px;
     }
 
-    th, td{
-      padding:10px;
-      border-bottom:1px solid var(--border);
-      vertical-align:top;
+    td, th {
+      padding:8px;
+      border-bottom:1px solid #222;
     }
 
-    th{
-      text-align:left;
-      color:var(--muted);
-      font-weight:700;
+    @media(max-width:900px){
+      .cards{grid-template-columns:repeat(2,1fr);}
     }
 
-    #map{
-      height:320px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      overflow:hidden;
-      background:#0d0e10;
-    }
-
-    code{
-      background:#17181b;
-      padding:2px 6px;
-      border-radius:6px;
-      color:#f0d878;
-    }
-
-    .contract-row{
-      margin:6px 0 10px;
-      line-height:1.45;
-      word-break:break-word;
-    }
-
-    .contract-value{
-      color:var(--accent);
-      font-weight:700;
-    }
-
-    .mini-note{
-      color:var(--muted);
-      font-size:12px;
-      margin-top:6px;
-    }
-
-    @media (max-width:1100px){
-      .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
-    }
-
-    @media (max-width:900px){
-      .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .grid{grid-template-columns:1fr}
-    }
-
-    @media (max-width:640px){
-      .cards{grid-template-columns:1fr}
-      .value{font-size:24px}
+    @media(max-width:600px){
+      .cards{grid-template-columns:1fr;}
     }
   </style>
 </head>
 
 <body>
-  <div id="systemBanner">SYSTEM ONLINE — 7TRB DASHBOARD ACTIVE</div>
 
-  <header>
-    <div class="wrap header-inner">
-      <div class="brand">
-        <img src="images/logo.png" alt="7TRB logo" />
-        <div>
-          <h1>
-            7TRB Dashboard
-            <span id="networkDot" title="Network status"></span>
-            <span id="walletDot" title="Wallet status"></span>
-          </h1>
-          <div class="subhead">Public metrics + on-chain balances + merchant visibility</div>
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-        <button id="connectBtn" class="btn gold" type="button">Connect Wallet</button>
-        <a href="index.html" class="btn ghost">← Home</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="wrap">
-
-    <p class="muted" style="margin:.3rem 0 .7rem;">
-      Updated <span id="updatedAt">—</span>
-      <span id="freshDot" title="Data freshness"></span>
-    </p>
-
-    <div class="wallet-strip">
-      <div id="walletBalance"></div>
-      <div id="tokenBalance"></div>
+<header>
+  <div class="wrap header-inner">
+    <div class="brand">
+      <img src="images/logo.png">
+      <h1>
+        7TRB Dashboard
+        <span id="networkDot"></span>
+        <span id="walletDot"></span>
+      </h1>
     </div>
 
-    <div class="panel" style="margin-bottom:12px;">
-      <div class="label">Smart contracts & treasury</div>
-
-      <div class="contract-row">
-        <b>Treasury Wallet:</b><br>
-        <span id="treasuryAddress" class="contract-value">0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</span>
-      </div>
-
-      <div class="contract-row">
-        <b>7TRB Token Contract:</b><br>
-        <span id="tokenContract" class="contract-value">0x991DF36e5b0BB596A83dEe6A840F78bAa40450e0</span>
-      </div>
-
-      <div id="treasuryBalance"></div>
-      <div class="mini-note">Wallet-based treasury for now. Upgrade to Treasury v1 contract later when governance goes live.</div>
-    </div>
-
-    <section class="panel" style="margin-bottom:12px;border-left:4px solid var(--accent);">
-      <div class="label">Alkebuleum DEX</div>
-
-      <p id="dexStatus" style="color:var(--yellow);font-weight:800;margin:0 0 10px;">
-        🔄 DEX Status: <span style="color:var(--yellow);">COMING SOON</span>
-      </p>
-
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn gold" type="button" onclick="openDexSwap()" style="flex:1;min-width:150px;">Swap 7TRB ↔ AKE</button>
-        <button class="btn gold" type="button" onclick="openDexLiquidity()" style="flex:1;min-width:150px;">Liquidity Pool</button>
-      </div>
-
-      <p class="mini-note">
-        Once the official DEX is live, these buttons will route to the real swap and liquidity pages.
-      </p>
-    </section>
-
-    <section class="cards">
-      <div class="card">
-        <div class="label">Holders</div>
-        <div class="value" id="holders">—</div>
-        <div class="bar"><i id="holdersBar"></i></div>
-      </div>
-
-      <div class="card">
-        <div class="label">Active (30d)</div>
-        <div class="value" id="active">—</div>
-      </div>
-
-      <div class="card">
-        <div class="label">Treasury (USD)</div>
-        <div class="value" id="treasury">—</div>
-        <div class="bar"><i id="treasuryBar"></i></div>
-      </div>
-
-      <div class="card">
-        <div class="label">Spend vs Save</div>
-        <div class="value" id="spendSave">—</div>
-        <div class="bar"><i id="spendBar"></i></div>
-      </div>
-
-      <div class="card">
-        <div class="label">Referrals (30d)</div>
-        <div class="value" id="referrals">—</div>
-        <div class="mini-note" id="referralsNote"></div>
-      </div>
-    </section>
-
-    <div class="grid">
-      <section class="card">
-        <div class="label">Treasury trend</div>
-        <canvas id="treasuryChart" height="140"></canvas>
-      </section>
-
-      <section class="card">
-        <div class="label">Projects pipeline</div>
-        <table>
-          <thead>
-            <tr><th>Status</th><th>Count</th></tr>
-          </thead>
-          <tbody id="projRows"></tbody>
-        </table>
-      </section>
-    </div>
-
-    <div class="grid" style="margin-top:12px;">
-      <section class="card">
-        <div class="label">Merchant map</div>
-        <div id="map"></div>
-
-        <div id="mapNotice" style="display:none;color:var(--muted);font-size:12px;margin-top:10px;">
-          Map disabled — add <code>lat</code> and <code>lng</code> in <code>data/merchants.json</code>.
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="label">Merchant directory</div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>City</th>
-              <th>Since</th>
-              <th>Monthly 7TRB</th>
-            </tr>
-          </thead>
-          <tbody id="merchRows"></tbody>
-        </table>
-      </section>
+    <div>
+      <button id="connectBtn" class="btn gold">Connect Wallet</button>
+      <a href="index.html" class="btn ghost">Home</a>
     </div>
   </div>
+</header>
 
-  <script>
-    const DEX_URL = "https://dex.alkebuleum.com";
-    const SWAP_PATH = "/swap?token=7TRB";
-    const LP_PATH = "/liquidity?pool=7TRB-AKE";
+<div class="wrap">
 
-    function openDexSwap(){
-      window.open(DEX_URL + SWAP_PATH, "_blank");
-    }
+  <p>Updated <span id="updatedAt"></span></p>
 
-    function openDexLiquidity(){
-      window.open(DEX_URL + LP_PATH, "_blank");
-    }
+  <div id="walletBalance"></div>
+  <div id="treasuryBalance"></div>
 
-    async function checkDexLive(){
-      try{
-        const res = await fetch(DEX_URL, { method:"HEAD" });
-        if(res.ok){
-          const el = document.getElementById("dexStatus");
-          if(el){
-            el.innerHTML = "🟢 DEX Status: <span style='color:#43a047;'>ONLINE</span>";
-          }
-        }
-      }catch(e){}
-    }
+  <!-- Contracts -->
+  <div class="panel">
+    <b>Treasury Wallet:</b><br>
+    <span id="treasuryAddress">0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</span><br><br>
 
-    checkDexLive();
-  </script>
+    <b>Token Contract:</b><br>
+    <span id="tokenContract">0x991DF36e5b0BB596A83dEe6A840F78bAa40450e0</span>
+  </div>
 
-  <script src="dashboard.js"></script>
+  <!-- DEX -->
+  <div class="panel">
+    <b>DEX: JollofSwap</b><br><br>
+
+    <button class="btn gold" onclick="openDex()">Open JollofSwap</button>
+
+    <p style="color:#aaa;margin-top:8px;">
+      Trade and liquidity access powered by JollofSwap
+    </p>
+  </div>
+
+  <!-- KPI -->
+  <div class="cards">
+    <div class="card"><div>Holders</div><div id="holders" class="value"></div></div>
+    <div class="card"><div>Active</div><div id="active" class="value"></div></div>
+    <div class="card"><div>Treasury</div><div id="treasury" class="value"></div></div>
+    <div class="card"><div>Spend</div><div id="spendSave" class="value"></div></div>
+    <div class="card"><div>Referrals</div><div id="referrals" class="value"></div></div>
+  </div>
+
+  <!-- Chart -->
+  <div class="panel">
+    <canvas id="treasuryChart"></canvas>
+  </div>
+
+  <!-- Map + Merchants -->
+  <div class="panel">
+    <div id="map"></div>
+  </div>
+
+  <div class="panel">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th>Volume</th>
+        </tr>
+      </thead>
+      <tbody id="merchRows"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+  function openDex(){
+    window.open("https://jollofswap.com","_blank");
+  }
+</script>
+
+<script src="dashboard.js"></script>
+
 </body>
 </html>
