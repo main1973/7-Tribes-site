@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -26,11 +25,9 @@
       --gold:#e7b852;
       --gold-2:#b8831b;
       --gold-bright:#ffdd7a;
-      --line:#3b2b17;
-      --radius:18px;
-      --radius-lg:24px;
       --shadow:0 18px 50px rgba(0,0,0,.55);
       --ok:#43a047;
+      --bad:#e53935;
     }
 
     *{box-sizing:border-box}
@@ -113,9 +110,7 @@
         url('images/welcome_banner.png') center/cover no-repeat;
     }
 
-    .hero-inner{
-      padding:42px 0;
-    }
+    .hero-inner{padding:42px 0}
 
     .eyebrow{
       display:inline-block;
@@ -140,9 +135,7 @@
       max-width:64ch;
     }
 
-    .section{
-      padding:40px 0;
-    }
+    .section{padding:40px 0}
 
     .grid{
       display:grid;
@@ -224,16 +217,8 @@
       background:rgba(255,255,255,.03);
     }
 
-    .detail-row strong{
-      color:var(--ink);
-      font-size:.95rem;
-    }
-
-    .detail-row span{
-      color:var(--gold-bright);
-      font-weight:800;
-      text-align:right;
-    }
+    .detail-row strong{color:var(--ink);font-size:.95rem}
+    .detail-row span{color:var(--gold-bright);font-weight:800;text-align:right}
 
     .lane-options{
       display:grid;
@@ -242,7 +227,6 @@
     }
 
     .lane{
-      position:relative;
       border:1px solid rgba(255,215,122,.16);
       border-radius:18px;
       background:rgba(255,255,255,.03);
@@ -420,15 +404,24 @@
       margin:8px 0;
     }
 
-    .success{
+    .status{
       display:none;
       margin-top:16px;
       padding:14px;
       border-radius:16px;
+      font-weight:700;
+    }
+
+    .status.success{
       background:rgba(67,160,71,.12);
       border:1px solid rgba(67,160,71,.35);
       color:#dff5e3;
-      font-weight:700;
+    }
+
+    .status.error{
+      background:rgba(229,57,53,.12);
+      border:1px solid rgba(229,57,53,.35);
+      color:#ffdede;
     }
 
     footer{
@@ -453,10 +446,7 @@
     }
 
     @media (max-width:980px){
-      .grid,
-      .product-shell{
-        grid-template-columns:1fr;
-      }
+      .grid,.product-shell{grid-template-columns:1fr}
     }
 
     @media (max-width:760px){
@@ -491,8 +481,7 @@
       <span class="eyebrow">Wear the movement</span>
       <h1>Checkout</h1>
       <p>
-        Pick your pricing lane, confirm your order, and keep it moving.
-        Clean page. Clear totals. No junk hanging off the bottom like unfinished construction.
+        Pick your pricing lane, submit your order, and send it where it needs to go.
       </p>
     </div>
   </section>
@@ -511,9 +500,7 @@
 
             <div>
               <h3 id="productName" style="margin:0 0 8px;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.05em;">7TRB Product</h3>
-              <p id="productDesc" class="muted" style="margin:0;">
-                Your selected item will appear here.
-              </p>
+              <p id="productDesc" class="muted" style="margin:0;">Your selected item will appear here.</p>
 
               <div class="detail-list">
                 <div class="detail-row">
@@ -571,19 +558,26 @@
           <h2 class="title">Order Details</h2>
 
           <form id="checkoutForm" class="form-grid">
+            <input type="hidden" name="_subject" id="subjectField" value="New 7TRB Order">
+            <input type="hidden" name="product" id="hiddenProduct">
+            <input type="hidden" name="pricing_lane" id="hiddenLane">
+            <input type="hidden" name="total" id="hiddenTotal">
+            <input type="hidden" name="cash_amount" id="hiddenCashAmount">
+            <input type="hidden" name="token_amount" id="hiddenTokenAmount">
+
             <div class="form-row">
               <label for="buyerName">Full Name</label>
-              <input id="buyerName" name="buyerName" type="text" placeholder="Your full name" required>
+              <input id="buyerName" name="buyer_name" type="text" placeholder="Your full name" required>
             </div>
 
             <div class="form-row">
               <label for="buyerEmail">Email</label>
-              <input id="buyerEmail" name="buyerEmail" type="email" placeholder="you@example.com" required>
+              <input id="buyerEmail" name="email" type="email" placeholder="you@example.com" required>
             </div>
 
             <div class="form-row">
               <label for="buyerPhone">Phone</label>
-              <input id="buyerPhone" name="buyerPhone" type="tel" placeholder="Optional">
+              <input id="buyerPhone" name="buyer_phone" type="tel" placeholder="Optional">
             </div>
 
             <div class="form-row">
@@ -601,7 +595,12 @@
 
             <div class="form-row">
               <label for="shippingAddress">Shipping Address</label>
-              <textarea id="shippingAddress" name="shippingAddress" placeholder="Street, city, state, ZIP" required></textarea>
+              <textarea id="shippingAddress" name="shipping_address" placeholder="Street, city, state, ZIP" required></textarea>
+            </div>
+
+            <div class="form-row">
+              <label for="txHash">Transaction Hash / Payment Proof</label>
+              <input id="txHash" name="tx_hash" type="text" placeholder="Required for hybrid or promo">
             </div>
 
             <div class="form-row">
@@ -625,23 +624,27 @@
             </div>
 
             <div class="notice" id="paymentNotice">
-              Standard lane is selected. This page currently captures the order and payment intent. Wire it to your payment processor, email, or Google Sheet next.
+              Standard lane selected. This order will be sent to your Formspree inbox.
             </div>
 
             <div class="wallet-box" id="walletBox">
               <strong>7TRB Payment Instructions</strong>
               <div>Send payment to this wallet address:</div>
-              <div class="wallet-code" id="walletAddress">YOUR_7TRB_WALLET_ADDRESS</div>
+              <div class="wallet-code" id="walletAddress">0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</div>
               <div class="muted" style="font-size:.92rem;">
-                After sending payment, submit the order so you can manually confirm it on your side.
+                After sending payment, paste the transaction hash above and submit the order.
               </div>
             </div>
 
-            <button class="btn gold full" type="submit">Submit Order</button>
+            <button class="btn gold full" id="submitBtn" type="submit">Submit Order</button>
           </form>
 
-          <div id="successBox" class="success">
-            Order captured. Next move is connecting this form to email, Google Sheets, Formspree, or a real payment flow so the engine actually closes sales.
+          <div id="successBox" class="status success">
+            Order submitted. Check your inbox and verify payment before shipping.
+          </div>
+
+          <div id="errorBox" class="status error">
+            Order failed to send. Try again.
           </div>
         </section>
 
@@ -666,7 +669,8 @@
   </footer>
 
   <script>
-    const TREASURY_WALLET = "YOUR_7TRB_WALLET_ADDRESS";
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xqegbgld";
+    const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB";
 
     const params = new URLSearchParams(window.location.search);
 
@@ -695,7 +699,16 @@
       walletBox: document.getElementById('walletBox'),
       walletAddress: document.getElementById('walletAddress'),
       successBox: document.getElementById('successBox'),
-      form: document.getElementById('checkoutForm')
+      errorBox: document.getElementById('errorBox'),
+      form: document.getElementById('checkoutForm'),
+      submitBtn: document.getElementById('submitBtn'),
+      txHash: document.getElementById('txHash'),
+      subjectField: document.getElementById('subjectField'),
+      hiddenProduct: document.getElementById('hiddenProduct'),
+      hiddenLane: document.getElementById('hiddenLane'),
+      hiddenTotal: document.getElementById('hiddenTotal'),
+      hiddenCashAmount: document.getElementById('hiddenCashAmount'),
+      hiddenTokenAmount: document.getElementById('hiddenTokenAmount')
     };
 
     el.productName.textContent = product;
@@ -718,6 +731,7 @@
     el.laneHybridAmount.textContent = hybridText;
     el.lanePromoAmount.textContent = promoText;
     el.summaryProduct.textContent = product;
+    el.subjectField.value = `New 7TRB Order — ${product}`;
 
     let selectedLane = 'standard';
 
@@ -735,19 +749,33 @@
 
     function laneNoticeText(lane) {
       if (lane === 'hybrid') {
-        return 'Hybrid lane selected. Buyer pays part cash and part 7TRB. Collect the cash portion through your normal method, and confirm the 7TRB payment manually.';
+        return 'Hybrid lane selected. Collect the cash portion normally, verify the 7TRB transfer, and paste the transaction hash before submitting.';
       }
       if (lane === 'promo') {
-        return 'Promo lane selected. Buyer pays in 7TRB only. Use the wallet instructions below and confirm the transfer manually.';
+        return 'Promo lane selected. Buyer must send full 7TRB payment and paste the transaction hash before submitting.';
       }
-      return 'Standard lane is selected. This page currently captures the order and payment intent. Wire it to your payment processor, email, or Google Sheet next.';
+      return 'Standard lane selected. This order will be sent to your Formspree inbox.';
     }
 
     function updateWalletBox(lane) {
-      if (lane === 'hybrid' || lane === 'promo') {
-        el.walletBox.style.display = 'block';
+      el.walletBox.style.display = (lane === 'hybrid' || lane === 'promo') ? 'block' : 'none';
+      el.txHash.required = (lane === 'hybrid' || lane === 'promo');
+    }
+
+    function updateHiddenFields() {
+      el.hiddenProduct.value = product;
+      el.hiddenLane.value = selectedLane;
+      el.hiddenTotal.value = laneTotalText(selectedLane);
+
+      if (selectedLane === 'hybrid') {
+        el.hiddenCashAmount.value = hybridCash || '';
+        el.hiddenTokenAmount.value = hybrid7trb || '';
+      } else if (selectedLane === 'promo') {
+        el.hiddenCashAmount.value = '0';
+        el.hiddenTokenAmount.value = promo7trb || '';
       } else {
-        el.walletBox.style.display = 'none';
+        el.hiddenCashAmount.value = cash || '';
+        el.hiddenTokenAmount.value = '0';
       }
     }
 
@@ -757,6 +785,7 @@
       el.summaryTotal.textContent = laneTotalText(selectedLane);
       el.paymentNotice.textContent = laneNoticeText(selectedLane);
       updateWalletBox(selectedLane);
+      updateHiddenFields();
     }
 
     const lanes = document.querySelectorAll('.lane');
@@ -769,7 +798,6 @@
 
       lane.addEventListener('click', () => {
         if (!laneAvailable(laneType)) return;
-
         lanes.forEach(item => item.classList.remove('active'));
         lane.classList.add('active');
         selectedLane = laneType;
@@ -779,26 +807,40 @@
 
     updateSummary();
 
-    el.form.addEventListener('submit', (e) => {
+    el.form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      el.successBox.style.display = 'none';
+      el.errorBox.style.display = 'none';
 
-      const order = {
-        product,
-        selectedLane,
-        total: laneTotalText(selectedLane),
-        buyerName: document.getElementById('buyerName').value,
-        buyerEmail: document.getElementById('buyerEmail').value,
-        buyerPhone: document.getElementById('buyerPhone').value,
-        size: document.getElementById('size').value,
-        shippingAddress: document.getElementById('shippingAddress').value,
-        notes: document.getElementById('notes').value
-      };
+      el.submitBtn.disabled = true;
+      el.submitBtn.textContent = 'Sending...';
 
-      console.log('7TRB order captured:', order);
+      try {
+        const formData = new FormData(el.form);
 
-      el.successBox.style.display = 'block';
-      el.form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (!response.ok) throw new Error('Failed');
+
+        el.successBox.style.display = 'block';
+        el.form.reset();
+        selectedLane = 'standard';
+        lanes.forEach(item => item.classList.remove('active'));
+        document.querySelector('.lane[data-lane="standard"]').classList.add('active');
+        updateSummary();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        console.error(err);
+        el.errorBox.style.display = 'block';
+      } finally {
+        el.submitBtn.disabled = false;
+        el.submitBtn.textContent = 'Submit Order';
+      }
     });
   </script>
 </body>
-  </html>
+</html>
