@@ -38,13 +38,14 @@ function setText(id, txt){
   if(el) el.textContent = txt;
 }
 
-// ---------- metrics + tables ----------
+// ---------- dashboard data ----------
 (async function initDashboard(){
-  const [goals, metrics, merchants, referrals] = await Promise.all([
+  const [goals, metrics, merchants, referrals, activity] = await Promise.all([
     safeJson("data/goals.json"),
     safeJson("data/metrics.json"),
     safeJson("data/merchants.json"),
-    safeJson("data/referrals.json")
+    safeJson("data/referrals.json"),
+    safeJson("data/activity.json")
   ]);
 
   if(!metrics){
@@ -52,7 +53,6 @@ function setText(id, txt){
     return;
   }
 
-  // timestamp / freshness
   const upd = metrics.updated_at ? new Date(metrics.updated_at) : null;
   setText("updatedAt", (upd && !isNaN(upd)) ? upd.toLocaleString() : "—");
 
@@ -63,7 +63,6 @@ function setText(id, txt){
     freshDot.title = `Data age: ${hrs.toFixed(1)}h`;
   }
 
-  // KPIs
   const holders = metrics.holders ?? 0;
   setText("holders", holders.toLocaleString());
   setBar("holdersBar", pct(holders, goals && goals.holders));
@@ -75,13 +74,11 @@ function setText(id, txt){
   setText("treasury", "$" + tUSD.toLocaleString());
   setBar("treasuryBar", pct(tUSD, goals && goals.treasury_usd));
 
-  // If your metrics.spent_pct_30d is 0–1, change the next line to:
-  // const spentPct = Math.round((metrics.spent_pct_30d ?? 0) * 100);
-  const spentPct = Math.round(metrics.spent_pct_30d ?? 0);
-  setText("spendSave", `${spentPct}% spent / ${100 - spentPct}% saved`);
+  // If your JSON stores decimal like 0.42, use *100. If it stores 42 already, remove *100.
+  const spentPct = Math.round((metrics.spent_pct_30d ?? 0) * 100);
+  setText("spendSave", `${spentPct}% / ${100 - spentPct}%`);
   setBar("spendBar", Math.max(0, Math.min(100, spentPct)));
 
-  // referrals.json (items[])
   let totalRefs = 0;
   if(referrals && Array.isArray(referrals.items)){
     totalRefs = referrals.items.reduce((sum, r) => sum + (r.count || 0), 0);
@@ -89,7 +86,6 @@ function setText(id, txt){
   setText("referrals", totalRefs.toLocaleString());
   setText("referralsNote", "from tracked sources");
 
-  // projects table
   const pr = metrics.projects || {};
   const projBody = document.getElementById("projRows");
   if (projBody){
@@ -106,7 +102,6 @@ function setText(id, txt){
     });
   }
 
-  // merchants table
   if(Array.isArray(merchants)){
     const mBody = document.getElementById("merchRows");
     if (mBody){
@@ -124,7 +119,6 @@ function setText(id, txt){
     }
   }
 
-  // treasury chart
   const series = metrics.treasury_series || [];
   const labels = series.map(x => x[0]);
   const data = series.map(x => x[1]);
@@ -154,7 +148,7 @@ function setText(id, txt){
     });
   }
 
-  // Map
+  // map
   try{
     const mapNotice = document.getElementById("mapNotice");
     const hasGeo = Array.isArray(merchants) &&
@@ -162,41 +156,59 @@ function setText(id, txt){
 
     if(!hasGeo){
       if(mapNotice) mapNotice.style.display = "block";
-      return;
+    } else {
+      if(mapNotice) mapNotice.style.display = "none";
+
+      const map = L.map("map", { zoomControl:true, scrollWheelZoom:false });
+      const points = merchants.filter(m => typeof m.lat === "number" && typeof m.lng === "number");
+      const latlngs = points.map(m => [m.lat, m.lng]);
+
+      const avgLat = latlngs.reduce((s,p)=>s+p[0],0)/latlngs.length || 42.3314;
+      const avgLng = latlngs.reduce((s,p)=>s+p[1],0)/latlngs.length || -83.0458;
+
+      map.setView([avgLat, avgLng], 9);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:"© OpenStreetMap"
+      }).addTo(map);
+
+      points.forEach(m => {
+        L.marker([m.lat, m.lng]).addTo(map)
+          .bindPopup(
+            `<b>${m.name || "Merchant"}</b><br>${m.city || ""}` +
+            (m.url ? `<br><a href="${m.url}" target="_blank" rel="noopener">Website</a>` : "")
+          );
+      });
+
+      if(latlngs.length > 1){
+        map.fitBounds(latlngs, { padding:[20,20] });
+      } else if (latlngs.length === 1){
+        map.setView(latlngs[0], 11);
+      }
     }
-
-    if(mapNotice) mapNotice.style.display = "none";
-
-    const map = L.map("map", { zoomControl:true, scrollWheelZoom:false });
-
-    const points = merchants.filter(m => typeof m.lat === "number" && typeof m.lng === "number");
-    const latlngs = points.map(m => [m.lat, m.lng]);
-
-    const avgLat = latlngs.reduce((s,p)=>s+p[0],0)/latlngs.length || 42.3314;
-    const avgLng = latlngs.reduce((s,p)=>s+p[1],0)/latlngs.length || -83.0458;
-
-    map.setView([avgLat, avgLng], 3);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:"© OpenStreetMap"
-    }).addTo(map);
-
-    points.forEach(m => {
-      L.marker([m.lat, m.lng]).addTo(map)
-        .bindPopup(
-          `<b>${m.name || "Merchant"}</b><br>${m.city || ""}` +
-          (m.url ? `<br><a href="${m.url}" target="_blank" rel="noopener">Website</a>` : "")
-        );
-    });
-
-    if(latlngs.length > 1){
-      map.fitBounds(latlngs, { padding:[20,20] });
-    } else if (latlngs.length === 1){
-      map.setView(latlngs[0], 11);
-    }
-
   }catch(e){
     console.warn("Map init failed:", e);
+  }
+
+  // circulation tracker
+  const activityList = document.getElementById("activityList");
+  if(activityList){
+    activityList.innerHTML = "";
+
+    if(activity && Array.isArray(activity.items) && activity.items.length){
+      activity.items.slice(0, 8).forEach(item => {
+        const div = document.createElement("div");
+        div.className = "activity-item";
+        div.innerHTML = `
+          <div><strong>${item.type || "Activity"}</strong></div>
+          <div class="mini">${item.date || ""}</div>
+          <div style="margin-top:6px;">${item.description || ""}</div>
+        `;
+        activityList.appendChild(div);
+      });
+    } else {
+      activityList.innerHTML = `<div class="activity-item muted">No circulation events loaded yet. Add them to <code>data/activity.json</code>.</div>`;
+    }
   }
 })();
 
@@ -236,13 +248,24 @@ async function showBalance(account){
     const tRaw = await contract.balanceOf(TREASURY_WALLET);
     const tBal = Number(ethers.formatUnits(tRaw, TOKEN_DECIMALS));
     setText("treasuryBalance", `Treasury 7TRB (on-chain): ${tBal.toFixed(3)} ${TOKEN_SYMBOL}`);
+    setText("treasuryTokenBalance", tBal.toFixed(3));
 
-    // Fill label fields if present
     setText("tokenContract", TOKEN_ADDRESS);
     setText("treasuryAddress", TREASURY_WALLET);
 
+    const nd = document.getElementById("networkDot");
+    if (nd) nd.style.background = "#43a047";
+
+    const banner = document.getElementById("systemBanner");
+    if (banner) banner.style.display = "block";
   }catch(err){
     console.error("Alkebuleum balance fetch failed:", err);
+
+    const nd = document.getElementById("networkDot");
+    if (nd) nd.style.background = "#e53935";
+
+    const banner = document.getElementById("systemBanner");
+    if (banner) banner.style.display = "none";
   }
 }
 
@@ -282,7 +305,6 @@ if(typeof window.ethereum !== "undefined"){
     if(!accounts.length){
       updateButton(null);
       setText("walletBalance", "");
-      setText("treasuryBalance", "");
     }else{
       updateButton(accounts[0]);
       showBalance(accounts[0]);
