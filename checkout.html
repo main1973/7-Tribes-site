@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,7 +13,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>7TRB Checkout</title>
-  <meta name="description" content="Checkout for 7TRB apparel with cash, hybrid, or promo 7TRB pricing." />
+  <meta name="description" content="Checkout for 7TRB apparel with standard, hybrid, and promo 7TRB pricing." />
   <link rel="icon" href="images/logo.png" />
 
   <style>
@@ -25,12 +26,16 @@
       --gold:#e7b852;
       --gold-2:#b8831b;
       --gold-bright:#ffdd7a;
+      --line:#3b2b17;
+      --radius:18px;
+      --radius-lg:24px;
       --shadow:0 18px 50px rgba(0,0,0,.55);
       --ok:#43a047;
       --bad:#e53935;
     }
 
     *{box-sizing:border-box}
+
     html,body{
       margin:0;
       background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
@@ -87,7 +92,9 @@
       font-size:1.12rem;
     }
 
-    .brand small{color:var(--muted)}
+    .brand small{
+      color:var(--muted);
+    }
 
     .nav-links{
       display:flex;
@@ -110,7 +117,9 @@
         url('images/welcome_banner.png') center/cover no-repeat;
     }
 
-    .hero-inner{padding:42px 0}
+    .hero-inner{
+      padding:42px 0;
+    }
 
     .eyebrow{
       display:inline-block;
@@ -135,7 +144,9 @@
       max-width:64ch;
     }
 
-    .section{padding:40px 0}
+    .section{
+      padding:40px 0;
+    }
 
     .grid{
       display:grid;
@@ -175,7 +186,9 @@
       font-size:clamp(22px,3vw,32px);
     }
 
-    .muted{color:var(--muted)}
+    .muted{
+      color:var(--muted);
+    }
 
     .product-shell{
       display:grid;
@@ -217,8 +230,16 @@
       background:rgba(255,255,255,.03);
     }
 
-    .detail-row strong{color:var(--ink);font-size:.95rem}
-    .detail-row span{color:var(--gold-bright);font-weight:800;text-align:right}
+    .detail-row strong{
+      color:var(--ink);
+      font-size:.95rem;
+    }
+
+    .detail-row span{
+      color:var(--gold-bright);
+      font-weight:800;
+      text-align:right;
+    }
 
     .lane-options{
       display:grid;
@@ -324,6 +345,7 @@
     }
 
     .btn:hover{transform:translateY(-1px)}
+
     .btn.gold{
       background:linear-gradient(90deg,var(--gold),var(--gold-2));
       color:#130b03;
@@ -337,7 +359,9 @@
       border-color:rgba(255,215,122,.28);
     }
 
-    .btn.full{width:100%}
+    .btn.full{
+      width:100%;
+    }
 
     .summary-card{
       display:grid;
@@ -352,7 +376,10 @@
       border-bottom:1px solid rgba(255,215,122,.10);
     }
 
-    .summary-line:last-child{border-bottom:none}
+    .summary-line:last-child{
+      border-bottom:none;
+    }
+
     .summary-line strong{
       color:var(--muted);
       text-transform:uppercase;
@@ -446,7 +473,10 @@
     }
 
     @media (max-width:980px){
-      .grid,.product-shell{grid-template-columns:1fr}
+      .grid,
+      .product-shell{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width:760px){
@@ -481,7 +511,7 @@
       <span class="eyebrow">Wear the movement</span>
       <h1>Checkout</h1>
       <p>
-        Pick your pricing lane, submit your order, and send it where it needs to go.
+        Pick your pricing lane, confirm your order, and send it where it needs to go.
       </p>
     </div>
   </section>
@@ -600,7 +630,7 @@
 
             <div class="form-row">
               <label for="txHash">Transaction Hash / Payment Proof</label>
-              <input id="txHash" name="tx_hash" type="text" placeholder="Required for hybrid or promo">
+              <input id="txHash" name="tx_hash" type="text" placeholder="Required for hybrid or promo payments">
             </div>
 
             <div class="form-row">
@@ -809,6 +839,7 @@
 
     el.form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
       el.successBox.style.display = 'none';
       el.errorBox.style.display = 'none';
 
@@ -821,17 +852,21 @@
         const response = await fetch(FORMSPREE_ENDPOINT, {
           method: 'POST',
           body: formData,
-          headers: { 'Accept': 'application/json' }
+          headers: {
+            'Accept': 'application/json'
+          }
         });
 
         if (!response.ok) throw new Error('Failed');
 
         el.successBox.style.display = 'block';
         el.form.reset();
+
         selectedLane = 'standard';
         lanes.forEach(item => item.classList.remove('active'));
         document.querySelector('.lane[data-lane="standard"]').classList.add('active');
         updateSummary();
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
         console.error(err);
