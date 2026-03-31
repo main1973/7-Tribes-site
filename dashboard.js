@@ -4,11 +4,10 @@
 
 // Alkebuleum config
 const ALKE_RPC       = "https://rpc.alkebuleum.com";
-const TOKEN_ADDRESS  = "0xdf7ce67dB19142672c4193d969cdD9975A5A6038"; // 7TRB on Alkebuleum
+const TOKEN_ADDRESS  = "0x991DF36e5b0BB596A83dEe6A840F78bAa40450e0";
 const TOKEN_DECIMALS = 18;
 const TOKEN_SYMBOL   = "7TRB";
 
-// AmVault treasury on Alkebuleum
 const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB";
 
 // ---------- helpers ----------
