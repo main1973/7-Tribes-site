@@ -13,7 +13,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>7TRB Shop — Apparel & Digital</title>
-  <meta name="description" content="Shop 7TRB apparel and digital products. Buy with cash, hybrid payment, or 7TRB promo pricing where available." />
+  <meta name="description" content="Shop 7TRB apparel and digital products. Add apparel to cart and continue to checkout. Digital products link to Gumroad." />
   <link rel="icon" href="images/7trb.logo.png" />
 
   <style>
@@ -28,6 +28,8 @@
       --gold-bright:#ffdd7a;
       --line:#3b2b17;
       --shadow:0 18px 50px rgba(0,0,0,.55);
+      --bad:#e53935;
+      --ok:#43a047;
     }
 
     *{box-sizing:border-box}
@@ -166,6 +168,7 @@
       cursor:pointer;
       white-space:nowrap;
       transition:transform .15s ease;
+      font:inherit;
     }
 
     .btn:hover{transform:translateY(-1px)}
@@ -183,9 +186,16 @@
       border-color:rgba(255,215,122,.28);
     }
 
+    .btn.danger{
+      background:transparent;
+      color:#ffccc7;
+      border-color:rgba(229,57,53,.35);
+    }
+
     .hero-card,
     .section-box,
-    .product-card{
+    .product-card,
+    .cart-panel{
       position:relative;
       background:linear-gradient(180deg, rgba(26,18,8,.96), rgba(18,12,6,.96));
       border:1px solid rgba(255,215,122,.24);
@@ -196,7 +206,8 @@
 
     .hero-card::after,
     .section-box::after,
-    .product-card::after{
+    .product-card::after,
+    .cart-panel::after{
       content:"";
       position:absolute;
       inset:0;
@@ -237,7 +248,6 @@
     }
 
     .section{padding:44px 0}
-
     .section-box{padding:24px}
 
     .title{
@@ -411,6 +421,115 @@
       box-shadow:var(--shadow);
     }
 
+    /* Cart */
+    .cart-fab{
+      position:fixed;
+      top:88px;
+      right:18px;
+      z-index:999;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#111;
+      padding:12px 16px;
+      border-radius:999px;
+      font-weight:900;
+      box-shadow:0 10px 26px rgba(0,0,0,.45);
+      cursor:pointer;
+      user-select:none;
+    }
+
+    .cart-count{
+      min-width:24px;
+      height:24px;
+      border-radius:999px;
+      background:#111;
+      color:var(--gold-bright);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.82rem;
+      padding:0 6px;
+    }
+
+    .cart-panel{
+      position:fixed;
+      top:140px;
+      right:18px;
+      width:340px;
+      max-width:calc(100vw - 36px);
+      z-index:998;
+      padding:16px;
+      display:none;
+    }
+
+    .cart-panel.open{display:block}
+
+    .cart-panel h3{
+      margin:0 0 12px;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .cart-items{
+      display:grid;
+      gap:10px;
+      max-height:360px;
+      overflow:auto;
+      margin-bottom:14px;
+    }
+
+    .cart-item{
+      display:grid;
+      grid-template-columns:62px 1fr auto;
+      gap:10px;
+      align-items:center;
+      padding:10px;
+      border:1px solid rgba(255,215,122,.14);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+    }
+
+    .cart-item img{
+      width:62px;
+      height:62px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid rgba(255,215,122,.14);
+      background:#0d0804;
+    }
+
+    .cart-item-title{
+      font-size:.92rem;
+      font-weight:800;
+      color:var(--ink);
+      line-height:1.3;
+    }
+
+    .cart-item-meta{
+      font-size:.84rem;
+      color:var(--muted);
+    }
+
+    .cart-empty{
+      color:var(--muted);
+      padding:10px 0;
+    }
+
+    .cart-total{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      padding:10px 0 14px;
+      border-top:1px solid rgba(255,215,122,.12);
+      margin-top:4px;
+      font-weight:800;
+      color:var(--gold-bright);
+    }
+
     footer{
       margin-top:12px;
       padding:24px 0;
@@ -440,6 +559,16 @@
       .info-grid{
         grid-template-columns:1fr;
       }
+      .cart-fab{
+        top:auto;
+        bottom:18px;
+        right:18px;
+      }
+      .cart-panel{
+        top:auto;
+        bottom:82px;
+        right:18px;
+      }
     }
 
     @media (max-width:760px){
@@ -450,6 +579,26 @@
   </style>
 </head>
 <body>
+
+  <div class="cart-fab" id="cartFab" onclick="toggleCart()">
+    <span>🛒 Cart</span>
+    <span class="cart-count" id="cartCount">0</span>
+  </div>
+
+  <aside class="cart-panel" id="cartPanel">
+    <h3>Your Cart</h3>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">Your cart is empty.</div>
+    </div>
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
+    <div style="display:grid;gap:10px;">
+      <button class="btn gold" type="button" onclick="goToCheckout()">Go to Checkout</button>
+      <button class="btn ghost" type="button" onclick="clearCart()">Clear Cart</button>
+    </div>
+  </aside>
 
   <header class="site-header">
     <div class="wrap header-inner">
@@ -507,9 +656,9 @@
         <div class="metric">
           <div>
             <div class="metric-label">Checkout</div>
-            <div class="muted">Cash, hybrid, or 7TRB promo lanes</div>
+            <div class="muted">Cart for physical items, Gumroad for digital</div>
           </div>
-          <div class="metric-value">Flexible</div>
+          <div class="metric-value">Split Flow</div>
         </div>
 
         <div class="metric">
@@ -577,7 +726,17 @@
               </div>
 
               <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Taxed%20To%20Death%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/taxed-to-death-tee.png&desc=You%20earn%20it.%20They%20take%20it.%20Over%20and%20over.%20This%20shirt%20says%20what%20people%20already%20feel%20every%20payday.">Buy This Tee</a>
+                <button class="btn gold" type="button" onclick="addToCart({
+                  id:'taxed-to-death-tee',
+                  name:'Taxed To Death Tee',
+                  price:29.99,
+                  image:'images/taxed-to-death-tee.png',
+                  hybridCash:25,
+                  hybrid7trb:20,
+                  promo7trb:30,
+                  desc:'You earn it. They take it. Over and over. This shirt says what people already feel every payday.'
+                })">Add to Cart</button>
+                <a class="btn ghost" href="checkout.html?product=Taxed%20To%20Death%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/taxed-to-death-tee.png&desc=You%20earn%20it.%20They%20take%20it.%20Over%20and%20over.%20This%20shirt%20says%20what%20people%20already%20feel%20every%20payday.">Buy Now</a>
               </div>
             </article>
 
@@ -599,7 +758,17 @@
               </div>
 
               <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Work%20Til%20I%20Die%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/work-til-i-die-tee.png&desc=Forty%20years%20of%20grind%20with%20no%20exit%20plan%20is%20not%20a%20dream.%20This%20tee%20questions%20the%20whole%20setup.">Buy This Tee</a>
+                <button class="btn gold" type="button" onclick="addToCart({
+                  id:'work-til-i-die-tee',
+                  name:'Work Til I Die? Tee',
+                  price:29.99,
+                  image:'images/work-til-i-die-tee.png',
+                  hybridCash:25,
+                  hybrid7trb:20,
+                  promo7trb:30,
+                  desc:'Forty years of grind with no exit plan is not a dream. This tee questions the whole setup.'
+                })">Add to Cart</button>
+                <a class="btn ghost" href="checkout.html?product=Work%20Til%20I%20Die%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/work-til-i-die-tee.png&desc=Forty%20years%20of%20grind%20with%20no%20exit%20plan%20is%20not%20a%20dream.%20This%20tee%20questions%20the%20whole%20setup.">Buy Now</a>
               </div>
             </article>
 
@@ -621,7 +790,17 @@
               </div>
 
               <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Economic%20Prison%20Break%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/economic-prison-break-tee.png&desc=This%20one%20is%20blunt%20for%20a%20reason.%20People%20feel%20trapped.%20This%20shirt%20turns%20that%20feeling%20into%20a%20signal.">Buy This Tee</a>
+                <button class="btn gold" type="button" onclick="addToCart({
+                  id:'economic-prison-break-tee',
+                  name:'Economic Prison Break Tee',
+                  price:29.99,
+                  image:'images/economic-prison-break-tee.png',
+                  hybridCash:25,
+                  hybrid7trb:20,
+                  promo7trb:30,
+                  desc:'This one is blunt for a reason. People feel trapped. This shirt turns that feeling into a signal.'
+                })">Add to Cart</button>
+                <a class="btn ghost" href="checkout.html?product=Economic%20Prison%20Break%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/economic-prison-break-tee.png&desc=This%20one%20is%20blunt%20for%20a%20reason.%20People%20feel%20trapped.%20This%20shirt%20turns%20that%20feeling%20into%20a%20signal.">Buy Now</a>
               </div>
             </article>
 
@@ -643,7 +822,17 @@
               </div>
 
               <div class="actions">
-                <a class="btn gold" href="checkout.html?product=Check%20to%20Check%20Is%20Not%20Living%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/check-to-check-tee.png&desc=Survival%20mode%20is%20not%20the%20finish%20line.%20This%20tee%20says%20the%20quiet%20part%20out%20loud.">Buy This Tee</a>
+                <button class="btn gold" type="button" onclick="addToCart({
+                  id:'check-to-check-tee',
+                  name:'Check to Check Is Not Living Tee',
+                  price:29.99,
+                  image:'images/check-to-check-tee.png',
+                  hybridCash:25,
+                  hybrid7trb:20,
+                  promo7trb:30,
+                  desc:'Survival mode is not the finish line. This tee says the quiet part out loud.'
+                })">Add to Cart</button>
+                <a class="btn ghost" href="checkout.html?product=Check%20to%20Check%20Is%20Not%20Living%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/check-to-check-tee.png&desc=Survival%20mode%20is%20not%20the%20finish%20line.%20This%20tee%20says%20the%20quiet%20part%20out%20loud.">Buy Now</a>
               </div>
             </article>
 
@@ -665,7 +854,17 @@
               </div>
 
               <div class="actions">
-                <a class="btn gold" href="checkout.html?product=7TRB%20Community%20Culture%20Change%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/community-culture-change-tee.png&desc=This%20is%20the%20cleaner%20identity%20piece.%20Less%20pain,%20more%20banner.%20Good%20for%20people%20who%20want%20the%20message%20without%20the%20punch%20in%20the%20throat.">Buy This Tee</a>
+                <button class="btn gold" type="button" onclick="addToCart({
+                  id:'community-culture-change-tee',
+                  name:'7TRB Community • Culture • Change Tee',
+                  price:29.99,
+                  image:'images/community-culture-change-tee.png',
+                  hybridCash:25,
+                  hybrid7trb:20,
+                  promo7trb:30,
+                  desc:'This is the cleaner identity piece. Less pain, more banner. Good for people who want the message without the punch in the throat.'
+                })">Add to Cart</button>
+                <a class="btn ghost" href="checkout.html?product=7TRB%20Community%20Culture%20Change%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/community-culture-change-tee.png&desc=This%20is%20the%20cleaner%20identity%20piece.%20Less%20pain,%20more%20banner.%20Good%20for%20people%20who%20want%20the%20message%20without%20the%20punch%20in%20the%20throat.">Buy Now</a>
               </div>
             </article>
 
@@ -871,6 +1070,78 @@
         });
       });
     });
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+      const cartCount = document.getElementById('cartCount');
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+
+      cartCount.textContent = cart.length;
+
+      if (!cart.length) {
+        cartItems.innerHTML = '<div class="cart-empty">Your cart is empty.</div>';
+        cartTotal.textContent = '$0.00';
+        return;
+      }
+
+      let total = 0;
+      cartItems.innerHTML = '';
+
+      cart.forEach((item, index) => {
+        total += Number(item.price || 0);
+
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" onerror="this.src='images/7trb.logo.png'">
+          <div>
+            <div class="cart-item-title">${item.name}</div>
+            <div class="cart-item-meta">$${Number(item.price).toFixed(2)}</div>
+          </div>
+          <button class="btn danger" type="button" onclick="removeFromCart(${index})">×</button>
+        `;
+        cartItems.appendChild(row);
+      });
+
+      cartTotal.textContent = '$' + total.toFixed(2);
+    }
+
+    function addToCart(product) {
+      cart.push(product);
+      saveCart();
+      updateCartUI();
+      const cartPanel = document.getElementById('cartPanel');
+      cartPanel.classList.add('open');
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      saveCart();
+      updateCartUI();
+    }
+
+    function clearCart() {
+      cart = [];
+      saveCart();
+      updateCartUI();
+    }
+
+    function toggleCart() {
+      document.getElementById('cartPanel').classList.toggle('open');
+    }
+
+    function goToCheckout() {
+      if (!cart.length) return;
+      window.location.href = 'checkout.html?cart=1';
+    }
+
+    updateCartUI();
   </script>
 </body>
-              </html>
+                  </html>
