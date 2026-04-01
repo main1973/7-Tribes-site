@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7TRB Network</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#000;
+  color:#FFD700;
+  text-align:center;
+}
+
+nav{
+  background:#111;
+  padding:15px;
+}
+
+nav a{
+  color:#FFD700;
+  margin:0 15px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+h1{
+  margin-top:40px;
+  font-size:42px;
+}
+
+p{
+  color:#ddd;
+  font-size:18px;
+}
+
+.section{
+  margin:50px auto;
+  width:90%;
+}
+
+.grid{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.card{
+  background:#111;
+  border:1px solid #333;
+  border-radius:12px;
+  width:320px;
+  margin:20px;
+  padding:25px;
+}
+
+.card h2{
+  color:#FFD700;
+}
+
+input, textarea{
+  width:90%;
+  padding:10px;
+  margin:8px 0;
+  border:none;
+  border-radius:6px;
+}
+
+button{
+  margin-top:10px;
+  padding:12px 25px;
+  background:#FFD700;
+  color:#000;
+  border:none;
+  border-radius:6px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="earn.html">Earn</a>
+  <a href="network.html">Network</a>
+  <a href="dashboard.html">Dashboard</a>
+</nav>
+
+<h1>Join the 7TRB Network</h1>
+<p>This is where the system comes alive. People + businesses + circulation.</p>
+
+<div class="section">
+  <div class="grid">
+
+    <!-- RESIDENT FORM -->
+    <div class="card">
+      <h2>Join as Resident</h2>
+      <p>Earn, spend, and circulate 7TRB in your daily life.</p>
+
+      <form action="https://formspree.io/f/xqegbgld" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="city" placeholder="City">
+        <textarea name="message" placeholder="How do you want to use 7TRB?"></textarea>
+
+        <input type="hidden" name="type" value="Resident">
+
+        <button type="submit">Join Network</button>
+      </form>
+    </div>
+
+    <!-- BUSINESS FORM -->
+    <div class="card">
+      <h2>Join as Business</h2>
+      <p>Accept 7TRB and become part of the local economy.</p>
+
+      <form action="https://formspree.io/f/xqegbgld" method="POST">
+        <input type="text" name="business_name" placeholder="Business Name" required>
+        <input type="email" name="email" placeholder="Business Email" required>
+        <input type="text" name="industry" placeholder="Industry">
+        <textarea name="message" placeholder="What do you sell?"></textarea>
+
+        <input type="hidden" name="type" value="Business">
+
+        <button type="submit">Join Network</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <h2>What Happens Next?</h2>
+  <p>
+    Once you join, you’ll be guided into the ecosystem:
+    wallet setup, how to earn, how to accept, and how to circulate.
+  </p>
+</div>
+
+<div class="section">
+  <h2>Why This Matters</h2>
+  <p>
+    Money leaving the community is the problem.  
+    Circulation inside the network is the solution.
+  </p>
+</div>
+
+</body>
+</html>
