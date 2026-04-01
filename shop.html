@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7TRB Shop — Apparel & Digital Products</title>
+  <meta name="description" content="Shop 7TRB apparel and digital products. Buy with cash, hybrid payment, or 7TRB promo pricing where available." />
+  <link rel="icon" href="images/logo.png" />
+
+  <style>
+    :root{
+      --bg:#0f0a05;
+      --panel:#1a1208;
+      --panel-2:#120c06;
+      --ink:#fff7e6;
+      --muted:#d4c3a1;
+      --gold:#e7b852;
+      --gold-2:#b8831b;
+      --gold-bright:#ffdd7a;
+      --line:#3b2b17;
+      --radius:18px;
+      --radius-lg:24px;
+      --shadow:0 18px 50px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
+      color:var(--ink);
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+
+    a{text-decoration:none;color:var(--gold-bright)}
+    img{max-width:100%;display:block}
+
+    .wrap{
+      max-width:1180px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(10,6,3,.88);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,215,122,.14);
+    }
+
+    .header-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:14px 0;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand img{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 8px 22px rgba(0,0,0,.45);
+    }
+
+    .brand strong{
+      display:block;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:1.15rem;
+    }
+
+    .brand small{
+      color:var(--muted);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .nav-links a{
+      color:var(--gold-bright);
+      font-size:.85rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,215,122,.16);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.28), rgba(0,0,0,.72)),
+        url('images/welcome_banner.png') center/cover no-repeat;
+    }
+
+    .hero-inner{
+      min-height:360px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:center;
+      padding:48px 0;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.82rem;
+      margin-bottom:12px;
+    }
+
+    .hero h1{
+      margin:0 0 14px;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      font-size:clamp(32px,5vw,58px);
+      line-height:1.04;
+    }
+
+    .hero p{
+      margin:0;
+      color:#fff4dd;
+      max-width:60ch;
+      font-size:1.04rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:22px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.5rem;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid transparent;
+      cursor:pointer;
+      white-space:nowrap;
+      transition:transform .15s ease;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#130b03;
+      border-color:rgba(255,215,122,.6);
+      box-shadow:0 0 18px rgba(255,215,122,.28);
+    }
+
+    .btn.ghost{
+      background:transparent;
+      color:var(--ink);
+      border-color:rgba(255,215,122,.28);
+    }
+
+    .hero-card,
+    .section-box,
+    .product-card{
+      position:relative;
+      background:linear-gradient(180deg, rgba(26,18,8,.96), rgba(18,12,6,.96));
+      border:1px solid rgba(255,215,122,.24);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero-card::after,
+    .section-box::after,
+    .product-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:2px;
+      background:linear-gradient(90deg, rgba(255,215,122,.42), rgba(184,131,31,.68), rgba(255,215,122,.42));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.38;
+    }
+
+    .hero-card{
+      padding:22px;
+    }
+
+    .metric{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 0;
+      border-bottom:1px solid rgba(255,215,122,.10);
+    }
+
+    .metric:last-child{border-bottom:none}
+
+    .metric-label{
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:.78rem;
+    }
+
+    .metric-value{
+      color:var(--gold-bright);
+      font-size:1.1rem;
+      font-weight:800;
+      text-align:right;
+    }
+
+    .section{
+      padding:44px 0;
+    }
+
+    .section-box{
+      padding:24px;
+    }
+
+    .title{
+      margin:0 0 10px;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:clamp(24px,3vw,34px);
+    }
+
+    .lead{
+      color:var(--muted);
+      max-width:78ch;
+    }
+
+    .filters{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .chip{
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,122,.20);
+      background:rgba(255,255,255,.03);
+      color:var(--ink);
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .chip.active{
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#130b03;
+      border-color:rgba(255,215,122,.55);
+    }
+
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-top:22px;
+    }
+
+    .product-card{
+      padding:16px;
+    }
+
+    .product-image{
+      height:300px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,215,122,.14);
+      background:#0d0804;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .product-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .badge-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:14px 0 10px;
+    }
+
+    .badge{
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:.76rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      border:1px solid rgba(255,215,122,.18);
+      background:rgba(255,255,255,.03);
+      color:var(--gold-bright);
+    }
+
+    .product-card h3{
+      margin:0 0 8px;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      font-size:1.04rem;
+    }
+
+    .product-card p{
+      margin:0 0 14px;
+      color:var(--muted);
+      min-height:72px;
+    }
+
+    .price-box{
+      display:grid;
+      gap:10px;
+      margin-bottom:16px;
+    }
+
+    .price-line{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,215,122,.14);
+      background:rgba(255,255,255,.025);
+    }
+
+    .price-line strong{
+      color:var(--ink);
+      font-size:.94rem;
+    }
+
+    .price-line span{
+      color:var(--gold-bright);
+      font-weight:800;
+      text-align:right;
+    }
+
+    .actions{
+      display:grid;
+      gap:10px;
+    }
+
+    .actions .btn{
+      width:100%;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+      margin-top:20px;
+    }
+
+    .info-card{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(255,215,122,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+    }
+
+    .info-card h4{
+      margin:0 0 8px;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-size:.94rem;
+    }
+
+    .info-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .cta-strip{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      padding:22px;
+      border-radius:24px;
+      border:1px solid rgba(255,215,122,.22);
+      background:linear-gradient(90deg, rgba(231,184,82,.12), rgba(184,131,31,.08));
+      box-shadow:var(--shadow);
+    }
+
+    footer{
+      margin-top:12px;
+      padding:24px 0;
+      border-top:1px solid rgba(255,215,122,.20);
+      background:radial-gradient(circle at center, rgba(255,215,122,.12), #090604 78%);
+    }
+
+    .footer-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .muted{color:var(--muted)}
+
+    @media (max-width:1000px){
+      .hero-inner,
+      .product-grid,
+      .info-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:760px){
+      .nav-links{gap:10px}
+      .nav-links a{font-size:.8rem}
+      .hero-inner{min-height:auto;padding:42px 0}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <img src="images/logo.png" alt="7TRB logo" />
+        <div>
+          <strong>7TRB Shop</strong>
+          <small>Apparel + digital products</small>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="earn.html">Earn</a>
+        <a href="network.html">Network</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="https://amvault.net" target="_blank" rel="noopener">Wallet</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">Organize • Build • Circulate</span>
+        <h1>One Store. Two Lanes.</h1>
+        <p>
+          Shop physical apparel and digital products from one clean storefront. Wear the message, learn the system, and keep value moving through the 7TRB ecosystem.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn gold" href="#apparel">Shop Apparel</a>
+          <a class="btn ghost" href="#digital">Shop Digital</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="metric">
+          <div>
+            <div class="metric-label">Physical</div>
+            <div class="muted">Message tees and movement apparel</div>
+          </div>
+          <div class="metric-value">Apparel</div>
+        </div>
+
+        <div class="metric">
+          <div>
+            <div class="metric-label">Digital</div>
+            <div class="muted">Guides, ebooks, templates, tools</div>
+          </div>
+          <div class="metric-value">Downloads</div>
+        </div>
+
+        <div class="metric">
+          <div>
+            <div class="metric-label">Checkout</div>
+            <div class="muted">Cash, hybrid, or 7TRB promo lanes</div>
+          </div>
+          <div class="metric-value">Flexible</div>
+        </div>
+
+        <div class="metric">
+          <div>
+            <div class="metric-label">Purpose</div>
+            <div class="muted">Every transaction supports circulation</div>
+          </div>
+          <div class="metric-value">Ecosystem</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="cta-strip">
+          <div>
+            <strong style="display:block;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">
+              Start with a clear choice
+            </strong>
+            <span class="muted">Physical merch builds identity. Digital products build knowledge. Both feed the system.</span>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn gold" href="#apparel">Browse Apparel</a>
+            <a class="btn ghost" href="#digital">Browse Digital</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="apparel">
+      <div class="wrap">
+        <div class="section-box">
+          <h2 class="title">Apparel</h2>
+          <p class="lead">
+            These are not random products. They are message pieces designed to carry pressure, truth, and identity into the real world.
+          </p>
+
+          <div class="filters" id="apparelFilters">
+            <button class="chip active" type="button" data-filter="all">All</button>
+            <button class="chip" type="button" data-filter="pain">Pain</button>
+            <button class="chip" type="button" data-filter="system">System</button>
+            <button class="chip" type="button" data-filter="identity">Identity</button>
+          </div>
+
+          <div class="product-grid" id="apparelGrid">
+
+            <article class="product-card" data-category="pain">
+              <div class="product-image">
+                <img src="images/taxed-to-death-tee.png" alt="Taxed To Death Tee" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">Pain</span>
+                <span class="badge">Tee</span>
+              </div>
+              <h3>Taxed To Death Tee</h3>
+              <p>You earn it. They take it. Over and over. This shirt says what people already feel every payday.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="checkout.html?product=Taxed%20To%20Death%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/taxed-to-death-tee.png&desc=You%20earn%20it.%20They%20take%20it.%20Over%20and%20over.%20This%20shirt%20says%20what%20people%20already%20feel%20every%20payday.">Buy This Tee</a>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="pain">
+              <div class="product-image">
+                <img src="images/work-til-i-die-tee.png" alt="Work Til I Die Tee" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">Pain</span>
+                <span class="badge">Tee</span>
+              </div>
+              <h3>Work Til I Die? Tee</h3>
+              <p>Forty years of grind with no exit plan is not a dream. This tee questions the whole setup.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="checkout.html?product=Work%20Til%20I%20Die%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/work-til-i-die-tee.png&desc=Forty%20years%20of%20grind%20with%20no%20exit%20plan%20is%20not%20a%20dream.%20This%20tee%20questions%20the%20whole%20setup.">Buy This Tee</a>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="system">
+              <div class="product-image">
+                <img src="images/economic-prison-break-tee.png" alt="Economic Prison Break Tee" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">System</span>
+                <span class="badge">Tee</span>
+              </div>
+              <h3>Economic Prison Break Tee</h3>
+              <p>This one is blunt for a reason. People feel trapped. This shirt turns that feeling into a signal.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="checkout.html?product=Economic%20Prison%20Break%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/economic-prison-break-tee.png&desc=This%20one%20is%20blunt%20for%20a%20reason.%20People%20feel%20trapped.%20This%20shirt%20turns%20that%20feeling%20into%20a%20signal.">Buy This Tee</a>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="pain">
+              <div class="product-image">
+                <img src="images/check-to-check-tee.png" alt="Check to Check Is Not Living Tee" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">Pain</span>
+                <span class="badge">Tee</span>
+              </div>
+              <h3>Check to Check Is Not Living Tee</h3>
+              <p>Survival mode is not the finish line. This tee says the quiet part out loud.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="checkout.html?product=Check%20to%20Check%20Is%20Not%20Living%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/check-to-check-tee.png&desc=Survival%20mode%20is%20not%20the%20finish%20line.%20This%20tee%20says%20the%20quiet%20part%20out%20loud.">Buy This Tee</a>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="identity">
+              <div class="product-image">
+                <img src="images/community-culture-change-tee.png" alt="7TRB Community Culture Change Tee" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">Identity</span>
+                <span class="badge">Tee</span>
+              </div>
+              <h3>7TRB Community • Culture • Change Tee</h3>
+              <p>This is the cleaner identity piece. Less pain, more banner. Good for people who want the message without the punch in the throat.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Standard</strong><span>$29.99</span></div>
+                <div class="price-line"><strong>Hybrid</strong><span>$25 + 20 7TRB</span></div>
+                <div class="price-line"><strong>Promo</strong><span>30 7TRB</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="checkout.html?product=7TRB%20Community%20Culture%20Change%20Tee&cash=29.99&hybrid_cash=25&hybrid_7trb=20&promo_7trb=30&image=images/community-culture-change-tee.png&desc=This%20is%20the%20cleaner%20identity%20piece.%20Less%20pain,%20more%20banner.%20Good%20for%20people%20who%20want%20the%20message%20without%20the%20punch%20in%20the%20throat.">Buy This Tee</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="digital">
+      <div class="wrap">
+        <div class="section-box">
+          <h2 class="title">Digital Products</h2>
+          <p class="lead">
+            Learn the system, sharpen the message, and build from templates, books, and downloadable tools. Replace these links with your real Gumroad or direct product URLs.
+          </p>
+
+          <div class="product-grid">
+
+            <article class="product-card">
+              <div class="product-image">
+                <img src="images/logo.png" alt="7Tribes Ebook" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">Digital</span>
+                <span class="badge">Ebook</span>
+              </div>
+              <h3>7Tribes: Organize, Build, Circulate</h3>
+              <p>A guide to community power, wealth, and coordinated action built around the 7Tribes model.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Price</strong><span>$12</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="https://mainhousedigital.gumroad.com" target="_blank" rel="noopener">Buy Digital</a>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image">
+                <img src="images/logo.png" alt="Build Your Tribe Workbook" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">Digital</span>
+                <span class="badge">Workbook</span>
+              </div>
+              <h3>Build Your Tribe Workbook</h3>
+              <p>Templates, prompts, and planning tools to help people organize, map assets, and build local structure.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Price</strong><span>$9</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="https://mainhousedigital.gumroad.com" target="_blank" rel="noopener">Buy Digital</a>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image">
+                <img src="images/logo.png" alt="7TRB Field Manual" onerror="this.src='images/logo.png'">
+              </div>
+              <div class="badge-row">
+                <span class="badge">Digital</span>
+                <span class="badge">Guide</span>
+              </div>
+              <h3>7TRB Field Manual</h3>
+              <p>A cleaner, practical manual for circulation, merchant onboarding, and real-world ecosystem building.</p>
+
+              <div class="price-box">
+                <div class="price-line"><strong>Price</strong><span>$15</span></div>
+              </div>
+
+              <div class="actions">
+                <a class="btn gold" href="https://mainhousedigital.gumroad.com" target="_blank" rel="noopener">Buy Digital</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-box">
+          <h2 class="title">Why This Store Matters</h2>
+          <div class="info-grid">
+            <div class="info-card">
+              <h4>Identity</h4>
+              <p>Apparel makes the message visible in public. It gives the movement a face and a signal.</p>
+            </div>
+            <div class="info-card">
+              <h4>Knowledge</h4>
+              <p>Digital products help people understand the system instead of just watching from the sidelines.</p>
+            </div>
+            <div class="info-card">
+              <h4>Circulation</h4>
+              <p>Every product supports a wider ecosystem focused on ownership, participation, and value in motion.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn gold" href="dashboard.html">View Dashboard</a>
+            <a class="btn ghost" href="https://amvault.net" target="_blank" rel="noopener">Get Wallet</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="images/logo.png" alt="7TRB small logo" style="width:40px;height:40px;border-radius:50%;">
+        <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="earn.html">Earn</a>
+        <a href="network.html">Network</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const apparelFilters = document.querySelectorAll('#apparelFilters .chip');
+    const apparelCards = document.querySelectorAll('#apparelGrid .product-card');
+
+    apparelFilters.forEach(chip => {
+      chip.addEventListener('click', () => {
+        apparelFilters.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        const filter = chip.dataset.filter;
+        apparelCards.forEach(card => {
+          const show = filter === 'all' || card.dataset.category === filter;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+                </html>
