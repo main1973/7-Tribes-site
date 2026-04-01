@@ -1,803 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-3ENCBC9RT3');
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7TRB — Organize. Build. Circulate.</title>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7TRB — Community Commerce Network</title>
-  <meta name="google-site-verification" content="J13STEzRChDz488QqKA5yP2eoiZ-FQNDUzuok6B2RHM" />
-  <meta name="description" content="7TRB is a community-powered commerce network built for residents, merchants, and wallet-to-wallet transparency through AmVault treasury structure." />
-  <link rel="icon" href="images/7trb.logo.png" />
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#000;
+  color:#FFD700;
+  text-align:center;
+}
 
-  <style>
-    :root{
-      --bg:#0f0a05;
-      --panel:#1a1208;
-      --panel-2:#120c06;
-      --ink:#fff7e6;
-      --muted:#d4c3a1;
-      --line:#3b2b17;
-      --gold:#e7b852;
-      --gold-2:#b8831b;
-      --gold-bright:#ffdd7a;
-      --ok:#25F4EE;
-      --pop:#FE2C55;
-      --radius:18px;
-      --radius-lg:24px;
-      --shadow:0 18px 50px rgba(0,0,0,.6);
-    }
+nav{
+  background:#111;
+  padding:15px;
+}
 
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
-      color:var(--ink);
-      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      scroll-behavior:smooth;
-    }
+nav a{
+  color:#FFD700;
+  margin:0 15px;
+  text-decoration:none;
+  font-weight:bold;
+}
 
-    a{color:var(--gold-bright);text-decoration:none}
-    a:hover{opacity:.92}
-    img{max-width:100%;display:block}
+h1{
+  margin-top:60px;
+  font-size:48px;
+}
 
-    .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+p{
+  color:#ddd;
+  font-size:18px;
+}
 
-    header.site-header{
-      position:relative;
-      width:100%;
-      overflow:hidden;
-      border-bottom:1px solid rgba(255,215,122,0.2)
-    }
+.section{
+  margin:60px auto;
+  width:90%;
+}
 
-    .hero-banner{
-      width:100%;
-      min-height:520px;
-      background:url('images/welcome_banner.png') center/cover no-repeat;
-      position:relative
-    }
+.grid{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
 
-    .hero-banner::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg,rgba(0,0,0,.62),rgba(0,0,0,.38),rgba(0,0,0,.72));
-    }
+.card{
+  background:#111;
+  border:1px solid #333;
+  border-radius:12px;
+  width:280px;
+  margin:20px;
+  padding:25px;
+}
 
-    .header-inner{
-      position:relative;
-      z-index:2;
-      max-width:1160px;
-      margin:0 auto;
-      padding:18px 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px
-    }
+.card h2{
+  color:#FFD700;
+}
 
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand img{
-      width:68px;height:68px;border-radius:50%;
-      border:1px solid rgba(255,255,255,.2);
-      box-shadow:0 10px 30px rgba(0,0,0,.6)
-    }
+.btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 24px;
+  background:#FFD700;
+  color:#000;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:bold;
+}
 
-    .brand b{
-      font-size:1.5rem;
-      color:var(--gold-bright);
-      letter-spacing:.12em;
-      text-transform:uppercase
-    }
+.hero-logo{
+  width:120px;
+  margin-top:30px;
+}
 
-    .nav-links{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      justify-content:flex-end
-    }
-
-    .nav-links a{
-      color:var(--gold-bright);
-      font-size:.82rem;
-      letter-spacing:.06em;
-      text-transform:uppercase
-    }
-
-    .hero-content{
-      position:relative;
-      z-index:2;
-      max-width:1160px;
-      margin:0 auto;
-      padding:42px 20px 54px;
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:20px;
-      align-items:end;
-      min-height:400px;
-    }
-
-    .hero-copy h1{
-      margin:0 0 10px;
-      font-size:clamp(34px,5vw,58px);
-      line-height:1.02;
-      color:var(--gold-bright);
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      text-shadow:0 6px 24px rgba(0,0,0,.55);
-    }
-
-    .hero-copy p{
-      margin:0 0 22px;
-      max-width:740px;
-      color:#fff3d8;
-      font-size:1.06rem;
-    }
-
-    .hero-actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:12px;
-    }
-
-    .hero-note{
-      color:var(--muted);
-      font-size:.95rem;
-      max-width:740px;
-    }
-
-    .hero-panel{
-      background:linear-gradient(180deg, rgba(26,18,8,.95), rgba(18,12,6,.96));
-      border:1px solid rgba(255,215,122,.35);
-      border-radius:var(--radius-lg);
-      padding:20px;
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .hero-panel::after,
-    .box::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:inherit;
-      padding:2px;
-      background:linear-gradient(90deg,rgba(255,215,122,.55),rgba(184,131,31,.75),rgba(255,215,122,.55));
-      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor;
-      mask-composite:exclude;
-      pointer-events:none;
-      opacity:.45;
-    }
-
-    .hero-panel h3{
-      margin:0 0 8px;
-      color:var(--gold-bright);
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:1rem;
-    }
-
-    .hero-stats{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .stat{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,215,122,.18);
-      border-radius:16px;
-      padding:14px;
-    }
-
-    .stat b{
-      display:block;
-      font-size:1.15rem;
-      color:var(--gold-bright);
-      margin-bottom:4px;
-    }
-
-    .stat span{
-      color:var(--muted);
-      font-size:.9rem;
-    }
-
-    .header-row{
-      background:linear-gradient(90deg,#261608,#110804);
-      border-bottom:1px solid rgba(255,215,122,.25)
-    }
-
-    .header-row-inner{
-      max-width:1160px;
-      margin:0 auto;
-      padding:12px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap
-    }
-
-    .section{padding:48px 0}
-
-    .box{
-      position:relative;
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:22px;
-      border:1px solid rgba(255,215,122,0.35);
-      box-shadow:var(--shadow);
-      overflow:hidden
-    }
-
-    .title{
-      margin:0 0 14px;
-      font-size:clamp(22px,3vw,30px);
-      letter-spacing:.08em;
-      color:var(--gold-bright);
-      text-transform:uppercase
-    }
-
-    .sub{
-      margin:0 auto 22px;
-      color:var(--muted);
-      max-width:860px;
-    }
-
-    .muted{color:var(--muted)}
-
-    .divider{
-      height:2px;
-      margin:20px auto;
-      width:86%;
-      border-radius:999px;
-      background:linear-gradient(90deg,transparent,rgba(255,215,122,0.35),rgba(255,215,122,0.85),rgba(255,215,122,0.35),transparent);
-      box-shadow:0 0 16px rgba(255,215,122,0.28)
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:.6rem;
-      padding:11px 16px;
-      border-radius:999px;
-      font-weight:800;
-      border:1px solid transparent;
-      cursor:pointer;
-      font-size:.95rem;
-      white-space:nowrap
-    }
-
-    .btn.gold{
-      background:linear-gradient(90deg,var(--gold),var(--gold-2));
-      color:#130b03;
-      border-color:rgba(255,215,122,.7);
-      box-shadow:0 0 18px rgba(255,215,122,.35)
-    }
-
-    .btn.ghost{
-      border:1px solid rgba(255,215,122,.35);
-      color:var(--ink);
-      background:transparent
-    }
-
-    .btn.tiktok{
-      background:linear-gradient(90deg,var(--ok),var(--pop));
-      color:#0a0b0f;
-      border:none;
-      box-shadow:0 0 20px rgba(254,44,85,.28)
-    }
-
-    .grid{display:grid;gap:16px}
-    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .four{grid-template-columns:repeat(4,minmax(0,1fr))}
-
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      border:1px solid rgba(255,215,122,.22);
-      border-radius:20px;
-      padding:18px;
-      box-shadow:0 10px 28px rgba(0,0,0,.35);
-      height:100%;
-    }
-
-    .card h3{
-      margin:0 0 10px;
-      color:var(--gold-bright);
-      letter-spacing:.05em;
-      text-transform:uppercase;
-      font-size:1rem;
-    }
-
-    .list{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-    }
-
-    .list li{margin:8px 0}
-
-    .scroll-section{
-      display:flex;
-      overflow-x:auto;
-      gap:16px;
-      padding:16px 0;
-      scroll-snap-type:x mandatory
-    }
-
-    .scroll-section::-webkit-scrollbar{display:none}
-
-    .scroll-card{
-      flex:0 0 260px;
-      background:linear-gradient(180deg,var(--panel),var(--panel-2));
-      border:1px solid rgba(255,215,122,.35);
-      border-radius:var(--radius-lg);
-      padding:16px;
-      scroll-snap-align:start;
-      box-shadow:0 12px 28px rgba(0,0,0,.5)
-    }
-
-    .scroll-card h3{
-      margin-top:0;
-      color:var(--gold-bright);
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      text-align:center
-    }
-
-    .scroll-card p{
-      margin:8px 0;
-      font-size:.95rem;
-      color:var(--muted);
-      text-align:center
-    }
-
-    .tag-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-      margin-top:18px;
-    }
-
-    .tag{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,215,122,.25);
-      background:rgba(255,255,255,.03);
-      color:var(--ink);
-      font-size:.92rem;
-    }
-
-    .metric{
-      text-align:center;
-      padding:18px;
-      border-radius:18px;
-      border:1px solid rgba(255,215,122,.22);
-      background:rgba(255,255,255,.025);
-    }
-
-    .metric strong{
-      display:block;
-      font-size:1.7rem;
-      color:var(--gold-bright);
-      margin-bottom:6px;
-    }
-
-    footer{
-      position:relative;
-      background:radial-gradient(circle at center, rgba(255,215,122,.2), #090604 78%);
-      border-top:1px solid rgba(255,215,122,.35);
-      box-shadow:0 -6px 30px rgba(0,0,0,.7);
-      padding:20px 0
-    }
-
-    @media (max-width:980px){
-      .hero-content{grid-template-columns:1fr}
-      .two,.three,.four{grid-template-columns:1fr}
-      .header-inner{flex-direction:column;align-items:flex-start}
-      .nav-links{justify-content:flex-start}
-      .hero-banner{min-height:620px}
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-<header class="site-header">
-  <div class="hero-banner">
-    <div class="header-inner">
-      <div class="brand">
-        <img src="images/7trb.logo.png" alt="7TRB logo" />
-        <b>7TRB</b>
-      </div>
-<nav class="nav-links">
-        <a href="apparel.html">Apparel</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#residents">Residents</a>
-        <a href="#merchants">Merchants</a>
-        <a href="#transparency">Transparency</a>
-        <a href="learn.html">Learn</a>
-        <a href="learn-7trb.html">Field Manual</a>
-        <a href="wallet.html">Wallet</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="exchange.html">Business Exchange</a>
-        <a href="investor.html">Investors</a>
-        <a href="#join">Join</a>
-      </nav>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="earn.html">Earn</a>
+  <a href="network.html">Network</a>
+  <a href="dashboard.html">Dashboard</a>
+</nav>
+
+<img src="images/7trb.logo.png" class="hero-logo">
+
+<h1>Organize. Build. Circulate.</h1>
+<p>A community-powered economy built on participation — not just speculation.</p>
+
+<div class="section">
+  <div class="grid">
+
+    <div class="card">
+      <h2>Shop</h2>
+      <p>Spend and circulate 7TRB through products, apparel, and tools.</p>
+      <a class="btn" href="shop.html">Go to Shop</a>
     </div>
 
-    <div class="hero-content">
-      <div class="hero-copy">
-        <h1>Turn Everyday Spending Into Local Growth</h1>
-        <p>
-          7TRB is a community-powered commerce network built to help residents earn rewards,
-          help businesses unlock an added revenue stream, and make value more visible through
-          wallet-to-wallet transparency.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn gold" href="shop.html">Start Circulating</a>
-          <a class="btn gold" href="#residents">Start as a Resident</a>
-          <a class="btn ghost" href="#merchants">Grow Your Business</a>
-          <a class="btn ghost" href="#transparency">See Transparency</a>
-        </div>
-        <div style="margin-top:20px;">
-  <a href="apparel.html" class="btn gold">
-    Shop 7TRB Apparel
-  </a>
-        </div>
-
-        <div class="hero-note">
-          Detroit made. Built for real circulation, merchant participation, and visible treasury structure through AmVault.
-        </div>
-      </div>
-
-      <div class="hero-panel">
-        <h3>What 7TRB is built to do</h3>
-        <p class="muted" style="margin:0">
-          Not just hold value. Move it. Residents spend. Merchants earn. Merchants re-spend. The network becomes stronger every time value stays in motion.
-        </p>
-
-        <div class="hero-stats">
-          <div class="stat">
-            <b>Residents</b>
-            <span>earn rewards and support local businesses</span>
-          </div>
-          <div class="stat">
-            <b>Merchants</b>
-            <span>gain added revenue and repeat traffic</span>
-          </div>
-          <div class="stat">
-            <b>AmVault</b>
-            <span>creates the identity and treasury layer</span>
-          </div>
-          <div class="stat">
-            <b>Transparency</b>
-            <span>makes wallet-to-wallet movement visible</span>
-          </div>
-        </div>
-      </div>
+    <div class="card">
+      <h2>Earn</h2>
+      <p>Learn how to earn 7TRB through participation and contribution.</p>
+      <a class="btn" href="earn.html">Start Earning</a>
     </div>
+
+    <div class="card">
+      <h2>Join Network</h2>
+      <p>Connect as a resident or business and become part of the system.</p>
+      <a class="btn" href="network.html">Join Now</a>
+    </div>
+
   </div>
+</div>
 
-  <div class="header-row">
-    <div class="header-row-inner">
-      <a class="btn tiktok" href="https://vt.tiktok.com/ZTMtY4tah/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
-      <span class="muted" style="text-transform:uppercase;letter-spacing:.08em">Detroit Made • Building for Detroit & Beyond</span>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a href="dashboard.html" class="btn gold">Open Dashboard</a>
-        <a href="wallet.html" class="btn ghost">Open Wallet</a>
-      </div>
-    </div>
-  </div>
-</header>
+<div class="section">
+  <h2>Why 7TRB?</h2>
+  <p>
+    Traditional money leaves the community.  
+    7TRB is designed to keep value circulating inside it.
+  </p>
+</div>
 
-<main>
-  <!-- START HERE -->
-  <section class="section" id="start">
-    <div class="wrap">
-      <div class="box" style="text-align:center">
-        <h2 class="title" style="margin-top:0">Start Here</h2>
-        <p class="muted" style="max-width:920px;margin:0 auto 14px">
-          This homepage is the front door. Learn the system, understand the mission, and choose your path.
-          Residents can join to earn and circulate. Merchants can join to open a new revenue stream.
-          Builders can use the Field Manual to structure the network correctly.
-        </p>
-        <div class="divider"></div>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <a class="btn ghost" href="learn.html">Learn the Basics</a>
-          <a class="btn gold" href="learn-7trb.html">Open Field Manual</a>
-          <a class="btn ghost" href="#transparency">View Transparency</a>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="section">
+  <h2>Track the System</h2>
+  <p>See transparency, wallets, and activity in real time.</p>
+  <a class="btn" href="dashboard.html">Open Dashboard</a>
+</div>
 
-  <!-- HOW IT WORKS -->
-  <section class="section" id="how-it-works">
-    <div class="wrap">
-      <h2 class="title" style="text-align:center">How 7TRB Works</h2>
-      <p class="sub" style="text-align:center">
-        Keep it simple. Residents spend. Businesses earn. Businesses re-spend. Value stays visible and moving instead of disappearing.
-      </p>
-
-      <div class="grid four">
-        <div class="card">
-          <h3>1. Join</h3>
-          <p class="muted">Residents and merchants enter the network and prepare for wallet-based participation.</p>
-        </div>
-        <div class="card">
-          <h3>2. Spend</h3>
-          <p class="muted">Residents use 7TRB with participating merchants and service providers.</p>
-        </div>
-        <div class="card">
-          <h3>3. Re-spend</h3>
-          <p class="muted">Businesses use 7TRB with other merchants, services, and community partners.</p>
-        </div>
-        <div class="card">
-          <h3>4. Verify</h3>
-          <p class="muted">Movement can be tracked through treasury structure, wallet activity, and network reporting.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESIDENTS / MERCHANTS -->
-  <section class="section" id="residents">
-    <div class="wrap">
-      <div class="grid two">
-        <div class="box">
-          <h2 class="title">For Residents</h2>
-          <p class="muted">
-            Spend local. Earn rewards. Help value circulate where you live.
-          </p>
-          <ul class="list">
-            <li>Use 7TRB with participating businesses</li>
-            <li>Access rewards, perks, and referral bonuses</li>
-            <li>Support local merchants and visible circulation</li>
-            <li>Participate in a system built for community movement</li>
-          </ul>
-          <div style="margin-top:16px">
-            <a class="btn gold" href="wallet.html">Open Wallet</a>
-            <a class="btn ghost" href="learn.html">Learn More</a>
-          </div>
-        </div>
-
-        <div class="box" id="merchants">
-          <h2 class="title">For Businesses</h2>
-          <p class="muted">
-            Accept 7TRB to attract new customers, increase repeat spending, and create an added revenue stream.
-          </p>
-          <ul class="list">
-            <li>Access residents already aligned with the network</li>
-            <li>Create more repeat spending through rewards and referrals</li>
-            <li>Use 7TRB with other businesses and services</li>
-            <li>Build visible merchant participation inside the system</li>
-          </ul>
-          <div style="margin-top:16px">
-            <a class="btn gold" href="merchants.html">Merchant Page</a>
-            <a class="btn ghost" href="#join">Become a Founding Merchant</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRANSPARENCY -->
-  <section class="section" id="transparency">
-    <div class="wrap">
-      <h2 class="title" style="text-align:center">AmVault Treasury & Wallet Transparency</h2>
-      <p class="sub" style="text-align:center">
-        Trust gets stronger when movement is visible. 7TRB is being structured around wallet identity, transparent treasury flow, and wallet-to-wallet participation through AmVault.
-      </p>
-
-      <div class="grid three">
-        <div class="box">
-          <h3 style="margin-top:0;color:var(--gold-bright);text-transform:uppercase">Register</h3>
-          <p class="muted">
-            Residents and merchants register through AmVault so participation begins with a visible wallet identity layer.
-          </p>
-        </div>
-        <div class="box">
-          <h3 style="margin-top:0;color:var(--gold-bright);text-transform:uppercase">Transact</h3>
-          <p class="muted">
-            7TRB moves wallet to wallet, creating a transparent record of activity across merchants, residents, and treasury flow.
-          </p>
-        </div>
-        <div class="box">
-          <h3 style="margin-top:0;color:var(--gold-bright);text-transform:uppercase">Verify</h3>
-          <p class="muted">
-            Treasury reporting, circulation metrics, and reward activity can be measured from actual movement instead of promises.
-          </p>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="grid two">
-        <div class="card">
-          <h3>Treasury Structure</h3>
-          <ul class="list">
-            <li>AmVault treasury wallet acts as the main reporting layer</li>
-            <li>Rewards and distribution can be tracked from a defined source</li>
-            <li>Wallet-to-wallet movement helps strengthen accountability</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Why It Matters</h3>
-          <ul class="list">
-            <li>Merchants need visibility and trust</li>
-            <li>Residents need clarity on where value moves</li>
-            <li>The network becomes harder to fake and easier to verify</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAMILY STARTER KIT -->
-  <section class="section" id="starter-kit">
-    <div class="wrap">
-      <h2 class="title" style="text-align:center">Family Micro-Economy Starter Kit</h2>
-      <p class="sub" style="text-align:center">
-        Start small, grow big — 3 families can become 5, 10, 15, 20. The point is not size first. The point is getting circulation right.
-      </p>
-
-      <div class="grid three">
-        <div class="box" style="text-align:center">
-          <h3 style="margin-top:0;color:var(--gold-bright)">Phase 1 — 3 Families</h3>
-          <p class="muted">Setup roles, define participation, organize a small treasury mindset, and begin circulation.</p>
-        </div>
-        <div class="box" style="text-align:center">
-          <h3 style="margin-top:0;color:var(--gold-bright)">Phase 2 — 5 Families</h3>
-          <p class="muted">Circulation grows, accountability improves, and small community projects can begin to form.</p>
-        </div>
-        <div class="box" style="text-align:center">
-          <h3 style="margin-top:0;color:var(--gold-bright)">Phase 3 — 10 Families</h3>
-          <p class="muted">Local merchants begin to see more consistent 7TRB flow and stronger repeat participation.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CIRCULATION FLOW -->
-  <section class="section" id="circulation-flow">
-    <div class="wrap">
-      <h2 class="title" style="text-align:center">How 7TRB Circulates</h2>
-      <p class="sub" style="text-align:center">
-        This is the engine. Families spend. Merchants receive. Treasury reports. Value returns to the community through continued movement and visible structure.
-      </p>
-
-      <div class="scroll-section">
-        <div class="scroll-card">
-          <h3>Family</h3>
-          <p>Members hold 7TRB, exchange with each other, and spend locally.</p>
-          <p style="font-weight:bold;text-align:center;">➡</p>
-        </div>
-        <div class="scroll-card">
-          <h3>Merchant</h3>
-          <p>Merchants accept 7TRB, provide goods and services, and track circulation.</p>
-          <p style="font-weight:bold;text-align:center;">➡</p>
-        </div>
-        <div class="scroll-card">
-          <h3>Treasury</h3>
-          <p>Records movement, supports transparency, and helps structure growth.</p>
-          <p style="font-weight:bold;text-align:center;">➡</p>
-        </div>
-        <div class="scroll-card">
-          <h3>Community</h3>
-          <p>Value returns through projects, participation, merchant growth, and new opportunities.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHERE TO USE -->
-  <section class="section" id="categories">
-    <div class="wrap">
-      <div class="box" style="text-align:center">
-        <h2 class="title">Where 7TRB Can Be Used</h2>
-        <p class="muted" style="max-width:860px;margin:0 auto">
-          Start with categories that make sense for daily use and merchant-to-merchant circulation.
-        </p>
-
-        <div class="tag-row">
-          <span class="tag">Food & Restaurants</span>
-          <span class="tag">Barbers & Beauty</span>
-          <span class="tag">Cleaning & Services</span>
-          <span class="tag">Design & Marketing</span>
-          <span class="tag">Retail & Apparel</span>
-          <span class="tag">Events & Promotions</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- METRICS -->
-  <section class="section" id="metrics">
-    <div class="wrap">
-      <h2 class="title" style="text-align:center">The Scoreboard</h2>
-      <p class="sub" style="text-align:center">
-        This section can grow into your live dashboard layer. For now, it marks the measurements that matter.
-      </p>
-
-      <div class="grid four">
-        <div class="metric">
-          <strong>5+</strong>
-          <span class="muted">Founding merchants target</span>
-        </div>
-        <div class="metric">
-          <strong>100+</strong>
-          <span class="muted">Resident launch goal</span>
-        </div>
-        <div class="metric">
-          <strong>7TRB</strong>
-          <span class="muted">Circulation is the core signal</span>
-        </div>
-        <div class="metric">
-          <strong>AmVault</strong>
-          <span class="muted">Treasury and wallet visibility layer</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- JOIN -->
-  <section class="section" id="join">
-    <div class="wrap">
-      <div class="box" style="text-align:center">
-        <h2 class="title">Join the Network</h2>
-        <p class="muted" style="max-width:900px;margin:0 auto 14px">
-          7TRB is preparing for deeper blockchain deployment, decentralized platform integration, merchant activation, and wallet-based transparency. Early supporters can join for launch updates, founding access, and merchant onboarding priority.
-        </p>
-        <div class="divider"></div>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <a class="btn gold" href="wallet.html">Join as Resident</a>
-          <a class="btn ghost" href="merchants.html">Become a Merchant</a>
-          <a class="btn ghost" href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-    <div style="margin-top:8px;text-align:center">
-      <img src="https://visitor-badge.laobi.icu/badge?page_id=7trb.com&left_color=gold&right_color=black&left_text=Visitors" alt="7TRB visitor count" />
-    </div>
-
-    <div style="display:flex;align-items:center;gap:10px">
-      <img src="images/logo.png" alt="7TRB small" style="width:36px;height:36px;border-radius:50%" />
-      <img src="images/icon-192.png" alt="7TRB Footer Icon" style="width:60px;height:60px;border-radius:50%;margin-right:8px;box-shadow:0 0 15px rgba(255,215,122,0.4)" />
-      <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
-    </div>
-
-    <div style="display:flex;gap:14px;flex-wrap:wrap">
-      <a href="#how-it-works">How It Works</a>
-      <a href="#transparency">Transparency</a>
-      <a href="learn.html">Learn</a>
-      <a href="learn-7trb.html">Field Manual</a>
-      <a href="investor.html">Investors</a>
-      <a href="wallet.html">Wallet</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
-      <a href="https://vt.tiktok.com/ZTMb5Fv6q/?page=TikTokShop" target="_blank" rel="noopener">TikTok Shop</a>
-    </div>
-  </div>
-</footer>
 </body>
-  </html>
+</html>
