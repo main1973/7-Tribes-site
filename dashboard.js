@@ -3,23 +3,36 @@
 // ----------------------------
 
 // Alkebuleum config
-const ALKE_RPC       = "https://rpc.alkebuleum.com";
-const TOKEN_ADDRESS  = "0x991DF36e5b0BB596A83dEe6A840F78bAa40450e0";
+const ALKE_RPC = "https://rpc.alkebuleum.com";
+const TOKEN_ADDRESS = "0x991DF36e5b0BB596A83dEe6A840F78bAa40450e0";
 const TOKEN_DECIMALS = 18;
-const TOKEN_SYMBOL   = "7TRB";
-
+const TOKEN_SYMBOL = "7TRB";
 const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB";
+
+const JOLLOFSWAP_URL = "https://jollofswap.com";
+const AMVAULT_URL = "https://amvault.net";
+const SAVED_WALLET_KEY = "amvault_wallet";
 
 // ---------- helpers ----------
 async function safeJson(url){
   try{
     const res = await fetch(url, { cache: "no-store" });
     if(!res.ok) throw new Error(`${url}: ${res.status}`);
-    return res.json();
+    return await res.json();
   }catch(err){
     console.warn("Fetch failed:", url, err);
     return null;
   }
+}
+
+function setText(id, txt){
+  const el = document.getElementById(id);
+  if(el) el.textContent = txt;
+}
+
+function setHTML(id, html){
+  const el = document.getElementById(id);
+  if(el) el.innerHTML = html;
 }
 
 const pct = (v, g) => {
@@ -33,12 +46,119 @@ const setBar = (id, p) => {
   if(el) el.style.width = p + "%";
 };
 
-function setText(id, txt){
-  const el = document.getElementById(id);
-  if(el) el.textContent = txt;
+function formatNum(n){
+  return Number(n || 0).toLocaleString();
 }
 
-// ---------- dashboard data ----------
+function formatMoney(n){
+  return "$" + Number(n || 0).toLocaleString();
+}
+
+function isValidWallet(address){
+  return /^0x[a-fA-F0-9]{40}$/.test(address);
+}
+
+function openDex(){
+  window.open(JOLLOFSWAP_URL, "_blank");
+}
+
+function openAmVault(){
+  window.open(AMVAULT_URL, "_blank");
+}
+
+async function getTokenBalance(address){
+  const provider = new ethers.JsonRpcProvider(ALKE_RPC);
+  const contract = new ethers.Contract(
+    TOKEN_ADDRESS,
+    ["function balanceOf(address owner) view returns (uint256)"],
+    provider
+  );
+  const raw = await contract.balanceOf(address);
+  return Number(ethers.formatUnits(raw, TOKEN_DECIMALS));
+}
+
+// ---------- wallet save/load ----------
+function loadSavedWallet(){
+  const saved = localStorage.getItem(SAVED_WALLET_KEY);
+  const input = document.getElementById("walletInput");
+  const note = document.getElementById("savedWalletNote");
+  const walletDot = document.getElementById("walletDot");
+
+  if(saved){
+    if(input) input.value = saved;
+    if(note) note.textContent = `Saved wallet: ${saved}`;
+    if(walletDot) walletDot.style.background = "#43a047";
+    return saved;
+  }
+
+  if(note) note.textContent = "No wallet saved yet.";
+  if(walletDot) walletDot.style.background = "#e53935";
+  return null;
+}
+
+async function saveWallet(){
+  const input = document.getElementById("walletInput");
+  const note = document.getElementById("savedWalletNote");
+
+  if(!input) return;
+  const wallet = input.value.trim();
+
+  if(!isValidWallet(wallet)){
+    alert("Enter a valid wallet address.");
+    return;
+  }
+
+  localStorage.setItem(SAVED_WALLET_KEY, wallet);
+
+  if(note) note.textContent = `Saved wallet: ${wallet}`;
+  const walletDot = document.getElementById("walletDot");
+  if(walletDot) walletDot.style.background = "#43a047";
+
+  await showBalance(wallet);
+}
+
+function clearWallet(){
+  localStorage.removeItem(SAVED_WALLET_KEY);
+
+  const input = document.getElementById("walletInput");
+  const note = document.getElementById("savedWalletNote");
+  const walletDot = document.getElementById("walletDot");
+
+  if(input) input.value = "";
+  if(note) note.textContent = "No wallet saved yet.";
+  if(walletDot) walletDot.style.background = "#e53935";
+
+  setText("walletBalance", "");
+  setText("tokenBalance", "");
+}
+
+// ---------- balance display ----------
+async function showBalance(account){
+  if(!account) return;
+
+  try{
+    setText("walletBalance", `Saved Wallet: ${account}`);
+
+    const userBal = await getTokenBalance(account);
+    setText("tokenBalance", `Your 7TRB Balance: ${userBal.toFixed(3)} ${TOKEN_SYMBOL}`);
+
+    const treasuryBal = await getTokenBalance(TREASURY_WALLET);
+    setText("treasuryBalance", `Treasury 7TRB (on-chain): ${treasuryBal.toFixed(3)} ${TOKEN_SYMBOL}`);
+    setText("treasuryTokenBalance", treasuryBal.toFixed(3));
+
+    const systemBanner = document.getElementById("systemBanner");
+    const networkDot = document.getElementById("networkDot");
+    if(systemBanner) systemBanner.style.display = "block";
+    if(networkDot) networkDot.style.background = "#43a047";
+  }catch(err){
+    console.error("Balance fetch failed:", err);
+    setText("tokenBalance", "Unable to load 7TRB balance.");
+    setText("treasuryBalance", "Unable to load treasury balance.");
+    setText("treasuryTokenBalance", "—");
+  }
+}
+
+// ---------- metrics + tables ----------
 (async function initDashboard(){
   const [goals, metrics, merchants, referrals, activity] = await Promise.all([
     safeJson("data/goals.json"),
@@ -50,58 +170,87 @@ function setText(id, txt){
 
   if(!metrics){
     setText("updatedAt", "— (awaiting data/metrics.json)");
-    return;
+  } else {
+    const upd = metrics.updated_at ? new Date(metrics.updated_at) : null;
+    setText("updatedAt", (upd && !isNaN(upd)) ? upd.toLocaleString() : "—");
+
+    const freshDot = document.getElementById("freshDot");
+    if (freshDot && upd && !isNaN(upd)){
+      const hrs = (Date.now() - upd.getTime()) / 36e5;
+      freshDot.style.background = hrs <= 24 ? "#22c55e" : (hrs <= 72 ? "#f59e0b" : "#ef4444");
+      freshDot.title = `Data age: ${hrs.toFixed(1)}h`;
+    }
+
+    const holders = metrics.holders ?? 0;
+    setText("holders", formatNum(holders));
+    setBar("holdersBar", pct(holders, goals && goals.holders));
+
+    const active = metrics.active_wallets_30d ?? 0;
+    setText("active", formatNum(active));
+
+    const tUSD = Math.round(metrics.treasury_usd ?? 0);
+    setText("treasury", formatMoney(tUSD));
+    setBar("treasuryBar", pct(tUSD, goals && goals.treasury_usd));
+
+    const spentPctRaw = metrics.spent_pct_30d ?? 0;
+    const spentPct = spentPctRaw <= 1 ? Math.round(spentPctRaw * 100) : Math.round(spentPctRaw);
+    setText("spendSave", `${spentPct}% / ${100 - spentPct}%`);
+    setBar("spendBar", Math.max(0, Math.min(100, spentPct)));
+
+    let totalRefs = 0;
+    if(referrals && Array.isArray(referrals.items)){
+      totalRefs = referrals.items.reduce((sum, r) => sum + (r.count || 0), 0);
+    }
+    setText("referrals", formatNum(totalRefs));
+    setText("referralsNote", "from tracked sources");
+
+    const pr = metrics.projects || {};
+    const projBody = document.getElementById("projRows");
+    if (projBody){
+      projBody.innerHTML = "";
+      [
+        ["Proposed", pr.proposed],
+        ["Approved", pr.approved],
+        ["Funded", pr.funded],
+        ["Delivered", pr.delivered]
+      ].forEach(([label, val]) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${label}</td><td>${val ?? 0}</td>`;
+        projBody.appendChild(tr);
+      });
+    }
+
+    const series = metrics.treasury_series || [];
+    const labels = series.map(x => x[0]);
+    const data = series.map(x => x[1]);
+    const ctx = document.getElementById("treasuryChart");
+
+    if(ctx && labels.length && window.Chart){
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [{
+            label: "Treasury (USD est)",
+            data,
+            tension: 0.25,
+            borderColor: "#FFD700",
+            borderWidth: 2,
+            pointRadius: 0
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: "#222" } },
+            y: { grid: { color: "#222" } }
+          }
+        }
+      });
+    }
   }
 
-  const upd = metrics.updated_at ? new Date(metrics.updated_at) : null;
-  setText("updatedAt", (upd && !isNaN(upd)) ? upd.toLocaleString() : "—");
-
-  const freshDot = document.getElementById("freshDot");
-  if (freshDot && upd && !isNaN(upd)){
-    const hrs = (Date.now() - upd.getTime()) / 36e5;
-    freshDot.style.background = hrs <= 24 ? "#22c55e" : (hrs <= 72 ? "#f59e0b" : "#ef4444");
-    freshDot.title = `Data age: ${hrs.toFixed(1)}h`;
-  }
-
-  const holders = metrics.holders ?? 0;
-  setText("holders", holders.toLocaleString());
-  setBar("holdersBar", pct(holders, goals && goals.holders));
-
-  const active = metrics.active_wallets_30d ?? 0;
-  setText("active", active.toLocaleString());
-
-  const tUSD = Math.round(metrics.treasury_usd ?? 0);
-  setText("treasury", "$" + tUSD.toLocaleString());
-  setBar("treasuryBar", pct(tUSD, goals && goals.treasury_usd));
-
-  // If your JSON stores decimal like 0.42, use *100. If it stores 42 already, remove *100.
-  const spentPct = Math.round((metrics.spent_pct_30d ?? 0) * 100);
-  setText("spendSave", `${spentPct}% / ${100 - spentPct}%`);
-  setBar("spendBar", Math.max(0, Math.min(100, spentPct)));
-
-  let totalRefs = 0;
-  if(referrals && Array.isArray(referrals.items)){
-    totalRefs = referrals.items.reduce((sum, r) => sum + (r.count || 0), 0);
-  }
-  setText("referrals", totalRefs.toLocaleString());
-  setText("referralsNote", "from tracked sources");
-
-  const pr = metrics.projects || {};
-  const projBody = document.getElementById("projRows");
-  if (projBody){
-    projBody.innerHTML = "";
-    [
-      ["Proposed", pr.proposed],
-      ["Approved", pr.approved],
-      ["Funded", pr.funded],
-      ["Delivered", pr.delivered]
-    ].forEach(([label, val]) => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${label}</td><td>${val ?? 0}</td>`;
-      projBody.appendChild(tr);
-    });
-  }
-
+  // merchants table
   if(Array.isArray(merchants)){
     const mBody = document.getElementById("merchRows");
     if (mBody){
@@ -112,40 +261,11 @@ function setText(id, txt){
           <td>${m.url ? `<a href="${m.url}" target="_blank" rel="noopener">${m.name}</a>` : (m.name || "—")}</td>
           <td>${m.city || ""}</td>
           <td>${m.since || ""}</td>
-          <td>${(m.monthly_volume ?? 0).toLocaleString()}</td>
+          <td>${formatNum(m.monthly_volume ?? 0)}</td>
         `;
         mBody.appendChild(tr);
       });
     }
-  }
-
-  const series = metrics.treasury_series || [];
-  const labels = series.map(x => x[0]);
-  const data = series.map(x => x[1]);
-  const ctx = document.getElementById("treasuryChart");
-
-  if(ctx && labels.length && window.Chart){
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels,
-        datasets: [{
-          label: "Treasury (USD est)",
-          data,
-          tension: 0.25,
-          borderColor: "#FFD700",
-          borderWidth: 2,
-          pointRadius: 0
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { color: "#222" } },
-          y: { grid: { color: "#222" } }
-        }
-      }
-    });
   }
 
   // map
@@ -166,7 +286,7 @@ function setText(id, txt){
       const avgLat = latlngs.reduce((s,p)=>s+p[0],0)/latlngs.length || 42.3314;
       const avgLng = latlngs.reduce((s,p)=>s+p[1],0)/latlngs.length || -83.0458;
 
-      map.setView([avgLat, avgLng], 9);
+      map.setView([avgLat, avgLng], 3);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:"© OpenStreetMap"
@@ -190,130 +310,59 @@ function setText(id, txt){
     console.warn("Map init failed:", e);
   }
 
-  // circulation tracker
+  // activity
   const activityList = document.getElementById("activityList");
   if(activityList){
     activityList.innerHTML = "";
 
     if(activity && Array.isArray(activity.items) && activity.items.length){
-      activity.items.slice(0, 8).forEach(item => {
+      activity.items.forEach(item => {
         const div = document.createElement("div");
         div.className = "activity-item";
+
+        const title = item.title || item.type || "Circulation event";
+        const body = item.description || item.detail || "";
+        const meta = item.date || item.when || "";
+
         div.innerHTML = `
-          <div><strong>${item.type || "Activity"}</strong></div>
-          <div class="mini">${item.date || ""}</div>
-          <div style="margin-top:6px;">${item.description || ""}</div>
+          <strong>${title}</strong>
+          ${meta ? `<div class="mini" style="margin-top:4px;">${meta}</div>` : ""}
+          ${body ? `<div style="margin-top:6px;">${body}</div>` : ""}
         `;
         activityList.appendChild(div);
       });
     } else {
-      activityList.innerHTML = `<div class="activity-item muted">No circulation events loaded yet. Add them to <code>data/activity.json</code>.</div>`;
+      activityList.innerHTML = `<div class="activity-item muted">No circulation events loaded yet. Add <code>data/activity.json</code>.</div>`;
     }
   }
 })();
 
-// ---------- wallet connect + balances ----------
-function updateButton(account){
-  const btn = document.getElementById("connectBtn");
-  if(!btn) return;
+// ---------- boot ----------
+document.addEventListener("DOMContentLoaded", async () => {
+  const openAmVaultBtn = document.getElementById("openAmVaultBtn");
+  const saveWalletBtn = document.getElementById("saveWalletBtn");
+  const clearWalletBtn = document.getElementById("clearWalletBtn");
 
-  if(account){
-    btn.textContent = account.slice(0,6) + "..." + account.slice(-4);
-    btn.style.background = "linear-gradient(90deg,#FFD700,#b8912f)";
-    const wd = document.getElementById("walletDot");
-    if(wd) wd.style.background = "#43a047";
-  }else{
-    btn.textContent = "Connect Wallet";
-    btn.style.background = "";
-    const wd = document.getElementById("walletDot");
-    if(wd) wd.style.background = "#e53935";
-  }
-}
+  if(openAmVaultBtn) openAmVaultBtn.addEventListener("click", openAmVault);
+  if(saveWalletBtn) saveWalletBtn.addEventListener("click", saveWallet);
+  if(clearWalletBtn) clearWalletBtn.addEventListener("click", clearWallet);
 
-async function showBalance(account){
-  if(!account) return;
+  const saved = loadSavedWallet();
+  if(saved){
+    await showBalance(saved);
+  } else {
+    try{
+      const treasuryBal = await getTokenBalance(TREASURY_WALLET);
+      setText("treasuryBalance", `Treasury 7TRB (on-chain): ${treasuryBal.toFixed(3)} ${TOKEN_SYMBOL}`);
+      setText("treasuryTokenBalance", treasuryBal.toFixed(3));
 
-  try{
-    const provider = new ethers.JsonRpcProvider(ALKE_RPC);
-    const contract = new ethers.Contract(
-      TOKEN_ADDRESS,
-      ["function balanceOf(address) view returns (uint256)"],
-      provider
-    );
+      const networkDot = document.getElementById("networkDot");
+      if(networkDot) networkDot.style.background = "#43a047";
 
-    const raw = await contract.balanceOf(account);
-    const userBal = Number(ethers.formatUnits(raw, TOKEN_DECIMALS));
-    setText("walletBalance", `Your 7TRB (Alkebuleum): ${userBal.toFixed(3)} ${TOKEN_SYMBOL}`);
-
-    const tRaw = await contract.balanceOf(TREASURY_WALLET);
-    const tBal = Number(ethers.formatUnits(tRaw, TOKEN_DECIMALS));
-    setText("treasuryBalance", `Treasury 7TRB (on-chain): ${tBal.toFixed(3)} ${TOKEN_SYMBOL}`);
-    setText("treasuryTokenBalance", tBal.toFixed(3));
-
-    setText("tokenContract", TOKEN_ADDRESS);
-    setText("treasuryAddress", TREASURY_WALLET);
-
-    const nd = document.getElementById("networkDot");
-    if (nd) nd.style.background = "#43a047";
-
-    const banner = document.getElementById("systemBanner");
-    if (banner) banner.style.display = "block";
-  }catch(err){
-    console.error("Alkebuleum balance fetch failed:", err);
-
-    const nd = document.getElementById("networkDot");
-    if (nd) nd.style.background = "#e53935";
-
-    const banner = document.getElementById("systemBanner");
-    if (banner) banner.style.display = "none";
-  }
-}
-
-async function connectWallet(){
-  if(typeof window.ethereum === "undefined"){
-    alert("No wallet found. Open this page in MetaMask or a Web3 browser.");
-    return;
-  }
-  try{
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const accounts = await provider.send("eth_requestAccounts", []);
-    const account = accounts[0];
-    updateButton(account);
-    showBalance(account);
-  }catch(err){
-    console.error("Connect error:", err);
-    alert("Wallet connection failed.");
-  }
-}
-
-async function checkConnection(){
-  if(typeof window.ethereum === "undefined") return;
-  try{
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const accounts = await provider.send("eth_accounts", []);
-    if(accounts.length){
-      updateButton(accounts[0]);
-      showBalance(accounts[0]);
+      const systemBanner = document.getElementById("systemBanner");
+      if(systemBanner) systemBanner.style.display = "block";
+    }catch(err){
+      console.error(err);
     }
-  }catch(err){
-    console.error("Auto-connect error:", err);
   }
-}
-
-if(typeof window.ethereum !== "undefined"){
-  window.ethereum.on("accountsChanged", (accounts) => {
-    if(!accounts.length){
-      updateButton(null);
-      setText("walletBalance", "");
-    }else{
-      updateButton(accounts[0]);
-      showBalance(accounts[0]);
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("connectBtn");
-  if(btn) btn.addEventListener("click", connectWallet);
-  checkConnection();
 });
