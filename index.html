@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>7TRB — Organize. Build. Circulate.</title>
+
 <link rel="icon" href="images/7trb.logo.png">
 
 <style>
@@ -15,24 +16,19 @@ body{
   text-align:center;
 }
 
-header{
-  position:relative;
-  border-bottom:1px solid #222;
-}
-
+/* HEADER */
 .hero-banner{
   width:100%;
   min-height:420px;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.58), rgba(0,0,0,.38), rgba(0,0,0,.7)),
+    linear-gradient(180deg, rgba(0,0,0,.7), rgba(0,0,0,.5)),
     url('images/welcome_banner.png') center/cover no-repeat;
   display:flex;
   flex-direction:column;
-  justify-content:flex-start;
 }
 
 nav{
-  background:rgba(17,17,17,.9);
+  background:#111;
   padding:15px;
 }
 
@@ -49,32 +45,61 @@ nav a{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  padding:40px 20px 60px;
+  padding:40px 20px;
 }
 
 .hero-logo{
   width:120px;
   margin-bottom:20px;
-  border-radius:50%;
-  box-shadow:0 0 20px rgba(255,215,0,.25);
 }
 
 h1{
-  margin:0 0 12px;
   font-size:48px;
+  margin:10px 0;
 }
 
 p{
   color:#ddd;
-  font-size:18px;
 }
 
+/* SECTIONS */
 .section{
   margin:60px auto;
   width:90%;
   max-width:1100px;
 }
 
+/* BOOK SECTION */
+.book-box{
+  background:#111;
+  border:1px solid #333;
+  border-radius:14px;
+  padding:30px;
+}
+
+.book-flex{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:30px;
+}
+
+.book-img{
+  width:220px;
+  border-radius:10px;
+}
+
+.book-text{
+  max-width:400px;
+  text-align:left;
+}
+
+ul{
+  color:#ccc;
+}
+
+/* GRID */
 .grid{
   display:flex;
   flex-wrap:wrap;
@@ -90,10 +115,7 @@ p{
   padding:25px;
 }
 
-.card h2{
-  color:#FFD700;
-}
-
+/* BUTTON */
 .btn{
   display:inline-block;
   margin-top:15px;
@@ -109,127 +131,158 @@ p{
   background:#e5c100;
 }
 
-.visitor-box{
-  background:#111;
-  border:1px solid #333;
-  border-radius:12px;
-  max-width:420px;
-  margin:0 auto;
-  padding:24px;
-}
-
-.visitor-count{
-  font-size:42px;
-  font-weight:bold;
-  color:#FFD700;
-  margin:10px 0;
-}
-
+/* FOOTER */
 footer{
-  margin-top:50px;
-  padding:25px 20px;
+  margin-top:60px;
+  padding:30px 20px;
   border-top:1px solid #222;
   background:#0a0a0a;
 }
 
-@media (max-width:700px){
-  h1{font-size:36px;}
-  nav a{
-    display:inline-block;
-    margin:6px 10px;
-    font-size:14px;
-  }
-  .hero-banner{min-height:360px;}
-}
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="hero-banner">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
-      <a href="earn.html">Earn</a>
-      <a href="network.html">Network</a>
-      <a href="dashboard.html">Dashboard</a>
-    </nav>
+<!-- HERO -->
+<header class="hero-banner">
 
-    <div class="hero-content">
-      <img src="images/7trb.logo.png" class="hero-logo" alt="7TRB Logo">
-      <h1>Organize. Build. Circulate.</h1>
-      <p>A community-powered economy built on participation — not just speculation.</p>
-    </div>
-  </div>
-</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="earn.html">Earn</a>
+  <a href="network.html">Network</a>
+  <a href="dashboard.html">Dashboard</a>
+</nav>
 
-<div class="section">
-  <div class="visitor-box">
-    <h2>Visitor Signal</h2>
-    <p>People exploring the 7TRB ecosystem</p>
-    <div class="visitor-count" id="visitorCount">0</div>
-    <p style="font-size:14px;color:#888;">Browser-based visit counter</p>
-  </div>
+<div class="hero-content">
+  <img src="images/7trb.logo.png" class="hero-logo">
+  <h1>Organize. Build. Circulate.</h1>
+  <p>A community-powered economy built on participation — not speculation.</p>
 </div>
 
+</header>
+
+<!-- 📘 BOOK SECTION -->
 <div class="section">
+
+  <div class="book-box">
+
+    <h2>📘 Build Community Power</h2>
+
+    <p>
+      The blueprint behind 7TRB — how to organize people, circulate money,
+      and build real community wealth.
+    </p>
+
+    <div class="book-flex">
+
+      <img src="images/ebook-cover.png" class="book-img">
+
+      <div class="book-text">
+
+        <h3>What You'll Learn</h3>
+
+        <ul>
+          <li>How to organize your community into economic power</li>
+          <li>How to circulate money instead of losing it</li>
+          <li>How to build wealth through participation</li>
+        </ul>
+
+        <a href="https://www.amazon.com/dp/B0GTBSD4Y9"
+           target="_blank"
+           class="btn">
+           Buy on Amazon — $12.99
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+  <div class="section">
+
+  <h2>How 7TRB Works</h2>
+
+  <p style="max-width:700px;margin:0 auto;">
+    7TRB is not just a token — it's a system designed to keep value circulating inside the community.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>1. Organize</h3>
+      <p>
+        Bring people together — residents, businesses, and creators —
+        into one connected network.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>2. Build</h3>
+      <p>
+        Create products, services, and opportunities inside the network.
+        Support each other first.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>3. Circulate</h3>
+      <p>
+        Spend within the system. Money stays moving —
+        and movement creates value.
+      </p>
+    </div>
+
+  </div>
+
+  </div>
+
+<!-- ACTION CARDS -->
+<div class="section">
+
   <div class="grid">
 
     <div class="card">
       <h2>Shop</h2>
-      <p>Spend and circulate 7TRB through products, apparel, and tools.</p>
+      <p>Spend and circulate 7TRB through products and tools.</p>
       <a class="btn" href="shop.html">Go to Shop</a>
     </div>
 
     <div class="card">
       <h2>Earn</h2>
-      <p>Learn how to earn 7TRB through participation and contribution.</p>
+      <p>Earn 7TRB through participation and contribution.</p>
       <a class="btn" href="earn.html">Start Earning</a>
     </div>
 
     <div class="card">
       <h2>Join Network</h2>
-      <p>Connect as a resident or business and become part of the system.</p>
+      <p>Become part of the system as a resident or business.</p>
       <a class="btn" href="network.html">Join Now</a>
     </div>
 
   </div>
+
 </div>
 
-<div class="section">
-  <h2>Why 7TRB?</h2>
-  <p>
-    Traditional money leaves the community.<br>
-    7TRB is designed to keep value circulating inside it.
-  </p>
-</div>
-
+<!-- DASHBOARD -->
 <div class="section">
   <h2>Track the System</h2>
   <p>See transparency, wallets, and activity in real time.</p>
   <a class="btn" href="dashboard.html">Open Dashboard</a>
 </div>
 
+<!-- FOOTER VISITOR COUNTER -->
 <footer>
+
+  <p style="color:#888;font-size:14px;">Network Activity Signal</p>
+
   <img src="https://visitor-badge.laobi.icu/badge?page_id=7trb.com&left_color=gold&right_color=black&left_text=Visitors"
        alt="7TRB visitor count" />
+
 </footer>
-
-<script>
-function updateVisitorCount() {
-  let count = localStorage.getItem("visitorCount");
-  if (!count) {
-    count = 1;
-  } else {
-    count = parseInt(count, 10) + 1;
-  }
-  localStorage.setItem("visitorCount", count);
-  document.getElementById("visitorCount").innerText = count;
-}
-
-updateVisitorCount();
-</script>
 
 </body>
 </html>
