@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,7 +12,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>7TRB Checkout</title>
-  <meta name="description" content="Checkout for 7TRB apparel with standard, hybrid, and promo 7TRB pricing." />
+  <meta name="description" content="Checkout for 7TRB apparel and cart orders." />
   <link rel="icon" href="images/7trb.logo.png" />
 
   <style>
@@ -26,16 +25,12 @@
       --gold:#e7b852;
       --gold-2:#b8831b;
       --gold-bright:#ffdd7a;
-      --line:#3b2b17;
-      --radius:18px;
-      --radius-lg:24px;
       --shadow:0 18px 50px rgba(0,0,0,.55);
       --ok:#43a047;
       --bad:#e53935;
     }
 
     *{box-sizing:border-box}
-
     html,body{
       margin:0;
       background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
@@ -92,9 +87,7 @@
       font-size:1.12rem;
     }
 
-    .brand small{
-      color:var(--muted);
-    }
+    .brand small{color:var(--muted)}
 
     .nav-links{
       display:flex;
@@ -117,9 +110,7 @@
         url('images/welcome_banner.png') center/cover no-repeat;
     }
 
-    .hero-inner{
-      padding:42px 0;
-    }
+    .hero-inner{padding:42px 0}
 
     .eyebrow{
       display:inline-block;
@@ -144,9 +135,7 @@
       max-width:64ch;
     }
 
-    .section{
-      padding:40px 0;
-    }
+    .section{padding:40px 0}
 
     .grid{
       display:grid;
@@ -186,32 +175,52 @@
       font-size:clamp(22px,3vw,32px);
     }
 
-    .muted{
-      color:var(--muted);
-    }
+    .muted{color:var(--muted)}
 
-    .product-shell{
+    .cart-list{
       display:grid;
-      grid-template-columns:260px 1fr;
-      gap:18px;
-      align-items:start;
+      gap:12px;
+      margin-top:8px;
     }
 
-    .product-image{
-      height:320px;
-      border-radius:18px;
-      overflow:hidden;
+    .cart-row{
+      display:grid;
+      grid-template-columns:88px 1fr auto;
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,215,122,.12);
+      background:rgba(255,255,255,.03);
+    }
+
+    .cart-row img{
+      width:88px;
+      height:88px;
+      object-fit:cover;
+      border-radius:12px;
       border:1px solid rgba(255,215,122,.14);
       background:#0d0804;
-      display:flex;
-      align-items:center;
-      justify-content:center;
     }
 
-    .product-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .cart-row-title{
+      color:var(--gold-bright);
+      font-weight:800;
+      font-size:1rem;
+      line-height:1.3;
+    }
+
+    .cart-row-desc{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-top:4px;
+    }
+
+    .cart-row-price{
+      color:var(--gold-bright);
+      font-weight:900;
+      text-align:right;
+      white-space:nowrap;
     }
 
     .detail-list{
@@ -265,6 +274,11 @@
       border-color:rgba(255,215,122,.60);
       background:linear-gradient(180deg, rgba(231,184,82,.14), rgba(184,131,31,.08));
       box-shadow:0 0 18px rgba(255,215,122,.12);
+    }
+
+    .lane.disabled{
+      opacity:.45;
+      cursor:not-allowed;
     }
 
     .lane-top{
@@ -345,23 +359,18 @@
     }
 
     .btn:hover{transform:translateY(-1px)}
-
     .btn.gold{
       background:linear-gradient(90deg,var(--gold),var(--gold-2));
       color:#130b03;
       border-color:rgba(255,215,122,.6);
       box-shadow:0 0 18px rgba(255,215,122,.28);
     }
-
     .btn.ghost{
       background:transparent;
       color:var(--ink);
       border-color:rgba(255,215,122,.28);
     }
-
-    .btn.full{
-      width:100%;
-    }
+    .btn.full{width:100%}
 
     .summary-card{
       display:grid;
@@ -376,17 +385,13 @@
       border-bottom:1px solid rgba(255,215,122,.10);
     }
 
-    .summary-line:last-child{
-      border-bottom:none;
-    }
-
+    .summary-line:last-child{border-bottom:none}
     .summary-line strong{
       color:var(--muted);
       text-transform:uppercase;
       letter-spacing:.06em;
       font-size:.82rem;
     }
-
     .summary-line span{
       color:var(--gold-bright);
       font-weight:800;
@@ -474,9 +479,10 @@
 
     @media (max-width:980px){
       .grid,
-      .product-shell{
+      .cart-row{
         grid-template-columns:1fr;
       }
+      .cart-row-price{text-align:left}
     }
 
     @media (max-width:760px){
@@ -493,13 +499,15 @@
         <img src="images/7trb.logo.png" alt="7TRB logo" />
         <div>
           <strong>7TRB Checkout</strong>
-          <small>Cash • Hybrid • Promo</small>
+          <small>Cart + single item checkout</small>
         </div>
       </div>
 
       <nav class="nav-links">
         <a href="index.html">Home</a>
-        <a href="apparel.html">Apparel</a>
+        <a href="shop.html">Shop</a>
+        <a href="earn.html">Earn</a>
+        <a href="network.html">Network</a>
         <a href="dashboard.html">Dashboard</a>
         <a href="https://amvault.net" target="_blank" rel="noopener">Wallet</a>
       </nav>
@@ -511,7 +519,7 @@
       <span class="eyebrow">Wear the movement</span>
       <h1>Checkout</h1>
       <p>
-        Pick your pricing lane, confirm your order, and send it where it needs to go.
+        Review your order, choose your payment lane, and submit your purchase cleanly.
       </p>
     </div>
   </section>
@@ -521,66 +529,63 @@
       <div class="grid">
 
         <section class="box">
-          <h2 class="title">Selected Product</h2>
+          <h2 class="title">Order Items</h2>
 
-          <div class="product-shell">
-            <div class="product-image">
-              <img id="productImage" src="images/logo.png" alt="Selected product image" onerror="this.src='images/logo.png'">
-            </div>
+          <div id="cartModeBlock">
+            <div id="cartList" class="cart-list"></div>
+          </div>
 
-            <div>
-              <h3 id="productName" style="margin:0 0 8px;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.05em;">7TRB Product</h3>
-              <p id="productDesc" class="muted" style="margin:0;">Your selected item will appear here.</p>
+          <div id="singleModeBlock" style="display:none;">
+            <div id="singleList" class="cart-list"></div>
 
-              <div class="detail-list">
-                <div class="detail-row">
-                  <strong>Standard</strong>
-                  <span id="standardPrice">$0</span>
+            <div style="margin-top:22px;">
+              <h3 style="margin:0 0 10px;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.06em;">Choose Pricing Lane</h3>
+
+              <div class="lane-options">
+                <div class="lane active" data-lane="standard">
+                  <div class="lane-top">
+                    <div class="lane-title">Standard</div>
+                    <div class="lane-amount" id="laneStandardAmount">$0</div>
+                  </div>
+                  <p>Regular cash checkout. Traditional lane. Straight and simple.</p>
                 </div>
-                <div class="detail-row">
-                  <strong>Hybrid</strong>
-                  <span id="hybridPrice">—</span>
+
+                <div class="lane" data-lane="hybrid">
+                  <div class="lane-top">
+                    <div class="lane-title">Hybrid</div>
+                    <div class="lane-amount" id="laneHybridAmount">—</div>
+                  </div>
+                  <p>Part cash, part 7TRB. Bridge old money rails with the new system.</p>
                 </div>
-                <div class="detail-row">
-                  <strong>Promo</strong>
-                  <span id="promoPrice">—</span>
+
+                <div class="lane" data-lane="promo">
+                  <div class="lane-top">
+                    <div class="lane-title">Promo</div>
+                    <div class="lane-amount" id="lanePromoAmount">—</div>
+                  </div>
+                  <p>7TRB-only pricing where available. Utility over decoration.</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div style="margin-top:22px;">
-            <h3 style="margin:0 0 10px;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.06em;">Choose Pricing Lane</h3>
-
-            <div class="lane-options">
-              <div class="lane active" data-lane="standard">
-                <div class="lane-top">
-                  <div class="lane-title">Standard</div>
-                  <div class="lane-amount" id="laneStandardAmount">$0</div>
-                </div>
-                <p>Regular cash checkout. Traditional lane. Straight and simple.</p>
-              </div>
-
-              <div class="lane" data-lane="hybrid">
-                <div class="lane-top">
-                  <div class="lane-title">Hybrid</div>
-                  <div class="lane-amount" id="laneHybridAmount">—</div>
-                </div>
-                <p>Part cash, part 7TRB. Bridge old money rails with the new system.</p>
-              </div>
-
-              <div class="lane" data-lane="promo">
-                <div class="lane-top">
-                  <div class="lane-title">Promo</div>
-                  <div class="lane-amount" id="lanePromoAmount">—</div>
-                </div>
-                <p>7TRB-only pricing where available. Utility over decoration.</p>
-              </div>
+          <div class="detail-list">
+            <div class="detail-row">
+              <strong>Order Type</strong>
+              <span id="orderTypeLabel">—</span>
+            </div>
+            <div class="detail-row">
+              <strong>Items</strong>
+              <span id="itemCountLabel">0</span>
+            </div>
+            <div class="detail-row">
+              <strong>Total</strong>
+              <span id="primaryTotalLabel">$0</span>
             </div>
           </div>
 
           <div style="margin-top:22px;">
-            <a class="btn ghost" href="apparel.html">← Back to Apparel</a>
+            <a class="btn ghost" href="shop.html">← Back to Shop</a>
           </div>
         </section>
 
@@ -589,11 +594,13 @@
 
           <form id="checkoutForm" class="form-grid">
             <input type="hidden" name="_subject" id="subjectField" value="New 7TRB Order">
+            <input type="hidden" name="order_mode" id="hiddenOrderMode">
             <input type="hidden" name="product" id="hiddenProduct">
             <input type="hidden" name="pricing_lane" id="hiddenLane">
             <input type="hidden" name="total" id="hiddenTotal">
             <input type="hidden" name="cash_amount" id="hiddenCashAmount">
             <input type="hidden" name="token_amount" id="hiddenTokenAmount">
+            <input type="hidden" name="cart_items" id="hiddenCartItems">
 
             <div class="form-row">
               <label for="buyerName">Full Name</label>
@@ -612,7 +619,7 @@
 
             <div class="form-row">
               <label for="size">Size</label>
-              <select id="size" name="size" required>
+              <select id="size" name="size">
                 <option value="">Choose size</option>
                 <option>S</option>
                 <option>M</option>
@@ -640,7 +647,7 @@
 
             <div class="summary-card">
               <div class="summary-line">
-                <strong>Product</strong>
+                <strong>Order</strong>
                 <span id="summaryProduct">—</span>
               </div>
               <div class="summary-line">
@@ -654,7 +661,7 @@
             </div>
 
             <div class="notice" id="paymentNotice">
-              Standard lane selected. This order will be sent to your Formspree inbox.
+              Review your order and submit it.
             </div>
 
             <div class="wallet-box" id="walletBox">
@@ -691,9 +698,10 @@
 
       <div class="footer-links">
         <a href="index.html">Home</a>
-        <a href="apparel.html">Apparel</a>
+        <a href="shop.html">Shop</a>
+        <a href="earn.html">Earn</a>
+        <a href="network.html">Network</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="https://amvault.net" target="_blank" rel="noopener">Wallet</a>
       </div>
     </div>
   </footer>
@@ -703,22 +711,28 @@
     const TREASURY_WALLET = "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB";
 
     const params = new URLSearchParams(window.location.search);
+    const cartMode = params.get('cart') === '1';
 
-    const product = params.get('product') || '7TRB Product';
-    const cash = params.get('cash') || '0';
-    const hybridCash = params.get('hybrid_cash');
-    const hybrid7trb = params.get('hybrid_7trb');
-    const promo7trb = params.get('promo_7trb');
-    const image = params.get('image') || 'images/logo.png';
-    const desc = params.get('desc') || 'Selected product from the 7TRB apparel page.';
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const singleProduct = {
+      product: params.get('product') || '7TRB Product',
+      cash: params.get('cash') || '0',
+      hybridCash: params.get('hybrid_cash'),
+      hybrid7trb: params.get('hybrid_7trb'),
+      promo7trb: params.get('promo_7trb'),
+      image: params.get('image') || 'images/7trb.logo.png',
+      desc: params.get('desc') || 'Selected product from the 7TRB shop.'
+    };
 
     const el = {
-      productName: document.getElementById('productName'),
-      productDesc: document.getElementById('productDesc'),
-      productImage: document.getElementById('productImage'),
-      standardPrice: document.getElementById('standardPrice'),
-      hybridPrice: document.getElementById('hybridPrice'),
-      promoPrice: document.getElementById('promoPrice'),
+      cartModeBlock: document.getElementById('cartModeBlock'),
+      singleModeBlock: document.getElementById('singleModeBlock'),
+      cartList: document.getElementById('cartList'),
+      singleList: document.getElementById('singleList'),
+      orderTypeLabel: document.getElementById('orderTypeLabel'),
+      itemCountLabel: document.getElementById('itemCountLabel'),
+      primaryTotalLabel: document.getElementById('primaryTotalLabel'),
       laneStandardAmount: document.getElementById('laneStandardAmount'),
       laneHybridAmount: document.getElementById('laneHybridAmount'),
       lanePromoAmount: document.getElementById('lanePromoAmount'),
@@ -734,114 +748,226 @@
       submitBtn: document.getElementById('submitBtn'),
       txHash: document.getElementById('txHash'),
       subjectField: document.getElementById('subjectField'),
+      hiddenOrderMode: document.getElementById('hiddenOrderMode'),
       hiddenProduct: document.getElementById('hiddenProduct'),
       hiddenLane: document.getElementById('hiddenLane'),
       hiddenTotal: document.getElementById('hiddenTotal'),
       hiddenCashAmount: document.getElementById('hiddenCashAmount'),
-      hiddenTokenAmount: document.getElementById('hiddenTokenAmount')
+      hiddenTokenAmount: document.getElementById('hiddenTokenAmount'),
+      hiddenCartItems: document.getElementById('hiddenCartItems'),
+      size: document.getElementById('size')
     };
 
-    el.productName.textContent = product;
-    el.productDesc.textContent = desc;
-    el.productImage.src = image;
-    el.standardPrice.textContent = `$${cash}`;
     el.walletAddress.textContent = TREASURY_WALLET;
-
-    const hybridText = (hybridCash && hybrid7trb)
-      ? `$${hybridCash} + ${hybrid7trb} 7TRB`
-      : 'Not available';
-
-    const promoText = promo7trb
-      ? `${promo7trb} 7TRB`
-      : 'Not available';
-
-    el.hybridPrice.textContent = hybridText;
-    el.promoPrice.textContent = promoText;
-    el.laneStandardAmount.textContent = `$${cash}`;
-    el.laneHybridAmount.textContent = hybridText;
-    el.lanePromoAmount.textContent = promoText;
-    el.summaryProduct.textContent = product;
-    el.subjectField.value = `New 7TRB Order — ${product}`;
 
     let selectedLane = 'standard';
 
+    function formatMoney(n) {
+      return '$' + Number(n || 0).toFixed(2);
+    }
+
+    function renderCartItems() {
+      if (!cart.length) {
+        el.cartList.innerHTML = `<div class="muted">Your cart is empty. Go back to the shop and add items first.</div>`;
+        return 0;
+      }
+
+      let total = 0;
+      el.cartList.innerHTML = '';
+
+      cart.forEach(item => {
+        total += Number(item.price || 0);
+
+        const row = document.createElement('div');
+        row.className = 'cart-row';
+        row.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" onerror="this.src='images/7trb.logo.png'">
+          <div>
+            <div class="cart-row-title">${item.name}</div>
+            <div class="cart-row-desc">${item.desc || ''}</div>
+          </div>
+          <div class="cart-row-price">${formatMoney(item.price)}</div>
+        `;
+        el.cartList.appendChild(row);
+      });
+
+      return total;
+    }
+
+    function renderSingleItem() {
+      el.singleList.innerHTML = `
+        <div class="cart-row">
+          <img src="${singleProduct.image}" alt="${singleProduct.product}" onerror="this.src='images/7trb.logo.png'">
+          <div>
+            <div class="cart-row-title">${singleProduct.product}</div>
+            <div class="cart-row-desc">${singleProduct.desc}</div>
+          </div>
+          <div class="cart-row-price">${formatMoney(singleProduct.cash)}</div>
+        </div>
+      `;
+    }
+
+    function singleHybridText() {
+      return (singleProduct.hybridCash && singleProduct.hybrid7trb)
+        ? `${formatMoney(singleProduct.hybridCash)} + ${singleProduct.hybrid7trb} 7TRB`
+        : 'Not available';
+    }
+
+    function singlePromoText() {
+      return singleProduct.promo7trb
+        ? `${singleProduct.promo7trb} 7TRB`
+        : 'Not available';
+    }
+
     function laneAvailable(lane) {
-      if (lane === 'hybrid') return !!(hybridCash && hybrid7trb);
-      if (lane === 'promo') return !!promo7trb;
+      if (cartMode) {
+        return lane === 'standard';
+      }
+      if (lane === 'hybrid') return !!(singleProduct.hybridCash && singleProduct.hybrid7trb);
+      if (lane === 'promo') return !!singleProduct.promo7trb;
       return true;
     }
 
     function laneTotalText(lane) {
-      if (lane === 'hybrid') return hybridText;
-      if (lane === 'promo') return promoText;
-      return `$${cash}`;
+      if (cartMode) {
+        const total = cart.reduce((sum, item) => sum + Number(item.price || 0), 0);
+        return formatMoney(total);
+      }
+
+      if (lane === 'hybrid') return singleHybridText();
+      if (lane === 'promo') return singlePromoText();
+      return formatMoney(singleProduct.cash);
     }
 
-    function laneNoticeText(lane) {
-      if (lane === 'hybrid') {
+    function updateLaneAvailabilityUI() {
+      const lanes = document.querySelectorAll('.lane');
+      lanes.forEach(lane => {
+        const laneType = lane.dataset.lane;
+        lane.classList.remove('disabled');
+        if (!laneAvailable(laneType)) lane.classList.add('disabled');
+      });
+    }
+
+    function updateWalletBox() {
+      const useWallet = !cartMode && (selectedLane === 'hybrid' || selectedLane === 'promo');
+      el.walletBox.style.display = useWallet ? 'block' : 'none';
+      el.txHash.required = useWallet;
+    }
+
+    function paymentNoticeText() {
+      if (cartMode) {
+        return 'Cart checkout uses standard cash total for now. Submit the order and confirm payment manually.';
+      }
+      if (selectedLane === 'hybrid') {
         return 'Hybrid lane selected. Collect the cash portion normally, verify the 7TRB transfer, and paste the transaction hash before submitting.';
       }
-      if (lane === 'promo') {
+      if (selectedLane === 'promo') {
         return 'Promo lane selected. Buyer must send full 7TRB payment and paste the transaction hash before submitting.';
       }
       return 'Standard lane selected. This order will be sent to your Formspree inbox.';
     }
 
-    function updateWalletBox(lane) {
-      el.walletBox.style.display = (lane === 'hybrid' || lane === 'promo') ? 'block' : 'none';
-      el.txHash.required = (lane === 'hybrid' || lane === 'promo');
-    }
-
-    function updateHiddenFields() {
-      el.hiddenProduct.value = product;
-      el.hiddenLane.value = selectedLane;
-      el.hiddenTotal.value = laneTotalText(selectedLane);
-
-      if (selectedLane === 'hybrid') {
-        el.hiddenCashAmount.value = hybridCash || '';
-        el.hiddenTokenAmount.value = hybrid7trb || '';
-      } else if (selectedLane === 'promo') {
-        el.hiddenCashAmount.value = '0';
-        el.hiddenTokenAmount.value = promo7trb || '';
-      } else {
-        el.hiddenCashAmount.value = cash || '';
-        el.hiddenTokenAmount.value = '0';
-      }
-    }
-
     function updateSummary() {
-      const laneLabel = selectedLane.charAt(0).toUpperCase() + selectedLane.slice(1);
-      el.summaryLane.textContent = laneLabel;
-      el.summaryTotal.textContent = laneTotalText(selectedLane);
-      el.paymentNotice.textContent = laneNoticeText(selectedLane);
-      updateWalletBox(selectedLane);
-      updateHiddenFields();
-    }
+      if (cartMode) {
+        const total = cart.reduce((sum, item) => sum + Number(item.price || 0), 0);
+        el.summaryProduct.textContent = `${cart.length} cart item${cart.length === 1 ? '' : 's'}`;
+        el.summaryLane.textContent = 'Standard';
+        el.summaryTotal.textContent = formatMoney(total);
 
-    const lanes = document.querySelectorAll('.lane');
-    lanes.forEach(lane => {
-      const laneType = lane.dataset.lane;
+        el.orderTypeLabel.textContent = 'Cart Checkout';
+        el.itemCountLabel.textContent = String(cart.length);
+        el.primaryTotalLabel.textContent = formatMoney(total);
 
-      if (!laneAvailable(laneType)) {
-        lane.style.opacity = '0.45';
+        el.hiddenOrderMode.value = 'cart';
+        el.hiddenProduct.value = cart.map(item => item.name).join(', ');
+        el.hiddenLane.value = 'standard';
+        el.hiddenTotal.value = formatMoney(total);
+        el.hiddenCashAmount.value = total.toFixed(2);
+        el.hiddenTokenAmount.value = '0';
+        el.hiddenCartItems.value = JSON.stringify(cart);
+        el.subjectField.value = `New 7TRB Cart Order — ${cart.length} item${cart.length === 1 ? '' : 's'}`;
+        el.size.required = false;
+      } else {
+        const laneLabel = selectedLane.charAt(0).toUpperCase() + selectedLane.slice(1);
+        el.summaryProduct.textContent = singleProduct.product;
+        el.summaryLane.textContent = laneLabel;
+        el.summaryTotal.textContent = laneTotalText(selectedLane);
+
+        el.orderTypeLabel.textContent = 'Single Item';
+        el.itemCountLabel.textContent = '1';
+        el.primaryTotalLabel.textContent = laneTotalText(selectedLane);
+
+        el.hiddenOrderMode.value = 'single';
+        el.hiddenProduct.value = singleProduct.product;
+        el.hiddenLane.value = selectedLane;
+        el.hiddenTotal.value = laneTotalText(selectedLane);
+        el.hiddenCartItems.value = '';
+
+        if (selectedLane === 'hybrid') {
+          el.hiddenCashAmount.value = singleProduct.hybridCash || '';
+          el.hiddenTokenAmount.value = singleProduct.hybrid7trb || '';
+        } else if (selectedLane === 'promo') {
+          el.hiddenCashAmount.value = '0';
+          el.hiddenTokenAmount.value = singleProduct.promo7trb || '';
+        } else {
+          el.hiddenCashAmount.value = singleProduct.cash || '';
+          el.hiddenTokenAmount.value = '0';
+        }
+
+        el.subjectField.value = `New 7TRB Order — ${singleProduct.product}`;
+        el.size.required = true;
       }
 
-      lane.addEventListener('click', () => {
-        if (!laneAvailable(laneType)) return;
-        lanes.forEach(item => item.classList.remove('active'));
-        lane.classList.add('active');
-        selectedLane = laneType;
-        updateSummary();
-      });
-    });
+      el.paymentNotice.textContent = paymentNoticeText();
+      updateWalletBox();
+    }
 
-    updateSummary();
+    function initMode() {
+      if (cartMode && cart.length) {
+        el.cartModeBlock.style.display = 'block';
+        el.singleModeBlock.style.display = 'none';
+        renderCartItems();
+      } else {
+        el.cartModeBlock.style.display = 'none';
+        el.singleModeBlock.style.display = 'block';
+        renderSingleItem();
+
+        el.laneStandardAmount.textContent = formatMoney(singleProduct.cash);
+        el.laneHybridAmount.textContent = singleHybridText();
+        el.lanePromoAmount.textContent = singlePromoText();
+
+        updateLaneAvailabilityUI();
+
+        const lanes = document.querySelectorAll('.lane');
+        lanes.forEach(lane => {
+          lane.addEventListener('click', () => {
+            const laneType = lane.dataset.lane;
+            if (!laneAvailable(laneType)) return;
+
+            lanes.forEach(item => item.classList.remove('active'));
+            lane.classList.add('active');
+            selectedLane = laneType;
+            updateSummary();
+          });
+        });
+      }
+
+      updateSummary();
+    }
+
+    initMode();
 
     el.form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       el.successBox.style.display = 'none';
       el.errorBox.style.display = 'none';
+
+      if (cartMode && !cart.length) {
+        el.errorBox.textContent = 'Your cart is empty. Go back to the shop and add items first.';
+        el.errorBox.style.display = 'block';
+        return;
+      }
 
       el.submitBtn.disabled = true;
       el.submitBtn.textContent = 'Sending...';
@@ -852,9 +978,7 @@
         const response = await fetch(FORMSPREE_ENDPOINT, {
           method: 'POST',
           body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
+          headers: { 'Accept': 'application/json' }
         });
 
         if (!response.ok) throw new Error('Failed');
@@ -862,10 +986,9 @@
         el.successBox.style.display = 'block';
         el.form.reset();
 
-        selectedLane = 'standard';
-        lanes.forEach(item => item.classList.remove('active'));
-        document.querySelector('.lane[data-lane="standard"]').classList.add('active');
-        updateSummary();
+        if (cartMode) {
+          localStorage.removeItem('cart');
+        }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
