@@ -12,7 +12,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>7TRB Dashboard — Live System</title>
-  <meta name="description" content="7TRB public dashboard for treasury, merchants, circulation, and live wallet visibility." />
+  <meta name="description" content="7TRB public dashboard for treasury, merchants, circulation, and saved wallet visibility." />
   <link rel="icon" href="images/7trb.logo.png" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -121,6 +121,7 @@
       cursor:pointer;
       white-space:nowrap;
       transition:transform .15s ease;
+      font:inherit;
     }
 
     .btn:hover{transform:translateY(-1px)}
@@ -180,10 +181,29 @@
       margin:10px 0 14px;
     }
 
-    #walletBalance,#treasuryBalance,#tokenBalance{
+    #walletBalance,#tokenBalance,#treasuryBalance{
       color:var(--accent);
       font-weight:700;
       word-break:break-word;
+    }
+
+    .wallet-connect-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+    }
+
+    .wallet-input{
+      flex:1 1 320px;
+      min-width:260px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#0f1012;
+      color:var(--text);
+      outline:none;
     }
 
     .cards{
@@ -303,12 +323,12 @@
             <span id="networkDot" title="Network status"></span>
             <span id="walletDot" title="Wallet status"></span>
           </h1>
-          <div class="subhead">Treasury • Merchants • Circulation • Wallet visibility</div>
+          <div class="subhead">Treasury • Merchants • Circulation • Saved wallet visibility</div>
         </div>
       </div>
 
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-        <button id="connectBtn" class="btn gold" type="button">Connect Wallet</button>
+        <button id="openAmVaultBtn" class="btn gold" type="button">Open AmVault</button>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIKHBUg_R6MYSi8Gf-SDOdRB5qZjXQ0EVC0anJd-A4JMOQXQ/viewform" target="_blank" rel="noopener" class="btn ghost">Join as Merchant</a>
         <a href="index.html" class="btn ghost">← Home</a>
       </div>
@@ -326,6 +346,21 @@
       <div id="walletBalance"></div>
       <div id="tokenBalance"></div>
       <div id="treasuryBalance"></div>
+    </div>
+
+    <div class="panel" style="margin-bottom:12px;">
+      <div class="label">AmVault connection</div>
+      <p class="mini" style="font-size:14px;line-height:1.5;margin-bottom:12px;">
+        Open AmVault, copy your wallet address, then paste it here to load your dashboard view.
+      </p>
+
+      <div class="wallet-connect-row">
+        <input id="walletInput" class="wallet-input" type="text" placeholder="Paste your AmVault wallet address" />
+        <button id="saveWalletBtn" class="btn gold" type="button">Save Wallet</button>
+        <button id="clearWalletBtn" class="btn ghost" type="button">Clear</button>
+      </div>
+
+      <div class="mini" id="savedWalletNote" style="margin-top:10px;">No wallet saved yet.</div>
     </div>
 
     <div class="panel" style="margin-bottom:12px;">
@@ -449,7 +484,7 @@
         </p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
           <a class="btn gold" href="https://docs.google.com/forms/d/e/1FAIpQLSdIKHBUg_R6MYSi8Gf-SDOdRB5qZjXQ0EVC0anJd-A4JMOQXQ/viewform" target="_blank" rel="noopener">Apply as Merchant</a>
-          <a class="btn ghost" href="index.html#circulation-map">View Landing Page</a>
+          <a class="btn ghost" href="network.html">View Network</a>
         </div>
         <p class="mini" style="margin-top:12px;">
           Once approved, add merchant records to <code>data/merchants.json</code> and circulation events to <code>data/activity.json</code>.
@@ -458,12 +493,6 @@
     </div>
 
   </div>
-
-  <script>
-    function openDex(){
-      window.open("https://jollofswap.com", "_blank");
-    }
-  </script>
 
   <script src="dashboard.js"></script>
 </body>
