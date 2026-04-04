@@ -1,16 +1,18 @@
-/* 7TRB Dashboard JS
-   Works with:
-   - ethers v6
-   - Chart.js
-   - Leaflet
+/* 7TRB Dashboard — AmVault-first flow
+   - Read-only mode works from normal browser
+   - Wallet connect works when opened inside AmVault (or any injected EVM wallet)
+   - Redirect/fallback button opens amvault.net
+   - ethers v6 required
 */
 
 const CONFIG = {
   chainIdDecimal: 237422,
-  chainIdHex: "0x39f5e", // 237422
+  chainIdHex: "0x39f5e",
   rpcUrl: "https://rpc.alkebuleum.com",
   tokenAddress: "0x991df36e5b0bb596a83dee6a840f78baa40450e0",
-  treasuryAddress: "0xdf7ce67db19142672c4193d969cdd9975a5a6038",
+  trackedWallet: "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB",
+  treasuryAddress: "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB", // change later if treasury is separate
+  amvaultUrl: "https://amvault.net",
   tokenSymbol: "7TRB",
   tokenDecimalsFallback: 18
 };
@@ -23,11 +25,10 @@ const ERC20_ABI = [
   "function balanceOf(address owner) view returns (uint256)"
 ];
 
-let browserProvider = null;
 let rpcProvider = null;
+let browserProvider = null;
 let signer = null;
-let userAddress = null;
-let tokenContract = null;
+let connectedAddress = null;
 let chartInstance = null;
 let mapInstance = null;
 let mapMarkersLayer = null;
@@ -36,21 +37,14 @@ function el(id) {
   return document.getElementById(id);
 }
 
-function safeSetText(id, value) {
+function setText(id, value) {
   const node = el(id);
   if (node) node.textContent = value;
 }
 
-function shortAddress(addr) {
-  if (!addr || addr.length < 10) return addr || "";
-  return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-}
-
-function formatNumber(value, maxFraction = 2) {
-  const num = Number(value || 0);
-  return num.toLocaleString(undefined, {
-    maximumFractionDigits: maxFraction
-  });
+function setHTML(id, value) {
+  const node = el(id);
+  if (node) node.innerHTML = value;
 }
 
 function setDot(id, color) {
@@ -58,30 +52,104 @@ function setDot(id, color) {
   if (node) node.style.background = color;
 }
 
-function setBanner(show, text = "SYSTEM ONLINE — 7TRB DASHBOARD ACTIVE") {
-  const banner = el("systemBanner");
-  if (!banner) return;
-  banner.style.display = show ? "block" : "none";
-  banner.textContent = text;
+function shortAddress(addr) {
+  if (!addr || addr.length < 12) return addr || "";
+  return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
 }
 
-async function ensureRpcProvider() {
+function formatNumber(value, maxFraction = 2) {
+  return Number(value || 0).toLocaleString(undefined, {
+    maximumFractionDigits: maxFraction
+  });
+}
+
+function showBanner(message, good = true) {
+  const banner = el("systemBanner");
+  if (!banner) return;
+  banner.style.display = "block";
+  banner.textContent = message;
+  banner.style.color = good ? "#35c759" : "#ffcc00";
+  banner.style.background = good
+    ? "rgba(53,199,89,.12)"
+    : "rgba(255,204,0,.12)";
+  banner.style.borderBottom = good
+    ? "1px solid rgba(53,199,89,.35)"
+    : "1px solid rgba(255,204,0,.35)";
+}
+
+async function getRpcProvider() {
   if (!rpcProvider) {
     rpcProvider = new ethers.JsonRpcProvider(CONFIG.rpcUrl);
   }
   return rpcProvider;
 }
 
-async function ensureTokenContract(providerLike) {
-  if (!tokenContract || tokenContract.runner !== providerLike) {
-    tokenContract = new ethers.Contract(CONFIG.tokenAddress, ERC20_ABI, providerLike);
+async function getTokenContract(providerLike) {
+  return new ethers.Contract(CONFIG.tokenAddress, ERC20_ABI, providerLike);
+}
+
+async function loadReadOnlyData() {
+  try {
+    const provider = await getRpcProvider();
+    const contract = await getTokenContract(provider);
+
+    let decimals = CONFIG.tokenDecimalsFallback;
+    try {
+      decimals = await contract.decimals();
+    } catch {}
+
+    const [totalSupplyRaw, trackedRaw, treasuryRaw, block] = await Promise.all([
+      contract.totalSupply(),
+      contract.balanceOf(CONFIG.trackedWallet),
+      contract.balanceOf(CONFIG.treasuryAddress),
+      provider.getBlockNumber()
+    ]);
+
+    const totalSupply = ethers.formatUnits(totalSupplyRaw, decimals);
+    const trackedBal = ethers.formatUnits(trackedRaw, decimals);
+    const treasuryBal = ethers.formatUnits(treasuryRaw, decimals);
+
+    setText("tokenContract", CONFIG.tokenAddress);
+    setText("walletBalance", `Tracked Wallet: ${CONFIG.trackedWallet}`);
+    setText("tokenBalance", `${CONFIG.tokenSymbol} Balance: ${formatNumber(trackedBal, 4)}`);
+    setText("treasury", formatNumber(treasuryBal, 4));
+    setText("holders", "—");
+    setText("active", "—");
+    setText("spendSave", "Live");
+    setText("referrals", "—");
+    setText("updatedAt", new Date().toLocaleString());
+    setText("blockNumber", block.toString());
+
+    const treasuryPct = Number(totalSupply) > 0
+      ? (Number(treasuryBal) / Number(totalSupply)) * 100
+      : 0;
+
+    if (el("treasuryBar")) el("treasuryBar").style.width = `${Math.min(treasuryPct, 100)}%`;
+    if (el("holdersBar")) el("holdersBar").style.width = `0%`;
+    if (el("spendBar")) el("spendBar").style.width = `100%`;
+
+    setDot("freshDot", "#35c759");
+    setDot("networkDot", "#35c759");
+
+    renderTreasuryChart([
+      { label: "Supply", value: Number(totalSupply) || 0 },
+      { label: "Wallet", value: Number(trackedBal) || 0 },
+      { label: "Treasury", value: Number(treasuryBal) || 0 }
+    ]);
+
+    showBanner("READ-ONLY MODE ACTIVE — OPEN IN AMVAULT TO CONNECT WALLET", false);
+  } catch (err) {
+    console.error("Read-only load failed:", err);
+    setDot("freshDot", "#ff453a");
+    setDot("networkDot", "#ff453a");
+    showBanner("RPC UNAVAILABLE — CHECK ALKEBULEUM CONNECTION", false);
   }
-  return tokenContract;
 }
 
 async function connectWallet() {
   if (!window.ethereum) {
-    alert("No wallet detected. Open this page inside MetaMask or a compatible wallet.");
+    showBanner("NO INJECTED WALLET DETECTED — OPEN THIS DASHBOARD IN AMVAULT", false);
+    window.location.href = CONFIG.amvaultUrl;
     return;
   }
 
@@ -89,149 +157,152 @@ async function connectWallet() {
     browserProvider = new ethers.BrowserProvider(window.ethereum);
     await browserProvider.send("eth_requestAccounts", []);
     signer = await browserProvider.getSigner();
-    userAddress = await signer.getAddress();
-
-    setDot("walletDot", "#43a047");
-    safeSetText("walletBalance", `Wallet Connected: ${userAddress}`);
+    connectedAddress = await signer.getAddress();
 
     const chainHex = await window.ethereum.request({ method: "eth_chainId" });
 
+    setText("walletBalance", `Connected Wallet: ${connectedAddress}`);
+    setDot("walletDot", "#35c759");
+
     if (chainHex.toLowerCase() === CONFIG.chainIdHex.toLowerCase()) {
-      setDot("networkDot", "#43a047");
-      setBanner(true);
+      setDot("networkDot", "#35c759");
+      showBanner("AMVAULT CONNECTED — 7TRB DASHBOARD LIVE");
     } else {
-      setDot("networkDot", "#fbc02d");
-      setBanner(false, "WALLET CONNECTED — WRONG NETWORK");
+      setDot("networkDot", "#ffcc00");
+      showBanner("WALLET CONNECTED — WRONG NETWORK SELECTED", false);
     }
 
-    await loadWalletData();
-  } catch (error) {
-    console.error("Wallet connection failed:", error);
-    setDot("walletDot", "#e53935");
-    safeSetText("walletBalance", "Wallet connection failed.");
+    await loadConnectedWalletData();
+  } catch (err) {
+    console.error("Connect failed:", err);
+    setDot("walletDot", "#ff453a");
+    showBanner("WALLET CONNECTION FAILED", false);
   }
 }
 
-async function loadWalletData() {
-  if (!browserProvider || !userAddress) return;
+async function loadConnectedWalletData() {
+  if (!browserProvider || !connectedAddress) return;
 
   try {
-    const contract = await ensureTokenContract(browserProvider);
+    const contract = await getTokenContract(browserProvider);
 
     let decimals = CONFIG.tokenDecimalsFallback;
     try {
       decimals = await contract.decimals();
     } catch {}
 
-    const tokenBalRaw = await contract.balanceOf(userAddress);
+    const [tokenBalRaw, nativeBalRaw] = await Promise.all([
+      contract.balanceOf(connectedAddress),
+      browserProvider.getBalance(connectedAddress)
+    ]);
+
     const tokenBal = ethers.formatUnits(tokenBalRaw, decimals);
+    const nativeBal = ethers.formatEther(nativeBalRaw);
 
-    let nativeBalText = "";
-    try {
-      const nativeBalRaw = await browserProvider.getBalance(userAddress);
-      const nativeBal = Number(ethers.formatEther(nativeBalRaw));
-      nativeBalText = ` | AKE: ${formatNumber(nativeBal, 4)}`;
-    } catch {}
-
-    safeSetText(
+    setText(
       "tokenBalance",
-      `${CONFIG.tokenSymbol} Balance: ${formatNumber(tokenBal, 4)}${nativeBalText}`
+      `${CONFIG.tokenSymbol} Balance: ${formatNumber(tokenBal, 4)} | ALKE: ${formatNumber(nativeBal, 6)}`
     );
-  } catch (error) {
-    console.error("Failed loading wallet data:", error);
-    safeSetText("tokenBalance", "Unable to load token balance.");
+  } catch (err) {
+    console.error("Connected wallet load failed:", err);
+    setText("tokenBalance", "Unable to load connected wallet balance.");
   }
 }
 
-async function loadOnchainStats() {
-  try {
-    const provider = await ensureRpcProvider();
-    const contract = await ensureTokenContract(provider);
-
-    let decimals = CONFIG.tokenDecimalsFallback;
-    try {
-      decimals = await contract.decimals();
-    } catch {}
-
-    const totalSupplyRaw = await contract.totalSupply();
-    const treasuryRaw = await contract.balanceOf(CONFIG.treasuryAddress);
-
-    const totalSupply = Number(ethers.formatUnits(totalSupplyRaw, decimals));
-    const treasuryBal = Number(ethers.formatUnits(treasuryRaw, decimals));
-
-    const treasuryPct = totalSupply > 0 ? (treasuryBal / totalSupply) * 100 : 0;
-
-    safeSetText("treasury", formatNumber(treasuryBal, 2));
-    if (el("treasuryBar")) el("treasuryBar").style.width = `${Math.min(treasuryPct, 100)}%`;
-
-    safeSetText("tokenContract", CONFIG.tokenAddress);
-
-    if (el("updatedAt")) {
-      el("updatedAt").textContent = new Date().toLocaleString();
-    }
-
-    setDot("freshDot", "#43a047");
-  } catch (error) {
-    console.error("On-chain stats error:", error);
-    setDot("freshDot", "#fbc02d");
-    safeSetText("treasury", "—");
-  }
-}
-
-async function loadMetricsJson() {
-  try {
-    const res = await fetch("data/metrics.json", { cache: "no-store" });
-    if (!res.ok) throw new Error("metrics.json not found");
-    const data = await res.json();
-
-    if (typeof data.holders !== "undefined") {
-      safeSetText("holders", formatNumber(data.holders, 0));
-      if (el("holdersBar")) {
-        const pct = Math.min(Number(data.holders_progress || 0), 100);
-        el("holdersBar").style.width = `${pct}%`;
-      }
-    }
-
-    if (typeof data.active_wallets_30d !== "undefined") {
-      safeSetText("active", formatNumber(data.active_wallets_30d, 0));
-    }
-
-    if (typeof data.spend_vs_save !== "undefined") {
-      safeSetText("spendSave", data.spend_vs_save);
-    }
-
-    if (typeof data.spend_progress !== "undefined" && el("spendBar")) {
-      el("spendBar").style.width = `${Math.min(Number(data.spend_progress), 100)}%`;
-    }
-
-    if (typeof data.referrals_30d !== "undefined") {
-      safeSetText("referrals", formatNumber(data.referrals_30d, 0));
-    }
-
-    if (Array.isArray(data.treasury_series)) {
-      renderTreasuryChart(data.treasury_series);
-    }
-
-    if (Array.isArray(data.project_pipeline)) {
-      renderProjects(data.project_pipeline);
-    }
-  } catch (error) {
-    console.warn("metrics.json unavailable:", error.message);
-    safeSetText("holders", "—");
-    safeSetText("active", "—");
-    safeSetText("spendSave", "—");
-    safeSetText("referrals", "—");
-    renderProjects([]);
-    renderTreasuryChart([]);
-  }
+function openAmVault() {
+  window.location.href = CONFIG.amvaultUrl;
 }
 
 function renderTreasuryChart(series) {
   const canvas = el("treasuryChart");
   if (!canvas || typeof Chart === "undefined") return;
 
-  const labels = series.map(item => item.label || item.date || "");
-  const values = series.map(item => Number(item.value || 0));
+  const labels = series.map(x => x.label);
+  const values = series.map(x => x.value);
+
+  if (chartInstance) chartInstance.destroy();
+
+  chartInstance = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: "7TRB",
+        data: values,
+        backgroundColor: [
+          "rgba(255,215,0,0.85)",
+          "rgba(255,215,0,0.65)",
+          "rgba(255,215,0,0.45)"
+        ],
+        borderColor: [
+          "rgba(255,215,0,1)",
+          "rgba(255,215,0,1)",
+          "rgba(255,215,0,1)"
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: "#f3f3f3" } }
+      },
+      scales: {
+        x: {
+          ticks: { color: "#b0b0b0" },
+          grid: { color: "#222" }
+        },
+        y: {
+          ticks: { color: "#b0b0b0" },
+          grid: { color: "#222" }
+        }
+      }
+    }
+  });
+}
+
+async function loadOptionalFiles() {
+  await Promise.all([
+    loadMetricsJson(),
+    loadMerchants()
+  ]);
+}
+
+async function loadMetricsJson() {
+  try {
+    const res = await fetch("data/metrics.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("No metrics.json");
+    const data = await res.json();
+
+    if (typeof data.holders !== "undefined") setText("holders", formatNumber(data.holders, 0));
+    if (typeof data.active_wallets_30d !== "undefined") setText("active", formatNumber(data.active_wallets_30d, 0));
+    if (typeof data.spend_vs_save !== "undefined") setText("spendSave", data.spend_vs_save);
+    if (typeof data.referrals_30d !== "undefined") setText("referrals", formatNumber(data.referrals_30d, 0));
+
+    if (typeof data.holders_progress !== "undefined" && el("holdersBar")) {
+      el("holdersBar").style.width = `${Math.min(Number(data.holders_progress), 100)}%`;
+    }
+    if (typeof data.spend_progress !== "undefined" && el("spendBar")) {
+      el("spendBar").style.width = `${Math.min(Number(data.spend_progress), 100)}%`;
+    }
+
+    if (Array.isArray(data.project_pipeline)) {
+      renderProjects(data.project_pipeline);
+    }
+    if (Array.isArray(data.treasury_series) && data.treasury_series.length) {
+      renderLineChart(data.treasury_series);
+    }
+  } catch {
+    renderProjects([]);
+  }
+}
+
+function renderLineChart(series) {
+  const canvas = el("treasuryChart");
+  if (!canvas || typeof Chart === "undefined") return;
+
+  const labels = series.map(x => x.label || x.date || "");
+  const values = series.map(x => Number(x.value || 0));
 
   if (chartInstance) chartInstance.destroy();
 
@@ -242,37 +313,37 @@ function renderTreasuryChart(series) {
       datasets: [{
         label: "Treasury",
         data: values,
-        borderColor: "#FFD700",
-        backgroundColor: "rgba(255,215,0,0.15)",
-        tension: 0.25,
-        fill: true
+        borderColor: "#ffd700",
+        backgroundColor: "rgba(255,215,0,0.14)",
+        fill: true,
+        tension: 0.25
       }]
     },
     options: {
       responsive: true,
       plugins: {
-        legend: { labels: { color: "#eaeaea" } }
+        legend: { labels: { color: "#f3f3f3" } }
       },
       scales: {
-        x: { ticks: { color: "#a1a1a6" }, grid: { color: "#222" } },
-        y: { ticks: { color: "#a1a1a6" }, grid: { color: "#222" } }
+        x: { ticks: { color: "#b0b0b0" }, grid: { color: "#222" } },
+        y: { ticks: { color: "#b0b0b0" }, grid: { color: "#222" } }
       }
     }
   });
 }
 
-function renderProjects(projectPipeline) {
+function renderProjects(items) {
   const tbody = el("projRows");
   if (!tbody) return;
 
   tbody.innerHTML = "";
 
-  if (!projectPipeline.length) {
+  if (!items.length) {
     tbody.innerHTML = `<tr><td colspan="2">No project data yet</td></tr>`;
     return;
   }
 
-  for (const item of projectPipeline) {
+  for (const item of items) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${item.status || "—"}</td>
@@ -285,13 +356,11 @@ function renderProjects(projectPipeline) {
 async function loadMerchants() {
   try {
     const res = await fetch("data/merchants.json", { cache: "no-store" });
-    if (!res.ok) throw new Error("merchants.json not found");
+    if (!res.ok) throw new Error("No merchants.json");
     const merchants = await res.json();
-
     renderMerchantsTable(merchants);
     renderMerchantMap(merchants);
-  } catch (error) {
-    console.warn("merchants.json unavailable:", error.message);
+  } catch {
     renderMerchantsTable([]);
     renderMerchantMap([]);
   }
@@ -308,7 +377,7 @@ function renderMerchantsTable(merchants) {
     return;
   }
 
-  merchants.forEach(m => {
+  for (const m of merchants) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${m.name || "—"}</td>
@@ -317,7 +386,7 @@ function renderMerchantsTable(merchants) {
       <td>${m.monthly_7trb ? formatNumber(m.monthly_7trb, 0) : "—"}</td>
     `;
     tbody.appendChild(tr);
-  });
+  }
 }
 
 function renderMerchantMap(merchants) {
@@ -348,39 +417,48 @@ function renderMerchantMap(merchants) {
   mapInstance.fitBounds(bounds, { padding: [20, 20] });
 }
 
-async function init() {
-  safeSetText("tokenContract", CONFIG.tokenAddress);
+function bindUi() {
+  const connectBtn = el("connectBtn");
+  if (connectBtn) connectBtn.addEventListener("click", connectWallet);
 
-  if (el("connectBtn")) {
-    el("connectBtn").addEventListener("click", connectWallet);
-  }
+  const openBtn = el("openAmVaultBtn");
+  if (openBtn) openBtn.addEventListener("click", openAmVault);
 
   if (window.ethereum) {
+    setDot("walletDot", "#ffcc00");
+
     window.ethereum.on("accountsChanged", async (accounts) => {
       if (!accounts.length) {
-        userAddress = null;
+        connectedAddress = null;
         signer = null;
-        setDot("walletDot", "#e53935");
-        safeSetText("walletBalance", "Wallet disconnected.");
-        safeSetText("tokenBalance", "");
+        setDot("walletDot", "#ff453a");
+        setText("walletBalance", `Tracked Wallet: ${CONFIG.trackedWallet}`);
+        setText("tokenBalance", `${CONFIG.tokenSymbol} Balance: loading...`);
         return;
       }
-      userAddress = accounts[0];
+      connectedAddress = accounts[0];
       if (browserProvider) signer = await browserProvider.getSigner();
-      safeSetText("walletBalance", `Wallet Connected: ${userAddress}`);
-      await loadWalletData();
+      setText("walletBalance", `Connected Wallet: ${connectedAddress}`);
+      await loadConnectedWalletData();
     });
 
-    window.ethereum.on("chainChanged", async () => {
-      window.location.reload();
-    });
+    window.ethereum.on("chainChanged", () => window.location.reload());
+  } else {
+    setDot("walletDot", "#ffcc00");
   }
+}
 
-  await Promise.all([
-    loadOnchainStats(),
-    loadMetricsJson(),
-    loadMerchants()
-  ]);
+async function init() {
+  bindUi();
+  await loadReadOnlyData();
+  await loadOptionalFiles();
+
+  if (!window.ethereum) {
+    setHTML(
+      "tokenBalance",
+      `${CONFIG.tokenSymbol} Balance: loading... <br><small>Open this dashboard inside AmVault to connect your wallet.</small>`
+    );
+  }
 }
 
 init();
