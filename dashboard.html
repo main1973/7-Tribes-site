@@ -14,36 +14,43 @@
   <style>
     :root{
       --bg:#090909;
-      --card:#121212;
-      --card2:#161616;
-      --text:#f3f3f3;
-      --muted:#b0b0b0;
+      --panel:#131313;
+      --panel2:#171717;
+      --text:#f5f5f5;
+      --muted:#aaaaaa;
       --gold:#ffd700;
-      --gold2:#c8a93c;
-      --border:#282828;
+      --gold2:#c79b2c;
+      --line:#272727;
       --green:#35c759;
       --yellow:#ffcc00;
       --red:#ff453a;
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-    a{color:var(--gold);text-decoration:none}
+    html,body{
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    a{text-decoration:none;color:inherit}
 
     #systemBanner{
       display:none;
       text-align:center;
       padding:10px 14px;
-      background:rgba(53,199,89,.12);
-      color:var(--green);
-      border-bottom:1px solid rgba(53,199,89,.35);
       font-weight:700;
       letter-spacing:.04em;
+      background:rgba(255,204,0,.12);
+      color:var(--yellow);
+      border-bottom:1px solid rgba(255,204,0,.35);
     }
 
     header{
-      border-bottom:1px solid var(--border);
-      background:linear-gradient(180deg,#111,#0c0c0c);
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#111,#0b0b0b);
     }
 
     .wrap{
@@ -54,8 +61,8 @@
 
     .topbar{
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
       gap:14px;
       flex-wrap:wrap;
     }
@@ -67,63 +74,67 @@
     }
 
     .brand img{
-      width:42px;
-      height:42px;
-      border-radius:50%;
+      width:46px;
+      height:46px;
       object-fit:cover;
+      border-radius:50%;
       border:1px solid rgba(255,215,0,.35);
+      box-shadow:0 0 14px rgba(255,215,0,.1);
     }
 
     .brand h1{
       margin:0;
-      font-size:1.5rem;
-      line-height:1.1;
+      font-size:1.55rem;
       color:var(--gold);
+      line-height:1.05;
     }
 
     .brand small{
       display:block;
       color:var(--muted);
-      font-size:.82rem;
-      margin-top:3px;
+      margin-top:4px;
+      font-size:.85rem;
+      letter-spacing:.04em;
     }
 
     .actions{
       display:flex;
-      align-items:center;
       gap:10px;
       flex-wrap:wrap;
     }
 
     .btn{
-      border:none;
-      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
       padding:10px 18px;
+      border-radius:999px;
       font-weight:700;
       cursor:pointer;
       transition:.2s ease;
+      border:none;
     }
 
     .btn-primary{
       background:linear-gradient(90deg,var(--gold),var(--gold2));
       color:#111;
-      box-shadow:0 0 14px rgba(255,215,0,.22);
+      box-shadow:0 0 18px rgba(255,215,0,.18);
     }
 
     .btn-ghost{
       background:transparent;
       color:var(--text);
-      border:1px solid #3a3a3a;
+      border:1px solid #3b3b3b;
     }
 
     .statusRow{
       display:flex;
-      align-items:center;
-      gap:16px;
       flex-wrap:wrap;
-      margin-top:12px;
+      gap:18px;
+      margin-top:14px;
       color:var(--muted);
-      font-size:.94rem;
+      font-size:.95rem;
     }
 
     .statusItem{
@@ -140,40 +151,60 @@
       box-shadow:0 0 0 2px rgba(255,255,255,.04) inset;
     }
 
-    .heroInfo{
+    .heroGrid{
       display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
+      grid-template-columns:1.2fr .8fr;
+      gap:14px;
       margin-top:18px;
     }
 
     .card{
-      background:linear-gradient(180deg,var(--card),var(--card2));
-      border:1px solid var(--border);
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--line);
       border-radius:18px;
       padding:16px;
-      box-shadow:0 10px 30px rgba(0,0,0,.18);
+      box-shadow:0 10px 30px rgba(0,0,0,.16);
     }
 
     .label{
       color:var(--muted);
-      font-size:.78rem;
+      font-size:.79rem;
       text-transform:uppercase;
       letter-spacing:.08em;
       margin-bottom:8px;
     }
 
     .value{
-      font-size:1.65rem;
+      font-size:1.6rem;
       font-weight:800;
-      color:var(--text);
     }
 
     .subvalue{
-      margin-top:6px;
+      margin-top:8px;
       color:var(--gold);
       font-weight:700;
       word-break:break-word;
+    }
+
+    .helpBox{
+      margin-top:12px;
+      padding:12px;
+      border:1px dashed rgba(255,215,0,.28);
+      border-radius:14px;
+      background:rgba(255,215,0,.04);
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    .helpBox strong{
+      color:var(--gold);
+    }
+
+    .miniGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-top:16px;
     }
 
     .cards{
@@ -196,7 +227,7 @@
       display:block;
       height:100%;
       width:0%;
-      background:linear-gradient(90deg,var(--gold),#fff0a6);
+      background:linear-gradient(90deg,var(--gold),#fff0a8);
       transition:width .3s ease;
     }
 
@@ -205,6 +236,13 @@
       grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:16px;
+    }
+
+    .addr{
+      font-family:monospace;
+      font-size:.92rem;
+      color:var(--gold);
+      word-break:break-all;
     }
 
     canvas{
@@ -219,7 +257,7 @@
 
     th, td{
       padding:10px 8px;
-      border-bottom:1px solid #242424;
+      border-bottom:1px solid #252525;
       text-align:left;
       font-size:.92rem;
     }
@@ -234,43 +272,42 @@
       height:360px;
       border-radius:14px;
       overflow:hidden;
-      border:1px solid #262626;
+      border:1px solid #252525;
       margin-top:8px;
     }
 
-    .addr{
-      font-family:monospace;
-      font-size:.92rem;
-      color:var(--gold);
-      word-break:break-all;
-    }
-
-    .miniGrid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:16px;
+    .footNote{
+      color:var(--muted);
+      font-size:.88rem;
+      margin-top:10px;
+      line-height:1.4;
     }
 
     @media (max-width:1100px){
       .cards{grid-template-columns:repeat(3,1fr)}
+      .miniGrid{grid-template-columns:1fr 1fr}
     }
 
-    @media (max-width:850px){
-      .grid,.miniGrid{grid-template-columns:1fr}
-      .cards{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:900px){
+      .heroGrid,
+      .grid,
+      .miniGrid{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width:560px){
       .cards{grid-template-columns:1fr}
-      .brand h1{font-size:1.25rem}
-      .value{font-size:1.4rem}
+      .brand h1{font-size:1.3rem}
+      .value{font-size:1.35rem}
+      .btn{width:100%}
+      .actions{width:100%}
     }
   </style>
 </head>
 <body>
 
-  <div id="systemBanner">SYSTEM ONLINE — 7TRB DASHBOARD ACTIVE</div>
+  <div id="systemBanner">READ-ONLY MODE ACTIVE — OPEN IN AMVAULT TO CONNECT WALLET</div>
 
   <header>
     <div class="wrap">
@@ -285,7 +322,8 @@
 
         <div class="actions">
           <button id="connectBtn" class="btn btn-primary">Connect Wallet</button>
-          <a href="index.html" class="btn btn-ghost">← Back</a>
+          <a id="openAmVaultBtn" class="btn btn-ghost" href="javascript:void(0)">Open in AmVault</a>
+          <a class="btn btn-ghost" href="index.html">← Back</a>
         </div>
       </div>
 
@@ -300,7 +338,7 @@
         </div>
         <div class="statusItem">
           <span class="dot" id="freshDot"></span>
-          <span>Data Status</span>
+          <span>Chain Data</span>
         </div>
         <div class="statusItem">
           <span>Updated: <span id="updatedAt">—</span></span>
@@ -311,25 +349,42 @@
 
   <main class="wrap">
 
-    <section class="heroInfo">
+    <section class="heroGrid">
       <div class="card">
-        <div class="label">Connected Wallet</div>
-        <div class="subvalue" id="walletBalance">Not connected</div>
-        <div class="subvalue" id="tokenBalance"></div>
+        <div class="label">Wallet Status</div>
+        <div class="subvalue" id="walletBalance">Tracked Wallet: 0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</div>
+        <div class="subvalue" id="tokenBalance">7TRB Balance: loading...</div>
+
+        <div class="helpBox">
+          <strong>AmVault Flow:</strong><br>
+          If you are in a normal browser, this dashboard stays in read-only mode.<br>
+          To connect your wallet, open this page inside <strong>AmVault</strong> and tap <strong>Connect Wallet</strong>.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">Live Chain Snapshot</div>
+        <div class="value" id="blockNumber">—</div>
+        <div class="footNote">Current Alkebuleum block height</div>
       </div>
     </section>
 
-    <div class="miniGrid">
-      <section class="card">
+    <section class="miniGrid">
+      <div class="card">
         <div class="label">7TRB Token Contract</div>
         <div class="addr" id="tokenContract">0x991df36e5b0bb596a83dee6a840f78baa40450e0</div>
-      </section>
+      </div>
 
-      <section class="card">
-        <div class="label">Treasury Contract</div>
-        <div class="addr">0xdf7ce67db19142672c4193d969cdd9975a5a6038</div>
-      </section>
-    </div>
+      <div class="card">
+        <div class="label">Tracked Wallet</div>
+        <div class="addr">0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Treasury Address</div>
+        <div class="addr">0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</div>
+      </div>
+    </section>
 
     <section class="cards">
       <div class="card">
@@ -363,7 +418,7 @@
 
     <section class="grid">
       <div class="card">
-        <div class="label">Treasury Trend</div>
+        <div class="label">Treasury / Supply View</div>
         <canvas id="treasuryChart"></canvas>
       </div>
 
@@ -377,7 +432,7 @@
             </tr>
           </thead>
           <tbody id="projRows">
-            <tr><td colspan="2">Loading…</td></tr>
+            <tr><td colspan="2">Loading...</td></tr>
           </tbody>
         </table>
       </div>
@@ -401,7 +456,7 @@
             </tr>
           </thead>
           <tbody id="merchRows">
-            <tr><td colspan="4">Loading…</td></tr>
+            <tr><td colspan="4">Loading...</td></tr>
           </tbody>
         </table>
       </div>
