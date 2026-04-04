@@ -1,469 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>7TRB Dashboard</title>
-  <link rel="icon" href="images/logo.png" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>7TRB Dashboard</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="icon" href="images/logo.png" />
 
-  <style>
-    :root{
-      --bg:#090909;
-      --panel:#131313;
-      --panel2:#171717;
-      --text:#f5f5f5;
-      --muted:#aaaaaa;
-      --gold:#ffd700;
-      --gold2:#c79b2c;
-      --line:#272727;
-      --green:#35c759;
-      --yellow:#ffcc00;
-      --red:#ff453a;
-    }
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      padding:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:Arial, Helvetica, sans-serif;
-    }
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#000;
+  color:#FFD700;
+}
 
-    a{text-decoration:none;color:inherit}
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
 
-    #systemBanner{
-      display:none;
-      text-align:center;
-      padding:10px 14px;
-      font-weight:700;
-      letter-spacing:.04em;
-      background:rgba(255,204,0,.12);
-      color:var(--yellow);
-      border-bottom:1px solid rgba(255,204,0,.35);
-    }
+h1{
+  text-align:center;
+  margin-bottom:10px;
+}
 
-    header{
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg,#111,#0b0b0b);
-    }
+.sub{
+  text-align:center;
+  color:#aaa;
+  margin-bottom:20px;
+}
 
-    .wrap{
-      max-width:1180px;
-      margin:0 auto;
-      padding:18px;
-    }
+button{
+  width:100%;
+  padding:15px;
+  margin:10px 0;
+  border:none;
+  border-radius:50px;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-    }
+.connect{
+  background:linear-gradient(90deg,#FFD700,#C9A227);
+  color:#000;
+}
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
+.card{
+  background:#111;
+  border:1px solid #333;
+  border-radius:20px;
+  padding:20px;
+  margin-top:15px;
+}
 
-    .brand img{
-      width:46px;
-      height:46px;
-      object-fit:cover;
-      border-radius:50%;
-      border:1px solid rgba(255,215,0,.35);
-      box-shadow:0 0 14px rgba(255,215,0,.1);
-    }
+.label{
+  color:#aaa;
+  font-size:12px;
+  letter-spacing:1px;
+}
 
-    .brand h1{
-      margin:0;
-      font-size:1.55rem;
-      color:var(--gold);
-      line-height:1.05;
-    }
+.value{
+  font-size:24px;
+  margin-top:5px;
+}
 
-    .brand small{
-      display:block;
-      color:var(--muted);
-      margin-top:4px;
-      font-size:.85rem;
-      letter-spacing:.04em;
-    }
+.bar{
+  height:10px;
+  background:#222;
+  border-radius:10px;
+  margin-top:10px;
+}
 
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+.bar-fill{
+  height:100%;
+  width:60%;
+  background:#FFD700;
+  border-radius:10px;
+}
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:44px;
-      padding:10px 18px;
-      border-radius:999px;
-      font-weight:700;
-      cursor:pointer;
-      transition:.2s ease;
-      border:none;
-    }
-
-    .btn-primary{
-      background:linear-gradient(90deg,var(--gold),var(--gold2));
-      color:#111;
-      box-shadow:0 0 18px rgba(255,215,0,.18);
-    }
-
-    .btn-ghost{
-      background:transparent;
-      color:var(--text);
-      border:1px solid #3b3b3b;
-    }
-
-    .statusRow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:18px;
-      margin-top:14px;
-      color:var(--muted);
-      font-size:.95rem;
-    }
-
-    .statusItem{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .dot{
-      width:11px;
-      height:11px;
-      border-radius:50%;
-      background:#666;
-      box-shadow:0 0 0 2px rgba(255,255,255,.04) inset;
-    }
-
-    .heroGrid{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:14px;
-      margin-top:18px;
-    }
-
-    .card{
-      background:linear-gradient(180deg,var(--panel),var(--panel2));
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      box-shadow:0 10px 30px rgba(0,0,0,.16);
-    }
-
-    .label{
-      color:var(--muted);
-      font-size:.79rem;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      margin-bottom:8px;
-    }
-
-    .value{
-      font-size:1.6rem;
-      font-weight:800;
-    }
-
-    .subvalue{
-      margin-top:8px;
-      color:var(--gold);
-      font-weight:700;
-      word-break:break-word;
-    }
-
-    .helpBox{
-      margin-top:12px;
-      padding:12px;
-      border:1px dashed rgba(255,215,0,.28);
-      border-radius:14px;
-      background:rgba(255,215,0,.04);
-      color:var(--muted);
-      line-height:1.45;
-    }
-
-    .helpBox strong{
-      color:var(--gold);
-    }
-
-    .miniGrid{
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .bar{
-      height:10px;
-      border-radius:999px;
-      overflow:hidden;
-      background:#1d1d1d;
-      margin-top:12px;
-      border:1px solid #242424;
-    }
-
-    .bar > i{
-      display:block;
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg,var(--gold),#fff0a8);
-      transition:width .3s ease;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .addr{
-      font-family:monospace;
-      font-size:.92rem;
-      color:var(--gold);
-      word-break:break-all;
-    }
-
-    canvas{
-      width:100% !important;
-      height:300px !important;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-    }
-
-    th, td{
-      padding:10px 8px;
-      border-bottom:1px solid #252525;
-      text-align:left;
-      font-size:.92rem;
-    }
-
-    th{
-      color:var(--muted);
-      font-weight:700;
-    }
-
-    #map{
-      width:100%;
-      height:360px;
-      border-radius:14px;
-      overflow:hidden;
-      border:1px solid #252525;
-      margin-top:8px;
-    }
-
-    .footNote{
-      color:var(--muted);
-      font-size:.88rem;
-      margin-top:10px;
-      line-height:1.4;
-    }
-
-    @media (max-width:1100px){
-      .cards{grid-template-columns:repeat(3,1fr)}
-      .miniGrid{grid-template-columns:1fr 1fr}
-    }
-
-    @media (max-width:900px){
-      .heroGrid,
-      .grid,
-      .miniGrid{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media (max-width:560px){
-      .cards{grid-template-columns:1fr}
-      .brand h1{font-size:1.3rem}
-      .value{font-size:1.35rem}
-      .btn{width:100%}
-      .actions{width:100%}
-    }
-  </style>
+#map{
+  height:300px;
+  border-radius:15px;
+  margin-top:10px;
+}
+</style>
 </head>
+
 <body>
 
-  <div id="systemBanner">READ-ONLY MODE ACTIVE — OPEN IN AMVAULT TO CONNECT WALLET</div>
+<div id="systemBanner" style="text-align:center;padding:10px;background:#111;color:#FFD700;">
+  Wallet connection available inside AmVault
+</div>
 
-  <header>
-    <div class="wrap">
-      <div class="topbar">
-        <div class="brand">
-          <img src="images/logo.png" alt="7TRB Logo" />
-          <div>
-            <h1>7TRB Dashboard</h1>
-            <small>Organize • Unity • Build • Power</small>
-          </div>
-        </div>
+<div class="container">
 
-        <div class="actions">
-          <button id="connectBtn" class="btn btn-primary">Connect Wallet</button>
-          <a id="openAmVaultBtn" class="btn btn-ghost" href="javascript:void(0)">Open in AmVault</a>
-          <a class="btn btn-ghost" href="index.html">← Back</a>
-        </div>
-      </div>
+<h1>7TRB Dashboard</h1>
+<div class="sub">Transparency • Circulation • Growth</div>
 
-      <div class="statusRow">
-        <div class="statusItem">
-          <span class="dot" id="walletDot"></span>
-          <span>Wallet</span>
-        </div>
-        <div class="statusItem">
-          <span class="dot" id="networkDot"></span>
-          <span>Network</span>
-        </div>
-        <div class="statusItem">
-          <span class="dot" id="freshDot"></span>
-          <span>Chain Data</span>
-        </div>
-        <div class="statusItem">
-          <span>Updated: <span id="updatedAt">—</span></span>
-        </div>
-      </div>
-    </div>
-  </header>
+<button class="connect" id="connectBtn">Connect Wallet</button>
 
-  <main class="wrap">
+<!-- WALLET -->
+<div class="card">
+  <div class="label">Wallet</div>
+  <div class="value" id="walletBalance">Not Connected</div>
+  <div class="value" id="tokenBalance">7TRB Balance: —</div>
+</div>
 
-    <section class="heroGrid">
-      <div class="card">
-        <div class="label">Wallet Status</div>
-        <div class="subvalue" id="walletBalance">Tracked Wallet: 0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</div>
-        <div class="subvalue" id="tokenBalance">7TRB Balance: loading...</div>
+<!-- TREASURY -->
+<div class="card">
+  <div class="label">Treasury</div>
+  <div class="value" id="treasury">—</div>
+  <div class="bar"><div id="treasuryBar" class="bar-fill"></div></div>
+</div>
 
-        <div class="helpBox">
-          <strong>AmVault Flow:</strong><br>
-          If you are in a normal browser, this dashboard stays in read-only mode.<br>
-          To connect your wallet, open this page inside <strong>AmVault</strong> and tap <strong>Connect Wallet</strong>.
-        </div>
-      </div>
+<!-- HOLDERS -->
+<div class="card">
+  <div class="label">Community Holders</div>
+  <div class="value" id="holders">—</div>
+</div>
 
-      <div class="card">
-        <div class="label">Live Chain Snapshot</div>
-        <div class="value" id="blockNumber">—</div>
-        <div class="footNote">Current Alkebuleum block height</div>
-      </div>
-    </section>
+<!-- ACTIVE -->
+<div class="card">
+  <div class="label">Active Participants (30d)</div>
+  <div class="value" id="active">—</div>
+</div>
 
-    <section class="miniGrid">
-      <div class="card">
-        <div class="label">7TRB Token Contract</div>
-        <div class="addr" id="tokenContract">0x991df36e5b0bb596a83dee6a840f78baa40450e0</div>
-      </div>
+<!-- REFERRALS -->
+<div class="card">
+  <div class="label">Referrals (30d)</div>
+  <div class="value" id="referrals">—</div>
+</div>
 
-      <div class="card">
-        <div class="label">Tracked Wallet</div>
-        <div class="addr">0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</div>
-      </div>
+<!-- CHART -->
+<div class="card">
+  <div class="label">Treasury / Supply View</div>
+  <canvas id="treasuryChart"></canvas>
+</div>
 
-      <div class="card">
-        <div class="label">Treasury Address</div>
-        <div class="addr">0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</div>
-      </div>
-    </section>
+<!-- MERCHANT MAP -->
+<div class="card">
+  <div class="label">Merchant Map</div>
+  <div id="map"></div>
+</div>
 
-    <section class="cards">
-      <div class="card">
-        <div class="label">Holders</div>
-        <div class="value" id="holders">—</div>
-        <div class="bar"><i id="holdersBar"></i></div>
-      </div>
+<!-- MERCHANT LIST -->
+<div class="card">
+  <div class="label">Merchant Directory</div>
+  <div id="merchants">Loading...</div>
+</div>
 
-      <div class="card">
-        <div class="label">Active Wallets (30d)</div>
-        <div class="value" id="active">—</div>
-      </div>
+</div>
 
-      <div class="card">
-        <div class="label">Treasury 7TRB</div>
-        <div class="value" id="treasury">—</div>
-        <div class="bar"><i id="treasuryBar"></i></div>
-      </div>
+<script src="dashboard.js"></script>
 
-      <div class="card">
-        <div class="label">Spend vs Save</div>
-        <div class="value" id="spendSave">—</div>
-        <div class="bar"><i id="spendBar"></i></div>
-      </div>
-
-      <div class="card">
-        <div class="label">Referrals (30d)</div>
-        <div class="value" id="referrals">—</div>
-      </div>
-    </section>
-
-    <section class="grid">
-      <div class="card">
-        <div class="label">Treasury / Supply View</div>
-        <canvas id="treasuryChart"></canvas>
-      </div>
-
-      <div class="card">
-        <div class="label">Projects Pipeline</div>
-        <table>
-          <thead>
-            <tr>
-              <th>Status</th>
-              <th>Count</th>
-            </tr>
-          </thead>
-          <tbody id="projRows">
-            <tr><td colspan="2">Loading...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="grid">
-      <div class="card">
-        <div class="label">Merchant Map</div>
-        <div id="map"></div>
-      </div>
-
-      <div class="card">
-        <div class="label">Merchant Directory</div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>City</th>
-              <th>Since</th>
-              <th>Monthly 7TRB</th>
-            </tr>
-          </thead>
-          <tbody id="merchRows">
-            <tr><td colspan="4">Loading...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </main>
-
-  <script src="dashboard.js"></script>
 </body>
 </html>
