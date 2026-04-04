@@ -1,27 +1,9 @@
 {
-  "updated_at": "2026-04-04T06:07:34Z",
-  "holders": 0,
-  "active_wallets_30d": 0,
-  "treasury_usd": 0,
-  "spent_pct_30d": 0,
-  "projects": {
-    "proposed": 0,
-    "approved": 0,
-    "funded": 0,
-    "delivered": 0
-  },
+  "holders": 1,
+  "active_wallets_30d": 1,
+  "referrals_30d": 0,
   "treasury_series": [
-    [
-      "Oct",
-      0
-    ],
-    [
-      "Nov",
-      0
-    ],
-    [
-      "Dec",
-      0
-    ]
+    { "label": "Launch", "value": 7000000000 },
+    { "label": "Now", "value": 7000000000 }
   ]
 }
