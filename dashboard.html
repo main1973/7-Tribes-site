@@ -1,394 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-3ENCBC9RT3');
-  </script>
-
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7TRB Dashboard — Live System</title>
-  <meta name="description" content="7TRB public dashboard for treasury, merchants, circulation, and saved wallet visibility." />
-  <link rel="icon" href="images/7trb.logo.png" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>7TRB Dashboard</title>
+  <link rel="icon" href="images/logo.png" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <style>
     :root{
-      --bg:#0b0b0c;
-      --card:#121214;
-      --card2:#11141a;
-      --text:#eaeaea;
-      --muted:#a1a1a6;
-      --accent:#FFD700;
-      --accent2:#b8912f;
-      --border:#222;
-      --green:#43a047;
-      --yellow:#fbc02d;
-      --red:#e53935;
-      --shadow:0 14px 34px rgba(0,0,0,.34);
+      --bg:#090909;
+      --card:#121212;
+      --card2:#161616;
+      --text:#f3f3f3;
+      --muted:#b0b0b0;
+      --gold:#ffd700;
+      --gold2:#c8a93c;
+      --border:#282828;
+      --green:#35c759;
+      --yellow:#ffcc00;
+      --red:#ff453a;
     }
 
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:radial-gradient(circle at top, #1a1208 0, #0b0b0c 52%, #070708 100%);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+    a{color:var(--gold);text-decoration:none}
 
-    a{color:var(--accent);text-decoration:none}
-    a:hover{opacity:.92}
-
-    .wrap{
-      max-width:1120px;
-      margin:auto;
-      padding:18px;
+    #systemBanner{
+      display:none;
+      text-align:center;
+      padding:10px 14px;
+      background:rgba(53,199,89,.12);
+      color:var(--green);
+      border-bottom:1px solid rgba(53,199,89,.35);
+      font-weight:700;
+      letter-spacing:.04em;
     }
 
     header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:blur(10px);
-      background:rgba(17,20,26,.92);
       border-bottom:1px solid var(--border);
+      background:linear-gradient(180deg,#111,#0c0c0c);
     }
 
-    .header-inner{
+    .wrap{
+      max-width:1180px;
+      margin:0 auto;
+      padding:18px;
+    }
+
+    .topbar{
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:12px;
+      align-items:center;
+      gap:14px;
       flex-wrap:wrap;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
     }
 
     .brand img{
-      width:38px;
-      height:38px;
+      width:42px;
+      height:42px;
       border-radius:50%;
-      box-shadow:0 8px 20px rgba(0,0,0,.35);
+      object-fit:cover;
+      border:1px solid rgba(255,215,0,.35);
     }
 
-    h1{
+    .brand h1{
       margin:0;
-      font-size:18px;
+      font-size:1.5rem;
+      line-height:1.1;
+      color:var(--gold);
+    }
+
+    .brand small{
+      display:block;
+      color:var(--muted);
+      font-size:.82rem;
+      margin-top:3px;
+    }
+
+    .actions{
       display:flex;
       align-items:center;
-      gap:6px;
+      gap:10px;
       flex-wrap:wrap;
     }
 
-    .subhead{
-      color:var(--muted);
-      font-size:12px;
-      margin-top:2px;
-    }
-
-    #networkDot,#walletDot,#freshDot{
-      display:inline-block;
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      vertical-align:middle;
-    }
-
-    #networkDot,#walletDot{background:var(--red)}
-    #freshDot{background:#888;margin-left:6px}
-
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:.5rem;
-      padding:10px 16px;
+      border:none;
       border-radius:999px;
-      font-weight:800;
-      border:1px solid transparent;
+      padding:10px 18px;
+      font-weight:700;
       cursor:pointer;
-      white-space:nowrap;
-      transition:transform .15s ease;
-      font:inherit;
+      transition:.2s ease;
     }
 
-    .btn:hover{transform:translateY(-1px)}
-    .btn.gold{
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
+    .btn-primary{
+      background:linear-gradient(90deg,var(--gold),var(--gold2));
       color:#111;
-      box-shadow:0 0 12px rgba(255,215,0,.22);
+      box-shadow:0 0 14px rgba(255,215,0,.22);
     }
-    .btn.ghost{
+
+    .btn-ghost{
       background:transparent;
       color:var(--text);
-      border-color:#2b2f3b;
+      border:1px solid #3a3a3a;
     }
 
-    #systemBanner{
-      text-align:center;
-      background:#0f1c13;
-      padding:10px;
-      color:var(--green);
-      font-weight:800;
-      border-bottom:1px solid #1c3a29;
-      display:none;
-      letter-spacing:.04em;
+    .statusRow{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:12px;
+      color:var(--muted);
+      font-size:.94rem;
     }
 
-    .panel,.card{
-      background:linear-gradient(180deg,var(--card),#0f1012);
+    .statusItem{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .dot{
+      width:11px;
+      height:11px;
+      border-radius:50%;
+      background:#666;
+      box-shadow:0 0 0 2px rgba(255,255,255,.04) inset;
+    }
+
+    .heroInfo{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,var(--card),var(--card2));
       border:1px solid var(--border);
-      border-radius:16px;
-      padding:14px;
-      box-shadow:var(--shadow);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
     }
 
     .label{
-      font-size:12px;
       color:var(--muted);
+      font-size:.78rem;
       text-transform:uppercase;
-      letter-spacing:.05em;
-      margin-bottom:6px;
+      letter-spacing:.08em;
+      margin-bottom:8px;
     }
 
     .value{
-      font-size:28px;
+      font-size:1.65rem;
       font-weight:800;
-      line-height:1.1;
+      color:var(--text);
     }
 
-    .mini{
-      color:var(--muted);
-      font-size:12px;
+    .subvalue{
       margin-top:6px;
-    }
-
-    .wallet-strip{
-      display:grid;
-      gap:8px;
-      margin:10px 0 14px;
-    }
-
-    #walletBalance,#tokenBalance,#treasuryBalance{
-      color:var(--accent);
+      color:var(--gold);
       font-weight:700;
       word-break:break-word;
     }
 
-    .wallet-connect-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-top:10px;
-    }
-
-    .wallet-input{
-      flex:1 1 320px;
-      min-width:260px;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:#0f1012;
-      color:var(--text);
-      outline:none;
-    }
-
     .cards{
       display:grid;
-      grid-template-columns:repeat(6,minmax(0,1fr));
+      grid-template-columns:repeat(5,1fr);
       gap:12px;
-      margin-top:12px;
+      margin-top:16px;
     }
 
     .bar{
       height:10px;
-      background:#1a1a1d;
       border-radius:999px;
       overflow:hidden;
-      margin-top:8px;
+      background:#1d1d1d;
+      margin-top:12px;
+      border:1px solid #242424;
     }
 
     .bar > i{
       display:block;
       height:100%;
       width:0%;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      transition:width .4s ease;
+      background:linear-gradient(90deg,var(--gold),#fff0a6);
+      transition:width .3s ease;
     }
 
     .grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
-      margin-top:12px;
+      margin-top:16px;
+    }
+
+    canvas{
+      width:100% !important;
+      height:300px !important;
     }
 
     table{
       width:100%;
       border-collapse:collapse;
-      font-size:14px;
     }
 
-    th,td{
-      padding:10px;
-      border-bottom:1px solid var(--border);
-      vertical-align:top;
+    th, td{
+      padding:10px 8px;
+      border-bottom:1px solid #242424;
+      text-align:left;
+      font-size:.92rem;
     }
 
     th{
-      text-align:left;
       color:var(--muted);
       font-weight:700;
     }
 
     #map{
-      height:320px;
-      border-radius:12px;
-      border:1px solid var(--border);
+      width:100%;
+      height:360px;
+      border-radius:14px;
       overflow:hidden;
-      background:#0d0e10;
+      border:1px solid #262626;
+      margin-top:8px;
     }
 
-    .contract-row{
-      margin:6px 0 10px;
-      line-height:1.45;
-      word-break:break-word;
+    .addr{
+      font-family:monospace;
+      font-size:.92rem;
+      color:var(--gold);
+      word-break:break-all;
     }
 
-    .contract-value{
-      color:var(--accent);
-      font-weight:700;
-    }
-
-    .activity-list{
+    .miniGrid{
       display:grid;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .activity-item{
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:10px 12px;
-      background:#0f1012;
-    }
-
-    .activity-item strong{
-      color:var(--accent);
-    }
-
-    code{
-      background:#17181b;
-      padding:2px 6px;
-      border-radius:6px;
-      color:#f0d878;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:16px;
     }
 
     @media (max-width:1100px){
-      .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .cards{grid-template-columns:repeat(3,1fr)}
     }
-    @media (max-width:900px){
-      .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .grid{grid-template-columns:1fr}
+
+    @media (max-width:850px){
+      .grid,.miniGrid{grid-template-columns:1fr}
+      .cards{grid-template-columns:repeat(2,1fr)}
     }
-    @media (max-width:640px){
+
+    @media (max-width:560px){
       .cards{grid-template-columns:1fr}
-      .value{font-size:24px}
+      .brand h1{font-size:1.25rem}
+      .value{font-size:1.4rem}
     }
   </style>
 </head>
 <body>
+
   <div id="systemBanner">SYSTEM ONLINE — 7TRB DASHBOARD ACTIVE</div>
 
   <header>
-    <div class="wrap header-inner">
-      <div class="brand">
-        <img src="images/7trb.logo.png" alt="7TRB logo" />
-        <div>
-          <h1>
-            7TRB Dashboard
-            <span id="networkDot" title="Network status"></span>
-            <span id="walletDot" title="Wallet status"></span>
-          </h1>
-          <div class="subhead">Treasury • Merchants • Circulation • Saved wallet visibility</div>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <img src="images/logo.png" alt="7TRB Logo" />
+          <div>
+            <h1>7TRB Dashboard</h1>
+            <small>Organize • Unity • Build • Power</small>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="connectBtn" class="btn btn-primary">Connect Wallet</button>
+          <a href="index.html" class="btn btn-ghost">← Back</a>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-        <button id="openAmVaultBtn" class="btn gold" type="button">Open AmVault</button>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIKHBUg_R6MYSi8Gf-SDOdRB5qZjXQ0EVC0anJd-A4JMOQXQ/viewform" target="_blank" rel="noopener" class="btn ghost">Join as Merchant</a>
-        <a href="index.html" class="btn ghost">← Home</a>
+      <div class="statusRow">
+        <div class="statusItem">
+          <span class="dot" id="walletDot"></span>
+          <span>Wallet</span>
+        </div>
+        <div class="statusItem">
+          <span class="dot" id="networkDot"></span>
+          <span>Network</span>
+        </div>
+        <div class="statusItem">
+          <span class="dot" id="freshDot"></span>
+          <span>Data Status</span>
+        </div>
+        <div class="statusItem">
+          <span>Updated: <span id="updatedAt">—</span></span>
+        </div>
       </div>
     </div>
   </header>
 
-  <div class="wrap">
+  <main class="wrap">
 
-    <p class="mini" style="margin:.3rem 0 .7rem;">
-      Updated <span id="updatedAt">—</span>
-      <span id="freshDot" title="Data freshness"></span>
-    </p>
-
-    <div class="wallet-strip">
-      <div id="walletBalance"></div>
-      <div id="tokenBalance"></div>
-      <div id="treasuryBalance"></div>
-    </div>
-
-    <div class="panel" style="margin-bottom:12px;">
-      <div class="label">AmVault connection</div>
-      <p class="mini" style="font-size:14px;line-height:1.5;margin-bottom:12px;">
-        Open AmVault, copy your wallet address, then paste it here to load your dashboard view.
-      </p>
-
-      <div class="wallet-connect-row">
-        <input id="walletInput" class="wallet-input" type="text" placeholder="Paste your AmVault wallet address" />
-        <button id="saveWalletBtn" class="btn gold" type="button">Save Wallet</button>
-        <button id="clearWalletBtn" class="btn ghost" type="button">Clear</button>
+    <section class="heroInfo">
+      <div class="card">
+        <div class="label">Connected Wallet</div>
+        <div class="subvalue" id="walletBalance">Not connected</div>
+        <div class="subvalue" id="tokenBalance"></div>
       </div>
-
-      <div class="mini" id="savedWalletNote" style="margin-top:10px;">No wallet saved yet.</div>
-    </div>
-
-    <div class="panel" style="margin-bottom:12px;">
-      <div class="label">Smart contracts & treasury</div>
-
-      <div class="contract-row">
-        <b>Treasury Wallet:</b><br>
-        <span id="treasuryAddress" class="contract-value">0x26B0cA2C767758Fc3E34e0481065a55521E42BaB</span>
-      </div>
-
-      <div class="contract-row">
-        <b>7TRB Token Contract:</b><br>
-        <span id="tokenContract" class="contract-value">0x991DF36e5b0BB596A83dEe6A840F78bAa40450e0</span>
-      </div>
-
-      <div class="mini">Wallet-based treasury for now. Treasury v1 contract can replace this later.</div>
-    </div>
-
-    <section class="panel" style="margin-bottom:12px;border-left:4px solid var(--accent);">
-      <div class="label">DEX</div>
-      <p id="dexStatus" style="color:var(--green);font-weight:800;margin:0 0 10px;">
-        🟢 DEX Status: <span style="color:var(--green);">LIVE ON JOLLOFSWAP</span>
-      </p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn gold" type="button" onclick="openDex()">Open JollofSwap</button>
-      </div>
-      <p class="mini">Trade and liquidity access route through JollofSwap.com.</p>
     </section>
+
+    <div class="miniGrid">
+      <section class="card">
+        <div class="label">7TRB Token Contract</div>
+        <div class="addr" id="tokenContract">0x991df36e5b0bb596a83dee6a840f78baa40450e0</div>
+      </section>
+
+      <section class="card">
+        <div class="label">Treasury Contract</div>
+        <div class="addr">0xdf7ce67db19142672c4193d969cdd9975a5a6038</div>
+      </section>
+    </div>
 
     <section class="cards">
       <div class="card">
@@ -398,20 +339,14 @@
       </div>
 
       <div class="card">
-        <div class="label">Active (30d)</div>
+        <div class="label">Active Wallets (30d)</div>
         <div class="value" id="active">—</div>
       </div>
 
       <div class="card">
-        <div class="label">Treasury (USD)</div>
+        <div class="label">Treasury 7TRB</div>
         <div class="value" id="treasury">—</div>
         <div class="bar"><i id="treasuryBar"></i></div>
-      </div>
-
-      <div class="card">
-        <div class="label">Treasury (7TRB)</div>
-        <div class="value" id="treasuryTokenBalance">—</div>
-        <div class="mini">Live token balance</div>
       </div>
 
       <div class="card">
@@ -423,38 +358,39 @@
       <div class="card">
         <div class="label">Referrals (30d)</div>
         <div class="value" id="referrals">—</div>
-        <div class="mini" id="referralsNote"></div>
       </div>
     </section>
 
-    <div class="grid">
-      <section class="card">
-        <div class="label">Treasury trend</div>
-        <canvas id="treasuryChart" height="140"></canvas>
-      </section>
+    <section class="grid">
+      <div class="card">
+        <div class="label">Treasury Trend</div>
+        <canvas id="treasuryChart"></canvas>
+      </div>
 
-      <section class="card">
-        <div class="label">Projects pipeline</div>
+      <div class="card">
+        <div class="label">Projects Pipeline</div>
         <table>
           <thead>
-            <tr><th>Status</th><th>Count</th></tr>
+            <tr>
+              <th>Status</th>
+              <th>Count</th>
+            </tr>
           </thead>
-          <tbody id="projRows"></tbody>
+          <tbody id="projRows">
+            <tr><td colspan="2">Loading…</td></tr>
+          </tbody>
         </table>
-      </section>
-    </div>
+      </div>
+    </section>
 
-    <div class="grid">
-      <section class="card">
-        <div class="label">Merchant map</div>
+    <section class="grid">
+      <div class="card">
+        <div class="label">Merchant Map</div>
         <div id="map"></div>
-        <div id="mapNotice" style="display:none;color:var(--muted);font-size:12px;margin-top:10px;">
-          Map disabled — add <code>lat</code> and <code>lng</code> in <code>data/merchants.json</code>.
-        </div>
-      </section>
+      </div>
 
-      <section class="card">
-        <div class="label">Merchant directory</div>
+      <div class="card">
+        <div class="label">Merchant Directory</div>
         <table>
           <thead>
             <tr>
@@ -464,35 +400,14 @@
               <th>Monthly 7TRB</th>
             </tr>
           </thead>
-          <tbody id="merchRows"></tbody>
+          <tbody id="merchRows">
+            <tr><td colspan="4">Loading…</td></tr>
+          </tbody>
         </table>
-      </section>
-    </div>
+      </div>
+    </section>
 
-    <div class="grid">
-      <section class="card">
-        <div class="label">Circulation tracker</div>
-        <div id="activityList" class="activity-list">
-          <div class="activity-item muted">No circulation events loaded yet.</div>
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="label">Merchant activation</div>
-        <p class="mini" style="font-size:14px;line-height:1.5;">
-          Bring new businesses into the network and get them listed on the dashboard map.
-        </p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-          <a class="btn gold" href="https://docs.google.com/forms/d/e/1FAIpQLSdIKHBUg_R6MYSi8Gf-SDOdRB5qZjXQ0EVC0anJd-A4JMOQXQ/viewform" target="_blank" rel="noopener">Apply as Merchant</a>
-          <a class="btn ghost" href="network.html">View Network</a>
-        </div>
-        <p class="mini" style="margin-top:12px;">
-          Once approved, add merchant records to <code>data/merchants.json</code> and circulation events to <code>data/activity.json</code>.
-        </p>
-      </section>
-    </div>
-
-  </div>
+  </main>
 
   <script src="dashboard.js"></script>
 </body>
