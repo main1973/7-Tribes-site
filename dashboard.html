@@ -1,159 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>7TRB Dashboard</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>7TRB Dashboard — Live System</title>
 
 <link rel="icon" href="images/logo.png" />
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
+:root{
+  --bg:#0b0b0c;
+  --card:#121214;
+  --text:#eaeaea;
+  --muted:#a1a1a6;
+  --accent:#FFD700;
+  --border:#222;
+}
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:#000;
-  color:#FFD700;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui;
 }
+.wrap{max-width:1100px;margin:auto;padding:20px;}
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-
-h1{
-  text-align:center;
-  margin-bottom:10px;
-}
-
-.sub{
-  text-align:center;
-  color:#aaa;
-  margin-bottom:20px;
-}
-
-button{
-  width:100%;
-  padding:15px;
-  margin:10px 0;
-  border:none;
-  border-radius:50px;
-  font-weight:bold;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.connect{
-  background:linear-gradient(90deg,#FFD700,#C9A227);
-  color:#000;
-}
-
-.card{
+header{
   background:#111;
-  border:1px solid #333;
-  border-radius:20px;
-  padding:20px;
+  border-bottom:1px solid var(--border);
+}
+h1{margin:0;color:#FFD700}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
   margin-top:15px;
 }
 
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:15px;
+}
+
 .label{
-  color:#aaa;
   font-size:12px;
-  letter-spacing:1px;
+  color:var(--muted);
+  text-transform:uppercase;
 }
 
 .value{
-  font-size:24px;
-  margin-top:5px;
+  font-size:26px;
+  font-weight:700;
 }
 
 .bar{
   height:10px;
-  background:#222;
-  border-radius:10px;
-  margin-top:10px;
+  background:#1a1a1d;
+  border-radius:999px;
+  margin-top:8px;
 }
 
-.bar-fill{
+.bar i{
+  display:block;
   height:100%;
-  width:60%;
   background:#FFD700;
-  border-radius:10px;
+  width:0%;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:15px;
 }
 
 #map{
   height:300px;
-  border-radius:15px;
-  margin-top:10px;
+  border-radius:12px;
+}
+
+button{
+  background:linear-gradient(90deg,#FFD700,#b8912f);
+  color:#111;
+  border:none;
+  padding:10px 20px;
+  border-radius:30px;
+  font-weight:bold;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div id="systemBanner" style="text-align:center;padding:10px;background:#111;color:#FFD700;">
-  Wallet connection available inside AmVault
+<header>
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
+    <h1>7TRB Dashboard</h1>
+    <button id="connectBtn">Connect Wallet</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p style="color:#aaa;">Transparency • Circulation • Growth</p>
+
+<div id="walletBalance" style="color:#FFD700;font-weight:600;"></div>
+
+<!-- KPI -->
+<section class="cards">
+  <div class="card">
+    <div class="label">Community Holders</div>
+    <div class="value" id="holders">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Active Participants</div>
+    <div class="value" id="active">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Treasury</div>
+    <div class="value" id="treasury">—</div>
+    <div class="bar"><i id="treasuryBar"></i></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Referrals</div>
+    <div class="value" id="referrals">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Your 7TRB</div>
+    <div class="value" id="tokenBalance">—</div>
+  </div>
+</section>
+
+<!-- CHART + PROJECTS -->
+<div class="grid">
+  <div class="card">
+    <div class="label">Treasury Trend</div>
+    <canvas id="treasuryChart"></canvas>
+  </div>
+
+  <div class="card">
+    <div class="label">Merchant Directory</div>
+    <div id="merchants">Loading...</div>
+  </div>
 </div>
 
-<div class="container">
-
-<h1>7TRB Dashboard</h1>
-<div class="sub">Transparency • Circulation • Growth</div>
-
-<button class="connect" id="connectBtn">Connect Wallet</button>
-
-<!-- WALLET -->
-<div class="card">
-  <div class="label">Wallet</div>
-  <div class="value" id="walletBalance">Not Connected</div>
-  <div class="value" id="tokenBalance">7TRB Balance: —</div>
-</div>
-
-<!-- TREASURY -->
-<div class="card">
-  <div class="label">Treasury</div>
-  <div class="value" id="treasury">—</div>
-  <div class="bar"><div id="treasuryBar" class="bar-fill"></div></div>
-</div>
-
-<!-- HOLDERS -->
-<div class="card">
-  <div class="label">Community Holders</div>
-  <div class="value" id="holders">—</div>
-</div>
-
-<!-- ACTIVE -->
-<div class="card">
-  <div class="label">Active Participants (30d)</div>
-  <div class="value" id="active">—</div>
-</div>
-
-<!-- REFERRALS -->
-<div class="card">
-  <div class="label">Referrals (30d)</div>
-  <div class="value" id="referrals">—</div>
-</div>
-
-<!-- CHART -->
-<div class="card">
-  <div class="label">Treasury / Supply View</div>
-  <canvas id="treasuryChart"></canvas>
-</div>
-
-<!-- MERCHANT MAP -->
-<div class="card">
+<!-- MAP -->
+<div class="card" style="margin-top:15px;">
   <div class="label">Merchant Map</div>
   <div id="map"></div>
-</div>
-
-<!-- MERCHANT LIST -->
-<div class="card">
-  <div class="label">Merchant Directory</div>
-  <div id="merchants">Loading...</div>
 </div>
 
 </div>
