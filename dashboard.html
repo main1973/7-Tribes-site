@@ -1,169 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>7TRB Dashboard — Live System</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>7TRB Dashboard</title>
+  <link rel="icon" href="images/logo.png" />
 
-<link rel="icon" href="images/logo.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    :root{
+      --bg:#090909;
+      --panel:#131313;
+      --panel2:#171717;
+      --text:#f5f5f5;
+      --muted:#aaaaaa;
+      --gold:#ffd700;
+      --gold2:#c79b2c;
+      --line:#272727;
+      --green:#35c759;
+      --yellow:#ffcc00;
+      --red:#ff453a;
+    }
 
-<style>
-:root{
-  --bg:#0b0b0c;
-  --card:#121214;
-  --text:#eaeaea;
-  --muted:#a1a1a6;
-  --accent:#FFD700;
-  --border:#222;
-}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:system-ui;
-}
-.wrap{max-width:1100px;margin:auto;padding:20px;}
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Arial, Helvetica, sans-serif;
+    }
 
-header{
-  background:#111;
-  border-bottom:1px solid var(--border);
-}
-h1{margin:0;color:#FFD700}
+    a{text-decoration:none;color:inherit}
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-  margin-top:15px;
-}
+    #systemBanner{
+      display:none;
+      text-align:center;
+      padding:10px 14px;
+      font-weight:700;
+      letter-spacing:.04em;
+      background:rgba(255,204,0,.12);
+      color:var(--yellow);
+      border-bottom:1px solid rgba(255,204,0,.35);
+    }
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:15px;
-}
+    header{
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#111,#0b0b0b);
+    }
 
-.label{
-  font-size:12px;
-  color:var(--muted);
-  text-transform:uppercase;
-}
+    .wrap{
+      max-width:1180px;
+      margin:0 auto;
+      padding:18px;
+    }
 
-.value{
-  font-size:26px;
-  font-weight:700;
-}
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
 
-.bar{
-  height:10px;
-  background:#1a1a1d;
-  border-radius:999px;
-  margin-top:8px;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
 
-.bar i{
-  display:block;
-  height:100%;
-  background:#FFD700;
-  width:0%;
-}
+    .brand img{
+      width:46px;
+      height:46px;
+      object-fit:cover;
+      border-radius:50%;
+      border:1px solid rgba(255,215,0,.35);
+      box-shadow:0 0 14px rgba(255,215,0,.1);
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:15px;
-}
+    .brand h1{
+      margin:0;
+      font-size:1.55rem;
+      color:var(--gold);
+      line-height:1.05;
+    }
 
-#map{
-  height:300px;
-  border-radius:12px;
-}
+    .brand small{
+      display:block;
+      color:var(--muted);
+      margin-top:4px;
+      font-size:.85rem;
+      letter-spacing:.04em;
+    }
 
-button{
-  background:linear-gradient(90deg,#FFD700,#b8912f);
-  color:#111;
-  border:none;
-  padding:10px 20px;
-  border-radius:30px;
-  font-weight:bold;
-  cursor:pointer;
-}
-</style>
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s ease;
+      border:none;
+    }
+
+    .btn-primary{
+      background:linear-gradient(90deg,var(--gold),var(--gold2));
+      color:#111;
+      box-shadow:0 0 18px rgba(255,215,0,.18);
+    }
+
+    .btn-ghost{
+      background:transparent;
+      color:var(--text);
+      border:1px solid #3b3b3b;
+    }
+
+    .statusRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      margin-top:14px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .statusItem{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .dot{
+      width:11px;
+      height:11px;
+      border-radius:50%;
+      background:#666;
+      box-shadow:0 0 0 2px rgba(255,255,255,.04) inset;
+    }
+
+    .heroGrid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,.16);
+    }
+
+    .label{
+      color:var(--muted);
+      font-size:.79rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:8px;
+    }
+
+    .value{
+      font-size:1.6rem;
+      font-weight:800;
+    }
+
+    .subvalue{
+      margin-top:8px;
+      color:var(--gold);
+      font-weight:700;
+      word-break:break-word;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .bar{
+      height:10px;
+      border-radius:999px;
+      overflow:hidden;
+      background:#1d1d1d;
+      margin-top:12px;
+      border:1px solid #242424;
+    }
+
+    .bar > i{
+      display:block;
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,var(--gold),#fff0a8);
+      transition:width .3s ease;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    canvas{
+      width:100% !important;
+      height:300px !important;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    th, td{
+      padding:10px 8px;
+      border-bottom:1px solid #252525;
+      text-align:left;
+      font-size:.92rem;
+    }
+
+    th{
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    #map{
+      width:100%;
+      height:360px;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid #252525;
+      margin-top:8px;
+    }
+
+    .footNote{
+      color:var(--muted);
+      font-size:.88rem;
+      margin-top:10px;
+      line-height:1.4;
+    }
+
+    @media (max-width:1100px){
+      .cards{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width:900px){
+      .heroGrid,
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:560px){
+      .cards{grid-template-columns:1fr}
+      .brand h1{font-size:1.3rem}
+      .value{font-size:1.35rem}
+      .btn{width:100%}
+      .actions{width:100%}
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
-    <h1>7TRB Dashboard</h1>
-    <button id="connectBtn">Connect Wallet</button>
-  </div>
-</header>
+  <div id="systemBanner">READ-ONLY MODE ACTIVE — OPEN IN AMVAULT TO CONNECT WALLET</div>
 
-<div class="wrap">
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <img src="images/logo.png" alt="7TRB Logo" />
+          <div>
+            <h1>7TRB Dashboard</h1>
+            <small>Organize • Unity • Build • Power</small>
+          </div>
+        </div>
 
-<p style="color:#aaa;">Transparency • Circulation • Growth</p>
+        <div class="actions">
+          <button id="connectBtn" class="btn btn-primary">Connect Wallet</button>
+          <a id="openAmVaultBtn" class="btn btn-ghost" href="javascript:void(0)">Open in AmVault</a>
+        </div>
+      </div>
 
-<div id="walletBalance" style="color:#FFD700;font-weight:600;"></div>
+      <div class="statusRow">
+        <div class="statusItem">
+          <span class="dot" id="walletDot"></span>
+          <span>Wallet</span>
+        </div>
+        <div class="statusItem">
+          <span class="dot" id="networkDot"></span>
+          <span>Network</span>
+        </div>
+        <div class="statusItem">
+          <span class="dot" id="freshDot"></span>
+          <span>Chain Data</span>
+        </div>
+        <div class="statusItem">
+          <span>Updated: <span id="updatedAt">—</span></span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<!-- KPI -->
-<section class="cards">
-  <div class="card">
-    <div class="label">Community Holders</div>
-    <div class="value" id="holders">—</div>
-  </div>
+  <main class="wrap">
 
-  <div class="card">
-    <div class="label">Active Participants</div>
-    <div class="value" id="active">—</div>
-  </div>
+    <section class="heroGrid">
+      <div class="card">
+        <div class="label">Wallet</div>
+        <div class="subvalue" id="walletBalance">Not Connected</div>
+        <div class="subvalue" id="tokenBalance">7TRB Balance: loading...</div>
+      </div>
 
-  <div class="card">
-    <div class="label">Treasury</div>
-    <div class="value" id="treasury">—</div>
-    <div class="bar"><i id="treasuryBar"></i></div>
-  </div>
+      <div class="card">
+        <div class="label">Live Chain Snapshot</div>
+        <div class="value" id="blockNumber">—</div>
+        <div class="footNote">Current Alkebuleum block height</div>
+      </div>
+    </section>
 
-  <div class="card">
-    <div class="label">Referrals</div>
-    <div class="value" id="referrals">—</div>
-  </div>
+    <section class="cards">
+      <div class="card">
+        <div class="label">Holders</div>
+        <div class="value" id="holders">—</div>
+        <div class="bar"><i id="holdersBar"></i></div>
+      </div>
 
-  <div class="card">
-    <div class="label">Your 7TRB</div>
-    <div class="value" id="tokenBalance">—</div>
-  </div>
-</section>
+      <div class="card">
+        <div class="label">Active Wallets (30d)</div>
+        <div class="value" id="active">—</div>
+      </div>
 
-<!-- CHART + PROJECTS -->
-<div class="grid">
-  <div class="card">
-    <div class="label">Treasury Trend</div>
-    <canvas id="treasuryChart"></canvas>
-  </div>
+      <div class="card">
+        <div class="label">Treasury 7TRB</div>
+        <div class="value" id="treasury">—</div>
+        <div class="bar"><i id="treasuryBar"></i></div>
+      </div>
 
-  <div class="card">
-    <div class="label">Merchant Directory</div>
-    <div id="merchants">Loading...</div>
-  </div>
-</div>
+      <div class="card">
+        <div class="label">Referrals (30d)</div>
+        <div class="value" id="referrals">—</div>
+      </div>
+    </section>
 
-<!-- MAP -->
-<div class="card" style="margin-top:15px;">
-  <div class="label">Merchant Map</div>
-  <div id="map"></div>
-</div>
+    <section class="grid">
+      <div class="card">
+        <div class="label">Treasury / Supply View</div>
+        <canvas id="treasuryChart"></canvas>
+      </div>
 
-</div>
+      <div class="card">
+        <div class="label">Merchant Directory</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>City</th>
+              <th>Since</th>
+              <th>Monthly 7TRB</th>
+            </tr>
+          </thead>
+          <tbody id="merchRows">
+            <tr><td colspan="4">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-<script src="dashboard.js"></script>
+    <section class="card" style="margin-top:16px;">
+      <div class="label">Merchant Map</div>
+      <div id="map"></div>
+    </section>
 
+  </main>
+
+  <script src="dashboard.js"></script>
 </body>
 </html>
