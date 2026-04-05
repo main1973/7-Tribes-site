@@ -3,7 +3,14 @@
   "active_wallets_30d": 1,
   "referrals_30d": 0,
   "treasury_series": [
-    { "label": "Launch", "value": 7000000000 },
-    { "label": "Now", "value": 7000000000 }
-  ]
+    {
+      "label": "Launch",
+      "value": 7000000000
+    },
+    {
+      "label": "Now",
+      "value": 7000000000
+    }
+  ],
+  "updated_at": "2026-04-05T06:18:00Z"
 }
