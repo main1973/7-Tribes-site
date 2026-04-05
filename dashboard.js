@@ -1,9 +1,4 @@
-/* 7TRB Dashboard JS
-   Matches simplified transparency dashboard.html
-   - Read-only data from Alkebuleum RPC
-   - AmVault-first wallet connect flow
-   - Loads optional metrics.json and merchants.json
-*/
+/* 7TRB Dashboard JS — trimmed to match lean dashboard.html */
 
 const CONFIG = {
   rpcUrl: "https://rpc.alkebuleum.com",
@@ -41,12 +36,19 @@ function setText(id, value) {
 
 function setBanner(message) {
   const node = el("systemBanner");
-  if (node) node.textContent = message;
+  if (node) {
+    node.style.display = "block";
+    node.textContent = message;
+  }
+}
+
+function setDot(id, color) {
+  const node = el(id);
+  if (node) node.style.background = color;
 }
 
 function formatNumber(value, maxFraction = 2) {
-  const num = Number(value || 0);
-  return num.toLocaleString(undefined, {
+  return Number(value || 0).toLocaleString(undefined, {
     maximumFractionDigits: maxFraction
   });
 }
@@ -64,7 +66,7 @@ async function getTokenContract(providerLike) {
 
 async function connectWallet() {
   if (!window.ethereum) {
-    setBanner("Open AmVault in a new tab, then return here.");
+    setBanner("Open this dashboard inside AmVault to connect wallet.");
     window.open(CONFIG.amvaultUrl, "_blank");
     return;
   }
@@ -75,27 +77,40 @@ async function connectWallet() {
     signer = await browserProvider.getSigner();
     connectedAddress = await signer.getAddress();
 
+    const chainHex = await window.ethereum.request({ method: "eth_chainId" });
+
     setText("walletBalance", "Connected");
+    setDot("walletDot", "#35c759");
+
+    if (chainHex.toLowerCase() === CONFIG.chainIdHex.toLowerCase()) {
+      setDot("networkDot", "#35c759");
+      setBanner("Wallet connected inside AmVault.");
+    } else {
+      setDot("networkDot", "#ffcc00");
+      setBanner("Wallet connected, but wrong network selected.");
+    }
 
     const contract = await getTokenContract(browserProvider);
 
     let decimals = CONFIG.tokenDecimalsFallback;
     try {
       decimals = await contract.decimals();
-    } catch (err) {
-      console.warn("Could not read decimals, using fallback.");
-    }
+    } catch {}
 
     const rawBalance = await contract.balanceOf(connectedAddress);
     const formatted = ethers.formatUnits(rawBalance, decimals);
 
     setText("tokenBalance", `${CONFIG.tokenSymbol} Balance: ${formatNumber(formatted, 4)}`);
-    setBanner("Wallet connected inside AmVault.");
   } catch (error) {
     console.error("Wallet connection failed:", error);
     setText("walletBalance", "Connection Failed");
     setBanner("Wallet connection failed. Try again inside AmVault.");
+    setDot("walletDot", "#ff453a");
   }
+}
+
+function openAmVault() {
+  window.open(CONFIG.amvaultUrl, "_blank");
 }
 
 async function loadReadOnlyTokenData() {
@@ -106,14 +121,13 @@ async function loadReadOnlyTokenData() {
     let decimals = CONFIG.tokenDecimalsFallback;
     try {
       decimals = await contract.decimals();
-    } catch (err) {
-      console.warn("Could not read decimals, using fallback.");
-    }
+    } catch {}
 
-    const [walletRaw, treasuryRaw, totalSupplyRaw] = await Promise.all([
+    const [walletRaw, treasuryRaw, totalSupplyRaw, block] = await Promise.all([
       contract.balanceOf(CONFIG.trackedWallet),
       contract.balanceOf(CONFIG.treasuryAddress),
-      contract.totalSupply()
+      contract.totalSupply(),
+      provider.getBlockNumber()
     ]);
 
     const walletBalance = Number(ethers.formatUnits(walletRaw, decimals));
@@ -123,10 +137,15 @@ async function loadReadOnlyTokenData() {
     setText("walletBalance", "Not Connected");
     setText("tokenBalance", `${CONFIG.tokenSymbol} Balance: ${formatNumber(walletBalance, 4)}`);
     setText("treasury", formatNumber(treasuryBalance, 0));
+    setText("blockNumber", block.toString());
+    setText("updatedAt", new Date().toLocaleString());
 
     const treasuryPct = totalSupply > 0 ? (treasuryBalance / totalSupply) * 100 : 0;
     const treasuryBar = el("treasuryBar");
     if (treasuryBar) treasuryBar.style.width = `${Math.min(treasuryPct, 100)}%`;
+
+    setDot("freshDot", "#35c759");
+    setDot("networkDot", "#35c759");
 
     renderChart([
       { label: "Launch", value: totalSupply },
@@ -136,6 +155,9 @@ async function loadReadOnlyTokenData() {
     console.error("Read-only token load failed:", error);
     setText("tokenBalance", `${CONFIG.tokenSymbol} Balance: unavailable`);
     setText("treasury", "Unavailable");
+    setText("blockNumber", "—");
+    setText("updatedAt", "—");
+    setDot("freshDot", "#ff453a");
   }
 }
 
@@ -150,20 +172,19 @@ async function loadMetrics() {
     setText("active", data.active_wallets_30d ?? "—");
     setText("referrals", data.referrals_30d ?? "—");
 
+    if (el("holdersBar") && typeof data.holders_progress !== "undefined") {
+      el("holdersBar").style.width = `${Math.min(Number(data.holders_progress), 100)}%`;
+    }
+
     if (Array.isArray(data.treasury_series) && data.treasury_series.length) {
       renderChart(data.treasury_series);
     }
   } catch (error) {
     console.warn("Metrics load failed:", error.message);
-    if (!el("holders")?.textContent || el("holders").textContent === "—") {
-      setText("holders", "1");
-    }
-    if (!el("active")?.textContent || el("active").textContent === "—") {
-      setText("active", "1");
-    }
-    if (!el("referrals")?.textContent || el("referrals").textContent === "—") {
-      setText("referrals", "0");
-    }
+    setText("holders", "1");
+    setText("active", "1");
+    setText("referrals", "0");
+    if (el("holdersBar")) el("holdersBar").style.width = "10%";
   }
 }
 
@@ -174,9 +195,7 @@ function renderChart(series) {
   const labels = series.map(item => item.label);
   const values = series.map(item => Number(item.value || 0));
 
-  if (treasuryChart) {
-    treasuryChart.destroy();
-  }
+  if (treasuryChart) treasuryChart.destroy();
 
   treasuryChart = new Chart(canvas, {
     type: "line",
@@ -218,32 +237,39 @@ async function loadMerchants() {
     if (!res.ok) throw new Error("merchants.json missing");
 
     const merchants = await res.json();
-    renderMerchantList(merchants);
+    renderMerchantTable(merchants);
     renderMerchantMap(merchants);
   } catch (error) {
     console.warn("Merchants load failed:", error.message);
-    const fallback = [
-      { name: "Mainhouse Apparel", city: "Detroit" },
-      { name: "7Tribes Digital", city: "Online" }
-    ];
-    renderMerchantList(fallback);
+    renderMerchantTable([
+      { name: "Mainhouse Apparel", city: "Detroit", since: "2026", monthly_7trb: "—" },
+      { name: "7Tribes Digital", city: "Online", since: "2026", monthly_7trb: "—" }
+    ]);
     renderMerchantMap([]);
   }
 }
 
-function renderMerchantList(merchants) {
-  const container = el("merchants");
-  if (!container) return;
+function renderMerchantTable(merchants) {
+  const tbody = el("merchRows");
+  if (!tbody) return;
+
+  tbody.innerHTML = "";
 
   if (!merchants.length) {
-    container.textContent = "No merchants yet";
+    tbody.innerHTML = `<tr><td colspan="4">No merchants yet</td></tr>`;
     return;
   }
 
-  container.innerHTML = merchants.map(m => {
-    const city = m.city ? ` — ${m.city}` : "";
-    return `<div style="padding:8px 0;border-bottom:1px solid #222;">${m.name}${city}</div>`;
-  }).join("");
+  merchants.forEach(m => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${m.name || "—"}</td>
+      <td>${m.city || "—"}</td>
+      <td>${m.since || "—"}</td>
+      <td>${m.monthly_7trb || "—"}</td>
+    `;
+    tbody.appendChild(tr);
+  });
 }
 
 function renderMerchantMap(merchants) {
@@ -278,9 +304,10 @@ function renderMerchantMap(merchants) {
 
 function bindUi() {
   const connectBtn = el("connectBtn");
-  if (connectBtn) {
-    connectBtn.addEventListener("click", connectWallet);
-  }
+  if (connectBtn) connectBtn.addEventListener("click", connectWallet);
+
+  const openBtn = el("openAmVaultBtn");
+  if (openBtn) openBtn.addEventListener("click", openAmVault);
 }
 
 async function init() {
