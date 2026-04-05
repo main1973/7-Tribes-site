@@ -273,17 +273,50 @@
       .btn{width:100%}
       .actions{width:100%}
     }
+    .mainNav{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:12px 10px;
+  border-bottom:1px solid #222;
+  background:#0d0d0d;
+}
+
+.mainNav a{
+  color:#aaa;
+  font-weight:600;
+  font-size:.95rem;
+  padding:6px 10px;
+  border-radius:8px;
+  transition:.2s ease;
+}
+
+.mainNav a:hover{
+  color:#FFD700;
+  background:rgba(255,215,0,.08);
+}
+
+.mainNav a.active{
+  color:#FFD700;
+  background:rgba(255,215,0,.12);
+  box-shadow:0 0 10px rgba(255,215,0,.15);
+}
   </style>
 </head>
-<body>
-
-  <div id="systemBanner">READ-ONLY MODE ACTIVE — OPEN IN AMVAULT TO CONNECT WALLET</div>
 
   <header>
+
+<nav class="mainNav">
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="earn.html">Earn</a>
+  <a href="network.html">Network</a>
+  <a href="dashboard.html" class="active">Dashboard</a>
+</nav>
     <div class="wrap">
       <div class="topbar">
         <div class="brand">
-          <img src="images/logo.png" alt="7TRB Logo" />
+          <img src="images/7trb.logo.png" alt="7TRB Logo" />
           <div>
             <h1>7TRB Dashboard</h1>
             <small>Organize • Unity • Build • Power</small>
