@@ -1,374 +1,440 @@
-I<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>7TRB — Organize. Build. Circulate.</title>
-<meta name="description" content="7TRB is a community-powered system built to organize people, circulate value, and build real economic participation locally and globally." />
-<link rel="icon" href="images/7trb.logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#000;
-  color:#FFD700;
-  text-align:center;
-}
+  <title>7TRB — Organize. Build. Circulate.</title>
+  <meta name="description" content="7TRB is a community-powered system built to organize people, circulate value, and build real economic participation locally and globally.">
+  <meta name="google-site-verification" content="J13STEzRChDz488QqKA5yP2eoiZ-FQNDUzuok6B2RHM">
+  <link rel="icon" href="images/7trb.logo.png">
 
-.hero-banner{
-  width:100%;
-  min-height:420px;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.7), rgba(0,0,0,.5)),
-    url('images/welcome_banner.png') center/cover no-repeat;
-  display:flex;
-  flex-direction:column;
-}
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
 
-nav{
-  background:#111;
-  padding:15px;
-}
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#000;
+      color:#FFD700;
+      text-align:center;
+    }
 
-nav a{
-  color:#FFD700;
-  margin:0 15px;
-  text-decoration:none;
-  font-weight:bold;
-}
+    .hero-banner{
+      width:100%;
+      min-height:420px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.7), rgba(0,0,0,.5)),
+        url('images/welcome_banner.png') center/cover no-repeat;
+      display:flex;
+      flex-direction:column;
+    }
 
-.hero-content{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:40px 20px;
-}
+    nav{
+      background:#111;
+      padding:15px;
+    }
 
-.hero-logo{
-  width:120px;
-  margin-bottom:20px;
-}
+    nav a{
+      color:#FFD700;
+      margin:0 15px;
+      text-decoration:none;
+      font-weight:bold;
+    }
 
-h1{
-  font-size:48px;
-  margin:10px 0;
-}
+    .hero-content{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:40px 20px;
+    }
 
-h2, h3{
-  color:#FFD700;
-}
+    .hero-logo{
+      width:120px;
+      margin-bottom:20px;
+    }
 
-p{
-  color:#ddd;
-}
+    h1{
+      font-size:48px;
+      margin:10px 0;
+    }
 
-.section{
-  margin:60px auto;
-  width:90%;
-  max-width:1100px;
-}
+    h2, h3{
+      color:#FFD700;
+    }
 
-.box{
-  background:#111;
-  border:1px solid #333;
-  border-radius:14px;
-  padding:30px;
-}
+    p{
+      color:#ddd;
+    }
 
-.book-box{
-  background:#111;
-  border:1px solid #333;
-  border-radius:14px;
-  padding:30px;
-}
+    .section{
+      margin:60px auto;
+      width:90%;
+      max-width:1100px;
+    }
 
-.book-flex{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:center;
-  gap:30px;
-}
+    .box,
+    .book-box,
+    .form-box{
+      background:#111;
+      border:1px solid #333;
+      border-radius:14px;
+      padding:30px;
+    }
 
-.book-img{
-  width:220px;
-  border-radius:10px;
-}
+    .book-flex{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+      gap:30px;
+    }
 
-.book-text{
-  max-width:430px;
-  text-align:left;
-}
+    .book-img{
+      width:220px;
+      border-radius:10px;
+    }
 
-ul{
-  color:#ccc;
-  text-align:left;
-}
+    .book-text{
+      max-width:430px;
+      text-align:left;
+    }
 
-.grid{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-}
+    ul{
+      color:#ccc;
+      text-align:left;
+    }
 
-.card{
-  background:#111;
-  border:1px solid #333;
-  border-radius:12px;
-  width:280px;
-  margin:20px;
-  padding:25px;
-}
+    .grid{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
 
-.btn{
-  display:inline-block;
-  margin-top:15px;
-  padding:12px 24px;
-  background:#FFD700;
-  color:#000;
-  border-radius:6px;
-  text-decoration:none;
-  font-weight:bold;
-}
+    .card{
+      background:#111;
+      border:1px solid #333;
+      border-radius:12px;
+      width:280px;
+      margin:20px;
+      padding:25px;
+    }
 
-.btn:hover{
-  background:#e5c100;
-}
+    .btn{
+      display:inline-block;
+      margin-top:15px;
+      padding:12px 24px;
+      background:#FFD700;
+      color:#000;
+      border-radius:6px;
+      text-decoration:none;
+      font-weight:bold;
+      border:none;
+      cursor:pointer;
+    }
 
-.btn-dark{
-  background:#111;
-  color:#FFD700;
-  border:1px solid #FFD700;
-}
+    .btn:hover{
+      background:#e5c100;
+    }
 
-.btn-dark:hover{
-  background:#1b1b1b;
-}
+    .btn-dark{
+      background:#111;
+      color:#FFD700;
+      border:1px solid #FFD700;
+    }
 
-.note{
-  color:#aaa;
-  font-size:14px;
-  margin-top:15px;
-}
+    .btn-dark:hover{
+      background:#1b1b1b;
+    }
 
-footer{
-  margin-top:60px;
-  padding:30px 20px;
-  border-top:1px solid #222;
-  background:#0a0a0a;
-}
+    .note{
+      color:#aaa;
+      font-size:14px;
+      margin-top:15px;
+    }
 
-@media (max-width: 768px){
-  nav a{
-    display:inline-block;
-    margin:8px 10px;
-  }
+    .join-form{
+      max-width:700px;
+      margin:0 auto;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+    }
 
-  h1{
-    font-size:38px;
-  }
+    .join-form input,
+    .join-form select,
+    .join-form textarea{
+      width:100%;
+      padding:14px;
+      border-radius:8px;
+      border:1px solid #444;
+      background:#0a0a0a;
+      color:#fff;
+      font-size:16px;
+    }
 
-  .book-text{
-    text-align:center;
-  }
+    .join-form textarea{
+      min-height:120px;
+      resize:vertical;
+    }
 
-  ul{
-    text-align:left;
-  }
-}
-</style>
+    footer{
+      margin-top:60px;
+      padding:30px 20px;
+      border-top:1px solid #222;
+      background:#0a0a0a;
+    }
+
+    @media (max-width: 768px){
+      nav a{
+        display:inline-block;
+        margin:8px 10px;
+      }
+
+      h1{
+        font-size:38px;
+      }
+
+      .book-text{
+        text-align:center;
+      }
+
+      ul{
+        text-align:left;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<header class="hero-banner">
+  <!-- HERO -->
+  <header class="hero-banner">
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="onboarding.html">Onboarding</a>
-  <a href="shop.html">Shop</a>
-  <a href="earn.html">Earn</a>
-  <a href="network.html">Network</a>
-  <a href="dashboard.html">Dashboard</a>
-</nav>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="onboarding.html">Onboarding</a>
+      <a href="shop.html">Shop</a>
+      <a href="earn.html">Earn</a>
+      <a href="network.html">Network</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
 
-<div class="hero-content">
-  <img src="images/7trb.logo.png" class="hero-logo" alt="7TRB Logo">
-  <h1>Organize. Build. Circulate.</h1>
-  <p style="max-width:760px;">
-    A community-powered economy built on participation — not speculation.
-  </p>
+    <div class="hero-content">
+      <img src="images/7trb.logo.png" class="hero-logo" alt="7TRB Logo">
+      <h1>Organize. Build. Circulate.</h1>
+      <p style="max-width:760px;">
+        A community-powered economy built on participation — not speculation.
+      </p>
 
-  <div style="margin-top:20px;">
-    <a href="#start" class="btn">Start Here</a>
-    <a href="network.html" class="btn btn-dark">Join the Network</a>
+      <div style="margin-top:20px;">
+        <a href="#start" class="btn">Start Here</a>
+        <a href="network.html" class="btn btn-dark">Join the Network</a>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- WHY IT EXISTS -->
+  <div class="section">
+    <div class="box">
+      <h2>Why 7TRB Exists</h2>
+
+      <p style="max-width:800px; margin:0 auto 18px;">
+        Most communities earn money and then watch it leave. Rent, taxes, outside businesses,
+        and disconnected spending pull value out faster than people can rebuild it.
+      </p>
+
+      <p style="max-width:800px; margin:0 auto 18px;">
+        7TRB exists to test a different model: organize people, connect businesses,
+        and keep value circulating between the people creating it.
+      </p>
+
+      <p style="max-width:800px; margin:0 auto;">
+        Products, tools, and education support that mission — they are not the mission.
+      </p>
+
+      <p class="note">
+        This model is being explored locally first, with connected participation from Africa and other communities over time.
+      </p>
+    </div>
   </div>
-</div>
 
-</header>
+  <!-- START HERE -->
+  <div class="section" id="start">
+    <div class="book-box">
 
-<!-- WHY IT EXISTS -->
-<div class="section">
-  <div class="box">
-    <h2>Why 7TRB Exists</h2>
+      <h2>Start With the Blueprint</h2>
 
-    <p style="max-width:800px; margin:0 auto 18px;">
-      Most communities earn money and then watch it leave. Rent, taxes, outside businesses,
-      and disconnected spending pull value out faster than people can rebuild it.
-    </p>
+      <p style="max-width:760px; margin:0 auto 25px;">
+        The best place to begin is with the message. Learn the thinking behind 7TRB,
+        how circulation works, and why communities need systems — not just spending.
+      </p>
 
-    <p style="max-width:800px; margin:0 auto 18px;">
-      7TRB exists to test a different model: organize people, connect businesses,
-      and keep value circulating between the people creating it.
-    </p>
+      <div class="book-flex">
 
-    <p style="max-width:800px; margin:0 auto;">
-      Products, tools, and education support that mission — they are not the mission.
-    </p>
+        <img src="images/ebook-cover.png" class="book-img" alt="Circulation Book Visual">
 
-    <p class="note">
-      This model is being explored locally first, with connected participation from Africa and other communities over time.
-    </p>
+        <div class="book-text">
+
+          <h3>7Tribes: Organize, Build, Circulate</h3>
+
+          <ul>
+            <li>How to organize your community into economic power</li>
+            <li>How to circulate money instead of losing it</li>
+            <li>How to build wealth through participation</li>
+            <li>Why this is about structure, not hype</li>
+          </ul>
+
+          <a href="https://mainhousedigital.gumroad.com/l/7Tribes"
+             target="_blank"
+             rel="noopener"
+             class="btn">
+             Buy on Gumroad
+          </a>
+
+          <a href="https://a.co/d/0f7FFnOl"
+             target="_blank"
+             rel="noopener"
+             class="btn btn-dark">
+             Buy on Amazon
+          </a>
+
+          <p class="note">
+            You do not need to buy anything to be part of this. You can start by learning, joining, or participating.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
   </div>
-</div>
 
-<!-- START HERE -->
-<div class="section" id="start">
-  <div class="book-box">
+  <!-- HOW IT WORKS -->
+  <div class="section">
 
-    <h2>Start With the Blueprint</h2>
+    <h2>How 7TRB Works</h2>
 
-    <p style="max-width:760px; margin:0 auto 25px;">
-      The best place to begin is with the message. Learn the thinking behind 7TRB,
-      how circulation works, and why communities need systems — not just spending.
+    <p style="max-width:700px;margin:0 auto;">
+      7TRB is not just a token — it is a system designed to keep value circulating inside the community.
     </p>
 
-    <div class="book-flex">
+    <div class="grid">
 
-      <img src="images/ebook-cover.png" class="book-img" alt="Circulation Book Visual">
-
-      <div class="book-text">
-
-        <h3>7Tribes:Organize,Build,Circulate</h3>
-
-        <ul>
-          <li>How to organize your community into economic power</li>
-          <li>How to circulate money instead of losing it</li>
-          <li>How to build wealth through participation</li>
-          <li>Why this is about structure, not hype</li>
-        </ul>
-
-        <a href="https://mainhousedigital.gumroad.com/l/7Tribes"
-           target="_blank"
-           class="btn">
-           Buy on Gumroad 
-        </a>
-
-        <a href="https://a.co/d/0f7FFnOl
-           target="_blank"
-           class="btn btn-dark">
-           Buy on Amazon
-        </a>
-
-        <p class="note">
-          You do not need to buy anything to be part of this. You can start by learning, joining, or participating.
+      <div class="card">
+        <h3>1. Organize</h3>
+        <p>
+          Bring people together — residents, businesses, and creators —
+          into one connected network.
         </p>
+      </div>
 
+      <div class="card">
+        <h3>2. Build</h3>
+        <p>
+          Create products, services, and opportunities inside the network.
+          Support each other first.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>3. Circulate</h3>
+        <p>
+          Spend within the system. Money stays moving —
+          and movement creates value.
+        </p>
       </div>
 
     </div>
 
   </div>
-</div>
 
-<!-- HOW IT WORKS -->
-<div class="section">
+  <!-- CHOOSE YOUR PATH -->
+  <div class="section">
 
-  <h2>How 7TRB Works</h2>
+    <h2>Choose Your Path</h2>
 
-  <p style="max-width:700px;margin:0 auto;">
-    7TRB is not just a token — it is a system designed to keep value circulating inside the community.
-  </p>
+    <div class="grid">
 
-  <div class="grid">
+      <div class="card">
+        <h2>Learn</h2>
+        <p>Start with the blueprint, understand the mission, and see how the system works.</p>
+        <a class="btn" href="https://mainhousedigital.gumroad.com/l/7Tribes" target="_blank" rel="noopener">Start Learning</a>
+      </div>
 
-    <div class="card">
-      <h3>1. Organize</h3>
-      <p>
-        Bring people together — residents, businesses, and creators —
-        into one connected network.
-      </p>
-    </div>
+      <div class="card">
+        <h2>Join</h2>
+        <p>Become part of the network as a resident, builder, or business participant.</p>
+        <a class="btn" href="network.html">Join Network</a>
+      </div>
 
-    <div class="card">
-      <h3>2. Build</h3>
-      <p>
-        Create products, services, and opportunities inside the network.
-        Support each other first.
-      </p>
-    </div>
+      <div class="card">
+        <h2>Shop</h2>
+        <p>Support the ecosystem through apparel, tools, and message-driven products.</p>
+        <a class="btn" href="shop.html">Go to Shop</a>
+      </div>
 
-    <div class="card">
-      <h3>3. Circulate</h3>
-      <p>
-        Spend within the system. Money stays moving —
-        and movement creates value.
-      </p>
     </div>
 
   </div>
 
-</div>
+  <!-- JOIN FORM -->
+  <div class="section" id="join">
+    <div class="form-box">
+      <h2>Join the Tribe</h2>
+      <p style="max-width:760px; margin:0 auto 25px;">
+        Get updates, onboarding info, and early access to the 7TRB network.
+      </p>
 
-<!-- CHOOSE YOUR PATH -->
-<div class="section">
+      <form class="join-form" action="https://formspree.io/f/xnnokrvl" method="POST">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <select name="role" required>
+          <option value="">Choose your path</option>
+          <option value="resident">Resident</option>
+          <option value="builder">Builder</option>
+          <option value="merchant">Merchant</option>
+          <option value="supporter">Supporter</option>
+        </select>
+        <textarea name="message" placeholder="Tell us how you want to participate"></textarea>
+        <button type="submit" class="btn">Join Now</button>
+      </form>
 
-  <h2>Choose Your Path</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <h2>Learn</h2>
-      <p>Start with the blueprint, understand the mission, and see how the system works.</p>
-      <a class="btn" href="https://mainhousedigital.gumroad.com/l/7Tribes" target="_blank">Start Learning</a>
+      <p class="note">
+        This form sends directly to your Formspree inbox.
+      </p>
     </div>
-
-    <div class="card">
-      <h2>Join</h2>
-      <p>Become part of the network as a resident, builder, or business participant.</p>
-      <a class="btn" href="network.html">Join Network</a>
-    </div>
-
-    <div class="card">
-      <h2>Shop</h2>
-      <p>Support the ecosystem through apparel, tools, and message-driven products.</p>
-      <a class="btn" href="shop.html">Go to Shop</a>
-    </div>
-
   </div>
 
-</div>
+  <!-- DASHBOARD -->
+  <div class="section">
+    <h2>Track the System</h2>
+    <p>See transparency, wallets, and activity in real time.</p>
+    <a class="btn" href="dashboard.html">Open Dashboard</a>
+  </div>
 
-<!-- DASHBOARD -->
-<div class="section">
-  <h2>Track the System</h2>
-  <p>See transparency, wallets, and activity in real time.</p>
-  <a class="btn" href="dashboard.html">Open Dashboard</a>
-</div>
+  <!-- FOOTER -->
+  <footer>
+    <p style="color:#888;font-size:14px;">Network Activity Signal</p>
 
-<!-- FOOTER -->
-<footer>
+    <img src="https://visitor-badge.laobi.icu/badge?page_id=7trb.com&left_color=gold&right_color=black&left_text=Visitors"
+         alt="7TRB visitor count">
 
-  <p style="color:#888;font-size:14px;">Network Activity Signal</p>
-
-  <img src="https://visitor-badge.laobi.icu/badge?page_id=7trb.com&left_color=gold&right_color=black&left_text=Visitors"
-       alt="7TRB visitor count" />
-
-</footer>
+    <p class="note" style="margin-top:15px;">
+      © 2025 7TRB • Mainhouse Oasis LLC
+    </p>
+  </footer>
 
 </body>
 </html>
