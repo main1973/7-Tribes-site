@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the 7TRB Network</title>
+  <meta name="description" content="Join the 7TRB network as a resident or business. Build your profile, connect, and start circulating value." />
+  <link rel="icon" href="images/7trb.logo.png" />
+
+  <style>
+    :root{
+      --bg:#070707;
+      --bg2:#120c06;
+      --panel:#111;
+      --panel2:#17120b;
+      --ink:#f5f1e8;
+      --muted:#cbbd9d;
+      --gold:#e7b852;
+      --gold2:#b8831b;
+      --goldBright:#ffdd7a;
+      --line:#322514;
+      --shadow:0 18px 50px rgba(0,0,0,.5);
+      --radius:18px;
+      --radiusLg:26px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:radial-gradient(circle at top, #241307 0, #0b0704 48%, #050505 100%);
+      color:var(--ink);
+      font-family:Arial, sans-serif;
+    }
+
+    a{
+      color:var(--goldBright);
+      text-decoration:none;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .wrap{
+      max-width:1180px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(10,8,6,.9);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,215,122,.14);
+    }
+
+    .header-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:14px 0;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand img{
+      width:52px;
+      height:52px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.15);
+      box-shadow:0 8px 20px rgba(0,0,0,.4);
+    }
+
+    .brand strong{
+      display:block;
+      color:var(--goldBright);
+      font-size:1.1rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .brand small{
+      color:var(--muted);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:var(--goldBright);
+      font-size:.85rem;
+      font-weight:bold;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,215,122,.14);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,.35), rgba(0,0,0,.7)),
+        url('images/welcome_banner.png') center/cover no-repeat;
+    }
+
+    .hero-inner{
+      min-height:420px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:center;
+      padding:48px 0;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,122,.25);
+      color:var(--goldBright);
+      font-size:.82rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      background:rgba(255,255,255,.03);
+      margin-bottom:14px;
+    }
+
+    .hero h1{
+      margin:0 0 14px;
+      color:var(--goldBright);
+      font-size:clamp(34px,5vw,66px);
+      line-height:1.02;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .hero p{
+      margin:0;
+      color:#f5ead2;
+      font-size:1.05rem;
+      max-width:62ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.55rem;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid transparent;
+      cursor:pointer;
+      white-space:nowrap;
+      transition:transform .15s ease;
+      font-size:.95rem;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold2));
+      color:#140c04;
+      border-color:rgba(255,215,122,.65);
+      box-shadow:0 0 18px rgba(255,215,122,.25);
+    }
+
+    .btn.ghost{
+      background:transparent;
+      color:var(--ink);
+      border-color:rgba(255,215,122,.28);
+    }
+
+    .box,.card{
+      position:relative;
+      background:linear-gradient(180deg, rgba(17,17,17,.96), rgba(18,12,6,.96));
+      border:1px solid rgba(255,215,122,.2);
+      border-radius:var(--radiusLg);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .box::after,.card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:2px;
+      background:linear-gradient(90deg, rgba(255,215,122,.4), rgba(184,131,31,.65), rgba(255,215,122,.4));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.35;
+    }
+
+    .hero-side{
+      padding:22px;
+    }
+
+    .mini-metrics{
+      display:grid;
+      gap:12px;
+    }
+
+    .metric{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 0;
+      border-bottom:1px solid rgba(255,215,122,.1);
+    }
+
+    .metric:last-child{border-bottom:none}
+
+    .metric-label{
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:.76rem;
+    }
+
+    .metric-value{
+      color:var(--goldBright);
+      font-size:1.05rem;
+      font-weight:800;
+      text-align:right;
+    }
+
+    .section{
+      padding:46px 0;
+    }
+
+    .section-title{
+      margin:0 0 10px;
+      color:var(--goldBright);
+      font-size:clamp(24px,3vw,36px);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .lead{
+      color:var(--muted);
+      max-width:80ch;
+    }
+
+    .grid{
+      display:grid;
+      gap:18px;
+    }
+
+    .two{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .three{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .card{
+      padding:20px;
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      color:var(--goldBright);
+      font-size:1.1rem;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .feature-row{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .step-list{
+      display:grid;
+      gap:14px;
+      margin-top:10px;
+    }
+
+    .step{
+      padding:16px;
+      border-radius:16px;
+      border:1px solid rgba(255,215,122,.16);
+      background:rgba(255,255,255,.025);
+    }
+
+    .step strong{
+      display:block;
+      color:var(--goldBright);
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .profile-preview{
+      display:grid;
+      gap:14px;
+    }
+
+    .profile-mock{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,215,122,.16);
+      background:#0b0907;
+    }
+
+    .profile-cover{
+      height:140px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55)),
+        url('images/welcome_banner.png') center/cover no-repeat;
+    }
+
+    .profile-body{
+      padding:18px;
+    }
+
+    .profile-head{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-top:-42px;
+    }
+
+    .avatar{
+      width:84px;
+      height:84px;
+      border-radius:18px;
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      border:3px solid #0b0907;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-size:1.6rem;
+      color:#140c04;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,122,.2);
+      background:rgba(255,255,255,.03);
+      color:var(--goldBright);
+      font-size:.76rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .pill-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .store-window{
+      margin-top:16px;
+      padding:14px;
+      border-radius:14px;
+      background:linear-gradient(90deg, rgba(231,184,82,.14), rgba(184,131,31,.08));
+      border:1px solid rgba(255,215,122,.18);
+    }
+
+    .store-window strong{
+      color:var(--goldBright);
+      display:block;
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .join-panel{
+      padding:24px;
+    }
+
+    .toggle-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .toggle-btn{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,122,.22);
+      background:rgba(255,255,255,.03);
+      color:var(--ink);
+      cursor:pointer;
+      font-weight:800;
+    }
+
+    .toggle-btn.active{
+      background:linear-gradient(90deg,var(--gold),var(--gold2));
+      color:#130b03;
+      border-color:rgba(255,215,122,.55);
+    }
+
+    .join-card{
+      display:none;
+      padding:20px;
+      border-radius:18px;
+      border:1px solid rgba(255,215,122,.16);
+      background:rgba(255,255,255,.025);
+    }
+
+    .join-card.active{
+      display:block;
+    }
+
+    .join-card ul{
+      margin:10px 0 0 18px;
+      color:var(--muted);
+    }
+
+    .cta-strip{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      padding:22px;
+      border-radius:24px;
+      border:1px solid rgba(255,215,122,.2);
+      background:linear-gradient(90deg, rgba(231,184,82,.12), rgba(184,131,31,.08));
+      box-shadow:var(--shadow);
+    }
+
+    footer{
+      margin-top:10px;
+      padding:24px 0;
+      border-top:1px solid rgba(255,215,122,.18);
+      background:radial-gradient(circle at center, rgba(255,215,122,.1), #090604 78%);
+    }
+
+    .footer-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width:980px){
+      .hero-inner,
+      .feature-row,
+      .two,
+      .three{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:760px){
+      .nav-links{
+        gap:10px;
+      }
+      .nav-links a{
+        font-size:.8rem;
+      }
+      .hero-inner{
+        min-height:auto;
+        padding:42px 0;
+      }
+      .hero h1{
+        font-size:clamp(30px,8vw,48px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <img src="images/7trb.logo.png" alt="7TRB logo" />
+        <div>
+          <strong>7TRB Onboarding</strong>
+          <small>Join the network. Build your presence.</small>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="network.html">Network</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="https://amvault.net" target="_blank" rel="noopener">Wallet</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">People + Profiles + Storefronts</span>
+        <h1>Join the Network That Keeps Value Moving</h1>
+        <p>
+          7TRB is building more than a website. This is a living network where people, creators, and businesses can create profiles, connect, get discovered, and circulate value together.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn gold" href="#join-now">Create Your Profile</a>
+          <a class="btn ghost" href="#how-it-works">See How It Works</a>
+        </div>
+      </div>
+
+      <div class="box hero-side">
+        <div class="mini-metrics">
+          <div class="metric">
+            <div>
+              <div class="metric-label">Residents</div>
+              <div class="lead">People in the network</div>
+            </div>
+            <div class="metric-value">Profiles</div>
+          </div>
+          <div class="metric">
+            <div>
+              <div class="metric-label">Businesses</div>
+              <div class="lead">Storefront-style listings</div>
+            </div>
+            <div class="metric-value">Storefronts</div>
+          </div>
+          <div class="metric">
+            <div>
+              <div class="metric-label">Circulation</div>
+              <div class="lead">Support, referrals, transactions</div>
+            </div>
+            <div class="metric-value">Motion</div>
+          </div>
+          <div class="metric">
+            <div>
+              <div class="metric-label">Goal</div>
+              <div class="lead">Find each other. Build together.</div>
+            </div>
+            <div class="metric-value">Growth</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+
+    <section class="section" id="how-it-works">
+      <div class="wrap">
+        <h2 class="section-title">How Onboarding Works</h2>
+        <p class="lead">
+          The goal is simple: join the network, create your identity, and start building connection, support, and revenue inside the ecosystem.
+        </p>
+
+        <div class="feature-row">
+          <div class="box" style="padding:22px;">
+            <div class="step-list">
+              <div class="step">
+                <strong>Step 1 — Choose your role</strong>
+                Join as a resident, creator, or business. Your role shapes how your profile appears inside the network.
+              </div>
+              <div class="step">
+                <strong>Step 2 — Build your profile</strong>
+                Add your name, image, city, bio, services, links, and anything people need to know to connect with you.
+              </div>
+              <div class="step">
+                <strong>Step 3 — Get listed</strong>
+                Once added, your profile becomes part of the 7TRB network directory where people can discover and support you.
+              </div>
+              <div class="step">
+                <strong>Step 4 — Circulate</strong>
+                Promote your offers, connect with others, accept support, and become part of a living economic network.
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-preview">
+            <div class="profile-mock">
+              <div class="profile-cover"></div>
+              <div class="profile-body">
+                <div class="profile-head">
+                  <div class="avatar">7</div>
+                  <div>
+                    <h3 style="margin:0;color:var(--goldBright);text-transform:uppercase;">Main House Cuts</h3>
+                    <div class="badge">Business Profile</div>
+                  </div>
+                </div>
+
+                <p style="margin:14px 0 0;color:var(--muted);">
+                  Detroit-based barber and grooming service. Precision cuts, clean service, and network pricing.
+                </p>
+
+                <div class="pill-row">
+                  <span class="badge">Detroit</span>
+                  <span class="badge">Accepts 7TRB</span>
+                  <span class="badge">Booking Open</span>
+                </div>
+
+                <div class="store-window">
+                  <strong>Store Window</strong>
+                  Haircut Special — $25 cash or 25 7TRB
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-mock">
+              <div class="profile-cover"></div>
+              <div class="profile-body">
+                <div class="profile-head">
+                  <div class="avatar">J</div>
+                  <div>
+                    <h3 style="margin:0;color:var(--goldBright);text-transform:uppercase;">Jermaine S.</h3>
+                    <div class="badge">Resident Profile</div>
+                  </div>
+                </div>
+
+                <p style="margin:14px 0 0;color:var(--muted);">
+                  Founder, builder, and community organizer focused on circulation, profiles, and economic coordination.
+                </p>
+
+                <div class="pill-row">
+                  <span class="badge">Detroit</span>
+                  <span class="badge">Builder</span>
+                  <span class="badge">Network Active</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">What You Get</h2>
+        <div class="grid three">
+          <article class="card">
+            <h3>Identity</h3>
+            <p>
+              A profile that gives people a real way to see who you are, what you offer, and how to connect.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Visibility</h3>
+            <p>
+              Get listed in a network where people can browse, search, and discover residents and businesses.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Circulation</h3>
+            <p>
+              Turn attention into support, support into transactions, and transactions into long-term network value.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="join-now">
+      <div class="wrap">
+        <div class="box join-panel">
+          <h2 class="section-title" style="margin-top:0;">Choose Your Onboarding Path</h2>
+          <p class="lead">
+            Start where you fit. Residents build identity. Businesses build storefronts. Both become part of the same ecosystem.
+          </p>
+
+          <div class="toggle-row">
+            <button class="toggle-btn active" type="button" data-target="residentCard">Join as Resident</button>
+            <button class="toggle-btn" type="button" data-target="businessCard">Join as Business</button>
+          </div>
+
+          <div id="residentCard" class="join-card active">
+            <h3 style="margin-top:0;color:var(--goldBright);text-transform:uppercase;">Resident / Creator Onboarding</h3>
+            <p class="lead">
+              Build your profile inside the network so people can find you, support you, and connect with your skills or services.
+            </p>
+            <ul>
+              <li>Create a personal profile</li>
+              <li>List your skills, offers, or interests</li>
+              <li>Become discoverable inside the network</li>
+              <li>Get positioned for future referrals and opportunities</li>
+            </ul>
+            <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
+              <a class="btn gold" href="https://formspree.io/f/xqegbgld" target="_blank" rel="noopener">Start Resident Form</a>
+              <a class="btn ghost" href="https://amvault.net" target="_blank" rel="noopener">Open AmVault</a>
+            </div>
+          </div>
+
+          <div id="businessCard" class="join-card">
+            <h3 style="margin-top:0;color:var(--goldBright);text-transform:uppercase;">Business / Storefront Onboarding</h3>
+            <p class="lead">
+              Build a storefront-style business profile with your logo, offers, services, promotions, and 7TRB acceptance options.
+            </p>
+            <ul>
+              <li>Create a business storefront</li>
+              <li>Show your services, prices, and promotions</li>
+              <li>Get listed in the business exchange directory</li>
+              <li>Position your business for community-driven traffic</li>
+            </ul>
+            <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
+              <a class="btn gold" href="https://docs.google.com/forms/d/e/1FAIpQLSdIKHBUg_R6MYSi8Gf-SDOdRB5qZjXQ0EVC0anJd-A4JMOQXQ/viewform" target="_blank" rel="noopener">Start Business Form</a>
+              <a class="btn ghost" href="network.html">Browse Exchange</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="cta-strip">
+          <div>
+            <strong style="display:block;color:var(--goldBright);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">
+              The network grows one profile at a time
+            </strong>
+            <span class="lead">
+              People join. Businesses list. Support turns into circulation. That’s how the ecosystem becomes real.
+            </span>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn gold" href="network.html">Browse Network</a>
+            <a class="btn ghost" href="dashboard.html">View Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="images/7trb.logo.png" alt="7TRB small logo" style="width:40px;height:40px;border-radius:50%;">
+        <span style="color:var(--muted);">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="network.html">Network</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    const joinCards = document.querySelectorAll('.join-card');
+
+    toggleButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        toggleButtons.forEach(btn => btn.classList.remove('active'));
+        joinCards.forEach(card => card.classList.remove('active'));
+
+        button.classList.add('active');
+        const target = document.getElementById(button.dataset.target);
+        if(target) target.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
