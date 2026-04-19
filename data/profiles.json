@@ -1,0 +1,48 @@
+[
+  {
+    "type": "business",
+    "name": "Mainhouse Cuts",
+    "location": "Detroit, MI",
+    "bio": "Precision cuts, clean fades, beard care, and reliable service built for the community.",
+    "category": "Barber",
+    "services": ["Haircuts", "Beards", "Fades", "Appointments"],
+    "accepts7trb": true,
+    "storeWindow": "Haircut Special — $25 cash or 25 7TRB",
+    "image": "images/profiles/mainhouse-cuts.jpg",
+    "contactLink": "onboarding.html"
+  },
+  {
+    "type": "business",
+    "name": "Detroit Flavor Kitchen",
+    "location": "Detroit, MI",
+    "bio": "Home-based food business serving plates, trays, and catering for local events and family gatherings.",
+    "category": "Catering",
+    "services": ["Catering", "Meal Trays", "Events", "Weekend Specials"],
+    "accepts7trb": true,
+    "storeWindow": "Weekend Tray Special — $20 cash or 20 7TRB",
+    "image": "images/profiles/detroit-flavor-kitchen.jpg",
+    "contactLink": "onboarding.html"
+  },
+  {
+    "type": "person",
+    "name": "Jermaine Stewart",
+    "location": "Detroit, MI",
+    "bio": "Founder building the 7TRB ecosystem around circulation, ownership, storefront profiles, and community coordination.",
+    "category": "Builder",
+    "skills": ["Networking", "Business Development", "Community Building", "Strategy"],
+    "accepts7trb": true,
+    "image": "images/profiles/jermaine.jpg",
+    "contactLink": "onboarding.html"
+  },
+  {
+    "type": "person",
+    "name": "Creative Tribe Media",
+    "location": "Detroit, MI",
+    "bio": "Content creator and editor helping businesses build visibility through video, design, and digital storytelling.",
+    "category": "Creator",
+    "skills": ["Video Editing", "Content", "Graphics", "Promotion"],
+    "accepts7trb": false,
+    "image": "images/profiles/creative-tribe-media.jpg",
+    "contactLink": "onboarding.html"
+  }
+]
