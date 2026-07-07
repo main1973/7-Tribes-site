@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7Tribes Developers — Build on Alkebuleum</title>
+  <meta name="description" content="Developer resources for 7Tribes: APIs, smart contracts, documentation, and integration guides." />
+  <link rel="icon" href="images/7trb_symbol.png" />
+
+  <style>
+    :root{
+      --bg:#0f0a05;
+      --panel:#1a1208;
+      --panel-2:#120c06;
+      --ink:#fff7e6;
+      --muted:#d4c3a1;
+      --line:#3b2b17;
+      --gold:#e7b852;
+      --gold-2:#b8831b;
+      --gold-bright:#ffdd7a;
+      --radius:18px;
+      --radius-lg:24px;
+      --shadow:0 18px 60px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box;}
+
+    html,body{
+      margin:0;
+      background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
+      color:var(--ink);
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+
+    img{max-width:100%;display:block}
+    a{color:var(--gold-bright);text-decoration:none}
+    a:hover{opacity:.9}
+
+    .wrap{
+      max-width:1160px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    .section{padding:70px 0}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:18px}
+    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+    .title{
+      position:relative;
+      margin:0 0 18px;
+      font-size:clamp(24px,3.2vw,34px);
+      letter-spacing:.02em;
+      color:var(--gold-bright);
+    }
+
+    .title::before{
+      content:"";
+      position:absolute;
+      left:-16px;
+      right:-16px;
+      top:-26px;
+      height:56px;
+      border-radius:20px;
+      background:
+        repeating-linear-gradient(110deg, rgba(231,184,82,.22) 0 2px, transparent 2px 16px),
+        radial-gradient(1200px 300px at 10% 0%, rgba(231,184,82,.18), transparent 60%);
+      mask:linear-gradient(180deg,transparent,rgba(0,0,0,.9) 15%, rgba(0,0,0,.9) 85%, transparent);
+      animation:flow 9s linear infinite;
+      pointer-events:none;
+      opacity:.8;
+    }
+
+    @keyframes flow{
+      to{transform:translateX(180px)}
+    }
+
+    .box{
+      position:relative;
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:22px;
+      border:1px solid rgba(255,215,122,0.4);
+      box-shadow:0 18px 50px rgba(0,0,0,.6);
+      overflow:hidden;
+    }
+
+    .box::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:2px;
+      background:linear-gradient(90deg,rgba(255,215,122,.6),rgba(184,131,31,.8),rgba(255,215,122,.6));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.65;
+    }
+
+    .divider{
+      height:2px;
+      margin:32px auto;
+      width:82%;
+      border-radius:999px;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,215,122,0.4),
+        rgba(255,215,122,0.9),
+        rgba(255,215,122,0.4),
+        transparent
+      );
+      box-shadow:0 0 16px rgba(255,215,122,0.35);
+      animation:divideGlow 8s ease-in-out infinite;
+    }
+
+    @keyframes divideGlow{
+      0%,100%{opacity:.9;box-shadow:0 0 16px rgba(255,215,122,0.35);}
+      50%{opacity:1;box-shadow:0 0 24px rgba(255,215,122,0.55);}
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.6rem;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid transparent;
+      cursor:pointer;
+      font-size:.95rem;
+      white-space:nowrap;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#130b03;
+      border-color:rgba(255,215,122,.7);
+      box-shadow:0 0 18px rgba(255,215,122,.35);
+      animation:pulse 3.5s ease-in-out infinite;
+    }
+
+    .btn.ghost{
+      border:1px solid rgba(255,215,122,.35);
+      color:var(--ink);
+      background:transparent;
+    }
+
+    @keyframes pulse{
+      0%,100%{box-shadow:0 0 0 0 rgba(255,215,122,.35);}
+      50%{box-shadow:0 0 18px 6px rgba(255,215,122,.35);}
+    }
+
+    .top-nav{
+      position:sticky;
+      top:0;
+      z-index:99;
+      background:rgba(9,5,2,.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,215,122,.18);
+    }
+
+    .top-nav-inner{
+      max-width:1160px;
+      margin:0 auto;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .nav-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--gold-bright);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .nav-brand img{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:0 8px 20px rgba(0,0,0,.4);
+    }
+
+    .main-nav{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    .main-nav a{
+      color:var(--gold-bright);
+      font-size:.82rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .site-header{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,215,122,0.2);
+    }
+
+    .hero-banner{
+      width:100%;
+      min-height:380px;
+      background:url('images/welcome_banner.png') center/cover no-repeat;
+      position:relative;
+    }
+
+    .hero-banner::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.68));
+    }
+
+    .banner-text{
+      position:absolute;
+      left:50%;
+      bottom:38px;
+      transform:translateX(-50%);
+      text-align:center;
+      z-index:2;
+      padding:0 16px;
+      width:min(900px,100%);
+    }
+
+    .banner-text h1{
+      margin:0;
+      color:var(--gold-bright);
+      font-size:clamp(34px,6vw,68px);
+      letter-spacing:.12em;
+      line-height:1.02;
+      text-transform:uppercase;
+    }
+
+    .banner-text p{
+      margin:12px 0 0;
+      color:#fff7e6;
+      font-size:1.05rem;
+    }
+
+    .hero-actions{
+      margin-top:22px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    code{
+      background:rgba(0,0,0,.3);
+      border:1px solid rgba(255,215,122,.2);
+      padding:2px 6px;
+      border-radius:4px;
+      color:var(--gold-bright);
+      font-family:monospace;
+      font-size:.9rem;
+    }
+
+    #toTop{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:#0c0d12 url('images/7trb.logo.png') center/cover no-repeat;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 0 0 0 rgba(231,184,82,.45);
+      opacity:0;
+      visibility:hidden;
+      cursor:pointer;
+      z-index:60;
+      transition:opacity .25s, visibility .25s, transform .2s;
+      animation:breath 3.2s ease-in-out infinite;
+    }
+
+    #toTop.show{opacity:1;visibility:visible}
+    #toTop:hover{transform:translateY(-2px)}
+
+    @keyframes breath{
+      0%,100%{box-shadow:0 0 0 0 rgba(231,184,82,.38);}
+      50%{box-shadow:0 0 22px 6px rgba(231,184,82,.32);}
+    }
+
+    footer{
+      position:relative;
+      background:radial-gradient(circle at center, rgba(255,215,122,.2), #090604 78%);
+      border-top:1px solid rgba(255,215,122,.35);
+      box-shadow:0 -6px 30px rgba(0,0,0,.7);
+      padding:20px 0;
+    }
+
+    footer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at center, rgba(255,215,122,0.14), transparent 70%);
+      opacity:0.6;
+      animation:footerGlow 8s ease-in-out infinite;
+      pointer-events:none;
+    }
+
+    @keyframes footerGlow{
+      0%,100%{opacity:0.4}
+      50%{opacity:0.8}
+    }
+
+    @media (max-width:900px){
+      .banner-text h1{font-size:36px}
+      .two,.three{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      .section{padding:52px 0}
+      .main-nav a{font-size:.78rem}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a class="nav-brand" href="index.html">
+        <img src="images/7trb_symbol.png" alt="7TRB logo">
+        <span>7TRB</span>
+      </a>
+
+      <div class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="ecosystem.html">Ecosystem</a>
+        <a href="transparency.html">Transparency</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="builders.html">Builders</a>
+        <a href="developers.html">Developers</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="site-header">
+    <div class="hero-banner">
+      <div class="banner-text">
+        <h1>Developer Resources</h1>
+        <p>Build on Alkebuleum. Integrate with 7Tribes. Access APIs, contracts, and documentation.</p>
+
+        <div class="hero-actions">
+          <a href="#resources" class="btn gold">View Resources</a>
+          <a href="https://github.com/main1973" target="_blank" rel="noopener" class="btn ghost">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- OVERVIEW -->
+    <section class="section" id="overview">
+      <div class="wrap">
+        <h2 class="title">Build on 7Tribes</h2>
+
+        <div class="box">
+          <p class="muted">
+            7Tribes is built on Alkebuleum, an open blockchain. We provide APIs, smart contracts, and documentation to help developers integrate with the ecosystem.
+          </p>
+
+          <div class="divider"></div>
+
+          <h3 style="color:var(--gold-bright);">What You Can Build</h3>
+          <ul class="muted" style="margin:0 0 0 18px;">
+            <li><b>Wallets & Integrations:</b> Build wallets that support 7TRB and Alkebuleum.</li>
+            <li><b>Trading Tools:</b> Create trading bots, analytics, or portfolio trackers.</li>
+            <li><b>Smart Contracts:</b> Deploy contracts for governance, staking, or custom logic.</li>
+            <li><b>dApps:</b> Build decentralized applications on Alkebuleum.</li>
+            <li><b>Bridges & Bridges:</b> Connect 7Tribes to other chains or platforms.</li>
+            <li><b>Community Tools:</b> Build tools that enhance the Loop, Connect, or Nuru experience.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section class="section" id="resources">
+      <div class="wrap">
+        <h2 class="title">Developer Resources</h2>
+
+        <div class="grid two">
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">🔗 Alkebuleum Blockchain</h3>
+            <p class="muted">
+              Alkebuleum is the decentralized blockchain powering 7Tribes. Build on it using standard Ethereum-compatible tools.
+            </p>
+            <div style="margin-top:12px;">
+              <a href="https://explorer.alkebuleum.com" target="_blank" rel="noopener" class="btn ghost">Block Explorer</a>
+            </div>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">💱 JollofSwap DEX</h3>
+            <p class="muted">
+              Decentralized exchange on Alkebuleum. Trade 7TRB, provide liquidity, and access swap APIs.
+            </p>
+            <div style="margin-top:12px;">
+              <a href="https://jollofswap.com" target="_blank" rel="noopener" class="btn ghost">Visit JollofSwap</a>
+            </div>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">📚 Documentation</h3>
+            <p class="muted">
+              Complete guides for integrating 7TRB, deploying contracts, and using Alkebuleum APIs.
+            </p>
+            <div style="margin-top:12px;">
+              <a href="https://github.com/main1973" target="_blank" rel="noopener" class="btn ghost">GitHub Docs</a>
+            </div>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">🔐 Smart Contracts</h3>
+            <p class="muted">
+              7TRB token contract, governance contracts, and example implementations on GitHub.
+            </p>
+            <div style="margin-top:12px;">
+              <a href="https://explorer.alkebuleum.com/address/0xdf7ce67dB19142672c4193d969cdD9975A5A6038" target="_blank" rel="noopener" class="btn ghost">7TRB Contract</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK START -->
+    <section class="section" id="quickstart">
+      <div class="wrap">
+        <h2 class="title">Quick Start</h2>
+
+        <div class="box">
+          <h3 style="color:var(--gold-bright);margin-top:0;">Set Up Your Environment</h3>
+
+          <div style="margin-top:16px;">
+            <h4 style="color:var(--gold-bright);">1. Connect to Alkebuleum</h4>
+            <p class="muted">
+              Use standard Ethereum RPC endpoints. Alkebuleum is EVM-compatible.
+            </p>
+            <code style="display:block;padding:8px;margin:8px 0;">
+              RPC: https://rpc.alkebuleum.com
+            </code>
+
+            <div class="divider"></div>
+
+            <h4 style="color:var(--gold-bright);">2. Get the 7TRB Contract ABI</h4>
+            <p class="muted">
+              Access the token contract on the block explorer or GitHub.
+            </p>
+            <code style="display:block;padding:8px;margin:8px 0;">
+              Contract: 0xdf7ce67dB19142672c4193d969cdD9975A5A6038
+            </code>
+
+            <div class="divider"></div>
+
+            <h4 style="color:var(--gold-bright);">3. Integrate with Your App</h4>
+            <p class="muted">
+              Use Web3.js, Ethers.js, or your preferred library to interact with 7TRB.
+            </p>
+            <code style="display:block;padding:8px;margin:8px 0;">
+              const contract = new ethers.Contract(address, abi, provider);
+            </code>
+
+            <div class="divider"></div>
+
+            <h4 style="color:var(--gold-bright);">4. Test on Testnet</h4>
+            <p class="muted">
+              Alkebuleum testnet available for development and testing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTEGRATION GUIDES -->
+    <section class="section" id="guides">
+      <div class="wrap">
+        <h2 class="title">Integration Guides</h2>
+
+        <div class="grid two">
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">🪙 Token Integration</h3>
+            <p class="muted">
+              Add 7TRB support to your wallet, exchange, or dApp. Full guide with code examples.
+            </p>
+            <a href="https://github.com/main1973" target="_blank" rel="noopener" class="btn ghost">View Guide</a>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">🔄 Swap Integration</h3>
+            <p class="muted">
+              Integrate JollofSwap into your app. Enable users to trade 7TRB directly.
+            </p>
+            <a href="https://github.com/main1973" target="_blank" rel="noopener" class="btn ghost">View Guide</a>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">🏗️ Smart Contract Development</h3>
+            <p class="muted">
+              Deploy contracts on Alkebuleum. Use Hardhat, Truffle, or Foundry.
+            </p>
+            <a href="https://github.com/main1973" target="_blank" rel="noopener" class="btn ghost">View Guide</a>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">📊 Data & Analytics</h3>
+            <p class="muted">
+              Access on-chain data. Build analytics dashboards and monitoring tools.
+            </p>
+            <a href="https://github.com/main1973" target="_blank" rel="noopener" class="btn ghost">View Guide</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section class="section" id="support">
+      <div class="wrap">
+        <h2 class="title">Developer Support</h2>
+
+        <div class="box">
+          <h3 style="color:var(--gold-bright);margin-top:0;">Get Help</h3>
+
+          <div class="grid two" style="margin-top:16px;">
+            <div>
+              <h4 style="color:var(--gold-bright);">GitHub Issues</h4>
+              <p class="muted">
+                Report bugs, request features, or ask questions on GitHub.
+              </p>
+              <a href="https://github.com/main1973" target="_blank" rel="noopener" class="btn ghost">GitHub</a>
+            </div>
+
+            <div>
+              <h4 style="color:var(--gold-bright);">Telegram Dev Channel</h4>
+              <p class="muted">
+                Join the developer community. Ask questions. Share ideas.
+              </p>
+              <a href="https://t.me/SevenTribesCrypto" target="_blank" rel="noopener" class="btn ghost">Join</a>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <p class="muted">
+            <b>Bounties:</b> Build something useful for 7Tribes? Submit a proposal and earn 7TRB rewards.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="section" id="cta">
+      <div class="wrap">
+        <h2 class="title">Ready to Build?</h2>
+
+        <div class="box" style="text-align:center;">
+          <p class="muted" style="max-width:800px;margin:0 auto 24px;">
+            The 7Tribes ecosystem is open. Build tools, integrations, and dApps that strengthen the network. Get funded. Earn rewards.
+          </p>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <a href="https://github.com/main1973" target="_blank" rel="noopener" class="btn gold">View GitHub</a>
+            <a href="builders.html" class="btn ghost">Become a Builder</a>
+            <a href="index.html" class="btn ghost">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="images/7trb_symbol.png" alt="7TRB small" style="width:42px;height:42px;border-radius:50%;" />
+        <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+      </div>
+
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="ecosystem.html">Ecosystem</a>
+        <a href="transparency.html">Transparency</a>
+        <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="toTop" aria-label="Back to top"></button>
+
+  <script>
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+
+      const id = a.getAttribute('href');
+      const el = document.querySelector(id);
+
+      if(el){
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+
+    const toTop = document.getElementById('toTop');
+
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 400) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    });
+
+    toTop.addEventListener('click', () => {
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  </script>
+
+</body>
+</html>

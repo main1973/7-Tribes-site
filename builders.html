@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7Tribes Builders — Join the Movement</title>
+  <meta name="description" content="Join 7Tribes as a builder. We're looking for engineers, designers, business strategists, and content creators." />
+  <link rel="icon" href="images/7trb_symbol.png" />
+
+  <style>
+    :root{
+      --bg:#0f0a05;
+      --panel:#1a1208;
+      --panel-2:#120c06;
+      --ink:#fff7e6;
+      --muted:#d4c3a1;
+      --line:#3b2b17;
+      --gold:#e7b852;
+      --gold-2:#b8831b;
+      --gold-bright:#ffdd7a;
+      --radius:18px;
+      --radius-lg:24px;
+      --shadow:0 18px 60px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box;}
+
+    html,body{
+      margin:0;
+      background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
+      color:var(--ink);
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+
+    img{max-width:100%;display:block}
+    a{color:var(--gold-bright);text-decoration:none}
+    a:hover{opacity:.9}
+
+    .wrap{
+      max-width:1160px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    .section{padding:70px 0}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:18px}
+    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .four{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+    .title{
+      position:relative;
+      margin:0 0 18px;
+      font-size:clamp(24px,3.2vw,34px);
+      letter-spacing:.02em;
+      color:var(--gold-bright);
+    }
+
+    .title::before{
+      content:"";
+      position:absolute;
+      left:-16px;
+      right:-16px;
+      top:-26px;
+      height:56px;
+      border-radius:20px;
+      background:
+        repeating-linear-gradient(110deg, rgba(231,184,82,.22) 0 2px, transparent 2px 16px),
+        radial-gradient(1200px 300px at 10% 0%, rgba(231,184,82,.18), transparent 60%);
+      mask:linear-gradient(180deg,transparent,rgba(0,0,0,.9) 15%, rgba(0,0,0,.9) 85%, transparent);
+      animation:flow 9s linear infinite;
+      pointer-events:none;
+      opacity:.8;
+    }
+
+    @keyframes flow{
+      to{transform:translateX(180px)}
+    }
+
+    .box{
+      position:relative;
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:22px;
+      border:1px solid rgba(255,215,122,0.4);
+      box-shadow:0 18px 50px rgba(0,0,0,.6);
+      overflow:hidden;
+    }
+
+    .box::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:2px;
+      background:linear-gradient(90deg,rgba(255,215,122,.6),rgba(184,131,31,.8),rgba(255,215,122,.6));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.65;
+    }
+
+    .divider{
+      height:2px;
+      margin:32px auto;
+      width:82%;
+      border-radius:999px;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,215,122,0.4),
+        rgba(255,215,122,0.9),
+        rgba(255,215,122,0.4),
+        transparent
+      );
+      box-shadow:0 0 16px rgba(255,215,122,0.35);
+      animation:divideGlow 8s ease-in-out infinite;
+    }
+
+    @keyframes divideGlow{
+      0%,100%{opacity:.9;box-shadow:0 0 16px rgba(255,215,122,0.35);}
+      50%{opacity:1;box-shadow:0 0 24px rgba(255,215,122,0.55);}
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.6rem;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid transparent;
+      cursor:pointer;
+      font-size:.95rem;
+      white-space:nowrap;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#130b03;
+      border-color:rgba(255,215,122,.7);
+      box-shadow:0 0 18px rgba(255,215,122,.35);
+      animation:pulse 3.5s ease-in-out infinite;
+    }
+
+    .btn.ghost{
+      border:1px solid rgba(255,215,122,.35);
+      color:var(--ink);
+      background:transparent;
+    }
+
+    @keyframes pulse{
+      0%,100%{box-shadow:0 0 0 0 rgba(255,215,122,.35);}
+      50%{box-shadow:0 0 18px 6px rgba(255,215,122,.35);}
+    }
+
+    .top-nav{
+      position:sticky;
+      top:0;
+      z-index:99;
+      background:rgba(9,5,2,.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,215,122,.18);
+    }
+
+    .top-nav-inner{
+      max-width:1160px;
+      margin:0 auto;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .nav-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--gold-bright);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .nav-brand img{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:0 8px 20px rgba(0,0,0,.4);
+    }
+
+    .main-nav{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    .main-nav a{
+      color:var(--gold-bright);
+      font-size:.82rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .site-header{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,215,122,0.2);
+    }
+
+    .hero-banner{
+      width:100%;
+      min-height:380px;
+      background:url('images/welcome_banner.png') center/cover no-repeat;
+      position:relative;
+    }
+
+    .hero-banner::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.68));
+    }
+
+    .banner-text{
+      position:absolute;
+      left:50%;
+      bottom:38px;
+      transform:translateX(-50%);
+      text-align:center;
+      z-index:2;
+      padding:0 16px;
+      width:min(900px,100%);
+    }
+
+    .banner-text h1{
+      margin:0;
+      color:var(--gold-bright);
+      font-size:clamp(34px,6vw,68px);
+      letter-spacing:.12em;
+      line-height:1.02;
+      text-transform:uppercase;
+    }
+
+    .banner-text p{
+      margin:12px 0 0;
+      color:#fff7e6;
+      font-size:1.05rem;
+    }
+
+    .hero-actions{
+      margin-top:22px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    #toTop{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:#0c0d12 url('images/7trb.logo.png') center/cover no-repeat;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 0 0 0 rgba(231,184,82,.45);
+      opacity:0;
+      visibility:hidden;
+      cursor:pointer;
+      z-index:60;
+      transition:opacity .25s, visibility .25s, transform .2s;
+      animation:breath 3.2s ease-in-out infinite;
+    }
+
+    #toTop.show{opacity:1;visibility:visible}
+    #toTop:hover{transform:translateY(-2px)}
+
+    @keyframes breath{
+      0%,100%{box-shadow:0 0 0 0 rgba(231,184,82,.38);}
+      50%{box-shadow:0 0 22px 6px rgba(231,184,82,.32);}
+    }
+
+    footer{
+      position:relative;
+      background:radial-gradient(circle at center, rgba(255,215,122,.2), #090604 78%);
+      border-top:1px solid rgba(255,215,122,.35);
+      box-shadow:0 -6px 30px rgba(0,0,0,.7);
+      padding:20px 0;
+    }
+
+    footer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at center, rgba(255,215,122,0.14), transparent 70%);
+      opacity:0.6;
+      animation:footerGlow 8s ease-in-out infinite;
+      pointer-events:none;
+    }
+
+    @keyframes footerGlow{
+      0%,100%{opacity:0.4}
+      50%{opacity:0.8}
+    }
+
+    @media (max-width:900px){
+      .banner-text h1{font-size:36px}
+      .two,.three,.four{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      .section{padding:52px 0}
+      .main-nav a{font-size:.78rem}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a class="nav-brand" href="index.html">
+        <img src="images/7trb_symbol.png" alt="7TRB logo">
+        <span>7TRB</span>
+      </a>
+
+      <div class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="ecosystem.html">Ecosystem</a>
+        <a href="transparency.html">Transparency</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="builders.html">Builders</a>
+        <a href="developers.html">Developers</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="site-header">
+    <div class="hero-banner">
+      <div class="banner-text">
+        <h1>Builders Wanted</h1>
+        <p>Help us build the future of 7Tribes. We're looking for talented people across all disciplines.</p>
+
+        <div class="hero-actions">
+          <a href="#roles" class="btn gold">See Open Roles</a>
+          <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener" class="btn ghost">Join Telegram</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- WHY BUILD WITH 7TRIBES -->
+    <section class="section" id="why">
+      <div class="wrap">
+        <h2 class="title">Why Build With 7Tribes?</h2>
+
+        <div class="grid two">
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">Real Impact</h3>
+            <p class="muted">
+              You're not building for a corporation. You're building for a community. Every line of code, every design, every strategy directly impacts real people.
+            </p>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">Ownership</h3>
+            <p class="muted">
+              Builders get paid in 7TRB. You own part of what you build. As the ecosystem grows, your stake grows.
+            </p>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">Transparency</h3>
+            <p class="muted">
+              No hidden agendas. All decisions are public. All treasury movements are on-chain. You know exactly what's happening.
+            </p>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">Flexibility</h3>
+            <p class="muted">
+              Work on your schedule. Propose projects. Get funded. Ship work. Earn rewards. No corporate bureaucracy.
+            </p>
+          </article>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="muted" style="text-align:center;max-width:800px;margin:0 auto;">
+          7Tribes is built by people who believe in the mission. If you do too, let's build together.
+        </p>
+      </div>
+    </section>
+
+    <!-- OPEN ROLES -->
+    <section class="section" id="roles">
+      <div class="wrap">
+        <h2 class="title">Open Roles</h2>
+
+        <div class="grid four">
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">🛠️ Engineering</h3>
+            <p class="muted">
+              Web development, smart contracts, automations, backend systems, GitHub pipelines, and infrastructure.
+            </p>
+            <div style="margin-top:12px;">
+              <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener" class="btn ghost">Learn More</a>
+            </div>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">🎨 Design</h3>
+            <p class="muted">
+              Brand identity, web design, motion graphics, UX/UI polish, and visual systems.
+            </p>
+            <div style="margin-top:12px;">
+              <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener" class="btn ghost">Learn More</a>
+            </div>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">💼 Business</h3>
+            <p class="muted">
+              Partnerships, merchant outreach, local community building, and revenue strategy.
+            </p>
+            <div style="margin-top:12px;">
+              <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener" class="btn ghost">Learn More</a>
+            </div>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">📢 Content</h3>
+            <p class="muted">
+              Video production, documentation, social media, education campaigns, and storytelling.
+            </p>
+            <div style="margin-top:12px;">
+              <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener" class="btn ghost">Learn More</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO GET STARTED -->
+    <section class="section" id="getstarted">
+      <div class="wrap">
+        <h2 class="title">How to Get Started</h2>
+
+        <div class="grid three">
+          <article class="box">
+            <h3 style="margin:0 0 6px;color:var(--gold-bright);">1. Join the Community</h3>
+            <p class="muted">
+              Connect on Telegram or WhatsApp. Introduce yourself. Get to know the team and other builders.
+            </p>
+          </article>
+
+          <article class="box">
+            <h3 style="margin:0 0 6px;color:var(--gold-bright);">2. Propose a Project</h3>
+            <p class="muted">
+              Have an idea? Submit a proposal with scope, timeline, and budget. The community votes on it.
+            </p>
+          </article>
+
+          <article class="box">
+            <h3 style="margin:0 0 6px;color:var(--gold-bright);">3. Ship & Earn</h3>
+            <p class="muted">
+              Get funded in milestones. Deliver work. Earn 7TRB. Repeat. Build your reputation and stake.
+            </p>
+          </article>
+        </div>
+
+        <div style="margin-top:40px;text-align:center;">
+          <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener" class="btn gold">Join Telegram</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPENSATION -->
+    <section class="section" id="compensation">
+      <div class="wrap">
+        <h2 class="title">How You Get Paid</h2>
+
+        <div class="box">
+          <h3 style="color:var(--gold-bright);margin-top:0;">Flexible Payment Models</h3>
+
+          <div class="grid two" style="margin-top:16px;">
+            <div>
+              <h4 style="color:var(--gold-bright);">Milestone Payments</h4>
+              <p class="muted">
+                Get paid in stages: 30% at start, 40% at mid-point, 30% at completion. Payment follows verified progress.
+              </p>
+            </div>
+
+            <div>
+              <h4 style="color:var(--gold-bright);">7TRB + USD</h4>
+              <p class="muted">
+                Choose your mix. Some builders prefer 100% 7TRB (more upside). Others prefer 50/50 or USD-heavy.
+              </p>
+            </div>
+
+            <div>
+              <h4 style="color:var(--gold-bright);">Equity / Ownership</h4>
+              <p class="muted">
+                Long-term builders can negotiate equity stakes or treasury allocation for major contributions.
+              </p>
+            </div>
+
+            <div>
+              <h4 style="color:var(--gold-bright);">Referral Bounties</h4>
+              <p class="muted">
+                Bring in new builders, merchants, or members. Earn referral rewards in 7TRB.
+              </p>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <p class="muted">
+            <b>Transparency:</b> All payments are logged on-chain. Every builder knows what everyone else earned. No secrets.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="section" id="cta">
+      <div class="wrap">
+        <h2 class="title">Ready to Build?</h2>
+
+        <div class="box" style="text-align:center;">
+          <p class="muted" style="max-width:800px;margin:0 auto 24px;">
+            The future of 7Tribes is built by people like you. Join us. Build something real. Own your stake.
+          </p>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener" class="btn gold">Join Telegram</a>
+            <a href="learn.html" class="btn ghost">Learn More</a>
+            <a href="index.html" class="btn ghost">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="images/7trb_symbol.png" alt="7TRB small" style="width:42px;height:42px;border-radius:50%;" />
+        <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+      </div>
+
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="ecosystem.html">Ecosystem</a>
+        <a href="transparency.html">Transparency</a>
+        <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="toTop" aria-label="Back to top"></button>
+
+  <script>
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+
+      const id = a.getAttribute('href');
+      const el = document.querySelector(id);
+
+      if(el){
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+
+    const toTop = document.getElementById('toTop');
+
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 400) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    });
+
+    toTop.addEventListener('click', () => {
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  </script>
+
+</body>
+</html>

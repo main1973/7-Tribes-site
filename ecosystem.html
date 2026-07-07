@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3ENCBC9RT3');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7Tribes Ecosystem — Loop, Connect, Nuru, Alkebuleum</title>
+  <meta name="description" content="The 7Tribes ecosystem: Loop (community), Connect (marketplace), Nuru (wallet/identity), and Alkebuleum (blockchain infrastructure)." />
+  <link rel="icon" href="images/7trb_symbol.png" />
+
+  <style>
+    :root{
+      --bg:#0f0a05;
+      --panel:#1a1208;
+      --panel-2:#120c06;
+      --ink:#fff7e6;
+      --muted:#d4c3a1;
+      --line:#3b2b17;
+      --gold:#e7b852;
+      --gold-2:#b8831b;
+      --gold-bright:#ffdd7a;
+      --ok:#25F4EE;
+      --pop:#FE2C55;
+      --radius:18px;
+      --radius-lg:24px;
+      --shadow:0 18px 60px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box;}
+
+    html,body{
+      margin:0;
+      background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
+      color:var(--ink);
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+
+    img{max-width:100%;display:block}
+    a{color:var(--gold-bright);text-decoration:none}
+    a:hover{opacity:.9}
+
+    .wrap{
+      max-width:1160px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    .section{padding:70px 0}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:18px}
+    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+    .title{
+      position:relative;
+      margin:0 0 18px;
+      font-size:clamp(24px,3.2vw,34px);
+      letter-spacing:.02em;
+      color:var(--gold-bright);
+    }
+
+    .title::before{
+      content:"";
+      position:absolute;
+      left:-16px;
+      right:-16px;
+      top:-26px;
+      height:56px;
+      border-radius:20px;
+      background:
+        repeating-linear-gradient(110deg, rgba(231,184,82,.22) 0 2px, transparent 2px 16px),
+        radial-gradient(1200px 300px at 10% 0%, rgba(231,184,82,.18), transparent 60%);
+      mask:linear-gradient(180deg,transparent,rgba(0,0,0,.9) 15%, rgba(0,0,0,.9) 85%, transparent);
+      animation:flow 9s linear infinite;
+      pointer-events:none;
+      opacity:.8;
+    }
+
+    @keyframes flow{
+      to{transform:translateX(180px)}
+    }
+
+    .box{
+      position:relative;
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:22px;
+      border:1px solid rgba(255,215,122,0.4);
+      box-shadow:0 18px 50px rgba(0,0,0,.6);
+      overflow:hidden;
+    }
+
+    .box::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:2px;
+      background:linear-gradient(90deg,rgba(255,215,122,.6),rgba(184,131,31,.8),rgba(255,215,122,.6));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.65;
+    }
+
+    .divider{
+      height:2px;
+      margin:32px auto;
+      width:82%;
+      border-radius:999px;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,215,122,0.4),
+        rgba(255,215,122,0.9),
+        rgba(255,215,122,0.4),
+        transparent
+      );
+      box-shadow:0 0 16px rgba(255,215,122,0.35);
+      animation:divideGlow 8s ease-in-out infinite;
+    }
+
+    @keyframes divideGlow{
+      0%,100%{opacity:.9;box-shadow:0 0 16px rgba(255,215,122,0.35);}
+      50%{opacity:1;box-shadow:0 0 24px rgba(255,215,122,0.55);}
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.6rem;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid transparent;
+      cursor:pointer;
+      font-size:.95rem;
+      white-space:nowrap;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#130b03;
+      border-color:rgba(255,215,122,.7);
+      box-shadow:0 0 18px rgba(255,215,122,.35);
+      animation:pulse 3.5s ease-in-out infinite;
+    }
+
+    .btn.ghost{
+      border:1px solid rgba(255,215,122,.35);
+      color:var(--ink);
+      background:transparent;
+    }
+
+    @keyframes pulse{
+      0%,100%{box-shadow:0 0 0 0 rgba(255,215,122,.35);}
+      50%{box-shadow:0 0 18px 6px rgba(255,215,122,.35);}
+    }
+
+    .top-nav{
+      position:sticky;
+      top:0;
+      z-index:99;
+      background:rgba(9,5,2,.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,215,122,.18);
+    }
+
+    .top-nav-inner{
+      max-width:1160px;
+      margin:0 auto;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .nav-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--gold-bright);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .nav-brand img{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:0 8px 20px rgba(0,0,0,.4);
+    }
+
+    .main-nav{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    .main-nav a{
+      color:var(--gold-bright);
+      font-size:.82rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .site-header{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,215,122,0.2);
+    }
+
+    .hero-banner{
+      width:100%;
+      min-height:380px;
+      background:url('images/welcome_banner.png') center/cover no-repeat;
+      position:relative;
+    }
+
+    .hero-banner::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.68));
+    }
+
+    .banner-text{
+      position:absolute;
+      left:50%;
+      bottom:38px;
+      transform:translateX(-50%);
+      text-align:center;
+      z-index:2;
+      padding:0 16px;
+      width:min(900px,100%);
+    }
+
+    .banner-text h1{
+      margin:0;
+      color:var(--gold-bright);
+      font-size:clamp(34px,6vw,68px);
+      letter-spacing:.12em;
+      line-height:1.02;
+      text-transform:uppercase;
+    }
+
+    .banner-text p{
+      margin:12px 0 0;
+      color:#fff7e6;
+      font-size:1.05rem;
+    }
+
+    .hero-actions{
+      margin-top:22px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .ecosystem-card{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .ecosystem-card h3{
+      margin:0;
+      color:var(--gold-bright);
+      font-size:1.3rem;
+    }
+
+    .ecosystem-card .icon{
+      font-size:2.5rem;
+      margin-bottom:8px;
+    }
+
+    #toTop{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:#0c0d12 url('images/7trb.logo.png') center/cover no-repeat;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 0 0 0 rgba(231,184,82,.45);
+      opacity:0;
+      visibility:hidden;
+      cursor:pointer;
+      z-index:60;
+      transition:opacity .25s, visibility .25s, transform .2s;
+      animation:breath 3.2s ease-in-out infinite;
+    }
+
+    #toTop.show{opacity:1;visibility:visible}
+    #toTop:hover{transform:translateY(-2px)}
+
+    @keyframes breath{
+      0%,100%{box-shadow:0 0 0 0 rgba(231,184,82,.38);}
+      50%{box-shadow:0 0 22px 6px rgba(231,184,82,.32);}
+    }
+
+    footer{
+      position:relative;
+      background:radial-gradient(circle at center, rgba(255,215,122,.2), #090604 78%);
+      border-top:1px solid rgba(255,215,122,.35);
+      box-shadow:0 -6px 30px rgba(0,0,0,.7);
+      padding:20px 0;
+    }
+
+    footer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at center, rgba(255,215,122,0.14), transparent 70%);
+      opacity:0.6;
+      animation:footerGlow 8s ease-in-out infinite;
+      pointer-events:none;
+    }
+
+    @keyframes footerGlow{
+      0%,100%{opacity:0.4}
+      50%{opacity:0.8}
+    }
+
+    @media (max-width:900px){
+      .banner-text h1{font-size:36px}
+      .two,.three{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      .section{padding:52px 0}
+      .main-nav a{font-size:.78rem}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a class="nav-brand" href="index.html">
+        <img src="images/7trb_symbol.png" alt="7TRB logo">
+        <span>7TRB</span>
+      </a>
+
+      <div class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="ecosystem.html">Ecosystem</a>
+        <a href="transparency.html">Transparency</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="builders.html">Builders</a>
+        <a href="developers.html">Developers</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="site-header">
+    <div class="hero-banner">
+      <div class="banner-text">
+        <h1>The 7Tribes Ecosystem</h1>
+        <p>Community, Marketplace, Identity, and Infrastructure — working as one.</p>
+
+        <div class="hero-actions">
+          <a href="#loop" class="btn gold">Explore Loop</a>
+          <a href="#connect" class="btn ghost">Explore Connect</a>
+          <a href="#nuru" class="btn ghost">Explore Nuru</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ECOSYSTEM OVERVIEW -->
+    <section class="section" id="overview">
+      <div class="wrap">
+        <h2 class="title">Four Pillars of 7Tribes</h2>
+
+        <div class="grid two">
+          <article class="box ecosystem-card">
+            <div class="icon">🔄</div>
+            <h3>Learn → Organize → Build → Circulate</h3>
+            <p class="muted">
+              This is the journey every member takes. Start with education, organize your tribe, build projects, and circulate value back into the community.
+            </p>
+          </article>
+
+          <article class="box ecosystem-card">
+            <div class="icon">🌍</div>
+            <h3>One Network, Four Tools</h3>
+            <p class="muted">
+              Loop handles community and governance. Connect powers the marketplace. Nuru manages identity and rewards. Alkebuleum provides the blockchain foundation.
+            </p>
+          </article>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="muted" style="text-align:center;max-width:800px;margin:0 auto;">
+          The 7Tribes ecosystem is built on transparency, ownership, and real circulation. Every component serves the mission: redirect wealth back to the people who create it.
+        </p>
+      </div>
+    </section>
+
+    <!-- LOOP -->
+    <section class="section" id="loop">
+      <div class="wrap">
+        <h2 class="title">Loop — Community & Governance</h2>
+
+        <div class="grid two" style="align-items:flex-start;">
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">What is Loop?</h3>
+            <p class="muted">
+              Loop is the heartbeat of 7Tribes. It's where members gather, discuss ideas, vote on proposals, and track community progress. Loop is the town hall, the voting floor, and the activity feed — all in one.
+            </p>
+
+            <div class="divider"></div>
+
+            <h3 style="color:var(--gold-bright);">Key Features</h3>
+            <ul class="muted" style="margin:0 0 0 18px;">
+              <li><b>Town Hall:</b> Weekly/bi-weekly community calls and updates.</li>
+              <li><b>Proposals & Voting:</b> Members propose projects, vote on funding, and track delivery.</li>
+              <li><b>Activity Feed:</b> Real-time updates on new members, referrals, and ecosystem activity.</li>
+              <li><b>Transparency:</b> All treasury movements and decisions logged on-chain.</li>
+              <li><b>Rewards:</b> Participation badges, referral bounties, and governance incentives.</li>
+            </ul>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">Get Started with Loop</h3>
+            <p class="muted">
+              Join the conversation. Attend a town hall. Vote on proposals. Bring ideas. The community runs on participation.
+            </p>
+
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+              <a href="https://t.me/SevenTribesCrypto" target="_blank" rel="noopener" class="btn gold">Join Telegram</a>
+              <a href="https://chat.whatsapp.com/FSrGZMxoqsD7C4bO6lKn3" target="_blank" rel="noopener" class="btn ghost">Join WhatsApp</a>
+              <a href="dashboard.html" class="btn ghost">View Activity Feed</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="muted" style="font-size:.95rem;">
+              <b>Loop Philosophy:</b> Decisions made together, receipts shown publicly, value circulated continuously.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNECT -->
+    <section class="section" id="connect">
+      <div class="wrap">
+        <h2 class="title">Connect — Marketplace & Profiles</h2>
+
+        <div class="grid two" style="align-items:flex-start;">
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">What is Connect?</h3>
+            <p class="muted">
+              Connect is the marketplace where people find each other, businesses showcase services, and value circulates. It's a network of profiles, storefronts, referrals, and real economic activity.
+            </p>
+
+            <div class="divider"></div>
+
+            <h3 style="color:var(--gold-bright);">Key Features</h3>
+            <ul class="muted" style="margin:0 0 0 18px;">
+              <li><b>People Profiles:</b> Build your reputation, show your work, connect with others.</li>
+              <li><b>Business Storefronts:</b> Merchants list services, set prices, accept 7TRB payments.</li>
+              <li><b>Referral System:</b> Earn bounties for bringing new members and businesses.</li>
+              <li><b>Reputation & Ratings:</b> Trust built through reviews, completed transactions, and community feedback.</li>
+              <li><b>Messaging:</b> Direct communication between buyers, sellers, and collaborators.</li>
+            </ul>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">Get Started with Connect</h3>
+            <p class="muted">
+              Create a profile. List your business. Start earning. Connect is where the 7Tribes economy becomes real.
+            </p>
+
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+              <a href="onboarding.html" class="btn gold">Create Profile</a>
+              <a href="network.html" class="btn ghost">Explore Marketplace</a>
+              <a href="dashboard.html" class="btn ghost">View Merchants</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="muted" style="font-size:.95rem;">
+              <b>Connect Philosophy:</b> People power the network. Reputation is earned. Circulation drives growth.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- NURU -->
+    <section class="section" id="nuru">
+      <div class="wrap">
+        <h2 class="title">Nuru — Wallet, Identity & Rewards</h2>
+
+        <div class="grid two" style="align-items:flex-start;">
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">What is Nuru?</h3>
+            <p class="muted">
+              Nuru is your identity and wallet in the 7Tribes ecosystem. It's where you hold 7TRB, manage your reputation, access rewards, and browse the dApp ecosystem. Nuru is built on Alkebuleum and integrates with AmVault.
+            </p>
+
+            <div class="divider"></div>
+
+            <h3 style="color:var(--gold-bright);">Key Features</h3>
+            <ul class="muted" style="margin:0 0 0 18px;">
+              <li><b>Wallet:</b> Hold, send, and receive 7TRB securely.</li>
+              <li><b>Identity:</b> Your on-chain profile linked to Loop and Connect.</li>
+              <li><b>Reputation Score:</b> Built from transactions, votes, and community participation.</li>
+              <li><b>Rewards:</b> Earn 7TRB from referrals, governance, and ecosystem participation.</li>
+              <li><b>dApp Browser:</b> Access JollofSwap, staking, and other 7Tribes tools.</li>
+            </ul>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">Get Started with Nuru</h3>
+            <p class="muted">
+              Create a wallet. Connect your identity. Start earning. Nuru is your key to the entire ecosystem.
+            </p>
+
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+              <a href="https://amvault.net" target="_blank" rel="noopener" class="btn gold">Open AmVault</a>
+              <a href="https://jollofswap.com" target="_blank" rel="noopener" class="btn ghost">Open JollofSwap</a>
+              <a href="dashboard.html" class="btn ghost">View Dashboard</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="muted" style="font-size:.95rem;">
+              <b>Nuru Philosophy:</b> Your wallet, your identity, your rewards. On-chain, transparent, yours.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALKEBULEUM -->
+    <section class="section" id="alkebuleum">
+      <div class="wrap">
+        <h2 class="title">Alkebuleum — Blockchain Infrastructure</h2>
+
+        <div class="grid two" style="align-items:flex-start;">
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">What is Alkebuleum?</h3>
+            <p class="muted">
+              Alkebuleum is the decentralized blockchain that powers 7Tribes. It's where 7TRB lives, where transactions are recorded, and where the future of the ecosystem is built. Alkebuleum is independent, community-focused, and designed for real use.
+            </p>
+
+            <div class="divider"></div>
+
+            <h3 style="color:var(--gold-bright);">Key Features</h3>
+            <ul class="muted" style="margin:0 0 0 18px;">
+              <li><b>7TRB Token:</b> Lives on Alkebuleum Mainnet with full transparency.</li>
+              <li><b>AKE Gas Token:</b> Powers transactions on the chain.</li>
+              <li><b>JollofSwap DEX:</b> Trade, swap, and provide liquidity for 7TRB.</li>
+              <li><b>Smart Contracts:</b> Treasury, governance, and future dApps run on-chain.</li>
+              <li><b>On-Chain Transparency:</b> Every transaction, every proposal, every receipt is verifiable.</li>
+            </ul>
+          </article>
+
+          <article class="box">
+            <h3 style="margin-top:0;color:var(--gold-bright);">Get Started with Alkebuleum</h3>
+            <p class="muted">
+              Explore the chain. Check the contract. Trade on JollofSwap. See the future of 7Tribes on-chain.
+            </p>
+
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+              <a href="https://explorer.alkebuleum.com/address/0xdf7ce67dB19142672c4193d969cdD9975A5A6038" target="_blank" rel="noopener" class="btn gold">View 7TRB Contract</a>
+              <a href="https://jollofswap.com" target="_blank" rel="noopener" class="btn ghost">Trade on JollofSwap</a>
+              <a href="transparency.html" class="btn ghost">View Transparency Hub</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="muted" style="font-size:.95rem;">
+              <b>Alkebuleum Philosophy:</b> Decentralized, transparent, built for communities that want to own their future.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT ALL WORKS TOGETHER -->
+    <section class="section" id="integration">
+      <div class="wrap">
+        <h2 class="title">How It All Works Together</h2>
+
+        <div class="box">
+          <div class="grid three">
+            <div>
+              <h3 style="color:var(--gold-bright);margin-top:0;">1. Join</h3>
+              <p class="muted">
+                Create a profile on Connect. Set up your Nuru wallet. Join Loop. You're now part of the ecosystem.
+              </p>
+            </div>
+
+            <div>
+              <h3 style="color:var(--gold-bright);margin-top:0;">2. Participate</h3>
+              <p class="muted">
+                Vote on proposals in Loop. Earn 7TRB through referrals and participation. Build your reputation on Connect.
+              </p>
+            </div>
+
+            <div>
+              <h3 style="color:var(--gold-bright);margin-top:0;">3. Circulate</h3>
+              <p class="muted">
+                Spend 7TRB at merchants on Connect. Support builders through Loop. Stake and trade on Alkebuleum.
+              </p>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <p class="muted" style="text-align:center;">
+            The entire ecosystem runs on one principle: <b>value circulates inside the community, not out of it.</b>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="section" id="cta">
+      <div class="wrap">
+        <h2 class="title">Ready to Build?</h2>
+
+        <div class="box" style="text-align:center;">
+          <p class="muted" style="max-width:800px;margin:0 auto 24px;">
+            The 7Tribes ecosystem is live and growing. Every member, builder, and merchant strengthens the network. Join us.
+          </p>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <a href="onboarding.html" class="btn gold">Create Profile</a>
+            <a href="learn.html" class="btn ghost">Learn More</a>
+            <a href="https://t.me/SevenTribesCrypto" target="_blank" rel="noopener" class="btn ghost">Join Telegram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="images/7trb_symbol.png" alt="7TRB small" style="width:42px;height:42px;border-radius:50%;" />
+        <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+      </div>
+
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="ecosystem.html">Ecosystem</a>
+        <a href="transparency.html">Transparency</a>
+        <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="toTop" aria-label="Back to top"></button>
+
+  <script>
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+
+      const id = a.getAttribute('href');
+      const el = document.querySelector(id);
+
+      if(el){
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+
+    const toTop = document.getElementById('toTop');
+
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 400) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    });
+
+    toTop.addEventListener('click', () => {
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  </script>
+
+</body>
+</html>
