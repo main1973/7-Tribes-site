@@ -1,13 +1,15 @@
-/* 7TRB Dashboard JS — trimmed to match lean dashboard.html */
+/* 7TRB Dashboard JS — Nuru Integration */
 
 const CONFIG = {
   rpcUrl: "https://rpc.alkebuleum.com",
-  chainIdHex: "0x39f5e",
-  amvaultUrl: "https://amvault.net",
-  tokenAddress: "0x991df36e5b0bb596a83dee6a840f78baa40450e0",
+  chainIdHex: "0x39f6e",
+  chainIdDecimal: 237422,
+  tokenAddress: "0xdf7ce67dB19142672c4193d969cdD9975A5A6038",
+  aleTokenAddress: "0x0000000000000000000000000000000000000000", // Placeholder - update with actual ALE address
   trackedWallet: "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB",
   treasuryAddress: "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB",
   tokenSymbol: "7TRB",
+  aleSymbol: "ALKE",
   tokenDecimalsFallback: 18
 };
 
@@ -21,9 +23,13 @@ let rpcProvider = null;
 let browserProvider = null;
 let signer = null;
 let connectedAddress = null;
+let aaWallet = null;
+let nuruHandle = null;
+let nuruAin = null;
 let treasuryChart = null;
 let map = null;
 let mapMarkers = null;
+let isNuruBrowser = false;
 
 function el(id) {
   return document.getElementById(id);
@@ -53,6 +59,11 @@ function formatNumber(value, maxFraction = 2) {
   });
 }
 
+function formatAddress(addr) {
+  if (!addr) return "—";
+  return addr.substring(0, 6) + "..." + addr.substring(addr.length - 4);
+}
+
 async function getRpcProvider() {
   if (!rpcProvider) {
     rpcProvider = new ethers.JsonRpcProvider(CONFIG.rpcUrl);
@@ -64,32 +75,128 @@ async function getTokenContract(providerLike) {
   return new ethers.Contract(CONFIG.tokenAddress, ERC20_ABI, providerLike);
 }
 
-async function connectWallet() {
+async function getAleContract(providerLike) {
+  return new ethers.Contract(CONFIG.aleTokenAddress, ERC20_ABI, providerLike);
+}
+
+function detectNuru() {
+  if (window.ethereum && window.ethereum._isNuruWallet === true) {
+    isNuruBrowser = true;
+    return true;
+  }
+  return false;
+}
+
+async function checkExistingConnection() {
   if (!window.ethereum) {
-    setBanner("Open this dashboard inside AmVault to connect wallet.");
-    window.open(CONFIG.amvaultUrl, "_blank");
-    return;
+    return false;
   }
 
   try {
-    browserProvider = new ethers.BrowserProvider(window.ethereum);
-    await browserProvider.send("eth_requestAccounts", []);
-    signer = await browserProvider.getSigner();
-    connectedAddress = await signer.getAddress();
+    const accounts = await window.ethereum.request({ method: "eth_accounts" });
+    if (accounts && accounts.length > 0) {
+      // Silent connection
+      await connectNuru(true);
+      return true;
+    }
+  } catch (error) {
+    console.warn("Failed to check existing connection:", error);
+  }
+  return false;
+}
 
+async function connectNuru(silent = false) {
+  if (!window.ethereum) {
+    if (!silent) {
+      setBanner("Open this dashboard inside Nuru dApp Browser for full wallet identity features.");
+    }
+    return false;
+  }
+
+  try {
+    // Detect Nuru
+    if (!detectNuru()) {
+      if (!silent) {
+        setBanner("Open this dashboard inside Nuru dApp Browser for full wallet identity features.");
+      }
+      return false;
+    }
+
+    // Request accounts
+    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+    if (!accounts || accounts.length === 0) {
+      if (!silent) {
+        setText("walletBalance", "No Account");
+        setDot("walletDot", "#ff453a");
+      }
+      return false;
+    }
+
+    connectedAddress = accounts[0];
+    browserProvider = new ethers.BrowserProvider(window.ethereum);
+    signer = await browserProvider.getSigner();
+
+    // Get Nuru identity
+    try {
+      const identity = await window.ethereum.request({ method: "nuru_getIdentity" });
+      if (identity) {
+        nuruHandle = identity.primaryHandle || null;
+        nuruAin = identity.ain || null;
+        aaWallet = identity.aaWallet || null;
+      }
+    } catch (error) {
+      console.warn("Failed to get Nuru identity:", error);
+    }
+
+    // Check network
     const chainHex = await window.ethereum.request({ method: "eth_chainId" });
 
-    setText("walletBalance", "Connected");
+    // Update UI
+    setText("walletBalance", "Connected via Nuru ✓");
+    setText("nuruHandle", `Handle: ${nuruHandle || "—"}`);
+    setText("nuruAin", `AIN: ${nuruAin || "—"}`);
+    setText("signerAddress", formatAddress(connectedAddress));
+    setText("aaWallet", formatAddress(aaWallet));
+    
     setDot("walletDot", "#35c759");
+
+    // Show Nuru info section
+    const nuruSection = el("nuruInfoSection");
+    if (nuruSection) nuruSection.style.display = "grid";
 
     if (chainHex.toLowerCase() === CONFIG.chainIdHex.toLowerCase()) {
       setDot("networkDot", "#35c759");
-      setBanner("Wallet connected inside AmVault.");
+      if (!silent) {
+        setBanner("Connected to Nuru on Alkebuleum.");
+      }
     } else {
       setDot("networkDot", "#ffcc00");
-      setBanner("Wallet connected, but wrong network selected.");
+      if (!silent) {
+        setBanner("Connected to Nuru, but wrong network. Switch to Alkebuleum.");
+      }
     }
 
+    // Load balances using AA wallet
+    await loadBalances();
+
+    // Set up event listeners
+    setupEventListeners();
+
+    return true;
+  } catch (error) {
+    console.error("Nuru connection failed:", error);
+    if (!silent) {
+      setText("walletBalance", "Connection Failed");
+      setBanner("Failed to connect to Nuru. Try again.");
+      setDot("walletDot", "#ff453a");
+    }
+    return false;
+  }
+}
+
+async function loadBalances() {
+  try {
+    const balanceAddress = aaWallet || connectedAddress;
     const contract = await getTokenContract(browserProvider);
 
     let decimals = CONFIG.tokenDecimalsFallback;
@@ -97,20 +204,92 @@ async function connectWallet() {
       decimals = await contract.decimals();
     } catch {}
 
-    const rawBalance = await contract.balanceOf(connectedAddress);
+    const rawBalance = await contract.balanceOf(balanceAddress);
     const formatted = ethers.formatUnits(rawBalance, decimals);
 
-    setText("tokenBalance", `${CONFIG.tokenSymbol} Balance: ${formatNumber(formatted, 4)}`);
+    setText("tokenBalance", `${formatNumber(formatted, 4)} ${CONFIG.tokenSymbol}`);
+
+    // Try to load ALE balance if address is available
+    if (CONFIG.aleTokenAddress !== "0x0000000000000000000000000000000000000000") {
+      try {
+        const aleContract = await getAleContract(browserProvider);
+        const aleDecimals = await aleContract.decimals();
+        const aleRaw = await aleContract.balanceOf(balanceAddress);
+        const aleFormatted = ethers.formatUnits(aleRaw, aleDecimals);
+        setText("aleBalance", `${formatNumber(aleFormatted, 4)} ${CONFIG.aleSymbol}`);
+      } catch {
+        setText("aleBalance", "—");
+      }
+    } else {
+      setText("aleBalance", "—");
+    }
+
+    // Placeholder values
+    setText("verificationStatus", "Verified");
+    setText("reputationScore", "—");
+    setText("referralRewards", "—");
   } catch (error) {
-    console.error("Wallet connection failed:", error);
-    setText("walletBalance", "Connection Failed");
-    setBanner("Wallet connection failed. Try again inside AmVault.");
-    setDot("walletDot", "#ff453a");
+    console.error("Failed to load balances:", error);
+    setText("tokenBalance", "—");
+    setText("aleBalance", "—");
   }
 }
 
-function openAmVault() {
-  window.open(CONFIG.amvaultUrl, "_blank");
+function setupEventListeners() {
+  if (!window.ethereum) return;
+
+  window.ethereum.on("accountsChanged", (accounts) => {
+    if (accounts.length === 0) {
+      handleDisconnect();
+    } else if (accounts[0] !== connectedAddress) {
+      connectedAddress = accounts[0];
+      connectNuru(true);
+    }
+  });
+
+  window.ethereum.on("nuruIdentityChanged", () => {
+    connectNuru(true);
+  });
+
+  window.ethereum.on("disconnect", () => {
+    handleDisconnect();
+  });
+}
+
+function handleDisconnect() {
+  connectedAddress = null;
+  aaWallet = null;
+  nuruHandle = null;
+  nuruAin = null;
+  browserProvider = null;
+  signer = null;
+
+  setText("walletBalance", "Not Connected");
+  setText("nuruHandle", "Handle: —");
+  setText("nuruAin", "AIN: —");
+  setText("signerAddress", "—");
+  setText("aaWallet", "—");
+  setText("tokenBalance", "—");
+  setText("aleBalance", "—");
+
+  const nuruSection = el("nuruInfoSection");
+  if (nuruSection) nuruSection.style.display = "none";
+
+  setDot("walletDot", "#666");
+  
+  const connectBtn = el("connectBtn");
+  if (connectBtn) {
+    connectBtn.textContent = "Sign in with Nuru";
+    connectBtn.style.display = "inline-flex";
+  }
+}
+
+function openNuru() {
+  if (isNuruBrowser) {
+    window.location.reload();
+  } else {
+    setBanner("Open this dashboard inside Nuru dApp Browser.");
+  }
 }
 
 async function loadReadOnlyTokenData() {
@@ -134,8 +313,6 @@ async function loadReadOnlyTokenData() {
     const treasuryBalance = Number(ethers.formatUnits(treasuryRaw, decimals));
     const totalSupply = Number(ethers.formatUnits(totalSupplyRaw, decimals));
 
-    setText("walletBalance", "Not Connected");
-    setText("tokenBalance", `${CONFIG.tokenSymbol} Balance: ${formatNumber(walletBalance, 4)}`);
     setText("treasury", formatNumber(treasuryBalance, 0));
     setText("blockNumber", block.toString());
     setText("updatedAt", new Date().toLocaleString());
@@ -145,7 +322,9 @@ async function loadReadOnlyTokenData() {
     if (treasuryBar) treasuryBar.style.width = `${Math.min(treasuryPct, 100)}%`;
 
     setDot("freshDot", "#35c759");
-    setDot("networkDot", "#35c759");
+    if (!connectedAddress) {
+      setDot("networkDot", "#35c759");
+    }
 
     renderChart([
       { label: "Launch", value: totalSupply },
@@ -153,7 +332,6 @@ async function loadReadOnlyTokenData() {
     ]);
   } catch (error) {
     console.error("Read-only token load failed:", error);
-    setText("tokenBalance", `${CONFIG.tokenSymbol} Balance: unavailable`);
     setText("treasury", "Unavailable");
     setText("blockNumber", "—");
     setText("updatedAt", "—");
@@ -304,14 +482,27 @@ function renderMerchantMap(merchants) {
 
 function bindUi() {
   const connectBtn = el("connectBtn");
-  if (connectBtn) connectBtn.addEventListener("click", connectWallet);
+  if (connectBtn) connectBtn.addEventListener("click", () => connectNuru(false));
 
-  const openBtn = el("openAmVaultBtn");
-  if (openBtn) openBtn.addEventListener("click", openAmVault);
+  const openBtn = el("openNuruBtn");
+  if (openBtn) openBtn.addEventListener("click", openNuru);
 }
 
 async function init() {
   bindUi();
+  
+  // Check if Nuru is available
+  detectNuru();
+  
+  // Try to check for existing connection
+  const hasConnection = await checkExistingConnection();
+  
+  // If not inside Nuru browser, show message
+  if (!isNuruBrowser) {
+    setBanner("Open this dashboard inside Nuru dApp Browser for full wallet identity features.");
+  }
+  
+  // Load read-only data regardless of connection
   await loadReadOnlyTokenData();
   await loadMetrics();
   await loadMerchants();
