@@ -2,7 +2,7 @@
 
 const CONFIG = {
   rpcUrl: "https://rpc.alkebuleum.com",
-  chainIdHex: "0x39f6e",
+  chainIdHex: "0x39F6E",
   chainIdDecimal: 237422,
   tokenAddress: "0xdf7ce67dB19142672c4193d969cdD9975A5A6038",
   aleTokenAddress: "0x0000000000000000000000000000000000000000", // Placeholder - update with actual ALE address
@@ -172,7 +172,7 @@ async function connectNuru(silent = false) {
     } else {
       setDot("networkDot", "#ffcc00");
       if (!silent) {
-        setBanner("Connected to Nuru, but wrong network. Switch to Alkebuleum.");
+        setBanner(`Connected to Nuru, but wrong network (${chainHex}). Switch to Alkebuleum.`);
       }
     }
 
@@ -197,30 +197,28 @@ async function connectNuru(silent = false) {
 async function loadBalances() {
   try {
     const balanceAddress = aaWallet || connectedAddress;
-    const contract = await getTokenContract(browserProvider);
+    const provider = browserProvider || await getRpcProvider();
+    const contract = await getTokenContract(provider);
 
     let decimals = CONFIG.tokenDecimalsFallback;
     try {
       decimals = await contract.decimals();
-    } catch {}
+    } catch (e) {
+      console.warn("Could not fetch decimals, using fallback", e);
+    }
 
     const rawBalance = await contract.balanceOf(balanceAddress);
     const formatted = ethers.formatUnits(rawBalance, decimals);
 
     setText("tokenBalance", `${formatNumber(formatted, 4)} ${CONFIG.tokenSymbol}`);
 
-    // Try to load ALE balance if address is available
-    if (CONFIG.aleTokenAddress !== "0x0000000000000000000000000000000000000000") {
-      try {
-        const aleContract = await getAleContract(browserProvider);
-        const aleDecimals = await aleContract.decimals();
-        const aleRaw = await aleContract.balanceOf(balanceAddress);
-        const aleFormatted = ethers.formatUnits(aleRaw, aleDecimals);
-        setText("aleBalance", `${formatNumber(aleFormatted, 4)} ${CONFIG.aleSymbol}`);
-      } catch {
-        setText("aleBalance", "—");
-      }
-    } else {
+    // Fetch ALKE balance (native)
+    try {
+      const nativeBalance = await provider.getBalance(balanceAddress);
+      const aleFormatted = ethers.formatEther(nativeBalance);
+      setText("aleBalance", `${formatNumber(aleFormatted, 4)} ${CONFIG.aleSymbol}`);
+    } catch (e) {
+      console.warn("Could not fetch native balance", e);
       setText("aleBalance", "—");
     }
 
