@@ -761,6 +761,144 @@
       .detroit-stats{grid-template-columns:repeat(2,1fr)}
     }
 
+    /* WHAT 7TRB UNLOCKS */
+    .unlocks-section {
+      background:rgba(255,215,122,0.02);
+      border-bottom:1px solid rgba(255,215,122,.15);
+    }
+
+    .unlocks-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+    }
+
+    .unlock-card {
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:24px;
+      border:1px solid rgba(255,215,122,0.3);
+      text-align:center;
+      transition:all .3s ease;
+      cursor:pointer;
+    }
+
+    .unlock-card:hover {
+      transform:translateY(-4px);
+      border-color:var(--gold-bright);
+      box-shadow:0 8px 30px rgba(255,215,122,.15);
+    }
+
+    .unlock-card h3 {
+      margin:0 0 8px;
+      color:var(--gold-bright);
+      font-size:1.1rem;
+    }
+
+    .unlock-card p {
+      color:var(--muted);
+      margin:0;
+      font-size:.9rem;
+    }
+
+    /* POWERED BY ALKEBULEUM */
+    .infra-section {
+      background:rgba(255,215,122,0.02);
+    }
+
+    .infra-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:24px;
+      margin-bottom:40px;
+    }
+
+    .infra-card {
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:28px;
+      border:1px solid rgba(255,215,122,0.4);
+    }
+
+    .security-panel {
+      background:rgba(255,44,85,0.05);
+      border:1px solid rgba(254,44,85,0.3);
+      padding:20px;
+      border-radius:12px;
+      margin-top:20px;
+    }
+
+    .security-panel h4 {
+      margin:0 0 8px;
+      color:var(--pop);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    /* ECOSYSTEM PREVIEW */
+    .preview-section {
+      background:rgba(255,215,122,0.02);
+      border-top:1px solid rgba(255,215,122,.15);
+    }
+
+    .preview-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:16px;
+    }
+
+    .preview-card {
+      background:rgba(255,215,122,0.05);
+      border-radius:12px;
+      padding:16px;
+      border:1px solid rgba(255,215,122,.1);
+    }
+
+    .preview-card h4 {
+      margin:0 0 12px;
+      color:var(--gold-bright);
+      font-size:.9rem;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .preview-item {
+      font-size:.85rem;
+      color:var(--muted);
+      margin-bottom:8px;
+      padding-bottom:8px;
+      border-bottom:1px solid rgba(255,215,122,.05);
+    }
+
+    .preview-item:last-child {
+      border:none;
+      margin:0;
+      padding:0;
+    }
+
+    /* CLOSING SECTION */
+    .closing-section {
+      text-align:center;
+      padding:100px 0;
+      background:radial-gradient(circle at center, rgba(255,215,122,0.1), transparent 70%);
+    }
+
+    .closing-headline {
+      font-size:clamp(32px,6vw,54px);
+      color:var(--gold-bright);
+      font-weight:900;
+      margin:0 0 40px;
+      letter-spacing:.02em;
+    }
+
+    @media (max-width:900px){
+      .blueprint-cards{grid-template-columns:1fr}
+      .role-grid{grid-template-columns:repeat(2,1fr)}
+      .detroit-stats{grid-template-columns:repeat(2,1fr)}
+      .infra-grid{grid-template-columns:1fr}
+    }
+
     @media (max-width:600px){
       .hero-headline{font-size:36px}
       .hero-subheadline{font-size:18px}
@@ -769,6 +907,7 @@
       .flow-item{font-size:1rem;margin:0 10px}
       .role-grid{grid-template-columns:1fr}
       .detroit-stats{grid-template-columns:1fr}
+      .preview-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -1229,6 +1368,118 @@
 
             <a href="https://loop.7trb.com" class="btn gold">Join Detroit in Loop</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT 7TRB UNLOCKS -->
+    <section class="section unlocks-section" id="unlocks">
+      <div class="wrap">
+        <h2 class="section-title">What 7TRB Unlocks</h2>
+        <p class="section-subtitle">Utility designed for community economic growth</p>
+
+        <div class="unlocks-grid">
+          <div class="unlock-card">
+            <h3>Merchant Benefits</h3>
+            <p>List businesses, accept payments, and access premium storefront tools.</p>
+          </div>
+          <div class="unlock-card">
+            <h3>Referrals</h3>
+            <p>Earn rewards for growing the network and connecting new members.</p>
+          </div>
+          <div class="unlock-card">
+            <h3>Rewards</h3>
+            <p>Participate in community initiatives and earn for your contributions.</p>
+          </div>
+          <div class="unlock-card">
+            <h3>Community</h3>
+            <p>Vote on proposals, join city groups, and influence ecosystem direction.</p>
+          </div>
+          <div class="unlock-card">
+            <h3>Premium Features</h3>
+            <p>Unlock advanced analytics, priority placement, and exclusive events.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POWERED BY ALKEBULEUM -->
+    <section class="section infra-section" id="infrastructure">
+      <div class="wrap">
+        <h2 class="section-title">Powered by Alkebuleum</h2>
+        <p class="section-subtitle">The decentralized infrastructure for community economies</p>
+
+        <div class="infra-grid">
+          <div class="infra-card">
+            <h3>Alkebuleum</h3>
+            <p>The high-performance blockchain powering the 7Tribes ecosystem. Secure, scalable, and community-owned.</p>
+          </div>
+          <div class="infra-card">
+            <h3>ALKE</h3>
+            <p>The native gas token of the Alkebuleum network. Required for all on-chain transactions and network security.</p>
+          </div>
+          <div class="infra-card">
+            <h3>Nuru</h3>
+            <p>The official wallet, identity, and dApp browser. Your gateway to everything in the 7Tribes ecosystem.</p>
+          </div>
+        </div>
+
+        <div class="security-panel">
+          <h4>🛡️ Security & Access</h4>
+          <p class="muted" style="font-size:.9rem;margin-bottom:20px;">Your identity and assets are protected by decentralized encryption. Never share your recovery phrase with anyone.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
+            <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn gold">Download Nuru</a>
+            <a href="learn.html" class="btn ghost">Tutorials</a>
+            <a href="https://jollofswap.com" class="btn ghost">Trade Tutorial</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ECOSYSTEM PREVIEW -->
+    <section class="section preview-section" id="preview">
+      <div class="wrap">
+        <h2 class="section-title">Ecosystem Live Preview</h2>
+        <p class="section-subtitle">A glimpse into the active 7Tribes network</p>
+
+        <div class="preview-grid">
+          <div class="preview-card">
+            <h4>Latest Members</h4>
+            <div class="preview-item">7tribes.alke</div>
+            <div class="preview-item">detroit_builder.alke</div>
+            <div class="preview-item">oasis_merchant.alke</div>
+          </div>
+          <div class="preview-card">
+            <h4>Latest Businesses</h4>
+            <div class="preview-item">Mainhouse Oasis</div>
+            <div class="preview-item">Detroit Tech Hub</div>
+            <div class="preview-item">Alkebuleum Nodes</div>
+          </div>
+          <div class="preview-card">
+            <h4>Latest Posts</h4>
+            <div class="preview-item">Detroit City Meeting...</div>
+            <div class="preview-item">New Merchant Guide...</div>
+            <div class="preview-item">7TRB Utility Update...</div>
+          </div>
+          <div class="preview-card">
+            <h4>Upcoming Events</h4>
+            <div class="preview-item">Detroit Town Hall</div>
+            <div class="preview-item">Developer Workshop</div>
+            <div class="preview-item">Merchant Onboarding</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSING SECTION -->
+    <section class="section closing-section">
+      <div class="wrap">
+        <h2 class="closing-headline">The Infrastructure Is Being Built.</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:800px;margin:0 auto;">
+          <a href="https://loop.7trb.com" class="btn gold">Join Loop</a>
+          <a href="https://connect.7trb.com" class="btn gold">Explore Connect</a>
+          <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn gold">Download Nuru</a>
+          <a href="handbook.html" class="btn ghost">Read Blueprint</a>
         </div>
       </div>
     </section>
