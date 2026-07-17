@@ -439,12 +439,336 @@
       .main-nav{justify-content:flex-start;flex-direction:column;gap:8px}
     }
 
+    /* ECOSYSTEM MAP */
+    .ecosystem-map {
+      background:rgba(255,215,122,0.02);
+      border-top:1px solid rgba(255,215,122,.15);
+      border-bottom:1px solid rgba(255,215,122,.15);
+    }
+
+    .ecosystem-cards {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      max-width:600px;
+      margin:0 auto;
+    }
+
+    .ecosystem-card {
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:24px;
+      border:2px solid rgba(255,215,122,0.3);
+      cursor:pointer;
+      transition:all .3s ease;
+      text-align:center;
+    }
+
+    .ecosystem-card:hover {
+      transform:scale(1.02);
+      border-color:var(--gold-bright);
+      box-shadow:0 8px 30px rgba(255,215,122,.2);
+    }
+
+    .ecosystem-card.active {
+      border-color:var(--gold-bright);
+      background:linear-gradient(180deg, rgba(255,215,122,.1), rgba(255,215,122,.05));
+    }
+
+    .ecosystem-card h3 {
+      margin:0 0 8px;
+      color:var(--gold-bright);
+      font-size:1.2rem;
+    }
+
+    .ecosystem-card p {
+      color:var(--muted);
+      margin:0 0 12px;
+      font-size:.95rem;
+    }
+
+    .ecosystem-arrow {
+      text-align:center;
+      font-size:1.5rem;
+      color:var(--gold-bright);
+      margin:8px 0;
+      animation:pulse-arrow 1.5s ease-in-out infinite;
+    }
+
+    .ecosystem-details {
+      display:none;
+      margin-top:16px;
+      padding-top:16px;
+      border-top:1px solid rgba(255,215,122,.2);
+      animation:slideIn .3s ease-out;
+    }
+
+    .ecosystem-card.active .ecosystem-details {
+      display:block;
+    }
+
+    /* ROLE SELECTOR */
+    .role-selector {
+      background:rgba(255,215,122,0.02);
+    }
+
+    .role-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+      gap:12px;
+      margin-bottom:30px;
+    }
+
+    .role-btn {
+      padding:16px 12px;
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border:2px solid rgba(255,215,122,0.3);
+      border-radius:var(--radius-lg);
+      color:var(--ink);
+      cursor:pointer;
+      font-weight:700;
+      transition:all .3s ease;
+      font-size:.9rem;
+    }
+
+    .role-btn:hover {
+      border-color:var(--gold-bright);
+      transform:translateY(-2px);
+    }
+
+    .role-btn.active {
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#130b03;
+      border-color:var(--gold-bright);
+    }
+
+    .role-journey {
+      display:none;
+      background:rgba(255,215,122,0.08);
+      border-left:3px solid var(--gold-bright);
+      padding:24px;
+      border-radius:8px;
+      animation:slideIn .3s ease-out;
+    }
+
+    .role-journey.active {
+      display:block;
+    }
+
+    .role-journey h4 {
+      margin:0 0 12px;
+      color:var(--gold-bright);
+    }
+
+    .role-journey p {
+      margin:0 0 12px;
+      color:var(--muted);
+    }
+
+    /* BLUEPRINT SECTION */
+    .blueprint-section {
+      background:rgba(255,215,122,0.02);
+      border-top:1px solid rgba(255,215,122,.15);
+    }
+
+    .blueprint-cards {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:20px;
+      margin:30px 0;
+    }
+
+    .blueprint-card {
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:28px;
+      border:1px solid rgba(255,215,122,0.4);
+      text-align:center;
+      transition:all .3s ease;
+    }
+
+    .blueprint-card:hover {
+      transform:translateY(-4px);
+      box-shadow:0 12px 40px rgba(255,215,122,.15);
+    }
+
+    .blueprint-card h3 {
+      margin:0 0 12px;
+      color:var(--gold-bright);
+      font-size:1.4rem;
+    }
+
+    .blueprint-card p {
+      color:var(--muted);
+      margin:0;
+      font-size:.95rem;
+    }
+
+    /* SIMULATOR */
+    .simulator-section {
+      background:rgba(255,215,122,0.02);
+    }
+
+    .simulator-controls {
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:28px;
+      border:1px solid rgba(255,215,122,0.4);
+      margin-bottom:30px;
+    }
+
+    .slider-group {
+      margin-bottom:20px;
+    }
+
+    .slider-group label {
+      display:block;
+      color:var(--gold-bright);
+      font-weight:700;
+      margin-bottom:8px;
+      font-size:.95rem;
+    }
+
+    .slider-group input[type="range"] {
+      width:100%;
+      height:6px;
+      border-radius:3px;
+      background:rgba(255,215,122,0.2);
+      outline:none;
+      -webkit-appearance:none;
+    }
+
+    .slider-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance:none;
+      appearance:none;
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:var(--gold-bright);
+      cursor:pointer;
+      box-shadow:0 0 10px rgba(255,215,122,.4);
+    }
+
+    .slider-group input[type="range"]::-moz-range-thumb {
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:var(--gold-bright);
+      cursor:pointer;
+      border:none;
+      box-shadow:0 0 10px rgba(255,215,122,.4);
+    }
+
+    .slider-value {
+      display:inline-block;
+      color:var(--gold-bright);
+      font-weight:700;
+      margin-left:10px;
+    }
+
+    .simulator-results {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:16px;
+    }
+
+    .result-card {
+      background:rgba(255,215,122,0.08);
+      border-left:3px solid var(--gold-bright);
+      padding:16px;
+      border-radius:8px;
+      text-align:center;
+    }
+
+    .result-card h4 {
+      margin:0 0 8px;
+      color:var(--gold-bright);
+      font-size:1rem;
+    }
+
+    .result-value {
+      font-size:1.6rem;
+      color:var(--gold-bright);
+      font-weight:900;
+    }
+
+    /* DETROIT VISUALIZATION */
+    .detroit-section {
+      background:rgba(255,215,122,0.02);
+      border-top:1px solid rgba(255,215,122,.15);
+    }
+
+    .detroit-viz {
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius:var(--radius-lg);
+      padding:40px 20px;
+      border:1px solid rgba(255,215,122,0.4);
+      min-height:400px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .detroit-content {
+      text-align:center;
+      z-index:2;
+      position:relative;
+    }
+
+    .detroit-content h3 {
+      margin:0 0 12px;
+      color:var(--gold-bright);
+      font-size:1.4rem;
+    }
+
+    .detroit-content p {
+      color:var(--muted);
+      margin:0 0 20px;
+      max-width:500px;
+    }
+
+    .detroit-stats {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+      gap:12px;
+      margin-bottom:20px;
+    }
+
+    .detroit-stat {
+      background:rgba(255,215,122,0.1);
+      padding:12px;
+      border-radius:8px;
+      border:1px solid rgba(255,215,122,.2);
+    }
+
+    .detroit-stat-value {
+      font-size:1.4rem;
+      color:var(--gold-bright);
+      font-weight:900;
+    }
+
+    .detroit-stat-label {
+      font-size:.85rem;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    @media (max-width:900px){
+      .blueprint-cards{grid-template-columns:1fr}
+      .role-grid{grid-template-columns:repeat(2,1fr)}
+      .detroit-stats{grid-template-columns:repeat(2,1fr)}
+    }
+
     @media (max-width:600px){
       .hero-headline{font-size:36px}
       .hero-subheadline{font-size:18px}
       .section{padding:50px 0}
       .main-nav a{font-size:.75rem}
       .flow-item{font-size:1rem;margin:0 10px}
+      .role-grid{grid-template-columns:1fr}
+      .detroit-stats{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -665,6 +989,250 @@
       </div>
     </section>
 
+    <!-- INTERACTIVE ECOSYSTEM MAP -->
+    <section class="section ecosystem-map" id="ecosystem-map">
+      <div class="wrap">
+        <h2 class="section-title">The 7Tribes Ecosystem</h2>
+        <p class="section-subtitle">Click each layer to explore</p>
+
+        <div class="ecosystem-cards">
+          <div class="ecosystem-card" onclick="selectEcosystem(this, 0)">
+            <h3>7TRB.com</h3>
+            <p>Education Hub</p>
+            <div class="ecosystem-arrow">↓</div>
+          </div>
+
+          <div class="ecosystem-card" onclick="selectEcosystem(this, 1)">
+            <h3>Loop</h3>
+            <p>Community Town Hall</p>
+            <div class="ecosystem-details">
+              <p style="margin:0;font-size:.9rem;color:var(--muted);">Create profiles, organize, discuss, and build relationships.</p>
+              <a href="https://loop.7trb.com" class="btn gold" style="margin-top:12px;display:inline-block;font-size:.85rem;padding:8px 16px;">Enter Loop</a>
+            </div>
+            <div class="ecosystem-arrow">↓</div>
+          </div>
+
+          <div class="ecosystem-card" onclick="selectEcosystem(this, 2)">
+            <h3>Connect</h3>
+            <p>Marketplace & Commerce</p>
+            <div class="ecosystem-details">
+              <p style="margin:0;font-size:.9rem;color:var(--muted);">Exchange value, build storefronts, and grow businesses.</p>
+              <a href="https://connect.7trb.com" class="btn gold" style="margin-top:12px;display:inline-block;font-size:.85rem;padding:8px 16px;">Explore Connect</a>
+            </div>
+            <div class="ecosystem-arrow">↓</div>
+          </div>
+
+          <div class="ecosystem-card" onclick="selectEcosystem(this, 3)">
+            <h3>Nuru</h3>
+            <p>Wallet & Identity</p>
+            <div class="ecosystem-details">
+              <p style="margin:0;font-size:.9rem;color:var(--muted);">Secure identity, wallet, reputation, and rewards management.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn gold" style="margin-top:12px;display:inline-block;font-size:.85rem;padding:8px 16px;">Download Nuru</a>
+            </div>
+            <div class="ecosystem-arrow">↓</div>
+          </div>
+
+          <div class="ecosystem-card" onclick="selectEcosystem(this, 4)">
+            <h3>Alkebuleum</h3>
+            <p>Blockchain Infrastructure</p>
+            <div class="ecosystem-details">
+              <p style="margin:0;font-size:.9rem;color:var(--muted);">Decentralized network powering all 7Tribes transactions.</p>
+            </div>
+            <div class="ecosystem-arrow">↓</div>
+          </div>
+
+          <div class="ecosystem-card" onclick="selectEcosystem(this, 5)">
+            <h3>7TRB Token</h3>
+            <p>Community Currency</p>
+            <div class="ecosystem-details">
+              <p style="margin:0;font-size:.9rem;color:var(--muted);">Utility token for participation, rewards, and circulation.</p>
+              <a href="transparency.html" class="btn gold" style="margin-top:12px;display:inline-block;font-size:.85rem;padding:8px 16px;">View Tokenomics</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLE SELECTOR -->
+    <section class="section role-selector" id="role-selector">
+      <div class="wrap">
+        <h2 class="section-title">Choose Your Role</h2>
+        <p class="section-subtitle">Every role strengthens the ecosystem</p>
+
+        <div class="role-grid">
+          <button class="role-btn" onclick="selectRole(this, 'member')">👥 Member</button>
+          <button class="role-btn" onclick="selectRole(this, 'merchant')">🏪 Merchant</button>
+          <button class="role-btn" onclick="selectRole(this, 'builder')">👷 Builder</button>
+          <button class="role-btn" onclick="selectRole(this, 'developer')">💻 Developer</button>
+          <button class="role-btn" onclick="selectRole(this, 'creator')">🎨 Creator</button>
+          <button class="role-btn" onclick="selectRole(this, 'organizer')">📋 Organizer</button>
+          <button class="role-btn" onclick="selectRole(this, 'supporter')">⭐ Supporter</button>
+        </div>
+
+        <div class="role-journey" id="member-journey">
+          <h4>Community Member Journey</h4>
+          <p>Join Loop → Create Profile → Earn Referrals → Participate in Proposals → Support Businesses</p>
+          <a href="https://loop.7trb.com" class="btn gold">Start as Member</a>
+        </div>
+
+        <div class="role-journey" id="merchant-journey">
+          <h4>Merchant Journey</h4>
+          <p>Create Storefront → List Products/Services → Accept 7TRB → Build Customer Base → Earn Rewards</p>
+          <a href="https://connect.7trb.com" class="btn gold">Become Merchant</a>
+        </div>
+
+        <div class="role-journey" id="builder-journey">
+          <h4>Builder Journey</h4>
+          <p>Propose Projects → Recruit Team → Build Solutions → Deliver Value → Earn 7TRB</p>
+          <a href="builders.html" class="btn gold">Join Builders</a>
+        </div>
+
+        <div class="role-journey" id="developer-journey">
+          <h4>Developer Journey</h4>
+          <p>Access APIs → Build Tools → Integrate Services → Deploy on Alkebuleum → Earn Fees</p>
+          <a href="developers.html" class="btn gold">Developer Resources</a>
+        </div>
+
+        <div class="role-journey" id="creator-journey">
+          <h4>Creator Journey</h4>
+          <p>Create Content → Build Audience → Monetize with 7TRB → Grow Community → Earn Referrals</p>
+          <a href="https://connect.7trb.com" class="btn gold">Start Creating</a>
+        </div>
+
+        <div class="role-journey" id="organizer-journey">
+          <h4>Organizer Journey</h4>
+          <p>Form City Groups → Host Events → Coordinate Initiatives → Build Local Power → Lead Change</p>
+          <a href="https://loop.7trb.com" class="btn gold">Organize Community</a>
+        </div>
+
+        <div class="role-journey" id="supporter-journey">
+          <h4>Supporter Journey</h4>
+          <p>Hold 7TRB → Vote on Proposals → Refer Friends → Support Ecosystem → Earn Rewards</p>
+          <a href="dashboard.html" class="btn gold">View Dashboard</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLUEPRINT SECTION -->
+    <section class="section blueprint-section" id="blueprint">
+      <div class="wrap">
+        <h2 class="section-title">The Blueprint Behind 7Tribes</h2>
+        <p class="section-subtitle">Learn the philosophy and playbook</p>
+
+        <div style="text-align:center;margin-bottom:40px;">
+          <img src="images/ebook-cover.png" alt="Building Community Power" style="max-width:200px;border-radius:12px;box-shadow:0 8px 30px rgba(255,215,122,.2);">
+          <p class="muted" style="margin-top:16px;max-width:500px;margin-left:auto;margin-right:auto;">Building Community Power by Jermaine Stewart — A practical guide to community power, wealth, and circulation.</p>
+        </div>
+
+        <div class="blueprint-cards">
+          <div class="blueprint-card">
+            <h3>Organize</h3>
+            <p>Connect people. Build relationships. Create the foundation for collective action.</p>
+          </div>
+          <div class="blueprint-card">
+            <h3>Build</h3>
+            <p>Create businesses. Launch projects. Turn community power into economic opportunity.</p>
+          </div>
+          <div class="blueprint-card">
+            <h3>Circulate</h3>
+            <p>Move value locally. Reward participation. Keep wealth in the community.</p>
+          </div>
+        </div>
+
+        <div style="text-align:center;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;max-width:600px;margin:0 auto;">
+          <a href="https://mainhousedigital.gumroad.com/l/7Tribes" target="_blank" rel="noopener" class="btn gold">Buy Book</a>
+          <a href="handbook.html" class="btn ghost">Read Field Manual</a>
+          <a href="learn.html" class="btn ghost">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATIONAL SIMULATOR -->
+    <section class="section simulator-section" id="simulator">
+      <div class="wrap">
+        <h2 class="section-title">Community Growth Simulator</h2>
+        <p class="section-subtitle">See how the ecosystem grows with participation</p>
+
+        <div class="simulator-controls">
+          <div class="slider-group">
+            <label>Members <span class="slider-value" id="members-value">100</span></label>
+            <input type="range" id="members-slider" min="10" max="10000" value="100" oninput="updateSimulator()">
+          </div>
+
+          <div class="slider-group">
+            <label>Businesses <span class="slider-value" id="businesses-value">5</span></label>
+            <input type="range" id="businesses-slider" min="1" max="500" value="5" oninput="updateSimulator()">
+          </div>
+
+          <div class="slider-group">
+            <label>Builders <span class="slider-value" id="builders-value">3</span></label>
+            <input type="range" id="builders-slider" min="1" max="200" value="3" oninput="updateSimulator()">
+          </div>
+
+          <div class="slider-group">
+            <label>Creators <span class="slider-value" id="creators-value">2</span></label>
+            <input type="range" id="creators-slider" min="1" max="100" value="2" oninput="updateSimulator()">
+          </div>
+
+          <div class="slider-group">
+            <label>Referral Rate <span class="slider-value" id="referrals-value">20%</span></label>
+            <input type="range" id="referrals-slider" min="0" max="100" value="20" oninput="updateSimulator()">
+          </div>
+        </div>
+
+        <div class="simulator-results">
+          <div class="result-card">
+            <h4>Network Connections</h4>
+            <div class="result-value" id="connections-result">495</div>
+          </div>
+          <div class="result-card">
+            <h4>Active Businesses</h4>
+            <div class="result-value" id="active-businesses-result">5</div>
+          </div>
+          <div class="result-card">
+            <h4>Participation Score</h4>
+            <div class="result-value" id="participation-result">42%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETROIT VISUALIZATION -->
+    <section class="section detroit-section" id="detroit">
+      <div class="wrap">
+        <h2 class="section-title">7Tribes in Detroit</h2>
+        <p class="section-subtitle">Building community power in Motor City</p>
+
+        <div class="detroit-viz">
+          <div class="detroit-content">
+            <h3>Detroit's Growing Ecosystem</h3>
+            <p>Businesses organizing. Communities connecting. Value circulating locally.</p>
+
+            <div class="detroit-stats">
+              <div class="detroit-stat">
+                <div class="detroit-stat-value" id="detroit-members">500+</div>
+                <div class="detroit-stat-label">Members</div>
+              </div>
+              <div class="detroit-stat">
+                <div class="detroit-stat-value" id="detroit-businesses">45+</div>
+                <div class="detroit-stat-label">Businesses</div>
+              </div>
+              <div class="detroit-stat">
+                <div class="detroit-stat-value" id="detroit-connections">1.2K</div>
+                <div class="detroit-stat-label">Connections</div>
+              </div>
+              <div class="detroit-stat">
+                <div class="detroit-stat-value" id="detroit-circulated">$89K</div>
+                <div class="detroit-stat-label">Circulated</div>
+              </div>
+            </div>
+
+            <a href="https://loop.7trb.com" class="btn gold">Join Detroit in Loop</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER -->
@@ -692,6 +1260,41 @@
       card.classList.add('active');
     }
 
+    function selectEcosystem(card, index) {
+      document.querySelectorAll('.ecosystem-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    }
+
+    function selectRole(btn, role) {
+      document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.role-journey').forEach(j => j.classList.remove('active'));
+      const journey = document.getElementById(role + '-journey');
+      if (journey) journey.classList.add('active');
+    }
+
+    function updateSimulator() {
+      const members = parseInt(document.getElementById('members-slider').value);
+      const businesses = parseInt(document.getElementById('businesses-slider').value);
+      const builders = parseInt(document.getElementById('builders-slider').value);
+      const creators = parseInt(document.getElementById('creators-slider').value);
+      const referrals = parseInt(document.getElementById('referrals-slider').value);
+
+      document.getElementById('members-value').textContent = members.toLocaleString();
+      document.getElementById('businesses-value').textContent = businesses;
+      document.getElementById('builders-value').textContent = builders;
+      document.getElementById('creators-value').textContent = creators;
+      document.getElementById('referrals-value').textContent = referrals + '%';
+
+      const connections = Math.floor(members * (members - 1) / 2 * 0.1);
+      const participation = Math.floor((businesses + builders + creators) / (members / 100));
+      const activeBusinesses = Math.min(businesses, Math.floor(members / 20));
+
+      document.getElementById('connections-result').textContent = connections.toLocaleString();
+      document.getElementById('active-businesses-result').textContent = activeBusinesses;
+      document.getElementById('participation-result').textContent = Math.min(100, participation) + '%';
+    }
+
     // Scroll animation for sections
     const observerOptions = {
       threshold: 0.1,
@@ -713,6 +1316,9 @@
       section.style.transition = 'opacity .6s ease-out, transform .6s ease-out';
       observer.observe(section);
     });
+
+    // Initialize simulator
+    updateSimulator();
   </script>
 
 </body>
