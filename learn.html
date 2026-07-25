@@ -452,7 +452,16 @@
       <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
     </div>
   </div>
+        <span class="muted" style="margin-left:20px;" id="visitor-count">Visitors: 0</span>
 </footer>
 
+    // Visitor counter
+    (function() {
+      const count = localStorage.getItem("7trb_visits") || "0";
+      const newCount = parseInt(count) + 1;
+      localStorage.setItem("7trb_visits", newCount.toString());
+      const elem = document.getElementById("visitor-count");
+      if (elem) elem.textContent = "Visitors: " + newCount.toLocaleString();
+    })();
 </body>
 </html>

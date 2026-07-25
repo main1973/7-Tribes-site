@@ -1504,6 +1504,7 @@
       <div style="display:flex;align-items:center;gap:10px;">
         <img src="images/7trb_symbol.png" alt="7TRB" style="width:42px;height:42px;border-radius:50%;" />
         <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+        <span class="muted" style="margin-left:20px;" id="visitor-count">Visitors: 0</span>
       </div>
 
       <div class="footer-links">
@@ -1582,6 +1583,14 @@
 
     // Initialize simulator
     updateSimulator();
+
+    // Visitor counter
+    (function() {
+      const count = localStorage.getItem('7trb_visits') || '0';
+      const newCount = parseInt(count) + 1;
+      localStorage.setItem('7trb_visits', newCount.toString());
+      document.getElementById('visitor-count').textContent = 'Visitors: ' + newCount.toLocaleString();
+    })();
   </script>
 
 </body>
