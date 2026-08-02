@@ -234,7 +234,7 @@
     .hero-banner{
       width:100%;
       min-height:380px;
-      background:url('images/welcome_banner.png') center/cover no-repeat;
+      background:url('images/backgrounds/7tribes-community.webp') center/cover no-repeat;
       position:relative;
     }
 
@@ -351,9 +351,58 @@
     }
 
     @media (max-width:600px){
+      .hero-banner{background-image:url('images/backgrounds/7tribes-community-mobile.webp')}
+
       .section{padding:52px 0}
       .main-nav a{font-size:.78rem}
     }
+  
+    /* BRANDED BACKGROUND IMAGES */
+    .bg-section {
+      position:relative;
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+    .bg-section::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      z-index:1;
+    }
+    .bg-section > * {
+      position:relative;
+      z-index:2;
+    }
+    .bg-community {
+      background-image:url('images/backgrounds/7tribes-community.webp');
+    }
+    .bg-community::before {
+      background:rgba(0,0,0,0.65);
+    }
+    .bg-technology {
+      background-image:url('images/backgrounds/7trb-technology.webp');
+    }
+    .bg-technology::before {
+      background:rgba(0,0,0,0.60);
+    }
+    .bg-circulate {
+      background-image:url('images/backgrounds/organize-build-circulate.webp');
+    }
+    .bg-circulate::before {
+      background:rgba(0,0,0,0.65);
+    }
+    .bg-footer-texture {
+      background-image:url('images/backgrounds/7tribes-footer-texture.webp');
+      background-size:cover;
+    }
+    @media (max-width:768px) {
+      .bg-community { background-image:url('images/backgrounds/7tribes-community-mobile.webp'); }
+      .bg-technology { background-image:url('images/backgrounds/7trb-technology-mobile.webp'); }
+      .bg-circulate { background-image:url('images/backgrounds/organize-build-circulate-mobile.webp'); }
+      .bg-footer-texture { background-image:url('images/backgrounds/7tribes-footer-texture-mobile.webp'); }
+    }
+
   </style>
 </head>
 
@@ -672,7 +721,7 @@
 
   </main>
 
-  <footer>
+  <footer class="bg-footer-texture">
     <div class="wrap" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:10px;">
         <img src="images/7trb_symbol.png" alt="7TRB small" style="width:42px;height:42px;border-radius:50%;" />

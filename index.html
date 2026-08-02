@@ -304,13 +304,14 @@
       align-items:center;
       justify-content:center;
       overflow:hidden;
-      background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.7));
+      background:transparent;
     }
 
     .hero-bg{
       position:absolute;
       inset:0;
       z-index:0;
+      opacity:0.3;
     }
 
     .hero-bg svg{
@@ -1063,6 +1064,99 @@
       body.menu-open{overflow:hidden}
     }
 
+
+    /* BRANDED BACKGROUND IMAGES */
+    .bg-section {
+      position:relative;
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+    .bg-section::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      z-index:1;
+    }
+    .bg-section > * {
+      position:relative;
+      z-index:2;
+    }
+    .bg-hero-img {
+      background-image:url('images/backgrounds/7tribes-home-hero.webp');
+    }
+    .bg-hero-img::before {
+      background:linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.75) 100%);
+    }
+    .bg-community {
+      background-image:url('images/backgrounds/7tribes-community.webp');
+    }
+    .bg-community::before {
+      background:rgba(0,0,0,0.65);
+    }
+    .bg-marketplace {
+      background-image:url('images/backgrounds/7tribes-marketplace.webp');
+    }
+    .bg-marketplace::before {
+      background:rgba(0,0,0,0.70);
+    }
+    .bg-circulate {
+      background-image:url('images/backgrounds/organize-build-circulate.webp');
+    }
+    .bg-circulate::before {
+      background:rgba(0,0,0,0.65);
+    }
+    .bg-technology {
+      background-image:url('images/backgrounds/7trb-technology.webp');
+    }
+    .bg-technology::before {
+      background:rgba(0,0,0,0.55);
+    }
+    .bg-detroit {
+      background-image:url('images/backgrounds/join-7tribes.webp');
+    }
+    .bg-detroit::before {
+      background:rgba(0,0,0,0.60);
+    }
+    .bg-closing {
+      background-image:url('images/backgrounds/join-7tribes.webp');
+      background-position:center top;
+    }
+    .bg-closing::before {
+      background:rgba(0,0,0,0.72);
+    }
+    .bg-footer-texture {
+      background-image:url('images/backgrounds/7tribes-footer-texture.webp');
+      background-size:cover;
+    }
+
+    @media (max-width:768px) {
+      .bg-hero-img {
+        background-image:url('images/backgrounds/7tribes-home-hero-mobile.webp');
+      }
+      .bg-community {
+        background-image:url('images/backgrounds/7tribes-community-mobile.webp');
+      }
+      .bg-marketplace {
+        background-image:url('images/backgrounds/7tribes-marketplace-mobile.webp');
+      }
+      .bg-circulate {
+        background-image:url('images/backgrounds/organize-build-circulate-mobile.webp');
+      }
+      .bg-technology {
+        background-image:url('images/backgrounds/7trb-technology-mobile.webp');
+      }
+      .bg-detroit {
+        background-image:url('images/backgrounds/join-7tribes-mobile.webp');
+      }
+      .bg-closing {
+        background-image:url('images/backgrounds/join-7tribes-mobile.webp');
+      }
+      .bg-footer-texture {
+        background-image:url('images/backgrounds/7tribes-footer-texture-mobile.webp');
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, ::before, ::after {
         animation-delay: -1ms !important;
@@ -1149,7 +1243,7 @@
   </div>
 
   <!-- HERO SECTION -->
-  <section class="hero">
+  <section class="hero bg-section bg-hero-img">
     <div class="hero-bg">
       <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
         <!-- Animated background with dots and connections -->
@@ -1260,7 +1354,7 @@
     </section>
 
     <!-- ORGANIZE SECTION -->
-    <section class="section organize-section" id="organize">
+    <section class="section organize-section bg-section bg-community" id="organize">
       <div class="wrap">
         <h2 class="section-title">Organize</h2>
         <p class="section-subtitle">People Must Connect Before They Can Build</p>
@@ -1284,7 +1378,7 @@
     </section>
 
     <!-- BUILD SECTION -->
-    <section class="section" id="build" style="background:rgba(255,215,122,0.02);">
+    <section class="section bg-section bg-marketplace" id="build">
       <div class="wrap">
         <h2 class="section-title">Build</h2>
         <p class="section-subtitle">Community Powers Businesses</p>
@@ -1312,7 +1406,7 @@
     </section>
 
     <!-- CIRCULATE SECTION -->
-    <section class="section" id="circulate">
+    <section class="section bg-section bg-circulate" id="circulate">
       <div class="wrap">
         <h2 class="section-title">Circulate</h2>
         <p class="section-subtitle">Value Moves Through the Entire Ecosystem</p>
@@ -1550,7 +1644,7 @@
     </section>
 
     <!-- DETROIT VISUALIZATION -->
-    <section class="section detroit-section" id="detroit">
+    <section class="section detroit-section bg-section bg-detroit" id="detroit">
       <div class="wrap">
         <h2 class="section-title">7Tribes in Detroit</h2>
         <p class="section-subtitle">Building community power in Motor City</p>
@@ -1586,7 +1680,7 @@
     </section>
 
     <!-- WHAT 7TRB UNLOCKS -->
-    <section class="section unlocks-section" id="unlocks">
+    <section class="section unlocks-section bg-section bg-technology" id="unlocks">
       <div class="wrap">
         <h2 class="section-title">What 7TRB Unlocks</h2>
         <p class="section-subtitle">Utility designed for community economic growth</p>
@@ -1685,7 +1779,7 @@
     </section>
 
     <!-- CLOSING SECTION -->
-    <section class="section closing-section">
+    <section class="section closing-section bg-section bg-closing">
       <div class="wrap">
         <h2 class="closing-headline">The Infrastructure Is Being Built.</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:800px;margin:0 auto;">
@@ -1700,7 +1794,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="bg-footer-texture">
     <div class="wrap">
       <div style="display:flex;align-items:center;gap:10px;">
         <img src="images/7trb_symbol.png" alt="7TRB" style="width:42px;height:42px;border-radius:50%;" />
