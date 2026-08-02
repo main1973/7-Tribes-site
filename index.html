@@ -103,7 +103,7 @@
     .top-nav-inner{
       max-width:1160px;
       margin:0 auto;
-      padding:12px 20px;
+      padding:10px 20px;
       display:flex;
       justify-content:space-between;
       align-items:center;
@@ -132,7 +132,7 @@
     .main-nav{
       display:flex;
       gap:14px;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
       align-items:center;
       justify-content:flex-end;
     }
@@ -582,6 +582,16 @@
       font-weight:700;
       text-transform:uppercase;
       letter-spacing:.04em;
+    }
+
+    
+    /* Hamburger at 992px */
+    @media (max-width:992px){
+      .main-nav{display:none !important}
+      .menu-toggle{display:block !important}
+      .top-nav-inner{padding:8px 16px;flex-wrap:nowrap}
+      .nav-brand img{width:34px;height:34px}
+      .nav-brand span{font-size:13px}
     }
 
     @media (max-width:900px){
@@ -1055,8 +1065,7 @@
       .hero-headline{font-size:36px}
       .hero-subheadline{font-size:18px}
       .section{padding:50px 0}
-      .main-nav{display:none}
-      .menu-toggle{display:block}
+      
       .flow-item{font-size:1rem;margin:0 10px}
       .role-grid{grid-template-columns:1fr}
       .detroit-stats{grid-template-columns:1fr}
@@ -1411,6 +1420,104 @@
       }
       .struggle-card, .unlock-card, .infra-card, .blueprint-card {
         padding: 16px !important;
+      }
+    }
+
+  
+    /* === HERO & SPACING FIXES === */
+    .site-header, header {
+      margin-top: 0;
+    }
+    .hero-banner, .hero, [class*="hero"] {
+      position: relative;
+    }
+    .hero-banner::before, .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,.45) 40%, rgba(0,0,0,.7) 100%);
+      z-index: 1;
+    }
+    .hero-banner > *, .hero > *, .banner-text, .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width:992px) {
+      /* Header spacing */
+      .top-nav, nav.top-nav, header > nav, .site-header > nav {
+        padding: 0;
+      }
+      .top-nav-inner, .header-inner, nav > div {
+        padding: 8px 16px !important;
+        flex-wrap: nowrap !important;
+      }
+      .nav-brand img, .brand img {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      .nav-brand span, .brand b {
+        font-size: 13px !important;
+      }
+
+      /* Hero responsive */
+      .hero-banner, .hero, [class*="hero-section"] {
+        min-height: 240px !important;
+        height: auto !important;
+        padding: 60px 16px 40px !important;
+      }
+      .hero-banner h1, .hero-headline, .banner-text h1 {
+        font-size: clamp(26px, 7vw, 40px) !important;
+        line-height: 1.15 !important;
+      }
+      .hero-banner p, .hero-subheadline, .banner-text p {
+        font-size: clamp(14px, 3.5vw, 18px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Section spacing */
+      section, .section, [class*="section"] {
+        padding-top: 36px !important;
+        padding-bottom: 36px !important;
+      }
+
+      /* Full-width buttons */
+      .btn, button:not(.menu-toggle):not(.close-btn), [class*="btn"]:not(.menu-toggle):not(.close-btn), a.btn, input[type="submit"] {
+        display: block !important;
+        width: calc(100% - 32px) !important;
+        max-width: 400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        min-height: 48px !important;
+        padding: 14px 20px !important;
+        font-size: 14px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+      }
+      .hero-actions, .btn-group, [class*="actions"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        align-items: stretch !important;
+        width: 100% !important;
+      }
+      .hero-actions .btn, .btn-group .btn {
+        width: 100% !important;
+        max-width: none !important;
+      }
+    }
+
+    @media (max-width:430px) {
+      .hero-banner, .hero {
+        padding: 50px 12px 32px !important;
+        min-height: 200px !important;
+      }
+      .hero-banner h1, .banner-text h1, .hero-headline {
+        font-size: clamp(22px, 6.5vw, 32px) !important;
+      }
+      section, .section {
+        padding-top: 28px !important;
+        padding-bottom: 28px !important;
       }
     }
 

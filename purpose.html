@@ -155,6 +155,180 @@
       }
     }
 
+  
+    /* === HAMBURGER MENU (992px) === */
+    .menu-toggle{
+      display:none;
+      background:none;
+      border:none;
+      color:var(--gold-bright, #e7b852);
+      font-size:26px;
+      cursor:pointer;
+      padding:8px;
+      line-height:1;
+      min-width:44px;
+      min-height:44px;
+      align-items:center;
+      justify-content:center;
+    }
+    .menu-overlay{
+      display:none;
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:rgba(0,0,0,.7);
+      z-index:998;
+    }
+    .menu-overlay.active{display:block}
+    .mobile-drawer{
+      display:none;
+      position:fixed;
+      top:0;right:0;
+      width:min(300px, 85vw);
+      height:100vh;height:100dvh;
+      background:linear-gradient(135deg, rgba(15,10,5,.98), rgba(26,18,8,.98));
+      border-left:1px solid rgba(255,215,122,.2);
+      z-index:999;
+      overflow-y:auto;
+      flex-direction:column;
+      transform:translateX(100%);
+      transition:transform .3s cubic-bezier(.23,1,.32,1);
+    }
+    .mobile-drawer.active{
+      display:flex;
+      transform:translateX(0);
+    }
+    .drawer-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 18px;
+      border-bottom:1px solid rgba(255,215,122,.15);
+    }
+    .drawer-header img{width:28px;height:28px;border-radius:50%}
+    .drawer-header span{color:#e7b852;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.1em}
+    .close-btn{
+      background:none;border:none;
+      color:#e7b852;font-size:28px;
+      cursor:pointer;padding:4px 8px;
+      min-width:44px;min-height:44px;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .drawer-links{padding:16px 18px;display:flex;flex-direction:column;gap:0}
+    .drawer-links a{
+      display:block;
+      padding:14px 0;
+      color:#f5e6c8;
+      font-size:15px;
+      font-weight:600;
+      border-bottom:1px solid rgba(255,215,122,.08);
+      text-decoration:none;
+    }
+    .drawer-links a:hover{color:#e7b852}
+    body.menu-open{overflow:hidden}
+
+    @media (max-width:992px){
+      .main-nav, .nav-links{display:none !important}
+      .menu-toggle{display:flex !important}
+    }
+
+  
+    /* === HERO & SPACING FIXES === */
+    .site-header, header {
+      margin-top: 0;
+    }
+    .hero-banner, .hero, [class*="hero"] {
+      position: relative;
+    }
+    .hero-banner::before, .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,.45) 40%, rgba(0,0,0,.7) 100%);
+      z-index: 1;
+    }
+    .hero-banner > *, .hero > *, .banner-text, .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width:992px) {
+      /* Header spacing */
+      .top-nav, nav.top-nav, header > nav, .site-header > nav {
+        padding: 0;
+      }
+      .top-nav-inner, .header-inner, nav > div {
+        padding: 8px 16px !important;
+        flex-wrap: nowrap !important;
+      }
+      .nav-brand img, .brand img {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      .nav-brand span, .brand b {
+        font-size: 13px !important;
+      }
+
+      /* Hero responsive */
+      .hero-banner, .hero, [class*="hero-section"] {
+        min-height: 240px !important;
+        height: auto !important;
+        padding: 60px 16px 40px !important;
+      }
+      .hero-banner h1, .hero-headline, .banner-text h1 {
+        font-size: clamp(26px, 7vw, 40px) !important;
+        line-height: 1.15 !important;
+      }
+      .hero-banner p, .hero-subheadline, .banner-text p {
+        font-size: clamp(14px, 3.5vw, 18px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Section spacing */
+      section, .section, [class*="section"] {
+        padding-top: 36px !important;
+        padding-bottom: 36px !important;
+      }
+
+      /* Full-width buttons */
+      .btn, button:not(.menu-toggle):not(.close-btn), [class*="btn"]:not(.menu-toggle):not(.close-btn), a.btn, input[type="submit"] {
+        display: block !important;
+        width: calc(100% - 32px) !important;
+        max-width: 400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        min-height: 48px !important;
+        padding: 14px 20px !important;
+        font-size: 14px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+      }
+      .hero-actions, .btn-group, [class*="actions"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        align-items: stretch !important;
+        width: 100% !important;
+      }
+      .hero-actions .btn, .btn-group .btn {
+        width: 100% !important;
+        max-width: none !important;
+      }
+    }
+
+    @media (max-width:430px) {
+      .hero-banner, .hero {
+        padding: 50px 12px 32px !important;
+        min-height: 200px !important;
+      }
+      .hero-banner h1, .banner-text h1, .hero-headline {
+        font-size: clamp(22px, 6.5vw, 32px) !important;
+      }
+      section, .section {
+        padding-top: 28px !important;
+        padding-bottom: 28px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -171,6 +345,30 @@
       <a href="#builders">Builders</a>
       <a href="#roadmap">Roadmap</a>
     </div>
+  
+  <!-- Mobile Menu -->
+  <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">&#9776;</button>
+  <div class="menu-overlay" id="menu-overlay"></div>
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="drawer-header">
+      <div style="display:flex;align-items:center;gap:8px">
+        <img src="images/7trb_symbol.png" alt="7TRB">
+        <span>7TRB</span>
+      </div>
+      <button class="close-btn" id="close-menu">&times;</button>
+    </div>
+    <div class="drawer-links">
+      <a href="index.html">Home</a>
+      <a href="learn.html">Learn</a>
+      <a href="https://loop.7trb.com">Loop</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="transparency.html">Transparency</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="builders.html">Builders</a>
+      <a href="developers.html">Developers</a>
+    </div>
+  </div>
+
   </nav>
 
   <header class="hero">
@@ -377,5 +575,23 @@
     }catch(e){ /* ignore */ }
   })();
   </script>
+
+  <script>
+  // Mobile Menu
+  (function(){
+    var toggle=document.getElementById("menu-toggle");
+    var close=document.getElementById("close-menu");
+    var drawer=document.getElementById("mobile-drawer");
+    var overlay=document.getElementById("menu-overlay");
+    if(!toggle||!drawer)return;
+    function open(){drawer.classList.add("active");overlay.classList.add("active");document.body.classList.add("menu-open")}
+    function shut(){drawer.classList.remove("active");overlay.classList.remove("active");document.body.classList.remove("menu-open")}
+    toggle.addEventListener("click",open);
+    close.addEventListener("click",shut);
+    overlay.addEventListener("click",shut);
+    drawer.querySelectorAll("a").forEach(function(a){a.addEventListener("click",shut)});
+  })();
+  </script>
+
 </body>
 </html>
