@@ -48,7 +48,7 @@
     a:hover{opacity:.9}
 
     .wrap{
-      max-width:1160px;
+      max-width:min(1160px, calc(100vw - 32px));
       margin:0 auto;
       padding:0 20px;
     }
@@ -180,7 +180,7 @@
     }
 
     .top-nav-inner{
-      max-width:1160px;
+      max-width:min(1160px, calc(100vw - 32px));
       margin:0 auto;
       padding:12px 20px;
       display:flex;
@@ -401,6 +401,125 @@
       .bg-technology { background-image:url('images/backgrounds/7trb-technology-mobile.webp'); }
       .bg-circulate { background-image:url('images/backgrounds/organize-build-circulate-mobile.webp'); }
       .bg-footer-texture { background-image:url('images/backgrounds/7tribes-footer-texture-mobile.webp'); }
+    }
+
+  
+    /* === GLOBAL RESPONSIVE FIXES === */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { overflow-x: clip; }
+    body { 
+      max-width: 100vw; 
+      overflow-x: clip;
+      -webkit-text-size-adjust: 100%;
+    }
+    img, video, iframe, embed, object { max-width: 100%; height: auto; }
+    pre, code, .address, .hash, .contract-address { 
+      word-break: break-all; 
+      overflow-wrap: break-word; 
+    }
+    table { max-width: 100%; }
+    .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    input, select, textarea, button { max-width: 100%; }
+
+  
+    /* === MOBILE RESPONSIVE (max-width: 480px) === */
+    @media (max-width: 480px) {
+      body { font-size: 16px; }
+      h1 { font-size: clamp(28px, 7vw, 44px); }
+      h2 { font-size: clamp(22px, 5.5vw, 34px); }
+      h3 { font-size: clamp(18px, 4.5vw, 26px); }
+      .wrap, .container, [class*="wrap"], main { 
+        padding-left: 16px; 
+        padding-right: 16px; 
+        max-width: 100%;
+      }
+      .btn, button, [class*="btn"] { 
+        min-height: 44px; 
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+      table { font-size: 13px; }
+      td, th { padding: 8px 6px; }
+    }
+
+    /* === TABLET RESPONSIVE (max-width: 768px) === */
+    @media (max-width: 768px) {
+      .wrap, .container, [class*="wrap"] { 
+        padding-left: 20px; 
+        padding-right: 20px;
+        max-width: 100%;
+      }
+    }
+
+  
+    /* === SUBPAGE MOBILE FIXES === */
+    @media (max-width: 430px) {
+      .wrap {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        max-width: 100% !important;
+      }
+      .hero-banner {
+        min-height: 260px !important;
+        height: auto !important;
+      }
+      .banner-text h1, .banner-text .hero-title {
+        font-size: clamp(24px, 7vw, 36px) !important;
+      }
+      .banner-text p {
+        font-size: 15px !important;
+      }
+      .section-title, h2 {
+        font-size: clamp(22px, 5.5vw, 32px) !important;
+      }
+      .cards-grid, .features-grid, .grid-3, .grid-2, [class*="grid"] {
+        grid-template-columns: 1fr !important;
+      }
+      .card, [class*="card"] {
+        padding: 16px !important;
+      }
+      .btn, button, [class*="btn"] {
+        min-height: 44px;
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+        width: 100%;
+        text-align: center;
+      }
+      .top-nav .wrap, .top-nav-inner {
+        padding: 8px 12px !important;
+      }
+      .nav-logo img {
+        max-height: 36px !important;
+      }
+      footer .wrap {
+        flex-direction: column !important;
+        gap: 12px !important;
+        text-align: center;
+      }
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+      pre, code {
+        font-size: 12px !important;
+        padding: 12px !important;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .contract-address, .address, [class*="address"] {
+        font-size: 11px !important;
+        word-break: break-all;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-banner {
+        min-height: 220px !important;
+      }
+      .banner-text h1 {
+        font-size: 22px !important;
+      }
     }
 
   </style>
