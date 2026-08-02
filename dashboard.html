@@ -494,7 +494,12 @@
 
   </main>
 
+  <footer style="text-align:center;padding:16px;opacity:0.6;font-size:0.8rem;">
+    <span id="visitor-count">Visitors: 0</span>
+  </footer>
+
   <script src="dashboard.js"></script>
+<script>
     // Visitor counter
     (function() {
       const count = localStorage.getItem("7trb_visits") || "0";
@@ -503,5 +508,6 @@
       const elem = document.getElementById("visitor-count");
       if (elem) elem.textContent = "Visitors: " + newCount.toLocaleString();
     })();
+</script>
 </body>
 </html>

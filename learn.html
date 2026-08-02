@@ -241,12 +241,13 @@
   <div class="hero-banner">
     <div class="header-inner">
       <div class="brand">
-        <img src="images/logo.png" alt="7TRB logo" />
+        <img src="images/7trb_symbol.png" alt="7TRB logo" />
         <b>7TRB</b>
       </div>
       <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="learn.html">Learn (Basics)</a>
+        <a href="https://loop.7trb.com">Loop</a>
         <a href="learn-7trb.html">How 7TRB Works</a>
         <a href="wallet/index.html">Wallet</a>
         <a href="dashboard.html">Dashboard</a>
@@ -344,7 +345,7 @@
         </p>
 
         <ol class="muted" style="margin:10px 0 0 20px">
-          <li><b>Install a wallet:</b> use AmVault (Alkebuleum ecosystem) or another supported wallet.</li>
+          <li><b>Install a wallet:</b> use Nuru (the official 7Tribes wallet) or another supported wallet.</li>
           <li><b>Add the right network:</b> make sure you’re on the chain where 7TRB lives.</li>
           <li><b>Get gas:</b> keep a little gas token for transactions (example: $AKE on Alkebuleum).</li>
           <li><b>Add 7TRB token:</b> use the official contract address from the <a href="index.html#transparency"><b>Transparency</b></a> section / explorer link.</li>
@@ -441,11 +442,12 @@
 <footer>
   <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:10px">
-      <img src="images/logo.png" alt="7TRB" style="width:36px;height:36px;border-radius:50%" />
+      <img src="images/7trb_symbol.png" alt="7TRB" style="width:36px;height:36px;border-radius:50%" />
       <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
     </div>
     <div style="display:flex;gap:14px;flex-wrap:wrap">
       <a href="index.html">Home</a>
+      <a href="https://loop.7trb.com">Loop</a>
       <a href="learn-7trb.html">How 7TRB Works</a>
       <a href="wallet/index.html">Wallet</a>
       <a href="dashboard.html">Dashboard</a>
@@ -454,7 +456,7 @@
   </div>
         <span class="muted" style="margin-left:20px;" id="visitor-count">Visitors: 0</span>
 </footer>
-
+<script>
     // Visitor counter
     (function() {
       const count = localStorage.getItem("7trb_visits") || "0";
@@ -463,5 +465,6 @@
       const elem = document.getElementById("visitor-count");
       if (elem) elem.textContent = "Visitors: " + newCount.toLocaleString();
     })();
+</script>
 </body>
 </html>

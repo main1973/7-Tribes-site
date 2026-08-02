@@ -700,7 +700,7 @@
       window.scrollTo({top:0, behavior:'smooth'});
     });
   </script>
-
+<script>
     // Visitor counter
     (function() {
       const count = localStorage.getItem("7trb_visits") || "0";
@@ -709,5 +709,6 @@
       const elem = document.getElementById("visitor-count");
       if (elem) elem.textContent = "Visitors: " + newCount.toLocaleString();
     })();
+</script>
 </body>
 </html>
