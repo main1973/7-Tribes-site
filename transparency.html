@@ -9,14 +9,13 @@
     gtag('js', new Date());
     gtag('config', 'G-3ENCBC9RT3');
   </script>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>7Tribes Transparency Hub — Token, Treasury, Roadmap</title>
-  <meta name="description" content="Complete transparency for 7TRB: token details, treasury breakdown, roadmap, and on-chain verification." />
+  <meta name="description" content="Verified information about the 7TRB token, treasury, documents, development status, and ecosystem." />
   <link rel="icon" href="images/7trb_symbol.png" />
-
   <style>
+    /* === DESIGN TOKENS === */
     :root{
       --bg:#0f0a05;
       --panel:#1a1208;
@@ -27,167 +26,216 @@
       --gold:#e7b852;
       --gold-2:#b8831b;
       --gold-bright:#ffdd7a;
-      --radius:18px;
-      --radius-lg:24px;
-      --shadow:0 18px 60px rgba(0,0,0,.55);
+      --radius:16px;
+      --shadow:0 12px 40px rgba(0,0,0,.5);
     }
 
-    *{box-sizing:border-box;}
-
+    /* === BASE === */
+    *{box-sizing:border-box;margin:0;padding:0}
     html,body{
-      margin:0;
       background:radial-gradient(circle at top, #291707 0, #0b0603 55%, #050201 100%);
       color:var(--ink);
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      overflow-x:clip;
     }
-
     img{max-width:100%;display:block}
     a{color:var(--gold-bright);text-decoration:none}
-    a:hover{opacity:.9}
+    a:hover{opacity:.85}
 
+    /* === LAYOUT === */
     .wrap{
-      max-width:min(1160px, calc(100vw - 32px));
+      max-width:min(1100px, calc(100vw - 40px));
       margin:0 auto;
       padding:0 20px;
     }
-
-    .section{padding:70px 0}
+    .section{padding:56px 0}
     .muted{color:var(--muted)}
-    .grid{display:grid;gap:18px}
-    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .divider{height:1px;background:var(--line);margin:24px 0}
 
-    .title{
-      position:relative;
-      margin:0 0 18px;
-      font-size:clamp(24px,3.2vw,34px);
-      letter-spacing:.02em;
+    /* === TYPOGRAPHY === */
+    .section-title{
+      font-size:clamp(24px, 4vw, 36px);
+      font-weight:900;
       color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      margin-bottom:24px;
+    }
+    .section-subtitle{
+      font-size:clamp(15px, 2.5vw, 18px);
+      color:var(--muted);
+      margin-bottom:32px;
+      max-width:700px;
     }
 
-    .title::before{
-      content:"";
-      position:absolute;
-      left:-16px;
-      right:-16px;
-      top:-26px;
-      height:56px;
-      border-radius:20px;
-      background:
-        repeating-linear-gradient(110deg, rgba(231,184,82,.22) 0 2px, transparent 2px 16px),
-        radial-gradient(1200px 300px at 10% 0%, rgba(231,184,82,.18), transparent 60%);
-      mask:linear-gradient(180deg,transparent,rgba(0,0,0,.9) 15%, rgba(0,0,0,.9) 85%, transparent);
-      animation:flow 9s linear infinite;
-      pointer-events:none;
-      opacity:.8;
+    /* === CARDS === */
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+    .card h3{
+      color:var(--gold-bright);
+      font-size:clamp(16px, 2.5vw, 20px);
+      margin-bottom:8px;
+    }
+    .card p{
+      color:var(--muted);
+      font-size:clamp(14px, 2vw, 16px);
+      line-height:1.6;
     }
 
-    @keyframes flow{
-      to{transform:translateX(180px)}
-    }
-
-    .box{
-      position:relative;
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:22px;
-      border:1px solid rgba(255,215,122,0.4);
-      box-shadow:0 18px 50px rgba(0,0,0,.6);
-      overflow:hidden;
-    }
-
-    .box::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:inherit;
-      padding:2px;
-      background:linear-gradient(90deg,rgba(255,215,122,.6),rgba(184,131,31,.8),rgba(255,215,122,.6));
-      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor;
-      mask-composite:exclude;
-      pointer-events:none;
-      opacity:.65;
-    }
-
-    .divider{
-      height:2px;
-      margin:32px auto;
-      width:82%;
+    /* === STATUS BADGES === */
+    .status{
+      display:inline-block;
+      padding:4px 12px;
       border-radius:999px;
-      background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,215,122,0.4),
-        rgba(255,215,122,0.9),
-        rgba(255,215,122,0.4),
-        transparent
-      );
-      box-shadow:0 0 16px rgba(255,215,122,0.35);
-      animation:divideGlow 8s ease-in-out infinite;
+      font-size:12px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.04em;
     }
+    .status-live{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3)}
+    .status-testing{background:rgba(234,179,8,.12);color:#facc15;border:1px solid rgba(234,179,8,.3)}
+    .status-dev{background:rgba(96,165,250,.12);color:#93c5fd;border:1px solid rgba(96,165,250,.3)}
+    .status-planned{background:rgba(168,85,247,.12);color:#c4b5fd;border:1px solid rgba(168,85,247,.3)}
+    .status-inactive{background:rgba(148,163,184,.1);color:#94a3b8;border:1px solid rgba(148,163,184,.2)}
 
-    @keyframes divideGlow{
-      0%,100%{opacity:.9;box-shadow:0 0 16px rgba(255,215,122,0.35);}
-      50%{opacity:1;box-shadow:0 0 24px rgba(255,215,122,0.55);}
-    }
+    /* === GRIDS === */
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
 
+    /* === BUTTONS === */
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:.6rem;
-      padding:10px 18px;
+      padding:12px 24px;
       border-radius:999px;
-      font-weight:800;
-      border:1px solid transparent;
+      font-weight:700;
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      border:none;
       cursor:pointer;
-      font-size:.95rem;
-      white-space:nowrap;
-      transition:transform .18s ease, box-shadow .18s ease;
+      text-decoration:none;
+      transition:transform .16s ease;
+      min-height:44px;
     }
-
-    .btn:hover{transform:translateY(-2px)}
-
-    .btn.gold{
+    .btn:active{transform:scale(.97)}
+    .btn-gold{
       background:linear-gradient(90deg,var(--gold),var(--gold-2));
       color:#130b03;
-      border-color:rgba(255,215,122,.7);
-      box-shadow:0 0 18px rgba(255,215,122,.35);
-      animation:pulse 3.5s ease-in-out infinite;
     }
-
-    .btn.ghost{
-      border:1px solid rgba(255,215,122,.35);
-      color:var(--ink);
+    .btn-ghost{
       background:transparent;
+      border:1px solid var(--gold);
+      color:var(--gold-bright);
+    }
+    .btn-sm{padding:8px 16px;font-size:12px}
+
+    /* === CONTRACT ADDRESS === */
+    .contract-box{
+      background:var(--panel-2);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .contract-address{
+      font-family:'Courier New',monospace;
+      font-size:clamp(12px, 2.5vw, 14px);
+      color:var(--gold-bright);
+      word-break:break-all;
+      overflow-wrap:break-word;
+      line-height:1.5;
+      padding:12px;
+      background:rgba(0,0,0,.3);
+      border-radius:8px;
+      border:1px solid var(--line);
+    }
+    .contract-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
     }
 
-    @keyframes pulse{
-      0%,100%{box-shadow:0 0 0 0 rgba(255,215,122,.35);}
-      50%{box-shadow:0 0 18px 6px rgba(255,215,122,.35);}
+    /* === INFO TABLE (stacked on mobile) === */
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:0;
+    }
+    .info-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      padding:12px 0;
+      border-bottom:1px solid var(--line);
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .info-row:last-child{border-bottom:none}
+    .info-label{
+      font-size:14px;
+      color:var(--muted);
+      font-weight:600;
+      min-width:120px;
+    }
+    .info-value{
+      font-size:15px;
+      color:var(--ink);
+      font-weight:700;
+      text-align:right;
+      flex:1;
     }
 
+    /* === ROADMAP === */
+    .roadmap-card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      position:relative;
+      border-left:4px solid var(--gold);
+    }
+    .roadmap-card h3{
+      color:var(--gold-bright);
+      font-size:clamp(16px, 2.5vw, 18px);
+      margin-bottom:8px;
+    }
+    .roadmap-card p{
+      color:var(--muted);
+      font-size:clamp(14px, 2vw, 15px);
+      line-height:1.6;
+    }
+    .roadmap-card .status{margin-top:12px}
+
+    /* === NAVIGATION === */
     .top-nav{
       position:sticky;
       top:0;
-      z-index:99;
+      z-index:100;
       background:rgba(9,5,2,.92);
       backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
       border-bottom:1px solid rgba(255,215,122,.18);
     }
-
     .top-nav-inner{
       max-width:min(1160px, calc(100vw - 32px));
       margin:0 auto;
-      padding:12px 20px;
+      padding:10px 20px;
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:16px;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
     }
-
     .nav-brand{
       display:flex;
       align-items:center;
@@ -197,302 +245,148 @@
       text-transform:uppercase;
       letter-spacing:.12em;
     }
-
     .nav-brand img{
-      width:42px;
-      height:42px;
+      width:38px;height:38px;
       border-radius:50%;
       border:1px solid rgba(255,255,255,.16);
-      box-shadow:0 8px 20px rgba(0,0,0,.4);
     }
-
     .main-nav{
       display:flex;
       gap:14px;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
       align-items:center;
-      justify-content:flex-end;
     }
-
     .main-nav a{
       color:var(--gold-bright);
       font-size:.82rem;
       font-weight:800;
       text-transform:uppercase;
       letter-spacing:.06em;
+      white-space:nowrap;
     }
 
-    .site-header{
-      position:relative;
-      width:100%;
-      overflow:hidden;
-      border-bottom:1px solid rgba(255,215,122,0.2);
-    }
-
+    /* === HERO === */
     .hero-banner{
-      width:100%;
-      min-height:320px;
+      position:relative;
       background:url('images/backgrounds/7trb-technology.webp') center/cover no-repeat;
-      position:relative;
-    }
-
-    .hero-banner::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.3),rgba(0,0,0,.68));
-    }
-
-    .banner-text{
-      position:absolute;
-      left:50%;
-      bottom:28px;
-      transform:translateX(-50%);
+      padding:80px 20px 60px;
       text-align:center;
-      z-index:2;
-      padding:0 16px;
-      width:min(900px,100%);
+      min-height:280px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-
-    .banner-text h1{
-      margin:0;
-      color:var(--gold-bright);
-      font-size:clamp(34px,6vw,68px);
-      letter-spacing:.12em;
-      line-height:1.02;
-      text-transform:uppercase;
-    }
-
-    .banner-text p{
-      margin:12px 0 0;
-      color:#fff7e6;
-      font-size:1.05rem;
-    }
-
-    #toTop{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      width:56px;
-      height:56px;
-      border-radius:50%;
-      background:#0c0d12 url('images/7trb.logo.png') center/cover no-repeat;
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 0 0 0 rgba(231,184,82,.45);
-      opacity:0;
-      visibility:hidden;
-      cursor:pointer;
-      z-index:60;
-      transition:opacity .25s, visibility .25s, transform .2s;
-      animation:breath 3.2s ease-in-out infinite;
-    }
-
-    #toTop.show{opacity:1;visibility:visible}
-    #toTop:hover{transform:translateY(-2px)}
-
-    @keyframes breath{
-      0%,100%{box-shadow:0 0 0 0 rgba(231,184,82,.38);}
-      50%{box-shadow:0 0 22px 6px rgba(231,184,82,.32);}
-    }
-
-    footer{
-      position:relative;
-      background:radial-gradient(circle at center, rgba(255,215,122,.2), #090604 78%);
-      border-top:1px solid rgba(255,215,122,.35);
-      box-shadow:0 -6px 30px rgba(0,0,0,.7);
-      padding:20px 0;
-    }
-
-    footer::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(circle at center, rgba(255,215,122,0.14), transparent 70%);
-      opacity:0.6;
-      animation:footerGlow 8s ease-in-out infinite;
-      pointer-events:none;
-    }
-
-    @keyframes footerGlow{
-      0%,100%{opacity:0.4}
-      50%{opacity:0.8}
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      margin:16px 0;
-      font-size:15px;
-    }
-
-    th, td{
-      padding:12px;
-      text-align:left;
-      border-bottom:1px solid rgba(255,215,122,0.2);
-    }
-
-    th{
-      color:var(--gold-bright);
-      font-weight:800;
-    }
-
-    @media (max-width:900px){
-      .banner-text h1{font-size:36px}
-      .two,.three{grid-template-columns:1fr}
-    }
-
-    @media (max-width:600px){
-      .hero-banner{background-image:url('images/backgrounds/7trb-technology-mobile.webp')}
-
-      .section{padding:52px 0}
-      .main-nav a{font-size:.78rem}
-    }
-  
-    /* BRANDED BACKGROUND IMAGES */
-    .bg-section {
-      position:relative;
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
-    }
-    .bg-section::before {
+    .hero-banner::before{
       content:'';
       position:absolute;
       inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.5) 50%,rgba(0,0,0,.75) 100%);
       z-index:1;
     }
-    .bg-section > * {
+    .hero-banner .banner-text{
       position:relative;
       z-index:2;
+      max-width:700px;
+      margin:0 auto;
     }
-    .bg-community {
-      background-image:url('images/backgrounds/7tribes-community.webp');
+    .hero-banner h1{
+      font-size:clamp(28px, 6vw, 48px);
+      font-weight:900;
+      color:var(--gold-bright);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:12px;
     }
-    .bg-community::before {
-      background:rgba(0,0,0,0.65);
-    }
-    .bg-technology {
-      background-image:url('images/backgrounds/7trb-technology.webp');
-    }
-    .bg-technology::before {
-      background:rgba(0,0,0,0.60);
-    }
-    .bg-circulate {
-      background-image:url('images/backgrounds/organize-build-circulate.webp');
-    }
-    .bg-circulate::before {
-      background:rgba(0,0,0,0.65);
-    }
-    .bg-footer-texture {
-      background-image:url('images/backgrounds/7tribes-footer-texture.webp');
-      background-size:cover;
-    }
-    @media (max-width:768px) {
-      .bg-community { background-image:url('images/backgrounds/7tribes-community-mobile.webp'); }
-      .bg-technology { background-image:url('images/backgrounds/7trb-technology-mobile.webp'); }
-      .bg-circulate { background-image:url('images/backgrounds/organize-build-circulate-mobile.webp'); }
-      .bg-footer-texture { background-image:url('images/backgrounds/7tribes-footer-texture-mobile.webp'); }
+    .hero-banner p{
+      font-size:clamp(15px, 3vw, 18px);
+      color:var(--muted);
+      line-height:1.6;
     }
 
-  
-    
+    /* === FOOTER === */
+    footer{
+      background:var(--panel-2);
+      border-top:1px solid var(--line);
+      padding:32px 20px;
+    }
+    .footer-inner{
+      max-width:min(1100px, calc(100vw - 40px));
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .footer-brand{display:flex;align-items:center;gap:10px}
+    .footer-brand img{width:36px;height:36px;border-radius:50%}
+    .footer-links{display:flex;gap:14px;flex-wrap:wrap}
+    .footer-links a{font-size:14px}
 
-  
-    
+    /* === BACK TO TOP === */
+    #toTop{
+      position:fixed;
+      bottom:24px;right:24px;
+      width:44px;height:44px;
+      border-radius:50%;
+      background:var(--gold);
+      color:#130b03;
+      border:none;
+      font-size:20px;
+      cursor:pointer;
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .3s,transform .3s;
+      z-index:90;
+      display:flex;align-items:center;justify-content:center;
+    }
+    #toTop.show{opacity:1;transform:translateY(0)}
 
-    
-
-  
-    
-
-  
-    
-
-  
-    
-      /* Header spacing */
-      .top-nav, nav.top-nav, header > nav, .site-header > nav {
-        padding: 0;
-      }
-      .top-nav-inner, .header-inner, nav > div {
-        padding: 8px 16px !important;
-        flex-wrap: nowrap !important;
-      }
-      .nav-brand img, .brand img {
-        width: 32px !important;
-        height: 32px !important;
-      }
-      .nav-brand span, .brand b {
-        font-size: 13px !important;
-      }
-
-      /* Hero responsive */
-      .hero-banner, .hero, [class*="hero-section"] {
-        min-height: 240px !important;
-        height: auto !important;
-        padding: 60px 16px 40px !important;
-      }
-      .hero-banner h1, .hero-headline, .banner-text h1 {
-        font-size: clamp(26px, 7vw, 40px) !important;
-        line-height: 1.15 !important;
-      }
-      .hero-banner p, .hero-subheadline, .banner-text p {
-        font-size: clamp(14px, 3.5vw, 18px) !important;
-        line-height: 1.5 !important;
-      }
-
-      /* Section spacing */
-      section, .section, [class*="section"] {
-        padding-top: 36px !important;
-        padding-bottom: 36px !important;
-      }
-
-      /* Full-width buttons */
-      .btn, button:not(.menu-toggle):not(.close-btn), [class*="btn"]:not(.menu-toggle):not(.close-btn), a.btn, input[type="submit"] {
-        display: block !important;
-        width: calc(100% - 32px) !important;
-        max-width: 400px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        min-height: 48px !important;
-        padding: 14px 20px !important;
-        font-size: 14px !important;
-        text-align: center !important;
-        box-sizing: border-box !important;
-      }
-      .hero-actions, .btn-group, [class*="actions"] {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px !important;
-        align-items: stretch !important;
-        width: 100% !important;
-      }
-      .hero-actions .btn, .btn-group .btn {
-        width: 100% !important;
-        max-width: none !important;
-      }
+    /* === DISCLAIMER BOX === */
+    .disclaimer{
+      background:rgba(234,179,8,.06);
+      border:1px solid rgba(234,179,8,.2);
+      border-radius:12px;
+      padding:16px 20px;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.6;
     }
 
-    @media (max-width:430px) {
-      .hero-banner, .hero {
-        padding: 50px 12px 32px !important;
-        min-height: 200px !important;
+    /* === MOBILE RESPONSIVE === */
+    @media (max-width:768px){
+      .grid-2,.grid-3,.grid-auto{grid-template-columns:1fr}
+      .section{padding:36px 0}
+      .hero-banner{
+        padding:60px 16px 40px;
+        min-height:220px;
       }
-      .hero-banner h1, .banner-text h1, .hero-headline {
-        font-size: clamp(22px, 6.5vw, 32px) !important;
+      .card{padding:20px}
+      .info-row{
+        flex-direction:column;
+        gap:4px;
       }
-      section, .section {
-        padding-top: 28px !important;
-        padding-bottom: 28px !important;
+      .info-value{text-align:left}
+      .contract-actions{flex-direction:column}
+      .contract-actions .btn{width:100%}
+      .footer-inner{flex-direction:column;text-align:center}
+      .footer-links{justify-content:center}
+      .btn{
+        display:block;
+        width:100%;
+        text-align:center;
       }
     }
-
+    @media (max-width:430px){
+      .wrap{padding:0 16px}
+      .section{padding:28px 0}
+      .hero-banner{padding:50px 12px 32px}
+      .card{padding:16px}
+    }
   </style>
   <link rel="stylesheet" href="css/global-responsive.css">
 </head>
-
 <body>
-
   <!-- NAVIGATION -->
   <nav class="top-nav">
     <div class="top-nav-inner">
@@ -500,7 +394,6 @@
         <img src="images/7trb_symbol.png" alt="7TRB logo">
         <span>7TRB</span>
       </a>
-
       <div class="main-nav">
         <a href="index.html">Home</a>
         <a href="learn.html">Learn</a>
@@ -512,285 +405,363 @@
         <a href="developers.html">Developers</a>
       </div>
     </div>
-
   </nav>
 
-  <header class="site-header">
+  <!-- HERO -->
+  <header>
     <div class="hero-banner">
       <div class="banner-text">
         <h1>Transparency Hub</h1>
-        <p>Token details, treasury breakdown, roadmap, and on-chain verification.</p>
+        <p>Verified information about the 7TRB token, treasury, documents, development status, and ecosystem.</p>
       </div>
     </div>
   </header>
 
   <main>
 
-    <!-- TOKEN DETAILS -->
+    <!-- 1. LIVE STATUS OVERVIEW -->
+    <section class="section" id="status">
+      <div class="wrap">
+        <h2 class="section-title">Live Status Overview</h2>
+        <p class="section-subtitle">Current state of each ecosystem component. Statuses are manually maintained and reflect the latest verified information.</p>
+        <div class="grid-auto">
+          <div class="card">
+            <h3>7TRB Network</h3>
+            <p>Alkebuleum Mainnet token contract deployed.</p>
+            <span class="status status-live">Live</span>
+          </div>
+          <div class="card">
+            <h3>Contract Status</h3>
+            <p>Token contract active on Alkebuleum.</p>
+            <span class="status status-live">Live</span>
+          </div>
+          <div class="card">
+            <h3>Liquidity Status</h3>
+            <p>JollofSwap DEX integration.</p>
+            <span class="status status-live">Live</span>
+          </div>
+          <div class="card">
+            <h3>Treasury Reporting</h3>
+            <p>Public treasury allocation and reporting.</p>
+            <span class="status status-dev">In Development</span>
+          </div>
+          <div class="card">
+            <h3>Merchant Adoption</h3>
+            <p>Merchant onboarding and payment acceptance.</p>
+            <span class="status status-testing">Testing</span>
+          </div>
+          <div class="card">
+            <h3>Governance</h3>
+            <p>Community governance and voting mechanisms.</p>
+            <span class="status status-planned">Planned</span>
+          </div>
+          <div class="card">
+            <h3>Staking</h3>
+            <p>Token staking and reward distribution.</p>
+            <span class="status status-inactive">Not Yet Available</span>
+          </div>
+          <div class="card">
+            <h3>Mobile App (Nuru)</h3>
+            <p>Wallet, identity, and dApp browser.</p>
+            <span class="status status-dev">In Development</span>
+          </div>
+          <div class="card">
+            <h3>Loop</h3>
+            <p>Community town hall and discussion platform.</p>
+            <span class="status status-live">Live</span>
+          </div>
+          <div class="card">
+            <h3>Connect</h3>
+            <p>Marketplace, profiles, and referrals.</p>
+            <span class="status status-live">Live</span>
+          </div>
+          <div class="card">
+            <h3>Nuru Integration</h3>
+            <p>Full wallet and identity integration.</p>
+            <span class="status status-dev">In Development</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TOKEN AND NETWORK DETAILS -->
     <section class="section" id="token">
       <div class="wrap">
-        <h2 class="title">Token & Supply</h2>
-
-        <div class="box" style="margin-bottom:20px;">
-          <h3 style="color:var(--gold-bright);margin-top:0;">7TRB Token Details</h3>
-
-          <table>
-            <tr>
-              <td><b>Total Supply</b></td>
-              <td>7,000,000,000 7TRB</td>
-            </tr>
-            <tr>
-              <td><b>Chain</b></td>
-              <td>Alkebuleum Mainnet</td>
-            </tr>
-            <tr>
-              <td><b>Symbol</b></td>
-              <td>7TRB</td>
-            </tr>
-            <tr>
-              <td><b>Decimals</b></td>
-              <td>18</td>
-            </tr>
-            <tr>
-              <td><b>Contract Address</b></td>
-              <td><a href="https://explorer.alkebuleum.com/address/0xdf7ce67dB19142672c4193d969cdD9975A5A6038" target="_blank" rel="noopener">0xdf7ce67dB19142672c4193d969cdD9975A5A6038</a></td>
-            </tr>
-          </table>
-
-          <p class="muted" style="margin-top:16px;">
-            <b>Purpose:</b> Community-owned utility and reward token powering the 7Tribes ecosystem. 7TRB is used for payments, governance, staking, and rewards.
-          </p>
+        <h2 class="section-title">Token &amp; Network Details</h2>
+        <div class="card">
+          <div class="info-grid">
+            <div class="info-row">
+              <span class="info-label">Token Name</span>
+              <span class="info-value">7TRB</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Symbol</span>
+              <span class="info-value">7TRB</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Total Supply</span>
+              <span class="info-value">7,000,000,000 7TRB</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Network</span>
+              <span class="info-value">Alkebuleum Mainnet</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Decimals</span>
+              <span class="info-value">18</span>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h3 style="margin-bottom:12px">Contract Address</h3>
+          <div class="contract-box">
+            <code class="contract-address" id="contract-addr">0xdf7ce67dB19142672c4193d969cdD9975A5A6038</code>
+            <div class="contract-actions">
+              <button class="btn btn-gold btn-sm" onclick="navigator.clipboard.writeText('0xdf7ce67dB19142672c4193d969cdD9975A5A6038').then(()=>this.textContent='Copied!').catch(()=>{})">Copy Address</button>
+              <a href="https://explorer.alkebuleum.com" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Open Explorer</a>
+              <a href="https://jollofswap.com" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Open JollofSwap</a>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h3 style="margin-bottom:8px">Token Purpose</h3>
+          <p class="muted">7TRB is designed as a community utility and participation token for payments, rewards, referrals, merchant activity, community programs, and ecosystem access. Individual features may remain in testing or development until officially activated.</p>
         </div>
       </div>
     </section>
 
-    <!-- COST & PROFIT BREAKDOWN -->
-    <section class="section" id="breakdown">
+    <!-- 3. TREASURY AND ALLOCATION -->
+    <section class="section" id="treasury">
       <div class="wrap">
-        <h2 class="title">Cost & Profit Breakdown</h2>
-
-        <div class="grid two">
-          <article class="box">
-            <h3 style="color:var(--gold-bright);margin-top:0;">Operational Costs</h3>
-
-            <p class="muted" style="margin:0 0 12px;">
-              How revenue is allocated to build and maintain the ecosystem:
-            </p>
-
-            <table style="margin:0;">
-              <tr>
-                <td><b>Product</b></td>
-                <td>25%</td>
-              </tr>
-              <tr>
-                <td><b>Technology</b></td>
-                <td>15%</td>
-              </tr>
-              <tr>
-                <td><b>Marketing</b></td>
-                <td>20%</td>
-              </tr>
-              <tr>
-                <td><b>Treasury</b></td>
-                <td>25%</td>
-              </tr>
-              <tr>
-                <td><b>Team</b></td>
-                <td>15%</td>
-              </tr>
-            </table>
-          </article>
-
-          <article class="box">
-            <h3 style="color:var(--gold-bright);margin-top:0;">Profit Distribution</h3>
-
-            <p class="muted" style="margin:0 0 12px;">
-              How profits flow back to the community:
-            </p>
-
-            <table style="margin:0;">
-              <tr>
-                <td><b>Treasury</b></td>
-                <td>50%</td>
-              </tr>
-              <tr>
-                <td><b>Community</b></td>
-                <td>25%</td>
-              </tr>
-              <tr>
-                <td><b>Reinvestment</b></td>
-                <td>15%</td>
-              </tr>
-              <tr>
-                <td><b>Team</b></td>
-                <td>10%</td>
-              </tr>
-            </table>
-          </article>
-        </div>
-
-        <div style="margin-top:20px;">
-          <a href="docs/7TRB_Liquidity_Guide.pdf" target="_blank" rel="noopener" class="btn gold">
-            Download Liquidity Guide
-          </a>
+        <h2 class="section-title">Treasury &amp; Allocation</h2>
+        <p class="section-subtitle">Planned token allocation model. Actual distribution figures will be published as they become available.</p>
+        <div class="card">
+          <div class="info-grid">
+            <div class="info-row">
+              <span class="info-label">Total Supply</span>
+              <span class="info-value">7,000,000,000 7TRB</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Actual Distributed</span>
+              <span class="info-value" style="color:var(--muted);font-style:italic">Reporting data pending verification</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Treasury-Controlled</span>
+              <span class="info-value" style="color:var(--muted);font-style:italic">Reporting data pending verification</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Liquidity Allocation</span>
+              <span class="info-value" style="color:var(--muted);font-style:italic">Reporting data pending verification</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Community Rewards</span>
+              <span class="info-value" style="color:var(--muted);font-style:italic">Reporting data pending verification</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Founder Allocation</span>
+              <span class="info-value" style="color:var(--muted);font-style:italic">Reporting data pending verification</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Team &amp; Operations</span>
+              <span class="info-value" style="color:var(--muted);font-style:italic">Reporting data pending verification</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Unallocated Supply</span>
+              <span class="info-value" style="color:var(--muted);font-style:italic">Reporting data pending verification</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Last Updated</span>
+              <span class="info-value" style="color:var(--muted);font-style:italic">Pending verification</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ROADMAP -->
+    <!-- 4. OPERATIONS AND PROFIT POLICY -->
+    <section class="section" id="operations">
+      <div class="wrap">
+        <h2 class="section-title">Operations &amp; Profit Policy</h2>
+        <div class="disclaimer">
+          <strong>Note:</strong> These percentages describe the current planning model. They are not a claim that revenue or profits have already been generated or distributed.
+        </div>
+        <div class="grid-2" style="margin-top:24px">
+          <div class="card">
+            <h3>Operational Cost Planning</h3>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Proposed Allocation Model</p>
+            <div class="info-grid">
+              <div class="info-row"><span class="info-label">Product</span><span class="info-value">25%</span></div>
+              <div class="info-row"><span class="info-label">Technology</span><span class="info-value">15%</span></div>
+              <div class="info-row"><span class="info-label">Marketing</span><span class="info-value">20%</span></div>
+              <div class="info-row"><span class="info-label">Treasury</span><span class="info-value">25%</span></div>
+              <div class="info-row"><span class="info-label">Team</span><span class="info-value">15%</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Profit-Flow Planning</h3>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Proposed Allocation Model</p>
+            <div class="info-grid">
+              <div class="info-row"><span class="info-label">Treasury</span><span class="info-value">50%</span></div>
+              <div class="info-row"><span class="info-label">Community</span><span class="info-value">25%</span></div>
+              <div class="info-row"><span class="info-label">Reinvestment</span><span class="info-value">15%</span></div>
+              <div class="info-row"><span class="info-label">Team</span><span class="info-value">10%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ROADMAP -->
     <section class="section" id="roadmap">
       <div class="wrap">
-        <h2 class="title">Roadmap</h2>
-
-        <div class="grid three">
-          <article class="box">
-            <h3 style="margin:0 0 6px;color:var(--gold-bright);">Phase 1 — Infrastructure</h3>
-            <p class="muted">Token, website, wallet, and transparency foundation.</p>
-          </article>
-
-          <article class="box">
-            <h3 style="margin:0 0 6px;color:var(--gold-bright);">Phase 2 — Community</h3>
-            <p class="muted">Member onboarding, builders network, merchant pilots.</p>
-          </article>
-
-          <article class="box">
-            <h3 style="margin:0 0 6px;color:var(--gold-bright);">Phase 3 — Scale</h3>
-            <p class="muted">DEX integration, liquidity growth, tools for everyday use.</p>
-          </article>
-        </div>
-
-        <div class="grid two" style="margin-top:18px;">
-          <article class="box">
-            <h3 style="margin:0 0 6px;color:var(--gold-bright);">Phase 4 — Global Presence</h3>
-            <p class="muted">African + diaspora pilots, cross-tribe projects, multi-region hubs.</p>
-          </article>
-
-          <article class="box">
-            <h3 style="margin:0 0 6px;color:var(--gold-bright);">Phase 5 — Legacy Fund</h3>
-            <p class="muted">Long-term treasury and generational projects backed by 7TRB.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXIT OPTIONS -->
-    <section class="section" id="exit">
-      <div class="wrap">
-        <h2 class="title">Exit Options</h2>
-
-        <div class="box">
-          <h3 style="color:var(--gold-bright);margin-top:0;">How to Sell or Redeem 7TRB</h3>
-
-          <div class="grid three" style="margin-top:16px;">
-            <div>
-              <h4 style="color:var(--gold-bright);">1. Exchange / P2P</h4>
-              <p class="muted">Sell on JollofSwap DEX or peer-to-peer with other community members.</p>
-            </div>
-
-            <div>
-              <h4 style="color:var(--gold-bright);">2. Buyback Requests</h4>
-              <p class="muted">Request buyback from treasury (depends on liquidity and rules).</p>
-            </div>
-
-            <div>
-              <h4 style="color:var(--gold-bright);">3. Unstaking</h4>
-              <p class="muted">Unstake at preset cycles once staking rules are active.</p>
-            </div>
+        <h2 class="section-title">Roadmap</h2>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="roadmap-card">
+            <h3>Phase 1 — Infrastructure</h3>
+            <p>Token, website, foundational documents, and initial ecosystem structure.</p>
+            <span class="status status-live">Live</span>
           </div>
-
-          <div class="divider"></div>
-
-          <p class="muted">
-            <b>Important:</b> The goal of 7TRB is circulation, not speculation. Redemption is rule-based to protect the treasury and encourage long-term participation.
-          </p>
+          <div class="roadmap-card">
+            <h3>Phase 2 — Community</h3>
+            <p>Member onboarding, builder recruitment, merchant pilots, and community testing.</p>
+            <span class="status status-testing">Testing</span>
+          </div>
+          <div class="roadmap-card">
+            <h3>Phase 3 — Utility</h3>
+            <p>Payments, referrals, rewards, merchant tools, and practical 7TRB use.</p>
+            <span class="status status-dev">In Development</span>
+          </div>
+          <div class="roadmap-card">
+            <h3>Phase 4 — Expansion</h3>
+            <p>Regional partnerships, diaspora participation, and broader ecosystem access.</p>
+            <span class="status status-planned">Planned</span>
+          </div>
+          <div class="roadmap-card">
+            <h3>Phase 5 — Community Infrastructure</h3>
+            <p>Long-term treasury development, community projects, and generational initiatives.</p>
+            <span class="status status-planned">Planned</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- DOCUMENTS -->
+    <!-- 6. OFFICIAL DOCUMENTS -->
     <section class="section" id="documents">
       <div class="wrap">
-        <h2 class="title">Official Documents</h2>
-
-        <div class="grid two">
-          <article class="box">
-            <h3 style="color:var(--gold-bright);margin-top:0;">📄 Whitepaper</h3>
-            <p class="muted">Complete technical and economic overview of 7TRB.</p>
-            <a href="docs/7TRB-Whitepaper.pdf" target="_blank" rel="noopener" class="btn gold">Download PDF</a>
-          </article>
-
-          <article class="box">
-            <h3 style="color:var(--gold-bright);margin-top:0;">📊 Tokenomics</h3>
-            <p class="muted">Detailed breakdown of token distribution and economics.</p>
-            <a href="docs/7TRB-Tokenomics.pdf" target="_blank" rel="noopener" class="btn gold">Download PDF</a>
-          </article>
-
-          <article class="box">
-            <h3 style="color:var(--gold-bright);margin-top:0;">📖 Field Manual</h3>
-            <p class="muted">Operating guide for tribes, builders, merchants, and members.</p>
-            <a href="docs/7TRB_Field_Manual.pdf" target="_blank" rel="noopener" class="btn gold">Download PDF</a>
-          </article>
-
-          <article class="box">
-            <h3 style="color:var(--gold-bright);margin-top:0;">💰 Liquidity Guide</h3>
-            <p class="muted">Guide to trading, liquidity, and DEX integration.</p>
-            <a href="docs/7TRB_Liquidity_Guide.pdf" target="_blank" rel="noopener" class="btn gold">Download PDF</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ON-CHAIN VERIFICATION -->
-    <section class="section" id="verification">
-      <div class="wrap">
-        <h2 class="title">On-Chain Verification</h2>
-
-        <div class="box">
-          <h3 style="color:var(--gold-bright);margin-top:0;">Verify Everything On-Chain</h3>
-
-          <p class="muted">
-            7TRB lives on Alkebuleum Mainnet. Every transaction, every balance, every governance action is recorded on the blockchain and publicly verifiable.
-          </p>
-
-          <div class="divider"></div>
-
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div>
-              <h4 style="color:var(--gold-bright);">View 7TRB Contract</h4>
-              <p class="muted">Check the token contract, holder balances, and transaction history.</p>
-              <a href="https://explorer.alkebuleum.com/address/0xdf7ce67dB19142672c4193d969cdD9975A5A6038" target="_blank" rel="noopener" class="btn gold">Open Explorer</a>
+        <h2 class="section-title">Official Documents</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Whitepaper</h3>
+            <p>Complete technical and economic overview of 7TRB.</p>
+            <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <span class="status status-live">Current</span>
             </div>
-
-            <div>
-              <h4 style="color:var(--gold-bright);">Trade on JollofSwap</h4>
-              <p class="muted">Swap 7TRB with other tokens on the decentralized exchange.</p>
-              <a href="https://jollofswap.com" target="_blank" rel="noopener" class="btn gold">Open JollofSwap</a>
+            <a href="docs/7TRB-Whitepaper.pdf" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:16px">Download PDF</a>
+          </div>
+          <div class="card">
+            <h3>Tokenomics</h3>
+            <p>Detailed breakdown of token distribution and economics.</p>
+            <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <span class="status status-live">Current</span>
             </div>
-
-            <div>
-              <h4 style="color:var(--gold-bright);">View Dashboard</h4>
-              <p class="muted">See real-time metrics: holders, active wallets, treasury, merchants.</p>
-              <a href="dashboard.html" class="btn gold">Open Dashboard</a>
+            <a href="docs/7TRB-Tokenomics.pdf" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:16px">Download PDF</a>
+          </div>
+          <div class="card">
+            <h3>Field Manual</h3>
+            <p>Operating guide for tribes, builders, merchants, and members.</p>
+            <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <span class="status status-live">Current</span>
             </div>
+            <a href="docs/7TRB_Field_Manual.pdf" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:16px">Download PDF</a>
+          </div>
+          <div class="card">
+            <h3>Liquidity Guide</h3>
+            <p>Guide to trading, liquidity, and DEX integration.</p>
+            <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <span class="status status-live">Current</span>
+            </div>
+            <a href="docs/7TRB_Liquidity_Guide.pdf" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:16px">Download PDF</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CALL TO ACTION -->
-    <section class="section" id="cta">
+    <!-- 7. ON-CHAIN VERIFICATION -->
+    <section class="section" id="verification">
       <div class="wrap">
-        <h2 class="title">Questions?</h2>
+        <h2 class="section-title">On-Chain Verification</h2>
+        <p class="section-subtitle">7TRB lives on Alkebuleum Mainnet. Transactions and balances are publicly verifiable.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>View 7TRB Contract</h3>
+            <p>Token contract on Alkebuleum explorer.</p>
+            <a href="https://explorer.alkebuleum.com" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:12px">Open Explorer</a>
+          </div>
+          <div class="card">
+            <h3>View Token Transactions</h3>
+            <p>Transaction history on the Alkebuleum network.</p>
+            <a href="https://explorer.alkebuleum.com" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:12px">Open Explorer</a>
+          </div>
+          <div class="card">
+            <h3>View Holder Information</h3>
+            <p>Token holder data on the blockchain.</p>
+            <a href="https://explorer.alkebuleum.com" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:12px">Open Explorer</a>
+          </div>
+          <div class="card">
+            <h3>Open JollofSwap</h3>
+            <p>Decentralized exchange for 7TRB trading.</p>
+            <a href="https://jollofswap.com" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:12px">Open JollofSwap</a>
+          </div>
+          <div class="card">
+            <h3>View Treasury Wallet</h3>
+            <p style="color:var(--muted);font-style:italic">Public address pending verification.</p>
+          </div>
+          <div class="card">
+            <h3>View Liquidity Wallet</h3>
+            <p style="color:var(--muted);font-style:italic">Public address pending verification.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <div class="box" style="text-align:center;">
-          <p class="muted" style="max-width:800px;margin:0 auto 24px;">
-            7Tribes is built on transparency. All documents, contracts, and metrics are public. If you have questions, reach out to the community.
-          </p>
+    <!-- 8. LIQUIDITY AND EXIT INFORMATION -->
+    <section class="section" id="liquidity">
+      <div class="wrap">
+        <h2 class="section-title">Liquidity &amp; Token Access</h2>
+        <p class="section-subtitle">Current options for accessing, trading, or transferring 7TRB tokens.</p>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="card">
+            <h3>1. Decentralized Exchange</h3>
+            <p>7TRB is available for trading on JollofSwap. Verify the supported trading pair directly on the exchange before transacting.</p>
+            <a href="https://jollofswap.com" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:12px">Open JollofSwap</a>
+          </div>
+          <div class="card">
+            <h3>2. Peer-to-Peer Transfers</h3>
+            <p>Wallet-to-wallet transfers are available on the Alkebuleum network. Users can send 7TRB directly to any compatible wallet address.</p>
+          </div>
+          <div class="card">
+            <h3>3. Treasury Buyback Requests</h3>
+            <p style="color:var(--muted);font-style:italic">No active treasury buyback program is currently guaranteed.</p>
+          </div>
+          <div class="card">
+            <h3>4. Staking or Unstaking</h3>
+            <p style="color:var(--muted);font-style:italic">7TRB staking is not currently active.</p>
+          </div>
+        </div>
+        <div class="disclaimer" style="margin-top:24px">
+          7TRB is intended for ecosystem utility and community participation. Availability, liquidity, and redemption are not guaranteed. Users should verify all contract and exchange information before conducting transactions.
+        </div>
+      </div>
+    </section>
 
-          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-            <a href="https://t.me/SevenTribesCrypto" target="_blank" rel="noopener" class="btn gold">Join Telegram</a>
-            <a href="learn.html" class="btn ghost">Learn More</a>
-            <a href="index.html" class="btn ghost">Back to Home</a>
+    <!-- 9. QUESTIONS AND COMMUNITY CONTACT -->
+    <section class="section" id="questions">
+      <div class="wrap">
+        <h2 class="section-title">Questions?</h2>
+        <div class="card" style="text-align:center">
+          <p class="muted" style="max-width:600px;margin:0 auto 24px;">7Tribes is built on transparency. All documents, contracts, and metrics are public. If you have questions, reach out to the community.</p>
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:320px;margin:0 auto">
+            <a href="https://t.me/SevenTribesCrypto" target="_blank" rel="noopener" class="btn btn-gold">Join Telegram</a>
+            <a href="learn.html" class="btn btn-ghost">Learn More</a>
+            <a href="index.html" class="btn btn-ghost">Back to Home</a>
           </div>
         </div>
       </div>
@@ -798,14 +769,14 @@
 
   </main>
 
-  <footer class="bg-footer-texture">
-    <div class="wrap" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <img src="images/7trb_symbol.png" alt="7TRB small" style="width:42px;height:42px;border-radius:50%;" />
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="images/7trb_symbol.png" alt="7TRB">
         <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
       </div>
-
-      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="learn.html">Learn</a>
         <a href="https://loop.7trb.com">Loop</a>
@@ -814,47 +785,37 @@
         <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
       </div>
     </div>
-        <span class="muted" style="margin-left:20px;" id="visitor-count">Visitors: 0</span>
+    <span class="muted" style="display:block;text-align:center;margin-top:12px;font-size:13px" id="visitor-count">Visitors: 0</span>
   </footer>
 
-  <button id="toTop" aria-label="Back to top"></button>
+  <!-- BACK TO TOP -->
+  <button id="toTop" aria-label="Back to top">↑</button>
 
   <script>
+    // Smooth scroll for anchor links
     document.addEventListener('click', e => {
       const a = e.target.closest('a[href^="#"]');
       if(!a) return;
-
-      const id = a.getAttribute('href');
-      const el = document.querySelector(id);
-
-      if(el){
-        e.preventDefault();
-        el.scrollIntoView({behavior:'smooth', block:'start'});
-      }
+      const el = document.querySelector(a.getAttribute('href'));
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'})}
     });
-
+    // Back to top
     const toTop = document.getElementById('toTop');
-
     window.addEventListener('scroll', () => {
-      if(window.scrollY > 400) toTop.classList.add('show');
-      else toTop.classList.remove('show');
+      toTop.classList.toggle('show', window.scrollY > 400);
     });
-
-    toTop.addEventListener('click', () => {
-      window.scrollTo({top:0, behavior:'smooth'});
-    });
+    toTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
   </script>
-<script>
+  <script>
     // Visitor counter
-    (function() {
+    (function(){
       const count = localStorage.getItem("7trb_visits") || "0";
       const newCount = parseInt(count) + 1;
       localStorage.setItem("7trb_visits", newCount.toString());
       const elem = document.getElementById("visitor-count");
-      if (elem) elem.textContent = "Visitors: " + newCount.toLocaleString();
+      if(elem) elem.textContent = "Visitors: " + newCount.toLocaleString();
     })();
-</script>
-
-<script src="js/nav.js"></script>
+  </script>
+  <script src="js/nav.js"></script>
 </body>
 </html>
