@@ -285,7 +285,7 @@ body.menu-open {
   pointer-events: none;
 }
 
-.hero-banner > *, .hero > *, .banner-text, .hero-content {
+.hero-banner > *:not(.hero-bg):not(.scroll-indicator), .hero > *:not(.hero-bg):not(.scroll-indicator), .banner-text, .hero-content {
   position: relative;
   z-index: 2;
 }
@@ -366,7 +366,7 @@ input[type="submit"] {
   [class*="btn"]:not(.menu-toggle):not(.close-btn),
   input[type="submit"] {
     display: block;
-    width: calc(100% - 32px);
+    width: 100%;
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
@@ -380,7 +380,7 @@ input[type="submit"] {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    align-items: stretch;
+    align-items: center;
     width: 100%;
   }
   .hero-actions .btn, .btn-group .btn {

@@ -314,7 +314,7 @@
       margin:0;
     }
 
-    .hero-bg{
+    .hero .hero-bg{
       position:absolute;
       inset:0;
       z-index:0;
@@ -337,7 +337,7 @@
       width:100%;
       max-width:1200px;
       margin:0 auto;
-      padding:60px 20px 40px;
+      padding:80px 24px 40px;
       box-sizing:border-box;
     }
 
@@ -1102,7 +1102,7 @@
       inset:0;
       z-index:1;
     }
-    .bg-section > * {
+    .bg-section > *:not(.hero-bg):not(.scroll-indicator) {
       position:relative;
       z-index:2;
     }
@@ -1317,110 +1317,7 @@
           from{stroke-dasharray:200;stroke-dashoffset:200}
           to{stroke-dasharray:200;stroke-dashoffset:0}
         }
-      
-    
-
-    
-
-  
-    
-
-  
-    
-      /* Header spacing */
-      .top-nav, nav.top-nav, header > nav, .site-header > nav {
-        padding: 0;
-      }
-      .top-nav-inner, .header-inner, nav > div {
-        padding: 8px 16px !important;
-        flex-wrap: nowrap !important;
-      }
-      .nav-brand img, .brand img {
-        width: 32px !important;
-        height: 32px !important;
-      }
-      .nav-brand span, .brand b {
-        font-size: 13px !important;
-      }
-
-      /* Hero responsive */
-      .hero-banner, .hero, [class*="hero-section"] {
-        min-height: 240px !important;
-        height: auto !important;
-        padding: 0 !important;
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-      }
-      .hero-banner h1, .hero-headline, .banner-text h1 {
-        font-size: clamp(26px, 7vw, 40px) !important;
-        line-height: 1.15 !important;
-      }
-      .hero-banner p, .hero-subheadline, .banner-text p {
-        font-size: clamp(14px, 3.5vw, 18px) !important;
-        line-height: 1.5 !important;
-      }
-
-      /* Section spacing */
-      section, .section, [class*="section"] {
-        padding-top: 36px !important;
-        padding-bottom: 36px !important;
-      }
-
-      /* Full-width buttons */
-      .btn, button:not(.menu-toggle):not(.close-btn), [class*="btn"]:not(.menu-toggle):not(.close-btn), a.btn, input[type="submit"] {
-        display: block !important;
-        width: 100% !important;
-        max-width: 400px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        min-height: 48px !important;
-        padding: 14px 20px !important;
-        font-size: 14px !important;
-        text-align: center !important;
-        box-sizing: border-box !important;
-      }
-      .hero-actions, .btn-group, [class*="actions"] {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px !important;
-        align-items: center !important;
-        width: 100% !important;
-        max-width: 400px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-      }
-      .hero-actions .btn, .btn-group .btn {
-        width: 100% !important;
-        max-width: none !important;
-      }
-    }
-
-    @media (max-width:430px) {
-      .hero-banner, .hero {
-        padding: 0 !important;
-        min-height: 200px !important;
-        width: 100% !important;
-      }
-      .hero-content {
-        max-width: 100% !important;
-        padding: 60px 16px 40px !important;
-        margin: 0 auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-      }
-      .hero-banner h1, .banner-text h1, .hero-headline {
-        font-size: clamp(22px, 6.5vw, 32px) !important;
-      }
-      section, .section {
-        padding-top: 28px !important;
-        padding-bottom: 28px !important;
-      }
-    }
-
-  </style>
+      </style>
     </div>
 
     <div class="hero-content">
