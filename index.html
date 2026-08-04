@@ -1182,6 +1182,7 @@
 
   </style>
   <link rel="stylesheet" href="css/global-responsive.css">
+  <link rel="stylesheet" href="svg/icons.svg">
 </head>
 
 <body>
@@ -1453,24 +1454,68 @@
       </div>
     </section>
 
-    <!-- ORGANIZE SECTION -->
-    <section class="section organize-section bg-section bg-community" id="organize">
+        <!-- ORGANIZE SECTION -->
+    <section class="section organize-section" id="organize">
       <div class="wrap">
         <h2 class="section-title">Organize</h2>
         <p class="section-subtitle">People Must Connect Before They Can Build</p>
-
-        <div class="animation-flow">
-          <div class="flow-item">👥 Scattered Profiles</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">🤝 People Connect</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">🏘️ Community Forms</div>
+        
+        <!-- Animated Network Diagram -->
+        <div class="network-diagram">
+          <svg viewBox="0 0 600 400" class="network-svg">
+            <!-- Center hub -->
+            <circle cx="300" cy="200" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="hub-circle"/>
+            <text x="300" y="210" text-anchor="middle" fill="#ffdd7a" font-size="12" font-weight="bold">Community Hub</text>
+            
+            <!-- Node 1: Create Profile -->
+            <circle cx="100" cy="100" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
+            <line x1="150" y1="130" x2="270" y2="170" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+            
+            <!-- Node 2: Meet Members -->
+            <circle cx="500" cy="100" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
+            <line x1="450" y1="130" x2="330" y2="170" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+            
+            <!-- Node 3: Join Conversations -->
+            <circle cx="100" cy="300" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
+            <line x1="150" y1="270" x2="270" y2="230" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+            
+            <!-- Node 4: Find Your Tribe -->
+            <circle cx="500" cy="300" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
+            <line x1="450" y1="270" x2="330" y2="230" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+            
+            <!-- Node 5: Organize Together -->
+            <circle cx="300" cy="50" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
+            <line x1="300" y1="85" x2="300" y2="150" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+          </svg>
+          
+          <!-- Node labels -->
+          <div class="network-labels">
+            <div class="node-label" style="top:70px;left:80px">
+              <svg class="icon-small"><use href="#icon-people"/></svg>
+              <span>Create Profile</span>
+            </div>
+            <div class="node-label" style="top:70px;right:80px">
+              <svg class="icon-small"><use href="#icon-community"/></svg>
+              <span>Meet Members</span>
+            </div>
+            <div class="node-label" style="bottom:70px;left:80px">
+              <svg class="icon-small"><use href="#icon-networking"/></svg>
+              <span>Join Conversations</span>
+            </div>
+            <div class="node-label" style="bottom:70px;right:80px">
+              <svg class="icon-small"><use href="#icon-community"/></svg>
+              <span>Find Your Tribe</span>
+            </div>
+            <div class="node-label" style="top:10px;left:50%;transform:translateX(-50%)">
+              <svg class="icon-small"><use href="#icon-people"/></svg>
+              <span>Organize Together</span>
+            </div>
+          </div>
         </div>
-
-        <div class="section-description">
-          <strong>Loop</strong> is the community town hall where members create profiles, organize, discuss, post updates, join city conversations, and start participating in the 7Tribes ecosystem. Connection is the foundation. Without it, nothing else works.
-        </div>
-
+        
+        <p class="section-description">
+          Strong communities begin with relationships. Organization creates trust, leadership, and shared purpose.
+        </p>
         <div style="text-align:center;">
           <a href="https://loop.7trb.com" class="btn gold">Enter Loop</a>
         </div>
@@ -1478,27 +1523,73 @@
     </section>
 
     <!-- BUILD SECTION -->
-    <section class="section bg-section bg-marketplace" id="build">
+    <section class="section build-section" id="build">
       <div class="wrap">
         <h2 class="section-title">Build</h2>
         <p class="section-subtitle">Community Powers Businesses</p>
-
-        <div class="animation-flow">
-          <div class="flow-item">🏘️ Community</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">🏪 Businesses</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">🛍️ Storefronts</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">🚀 Projects</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">👷 Builders</div>
+        
+        <!-- 5-Stage Ecosystem Pathway -->
+        <div class="ecosystem-pathway">
+          <div class="pathway-stage">
+            <div class="stage-icon">
+              <svg class="icon-medium"><use href="#icon-community"/></svg>
+            </div>
+            <h3>Community</h3>
+            <p>Members organize around shared goals.</p>
+          </div>
+          
+          <div class="pathway-connector">
+            <svg class="icon-small"><use href="#icon-arrow-right"/></svg>
+          </div>
+          
+          <div class="pathway-stage">
+            <div class="stage-icon">
+              <svg class="icon-medium"><use href="#icon-builders"/></svg>
+            </div>
+            <h3>Businesses</h3>
+            <p>Entrepreneurs create products and services.</p>
+          </div>
+          
+          <div class="pathway-connector">
+            <svg class="icon-small"><use href="#icon-arrow-right"/></svg>
+          </div>
+          
+          <div class="pathway-stage">
+            <div class="stage-icon">
+              <svg class="icon-medium"><use href="#icon-storefront"/></svg>
+            </div>
+            <h3>Storefronts</h3>
+            <p>Businesses become discoverable.</p>
+          </div>
+          
+          <div class="pathway-connector">
+            <svg class="icon-small"><use href="#icon-arrow-right"/></svg>
+          </div>
+          
+          <div class="pathway-stage">
+            <div class="stage-icon">
+              <svg class="icon-medium"><use href="#icon-people"/></svg>
+            </div>
+            <h3>Customers</h3>
+            <p>People buy from trusted merchants.</p>
+          </div>
+          
+          <div class="pathway-connector">
+            <svg class="icon-small"><use href="#icon-arrow-right"/></svg>
+          </div>
+          
+          <div class="pathway-stage">
+            <div class="stage-icon">
+              <svg class="icon-medium"><use href="#icon-projects"/></svg>
+            </div>
+            <h3>Projects</h3>
+            <p>Economic circulation funds growth.</p>
+          </div>
         </div>
-
-        <div class="section-description">
+        
+        <p class="section-description">
           <strong>Connect</strong> is the marketplace where merchants, creators, developers, and service providers exchange value using 7TRB. Build your business. Find your customers. Grow together.
-        </div>
-
+        </p>
         <div style="text-align:center;">
           <a href="https://connect.7trb.com" class="btn gold">Explore Connect</a>
         </div>
@@ -1506,98 +1597,295 @@
     </section>
 
     <!-- CIRCULATE SECTION -->
-    <section class="section bg-section bg-circulate" id="circulate">
+    <section class="section circulate-section" id="circulate">
       <div class="wrap">
         <h2 class="section-title">Circulate</h2>
         <p class="section-subtitle">Value Moves Through the Entire Ecosystem</p>
-
-        <div class="animation-flow">
-          <div class="flow-item">✨ Gold Energy</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">👥 Members</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">🏪 Businesses</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">👷 Builders</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">🎨 Creators</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">🏘️ Community</div>
+        
+        <!-- Circular Ecosystem Diagram -->
+        <div class="circular-diagram">
+          <svg viewBox="0 0 500 500" class="circle-svg">
+            <!-- Outer circle -->
+            <circle cx="250" cy="250" r="180" fill="none" stroke="#ffdd7a" stroke-width="1.5" opacity="0.3"/>
+            
+            <!-- Center 7TRB symbol -->
+            <circle cx="250" cy="250" r="40" fill="none" stroke="#ffdd7a" stroke-width="2"/>
+            <text x="250" y="260" text-anchor="middle" fill="#ffdd7a" font-size="14" font-weight="bold">7TRB</text>
+            
+            <!-- Animated energy flow (dashed circle) -->
+            <circle cx="250" cy="250" r="160" fill="none" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="8,4" class="energy-flow" opacity="0.6"/>
+            
+            <!-- Nodes around circle -->
+            <g class="circulation-node" style="transform:rotate(0deg);transform-origin:250px 250px">
+              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Members</text>
+            </g>
+            
+            <g class="circulation-node" style="transform:rotate(72deg);transform-origin:250px 250px">
+              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Businesses</text>
+            </g>
+            
+            <g class="circulation-node" style="transform:rotate(144deg);transform-origin:250px 250px">
+              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Builders</text>
+            </g>
+            
+            <g class="circulation-node" style="transform:rotate(216deg);transform-origin:250px 250px">
+              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Creators</text>
+            </g>
+            
+            <g class="circulation-node" style="transform:rotate(288deg);transform-origin:250px 250px">
+              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Community</text>
+            </g>
+          </svg>
         </div>
-
-        <div class="section-description">
+        
+        <p class="section-description">
+          Every purchase, referral, and collaboration strengthens the community by keeping value moving.
+        </p>
+        <p class="section-description">
           <strong>7TRB</strong> supports participation, referrals, rewards, and merchant benefits. Every transaction strengthens the network. Every purchase builds community wealth. This is circulation in action.
-        </div>
-
-        <div style="text-align:center;">
-          <a href="learn.html" class="btn gold">Learn About 7TRB</a>
-        </div>
+        </p>
       </div>
     </section>
 
-    <!-- INTERACTIVE ECOSYSTEM MAP -->
-    <section class="section ecosystem-map" id="ecosystem-map">
-      <div class="wrap">
-        <h2 class="section-title">The 7Tribes Ecosystem</h2>
-        <p class="section-subtitle">Click each layer to explore</p>
-
-        <div class="ecosystem-cards">
-          <div class="ecosystem-card" onclick="selectEcosystem(this, 0)">
-            <h3>7TRB.com</h3>
-            <p>Education Hub</p>
-            <div class="ecosystem-arrow">↓</div>
-          </div>
-
-          <div class="ecosystem-card" onclick="selectEcosystem(this, 1)">
-            <h3>Loop</h3>
-            <p>Community Town Hall</p>
-            <div class="ecosystem-details">
-              <p style="margin:0;font-size:.9rem;color:var(--muted);">Create profiles, organize, discuss, and build relationships.</p>
-              <a href="https://loop.7trb.com" class="btn gold" style="margin-top:12px;display:inline-block;font-size:.85rem;padding:8px 16px;">Enter Loop</a>
-            </div>
-            <div class="ecosystem-arrow">↓</div>
-          </div>
-
-          <div class="ecosystem-card" onclick="selectEcosystem(this, 2)">
-            <h3>Connect</h3>
-            <p>Marketplace & Commerce</p>
-            <div class="ecosystem-details">
-              <p style="margin:0;font-size:.9rem;color:var(--muted);">Exchange value, build storefronts, and grow businesses.</p>
-              <a href="https://connect.7trb.com" class="btn gold" style="margin-top:12px;display:inline-block;font-size:.85rem;padding:8px 16px;">Explore Connect</a>
-            </div>
-            <div class="ecosystem-arrow">↓</div>
-          </div>
-
-          <div class="ecosystem-card" onclick="selectEcosystem(this, 3)">
-            <h3>Nuru</h3>
-            <p>Wallet & Identity</p>
-            <div class="ecosystem-details">
-              <p style="margin:0;font-size:.9rem;color:var(--muted);">Secure identity, wallet, reputation, and rewards management.</p>
-              <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn gold" style="margin-top:12px;display:inline-block;font-size:.85rem;padding:8px 16px;">Download Nuru</a>
-            </div>
-            <div class="ecosystem-arrow">↓</div>
-          </div>
-
-          <div class="ecosystem-card" onclick="selectEcosystem(this, 4)">
-            <h3>Alkebuleum</h3>
-            <p>Blockchain Infrastructure</p>
-            <div class="ecosystem-details">
-              <p style="margin:0;font-size:.9rem;color:var(--muted);">Decentralized network powering all 7Tribes transactions.</p>
-            </div>
-            <div class="ecosystem-arrow">↓</div>
-          </div>
-
-          <div class="ecosystem-card" onclick="selectEcosystem(this, 5)">
-            <h3>7TRB Token</h3>
-            <p>Community Currency</p>
-            <div class="ecosystem-details">
-              <p style="margin:0;font-size:.9rem;color:var(--muted);">Utility token for participation, rewards, and circulation.</p>
-              <a href="transparency.html" class="btn gold" style="margin-top:12px;display:inline-block;font-size:.85rem;padding:8px 16px;">View Tokenomics</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <style>
+      /* === ORGANIZE SECTION === */
+      .organize-section {
+        position: relative;
+      }
+      
+      .network-diagram {
+        position: relative;
+        margin: 60px 0;
+        height: 400px;
+      }
+      
+      .network-svg {
+        width: 100%;
+        height: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        display: block;
+      }
+      
+      .hub-circle {
+        animation: pulse 2s ease-in-out infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { r: 50; opacity: 1; }
+        50% { r: 55; opacity: 0.7; }
+      }
+      
+      .network-node {
+        animation: float 3s ease-in-out infinite;
+      }
+      
+      @keyframes float {
+        0%, 100% { r: 35; }
+        50% { r: 38; }
+      }
+      
+      .connector-line {
+        animation: dash 8s linear infinite;
+      }
+      
+      @keyframes dash {
+        0% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: -20; }
+      }
+      
+      .network-labels {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      
+      .node-label {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      
+      .icon-small {
+        width: 32px;
+        height: 32px;
+        color: var(--gold-bright);
+      }
+      
+      /* === BUILD SECTION === */
+      .ecosystem-pathway {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 60px 0;
+        overflow-x: auto;
+        padding: 20px 0;
+      }
+      
+      .pathway-stage {
+        flex: 0 0 auto;
+        min-width: 140px;
+        text-align: center;
+        padding: 20px 16px;
+        background: rgba(232, 184, 82, 0.05);
+        border: 1px solid rgba(232, 184, 82, 0.15);
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+      }
+      
+      .stage-icon {
+        margin-bottom: 12px;
+      }
+      
+      .icon-medium {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto;
+        color: var(--gold-bright);
+      }
+      
+      .pathway-stage h3 {
+        font-size: 15px;
+        color: var(--gold-bright);
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+      
+      .pathway-stage p {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      
+      .pathway-connector {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      /* === CIRCULATE SECTION === */
+      .circular-diagram {
+        position: relative;
+        margin: 60px 0;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .circle-svg {
+        width: 100%;
+        height: 100%;
+        max-width: 500px;
+        max-height: 500px;
+      }
+      
+      .energy-flow {
+        animation: rotate-flow 12s linear infinite;
+      }
+      
+      @keyframes rotate-flow {
+        0% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: -48; }
+      }
+      
+      .circulation-node {
+        animation: orbit 12s linear infinite;
+      }
+      
+      @keyframes orbit {
+        0% { transform: rotate(0deg) translateY(-160px) rotate(0deg); }
+        100% { transform: rotate(360deg) translateY(-160px) rotate(-360deg); }
+      }
+      
+      /* === RESPONSIVE === */
+      @media (max-width: 768px) {
+        .network-diagram {
+          height: 300px;
+        }
+        
+        .node-label {
+          font-size: 11px;
+        }
+        
+        .icon-small {
+          width: 24px;
+          height: 24px;
+        }
+        
+        .ecosystem-pathway {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 12px;
+        }
+        
+        .pathway-stage {
+          min-width: 120px;
+          padding: 16px 12px;
+        }
+        
+        .pathway-connector {
+          display: none;
+        }
+        
+        .pathway-stage:not(:last-child)::after {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, var(--gold), transparent);
+          margin-top: 12px;
+        }
+        
+        .circular-diagram {
+          height: 300px;
+        }
+      }
+      
+      @media (max-width: 430px) {
+        .network-diagram {
+          height: 250px;
+        }
+        
+        .node-label {
+          font-size: 10px;
+        }
+        
+        .icon-small {
+          width: 20px;
+          height: 20px;
+        }
+        
+        .pathway-stage {
+          min-width: 100px;
+          padding: 12px 10px;
+          font-size: 12px;
+        }
+        
+        .pathway-stage h3 {
+          font-size: 13px;
+        }
+        
+        .pathway-stage p {
+          font-size: 11px;
+        }
+        
+        .circular-diagram {
+          height: 250px;
+        }
+      }
+    </style>
 
     <!-- ROLE SELECTOR -->
     <section class="section role-selector" id="role-selector">
