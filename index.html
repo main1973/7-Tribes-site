@@ -423,183 +423,807 @@
       opacity:0.4;
     }
 
-    /* WHY COMMUNITIES STRUGGLE */
-    .struggle-section{
-      background:rgba(255,215,122,0.03);
-      border-top:1px solid rgba(255,215,122,.15);
-      border-bottom:1px solid rgba(255,215,122,.15);
+    /* ============================================================
+       PREMIUM DESIGN SYSTEM
+       ============================================================ */
+    .premium-title {
+      font-size: clamp(32px, 5vw, 52px);
+      color: var(--gold-bright);
+      text-align: center;
+      margin: 0 0 16px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+    .premium-subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: clamp(16px, 2.5vw, 20px);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+    .premium-description {
+      background: rgba(255,215,122,0.05);
+      border-left: 3px solid var(--gold-bright);
+      padding: 24px 28px;
+      border-radius: 8px;
+      margin: 40px auto 30px;
+      max-width: 700px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    .premium-cta {
+      text-align: center;
+      margin-top: 32px;
+    }
+    .premium-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .premium-btn::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255,215,122,0.4), transparent, rgba(255,215,122,0.2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+    .premium-btn:hover::after {
+      opacity: 1;
+    }
+    .premium-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(255,215,122,0.25);
+    }
+    .premium-conclusion {
+      text-align: center;
+      font-size: clamp(20px, 3vw, 28px);
+      color: var(--gold-bright);
+      font-weight: 700;
+      margin-top: 48px;
+      font-style: italic;
     }
 
-    .struggle-title{
-      font-size:clamp(28px,4vw,42px);
-      color:var(--gold-bright);
-      text-align:center;
-      margin:0 0 40px;
-      font-weight:900;
-      letter-spacing:.02em;
+    /* WHY COMMUNITIES STRUGGLE - PREMIUM */
+    .struggle-section {
+      padding: 80px 0;
+    }
+    .premium-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    .premium-card {
+      background: linear-gradient(135deg, rgba(255,215,122,0.04), rgba(255,215,122,0.01));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,215,122,0.2);
+      border-radius: 16px;
+      padding: 36px 28px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .premium-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,215,122,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .premium-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,215,122,0.5);
+      box-shadow: 0 20px 60px rgba(255,215,122,0.12), 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .premium-card:hover::before {
+      opacity: 1;
+    }
+    .premium-card-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 20px;
+      color: var(--gold-bright);
+    }
+    .premium-card-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+    .premium-card h3 {
+      color: var(--gold-bright);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+    .premium-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin: 0;
     }
 
-    .struggle-cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:20px;
-      margin-bottom:40px;
+    /* ORGANIZE - NETWORK VISUALIZATION */
+    .organize-section {
+      padding: 80px 0;
+    }
+    .network-viz {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+    .network-interactive {
+      width: 100%;
+      height: auto;
+    }
+    .conn-line {
+      stroke: rgba(255,215,122,0.3);
+      stroke-width: 1.5;
+      stroke-dasharray: 6 4;
+      animation: dash-flow 3s linear infinite;
+    }
+    @keyframes dash-flow {
+      to { stroke-dashoffset: -20; }
+    }
+    .center-hub {
+      animation: hub-breathe 3s ease-in-out infinite;
+    }
+    @keyframes hub-breathe {
+      0%, 100% { r: 36; }
+      50% { r: 38; }
+    }
+    .hub-pulse {
+      animation: hub-pulse-anim 3s ease-in-out infinite;
+    }
+    @keyframes hub-pulse-anim {
+      0%, 100% { opacity: 0.4; r: 60; }
+      50% { opacity: 0.7; r: 65; }
+    }
+    .network-node {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .network-node:hover circle {
+      fill: rgba(255,215,122,0.2);
+      stroke: rgba(255,215,122,0.9);
+    }
+    .network-tooltip {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20,15,8,0.95);
+      border: 1px solid rgba(255,215,122,0.4);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      max-width: 280px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+    .network-tooltip.visible {
+      opacity: 1;
     }
 
-    .struggle-card{
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:28px;
-      border:1px solid rgba(255,215,122,0.4);
-      cursor:pointer;
-      transition:all .3s ease;
-      position:relative;
-      overflow:hidden;
+    /* BUILD - PREMIUM CARDS */
+    .build-section {
+      padding: 80px 0;
+    }
+    .build-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .build-card {
+      background: linear-gradient(135deg, rgba(255,215,122,0.04), rgba(255,215,122,0.01));
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,215,122,0.15);
+      border-radius: 14px;
+      padding: 28px 22px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      text-align: center;
+    }
+    .build-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,215,122,0.5);
+      box-shadow: 0 16px 48px rgba(255,215,122,0.1);
+    }
+    .build-card-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      color: var(--gold-bright);
+    }
+    .build-card-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+    .build-card h3 {
+      color: var(--gold-bright);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    .build-card p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin: 0 0 12px;
+    }
+    .build-card-arrow {
+      color: var(--gold-bright);
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+    }
+    .build-card:hover .build-card-arrow {
+      opacity: 1;
+      transform: translateX(4px);
     }
 
-    .struggle-card:hover{
-      transform:translateY(-4px);
-      border-color:rgba(255,215,122,0.7);
-      box-shadow:0 12px 40px rgba(255,215,122,.15);
+    /* CIRCULATE - ORBITAL ANIMATION */
+    .circulate-section {
+      padding: 80px 0;
+    }
+    .orbit-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1;
+      margin: 0 auto 40px;
+    }
+    .orbit-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+    .orbit-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+    }
+    .orbit-pulse {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,122,0.3), transparent);
+      animation: orbit-pulse-anim 2.5s ease-in-out infinite;
+      z-index: 1;
+    }
+    @keyframes orbit-pulse-anim {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+      50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.2; }
+    }
+    .orbit-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .orbit-energy {
+      animation: orbit-spin 8s linear infinite;
+      transform-origin: center;
+    }
+    @keyframes orbit-spin {
+      to { transform: rotate(360deg); }
+    }
+    .orbit-ring {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+    .orbit-ring-1 {
+      animation: orbit-rotate-1 30s linear infinite;
+    }
+    .orbit-ring-2 {
+      animation: orbit-rotate-2 40s linear infinite reverse;
+    }
+    @keyframes orbit-rotate-1 {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes orbit-rotate-2 {
+      to { transform: rotate(360deg); }
+    }
+    .orbit-node {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,215,122,0.08);
+      border: 1px solid rgba(255,215,122,0.4);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    .orbit-node span {
+      font-size: 0.65rem;
+      color: var(--gold-bright);
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .orbit-ring-1 .orbit-node:nth-child(1) { top: 5%; left: 50%; transform: translateX(-50%); }
+    .orbit-ring-1 .orbit-node:nth-child(2) { top: 50%; right: 5%; transform: translateY(-50%); }
+    .orbit-ring-1 .orbit-node:nth-child(3) { bottom: 5%; left: 50%; transform: translateX(-50%); }
+    .orbit-ring-1 .orbit-node:nth-child(4) { top: 50%; left: 5%; transform: translateY(-50%); }
+    .orbit-ring-2 .orbit-node:nth-child(1) { top: 15%; left: 15%; }
+    .orbit-ring-2 .orbit-node:nth-child(2) { top: 15%; right: 15%; }
+    .orbit-ring-2 .orbit-node:nth-child(3) { bottom: 15%; right: 15%; }
+    .orbit-ring-2 .orbit-node:nth-child(4) { bottom: 15%; left: 15%; }
+    .orbit-node:hover {
+      background: rgba(255,215,122,0.2);
+      border-color: rgba(255,215,122,0.8);
+      box-shadow: 0 0 20px rgba(255,215,122,0.3);
+      transform: scale(1.1);
+    }
+    /* Counter-rotate text so it stays readable */
+    .orbit-ring-1 .orbit-node span {
+      animation: orbit-counter-1 30s linear infinite reverse;
+    }
+    .orbit-ring-2 .orbit-node span {
+      animation: orbit-counter-2 40s linear infinite;
+    }
+    @keyframes orbit-counter-1 { to { transform: rotate(-360deg); } }
+    @keyframes orbit-counter-2 { to { transform: rotate(-360deg); } }
+
+    /* ECOSYSTEM MAP */
+    .ecosystem-map-section {
+      padding: 80px 0;
+    }
+    .eco-map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .eco-map-card {
+      background: rgba(255,215,122,0.03);
+      border: 1px solid rgba(255,215,122,0.15);
+      border-radius: 14px;
+      padding: 24px 18px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .eco-map-card.active, .eco-map-card:hover {
+      border-color: rgba(255,215,122,0.6);
+      background: rgba(255,215,122,0.06);
+      box-shadow: 0 8px 32px rgba(255,215,122,0.1);
+      transform: translateY(-3px);
+    }
+    .eco-map-icon {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 12px;
+      color: var(--gold-bright);
+    }
+    .eco-map-icon svg, .eco-map-icon img {
+      width: 100%;
+      height: 100%;
+    }
+    .eco-map-card h3 {
+      color: var(--gold-bright);
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+    .eco-map-card p {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin: 0 0 12px;
+      line-height: 1.5;
+    }
+    .eco-map-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold-bright);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .eco-map-card.active .eco-map-link, .eco-map-card:hover .eco-map-link {
+      opacity: 1;
     }
 
-    .struggle-card h3{
-      margin:0 0 12px;
-      color:var(--gold-bright);
-      font-size:1.3rem;
+    /* ROLE SELECTOR - PREMIUM */
+    .role-section {
+      padding: 80px 0;
+    }
+    .role-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .role-card {
+      background: rgba(255,215,122,0.03);
+      border: 1px solid rgba(255,215,122,0.12);
+      border-radius: 14px;
+      padding: 24px 16px;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+    }
+    .role-card:hover {
+      border-color: rgba(255,215,122,0.5);
+      background: rgba(255,215,122,0.06);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(255,215,122,0.1);
+    }
+    .role-card-icon {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 12px;
+      color: var(--gold-bright);
+    }
+    .role-card-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+    .role-card h3 {
+      color: var(--gold-bright);
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    .role-card p {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      margin: 0;
     }
 
-    .struggle-card p{
-      color:var(--muted);
-      margin:0;
-      font-size:.95rem;
+    /* BLUEPRINT SECTION */
+    .blueprint-section {
+      padding: 80px 0;
+    }
+    .blueprint-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    @media (max-width: 768px) {
+      .blueprint-showcase {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+    .blueprint-book {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .book-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255,215,122,0.2), transparent);
+      border-radius: 50%;
+      animation: book-float-glow 4s ease-in-out infinite;
+    }
+    @keyframes book-float-glow {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.8; transform: translate(-50%, -52%) scale(1.05); }
+    }
+    .book-visual {
+      position: relative;
+      z-index: 2;
+      animation: book-float 4s ease-in-out infinite;
+    }
+    @keyframes book-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .book-cover {
+      width: 160px;
+      height: 220px;
+      background: linear-gradient(135deg, #1a1208, #2a1f10);
+      border: 2px solid rgba(255,215,122,0.4);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(255,215,122,0.1);
+    }
+    .book-title-text {
+      color: var(--gold-bright);
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .blueprint-chapters {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .chapter-card {
+      background: rgba(255,215,122,0.04);
+      border: 1px solid rgba(255,215,122,0.15);
+      border-radius: 10px;
+      padding: 16px 20px;
+      transition: all 0.3s ease;
+    }
+    .chapter-card:hover {
+      border-color: rgba(255,215,122,0.4);
+      background: rgba(255,215,122,0.06);
+    }
+    .chapter-num {
+      font-size: 0.75rem;
+      color: rgba(255,215,122,0.5);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+    .chapter-card h4 {
+      color: var(--gold-bright);
+      font-size: 1rem;
+      margin: 4px 0;
+    }
+    .chapter-card p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .blueprint-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    .struggle-animation{
-      margin-top:20px;
-      padding:16px;
-      background:rgba(255,215,122,0.05);
-      border-radius:8px;
-      font-size:.9rem;
-      color:var(--muted);
-      display:none;
-      animation:slideIn .4s ease-out;
+    /* SIMULATOR - DASHBOARD */
+    .simulator-section {
+      padding: 80px 0;
+    }
+    .sim-dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255,215,122,0.02);
+      border: 1px solid rgba(255,215,122,0.15);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    @media (max-width: 768px) {
+      .sim-dashboard {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+    }
+    .sim-slider-group {
+      margin-bottom: 20px;
+    }
+    .sim-slider-group label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+    .sim-slider-group label span {
+      color: var(--gold-bright);
+      font-weight: 700;
+    }
+    .sim-slider-group input[type="range"] {
+      width: 100%;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255,215,122,0.2);
+      border-radius: 2px;
+      outline: none;
+    }
+    .sim-slider-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(255,215,122,0.4);
+    }
+    .sim-results {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+    }
+    .sim-stat {
+      text-align: center;
+      padding: 16px;
+      background: rgba(255,215,122,0.04);
+      border-radius: 10px;
+      border: 1px solid rgba(255,215,122,0.1);
+    }
+    .sim-stat-value {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--gold-bright);
+      margin-bottom: 4px;
+    }
+    .sim-stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .struggle-card.active .struggle-animation{
-      display:block;
+    /* DETROIT SECTION */
+    .detroit-section {
+      padding: 80px 0;
+    }
+    .detroit-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+    .detroit-stat {
+      text-align: center;
+      padding: 24px 16px;
+      background: rgba(255,215,122,0.04);
+      border: 1px solid rgba(255,215,122,0.15);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .detroit-stat:hover {
+      border-color: rgba(255,215,122,0.4);
+      transform: translateY(-2px);
+    }
+    .detroit-stat-value {
+      display: block;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold-bright);
+      margin-bottom: 4px;
+    }
+    .detroit-stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    @keyframes slideIn{
-      from{opacity:0;transform:translateY(-10px)}
-      to{opacity:1;transform:translateY(0)}
+    /* CLOSING SECTION */
+    .closing-section {
+      padding: 100px 0 80px;
+    }
+    .closing-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    .struggle-conclusion{
-      text-align:center;
-      font-size:clamp(20px,3vw,28px);
-      color:var(--gold-bright);
-      font-weight:900;
-      margin-top:40px;
-      animation:fadeInUp 1s ease-out;
+    /* PREMIUM FOOTER */
+    .premium-footer {
+      background: linear-gradient(180deg, rgba(20,15,8,0.95), rgba(5,3,1,0.98));
+      border-top: 1px solid rgba(255,215,122,0.2);
+      padding: 60px 0 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+    }
+    @media (max-width: 480px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .footer-brand {
+      max-width: 300px;
+    }
+    .footer-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-bottom: 16px;
+    }
+    .footer-mission {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .footer-col h4 {
+      color: var(--gold-bright);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 0 0 16px;
+    }
+    .footer-col a {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      transition: color 0.2s ease;
+    }
+    .footer-col a:hover {
+      color: var(--gold-bright);
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,215,122,0.1);
+      color: var(--muted);
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    /* ORGANIZE SECTION */
-    .organize-section{
-      position:relative;
+    /* GLOBAL ANIMATIONS */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    [data-animate].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    [data-delay="80"] { transition-delay: 80ms; }
+    [data-delay="100"] { transition-delay: 100ms; }
+    [data-delay="160"] { transition-delay: 160ms; }
+    [data-delay="200"] { transition-delay: 200ms; }
+    [data-delay="240"] { transition-delay: 240ms; }
+    [data-delay="320"] { transition-delay: 320ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-animate] { opacity: 1; transform: none; transition: none; }
+      .orbit-ring-1, .orbit-ring-2, .orbit-energy { animation: none; }
+      .conn-line { animation: none; }
+      .hub-pulse, .center-hub { animation: none; }
+      .book-visual, .book-glow { animation: none; }
+      .orbit-pulse { animation: none; }
     }
 
-    .section-title{
-      font-size:clamp(32px,5vw,48px);
-      color:var(--gold-bright);
-      text-align:center;
-      margin:0 0 30px;
-      font-weight:900;
-      letter-spacing:.02em;
-    }
-
-    .section-subtitle{
-      text-align:center;
-      color:var(--muted);
-      font-size:1.1rem;
-      max-width:700px;
-      margin:0 auto 40px;
-    }
-
-    .animation-flow{
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:40px 20px;
-      border:1px solid rgba(255,215,122,0.4);
-      text-align:center;
-      margin-bottom:30px;
-      min-height:300px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .flow-item{
-      font-size:1.2rem;
-      color:var(--gold-bright);
-      font-weight:800;
-      margin:0 20px;
-      animation:fadeInScale .6s ease-out;
-    }
-
-    .flow-arrow{
-      font-size:1.5rem;
-      color:var(--gold-bright);
-      margin:0 10px;
-      animation:pulse-arrow 1.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse-arrow{
-      0%,100%{opacity:.5}
-      50%{opacity:1}
-    }
-
-    .section-description{
-      background:rgba(255,215,122,0.08);
-      border-left:3px solid var(--gold-bright);
-      padding:24px;
-      border-radius:8px;
-      margin-bottom:30px;
-      color:var(--muted);
-      line-height:1.8;
-    }
-
-    /* FOOTER */
-    footer{
-      position:relative;
-      background:radial-gradient(circle at center, rgba(255,215,122,.2), #090604 78%);
-      border-top:1px solid rgba(255,215,122,.35);
-      box-shadow:0 -6px 30px rgba(0,0,0,.7);
-      padding:40px 0 20px;
-    }
-
-    footer .wrap{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-
-    .footer-links{
-      display:flex;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-
-    .footer-links a{
-      font-size:.9rem;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-    }
-
-    
     /* Hamburger at 992px */
     @media (max-width:992px){
       .main-nav{display:none !important}
@@ -615,479 +1239,6 @@
       .struggle-cards{grid-template-columns:1fr}
       .main-nav{justify-content:flex-start;flex-direction:column;gap:8px}
     }
-
-    /* ECOSYSTEM MAP */
-    .ecosystem-map {
-      background:rgba(255,215,122,0.02);
-      border-top:1px solid rgba(255,215,122,.15);
-      border-bottom:1px solid rgba(255,215,122,.15);
-    }
-
-    .ecosystem-cards {
-      display:grid;
-      grid-template-columns:1fr;
-      gap:16px;
-      max-width:600px;
-      margin:0 auto;
-    }
-
-    .ecosystem-card {
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:24px;
-      border:2px solid rgba(255,215,122,0.3);
-      cursor:pointer;
-      transition:all .3s ease;
-      text-align:center;
-    }
-
-    .ecosystem-card:hover {
-      transform:scale(1.02);
-      border-color:var(--gold-bright);
-      box-shadow:0 8px 30px rgba(255,215,122,.2);
-    }
-
-    .ecosystem-card.active {
-      border-color:var(--gold-bright);
-      background:linear-gradient(180deg, rgba(255,215,122,.1), rgba(255,215,122,.05));
-    }
-
-    .ecosystem-card h3 {
-      margin:0 0 8px;
-      color:var(--gold-bright);
-      font-size:1.2rem;
-    }
-
-    .ecosystem-card p {
-      color:var(--muted);
-      margin:0 0 12px;
-      font-size:.95rem;
-    }
-
-    .ecosystem-arrow {
-      text-align:center;
-      font-size:1.5rem;
-      color:var(--gold-bright);
-      margin:8px 0;
-      animation:pulse-arrow 1.5s ease-in-out infinite;
-    }
-
-    .ecosystem-details {
-      display:none;
-      margin-top:16px;
-      padding-top:16px;
-      border-top:1px solid rgba(255,215,122,.2);
-      animation:slideIn .3s ease-out;
-    }
-
-    .ecosystem-card.active .ecosystem-details {
-      display:block;
-    }
-
-    /* ROLE SELECTOR */
-    .role-selector {
-      background:rgba(255,215,122,0.02);
-    }
-
-    .role-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-      gap:12px;
-      margin-bottom:30px;
-    }
-
-    .role-btn {
-      padding:16px 12px;
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border:2px solid rgba(255,215,122,0.3);
-      border-radius:var(--radius-lg);
-      color:var(--ink);
-      cursor:pointer;
-      font-weight:700;
-      transition:all .3s ease;
-      font-size:.9rem;
-    }
-
-    .role-btn:hover {
-      border-color:var(--gold-bright);
-      transform:translateY(-2px);
-    }
-
-    .role-btn.active {
-      background:linear-gradient(90deg,var(--gold),var(--gold-2));
-      color:#130b03;
-      border-color:var(--gold-bright);
-    }
-
-    .role-journey {
-      display:none;
-      background:rgba(255,215,122,0.08);
-      border-left:3px solid var(--gold-bright);
-      padding:24px;
-      border-radius:8px;
-      animation:slideIn .3s ease-out;
-    }
-
-    .role-journey.active {
-      display:block;
-    }
-
-    .role-journey h4 {
-      margin:0 0 12px;
-      color:var(--gold-bright);
-    }
-
-    .role-journey p {
-      margin:0 0 12px;
-      color:var(--muted);
-    }
-
-    /* BLUEPRINT SECTION */
-    .blueprint-section {
-      background:rgba(255,215,122,0.02);
-      border-top:1px solid rgba(255,215,122,.15);
-    }
-
-    .blueprint-cards {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:20px;
-      margin:30px 0;
-    }
-
-    .blueprint-card {
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:28px;
-      border:1px solid rgba(255,215,122,0.4);
-      text-align:center;
-      transition:all .3s ease;
-    }
-
-    .blueprint-card:hover {
-      transform:translateY(-4px);
-      box-shadow:0 12px 40px rgba(255,215,122,.15);
-    }
-
-    .blueprint-card h3 {
-      margin:0 0 12px;
-      color:var(--gold-bright);
-      font-size:1.4rem;
-    }
-
-    .blueprint-card p {
-      color:var(--muted);
-      margin:0;
-      font-size:.95rem;
-    }
-
-    /* SIMULATOR */
-    .simulator-section {
-      background:rgba(255,215,122,0.02);
-    }
-
-    .simulator-controls {
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:28px;
-      border:1px solid rgba(255,215,122,0.4);
-      margin-bottom:30px;
-    }
-
-    .slider-group {
-      margin-bottom:20px;
-    }
-
-    .slider-group label {
-      display:block;
-      color:var(--gold-bright);
-      font-weight:700;
-      margin-bottom:8px;
-      font-size:.95rem;
-    }
-
-    .slider-group input[type="range"] {
-      width:100%;
-      height:6px;
-      border-radius:3px;
-      background:rgba(255,215,122,0.2);
-      outline:none;
-      -webkit-appearance:none;
-    }
-
-    .slider-group input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance:none;
-      appearance:none;
-      width:18px;
-      height:18px;
-      border-radius:50%;
-      background:var(--gold-bright);
-      cursor:pointer;
-      box-shadow:0 0 10px rgba(255,215,122,.4);
-    }
-
-    .slider-group input[type="range"]::-moz-range-thumb {
-      width:18px;
-      height:18px;
-      border-radius:50%;
-      background:var(--gold-bright);
-      cursor:pointer;
-      border:none;
-      box-shadow:0 0 10px rgba(255,215,122,.4);
-    }
-
-    .slider-value {
-      display:inline-block;
-      color:var(--gold-bright);
-      font-weight:700;
-      margin-left:10px;
-    }
-
-    .simulator-results {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:16px;
-    }
-
-    .result-card {
-      background:rgba(255,215,122,0.08);
-      border-left:3px solid var(--gold-bright);
-      padding:16px;
-      border-radius:8px;
-      text-align:center;
-    }
-
-    .result-card h4 {
-      margin:0 0 8px;
-      color:var(--gold-bright);
-      font-size:1rem;
-    }
-
-    .result-value {
-      font-size:1.6rem;
-      color:var(--gold-bright);
-      font-weight:900;
-    }
-
-    /* DETROIT VISUALIZATION */
-    .detroit-section {
-      background:rgba(255,215,122,0.02);
-      border-top:1px solid rgba(255,215,122,.15);
-    }
-
-    .detroit-viz {
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:40px 20px;
-      border:1px solid rgba(255,215,122,0.4);
-      min-height:400px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .detroit-content {
-      text-align:center;
-      z-index:2;
-      position:relative;
-    }
-
-    .detroit-content h3 {
-      margin:0 0 12px;
-      color:var(--gold-bright);
-      font-size:1.4rem;
-    }
-
-    .detroit-content p {
-      color:var(--muted);
-      margin:0 0 20px;
-      max-width:500px;
-    }
-
-    .detroit-stats {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-      gap:12px;
-      margin-bottom:20px;
-    }
-
-    .detroit-stat {
-      background:rgba(255,215,122,0.1);
-      padding:12px;
-      border-radius:8px;
-      border:1px solid rgba(255,215,122,.2);
-    }
-
-    .detroit-stat-value {
-      font-size:1.4rem;
-      color:var(--gold-bright);
-      font-weight:900;
-    }
-
-    .detroit-stat-label {
-      font-size:.85rem;
-      color:var(--muted);
-      margin-top:4px;
-    }
-
-    @media (max-width:900px){
-      .blueprint-cards{grid-template-columns:1fr}
-      .role-grid{grid-template-columns:repeat(2,1fr)}
-      .detroit-stats{grid-template-columns:repeat(2,1fr)}
-    }
-
-    /* WHAT 7TRB UNLOCKS */
-    .unlocks-section {
-      background:rgba(255,215,122,0.02);
-      border-bottom:1px solid rgba(255,215,122,.15);
-    }
-
-    .unlocks-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:16px;
-    }
-
-    .unlock-card {
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:24px;
-      border:1px solid rgba(255,215,122,0.3);
-      text-align:center;
-      transition:all .3s ease;
-      cursor:pointer;
-    }
-
-    .unlock-card:hover {
-      transform:translateY(-4px);
-      border-color:var(--gold-bright);
-      box-shadow:0 8px 30px rgba(255,215,122,.15);
-    }
-
-    .unlock-card h3 {
-      margin:0 0 8px;
-      color:var(--gold-bright);
-      font-size:1.1rem;
-    }
-
-    .unlock-card p {
-      color:var(--muted);
-      margin:0;
-      font-size:.9rem;
-    }
-
-    /* POWERED BY ALKEBULEUM */
-    .infra-section {
-      background:rgba(255,215,122,0.02);
-    }
-
-    .infra-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:24px;
-      margin-bottom:40px;
-    }
-
-    .infra-card {
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius:var(--radius-lg);
-      padding:28px;
-      border:1px solid rgba(255,215,122,0.4);
-    }
-
-    .security-panel {
-      background:rgba(255,44,85,0.05);
-      border:1px solid rgba(254,44,85,0.3);
-      padding:20px;
-      border-radius:12px;
-      margin-top:20px;
-    }
-
-    .security-panel h4 {
-      margin:0 0 8px;
-      color:var(--pop);
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    /* ECOSYSTEM PREVIEW */
-    .preview-section {
-      background:rgba(255,215,122,0.02);
-      border-top:1px solid rgba(255,215,122,.15);
-    }
-
-    .preview-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:16px;
-    }
-
-    .preview-card {
-      background:rgba(255,215,122,0.05);
-      border-radius:12px;
-      padding:16px;
-      border:1px solid rgba(255,215,122,.1);
-    }
-
-    .preview-card h4 {
-      margin:0 0 12px;
-      color:var(--gold-bright);
-      font-size:.9rem;
-      text-transform:uppercase;
-      letter-spacing:.05em;
-    }
-
-    .preview-item {
-      font-size:.85rem;
-      color:var(--muted);
-      margin-bottom:8px;
-      padding-bottom:8px;
-      border-bottom:1px solid rgba(255,215,122,.05);
-    }
-
-    .preview-item:last-child {
-      border:none;
-      margin:0;
-      padding:0;
-    }
-
-    /* CLOSING SECTION */
-    .closing-section {
-      text-align:center;
-      padding:100px 0;
-      background:radial-gradient(circle at center, rgba(255,215,122,0.1), transparent 70%);
-    }
-
-    .closing-headline {
-      font-size:clamp(32px,6vw,54px);
-      color:var(--gold-bright);
-      font-weight:900;
-      margin:0 0 40px;
-      letter-spacing:.02em;
-    }
-
-    @media (max-width:900px){
-      .blueprint-cards{grid-template-columns:1fr}
-      .role-grid{grid-template-columns:repeat(2,1fr)}
-      .detroit-stats{grid-template-columns:repeat(2,1fr)}
-      .infra-grid{grid-template-columns:1fr}
-    }
-
-    @media (max-width:600px){
-      .hero-headline{font-size:36px}
-      .hero-subheadline{font-size:18px}
-      .section{padding:50px 0}
-      
-      .flow-item{font-size:1rem;margin:0 10px}
-      .role-grid{grid-template-columns:1fr}
-      .detroit-stats{grid-template-columns:1fr}
-      .preview-grid{grid-template-columns:1fr}
-      body.menu-open{overflow:hidden}
-    }
-
 
     /* BRANDED BACKGROUND IMAGES */
     .bg-section {
@@ -1344,147 +1495,112 @@
     <!-- WHY COMMUNITIES STRUGGLE -->
     <section class="section struggle-section" id="why-struggle">
       <div class="wrap">
-        <h2 class="struggle-title">Why Communities Struggle</h2>
-
-        <div class="struggle-cards">
-          <div class="struggle-card" onclick="toggleCard(this)">
+        <h2 class="premium-title">Why Communities Struggle</h2>
+        <div class="premium-cards-grid">
+          <div class="premium-card" data-animate="fade-up">
+            <div class="premium-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="16" cy="16" r="6"/>
+                <circle cx="32" cy="16" r="6"/>
+                <circle cx="24" cy="34" r="6"/>
+                <line x1="16" y1="22" x2="24" y2="28" stroke-dasharray="3 3" opacity="0.4"/>
+                <line x1="32" y1="22" x2="24" y2="28" stroke-dasharray="3 3" opacity="0.4"/>
+              </svg>
+            </div>
             <h3>Disconnected People</h3>
-            <p>Without connection, people can't collaborate or build together.</p>
-            <div class="struggle-animation">
-              <strong>Resident</strong> ↓<br>
-              <strong>No Network</strong> ↓<br>
-              <strong>Isolated Potential</strong>
-            </div>
+            <p>Without connection, people cannot collaborate, share resources, or build together. Isolation prevents collective power.</p>
           </div>
-
-          <div class="struggle-card" onclick="toggleCard(this)">
+          <div class="premium-card" data-animate="fade-up" data-delay="100">
+            <div class="premium-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="8" y="20" width="12" height="18" rx="2"/>
+                <rect x="28" y="14" width="12" height="24" rx="2"/>
+                <line x1="20" y1="30" x2="28" y2="26" stroke-dasharray="3 3" opacity="0.4"/>
+              </svg>
+            </div>
             <h3>Businesses Without Networks</h3>
-            <p>Local businesses struggle without a community ecosystem.</p>
-            <div class="struggle-animation">
-              <strong>Business</strong> ↓<br>
-              <strong>No Local Support</strong> ↓<br>
-              <strong>Limited Growth</strong>
-            </div>
+            <p>Local businesses struggle without a community ecosystem to support them. No network means no customers, no referrals, no growth.</p>
           </div>
-
-          <div class="struggle-card" onclick="toggleCard(this)">
-            <h3>Money Leaves Too Quickly</h3>
-            <p>Wealth flows out faster than it circulates locally.</p>
-            <div class="struggle-animation">
-              <strong>Resident</strong> ↓<br>
-              <strong>Large Corporation</strong> ↓<br>
-              <strong>Money Leaves Community</strong>
+          <div class="premium-card" data-animate="fade-up" data-delay="200">
+            <div class="premium-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="24" cy="24" r="16"/>
+                <path d="M24 8 L24 14 M24 34 L24 40" stroke-dasharray="2 2"/>
+                <path d="M16 24 C16 24 20 16 28 20 C36 24 32 32 24 32 C16 32 12 28 16 24" opacity="0.6"/>
+                <line x1="30" y1="30" x2="40" y2="40" stroke-width="2"/>
+              </svg>
             </div>
+            <h3>Money Leaves Too Quickly</h3>
+            <p>Wealth flows out of communities faster than it circulates locally. Without internal circulation, economies weaken from within.</p>
           </div>
         </div>
-
-        <div class="struggle-conclusion">There is another way.</div>
+        <p class="premium-conclusion" data-animate="fade-up">There is another way. Organized communities create stronger economies.</p>
       </div>
     </section>
 
-        <!-- ORGANIZE SECTION -->
+    <!-- ORGANIZE SECTION -->
     <section class="section organize-section" id="organize">
       <div class="wrap">
-        <h2 class="section-title">Organize</h2>
-        <p class="section-subtitle">People Must Connect Before They Can Build</p>
-        
-        <!-- Animated Network Diagram -->
-        <div class="network-diagram">
-          <svg viewBox="0 0 700 500" class="network-svg" preserveAspectRatio="xMidYMid meet">
+        <h2 class="premium-title" data-animate="fade-up">Organize</h2>
+        <p class="premium-subtitle" data-animate="fade-up">People Must Connect Before They Can Build</p>
+        <div class="network-viz" data-animate="fade-up">
+          <svg viewBox="0 0 600 400" class="network-interactive" preserveAspectRatio="xMidYMid meet">
             <defs>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
+              <filter id="node-glow">
+                <feGaussianBlur stdDeviation="4" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
+              <radialGradient id="hub-gradient" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(255,215,122,0.4)"/>
+                <stop offset="100%" stop-color="rgba(255,215,122,0)"/>
+              </radialGradient>
             </defs>
-            
+            <!-- Connection lines (animated) -->
+            <g class="connection-lines" opacity="0.6">
+              <line x1="300" y1="200" x2="150" y2="100" class="conn-line"/>
+              <line x1="300" y1="200" x2="450" y2="100" class="conn-line"/>
+              <line x1="300" y1="200" x2="120" y2="300" class="conn-line"/>
+              <line x1="300" y1="200" x2="480" y2="300" class="conn-line"/>
+              <line x1="300" y1="200" x2="300" y2="60" class="conn-line"/>
+            </g>
+            <!-- Center hub glow -->
+            <circle cx="300" cy="200" r="60" fill="url(#hub-gradient)" class="hub-pulse"/>
             <!-- Center hub -->
-            <circle cx="350" cy="250" r="60" fill="none" stroke="#ffdd7a" stroke-width="3" class="hub-circle" filter="url(#glow)"/>
-            <circle cx="350" cy="250" r="55" fill="rgba(255, 221, 122, 0.05)"/>
-            <text x="350" y="260" text-anchor="middle" fill="#ffdd7a" font-size="14" font-weight="bold">Community</text>
-            <text x="350" y="278" text-anchor="middle" fill="#ffdd7a" font-size="14" font-weight="bold">Hub</text>
-            
-            <!-- Animated connector lines (pulsing) -->
-            <line x1="170" y1="130" x2="310" y2="210" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
-            <line x1="530" y1="130" x2="390" y2="210" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
-            <line x1="170" y1="370" x2="310" y2="290" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
-            <line x1="530" y1="370" x2="390" y2="290" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
-            <line x1="350" y1="80" x2="350" y2="190" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
-            
-            <!-- Node 1: Create Profile (top-left) -->
-            <circle cx="150" cy="120" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
-            <circle cx="150" cy="120" r="48" fill="rgba(255, 221, 122, 0.08)"/>
-            <g class="node-icon">
-              <circle cx="150" cy="110" r="8" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <path d="M 140 130 Q 150 140 160 130" fill="none" stroke="#ffdd7a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="300" cy="200" r="36" fill="rgba(255,215,122,0.15)" stroke="rgba(255,215,122,0.8)" stroke-width="2" filter="url(#node-glow)" class="center-hub"/>
+            <text x="300" y="195" text-anchor="middle" fill="#FFD77A" font-size="11" font-weight="700">COMMUNITY</text>
+            <text x="300" y="210" text-anchor="middle" fill="#FFD77A" font-size="11" font-weight="700">HUB</text>
+            <!-- Outer nodes -->
+            <g class="network-node" data-label="Create your profile, share your skills, and become discoverable.">
+              <circle cx="150" cy="100" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
+              <text x="150" y="104" text-anchor="middle" fill="#FFD77A" font-size="9" font-weight="600">Create Profile</text>
             </g>
-            
-            <!-- Node 2: Meet Members (top-right) -->
-            <circle cx="550" cy="120" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
-            <circle cx="550" cy="120" r="48" fill="rgba(255, 221, 122, 0.08)"/>
-            <g class="node-icon">
-              <circle cx="540" cy="110" r="6" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <circle cx="560" cy="110" r="6" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <path d="M 540 125 L 560 125" stroke="#ffdd7a" stroke-width="1.5" stroke-linecap="round"/>
+            <g class="network-node" data-label="Discover members in your city and connect with like-minded people.">
+              <circle cx="450" cy="100" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
+              <text x="450" y="104" text-anchor="middle" fill="#FFD77A" font-size="9" font-weight="600">Meet Members</text>
             </g>
-            
-            <!-- Node 3: Join Conversations (bottom-left) -->
-            <circle cx="150" cy="380" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
-            <circle cx="150" cy="380" r="48" fill="rgba(255, 221, 122, 0.08)"/>
-            <g class="node-icon">
-              <rect x="138" y="368" width="24" height="18" fill="none" stroke="#ffdd7a" stroke-width="1.5" rx="2"/>
-              <line x1="142" y1="372" x2="154" y2="372" stroke="#ffdd7a" stroke-width="1"/>
-              <line x1="142" y1="376" x2="154" y2="376" stroke="#ffdd7a" stroke-width="1"/>
+            <g class="network-node" data-label="Join discussions, share ideas, and participate in community decisions.">
+              <circle cx="120" cy="300" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
+              <text x="120" y="296" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Join</text>
+              <text x="120" y="308" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Conversations</text>
             </g>
-            
-            <!-- Node 4: Find Your Tribe (bottom-right) -->
-            <circle cx="550" cy="380" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
-            <circle cx="550" cy="380" r="48" fill="rgba(255, 221, 122, 0.08)"/>
-            <g class="node-icon">
-              <circle cx="550" cy="375" r="8" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <path d="M 540 388 L 550 395 L 560 388" fill="none" stroke="#ffdd7a" stroke-width="1.5" stroke-linejoin="round"/>
+            <g class="network-node" data-label="Find your city, your community, your people. Build relationships.">
+              <circle cx="480" cy="300" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
+              <text x="480" y="296" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Find Your</text>
+              <text x="480" y="308" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Tribe</text>
             </g>
-            
-            <!-- Node 5: Organize Together (top-center) -->
-            <circle cx="350" cy="60" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
-            <circle cx="350" cy="60" r="48" fill="rgba(255, 221, 122, 0.08)"/>
-            <g class="node-icon">
-              <circle cx="345" cy="55" r="5" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <circle cx="355" cy="55" r="5" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <circle cx="350" cy="65" r="5" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <line x1="345" y1="58" x2="350" y2="62" stroke="#ffdd7a" stroke-width="1"/>
-              <line x1="355" y1="58" x2="350" y2="62" stroke="#ffdd7a" stroke-width="1"/>
+            <g class="network-node" data-label="Coordinate projects, events, and initiatives with your community.">
+              <circle cx="300" cy="60" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
+              <text x="300" y="56" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Organize</text>
+              <text x="300" y="68" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Together</text>
             </g>
           </svg>
-          
-          <!-- Node labels -->
-          <div class="network-labels">
-            <div class="node-label" style="top:100px;left:60px;animation:slideInLeft 0.8s ease-out 0.2s both">
-              <span>Create Profile</span>
-            </div>
-            <div class="node-label" style="top:100px;right:60px;animation:slideInRight 0.8s ease-out 0.3s both">
-              <span>Meet Members</span>
-            </div>
-            <div class="node-label" style="bottom:100px;left:60px;animation:slideInLeft 0.8s ease-out 0.4s both">
-              <span>Join Conversations</span>
-            </div>
-            <div class="node-label" style="bottom:100px;right:60px;animation:slideInRight 0.8s ease-out 0.5s both">
-              <span>Find Your Tribe</span>
-            </div>
-            <div class="node-label" style="top:-20px;left:50%;transform:translateX(-50%);animation:slideDown 0.8s ease-out 0.1s both">
-              <span>Organize Together</span>
-            </div>
-          </div>
+          <div class="network-tooltip" id="network-tooltip"></div>
         </div>
-        
-        <p class="section-description">
-          Strong communities begin with relationships. Organization creates trust, leadership, and shared purpose.
+        <p class="premium-description" data-animate="fade-up">
+          <strong>Loop</strong> is the community town hall where members create profiles, organize, discuss, post updates, join city conversations, and start participating in the 7Tribes ecosystem.
         </p>
-        <div style="text-align:center;">
-          <a href="https://loop.7trb.com" class="btn gold">Enter Loop</a>
+        <div class="premium-cta" data-animate="fade-up">
+          <a href="https://loop.7trb.com" class="btn gold premium-btn">Enter Loop</a>
         </div>
       </div>
     </section>
@@ -1492,73 +1608,81 @@
     <!-- BUILD SECTION -->
     <section class="section build-section" id="build">
       <div class="wrap">
-        <h2 class="section-title">Build</h2>
-        <p class="section-subtitle">Community Powers Businesses</p>
-        
-        <!-- 5-Stage Ecosystem Pathway -->
-        <div class="ecosystem-pathway">
-          <div class="pathway-stage">
-            <div class="stage-icon">
-              <svg class="icon-medium"><use href="#icon-community"/></svg>
+        <h2 class="premium-title" data-animate="fade-up">Build</h2>
+        <p class="premium-subtitle" data-animate="fade-up">Community Powers Businesses</p>
+        <div class="build-cards-grid">
+          <div class="build-card" data-animate="fade-up">
+            <div class="build-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="24" cy="14" r="6"/>
+                <circle cx="12" cy="34" r="5"/>
+                <circle cx="36" cy="34" r="5"/>
+                <line x1="24" y1="20" x2="12" y2="29"/>
+                <line x1="24" y1="20" x2="36" y2="29"/>
+                <line x1="12" y1="34" x2="36" y2="34" stroke-dasharray="3 3" opacity="0.5"/>
+              </svg>
             </div>
             <h3>Community</h3>
-            <p>Members organize around shared goals.</p>
+            <p>Members organize around shared goals and mutual support.</p>
+            <span class="build-card-arrow">&rarr;</span>
           </div>
-          
-          <div class="pathway-connector">
-            <svg class="icon-small"><use href="#icon-arrow-right"/></svg>
-          </div>
-          
-          <div class="pathway-stage">
-            <div class="stage-icon">
-              <svg class="icon-medium"><use href="#icon-builders"/></svg>
+          <div class="build-card" data-animate="fade-up" data-delay="80">
+            <div class="build-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="10" y="16" width="28" height="22" rx="3"/>
+                <line x1="10" y1="24" x2="38" y2="24"/>
+                <rect x="14" y="28" width="8" height="6" rx="1"/>
+                <rect x="26" y="28" width="8" height="6" rx="1"/>
+              </svg>
             </div>
             <h3>Businesses</h3>
-            <p>Entrepreneurs create products and services.</p>
+            <p>Entrepreneurs create products and services for the community.</p>
+            <span class="build-card-arrow">&rarr;</span>
           </div>
-          
-          <div class="pathway-connector">
-            <svg class="icon-small"><use href="#icon-arrow-right"/></svg>
-          </div>
-          
-          <div class="pathway-stage">
-            <div class="stage-icon">
-              <svg class="icon-medium"><use href="#icon-storefront"/></svg>
+          <div class="build-card" data-animate="fade-up" data-delay="160">
+            <div class="build-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M8 38 L8 18 L24 8 L40 18 L40 38"/>
+                <rect x="18" y="26" width="12" height="12"/>
+                <line x1="24" y1="26" x2="24" y2="38"/>
+              </svg>
             </div>
             <h3>Storefronts</h3>
-            <p>Businesses become discoverable.</p>
+            <p>Businesses become discoverable within the ecosystem.</p>
+            <span class="build-card-arrow">&rarr;</span>
           </div>
-          
-          <div class="pathway-connector">
-            <svg class="icon-small"><use href="#icon-arrow-right"/></svg>
-          </div>
-          
-          <div class="pathway-stage">
-            <div class="stage-icon">
-              <svg class="icon-medium"><use href="#icon-people"/></svg>
-            </div>
-            <h3>Customers</h3>
-            <p>People buy from trusted merchants.</p>
-          </div>
-          
-          <div class="pathway-connector">
-            <svg class="icon-small"><use href="#icon-arrow-right"/></svg>
-          </div>
-          
-          <div class="pathway-stage">
-            <div class="stage-icon">
-              <svg class="icon-medium"><use href="#icon-projects"/></svg>
+          <div class="build-card" data-animate="fade-up" data-delay="240">
+            <div class="build-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="10" y="10" width="28" height="28" rx="4"/>
+                <line x1="10" y1="20" x2="38" y2="20"/>
+                <circle cx="24" cy="32" r="4"/>
+                <path d="M20 32 L28 32"/>
+              </svg>
             </div>
             <h3>Projects</h3>
-            <p>Economic circulation funds growth.</p>
+            <p>Economic circulation funds community growth initiatives.</p>
+            <span class="build-card-arrow">&rarr;</span>
+          </div>
+          <div class="build-card" data-animate="fade-up" data-delay="320">
+            <div class="build-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M24 8 L24 16"/>
+                <path d="M16 12 L24 16 L32 12"/>
+                <rect x="12" y="16" width="24" height="24" rx="3"/>
+                <path d="M18 26 L22 30 L30 22"/>
+              </svg>
+            </div>
+            <h3>Builders</h3>
+            <p>Developers and creators build tools that strengthen the ecosystem.</p>
+            <span class="build-card-arrow">&rarr;</span>
           </div>
         </div>
-        
-        <p class="section-description">
+        <p class="premium-description" data-animate="fade-up">
           <strong>Connect</strong> is the marketplace where merchants, creators, developers, and service providers exchange value using 7TRB. Build your business. Find your customers. Grow together.
         </p>
-        <div style="text-align:center;">
-          <a href="https://connect.7trb.com" class="btn gold">Explore Connect</a>
+        <div class="premium-cta" data-animate="fade-up">
+          <a href="https://connect.7trb.com" class="btn gold premium-btn">Explore Connect</a>
         </div>
       </div>
     </section>
@@ -1566,633 +1690,145 @@
     <!-- CIRCULATE SECTION -->
     <section class="section circulate-section" id="circulate">
       <div class="wrap">
-        <h2 class="section-title">Circulate</h2>
-        <p class="section-subtitle">Value Moves Through the Entire Ecosystem</p>
-        
-        <!-- Circular Ecosystem Diagram -->
-        <div class="circular-diagram">
-          <svg viewBox="0 0 500 500" class="circle-svg">
-            <!-- Outer circle -->
-            <circle cx="250" cy="250" r="180" fill="none" stroke="#ffdd7a" stroke-width="1.5" opacity="0.3"/>
-            
-            <!-- Center 7TRB symbol (official logo) -->
-            <defs>
-              <clipPath id="symbolClip">
-                <circle cx="250" cy="250" r="45"/>
-              </clipPath>
-            </defs>
-            <circle cx="250" cy="250" r="45" fill="rgba(0,0,0,0.3)" stroke="#ffdd7a" stroke-width="2"/>
-            <image href="images/7trb_symbol.png" x="205" y="205" width="90" height="90" clip-path="url(#symbolClip)" preserveAspectRatio="xMidYMid slice"/>
-            
-            <!-- Animated energy flow (dashed circle) -->
-            <circle cx="250" cy="250" r="160" fill="none" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="8,4" class="energy-flow" opacity="0.6"/>
-            
-            <!-- Nodes around circle -->
-            <g class="circulation-node" style="transform:rotate(0deg);transform-origin:250px 250px">
-              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Members</text>
-            </g>
-            
-            <g class="circulation-node" style="transform:rotate(72deg);transform-origin:250px 250px">
-              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Businesses</text>
-            </g>
-            
-            <g class="circulation-node" style="transform:rotate(144deg);transform-origin:250px 250px">
-              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Builders</text>
-            </g>
-            
-            <g class="circulation-node" style="transform:rotate(216deg);transform-origin:250px 250px">
-              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Creators</text>
-            </g>
-            
-            <g class="circulation-node" style="transform:rotate(288deg);transform-origin:250px 250px">
-              <circle cx="250" cy="90" r="30" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
-              <text x="250" y="100" text-anchor="middle" fill="#ffdd7a" font-size="11" font-weight="bold">Community</text>
-            </g>
+        <h2 class="premium-title" data-animate="fade-up">Circulate</h2>
+        <p class="premium-subtitle" data-animate="fade-up">Value Moves Through the Entire Ecosystem</p>
+        <div class="orbit-container" data-animate="fade-up">
+          <div class="orbit-center">
+            <img src="images/7trb_symbol.png" alt="7TRB" class="orbit-logo"/>
+            <div class="orbit-pulse"></div>
+          </div>
+          <div class="orbit-ring orbit-ring-1">
+            <div class="orbit-node" data-label="Members"><span>Members</span></div>
+            <div class="orbit-node" data-label="Businesses"><span>Businesses</span></div>
+            <div class="orbit-node" data-label="Merchants"><span>Merchants</span></div>
+            <div class="orbit-node" data-label="Builders"><span>Builders</span></div>
+          </div>
+          <div class="orbit-ring orbit-ring-2">
+            <div class="orbit-node" data-label="Creators"><span>Creators</span></div>
+            <div class="orbit-node" data-label="Rewards"><span>Rewards</span></div>
+            <div class="orbit-node" data-label="Projects"><span>Projects</span></div>
+            <div class="orbit-node" data-label="Referrals"><span>Referrals</span></div>
+          </div>
+          <svg class="orbit-lines" viewBox="0 0 400 400">
+            <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(255,215,122,0.2)" stroke-width="1" stroke-dasharray="4 4"/>
+            <circle cx="200" cy="200" r="170" fill="none" stroke="rgba(255,215,122,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+            <circle cx="200" cy="200" r="40" fill="none" stroke="rgba(255,215,122,0.4)" stroke-width="1.5" class="orbit-energy"/>
           </svg>
         </div>
-        
-        <p class="section-description">
-          Every purchase, referral, and collaboration strengthens the community by keeping value moving.
+        <p class="premium-description" data-animate="fade-up">
+          7TRB supports participation, referrals, rewards, and merchant benefits. Value circulates continuously through members, businesses, builders, and creators — strengthening the entire community.
         </p>
-        <p class="section-description">
-          <strong>7TRB</strong> supports participation, referrals, rewards, and merchant benefits. Every transaction strengthens the network. Every purchase builds community wealth. This is circulation in action.
-        </p>
+        <div class="premium-cta" data-animate="fade-up">
+          <a href="learn.html" class="btn gold premium-btn">Learn About 7TRB</a>
+        </div>
       </div>
     </section>
 
-    <style>
-      /* === ORGANIZE SECTION === */
-      .organize-section {
-        position: relative;
-      }
-      
-      .network-diagram {
-        position: relative;
-        margin: 60px 0;
-        height: 400px;
-      }
-      
-      .network-svg {
-        width: 100%;
-        height: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        display: block;
-      }
-      
-      .hub-circle {
-        animation: pulse 2s ease-in-out infinite;
-      }
-      
-      @keyframes pulse {
-        0%, 100% { r: 50; opacity: 1; }
-        50% { r: 55; opacity: 0.7; }
-      }
-      
-      .network-node {
-        animation: float 3s ease-in-out infinite;
-      }
-      
-      @keyframes float {
-        0%, 100% { r: 35; }
-        50% { r: 38; }
-      }
-      
-      .connector-line {
-        animation: dash 8s linear infinite;
-      }
-      
-      @keyframes dash {
-        0% { stroke-dashoffset: 0; }
-        100% { stroke-dashoffset: -20; }
-      }
-      
-      .network-labels {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-      }
-      
-      .node-label {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        color: var(--muted);
-        font-weight: 600;
-      }
-      
-      .icon-small {
-        width: 32px;
-        height: 32px;
-        color: var(--gold-bright);
-      }
-      
-      /* === BUILD SECTION === */
-      .ecosystem-pathway {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin: 60px 0;
-        overflow-x: auto;
-        padding: 20px 0;
-      }
-      
-      .pathway-stage {
-        flex: 0 0 auto;
-        min-width: 140px;
-        text-align: center;
-        padding: 20px 16px;
-        background: rgba(232, 184, 82, 0.05);
-        border: 1px solid rgba(232, 184, 82, 0.15);
-        border-radius: 12px;
-        backdrop-filter: blur(10px);
-      }
-      
-      .stage-icon {
-        margin-bottom: 12px;
-      }
-      
-      .icon-medium {
-        width: 48px;
-        height: 48px;
-        margin: 0 auto;
-        color: var(--gold-bright);
-      }
-      
-      .pathway-stage h3 {
-        font-size: 15px;
-        color: var(--gold-bright);
-        margin-bottom: 6px;
-        font-weight: 700;
-      }
-      
-      .pathway-stage p {
-        font-size: 12px;
-        color: var(--muted);
-        line-height: 1.4;
-      }
-      
-      .pathway-connector {
-        flex: 0 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      /* === CIRCULATE SECTION === */
-      .circular-diagram {
-        position: relative;
-        margin: 60px 0;
-        height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .circle-svg {
-        width: 100%;
-        height: 100%;
-        max-width: 500px;
-        max-height: 500px;
-      }
-      
-      .energy-flow {
-        animation: rotate-flow 12s linear infinite;
-      }
-      
-      @keyframes rotate-flow {
-        0% { stroke-dashoffset: 0; }
-        100% { stroke-dashoffset: -48; }
-      }
-      
-      .circulation-node {
-        animation: orbit 12s linear infinite;
-      }
-      
-      @keyframes orbit {
-        0% { transform: rotate(0deg) translateY(-160px) rotate(0deg); }
-        100% { transform: rotate(360deg) translateY(-160px) rotate(-360deg); }
-      }
-      
-      /* === RESPONSIVE === */
-      @media (max-width: 768px) {
-        .network-diagram {
-          height: 300px;
-        }
-        
-        .node-label {
-          font-size: 11px;
-        }
-        
-        .icon-small {
-          width: 24px;
-          height: 24px;
-        }
-        
-        .ecosystem-pathway {
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 12px;
-        }
-        
-        .pathway-stage {
-          min-width: 120px;
-          padding: 16px 12px;
-        }
-        
-        .pathway-connector {
-          display: none;
-        }
-        
-        .pathway-stage:not(:last-child)::after {
-          content: '';
-          display: block;
-          width: 100%;
-          height: 1px;
-          background: linear-gradient(90deg, transparent, var(--gold), transparent);
-          margin-top: 12px;
-        }
-        
-        .circular-diagram {
-          height: 300px;
-        }
-      }
-      
-      @keyframes slideInLeft {
-        from { opacity: 0; transform: translateX(-20px); }
-        to { opacity: 1; transform: translateX(0); }
-      }
-      
-      @keyframes slideInRight {
-        from { opacity: 0; transform: translateX(20px); }
-        to { opacity: 1; transform: translateX(0); }
-      }
-      
-      @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      
-      @media (max-width: 430px) {
-        .network-diagram {
-          height: 250px;
-        }
-        
-        .node-label {
-          font-size: 10px;
-        }
-        
-        .icon-small {
-          width: 20px;
-          height: 20px;
-        }
-        
-        .pathway-stage {
-          min-width: 100px;
-          padding: 12px 10px;
-          font-size: 12px;
-        }
-        
-        .pathway-stage h3 {
-          font-size: 13px;
-        }
-        
-        .pathway-stage p {
-          font-size: 11px;
-        }
-        
-        .circular-diagram {
-          height: 250px;
-        }
-      }
-    
-    /* Mobile Header Improvements */
-    .nav-brand img {
-      height:42px;
-      width:auto;
-      filter:drop-shadow(0 0 2px rgba(255,215,122,0.2));
-    }
-    
-    .nav-brand span {
-      display:none;
-    }
-    
-    .main-nav {
-      display:none;
-    }
-    
-    @media (max-width:1023px) {
-      .nav-brand span {
-        display:none;
-      }
-    }
-    
-    @media (min-width:1024px) {
-      .nav-brand span {
-        display:inline;
-        margin-left:8px;
-        font-size:14px;
-        letter-spacing:2px;
-      }
-      
-      .top-nav-inner {
-        grid-template-columns:auto 1fr auto;
-        justify-content:space-between;
-      }
-      
-      .nav-brand {
-        grid-column:auto;
-        justify-self:start;
-      }
-      
-      .menu-toggle {
-        grid-column:auto;
-        justify-self:end;
-      }
-      
-      .main-nav {
-        display:flex;
-        gap:24px;
-        align-items:center;
-        flex:0;
-      }
-      
-      .main-nav a {
-        color:rgba(255,215,122,0.8);
-        text-decoration:none;
-        font-size:14px;
-        font-weight:500;
-        transition:color 0.3s ease;
-        position:relative;
-      }
-      
-      .main-nav a:hover {
-        color:#ffdd7a;
-      }
-      
-      .main-nav a.active {
-        color:#ffdd7a;
-      }
-      
-      .main-nav a.active::after {
-        content:'';
-        position:absolute;
-        bottom:-8px;
-        left:0;
-        right:0;
-        height:2px;
-        background:#ffdd7a;
-      }
-    }
-    
-    /* Hamburger Button */
-    .menu-toggle {
-      background:none;
-      border:none;
-      color:#ffdd7a;
-      font-size:28px;
-      cursor:pointer;
-      padding:8px;
-      width:44px;
-      height:44px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:4px;
-      transition:background 0.3s ease;
-      flex-shrink:0;
-      grid-column:3;
-      justify-self:end;
-      margin-right:0;
-    }
-    
-    .menu-toggle:hover {
-      background:rgba(255,215,122,0.1);
-    }
-    
-    .menu-toggle::after {
-      content:'';
-      position:absolute;
-      width:24px;
-      height:24px;
-      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffdd7a' stroke-width='2' stroke-linecap='round'%3E%3Cline x1='3' y1='6' x2='21' y2='6'/%3E%3Cline x1='3' y1='12' x2='21' y2='12'/%3E%3Cline x1='3' y1='18' x2='21' y2='18'/%3E%3C/svg%3E") no-repeat center;
-      background-size:contain;
-    }
-    
-    .menu-toggle {
-      font-size:0;
-    }
-    
-    @media (min-width:1024px) {
-      .menu-toggle {
-        display:none;
-      }
-    }
-    
-    /* Mobile Drawer */
-    .mobile-drawer {
-      position:fixed;
-      top:0;
-      right:-100%;
-      width:100%;
-      max-width:320px;
-      height:100vh;
-      background:rgba(15,10,5,0.98);
-      backdrop-filter:blur(12px);
-      border-left:2px solid rgba(255,215,122,0.25);
-      z-index:98;
-      transition:right 0.3s ease;
-      display:flex;
-      flex-direction:column;
-      overflow-y:auto;
-    }
-    
-    .mobile-drawer.open {
-      right:0;
-    }
-    
-    .drawer-header {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:16px 20px;
-      border-bottom:1px solid rgba(255,215,122,0.15);
-      flex-shrink:0;
-    }
-    
-    .drawer-header .nav-brand {
-      flex:1;
-      justify-content:flex-start;
-      gap:12px;
-    }
-    
-    .drawer-header .nav-brand img {
-      height:36px;
-    }
-    
-    .drawer-header .nav-brand span {
-      display:inline;
-      font-size:12px;
-    }
-    
-    .close-btn {
-      background:none;
-      border:none;
-      color:#ffdd7a;
-      font-size:24px;
-      cursor:pointer;
-      padding:8px;
-      width:44px;
-      height:44px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:4px;
-      transition:background 0.3s ease;
-      flex-shrink:0;
-    }
-    
-    .close-btn:hover {
-      background:rgba(255,215,122,0.1);
-    }
-    
-    .drawer-content {
-      flex:1;
-      padding:16px 0;
-      overflow-y:auto;
-    }
-    
-    .drawer-section {
-      padding:12px 20px;
-      border-bottom:1px solid rgba(255,215,122,0.1);
-    }
-    
-    .drawer-section:last-child {
-      border-bottom:none;
-    }
-    
-    .drawer-section-title {
-      display:block;
-      font-size:12px;
-      font-weight:600;
-      color:rgba(255,215,122,0.5);
-      text-transform:uppercase;
-      letter-spacing:1px;
-      margin-bottom:12px;
-    }
-    
-    .drawer-section a {
-      display:block;
-      padding:12px 0;
-      color:rgba(255,215,122,0.85);
-      text-decoration:none;
-      font-size:16px;
-      font-weight:500;
-      transition:color 0.3s ease;
-      border-left:3px solid transparent;
-      padding-left:12px;
-    }
-    
-    .drawer-section a:hover {
-      color:#ffdd7a;
-    }
-    
-    .drawer-section a.active {
-      color:#ffdd7a;
-      border-left-color:#ffdd7a;
-    }
-    
-    /* Menu Overlay */
-    .menu-overlay {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:rgba(0,0,0,0);
-      z-index:97;
-      opacity:0;
-      pointer-events:none;
-      transition:opacity 0.3s ease;
-    }
-    
-    .menu-overlay.open {
-      background:rgba(0,0,0,0.5);
-      opacity:1;
-      pointer-events:auto;
-    }
-    
-    @media (min-width:1024px) {
-      .mobile-drawer,
-      .menu-overlay {
-        display:none;
-      }
-    }
-    </style>
+    <!-- ECOSYSTEM MAP -->
+    <section class="section ecosystem-map-section" id="ecosystem-map">
+      <div class="wrap">
+        <h2 class="premium-title" data-animate="fade-up">The Ecosystem</h2>
+        <p class="premium-subtitle" data-animate="fade-up">Five layers working together</p>
+        <div class="eco-map-grid" data-animate="fade-up">
+          <div class="eco-map-card active" onclick="selectEcosystem(this, 0)">
+            <div class="eco-map-icon">
+              <img src="images/7trb_symbol.png" alt="7TRB" style="width:32px;height:32px;"/>
+            </div>
+            <h3>7TRB</h3>
+            <p>Education and economic model</p>
+            <a href="learn.html" class="eco-map-link">Learn More &rarr;</a>
+          </div>
+          <div class="eco-map-card" onclick="selectEcosystem(this, 1)">
+            <div class="eco-map-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="12"/><path d="M10 16 L14 20 L22 12"/></svg>
+            </div>
+            <h3>Loop</h3>
+            <p>Town hall and community</p>
+            <a href="https://loop.7trb.com" class="eco-map-link">Enter Loop &rarr;</a>
+          </div>
+          <div class="eco-map-card" onclick="selectEcosystem(this, 2)">
+            <div class="eco-map-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="24" height="16" rx="3"/><line x1="4" y1="14" x2="28" y2="14"/></svg>
+            </div>
+            <h3>Connect</h3>
+            <p>Marketplace and profiles</p>
+            <a href="https://connect.7trb.com" class="eco-map-link">Explore Connect &rarr;</a>
+          </div>
+          <div class="eco-map-card" onclick="selectEcosystem(this, 3)">
+            <div class="eco-map-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="3"/><circle cx="16" cy="22" r="3"/></svg>
+            </div>
+            <h3>Nuru</h3>
+            <p>Wallet, identity, and dApp browser</p>
+            <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="eco-map-link">Download Nuru &rarr;</a>
+          </div>
+          <div class="eco-map-card" onclick="selectEcosystem(this, 4)">
+            <div class="eco-map-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="24" height="16" rx="2"/><path d="M4 14 L28 14"/><circle cx="8" cy="11" r="1.5" fill="currentColor"/><circle cx="13" cy="11" r="1.5" fill="currentColor"/></svg>
+            </div>
+            <h3>Alkebuleum</h3>
+            <p>Blockchain infrastructure</p>
+            <a href="ecosystem.html" class="eco-map-link">Learn More &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ROLE SELECTOR -->
-    <section class="section role-selector" id="role-selector">
+    <section class="section role-section" id="role-selector">
       <div class="wrap">
-        <h2 class="section-title">Choose Your Role</h2>
-        <p class="section-subtitle">Every role strengthens the ecosystem</p>
-
-        <div class="role-grid">
-          <button class="role-btn" onclick="selectRole(this, 'member')">👥 Member</button>
-          <button class="role-btn" onclick="selectRole(this, 'merchant')">🏪 Merchant</button>
-          <button class="role-btn" onclick="selectRole(this, 'builder')">👷 Builder</button>
-          <button class="role-btn" onclick="selectRole(this, 'developer')">💻 Developer</button>
-          <button class="role-btn" onclick="selectRole(this, 'creator')">🎨 Creator</button>
-          <button class="role-btn" onclick="selectRole(this, 'organizer')">📋 Organizer</button>
-          <button class="role-btn" onclick="selectRole(this, 'supporter')">⭐ Supporter</button>
-        </div>
-
-        <div class="role-journey" id="member-journey">
-          <h4>Community Member Journey</h4>
-          <p>Join Loop → Create Profile → Earn Referrals → Participate in Proposals → Support Businesses</p>
-          <a href="https://loop.7trb.com" class="btn gold">Start as Member</a>
-        </div>
-
-        <div class="role-journey" id="merchant-journey">
-          <h4>Merchant Journey</h4>
-          <p>Create Storefront → List Products/Services → Accept 7TRB → Build Customer Base → Earn Rewards</p>
-          <a href="https://connect.7trb.com" class="btn gold">Become Merchant</a>
-        </div>
-
-        <div class="role-journey" id="builder-journey">
-          <h4>Builder Journey</h4>
-          <p>Propose Projects → Recruit Team → Build Solutions → Deliver Value → Earn 7TRB</p>
-          <a href="builders.html" class="btn gold">Join Builders</a>
-        </div>
-
-        <div class="role-journey" id="developer-journey">
-          <h4>Developer Journey</h4>
-          <p>Access APIs → Build Tools → Integrate Services → Deploy on Alkebuleum → Earn Fees</p>
-          <a href="developers.html" class="btn gold">Developer Resources</a>
-        </div>
-
-        <div class="role-journey" id="creator-journey">
-          <h4>Creator Journey</h4>
-          <p>Create Content → Build Audience → Monetize with 7TRB → Grow Community → Earn Referrals</p>
-          <a href="https://connect.7trb.com" class="btn gold">Start Creating</a>
-        </div>
-
-        <div class="role-journey" id="organizer-journey">
-          <h4>Organizer Journey</h4>
-          <p>Form City Groups → Host Events → Coordinate Initiatives → Build Local Power → Lead Change</p>
-          <a href="https://loop.7trb.com" class="btn gold">Organize Community</a>
-        </div>
-
-        <div class="role-journey" id="supporter-journey">
-          <h4>Supporter Journey</h4>
-          <p>Hold 7TRB → Vote on Proposals → Refer Friends → Support Ecosystem → Earn Rewards</p>
-          <a href="dashboard.html" class="btn gold">View Dashboard</a>
+        <h2 class="premium-title" data-animate="fade-up">Choose Your Role</h2>
+        <p class="premium-subtitle" data-animate="fade-up">Everyone has a place in the ecosystem</p>
+        <div class="role-cards-grid" data-animate="fade-up">
+          <div class="role-card">
+            <div class="role-card-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="14" r="6"/><path d="M8 36 C8 28 14 24 20 24 C26 24 32 28 32 36"/></svg>
+            </div>
+            <h3>Member</h3>
+            <p>Join the community, build your profile, participate.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-card-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="12" width="28" height="20" rx="3"/><line x1="6" y1="20" x2="34" y2="20"/><path d="M14 26 L18 30 L26 22"/></svg>
+            </div>
+            <h3>Merchant</h3>
+            <p>Open your storefront, accept 7TRB, grow your business.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-card-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="24" height="24" rx="3"/><path d="M14 20 L20 14 L26 20 L20 26 Z"/></svg>
+            </div>
+            <h3>Builder</h3>
+            <p>Create tools, apps, and services for the ecosystem.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-card-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 32 L8 12 L16 8 L24 12 L24 8 L32 12 L32 32"/><line x1="8" y1="32" x2="32" y2="32"/></svg>
+            </div>
+            <h3>Developer</h3>
+            <p>Build on Alkebuleum, integrate APIs, ship code.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-card-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="20" r="12"/><path d="M14 20 L18 24 L26 16"/></svg>
+            </div>
+            <h3>Creator</h3>
+            <p>Produce content, art, music, and media for the community.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-card-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="16" r="6"/><circle cx="10" cy="28" r="4"/><circle cx="30" cy="28" r="4"/><line x1="20" y1="22" x2="10" y2="24"/><line x1="20" y1="22" x2="30" y2="24"/></svg>
+            </div>
+            <h3>Organizer</h3>
+            <p>Lead initiatives, coordinate events, build movements.</p>
+          </div>
+          <div class="role-card">
+            <div class="role-card-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 8 L24 16 L32 17 L26 23 L28 32 L20 28 L12 32 L14 23 L8 17 L16 16 Z"/></svg>
+            </div>
+            <h3>Supporter</h3>
+            <p>Invest in the vision, hold 7TRB, support growth.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -2200,364 +1836,284 @@
     <!-- BLUEPRINT SECTION -->
     <section class="section blueprint-section" id="blueprint">
       <div class="wrap">
-        <h2 class="section-title">The Blueprint Behind 7Tribes</h2>
-        <p class="section-subtitle">Learn the philosophy and playbook</p>
-
-        <div style="text-align:center;margin-bottom:40px;">
-          <img src="images/ebook-cover.png" alt="Building Community Power" style="max-width:200px;border-radius:12px;box-shadow:0 8px 30px rgba(255,215,122,.2);">
-          <p class="muted" style="margin-top:16px;max-width:500px;margin-left:auto;margin-right:auto;">Building Community Power by Jermaine Stewart — A practical guide to community power, wealth, and circulation.</p>
-        </div>
-
-        <div class="blueprint-cards">
-          <div class="blueprint-card">
-            <h3>Organize</h3>
-            <p>Connect people. Build relationships. Create the foundation for collective action.</p>
-          </div>
-          <div class="blueprint-card">
-            <h3>Build</h3>
-            <p>Create businesses. Launch projects. Turn community power into economic opportunity.</p>
-          </div>
-          <div class="blueprint-card">
-            <h3>Circulate</h3>
-            <p>Move value locally. Reward participation. Keep wealth in the community.</p>
-          </div>
-        </div>
-
-        <div style="text-align:center;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;max-width:600px;margin:0 auto;">
-          <a href="https://mainhousedigital.gumroad.com/l/7Tribes" target="_blank" rel="noopener" class="btn gold">Buy Book</a>
-          <a href="handbook.html" class="btn ghost">Read Field Manual</a>
-          <a href="learn.html" class="btn ghost">Learn More</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- EDUCATIONAL SIMULATOR -->
-    <section class="section simulator-section" id="simulator">
-      <div class="wrap">
-        <h2 class="section-title">Community Growth Simulator</h2>
-        <p class="section-subtitle">See how the ecosystem grows with participation</p>
-
-        <div class="simulator-controls">
-          <div class="slider-group">
-            <label>Members <span class="slider-value" id="members-value">100</span></label>
-            <input type="range" id="members-slider" min="10" max="10000" value="100" oninput="updateSimulator()">
-          </div>
-
-          <div class="slider-group">
-            <label>Businesses <span class="slider-value" id="businesses-value">5</span></label>
-            <input type="range" id="businesses-slider" min="1" max="500" value="5" oninput="updateSimulator()">
-          </div>
-
-          <div class="slider-group">
-            <label>Builders <span class="slider-value" id="builders-value">3</span></label>
-            <input type="range" id="builders-slider" min="1" max="200" value="3" oninput="updateSimulator()">
-          </div>
-
-          <div class="slider-group">
-            <label>Creators <span class="slider-value" id="creators-value">2</span></label>
-            <input type="range" id="creators-slider" min="1" max="100" value="2" oninput="updateSimulator()">
-          </div>
-
-          <div class="slider-group">
-            <label>Referral Rate <span class="slider-value" id="referrals-value">20%</span></label>
-            <input type="range" id="referrals-slider" min="0" max="100" value="20" oninput="updateSimulator()">
-          </div>
-        </div>
-
-        <div class="simulator-results">
-          <div class="result-card">
-            <h4>Network Connections</h4>
-            <div class="result-value" id="connections-result">495</div>
-          </div>
-          <div class="result-card">
-            <h4>Active Businesses</h4>
-            <div class="result-value" id="active-businesses-result">5</div>
-          </div>
-          <div class="result-card">
-            <h4>Participation Score</h4>
-            <div class="result-value" id="participation-result">42%</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DETROIT VISUALIZATION -->
-    <section class="section detroit-section bg-section bg-detroit" id="detroit">
-      <div class="wrap">
-        <h2 class="section-title">7Tribes in Detroit</h2>
-        <p class="section-subtitle">Building community power in Motor City</p>
-
-        <div class="detroit-viz">
-          <div class="detroit-content">
-            <h3>Detroit's Growing Ecosystem</h3>
-            <p>Businesses organizing. Communities connecting. Value circulating locally.</p>
-
-            <div class="detroit-stats">
-              <div class="detroit-stat">
-                <div class="detroit-stat-value" id="detroit-members">500+</div>
-                <div class="detroit-stat-label">Members</div>
-              </div>
-              <div class="detroit-stat">
-                <div class="detroit-stat-value" id="detroit-businesses">45+</div>
-                <div class="detroit-stat-label">Businesses</div>
-              </div>
-              <div class="detroit-stat">
-                <div class="detroit-stat-value" id="detroit-connections">1.2K</div>
-                <div class="detroit-stat-label">Connections</div>
-              </div>
-              <div class="detroit-stat">
-                <div class="detroit-stat-value" id="detroit-circulated">$89K</div>
-                <div class="detroit-stat-label">Circulated</div>
+        <h2 class="premium-title" data-animate="fade-up">The Blueprint Behind 7Tribes</h2>
+        <p class="premium-subtitle" data-animate="fade-up">A practical guide to building community economies</p>
+        <div class="blueprint-showcase" data-animate="fade-up">
+          <div class="blueprint-book">
+            <div class="book-glow"></div>
+            <div class="book-visual">
+              <div class="book-cover">
+                <img src="images/7trb_symbol.png" alt="7Tribes Blueprint" style="width:64px;height:64px;margin:0 auto 16px;display:block;"/>
+                <span class="book-title-text">7Tribes<br/>Blueprint</span>
               </div>
             </div>
+          </div>
+          <div class="blueprint-chapters">
+            <div class="chapter-card">
+              <span class="chapter-num">01</span>
+              <h4>Organize</h4>
+              <p>Connect people, build networks, form community.</p>
+            </div>
+            <div class="chapter-card">
+              <span class="chapter-num">02</span>
+              <h4>Build</h4>
+              <p>Create businesses, storefronts, and projects.</p>
+            </div>
+            <div class="chapter-card">
+              <span class="chapter-num">03</span>
+              <h4>Circulate</h4>
+              <p>Move value through the ecosystem continuously.</p>
+            </div>
+          </div>
+        </div>
+        <div class="blueprint-ctas" data-animate="fade-up">
+          <a href="https://gumroad.com" target="_blank" rel="noopener" class="btn gold premium-btn">Buy Book</a>
+          <a href="learn.html" class="btn ghost premium-btn">Read Field Manual</a>
+          <a href="learn.html" class="btn ghost premium-btn">Learn More</a>
+        </div>
+      </div>
+    </section>
 
-            <a href="https://loop.7trb.com" class="btn gold">Join Detroit in Loop</a>
+    <!-- COMMUNITY GROWTH SIMULATOR -->
+    <section class="section simulator-section" id="simulator">
+      <div class="wrap">
+        <h2 class="premium-title" data-animate="fade-up">Community Growth Simulator</h2>
+        <p class="premium-subtitle" data-animate="fade-up">See how organized communities create economic power</p>
+        <div class="sim-dashboard" data-animate="fade-up">
+          <div class="sim-controls">
+            <div class="sim-slider-group">
+              <label>Members <span id="members-value">500</span></label>
+              <input type="range" id="members-slider" min="10" max="10000" value="500" oninput="updateSimulator()"/>
+            </div>
+            <div class="sim-slider-group">
+              <label>Businesses <span id="businesses-value">25</span></label>
+              <input type="range" id="businesses-slider" min="1" max="500" value="25" oninput="updateSimulator()"/>
+            </div>
+            <div class="sim-slider-group">
+              <label>Builders <span id="builders-value">10</span></label>
+              <input type="range" id="builders-slider" min="1" max="200" value="10" oninput="updateSimulator()"/>
+            </div>
+            <div class="sim-slider-group">
+              <label>Creators <span id="creators-value">15</span></label>
+              <input type="range" id="creators-slider" min="1" max="200" value="15" oninput="updateSimulator()"/>
+            </div>
+            <div class="sim-slider-group">
+              <label>Referral Rate <span id="referrals-value">20%</span></label>
+              <input type="range" id="referrals-slider" min="5" max="80" value="20" oninput="updateSimulator()"/>
+            </div>
+          </div>
+          <div class="sim-results">
+            <div class="sim-stat">
+              <span class="sim-stat-value" id="connections-result">12,375</span>
+              <span class="sim-stat-label">Connections</span>
+            </div>
+            <div class="sim-stat">
+              <span class="sim-stat-value" id="active-businesses-result">25</span>
+              <span class="sim-stat-label">Active Businesses</span>
+            </div>
+            <div class="sim-stat">
+              <span class="sim-stat-value" id="participation-result">10%</span>
+              <span class="sim-stat-label">Participation Score</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WHAT 7TRB UNLOCKS -->
-    <section class="section unlocks-section bg-section bg-technology" id="unlocks">
+    <!-- DETROIT SECTION -->
+    <section class="section detroit-section" id="detroit">
       <div class="wrap">
-        <h2 class="section-title">What 7TRB Unlocks</h2>
-        <p class="section-subtitle">Utility designed for community economic growth</p>
-
-        <div class="unlocks-grid">
-          <div class="unlock-card">
-            <h3>Merchant Benefits</h3>
-            <p>List businesses, accept payments, and access premium storefront tools.</p>
+        <h2 class="premium-title" data-animate="fade-up">Detroit: Flagship City</h2>
+        <p class="premium-subtitle" data-animate="fade-up">Building the model for community-powered economies</p>
+        <div class="detroit-stats" data-animate="fade-up">
+          <div class="detroit-stat">
+            <span class="detroit-stat-value" data-count="247">0</span>
+            <span class="detroit-stat-label">Members</span>
           </div>
-          <div class="unlock-card">
-            <h3>Referrals</h3>
-            <p>Earn rewards for growing the network and connecting new members.</p>
+          <div class="detroit-stat">
+            <span class="detroit-stat-value" data-count="34">0</span>
+            <span class="detroit-stat-label">Businesses</span>
           </div>
-          <div class="unlock-card">
-            <h3>Rewards</h3>
-            <p>Participate in community initiatives and earn for your contributions.</p>
+          <div class="detroit-stat">
+            <span class="detroit-stat-value" data-count="12">0</span>
+            <span class="detroit-stat-label">Projects</span>
           </div>
-          <div class="unlock-card">
-            <h3>Community</h3>
-            <p>Vote on proposals, join city groups, and influence ecosystem direction.</p>
-          </div>
-          <div class="unlock-card">
-            <h3>Premium Features</h3>
-            <p>Unlock advanced analytics, priority placement, and exclusive events.</p>
+          <div class="detroit-stat">
+            <span class="detroit-stat-value" data-count="89">0</span>
+            <span class="detroit-stat-label">Community Growth %</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- POWERED BY ALKEBULEUM -->
-    <section class="section infra-section" id="infrastructure">
-      <div class="wrap">
-        <h2 class="section-title">Powered by Alkebuleum</h2>
-        <p class="section-subtitle">The decentralized infrastructure for community economies</p>
-
-        <div class="infra-grid">
-          <div class="infra-card">
-            <h3>Alkebuleum</h3>
-            <p>The high-performance blockchain powering the 7Tribes ecosystem. Secure, scalable, and community-owned.</p>
-          </div>
-          <div class="infra-card">
-            <h3>ALKE</h3>
-            <p>The native gas token of the Alkebuleum network. Required for all on-chain transactions and network security.</p>
-          </div>
-          <div class="infra-card">
-            <h3>Nuru</h3>
-            <p>The official wallet, identity, and dApp browser. Your gateway to everything in the 7Tribes ecosystem.</p>
-          </div>
-        </div>
-
-        <div class="security-panel">
-          <h4>🛡️ Security & Access</h4>
-          <p class="muted" style="font-size:.9rem;margin-bottom:20px;">Your identity and assets are protected by decentralized encryption. Never share your recovery phrase with anyone.</p>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
-            <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn gold">Download Nuru</a>
-            <a href="learn.html" class="btn ghost">Tutorials</a>
-            <a href="https://jollofswap.com" class="btn ghost">Trade Tutorial</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ECOSYSTEM PREVIEW -->
-    <section class="section preview-section" id="preview">
-      <div class="wrap">
-        <h2 class="section-title">Ecosystem Live Preview</h2>
-        <p class="section-subtitle">A glimpse into the active 7Tribes network</p>
-
-        <div class="preview-grid">
-          <div class="preview-card">
-            <h4>Latest Members</h4>
-            <div class="preview-item">7tribes.alke</div>
-            <div class="preview-item">detroit_builder.alke</div>
-            <div class="preview-item">oasis_merchant.alke</div>
-          </div>
-          <div class="preview-card">
-            <h4>Latest Businesses</h4>
-            <div class="preview-item">Mainhouse Oasis</div>
-            <div class="preview-item">Detroit Tech Hub</div>
-            <div class="preview-item">Alkebuleum Nodes</div>
-          </div>
-          <div class="preview-card">
-            <h4>Latest Posts</h4>
-            <div class="preview-item">Detroit City Meeting...</div>
-            <div class="preview-item">New Merchant Guide...</div>
-            <div class="preview-item">7TRB Utility Update...</div>
-          </div>
-          <div class="preview-card">
-            <h4>Upcoming Events</h4>
-            <div class="preview-item">Detroit Town Hall</div>
-            <div class="preview-item">Developer Workshop</div>
-            <div class="preview-item">Merchant Onboarding</div>
-          </div>
+        <div class="premium-cta" data-animate="fade-up">
+          <a href="https://loop.7trb.com" class="btn gold premium-btn">Join Detroit in Loop</a>
         </div>
       </div>
     </section>
 
     <!-- CLOSING SECTION -->
-    <section class="section closing-section bg-section bg-closing">
+    <section class="section closing-section" id="closing">
       <div class="wrap">
-        <h2 class="closing-headline">The Infrastructure Is Being Built.</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:800px;margin:0 auto;">
-          <a href="https://loop.7trb.com" class="btn gold">Join Loop</a>
-          <a href="https://connect.7trb.com" class="btn gold">Explore Connect</a>
-          <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn gold">Download Nuru</a>
-          <a href="handbook.html" class="btn ghost">Read Blueprint</a>
+        <h2 class="premium-title" data-animate="fade-up">The Infrastructure Is Being Built</h2>
+        <p class="premium-subtitle" data-animate="fade-up">Join the ecosystem. Start organizing. Build something real.</p>
+        <div class="closing-ctas" data-animate="fade-up">
+          <a href="https://loop.7trb.com" class="btn gold premium-btn">Join Loop</a>
+          <a href="https://connect.7trb.com" class="btn ghost premium-btn">Explore Connect</a>
+          <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn ghost premium-btn">Download Nuru</a>
+          <a href="learn.html" class="btn ghost premium-btn">Read Blueprint</a>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-footer-texture">
+  <!-- PREMIUM FOOTER -->
+  <footer class="premium-footer">
     <div class="wrap">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <img src="images/7trb_symbol.png" alt="7TRB" style="width:42px;height:42px;border-radius:50%;" />
-        <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
-        <span class="muted" style="margin-left:20px;" id="visitor-count">Visitors: 0</span>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="images/7trb_symbol.png" alt="7TRB" class="footer-logo"/>
+          <p class="footer-mission">Organize. Build. Circulate. A practical blueprint for connecting people, growing businesses, and building stronger community economies.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="https://loop.7trb.com">Loop</a>
+          <a href="https://connect.7trb.com">Connect</a>
+          <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener">Nuru</a>
+          <a href="https://jollofswap.com" target="_blank" rel="noopener">JollofSwap</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="learn.html">Learn</a>
+          <a href="ecosystem.html">Ecosystem</a>
+          <a href="transparency.html">Transparency</a>
+          <a href="dashboard.html">Dashboard</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+          <a href="builders.html">Builders</a>
+          <a href="developers.html">Developers</a>
+        </div>
       </div>
-
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="learn.html">Learn</a>
-        <a href="https://loop.7trb.com">Loop</a>
-        <a href="ecosystem.html">Ecosystem</a>
-        <a href="transparency.html">Transparency</a>
-        <a href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a>
+      <div class="footer-bottom">
+        <span>&copy; 2025 7Tribes &bull; Mainhouse Oasis LLC</span>
+        <span id="visitor-count">Visitors: 0</span>
       </div>
     </div>
   </footer>
 
   <script>
-    function toggleCard(card) {
-      document.querySelectorAll('.struggle-card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-    }
+    // Premium scroll animations
+    const animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('[data-animate]').forEach(el => animObserver.observe(el));
 
+    // Ecosystem map selection
     function selectEcosystem(card, index) {
-      document.querySelectorAll('.ecosystem-card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.eco-map-card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
     }
 
-    function selectRole(btn, role) {
-      document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.role-journey').forEach(j => j.classList.remove('active'));
-      const journey = document.getElementById(role + '-journey');
-      if (journey) journey.classList.add('active');
-    }
+    // Network node tooltip
+    document.querySelectorAll('.network-node').forEach(node => {
+      node.addEventListener('click', function() {
+        const tooltip = document.getElementById('network-tooltip');
+        const label = this.getAttribute('data-label');
+        if (tooltip && label) {
+          tooltip.textContent = label;
+          tooltip.classList.toggle('visible');
+          setTimeout(() => tooltip.classList.remove('visible'), 3000);
+        }
+      });
+    });
 
+    // Community Growth Simulator
     function updateSimulator() {
       const members = parseInt(document.getElementById('members-slider').value);
       const businesses = parseInt(document.getElementById('businesses-slider').value);
       const builders = parseInt(document.getElementById('builders-slider').value);
       const creators = parseInt(document.getElementById('creators-slider').value);
       const referrals = parseInt(document.getElementById('referrals-slider').value);
-
       document.getElementById('members-value').textContent = members.toLocaleString();
       document.getElementById('businesses-value').textContent = businesses;
       document.getElementById('builders-value').textContent = builders;
       document.getElementById('creators-value').textContent = creators;
       document.getElementById('referrals-value').textContent = referrals + '%';
-
       const connections = Math.floor(members * (members - 1) / 2 * 0.1);
       const participation = Math.floor((businesses + builders + creators) / (members / 100));
       const activeBusinesses = Math.min(businesses, Math.floor(members / 20));
-
       document.getElementById('connections-result').textContent = connections.toLocaleString();
       document.getElementById('active-businesses-result').textContent = activeBusinesses;
       document.getElementById('participation-result').textContent = Math.min(100, participation) + '%';
     }
+    updateSimulator();
 
-    // Scroll animation for sections
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
+    // Detroit animated counters
+    const counterObserver = new IntersectionObserver(function(entries) {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+          const counters = entry.target.querySelectorAll('[data-count]');
+          counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-count'));
+            let current = 0;
+            const increment = target / 40;
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                counter.textContent = target;
+                clearInterval(timer);
+              } else {
+                counter.textContent = Math.floor(current);
+              }
+            }, 30);
+          });
+          counterObserver.unobserve(entry.target);
         }
       });
-    }, observerOptions);
-
-    document.querySelectorAll('.section').forEach(section => {
-      section.style.opacity = '0';
-      section.style.transform = 'translateY(20px)';
-      section.style.transition = 'opacity .6s ease-out, transform .6s ease-out';
-      observer.observe(section);
-    });
-
-    // Initialize simulator
-    updateSimulator();
+    }, { threshold: 0.3 });
+    const detroitStats = document.querySelector('.detroit-stats');
+    if (detroitStats) counterObserver.observe(detroitStats);
 
     // Visitor counter
     (function() {
       const count = localStorage.getItem('7trb_visits') || '0';
       const newCount = parseInt(count) + 1;
       localStorage.setItem('7trb_visits', newCount.toString());
-      document.getElementById('visitor-count').textContent = 'Visitors: ' + newCount.toLocaleString();
+      const el = document.getElementById('visitor-count');
+      if (el) el.textContent = 'Visitors: ' + newCount.toLocaleString();
     })();
   </script>
-
   <script>
     // Mobile Menu Toggle
     const menuToggle = document.getElementById("menu-toggle");
     const closeMenu = document.getElementById("close-menu");
     const mobileDrawer = document.getElementById("mobile-drawer");
     const menuOverlay = document.getElementById("menu-overlay");
-    const drawerLinks = mobileDrawer.querySelectorAll("a");
-
-    function openMenu() {
-      mobileDrawer.classList.add("active");
-      menuOverlay.classList.add("active");
-      document.body.classList.add("menu-open");
-    }
-
-    function closeMenuDrawer() {
-      mobileDrawer.classList.remove("active");
-      menuOverlay.classList.remove("active");
-      document.body.classList.remove("menu-open");
-    }
-
-    menuToggle.addEventListener("click", openMenu);
-    closeMenu.addEventListener("click", closeMenuDrawer);
-    menuOverlay.addEventListener("click", closeMenuDrawer);
-
-    drawerLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        if (link.target !== "_blank") {
-          closeMenuDrawer();
-        }
+    if (menuToggle && mobileDrawer && menuOverlay) {
+      const drawerLinks = mobileDrawer.querySelectorAll("a");
+      function openMenu() {
+        mobileDrawer.classList.add("active");
+        menuOverlay.classList.add("active");
+        document.body.classList.add("menu-open");
+      }
+      function closeMenuDrawer() {
+        mobileDrawer.classList.remove("active");
+        menuOverlay.classList.remove("active");
+        document.body.classList.remove("menu-open");
+      }
+      menuToggle.addEventListener("click", openMenu);
+      if (closeMenu) closeMenu.addEventListener("click", closeMenuDrawer);
+      menuOverlay.addEventListener("click", closeMenuDrawer);
+      drawerLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          if (link.target !== "_blank") closeMenuDrawer();
+        });
       });
-    });
+    }
   </script>
-<script src="js/nav.js"></script>
+  <script src="js/nav.js"></script>
 </body>
 </html>
