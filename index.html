@@ -1462,52 +1462,91 @@
         
         <!-- Animated Network Diagram -->
         <div class="network-diagram">
-          <svg viewBox="0 0 600 400" class="network-svg">
+          <svg viewBox="0 0 700 500" class="network-svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            
             <!-- Center hub -->
-            <circle cx="300" cy="200" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="hub-circle"/>
-            <text x="300" y="210" text-anchor="middle" fill="#ffdd7a" font-size="12" font-weight="bold">Community Hub</text>
+            <circle cx="350" cy="250" r="60" fill="none" stroke="#ffdd7a" stroke-width="3" class="hub-circle" filter="url(#glow)"/>
+            <circle cx="350" cy="250" r="55" fill="rgba(255, 221, 122, 0.05)"/>
+            <text x="350" y="260" text-anchor="middle" fill="#ffdd7a" font-size="14" font-weight="bold">Community</text>
+            <text x="350" y="278" text-anchor="middle" fill="#ffdd7a" font-size="14" font-weight="bold">Hub</text>
             
-            <!-- Node 1: Create Profile -->
-            <circle cx="100" cy="100" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
-            <line x1="150" y1="130" x2="270" y2="170" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+            <!-- Animated connector lines (pulsing) -->
+            <line x1="170" y1="130" x2="310" y2="210" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
+            <line x1="530" y1="130" x2="390" y2="210" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
+            <line x1="170" y1="370" x2="310" y2="290" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
+            <line x1="530" y1="370" x2="390" y2="290" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
+            <line x1="350" y1="80" x2="350" y2="190" stroke="#ffdd7a" stroke-width="2" stroke-dasharray="8,4" class="connector-line" opacity="0.6"/>
             
-            <!-- Node 2: Meet Members -->
-            <circle cx="500" cy="100" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
-            <line x1="450" y1="130" x2="330" y2="170" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+            <!-- Node 1: Create Profile (top-left) -->
+            <circle cx="150" cy="120" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
+            <circle cx="150" cy="120" r="48" fill="rgba(255, 221, 122, 0.08)"/>
+            <g class="node-icon">
+              <circle cx="150" cy="110" r="8" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <path d="M 140 130 Q 150 140 160 130" fill="none" stroke="#ffdd7a" stroke-width="1.5" stroke-linecap="round"/>
+            </g>
             
-            <!-- Node 3: Join Conversations -->
-            <circle cx="100" cy="300" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
-            <line x1="150" y1="270" x2="270" y2="230" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+            <!-- Node 2: Meet Members (top-right) -->
+            <circle cx="550" cy="120" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
+            <circle cx="550" cy="120" r="48" fill="rgba(255, 221, 122, 0.08)"/>
+            <g class="node-icon">
+              <circle cx="540" cy="110" r="6" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <circle cx="560" cy="110" r="6" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <path d="M 540 125 L 560 125" stroke="#ffdd7a" stroke-width="1.5" stroke-linecap="round"/>
+            </g>
             
-            <!-- Node 4: Find Your Tribe -->
-            <circle cx="500" cy="300" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
-            <line x1="450" y1="270" x2="330" y2="230" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+            <!-- Node 3: Join Conversations (bottom-left) -->
+            <circle cx="150" cy="380" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
+            <circle cx="150" cy="380" r="48" fill="rgba(255, 221, 122, 0.08)"/>
+            <g class="node-icon">
+              <rect x="138" y="368" width="24" height="18" fill="none" stroke="#ffdd7a" stroke-width="1.5" rx="2"/>
+              <line x1="142" y1="372" x2="154" y2="372" stroke="#ffdd7a" stroke-width="1"/>
+              <line x1="142" y1="376" x2="154" y2="376" stroke="#ffdd7a" stroke-width="1"/>
+            </g>
             
-            <!-- Node 5: Organize Together -->
-            <circle cx="300" cy="50" r="35" fill="none" stroke="#ffdd7a" stroke-width="1.5" class="network-node"/>
-            <line x1="300" y1="85" x2="300" y2="150" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="5,5" class="connector-line"/>
+            <!-- Node 4: Find Your Tribe (bottom-right) -->
+            <circle cx="550" cy="380" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
+            <circle cx="550" cy="380" r="48" fill="rgba(255, 221, 122, 0.08)"/>
+            <g class="node-icon">
+              <circle cx="550" cy="375" r="8" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <path d="M 540 388 L 550 395 L 560 388" fill="none" stroke="#ffdd7a" stroke-width="1.5" stroke-linejoin="round"/>
+            </g>
+            
+            <!-- Node 5: Organize Together (top-center) -->
+            <circle cx="350" cy="60" r="50" fill="none" stroke="#ffdd7a" stroke-width="2" class="network-node" filter="url(#glow)"/>
+            <circle cx="350" cy="60" r="48" fill="rgba(255, 221, 122, 0.08)"/>
+            <g class="node-icon">
+              <circle cx="345" cy="55" r="5" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <circle cx="355" cy="55" r="5" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <circle cx="350" cy="65" r="5" fill="none" stroke="#ffdd7a" stroke-width="1.5"/>
+              <line x1="345" y1="58" x2="350" y2="62" stroke="#ffdd7a" stroke-width="1"/>
+              <line x1="355" y1="58" x2="350" y2="62" stroke="#ffdd7a" stroke-width="1"/>
+            </g>
           </svg>
           
           <!-- Node labels -->
           <div class="network-labels">
-            <div class="node-label" style="top:70px;left:80px">
-              <svg class="icon-small"><use href="#icon-people"/></svg>
+            <div class="node-label" style="top:100px;left:60px;animation:slideInLeft 0.8s ease-out 0.2s both">
               <span>Create Profile</span>
             </div>
-            <div class="node-label" style="top:70px;right:80px">
-              <svg class="icon-small"><use href="#icon-community"/></svg>
+            <div class="node-label" style="top:100px;right:60px;animation:slideInRight 0.8s ease-out 0.3s both">
               <span>Meet Members</span>
             </div>
-            <div class="node-label" style="bottom:70px;left:80px">
-              <svg class="icon-small"><use href="#icon-networking"/></svg>
+            <div class="node-label" style="bottom:100px;left:60px;animation:slideInLeft 0.8s ease-out 0.4s both">
               <span>Join Conversations</span>
             </div>
-            <div class="node-label" style="bottom:70px;right:80px">
-              <svg class="icon-small"><use href="#icon-community"/></svg>
+            <div class="node-label" style="bottom:100px;right:60px;animation:slideInRight 0.8s ease-out 0.5s both">
               <span>Find Your Tribe</span>
             </div>
-            <div class="node-label" style="top:10px;left:50%;transform:translateX(-50%)">
-              <svg class="icon-small"><use href="#icon-people"/></svg>
+            <div class="node-label" style="top:-20px;left:50%;transform:translateX(-50%);animation:slideDown 0.8s ease-out 0.1s both">
               <span>Organize Together</span>
             </div>
           </div>
@@ -1856,6 +1895,21 @@
         .circular-diagram {
           height: 300px;
         }
+      }
+      
+      @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      
+      @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(20px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
       
       @media (max-width: 430px) {
