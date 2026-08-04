@@ -309,6 +309,9 @@
       justify-content:center;
       overflow:hidden;
       background:transparent;
+      width:100%;
+      padding:0;
+      margin:0;
     }
 
     .hero-bg{
@@ -326,10 +329,16 @@
     .hero-content{
       position:relative;
       z-index:2;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
       text-align:center;
-      max-width:900px;
-      margin:50px auto 0;
-      padding:40px 20px;
+      width:100%;
+      max-width:1200px;
+      margin:0 auto;
+      padding:60px 20px 40px;
+      box-sizing:border-box;
     }
 
     .hero-headline{
@@ -357,7 +366,8 @@
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
       gap:12px;
-      max-width:900px;
+      width:100%;
+      max-width:500px;
       margin:0 auto 40px;
       animation:fadeInUp 1s ease-out .4s both;
     }
@@ -1337,7 +1347,11 @@
       .hero-banner, .hero, [class*="hero-section"] {
         min-height: 240px !important;
         height: auto !important;
-        padding: 60px 16px 40px !important;
+        padding: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
       }
       .hero-banner h1, .hero-headline, .banner-text h1 {
         font-size: clamp(26px, 7vw, 40px) !important;
@@ -1357,7 +1371,7 @@
       /* Full-width buttons */
       .btn, button:not(.menu-toggle):not(.close-btn), [class*="btn"]:not(.menu-toggle):not(.close-btn), a.btn, input[type="submit"] {
         display: block !important;
-        width: calc(100% - 32px) !important;
+        width: 100% !important;
         max-width: 400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
@@ -1371,8 +1385,11 @@
         display: flex !important;
         flex-direction: column !important;
         gap: 12px !important;
-        align-items: stretch !important;
+        align-items: center !important;
         width: 100% !important;
+        max-width: 400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
       }
       .hero-actions .btn, .btn-group .btn {
         width: 100% !important;
@@ -1382,12 +1399,17 @@
 
     @media (max-width:430px) {
       .hero-banner, .hero {
-        padding: 50px 12px 32px !important;
+        padding: 0 !important;
         min-height: 200px !important;
+        width: 100% !important;
       }
       .hero-content {
         max-width: 100% !important;
-        padding: 40px 12px !important;
+        padding: 60px 16px 40px !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
       }
       .hero-banner h1, .banner-text h1, .hero-headline {
         font-size: clamp(22px, 6.5vw, 32px) !important;
