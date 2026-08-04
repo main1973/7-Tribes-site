@@ -1608,9 +1608,14 @@
             <!-- Outer circle -->
             <circle cx="250" cy="250" r="180" fill="none" stroke="#ffdd7a" stroke-width="1.5" opacity="0.3"/>
             
-            <!-- Center 7TRB symbol -->
-            <circle cx="250" cy="250" r="40" fill="none" stroke="#ffdd7a" stroke-width="2"/>
-            <text x="250" y="260" text-anchor="middle" fill="#ffdd7a" font-size="14" font-weight="bold">7TRB</text>
+            <!-- Center 7TRB symbol (official logo) -->
+            <defs>
+              <clipPath id="symbolClip">
+                <circle cx="250" cy="250" r="45"/>
+              </clipPath>
+            </defs>
+            <circle cx="250" cy="250" r="45" fill="rgba(0,0,0,0.3)" stroke="#ffdd7a" stroke-width="2"/>
+            <image href="images/7trb_symbol.png" x="205" y="205" width="90" height="90" clip-path="url(#symbolClip)" preserveAspectRatio="xMidYMid slice"/>
             
             <!-- Animated energy flow (dashed circle) -->
             <circle cx="250" cy="250" r="160" fill="none" stroke="#ffdd7a" stroke-width="1" stroke-dasharray="8,4" class="energy-flow" opacity="0.6"/>
