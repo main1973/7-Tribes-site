@@ -24,6 +24,24 @@ The deployed Dashboard was exercised with a controlled Nuru-compatible provider.
 
 The deterministic `tests/nuru-state.test.cjs` test additionally checks that initial loading does not call `eth_requestAccounts`, that both address balances are queried, that wrong-chain reads are not presented as zero, and that an account disconnect clears stale identity and balances.
 
-## Remaining device-specific verification
+## Actual Nuru Android dApp Browser verification
 
-The actual Nuru Android dApp Browser is not available in this environment. The final acceptance steps requiring a live Nuru identity, AA wallet, signer address, and live wallet balances must be run inside that browser after deployment.
+The supplied Nuru Android screenshots show the deployed Dashboard in an authorized Nuru state. The Dashboard displayed **Nuru Connected**, the primary handle **7tribes.alke**, and AIN **aa0000108**. The active network was **Alkebuleum** and the balance-status card showed **Live**.
+
+| Check | Observed device result | Status |
+|---|---|---|
+| Public site opens in Nuru | Dashboard loaded in the Nuru dApp Browser | Pass |
+| Authorized identity | `Nuru Connected` | Pass |
+| Primary handle | `7tribes.alke` | Pass |
+| AIN | `aa0000108` | Pass |
+| Signer address displayed | Truncated copyable UI value shown as `0x26b0…2bab` | Pass |
+| AA wallet displayed | Truncated copyable UI value shown as `0x0f6d…442e` | Pass |
+| AA Wallet 7TRB | `20,000,000 7TRB` | Pass |
+| Signer Address 7TRB | `0 7TRB` | Pass |
+| Combined Total 7TRB | `20,000,000 7TRB` | Pass |
+| Arithmetic | `20,000,000 + 0 = 20,000,000` | Pass |
+| Token network | `Alkebuleum` | Pass |
+| Native AA-wallet balance | `5 ALKE` | Pass |
+| Last refresh | Device displayed `8/15/2026, 6:29:55 AM` | Pass |
+
+The screenshots intentionally expose only shortened address values; this record does not infer or store full wallet addresses that were not displayed. The screenshots also revealed narrow-screen wrapping in the two-column wallet-card layout. Commit `6ca9f13` changes the Nuru wallet fields to a one-column layout at `640px` and below, with ellipsis handling for shortened copyable addresses. A post-deployment Nuru-device visual refresh remains the final responsive confirmation.

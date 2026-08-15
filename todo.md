@@ -6,6 +6,7 @@
 - [x] Implement Alkebuleum chain verification, token-decimals lookup, and independent AA-wallet and signer balance reads.
 - [x] Update Dashboard and any public Web3 surface to display AA Wallet 7TRB, Signer Address 7TRB, Total 7TRB, network, and last refresh without false zero values.
 - [x] Ensure public content remains accessible outside Nuru and connect actions are explicit and user-controlled.
-- [ ] Test normal-browser behavior, inspect deployed code, push the correction, and prepare the requested verification report.
-- [ ] Correct narrow-screen Dashboard wallet-card wrapping while preserving verified Nuru values and the two-address balance logic.
-- [ ] Add the Nuru Android device evidence to the verification report and complete the final acceptance record after the responsive refinement is live.
+- [x] Test normal-browser behavior, inspect deployed code, push the correction, and prepare the requested verification report.
+- [x] Correct narrow-screen Dashboard wallet-card wrapping while preserving verified Nuru values and the two-address balance logic.
+- [x] Add the Nuru Android device evidence to the verification report and complete the final acceptance record after the responsive refinement is live.
+- [ ] Confirm the live one-column Nuru wallet-card layout inside the Nuru Android dApp Browser after a refresh.
