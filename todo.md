@@ -7,3 +7,5 @@
 - [x] Update Dashboard and any public Web3 surface to display AA Wallet 7TRB, Signer Address 7TRB, Total 7TRB, network, and last refresh without false zero values.
 - [x] Ensure public content remains accessible outside Nuru and connect actions are explicit and user-controlled.
 - [ ] Test normal-browser behavior, inspect deployed code, push the correction, and prepare the requested verification report.
+- [ ] Correct narrow-screen Dashboard wallet-card wrapping while preserving verified Nuru values and the two-address balance logic.
+- [ ] Add the Nuru Android device evidence to the verification report and complete the final acceptance record after the responsive refinement is live.

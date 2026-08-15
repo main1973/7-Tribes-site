@@ -302,6 +302,27 @@
       border-radius:4px;
     }
 
+    @media (max-width:640px){
+      .nuru-info{
+        grid-template-columns:1fr;
+        gap:12px;
+      }
+
+      .nuru-info .card{
+        min-width:0;
+      }
+
+      .nuru-info .value{
+        font-size:1.2rem;
+      }
+
+      .copy-address{
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+    }
+
     @media (max-width:min(1100px, calc(100vw - 32px))){
       .cards{grid-template-columns:repeat(2,1fr)}
       .nuru-info{grid-template-columns:1fr}
