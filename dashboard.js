@@ -1,509 +1,261 @@
-/* 7TRB Dashboard JS — Nuru Integration */
+/* Dashboard Nuru surface — uses the shared js/nuru.js client. Public data remains accessible without Nuru. */
+(function () {
+  "use strict";
 
-const CONFIG = {
-  rpcUrl: "https://rpc.alkebuleum.com",
-  chainIdHex: "0x39F6E",
-  chainIdDecimal: 237422,
-  tokenAddress: "0xdf7ce67dB19142672c4193d969cdD9975A5A6038",
-  aleTokenAddress: "0x0000000000000000000000000000000000000000", // Placeholder - update with actual ALE address
-  trackedWallet: "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB",
-  treasuryAddress: "0x26B0cA2C767758Fc3E34e0481065a55521E42BaB",
-  tokenSymbol: "7TRB",
-  aleSymbol: "ALKE",
-  tokenDecimalsFallback: 18
-};
+  const ALKE_RPC = "https://rpc.alkebuleum.com";
+  let map = null;
+  let mapMarkers = null;
 
-const ERC20_ABI = [
-  "function decimals() view returns (uint8)",
-  "function totalSupply() view returns (uint256)",
-  "function balanceOf(address owner) view returns (uint256)"
-];
-
-let rpcProvider = null;
-let browserProvider = null;
-let signer = null;
-let connectedAddress = null;
-let aaWallet = null;
-let nuruHandle = null;
-let nuruAin = null;
-let treasuryChart = null;
-let map = null;
-let mapMarkers = null;
-let isNuruBrowser = false;
-
-function el(id) {
-  return document.getElementById(id);
-}
-
-function setText(id, value) {
-  const node = el(id);
-  if (node) node.textContent = value;
-}
-
-function setBanner(message) {
-  const node = el("systemBanner");
-  if (node) {
-    node.style.display = "block";
-    node.textContent = message;
-  }
-}
-
-function setDot(id, color) {
-  const node = el(id);
-  if (node) node.style.background = color;
-}
-
-function formatNumber(value, maxFraction = 2) {
-  return Number(value || 0).toLocaleString(undefined, {
-    maximumFractionDigits: maxFraction
-  });
-}
-
-function formatAddress(addr) {
-  if (!addr) return "—";
-  return addr.substring(0, 6) + "..." + addr.substring(addr.length - 4);
-}
-
-async function getRpcProvider() {
-  if (!rpcProvider) {
-    rpcProvider = new ethers.JsonRpcProvider(CONFIG.rpcUrl);
-  }
-  return rpcProvider;
-}
-
-async function getTokenContract(providerLike) {
-  return new ethers.Contract(CONFIG.tokenAddress, ERC20_ABI, providerLike);
-}
-
-async function getAleContract(providerLike) {
-  return new ethers.Contract(CONFIG.aleTokenAddress, ERC20_ABI, providerLike);
-}
-
-function detectNuru() {
-  if (window.ethereum && window.ethereum._isNuruWallet === true) {
-    isNuruBrowser = true;
-    return true;
-  }
-  return false;
-}
-
-async function checkExistingConnection() {
-  if (!window.ethereum) {
-    return false;
+  function el(id) {
+    return document.getElementById(id);
   }
 
-  try {
-    const accounts = await window.ethereum.request({ method: "eth_accounts" });
-    if (accounts && accounts.length > 0) {
-      // Silent connection
-      await connectNuru(true);
-      return true;
-    }
-  } catch (error) {
-    console.warn("Failed to check existing connection:", error);
+  function setText(id, value) {
+    const node = el(id);
+    if (node) node.textContent = value;
   }
-  return false;
-}
 
-async function connectNuru(silent = false) {
-  if (!window.ethereum) {
-    if (!silent) {
+  function setDot(id, color) {
+    const node = el(id);
+    if (node) node.style.background = color;
+  }
+
+  function setBanner(message) {
+    const node = el("systemBanner");
+    if (!node) return;
+    node.textContent = message || "";
+    node.style.display = message ? "block" : "none";
+  }
+
+  function formatAddress(address) {
+    return address ? address.slice(0, 6) + "…" + address.slice(-4) : "—";
+  }
+
+  function updateCopyableAddress(id, address) {
+    const node = el(id);
+    if (!node) return;
+    node.textContent = formatAddress(address);
+    node.dataset.address = address || "";
+    node.disabled = !address;
+    node.title = address ? "Copy " + address : "Address unavailable";
+  }
+
+  function balanceText(balance) {
+    if (!balance) return "Unavailable";
+    if (balance.status === "available") return balance.normalized + " 7TRB";
+    if (balance.status === "partial") return "Partial — " + balance.normalized + " 7TRB";
+    if (balance.status === "same-address") return "Same as AA Wallet";
+    if (balance.status === "wrong-network") return "Switch to Alkebuleum";
+    if (balance.status === "idle") return "—";
+    return "Unavailable";
+  }
+
+  function nativeBalanceText(balance) {
+    if (!balance) return "Unavailable";
+    if (balance.status === "available") return balance.normalized + " ALKE";
+    if (balance.status === "wrong-network") return "Switch to Alkebuleum";
+    if (balance.status === "idle") return "—";
+    return "Unavailable";
+  }
+
+  function updateNuruSurface(state) {
+    const connectBtn = el("connectBtn");
+    const openNuruBtn = el("openNuruBtn");
+    const infoSection = el("nuruInfoSection");
+    const onCorrectNetwork = state.onAlkebuleum;
+
+    if (!state.detected) {
+      setText("walletBalance", "Open in Nuru to view wallet and identity");
+      setText("nuruHandle", "Handle: —");
+      setText("nuruAin", "AIN: —");
+      if (connectBtn) {
+        connectBtn.textContent = "Open in Nuru";
+        connectBtn.disabled = false;
+      }
+      if (openNuruBtn) openNuruBtn.style.display = "none";
+      if (infoSection) infoSection.style.display = "none";
+      setDot("walletDot", "#666");
+      setDot("networkDot", "#666");
       setBanner("Open this dashboard inside Nuru dApp Browser for full wallet identity features.");
+      return;
     }
-    return false;
+
+    if (!state.authorized) {
+      setText("walletBalance", "Nuru detected — connect to view wallet and identity");
+      setText("nuruHandle", "Handle: —");
+      setText("nuruAin", "AIN: —");
+      if (connectBtn) {
+        connectBtn.textContent = "Connect Nuru";
+        connectBtn.disabled = false;
+      }
+      if (openNuruBtn) openNuruBtn.style.display = "none";
+      if (infoSection) infoSection.style.display = "none";
+      setDot("walletDot", "#ffcc00");
+      setDot("networkDot", "#666");
+      setBanner("");
+      return;
+    }
+
+    if (connectBtn) {
+      connectBtn.textContent = state.loading ? "Refreshing…" : "Refresh Nuru";
+      connectBtn.disabled = state.loading;
+    }
+    if (openNuruBtn) openNuruBtn.style.display = "none";
+    if (infoSection) infoSection.style.display = "grid";
+
+    setText("walletBalance", "Nuru Connected ✓");
+    setText("nuruHandle", "Handle: " + (state.primaryHandle || "Unavailable"));
+    setText("nuruAin", "AIN: " + (state.ain || "Unavailable"));
+    updateCopyableAddress("signerAddress", state.signerAddress);
+    updateCopyableAddress("aaWallet", state.aaWallet);
+    setText("aaTokenBalance", balanceText(state.aaBalance));
+    setText("signerTokenBalance", balanceText(state.signerBalance));
+    setText("totalTokenBalance", balanceText(state.totalBalance));
+    setText("alkeBalance", nativeBalanceText(state.alkeBalance));
+    setText("networkName", onCorrectNetwork ? "Alkebuleum" : "Switch to Alkebuleum to view 7TRB");
+    setText("lastRefreshed", state.lastRefreshed ? new Date(state.lastRefreshed).toLocaleString() : "—");
+    setText("balanceStatus", state.totalBalance.status === "partial" ? "Partial" : state.totalBalance.status === "available" ? "Live" : state.totalBalance.status === "wrong-network" ? "Wrong network" : "Unavailable");
+    setText("verificationStatus", state.ain || state.primaryHandle ? "Nuru identity loaded" : "Identity unavailable");
+    setText("reputationScore", "Integration Pending");
+    setText("referralRewards", "Integration Pending");
+
+    setDot("walletDot", "#35c759");
+    setDot("networkDot", onCorrectNetwork ? "#35c759" : "#ffcc00");
+    if (!onCorrectNetwork) {
+      setBanner("Switch to Alkebuleum to view 7TRB.");
+    } else if (state.totalBalance.status === "partial") {
+      setBanner("One 7TRB wallet balance is unavailable. The displayed total is partial.");
+    } else if (state.totalBalance.status === "unavailable" && !state.loading) {
+      setBanner("7TRB balances are unavailable. No failed contract read is shown as zero.");
+    } else {
+      setBanner("");
+    }
   }
 
-  try {
-    // Detect Nuru
-    if (!detectNuru()) {
-      if (!silent) {
-        setBanner("Open this dashboard inside Nuru dApp Browser for full wallet identity features.");
-      }
-      return false;
-    }
-
-    // Request accounts
-    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-    if (!accounts || accounts.length === 0) {
-      if (!silent) {
-        setText("walletBalance", "No Account");
-        setDot("walletDot", "#ff453a");
-      }
-      return false;
-    }
-
-    connectedAddress = accounts[0];
-    browserProvider = new ethers.BrowserProvider(window.ethereum);
-    signer = await browserProvider.getSigner();
-
-    // Get Nuru identity
+  async function connectOrRefreshNuru() {
     try {
-      const identity = await window.ethereum.request({ method: "nuru_getIdentity" });
-      if (identity) {
-        nuruHandle = identity.primaryHandle || null;
-        nuruAin = identity.ain || null;
-        aaWallet = identity.aaWallet || null;
+      const state = window.NuruWeb3.getState();
+      if (!state.detected) {
+        setBanner("Open this dashboard inside Nuru dApp Browser for full wallet identity features.");
+        return;
+      }
+      if (state.authorized) {
+        await window.NuruWeb3.refresh();
+      } else {
+        await window.NuruWeb3.connect();
       }
     } catch (error) {
-      console.warn("Failed to get Nuru identity:", error);
+      setBanner(error && error.message ? error.message : "Unable to connect to Nuru.");
     }
-
-    // Check network
-    const chainHex = await window.ethereum.request({ method: "eth_chainId" });
-
-    // Update UI
-    setText("walletBalance", "Connected via Nuru ✓");
-    setText("nuruHandle", `Handle: ${nuruHandle || "—"}`);
-    setText("nuruAin", `AIN: ${nuruAin || "—"}`);
-    setText("signerAddress", formatAddress(connectedAddress));
-    setText("aaWallet", formatAddress(aaWallet));
-    
-    setDot("walletDot", "#35c759");
-
-    // Show Nuru info section
-    const nuruSection = el("nuruInfoSection");
-    if (nuruSection) nuruSection.style.display = "grid";
-
-    if (chainHex.toLowerCase() === CONFIG.chainIdHex.toLowerCase()) {
-      setDot("networkDot", "#35c759");
-      if (!silent) {
-        setBanner("Connected to Nuru on Alkebuleum.");
-      }
-    } else {
-      setDot("networkDot", "#ffcc00");
-      if (!silent) {
-        setBanner(`Connected to Nuru, but wrong network (${chainHex}). Switch to Alkebuleum.`);
-      }
-    }
-
-    // Load balances using AA wallet
-    await loadBalances();
-
-    // Set up event listeners
-    setupEventListeners();
-
-    return true;
-  } catch (error) {
-    console.error("Nuru connection failed:", error);
-    if (!silent) {
-      setText("walletBalance", "Connection Failed");
-      setBanner("Failed to connect to Nuru. Try again.");
-      setDot("walletDot", "#ff453a");
-    }
-    return false;
   }
-}
 
-async function loadBalances() {
-  try {
-    const balanceAddress = aaWallet || connectedAddress;
-    const provider = browserProvider || await getRpcProvider();
-    const contract = await getTokenContract(provider);
+  function bindCopyableAddresses() {
+    document.querySelectorAll("[data-copyable-address]").forEach(function (node) {
+      node.addEventListener("click", async function () {
+        const address = node.dataset.address;
+        if (!address || !navigator.clipboard) return;
+        try {
+          await navigator.clipboard.writeText(address);
+          const original = node.textContent;
+          node.textContent = "Copied";
+          window.setTimeout(function () { node.textContent = original; }, 1000);
+        } catch (_) {
+          setBanner("Copy unavailable in this browser. Address: " + address);
+        }
+      });
+    });
+  }
 
-    let decimals = CONFIG.tokenDecimalsFallback;
+  async function loadPublicChainData() {
     try {
-      decimals = await contract.decimals();
-    } catch (e) {
-      console.warn("Could not fetch decimals, using fallback", e);
+      const response = await fetch(ALKE_RPC, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_blockNumber", params: [] })
+      });
+      const payload = await response.json();
+      if (!payload || !payload.result) throw new Error("No block number returned");
+      setText("blockNumber", Number.parseInt(payload.result, 16).toLocaleString());
+      setText("updatedAt", new Date().toLocaleString());
+      setDot("freshDot", "#35c759");
+    } catch (_) {
+      setText("blockNumber", "Unavailable");
+      setText("updatedAt", "—");
+      setDot("freshDot", "#ff453a");
     }
-
-    const rawBalance = await contract.balanceOf(balanceAddress);
-    const formatted = ethers.formatUnits(rawBalance, decimals);
-
-    setText("tokenBalance", `${formatNumber(formatted, 4)} ${CONFIG.tokenSymbol}`);
-
-    // Fetch ALKE balance (native)
-    try {
-      const nativeBalance = await provider.getBalance(balanceAddress);
-      const aleFormatted = ethers.formatEther(nativeBalance);
-      setText("aleBalance", `${formatNumber(aleFormatted, 4)} ${CONFIG.aleSymbol}`);
-    } catch (e) {
-      console.warn("Could not fetch native balance", e);
-      setText("aleBalance", "—");
-    }
-
-    // Placeholder values
-    setText("verificationStatus", "Verified");
-    setText("reputationScore", "—");
-    setText("referralRewards", "—");
-  } catch (error) {
-    console.error("Failed to load balances:", error);
-    setText("tokenBalance", "—");
-    setText("aleBalance", "—");
   }
-}
 
-function setupEventListeners() {
-  if (!window.ethereum) return;
-
-  window.ethereum.on("accountsChanged", (accounts) => {
-    if (accounts.length === 0) {
-      handleDisconnect();
-    } else if (accounts[0] !== connectedAddress) {
-      connectedAddress = accounts[0];
-      connectNuru(true);
-    }
-  });
-
-  window.ethereum.on("nuruIdentityChanged", () => {
-    connectNuru(true);
-  });
-
-  window.ethereum.on("disconnect", () => {
-    handleDisconnect();
-  });
-}
-
-function handleDisconnect() {
-  connectedAddress = null;
-  aaWallet = null;
-  nuruHandle = null;
-  nuruAin = null;
-  browserProvider = null;
-  signer = null;
-
-  setText("walletBalance", "Not Connected");
-  setText("nuruHandle", "Handle: —");
-  setText("nuruAin", "AIN: —");
-  setText("signerAddress", "—");
-  setText("aaWallet", "—");
-  setText("tokenBalance", "—");
-  setText("aleBalance", "—");
-
-  const nuruSection = el("nuruInfoSection");
-  if (nuruSection) nuruSection.style.display = "none";
-
-  setDot("walletDot", "#666");
-  
-  const connectBtn = el("connectBtn");
-  if (connectBtn) {
-    connectBtn.textContent = "Sign in with Nuru";
-    connectBtn.style.display = "inline-flex";
-  }
-}
-
-function openNuru() {
-  if (isNuruBrowser) {
-    window.location.reload();
-  } else {
-    setBanner("Open this dashboard inside Nuru dApp Browser.");
-  }
-}
-
-async function loadReadOnlyTokenData() {
-  try {
-    const provider = await getRpcProvider();
-    const contract = await getTokenContract(provider);
-
-    let decimals = CONFIG.tokenDecimalsFallback;
-    try {
-      decimals = await contract.decimals();
-    } catch {}
-
-    const [walletRaw, treasuryRaw, totalSupplyRaw, block] = await Promise.all([
-      contract.balanceOf(CONFIG.trackedWallet),
-      contract.balanceOf(CONFIG.treasuryAddress),
-      contract.totalSupply(),
-      provider.getBlockNumber()
-    ]);
-
-    const walletBalance = Number(ethers.formatUnits(walletRaw, decimals));
-    const treasuryBalance = Number(ethers.formatUnits(treasuryRaw, decimals));
-    const totalSupply = Number(ethers.formatUnits(totalSupplyRaw, decimals));
-
-    setText("treasury", formatNumber(treasuryBalance, 0));
-    setText("blockNumber", block.toString());
-    setText("updatedAt", new Date().toLocaleString());
-
-    const treasuryPct = totalSupply > 0 ? (treasuryBalance / totalSupply) * 100 : 0;
+  function setPendingMetrics() {
+    setText("holders", "Unavailable");
+    setText("active", "Integration Pending");
+    setText("treasury", "Integration Pending");
+    setText("referrals", "Integration Pending");
+    const holdersBar = el("holdersBar");
     const treasuryBar = el("treasuryBar");
-    if (treasuryBar) treasuryBar.style.width = `${Math.min(treasuryPct, 100)}%`;
+    if (holdersBar) holdersBar.style.width = "0%";
+    if (treasuryBar) treasuryBar.style.width = "0%";
+  }
 
-    setDot("freshDot", "#35c759");
-    if (!connectedAddress) {
-      setDot("networkDot", "#35c759");
+  async function loadMerchants() {
+    try {
+      const response = await fetch("data/merchants.json", { cache: "no-store" });
+      if (!response.ok) throw new Error("merchants.json missing");
+      const merchants = await response.json();
+      renderMerchantTable(merchants);
+      renderMerchantMap(merchants);
+    } catch (_) {
+      renderMerchantTable([]);
+      renderMerchantMap([]);
     }
-
-    renderChart([
-      { label: "Launch", value: totalSupply },
-      { label: "Treasury", value: treasuryBalance }
-    ]);
-  } catch (error) {
-    console.error("Read-only token load failed:", error);
-    setText("treasury", "Unavailable");
-    setText("blockNumber", "—");
-    setText("updatedAt", "—");
-    setDot("freshDot", "#ff453a");
   }
-}
 
-async function loadMetrics() {
-  try {
-    const res = await fetch("data/metrics.json", { cache: "no-store" });
-    if (!res.ok) throw new Error("metrics.json missing");
-
-    const data = await res.json();
-
-    setText("holders", data.holders ?? "—");
-    setText("active", data.active_wallets_30d ?? "—");
-    setText("referrals", data.referrals_30d ?? "—");
-
-    if (el("holdersBar") && typeof data.holders_progress !== "undefined") {
-      el("holdersBar").style.width = `${Math.min(Number(data.holders_progress), 100)}%`;
+  function renderMerchantTable(merchants) {
+    const tbody = el("merchRows");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    if (!merchants.length) {
+      tbody.innerHTML = "<tr><td colspan=\"4\">Merchant data unavailable</td></tr>";
+      return;
     }
+    merchants.forEach(function (merchant) {
+      const row = document.createElement("tr");
+      row.innerHTML = "<td>" + (merchant.name || "—") + "</td><td>" + (merchant.city || "—") + "</td><td>" + (merchant.since || "—") + "</td><td>" + (merchant.monthly_7trb || "—") + "</td>";
+      tbody.appendChild(row);
+    });
+  }
 
-    if (Array.isArray(data.treasury_series) && data.treasury_series.length) {
-      renderChart(data.treasury_series);
+  function renderMerchantMap(merchants) {
+    const mapNode = el("map");
+    if (!mapNode || typeof window.L === "undefined") return;
+    const withCoordinates = merchants.filter(function (merchant) {
+      return typeof merchant.lat === "number" && typeof merchant.lng === "number";
+    });
+    if (!map) {
+      map = window.L.map("map").setView([42.3314, -83.0458], 3);
+      window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
+      mapMarkers = window.L.layerGroup().addTo(map);
     }
-  } catch (error) {
-    console.warn("Metrics load failed:", error.message);
-    setText("holders", "1");
-    setText("active", "1");
-    setText("referrals", "0");
-    if (el("holdersBar")) el("holdersBar").style.width = "10%";
-  }
-}
-
-function renderChart(series) {
-  const canvas = el("treasuryChart");
-  if (!canvas || typeof Chart === "undefined") return;
-
-  const labels = series.map(item => item.label);
-  const values = series.map(item => Number(item.value || 0));
-
-  if (treasuryChart) treasuryChart.destroy();
-
-  treasuryChart = new Chart(canvas, {
-    type: "line",
-    data: {
-      labels,
-      datasets: [{
-        label: "Treasury",
-        data: values,
-        borderColor: "#FFD700",
-        backgroundColor: "rgba(255,215,0,0.1)",
-        fill: true,
-        tension: 0.25
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          labels: { color: "#FFD700" }
-        }
-      },
-      scales: {
-        x: {
-          ticks: { color: "#aaa" },
-          grid: { color: "#222" }
-        },
-        y: {
-          ticks: { color: "#aaa" },
-          grid: { color: "#222" }
-        }
-      }
-    }
-  });
-}
-
-async function loadMerchants() {
-  try {
-    const res = await fetch("data/merchants.json", { cache: "no-store" });
-    if (!res.ok) throw new Error("merchants.json missing");
-
-    const merchants = await res.json();
-    renderMerchantTable(merchants);
-    renderMerchantMap(merchants);
-  } catch (error) {
-    console.warn("Merchants load failed:", error.message);
-    renderMerchantTable([
-      { name: "Mainhouse Apparel", city: "Detroit", since: "2026", monthly_7trb: "—" },
-      { name: "7Tribes Digital", city: "Online", since: "2026", monthly_7trb: "—" }
-    ]);
-    renderMerchantMap([]);
-  }
-}
-
-function renderMerchantTable(merchants) {
-  const tbody = el("merchRows");
-  if (!tbody) return;
-
-  tbody.innerHTML = "";
-
-  if (!merchants.length) {
-    tbody.innerHTML = `<tr><td colspan="4">No merchants yet</td></tr>`;
-    return;
+    mapMarkers.clearLayers();
+    if (!withCoordinates.length) return;
+    withCoordinates.forEach(function (merchant) {
+      window.L.marker([merchant.lat, merchant.lng]).bindPopup("<strong>" + merchant.name + "</strong><br>" + (merchant.city || "")).addTo(mapMarkers);
+    });
+    map.fitBounds(window.L.latLngBounds(withCoordinates.map(function (merchant) { return [merchant.lat, merchant.lng]; })), { padding: [20, 20] });
   }
 
-  merchants.forEach(m => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${m.name || "—"}</td>
-      <td>${m.city || "—"}</td>
-      <td>${m.since || "—"}</td>
-      <td>${m.monthly_7trb || "—"}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-function renderMerchantMap(merchants) {
-  const mapNode = el("map");
-  if (!mapNode || typeof L === "undefined") return;
-
-  const withCoords = merchants.filter(
-    m => typeof m.lat === "number" && typeof m.lng === "number"
-  );
-
-  if (!map) {
-    map = L.map("map").setView([42.3314, -83.0458], 3);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap contributors"
-    }).addTo(map);
-    mapMarkers = L.layerGroup().addTo(map);
+  function bindUi() {
+    const connectButton = el("connectBtn");
+    if (connectButton) connectButton.addEventListener("click", connectOrRefreshNuru);
+    bindCopyableAddresses();
   }
 
-  mapMarkers.clearLayers();
-
-  if (!withCoords.length) return;
-
-  withCoords.forEach(m => {
-    L.marker([m.lat, m.lng])
-      .bindPopup(`<strong>${m.name}</strong><br>${m.city || ""}`)
-      .addTo(mapMarkers);
-  });
-
-  const bounds = L.latLngBounds(withCoords.map(m => [m.lat, m.lng]));
-  map.fitBounds(bounds, { padding: [20, 20] });
-}
-
-function bindUi() {
-  const connectBtn = el("connectBtn");
-  if (connectBtn) connectBtn.addEventListener("click", () => connectNuru(false));
-
-  const openBtn = el("openNuruBtn");
-  if (openBtn) openBtn.addEventListener("click", openNuru);
-}
-
-async function init() {
-  bindUi();
-  
-  // Check if Nuru is available
-  detectNuru();
-  
-  // Try to check for existing connection
-  const hasConnection = await checkExistingConnection();
-  
-  // If not inside Nuru browser, show message
-  if (!isNuruBrowser) {
-    setBanner("Open this dashboard inside Nuru dApp Browser for full wallet identity features.");
+  async function init() {
+    bindUi();
+    window.NuruWeb3.subscribe(updateNuruSurface);
+    setPendingMetrics();
+    await Promise.all([loadPublicChainData(), loadMerchants()]);
+    await window.NuruWeb3.initialize();
   }
-  
-  // Load read-only data regardless of connection
-  await loadReadOnlyTokenData();
-  await loadMetrics();
-  await loadMerchants();
-}
 
-init();
+  init();
+})();

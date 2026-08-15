@@ -283,6 +283,25 @@
       word-break:break-all;
     }
 
+    .copy-address{
+      appearance:none;
+      width:100%;
+      padding:0;
+      border:0;
+      background:transparent;
+      color:var(--gold);
+      font:inherit;
+      font-weight:800;
+      text-align:left;
+      cursor:pointer;
+    }
+
+    .copy-address:focus-visible{
+      outline:2px solid var(--gold);
+      outline-offset:4px;
+      border-radius:4px;
+    }
+
     @media (max-width:min(1100px, calc(100vw - 32px))){
       .cards{grid-template-columns:repeat(2,1fr)}
       .nuru-info{grid-template-columns:1fr}
@@ -431,6 +450,7 @@
   <link rel="stylesheet" href="css/global-responsive.css">
 </head>
 
+  <div id="systemBanner" role="status" aria-live="polite"></div>
   <header>
 
 <nav class="mainNav">
@@ -455,8 +475,7 @@
         </div>
 
         <div class="actions">
-          <button id="connectBtn" class="btn btn-primary">Sign in with Nuru</button>
-          <a id="openNuruBtn" class="btn btn-ghost" href="javascript:void(0)" style="display:none;">Open in Nuru</a>
+          <button id="connectBtn" class="btn btn-primary">Connect Nuru</button>
         </div>
       </div>
 
@@ -500,22 +519,47 @@
     <section class="nuru-info" id="nuruInfoSection" style="display:none;">
       <div class="card">
         <div class="label">Signer Address (EOA)</div>
-        <div class="value" id="signerAddress">—</div>
+        <button id="signerAddress" class="value copy-address" type="button" data-copyable-address>—</button>
       </div>
 
       <div class="card">
         <div class="label">Smart Wallet Address (AA)</div>
-        <div class="value" id="aaWallet">—</div>
+        <button id="aaWallet" class="value copy-address" type="button" data-copyable-address>—</button>
       </div>
 
       <div class="card">
-        <div class="label">7TRB Balance</div>
-        <div class="value" id="tokenBalance">—</div>
+        <div class="label">AA Wallet 7TRB</div>
+        <div class="value" id="aaTokenBalance">—</div>
       </div>
 
       <div class="card">
-        <div class="label">ALKE Balance</div>
-        <div class="value" id="aleBalance">—</div>
+        <div class="label">Signer Address 7TRB</div>
+        <div class="value" id="signerTokenBalance">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Total 7TRB</div>
+        <div class="value" id="totalTokenBalance">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Network</div>
+        <div class="value" id="networkName">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Last Refreshed</div>
+        <div class="value" id="lastRefreshed">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Balance Status</div>
+        <div class="value" id="balanceStatus">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">ALKE (AA Wallet)</div>
+        <div class="value" id="alkeBalance">—</div>
       </div>
 
       <div class="card">
@@ -560,8 +604,8 @@
 
     <section class="grid">
       <div class="card">
-        <div class="label">Treasury / Supply View</div>
-        <canvas id="treasuryChart"></canvas>
+        <div class="label">Treasury / Liquidity Data</div>
+        <p class="footNote">Integration Pending — treasury and liquidity values are not shown until verified sources are connected.</p>
       </div>
 
       <div class="card">
@@ -593,6 +637,7 @@
     <span id="visitor-count">Visitors: 0</span>
   </footer>
 
+  <script src="js/nuru.js"></script>
   <script src="dashboard.js"></script>
 <script>
     // Visitor counter
