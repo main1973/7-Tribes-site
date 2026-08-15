@@ -44,4 +44,8 @@ The supplied Nuru Android screenshots show the deployed Dashboard in an authoriz
 | Native AA-wallet balance | `5 ALKE` | Pass |
 | Last refresh | Device displayed `8/15/2026, 6:29:55 AM` | Pass |
 
-The screenshots intentionally expose only shortened address values; this record does not infer or store full wallet addresses that were not displayed. The screenshots also revealed narrow-screen wrapping in the two-column wallet-card layout. Commit `6ca9f13` changes the Nuru wallet fields to a one-column layout at `640px` and below, with ellipsis handling for shortened copyable addresses. A post-deployment Nuru-device visual refresh remains the final responsive confirmation.
+The screenshots intentionally expose only shortened address values; this record does not infer or store full wallet addresses that were not displayed. The initial screenshots revealed narrow-screen wrapping in the two-column wallet-card layout. Commit `6ca9f13` changes the Nuru wallet fields to a one-column layout at `640px` and below, with ellipsis handling for shortened copyable addresses.
+
+## Final responsive confirmation
+
+A refreshed Nuru Android screenshot confirmed that the Nuru connection, identity, network, and chain-refresh states remained intact after the mobile refinement. The wallet-detail area begins as a single full-width card beneath the top Dashboard cards, replacing the former cramped two-column presentation. No new wrapping defect is visible in the refreshed view.

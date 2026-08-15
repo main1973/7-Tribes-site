@@ -9,4 +9,4 @@
 - [x] Test normal-browser behavior, inspect deployed code, push the correction, and prepare the requested verification report.
 - [x] Correct narrow-screen Dashboard wallet-card wrapping while preserving verified Nuru values and the two-address balance logic.
 - [x] Add the Nuru Android device evidence to the verification report and complete the final acceptance record after the responsive refinement is live.
-- [ ] Confirm the live one-column Nuru wallet-card layout inside the Nuru Android dApp Browser after a refresh.
+- [x] Confirm the live one-column Nuru wallet-card layout inside the Nuru Android dApp Browser after a refresh.
