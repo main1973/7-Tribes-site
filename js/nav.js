@@ -13,6 +13,20 @@
 (function() {
   'use strict';
 
+  // Load the shared counter after the footer exists. This fallback keeps the
+  // device-visit display working even when a page's direct script request is
+  // delayed by an embedded browser cache.
+  function ensureVisitorCounter() {
+    if (!document.getElementById('visitor-count') || window.__7trbVisitorCounterFallback) return;
+    window.__7trbVisitorCounterFallback = true;
+    var script = document.createElement('script');
+    script.src = 'js/visitor-counter.js?v=device-visits-20260817&fallback=nav';
+    script.async = true;
+    document.body.appendChild(script);
+  }
+
+  ensureVisitorCounter();
+
   // Navigation links — edit here to update across all pages
   var NAV_LINKS = [
     { label: 'Home', href: 'index.html' },
