@@ -10,6 +10,6 @@
 - [x] Correct narrow-screen Dashboard wallet-card wrapping while preserving verified Nuru values and the two-address balance logic.
 - [x] Add the Nuru Android device evidence to the verification report and complete the final acceptance record after the responsive refinement is live.
 - [x] Confirm the live one-column Nuru wallet-card layout inside the Nuru Android dApp Browser after a refresh.
-- [ ] Inspect every visitor-counter placeholder and script reference, including the live browser failure state.
-- [ ] Replace the broken counter implementation with a production-safe counter that avoids fabricated shared traffic figures.
-- [ ] Deploy and verify the repaired counter on the live site.
+- [x] Inspect every visitor-counter placeholder and script reference, including the live browser failure state.
+- [x] Replace the broken counter implementation with a production-safe counter that avoids fabricated shared traffic figures.
+- [x] Deploy and verify the repaired counter on the live site.
