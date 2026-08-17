@@ -655,21 +655,12 @@
   </main>
 
   <footer style="text-align:center;padding:16px;opacity:0.6;font-size:0.8rem;">
-    <span id="visitor-count">Visitors: 0</span>
+    <span id="visitor-count">Your visits: —</span>
   </footer>
 
   <script src="js/nuru.js?v=nuru-two-address-20260815"></script>
   <script src="dashboard.js?v=nuru-two-address-20260815"></script>
-<script>
-    // Visitor counter
-    (function() {
-      const count = localStorage.getItem("7trb_visits") || "0";
-      const newCount = parseInt(count) + 1;
-      localStorage.setItem("7trb_visits", newCount.toString());
-      const elem = document.getElementById("visitor-count");
-      if (elem) elem.textContent = "Visitors: " + newCount.toLocaleString();
-    })();
-</script>
+<script src="js/visitor-counter.js?v=device-visits-20260817"></script>
 
 <script src="js/nav.js"></script>
 </body>

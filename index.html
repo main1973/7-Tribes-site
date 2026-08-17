@@ -1975,7 +1975,7 @@
       </div>
       <div class="footer-bottom">
         <span>&copy; 2025 7Tribes &bull; Mainhouse Oasis LLC</span>
-        <span id="visitor-count">Visitors: 0</span>
+        <span id="visitor-count">Your visits: —</span>
       </div>
     </div>
   </footer>
@@ -2057,15 +2057,8 @@
     const detroitStats = document.querySelector('.detroit-stats');
     if (detroitStats) counterObserver.observe(detroitStats);
 
-    // Visitor counter
-    (function() {
-      const count = localStorage.getItem('7trb_visits') || '0';
-      const newCount = parseInt(count) + 1;
-      localStorage.setItem('7trb_visits', newCount.toString());
-      const el = document.getElementById('visitor-count');
-      if (el) el.textContent = 'Visitors: ' + newCount.toLocaleString();
-    })();
   </script>
+  <script src="js/visitor-counter.js?v=device-visits-20260817"></script>
   <script>
     // Mobile Menu Toggle
     const menuToggle = document.getElementById("menu-toggle");
