@@ -195,3 +195,55 @@
   });
 
 })();
+
+// Post-parse resilience for legacy documents where a drawer can be created
+// before the page has exposed a compatible navigation host. This preserves
+// all existing links and only restores the missing toggle/close pairing.
+(function () {
+  'use strict';
+  function repairDrawerToggle() {
+    var drawer = document.getElementById('mobile-drawer');
+    if (!drawer || document.getElementById('menu-toggle')) return;
+
+    var directNav = document.querySelector('nav.mainNav');
+    var host = directNav || document.querySelector('.top-nav-inner') || document.querySelector('.header-inner') || document.querySelector('.topbar');
+    if (!host) return;
+
+    if (directNav && !directNav.querySelector('.mobile-platform-brand')) {
+      var brand = document.createElement('a');
+      brand.className = 'mobile-platform-brand';
+      brand.href = 'index.html';
+      brand.innerHTML = '<img src="images/7trb_symbol.png" alt="7TRB"> <span>7TRB</span>';
+      directNav.insertBefore(brand, directNav.firstChild);
+    }
+
+    var toggle = document.createElement('button');
+    toggle.className = 'menu-toggle';
+    toggle.id = 'menu-toggle';
+    toggle.setAttribute('aria-label', 'Open navigation menu');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.innerHTML = '<span class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span></span>';
+    host.appendChild(toggle);
+
+    var overlay = document.getElementById('menu-overlay');
+    function closeMenu() {
+      drawer.classList.remove('active');
+      if (overlay) overlay.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    toggle.addEventListener('click', function () {
+      drawer.classList.add('active');
+      if (overlay) overlay.classList.add('active');
+      document.body.classList.add('menu-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    });
+    if (overlay) overlay.addEventListener('click', closeMenu);
+    var closeButton = drawer.querySelector('#close-menu');
+    if (closeButton) closeButton.addEventListener('click', closeMenu);
+    drawer.querySelectorAll('a').forEach(function (link) { link.addEventListener('click', closeMenu); });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', repairDrawerToggle);
+  else window.setTimeout(repairDrawerToggle, 0);
+})();
