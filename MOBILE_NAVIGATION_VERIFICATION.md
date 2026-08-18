@@ -19,3 +19,5 @@ The drawer uses `80vw` with a `360px` maximum, so it remains within the requeste
 The initial Dashboard mobile-frame check found that a drawer was present but no mobile toggle was available. The production page loaded `nav.js`, retained its `mainNav` and `topbar`, and remained in its correct public Nuru state. The missing-toggle condition is being treated as an incomplete shared-navigation compatibility issue and will be corrected before acceptance.
 
 The first compatibility patch did not yet attach a toggle in the live Dashboard frame, although no overflow or Nuru-state regression was observed. The shared initializer is being strengthened with a post-parse repair for any drawer that exists without its paired toggle.
+
+The subsequent production check confirmed that the Dashboard continued to receive a cached `nav.js` response: the current drawer content was present, while the latest resilient-toggle logic was absent. The final repair versions the shared `nav.js` reference on every public page so embedded and Nuru-browser caches receive the deployed global navigation code.
