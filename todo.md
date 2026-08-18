@@ -13,3 +13,8 @@
 - [x] Inspect every visitor-counter placeholder and script reference, including the live browser failure state.
 - [x] Replace the broken counter implementation with a production-safe counter that avoids fabricated shared traffic figures.
 - [x] Deploy and verify the repaired counter on the live site.
+- [ ] Audit homepage hierarchy, existing referral pages, public routes, and current Loop, Connect, and Nuru destinations.
+- [ ] Reposition the homepage as 7TRIBES — THE UNITY PLATFORM and move educational material below the ecosystem entry layer.
+- [ ] Create the production `/join` route with safe `ref` query capture and preservation through the available join actions.
+- [ ] Ensure no simulated figures are presented as real ecosystem metrics.
+- [ ] Test root and `/join` routes, `?ref=TESTCODE` retention, outbound links, mobile layout, and live deployment.

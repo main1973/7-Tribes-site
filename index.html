@@ -12,9 +12,9 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7Tribes - Organize • Build • Circulate</title>
+  <title>7TRIBES — The Unity Platform</title>
   <meta name="google-site-verification" content="J13STEzRChDz488QqKA5yP2eoiZ-FQNDUzuok6B2RHM" />
-  <meta name="description" content="7Tribes — Organize • Build • Circulate. A practical blueprint for connecting people, growing businesses, and building stronger community economies." />
+  <meta name="description" content="7TRIBES — The Unity Platform. One community, one network, and an economy we build together." />
   <link rel="icon" href="images/7trb_symbol.png" />
 
   <style>
@@ -1332,8 +1332,28 @@
       }
     }
   
-    
-
+    /* UNITY PLATFORM: a high-contrast ecosystem front door that keeps the
+       black-and-gold system, prioritizes entry actions, and moves education
+       below the live platform layer. */
+    main{display:flex;flex-direction:column}
+    .unity-platform-section{order:1;padding:72px 0 58px;position:relative;overflow:hidden;background:radial-gradient(circle at 15% 30%,rgba(231,184,82,.15),transparent 36%),linear-gradient(180deg,#0b0804,#120b04)}
+    .unity-platform-section::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(255,215,122,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,215,122,.12) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(90deg,transparent,black 18%,black 82%,transparent)}
+    .unity-platform-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:34px;align-items:end}
+    .unity-eyebrow{margin:0 0 12px;color:var(--gold-bright);font-size:.75rem;letter-spacing:.2em;font-weight:900;text-transform:uppercase}
+    .unity-platform-copy h2{max-width:18ch;margin:0;color:var(--ink);font-size:clamp(32px,5vw,60px);line-height:1.03;letter-spacing:-.035em}
+    .unity-platform-copy p{max-width:58ch;margin:18px 0 0;color:var(--muted);font-size:1.05rem}
+    .unity-platform-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .unity-platform-actions .btn{min-width:190px}
+    .layer-ledger{display:grid;gap:10px;padding:18px;border:1px solid rgba(255,215,122,.23);border-radius:22px;background:rgba(20,14,7,.72);box-shadow:var(--shadow);backdrop-filter:blur(8px)}
+    .layer-ledger-header{display:flex;align-items:center;gap:10px;padding:0 4px 7px;border-bottom:1px solid rgba(255,215,122,.16);color:var(--gold-bright);font-size:.75rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+    .layer-ledger-header img{width:28px;height:28px;object-fit:contain}
+    .layer-row{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:8px 4px;border-bottom:1px solid rgba(255,215,122,.08)}
+    .layer-row:last-child{border-bottom:0}
+    .layer-row strong{color:var(--ink);font-size:1rem}.layer-row span{color:var(--muted);font-size:.88rem;text-align:right}
+    #ecosystem-map{order:2}#role-selector{order:3}#why-struggle{order:10}#organize{order:11}#build{order:12}#circulate{order:13}#blueprint{order:14}#simulator{order:15}#detroit{order:16}#closing{order:17}
+    .illustrative-note{max-width:760px;margin:20px auto 0;padding:12px 16px;border-left:2px solid var(--gold);background:rgba(231,184,82,.07);color:var(--muted);font-size:.9rem;text-align:left}
+    .detroit-stat-value.is-qualitative{font-size:clamp(18px,2.6vw,30px);line-height:1.15;color:var(--gold-bright)}
+    @media(max-width:760px){.unity-platform-section{padding:48px 0 38px}.unity-platform-inner{grid-template-columns:1fr;gap:24px}.unity-platform-copy h2{max-width:none}.unity-platform-actions{display:grid;grid-template-columns:1fr}.unity-platform-actions .btn{width:100%;min-width:0}.layer-row{align-items:flex-start;flex-direction:column;gap:2px}.layer-row span{text-align:left}}
   </style>
   <link rel="stylesheet" href="css/global-responsive.css">
   <link rel="stylesheet" href="svg/icons.svg">
@@ -1455,14 +1475,12 @@
     </div>
 
     <div class="hero-content">
-      <h1 class="hero-headline">Organize • Build • Circulate</h1>
-      <p class="hero-subheadline">A practical blueprint for connecting people, growing businesses, and building stronger community economies.</p>
+      <h1 class="hero-headline">7TRIBES — THE UNITY PLATFORM</h1>
+      <p class="hero-subheadline">One Community. One Network. An Economy We Build Together.<br>Organize people. Connect businesses. Create opportunities. Circulate value.</p>
 
       <div class="hero-actions">
-        <a href="https://loop.7trb.com" class="btn gold">Enter Loop</a>
-        <a href="https://connect.7trb.com" class="btn ghost">Explore Connect</a>
-        <a href="learn.html" class="btn ghost">Learn About 7TRB</a>
-        <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn ghost">Download Nuru</a>
+        <a href="#unity-platform" class="btn gold">Enter the Ecosystem</a>
+        <a href="join/" class="btn ghost">Join 7Tribes</a>
       </div>
     </div>
 
@@ -1474,6 +1492,29 @@
   </section>
 
   <main>
+
+    <!-- UNITY PLATFORM ENTRY LAYER -->
+    <section class="section unity-platform-section" id="unity-platform">
+      <div class="wrap unity-platform-inner">
+        <div class="unity-platform-copy" data-animate="fade-up">
+          <p class="unity-eyebrow">The ecosystem entry point</p>
+          <h2>One community. One network. An economy we build together.</h2>
+          <p>7TRIBES connects community, commerce, identity, utility, and infrastructure so people can organize, businesses can grow, and value can move through the ecosystem.</p>
+          <div class="unity-platform-actions">
+            <a class="btn gold" href="join/">Join 7Tribes</a>
+            <a class="btn ghost" href="https://loop.7trb.com">Enter Loop</a>
+          </div>
+        </div>
+        <div class="layer-ledger" aria-label="7Tribes ecosystem layers" data-animate="fade-up">
+          <div class="layer-ledger-header"><img src="images/7trb_symbol.png" alt="">Ecosystem layers</div>
+          <div class="layer-row"><strong>Loop</strong><span>Community</span></div>
+          <div class="layer-row"><strong>Connect</strong><span>Commerce</span></div>
+          <div class="layer-row"><strong>Nuru</strong><span>Identity + Web3</span></div>
+          <div class="layer-row"><strong>7TRB</strong><span>Utility + Circulation</span></div>
+          <div class="layer-row"><strong>Alkebuleum</strong><span>Blockchain infrastructure</span></div>
+        </div>
+      </div>
+    </section>
 
     <!-- WHY COMMUNITIES STRUGGLE -->
     <section class="section struggle-section" id="why-struggle">
@@ -1710,7 +1751,7 @@
     <!-- ECOSYSTEM MAP -->
     <section class="section ecosystem-map-section" id="ecosystem-map">
       <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">The Ecosystem</h2>
+        <h2 class="premium-title" data-animate="fade-up">Explore the Unity Platform</h2>
         <p class="premium-subtitle" data-animate="fade-up">Five layers working together</p>
         <div class="eco-map-grid" data-animate="fade-up">
           <div class="eco-map-card active" onclick="selectEcosystem(this, 0)">
@@ -1718,7 +1759,7 @@
               <img src="images/7trb_symbol.png" alt="7TRB" style="width:32px;height:32px;"/>
             </div>
             <h3>7TRB</h3>
-            <p>Education and economic model</p>
+            <p>Utility + circulation</p>
             <a href="learn.html" class="eco-map-link">Learn More &rarr;</a>
           </div>
           <div class="eco-map-card" onclick="selectEcosystem(this, 1)">
@@ -1726,7 +1767,7 @@
               <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="12"/><path d="M10 16 L14 20 L22 12"/></svg>
             </div>
             <h3>Loop</h3>
-            <p>Town hall and community</p>
+            <p>Community</p>
             <a href="https://loop.7trb.com" class="eco-map-link">Enter Loop &rarr;</a>
           </div>
           <div class="eco-map-card" onclick="selectEcosystem(this, 2)">
@@ -1734,7 +1775,7 @@
               <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="24" height="16" rx="3"/><line x1="4" y1="14" x2="28" y2="14"/></svg>
             </div>
             <h3>Connect</h3>
-            <p>Marketplace and profiles</p>
+            <p>Commerce</p>
             <a href="https://connect.7trb.com" class="eco-map-link">Explore Connect &rarr;</a>
           </div>
           <div class="eco-map-card" onclick="selectEcosystem(this, 3)">
@@ -1742,7 +1783,7 @@
               <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="3"/><circle cx="16" cy="22" r="3"/></svg>
             </div>
             <h3>Nuru</h3>
-            <p>Wallet, identity, and dApp browser</p>
+            <p>Identity + Web3</p>
             <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="eco-map-link">Download Nuru &rarr;</a>
           </div>
           <div class="eco-map-card" onclick="selectEcosystem(this, 4)">
@@ -1857,8 +1898,8 @@
     <!-- COMMUNITY GROWTH SIMULATOR -->
     <section class="section simulator-section" id="simulator">
       <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">Community Growth Simulator</h2>
-        <p class="premium-subtitle" data-animate="fade-up">See how organized communities create economic power</p>
+        <h2 class="premium-title" data-animate="fade-up">Community Scenario Lab</h2>
+        <p class="premium-subtitle" data-animate="fade-up">Explore an illustrative model of organized community activity</p>
         <div class="sim-dashboard" data-animate="fade-up">
           <div class="sim-controls">
             <div class="sim-slider-group">
@@ -1885,42 +1926,43 @@
           <div class="sim-results">
             <div class="sim-stat">
               <span class="sim-stat-value" id="connections-result">12,375</span>
-              <span class="sim-stat-label">Connections</span>
+              <span class="sim-stat-label">Illustrative connections</span>
             </div>
             <div class="sim-stat">
               <span class="sim-stat-value" id="active-businesses-result">25</span>
-              <span class="sim-stat-label">Active Businesses</span>
+              <span class="sim-stat-label">Illustrative active businesses</span>
             </div>
             <div class="sim-stat">
               <span class="sim-stat-value" id="participation-result">10%</span>
-              <span class="sim-stat-label">Participation Score</span>
+              <span class="sim-stat-label">Illustrative participation score</span>
             </div>
           </div>
         </div>
+        <p class="illustrative-note">This scenario tool uses the settings selected above. It is educational and does not represent live 7Tribes ecosystem metrics.</p>
       </div>
     </section>
 
     <!-- DETROIT SECTION -->
     <section class="section detroit-section" id="detroit">
       <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">Detroit: Flagship City</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Building the model for community-powered economies</p>
+        <h2 class="premium-title" data-animate="fade-up">Detroit: Community Focus</h2>
+        <p class="premium-subtitle" data-animate="fade-up">A place to organize people, connect commerce, and build local infrastructure</p>
         <div class="detroit-stats" data-animate="fade-up">
           <div class="detroit-stat">
-            <span class="detroit-stat-value" data-count="247">0</span>
-            <span class="detroit-stat-label">Members</span>
+            <span class="detroit-stat-value is-qualitative">Community</span>
+            <span class="detroit-stat-label">Member networks</span>
           </div>
           <div class="detroit-stat">
-            <span class="detroit-stat-value" data-count="34">0</span>
-            <span class="detroit-stat-label">Businesses</span>
+            <span class="detroit-stat-value is-qualitative">Commerce</span>
+            <span class="detroit-stat-label">Merchant collaboration</span>
           </div>
           <div class="detroit-stat">
-            <span class="detroit-stat-value" data-count="12">0</span>
-            <span class="detroit-stat-label">Projects</span>
+            <span class="detroit-stat-value is-qualitative">Projects</span>
+            <span class="detroit-stat-label">Community initiatives</span>
           </div>
           <div class="detroit-stat">
-            <span class="detroit-stat-value" data-count="89">0</span>
-            <span class="detroit-stat-label">Community Growth %</span>
+            <span class="detroit-stat-value is-qualitative">Circulation</span>
+            <span class="detroit-stat-label">Local opportunity</span>
           </div>
         </div>
         <div class="premium-cta" data-animate="fade-up">
@@ -1932,10 +1974,10 @@
     <!-- CLOSING SECTION -->
     <section class="section closing-section" id="closing">
       <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">The Infrastructure Is Being Built</h2>
+        <h2 class="premium-title" data-animate="fade-up">The Unity Platform Is Live and Growing</h2>
         <p class="premium-subtitle" data-animate="fade-up">Join the ecosystem. Start organizing. Build something real.</p>
         <div class="closing-ctas" data-animate="fade-up">
-          <a href="https://loop.7trb.com" class="btn gold premium-btn">Join Loop</a>
+          <a href="join/" class="btn gold premium-btn">Join 7Tribes</a>
           <a href="https://connect.7trb.com" class="btn ghost premium-btn">Explore Connect</a>
           <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn ghost premium-btn">Download Nuru</a>
           <a href="learn.html" class="btn ghost premium-btn">Read Blueprint</a>
