@@ -55,8 +55,51 @@
     return current === href;
   }
 
-  // Only inject if hamburger doesn't already exist (avoid duplicates)
-  if (document.getElementById('mobile-drawer')) return;
+  // Some legacy pages can have a drawer inserted before the associated toggle.
+  // Complete that pairing instead of returning with an unreachable drawer.
+  var existingDrawer = document.getElementById('mobile-drawer');
+  if (existingDrawer) {
+    var existingToggle = document.getElementById('menu-toggle');
+    if (!existingToggle) {
+      var existingDirectNav = document.querySelector('nav.mainNav');
+      var existingHost = document.querySelector('.top-nav-inner') || document.querySelector('.header-inner') || document.querySelector('.topbar') || existingDirectNav;
+      if (existingHost) {
+        if (existingDirectNav && !existingDirectNav.querySelector('.mobile-platform-brand')) {
+          var existingBrand = document.createElement('a');
+          existingBrand.className = 'mobile-platform-brand';
+          existingBrand.href = 'index.html';
+          existingBrand.innerHTML = '<img src="images/7trb_symbol.png" alt="7TRB"> <span>7TRB</span>';
+          existingDirectNav.insertBefore(existingBrand, existingDirectNav.firstChild);
+        }
+        existingToggle = document.createElement('button');
+        existingToggle.className = 'menu-toggle';
+        existingToggle.id = 'menu-toggle';
+        existingToggle.setAttribute('aria-label', 'Open navigation menu');
+        existingToggle.setAttribute('aria-expanded', 'false');
+        existingToggle.innerHTML = '<span class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span></span>';
+        existingHost.appendChild(existingToggle);
+        var existingOverlay = document.getElementById('menu-overlay');
+        function openExistingMenu() {
+          existingDrawer.classList.add('active');
+          if (existingOverlay) existingOverlay.classList.add('active');
+          document.body.classList.add('menu-open');
+          existingToggle.setAttribute('aria-expanded', 'true');
+        }
+        function closeExistingMenu() {
+          existingDrawer.classList.remove('active');
+          if (existingOverlay) existingOverlay.classList.remove('active');
+          document.body.classList.remove('menu-open');
+          existingToggle.setAttribute('aria-expanded', 'false');
+        }
+        existingToggle.addEventListener('click', openExistingMenu);
+        if (existingOverlay) existingOverlay.addEventListener('click', closeExistingMenu);
+        var existingClose = existingDrawer.querySelector('#close-menu');
+        if (existingClose) existingClose.addEventListener('click', closeExistingMenu);
+        existingDrawer.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeExistingMenu); });
+      }
+    }
+    return;
+  }
 
   // --- Create hamburger button ---
   var toggle = document.createElement('button');
