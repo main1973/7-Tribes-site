@@ -31,6 +31,6 @@
 - [x] Reconcile the uploaded Unity Platform visual-upgrade checklist against the committed and deployed site-wide visual system.
 - [x] Apply only verified outstanding corrections, if any, without altering working content, data, links, forms, or integrations. No outstanding correction was identified.
 - [x] Report the repository and production status for the uploaded requirements.
-- [ ] Audit homepage section selectors, existing dark environments, and ecosystem/role-card mobile layout risks.
-- [ ] Apply richer low-saturation section environments, atmospheric dividers, and elevated card surfaces without changing content or behavior.
-- [ ] Verify homepage section reflow and horizontal containment at phone widths, deploy, and document the visual refinement.
+- [x] Audit homepage section selectors, existing dark environments, and ecosystem/role-card mobile layout risks.
+- [x] Apply richer low-saturation section environments, atmospheric dividers, and elevated card surfaces without changing content or behavior.
+- [x] Verify homepage section reflow and horizontal containment at phone widths, deploy, and document the visual refinement.
