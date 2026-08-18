@@ -21,3 +21,17 @@ The initial Dashboard mobile-frame check found that a drawer was present but no 
 The first compatibility patch did not yet attach a toggle in the live Dashboard frame, although no overflow or Nuru-state regression was observed. The shared initializer is being strengthened with a post-parse repair for any drawer that exists without its paired toggle.
 
 The subsequent production check confirmed that the Dashboard continued to receive a cached `nav.js` response: the current drawer content was present, while the latest resilient-toggle logic was absent. The final repair versions the shared `nav.js` reference on every public page so embedded and Nuru-browser caches receive the deployed global navigation code.
+
+## Final direct-navigation confirmation
+
+After cache-versioning the shared navigation script and adding the legacy drawer recovery path, the 390px production Dashboard frame passed the complete mobile-menu flow. The Dashboard showed a **48px** hamburger touch target, opened the **312px** drawer, showed the Platform / Community / Resources groups, highlighted **Dashboard** as the active page, displayed **Enter the Ecosystem** as its persistent CTA, and closed successfully. The public Dashboard state remained **Open in Nuru**, and no horizontal overflow occurred. A final desktop check confirmed the direct-navigation mobile brand is hidden above the mobile breakpoint.
+
+## Release record
+
+| Item | Result |
+|---|---|
+| Main navigation refinement | `e9ec6b5` |
+| Direct-navigation support | `ed0249f` |
+| Legacy-drawer and cache resilience | `af42b44`, `ac96bf6` |
+| Desktop safety refinement | `65a7a53` |
+| Live production verification | Completed on 2026-08-18 |
