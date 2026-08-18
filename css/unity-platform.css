@@ -209,3 +209,119 @@ body[data-unity-env] :is(footer, .footer, .premium-footer) {
 @media (prefers-reduced-motion: reduce) {
   body[data-unity-env] * { transition-duration: 0.01ms !important; }
 }
+
+/* ========================================================================
+   HOMEPAGE ATMOSPHERE REFINEMENT
+   Preserves the existing Unity Platform structure while making each journey
+   phase visually distinct through restrained, low-saturation dark layers.
+   ======================================================================== */
+body[data-unity-env="education"] main > .section {
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 221, 122, 0.09);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.32);
+  background-color: #0b0a09;
+}
+
+body[data-unity-env="education"] .unity-platform-section {
+  background:
+    radial-gradient(ellipse 64% 75% at 82% 20%, rgba(177, 101, 26, 0.18), transparent 67%),
+    radial-gradient(ellipse 50% 60% at 10% 90%, rgba(231, 184, 82, 0.09), transparent 70%),
+    linear-gradient(132deg, #12100f 0%, #21160d 50%, #0c0b0a 100%) !important;
+}
+
+body[data-unity-env="education"] .struggle-section {
+  background:
+    radial-gradient(ellipse 64% 55% at 8% 20%, rgba(132, 75, 37, 0.17), transparent 70%),
+    linear-gradient(145deg, #21150d 0%, #15100d 51%, #0d0c0c 100%) !important;
+}
+
+body[data-unity-env="education"] .organize-section {
+  background:
+    radial-gradient(ellipse 62% 56% at 52% 30%, rgba(47, 91, 167, 0.19), transparent 68%),
+    linear-gradient(145deg, #080d1b 0%, #10182a 50%, #0a0c13 100%) !important;
+}
+
+body[data-unity-env="education"] .build-section {
+  background:
+    radial-gradient(ellipse 54% 60% at 88% 28%, rgba(169, 93, 27, 0.19), transparent 68%),
+    linear-gradient(132deg, #160e08 0%, #2b190d 48%, #0e0c0a 100%) !important;
+}
+
+body[data-unity-env="education"] .circulate-section {
+  background:
+    radial-gradient(circle at 50% 47%, rgba(231, 184, 82, 0.16), transparent 31%),
+    radial-gradient(ellipse 88% 72% at 52% 58%, rgba(34, 108, 61, 0.20), transparent 72%),
+    linear-gradient(145deg, #08130d 0%, #11261a 54%, #080d0a 100%) !important;
+}
+
+body[data-unity-env="education"] .ecosystem-map-section {
+  background:
+    radial-gradient(circle at 50% 32%, rgba(231, 184, 82, 0.17), transparent 32%),
+    radial-gradient(ellipse 78% 68% at 8% 88%, rgba(33, 62, 120, 0.18), transparent 70%),
+    linear-gradient(145deg, #080b14 0%, #10182a 50%, #090a0e 100%) !important;
+}
+
+body[data-unity-env="education"] .role-section {
+  background:
+    radial-gradient(ellipse 68% 60% at 84% 20%, rgba(126, 35, 57, 0.22), transparent 70%),
+    linear-gradient(145deg, #180a10 0%, #2b111b 51%, #100a0d 100%) !important;
+}
+
+body[data-unity-env="education"] .blueprint-section {
+  background:
+    radial-gradient(ellipse 40% 64% at 36% 45%, rgba(255, 218, 127, 0.17), transparent 65%),
+    radial-gradient(ellipse 55% 54% at 90% 18%, rgba(180, 111, 25, 0.15), transparent 69%),
+    linear-gradient(145deg, #1f150b 0%, #2a1b0d 49%, #100c09 100%) !important;
+}
+
+body[data-unity-env="education"] .simulator-section {
+  background:
+    radial-gradient(ellipse 60% 64% at 76% 18%, rgba(49, 94, 174, 0.18), transparent 70%),
+    linear-gradient(145deg, #090d19 0%, #111c30 50%, #0a0c12 100%) !important;
+}
+
+body[data-unity-env="education"] .detroit-section {
+  background:
+    radial-gradient(ellipse 60% 58% at 14% 22%, rgba(126, 33, 54, 0.21), transparent 70%),
+    radial-gradient(ellipse 46% 54% at 92% 78%, rgba(166, 96, 29, 0.15), transparent 72%),
+    linear-gradient(145deg, #180a10 0%, #2c1516 51%, #120b0c 100%) !important;
+}
+
+body[data-unity-env="education"] .closing-section {
+  background:
+    radial-gradient(ellipse 70% 90% at 50% 10%, rgba(255, 211, 110, 0.25), transparent 68%),
+    radial-gradient(ellipse 80% 68% at 82% 80%, rgba(163, 88, 20, 0.20), transparent 70%),
+    linear-gradient(145deg, #2e1b0d 0%, #191109 52%, #0c0907 100%) !important;
+}
+
+body[data-unity-env="education"] main > .section::before {
+  content: "";
+  position: absolute;
+  inset: auto 7% -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 221, 122, 0.46), transparent);
+  pointer-events: none;
+}
+
+body[data-unity-env="education"] :is(.premium-card, .build-card, .role-card, .ecosystem-card, .chapter-card, .simulator-panel, .detroit-stat, .layer-card) {
+  background: linear-gradient(145deg, rgba(255, 248, 230, 0.075), rgba(8, 8, 10, 0.56)) !important;
+  border: 1px solid rgba(232, 188, 98, 0.32) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 241, 202, 0.06);
+}
+
+body[data-unity-env="education"] :is(.premium-card, .build-card, .role-card, .ecosystem-card, .chapter-card, .simulator-panel, .detroit-stat, .layer-card):hover {
+  border-color: rgba(255, 221, 122, 0.54) !important;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.34), 0 0 24px rgba(231, 184, 82, 0.08);
+}
+
+@media (max-width: 640px) {
+  body[data-unity-env="education"] :is(.premium-cards-grid, .build-cards-grid, .role-cards-grid, .ecosystem-grid, .ecosystem-map-grid, .detroit-stats, .blueprint-chapters) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  body[data-unity-env="education"] :is(.premium-card, .build-card, .role-card, .ecosystem-card, .chapter-card, .simulator-panel, .detroit-stat, .layer-card) {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
