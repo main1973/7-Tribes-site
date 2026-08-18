@@ -23,3 +23,8 @@
 - [x] Apply the shared visual system to all public pages without altering live data, zero states, forms, wallet behavior, or ecosystem URLs.
 - [x] Run page-by-page desktop and mobile checks for overflow, readability, card stacking, navigation, and preserved functionality.
 - [x] Deploy the site-wide visual upgrade and publish a production verification record.
+- [ ] Audit the shared header CSS, drawer markup generator, and current-page link behavior across public routes.
+- [ ] Increase mobile branding, hamburger target, header height, drawer treatment, close affordance, and active-link treatment globally.
+- [ ] Change the persistent mobile drawer CTA to Enter the Ecosystem while retaining Loop under Community.
+- [ ] Test menu interaction and containment at 320px, 360px, 390px, 412px, and 430px across representative routes.
+- [ ] Deploy and document the completed global navigation refinement.

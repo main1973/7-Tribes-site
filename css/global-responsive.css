@@ -142,22 +142,26 @@ small, .text-sm {
   text-decoration: none;
 }
 
+/* UNITY MOBILE NAV: official brand symbol and wordmark lead the header;
+   drawer remains compact, clearly grouped, and safely touch-accessible. */
 /* Hamburger button */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
-  color: var(--gold-bright, #e7b852);
-  font-size: 26px;
+  color: var(--gold-bright, #ffdd7a);
+  font-size: 0;
   cursor: pointer;
-  padding: 8px;
+  padding: 9px;
   line-height: 1;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: 48px;
+  min-height: 48px;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
+.hamburger-icon { display:flex; width:30px; flex-direction:column; gap:5px; }
+.hamburger-icon > span { display:block; width:100%; height:3px; border-radius:99px; background:var(--gold-bright, #ffdd7a); box-shadow:0 0 8px rgba(255,215,122,.22); }
 
 /* Mobile overlay */
 .menu-overlay {
@@ -179,11 +183,12 @@ small, .text-sm {
   display: none;
   position: fixed;
   top: 0; right: 0;
-  width: min(300px, 85vw);
+  width: min(80vw, 360px);
   height: 100vh;
   height: 100dvh;
-  background: linear-gradient(135deg, rgba(15, 10, 5, 0.98), rgba(26, 18, 8, 0.98));
-  border-left: 1px solid rgba(255, 215, 122, 0.2);
+  background: radial-gradient(ellipse 80% 35% at 100% 0%, rgba(184,131,27,.22), transparent 70%), linear-gradient(155deg, rgba(35,20,9,.99), rgba(11,8,7,.99) 58%, rgba(30,18,10,.99));
+  border-left: 1px solid rgba(255, 215, 122, 0.42);
+  box-shadow: -22px 0 55px rgba(0,0,0,.42);
   z-index: 999;
   overflow-y: auto;
   flex-direction: column;
@@ -199,26 +204,25 @@ small, .text-sm {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 18px;
+  min-height:72px;
+  padding: 12px 18px;
   border-bottom: 1px solid rgba(255, 215, 122, 0.15);
   flex-shrink: 0;
 }
-.drawer-header img {
-  width: 28px; height: 28px; border-radius: 50%;
-}
+.drawer-header img { width:40px; height:40px; border-radius:50%; }
 .drawer-header span {
   color: #e7b852;
-  font-weight: 800;
-  font-size: 14px;
+  font-weight: 900;
+  font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
 .close-btn {
   background: none; border: none;
-  color: #e7b852; font-size: 28px;
-  cursor: pointer; padding: 4px 8px;
-  min-width: 44px; min-height: 44px;
+  color: #ffdd7a; font-size: 34px;
+  cursor: pointer; padding: 4px;
+  min-width: 48px; min-height: 48px;
   display: flex; align-items: center; justify-content: center;
 }
 
@@ -243,6 +247,14 @@ small, .text-sm {
   color: #e7b852;
 }
 
+.drawer-content, .drawer-links { flex:1; overflow-y:auto; padding:12px 18px; }
+.drawer-section { margin:0 0 14px; }
+.drawer-section-title { display:block; margin:0 0 5px; color:var(--unity-muted, #c9b898); font-size:10px; font-weight:900; letter-spacing:.16em; text-transform:uppercase; }
+.drawer-section a { display:block; margin:1px 0; padding:8px 10px; border-radius:9px; color:#f5e6c8; font-size:14px; font-weight:700; line-height:1.2; text-decoration:none; }
+.drawer-section a[aria-current="page"] { color:#ffdd7a; background:linear-gradient(90deg, rgba(231,184,82,.20), rgba(231,184,82,.03)); box-shadow:inset 2px 0 0 #e7b852; }
+.drawer-footer { padding:12px 18px 16px; border-top:1px solid rgba(255,215,122,.15); background:linear-gradient(180deg, rgba(8,6,4,.02), rgba(8,6,4,.32)); }
+.drawer-cta { display:flex; width:100%; min-height:48px; align-items:center; justify-content:center; border:1px solid rgba(255,221,122,.62); border-radius:12px; background:linear-gradient(108deg, #ffdd7a, #e7b852 52%, #b8831b); color:#170d03; font-size:13px; font-weight:900; letter-spacing:.07em; text-align:center; text-decoration:none; text-transform:uppercase; }
+
 body.menu-open {
   overflow: hidden;
 }
@@ -256,11 +268,15 @@ body.menu-open {
     display: flex !important;
   }
   .top-nav-inner, .header-inner {
-    padding: 8px 16px;
+    min-height:70px;
+    padding:12px 18px;
+    gap:12px;
   }
   .nav-brand img, .brand img {
-    width: 32px; height: 32px;
+    width:42px; height:42px;
   }
+  .nav-brand, .brand { gap:10px; }
+  .nav-brand span, .brand span { color:var(--gold-bright, #ffdd7a); font-size:18px; font-weight:900; letter-spacing:.11em; }
 }
 
 /* ============================================================

@@ -27,17 +27,33 @@
 
   ensureVisitorCounter();
 
-  // Navigation links — edit here to update across all pages
-  var NAV_LINKS = [
-    { label: 'Home', href: 'index.html' },
-    { label: 'Learn', href: 'learn.html' },
-    { label: 'Loop', href: 'https://loop.7trb.com' },
-    { label: 'Ecosystem', href: 'ecosystem.html' },
-    { label: 'Transparency', href: 'transparency.html' },
-    { label: 'Dashboard', href: 'dashboard.html' },
-    { label: 'Builders', href: 'builders.html' },
-    { label: 'Developers', href: 'developers.html' }
+  // Navigation links — edit here to update across all pages.
+  // The sections intentionally distinguish the public platform, community,
+  // and resources rather than treating Loop as the entire ecosystem.
+  var NAV_SECTIONS = [
+    { title: 'Platform', links: [
+      { label: 'Home', href: 'index.html' },
+      { label: 'Learn', href: 'learn.html' },
+      { label: 'Ecosystem', href: 'ecosystem.html' },
+      { label: 'Transparency', href: 'transparency.html' }
+    ]},
+    { title: 'Community', links: [
+      { label: 'Loop', href: 'https://loop.7trb.com' },
+      { label: 'Connect', href: 'https://connect.7trb.com' },
+      { label: 'Telegram', href: 'https://t.me/SevenTribeowner' }
+    ]},
+    { title: 'Resources', links: [
+      { label: 'Builders', href: 'builders.html' },
+      { label: 'Developers', href: 'developers.html' },
+      { label: 'Dashboard', href: 'dashboard.html' }
+    ]}
   ];
+
+  function isCurrentPage(href) {
+    if (/^https?:/i.test(href)) return false;
+    var current = window.location.pathname.split('/').pop() || 'index.html';
+    return current === href;
+  }
 
   // Only inject if hamburger doesn't already exist (avoid duplicates)
   if (document.getElementById('mobile-drawer')) return;
@@ -47,7 +63,7 @@
   toggle.className = 'menu-toggle';
   toggle.id = 'menu-toggle';
   toggle.setAttribute('aria-label', 'Open navigation menu');
-  toggle.innerHTML = '&#9776;';
+  toggle.innerHTML = '<span class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span></span>';
 
   // Insert hamburger into the nav-inner
   var navInner = document.querySelector('.top-nav-inner') || 
@@ -72,12 +88,17 @@
     '<img src="images/7trb_symbol.png" alt="7TRB">' +
     '<span>7TRB</span></div>' +
     '<button class="close-btn" id="close-menu" aria-label="Close menu">&times;</button></div>' +
-    '<div class="drawer-links">';
+    '<div class="drawer-content">';
 
-  for (var i = 0; i < NAV_LINKS.length; i++) {
-    drawerHTML += '<a href="' + NAV_LINKS[i].href + '">' + NAV_LINKS[i].label + '</a>';
+  for (var i = 0; i < NAV_SECTIONS.length; i++) {
+    drawerHTML += '<div class="drawer-section"><span class="drawer-section-title">' + NAV_SECTIONS[i].title + '</span>';
+    for (var j = 0; j < NAV_SECTIONS[i].links.length; j++) {
+      var link = NAV_SECTIONS[i].links[j];
+      drawerHTML += '<a href="' + link.href + '"' + (isCurrentPage(link.href) ? ' aria-current="page"' : '') + '>' + link.label + '</a>';
+    }
+    drawerHTML += '</div>';
   }
-  drawerHTML += '</div>';
+  drawerHTML += '</div><div class="drawer-footer"><a class="drawer-cta" href="join/">Enter the Ecosystem</a></div>';
   drawer.innerHTML = drawerHTML;
 
   // Append to body
@@ -107,8 +128,8 @@
 
   // Close on link click
   var links = drawer.querySelectorAll('a');
-  for (var j = 0; j < links.length; j++) {
-    links[j].addEventListener('click', function() {
+  for (var k = 0; k < links.length; k++) {
+    links[k].addEventListener('click', function() {
       closeMenu();
     });
   }
