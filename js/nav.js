@@ -66,10 +66,20 @@
   toggle.innerHTML = '<span class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span></span>';
 
   // Insert hamburger into the nav-inner
+  var directMainNav = document.querySelector('nav.mainNav');
   var navInner = document.querySelector('.top-nav-inner') || 
                  document.querySelector('.header-inner') ||
-                 document.querySelector('nav > div');
+                 document.querySelector('.topbar') ||
+                 document.querySelector('nav > div') ||
+                 directMainNav;
   if (navInner) {
+    if (directMainNav && !directMainNav.querySelector('.mobile-platform-brand')) {
+      var mobileBrand = document.createElement('a');
+      mobileBrand.className = 'mobile-platform-brand';
+      mobileBrand.href = 'index.html';
+      mobileBrand.innerHTML = '<img src="images/7trb_symbol.png" alt="7TRB"> <span>7TRB</span>';
+      directMainNav.insertBefore(mobileBrand, directMainNav.firstChild);
+    }
     navInner.appendChild(toggle);
   }
 
