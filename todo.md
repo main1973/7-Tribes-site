@@ -18,3 +18,8 @@
 - [x] Create the production `/join` route with safe `ref` query capture and preservation through the available join actions.
 - [x] Ensure no simulated figures are presented as real ecosystem metrics.
 - [x] Test root and `/join` routes, `?ref=TESTCODE` retention, outbound links, mobile layout, and live deployment.
+- [ ] Inventory every public 7trb.com page, its primary interface type, existing visual state, and mobile-risk areas.
+- [ ] Define the shared Unity Platform color tokens, component rules, and environment mapping for community, commerce, technology, circulation, and education.
+- [ ] Apply the shared visual system to all public pages without altering live data, zero states, forms, wallet behavior, or ecosystem URLs.
+- [ ] Run page-by-page desktop and mobile checks for overflow, readability, card stacking, navigation, and preserved functionality.
+- [ ] Deploy the site-wide visual upgrade and publish a production verification record.

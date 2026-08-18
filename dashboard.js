@@ -2,6 +2,10 @@
 (function () {
   "use strict";
 
+  // UNITY PLATFORM: presentation-only environment marker for the shared visual system.
+  // It does not change Nuru, chain, balance, or Dashboard state logic.
+  if (document.body) document.body.dataset.unityEnv = "technology";
+
   const ALKE_RPC = "https://rpc.alkebuleum.com";
   let map = null;
   let mapMarkers = null;

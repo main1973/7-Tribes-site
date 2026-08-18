@@ -1,0 +1,211 @@
+/* ========================================================================
+   7TRIBES — THE UNITY PLATFORM
+   Shared visual foundation for every public 7trb.com route.
+   The system uses sophisticated dark environments: burgundy for community,
+   bronze for commerce, midnight for technology, forest for circulation, and
+   espresso-gold for education. It intentionally preserves page content and
+   functional DOM structure while unifying depth, surfaces, typography, and
+   responsive behavior.
+   ======================================================================== */
+
+:root {
+  --unity-ink: #fff6e4;
+  --unity-cream: #eadfc8;
+  --unity-muted: #c9b898;
+  --unity-gold: #e7b852;
+  --unity-gold-bright: #ffdd7a;
+  --unity-line: rgba(255, 215, 122, 0.24);
+  --unity-radius: 18px;
+  --unity-radius-lg: 24px;
+  --unity-shadow: 0 20px 56px rgba(0, 0, 0, 0.38);
+}
+
+body[data-unity-env] {
+  --unity-deep: #0d0e12;
+  --unity-mid: #171a22;
+  --unity-lift: #222633;
+  --unity-glow: rgba(231, 184, 82, 0.16);
+  background:
+    radial-gradient(ellipse 80% 42% at 12% -8%, var(--unity-glow), transparent 62%),
+    radial-gradient(ellipse 60% 35% at 96% 52%, rgba(255, 215, 122, 0.055), transparent 72%),
+    linear-gradient(160deg, var(--unity-mid) 0%, var(--unity-deep) 52%, #07080a 100%) !important;
+  color: var(--unity-ink) !important;
+  text-rendering: optimizeLegibility;
+}
+
+body[data-unity-env="community"] {
+  --unity-deep: #15080c;
+  --unity-mid: #291017;
+  --unity-lift: #3a1921;
+  --unity-glow: rgba(133, 35, 54, 0.29);
+}
+
+body[data-unity-env="commerce"] {
+  --unity-deep: #130b05;
+  --unity-mid: #291508;
+  --unity-lift: #3a2110;
+  --unity-glow: rgba(160, 89, 29, 0.25);
+}
+
+body[data-unity-env="technology"] {
+  --unity-deep: #070b17;
+  --unity-mid: #101a31;
+  --unity-lift: #1a2947;
+  --unity-glow: rgba(47, 91, 167, 0.28);
+}
+
+body[data-unity-env="circulation"] {
+  --unity-deep: #07130d;
+  --unity-mid: #10251a;
+  --unity-lift: #1b3626;
+  --unity-glow: rgba(47, 124, 72, 0.26);
+}
+
+body[data-unity-env="education"] {
+  --unity-deep: #150d07;
+  --unity-mid: #27160c;
+  --unity-lift: #382414;
+  --unity-glow: rgba(184, 131, 27, 0.23);
+}
+
+/* Header, navigation, and mobile drawer */
+body[data-unity-env] :is(.top-nav, .topbar, .site-header, .header, header[class*="header"]):not(.drawer-header) {
+  background: linear-gradient(100deg, rgba(8, 9, 13, 0.96), color-mix(in srgb, var(--unity-mid) 82%, #030305 18%)) !important;
+  border-color: var(--unity-line) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+}
+
+body[data-unity-env] :is(.mobile-drawer, .drawer, .menu-overlay) {
+  border-color: var(--unity-line) !important;
+}
+
+body[data-unity-env] :is(.mobile-drawer, .drawer) {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--unity-mid) 94%, #050506 6%), var(--unity-deep)) !important;
+}
+
+body[data-unity-env] :is(.nav-brand, .brand, .main-nav a, .nav-links a, .top-nav a, .topbar a) {
+  color: var(--unity-gold-bright);
+}
+
+/* Typography and section environments */
+body[data-unity-env] :is(h1, h2, h3, h4, h5, h6, .title, .page-title, .hero-title) {
+  color: var(--unity-ink);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.16);
+}
+
+body[data-unity-env] :is(.section, section[class*="section"], main > section:not(.hero):not(.hero-banner):not([class*="hero"])) {
+  position: relative;
+  isolation: isolate;
+}
+
+body[data-unity-env] :is(.section, section[class*="section"], main > section:not(.hero):not(.hero-banner):not([class*="hero"]))::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(104deg, rgba(255, 215, 122, 0.025), transparent 40%, color-mix(in srgb, var(--unity-lift) 28%, transparent) 100%);
+  border-block: 1px solid rgba(255, 215, 122, 0.065);
+}
+
+body[data-unity-env] :is(.section, section[class*="section"], main > section:not(.hero):not(.hero-banner):not([class*="hero"])):nth-of-type(even)::after {
+  background: linear-gradient(112deg, color-mix(in srgb, var(--unity-lift) 36%, transparent), transparent 55%, rgba(255, 215, 122, 0.035));
+}
+
+body[data-unity-env] :is(p, li, td, th, label, .muted, .subtitle, .lede, .hint, .meta) {
+  color: var(--unity-cream);
+}
+
+body[data-unity-env] :is(a:not(.btn), .link, .eco-map-link) {
+  color: var(--unity-gold-bright);
+}
+
+/* Reusable content surfaces */
+body[data-unity-env] :is(.card, .box, .panel, .surface, .info-card, .summary-card, .product-card, .business-card, .ecosystem-card, .roadmap-card, .callout, .accordion, details, .nuru-info, .metric, .stat, .kpi, .cta-panel, .hero-card, .section-box, .join-panel, .profile-preview, .cart-panel, .lane, .frame-wrap, .contract-box) {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--unity-lift) 72%, #090a0d 28%), color-mix(in srgb, var(--unity-mid) 84%, #050506 16%)) !important;
+  border-color: var(--unity-line) !important;
+  box-shadow: var(--unity-shadow);
+}
+
+body[data-unity-env] :is(.card, .box, .panel, .surface, .info-card, .summary-card, .product-card, .business-card, .ecosystem-card, .roadmap-card, .callout, .accordion, details, .nuru-info, .metric, .stat, .kpi, .cta-panel, .hero-card, .section-box, .join-panel, .profile-preview, .cart-panel, .lane, .frame-wrap, .contract-box):hover {
+  border-color: rgba(255, 221, 122, 0.46) !important;
+}
+
+/* Button family */
+body[data-unity-env] :is(.btn, .btn-primary, .gold, .primary, .buy-btn, .hero-btn, .invest-btn) {
+  border-color: rgba(255, 221, 122, 0.55) !important;
+  box-shadow: 0 9px 22px rgba(0, 0, 0, 0.24), 0 0 18px rgba(231, 184, 82, 0.1);
+}
+
+body[data-unity-env] :is(.btn:not(.ghost):not(.btn-ghost), .btn-primary, .gold, .primary, .buy-btn, .hero-btn, .invest-btn) {
+  background: linear-gradient(110deg, var(--unity-gold-bright), var(--unity-gold) 48%, #b67b1d) !important;
+  color: #160d03 !important;
+}
+
+body[data-unity-env] :is(.btn.ghost, .btn-ghost, .secondary, .outline) {
+  background: rgba(0, 0, 0, 0.18) !important;
+  color: var(--unity-ink) !important;
+  border-color: rgba(255, 215, 122, 0.32) !important;
+}
+
+body[data-unity-env] :is(.btn, button, .buy-btn, .hero-btn, .invest-btn):hover {
+  transform: translateY(-2px);
+}
+
+/* Forms, data views, and truthful empty states */
+body[data-unity-env] :is(input, select, textarea) {
+  background: rgba(4, 5, 7, 0.62) !important;
+  color: var(--unity-ink) !important;
+  border-color: rgba(255, 215, 122, 0.24) !important;
+  border-radius: 12px;
+}
+
+body[data-unity-env] :is(input, select, textarea):focus {
+  outline: 2px solid rgba(255, 215, 122, 0.7);
+  outline-offset: 2px;
+}
+
+body[data-unity-env] :is(table, thead, tbody, tr, th, td) {
+  border-color: rgba(255, 215, 122, 0.14) !important;
+}
+
+body[data-unity-env] thead {
+  background: color-mix(in srgb, var(--unity-lift) 78%, #050506 22%);
+}
+
+body[data-unity-env] :is(.empty, .empty-state, .unavailable, .zero-state) {
+  border: 1px dashed rgba(255, 215, 122, 0.26);
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--unity-muted);
+}
+
+/* Footer */
+body[data-unity-env] :is(footer, .footer, .premium-footer) {
+  background: linear-gradient(160deg, rgba(4, 5, 7, 0.94), color-mix(in srgb, var(--unity-deep) 84%, #030303 16%)) !important;
+  border-color: rgba(255, 215, 122, 0.16) !important;
+}
+
+/* Mobile containment */
+@media (max-width: 768px) {
+  body[data-unity-env] :is(.section, section[class*="section"], main > section:not(.hero):not(.hero-banner):not([class*="hero"])) {
+    padding-inline: 0;
+  }
+  body[data-unity-env] :is(.card, .box, .panel, .surface, .info-card, .summary-card, .product-card, .business-card, .ecosystem-card, .roadmap-card, .callout, .accordion, details, .nuru-info, .metric, .stat, .kpi, .cta-panel, .hero-card, .section-box, .join-panel, .profile-preview, .cart-panel, .lane, .frame-wrap, .contract-box) {
+    border-radius: 16px;
+  }
+  body[data-unity-env] table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  body[data-unity-env] :is(.controls, .actions, .btn-group, .filter-row, .filters) {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-unity-env] * { transition-duration: 0.01ms !important; }
+}
