@@ -28,3 +28,6 @@
 - [x] Change the persistent mobile drawer CTA to Enter the Ecosystem while retaining Loop under Community.
 - [x] Test menu interaction and containment at 320px, 360px, 390px, 412px, and 430px across representative routes.
 - [x] Deploy and document the completed global navigation refinement.
+- [x] Reconcile the uploaded Unity Platform visual-upgrade checklist against the committed and deployed site-wide visual system.
+- [x] Apply only verified outstanding corrections, if any, without altering working content, data, links, forms, or integrations. No outstanding correction was identified.
+- [x] Report the repository and production status for the uploaded requirements.
