@@ -28,9 +28,11 @@
     </section>
     <section class="join-card" aria-label="Join actions">
       <h2>Choose your first step</h2>
-      <p>Start with community, explore commerce, or download Nuru for identity and Web3 access.</p>
+      <p>Open 7Tribes registration when the app is installed, or continue with the referral-safe join flow in your browser.</p>
+      <p id="app-fallback" class="ref-note" role="status">The 7Tribes app is not installed. Your invitation remains applied on this join page; continue in Loop or Connect while you choose an install path.</p>
       <div class="actions">
-        <a id="join-action" class="action primary" href="https://loop.7trb.com/"><span>Join 7Tribes</span><small>Start in Loop</small></a>
+        <a id="mobile-register-action" class="action primary" href="manusecosystem://register"><span>Open 7Tribes App</span><small>Register with invitation</small></a>
+        <a id="join-action" class="action" href="https://loop.7trb.com/"><span>Continue in Loop</span><small>Community</small></a>
         <a id="app-action" class="action" href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener"><span>Download the App</span><small>Nuru identity + Web3</small></a>
         <a id="loop-action" class="action" href="https://loop.7trb.com/"><span>Enter Loop</span><small>Community</small></a>
         <a id="connect-action" class="action" href="https://connect.7trb.com/"><span>Explore Connect</span><small>Commerce</small></a>
@@ -57,10 +59,28 @@
         url.searchParams.set('ref', validReferral);
         link.href = url.toString();
       };
+      var buildAndroidIntent = function () {
+        var fallback = new URL('https://7trb.com/join/');
+        fallback.searchParams.set('ref', validReferral);
+        fallback.searchParams.set('app', 'not-installed');
+        return 'intent://register?ref=' + encodeURIComponent(validReferral) +
+          '#Intent;scheme=manusecosystem;package=com.seventribes.ecosystem;S.browser_fallback_url=' +
+          encodeURIComponent(fallback.toString()) + ';end';
+      };
+      var mobileRegister = document.getElementById('mobile-register-action');
+      var androidIntent = buildAndroidIntent();
+      if (mobileRegister) mobileRegister.href = androidIntent;
       addReferral('join-action', 'https://loop.7trb.com/');
       addReferral('loop-action', 'https://loop.7trb.com/');
       addReferral('connect-action', 'https://connect.7trb.com/');
       addReferral('app-action', 'https://play.google.com/store/apps/details?id=com.alkebuleum.nuru', true);
+      if (params.get('app') === 'not-installed') {
+        document.getElementById('app-fallback').classList.add('visible');
+        return;
+      }
+      if (/Android/i.test(navigator.userAgent)) {
+        window.location.replace(androidIntent);
+      }
     })();
   </script>
 </body>
