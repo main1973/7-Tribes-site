@@ -54,3 +54,8 @@
 - [x] Preserve the working block-height RPC, contract address, copy action, explorer, JollofSwap, Transparency, Loop, Connect, and Nuru utility links.
 - [x] Validate compact Dashboard behavior at 360px, 390px, 412px, 430px, and desktop with no fake metrics or horizontal overflow.
 - [x] Deploy the simplified Dashboard and document removed sections, connected blockchain metrics, available productivity data, and unavailable integrations.
+- [ ] Audit builders.html claims, existing CTA destinations, official assets, decorative layers, and the source of the mobile overlap defect.
+- [ ] Replace employment, equity, token, payment, staking, referral, treasury, and on-chain-payment guarantees with accurate mission-driven contribution language.
+- [ ] Rebuild builders.html only, using the official symbol, no emoji icons, contained decoration, and the requested contribution/opportunity structure.
+- [ ] Validate Builders page at 360px, 390px, 412px, 430px, and desktop for overlap, overflow, card spacing, controls, and working links.
+- [ ] Deploy the Builders rebuild and publish the requested claims, QA, and planned-functionality report.
