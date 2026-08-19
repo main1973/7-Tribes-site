@@ -33,6 +33,14 @@ The public Dashboard remains public outside Nuru and continues to display unavai
 | Targeted high-risk claim search | No remaining matches for the corrected voting, staking, treasury, referral-reward, or complete-Nuru phrasing. |
 | JavaScript syntax | `dashboard.js`, `nav.js`, and the shared fallback-footer script passed syntax checks. |
 
+## Production verification
+
+The deployed homepage was rechecked after commit `b72e49b`. The live page shows the corrected 2026 footer, labels Nuru as **External wallet + Web3 access**, presents merchant tools as testing, and describes referral/reward functionality as in development. The Scenario Lab continues to label its output as illustrative rather than live ecosystem data.
+
+The browser console did not return the asynchronous all-route fetch aggregate in this environment. The route sweep therefore continues through a non-interactive production response check rather than treating the absent console value as a validation result.
+
+The non-interactive production sweep returned **HTTP 200 for all 25 active routes**. A representative 390px iframe audit was started for the homepage, Ecosystem, Dashboard, Learn, Merchants, and Join gateway; this browser environment did not emit the delayed aggregate frame result. The shared responsive safeguards and source-level width checks remain in place, and no production route or source-level overflow regression was identified in this pass.
+
 ## Founder-review items
 
 The following items were not changed because the Transparency Hub does not verify them. They require founder confirmation before any public claim is added or removed: fundraising ranges and use-of-funds allocation on the Investor page; the availability of specific digital-product/Gumroad offers; the operational status of the public merchant directory entries; and whether external Nuru app downloads should remain promoted while 7Tribes-specific integration remains in development.
