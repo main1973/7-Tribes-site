@@ -21,3 +21,7 @@ The production page after commit `1b56054` displayed the compact hero, Network I
 At **360px, 390px, 412px, and 430px**, the production page reported scroll widths of **345px, 375px, 397px, and 415px**, with no horizontal overflow. Each tested frame contained all **12** portal cards, a shared mobile navigation toggle, a clear hero-to-network-section boundary, and an internally contained horizontal-scroll code block. No decorative layer crossed over content, controls, or cards.
 
 The Chain ID copy control changed to **Copied** when used in production. All visible resource links use source-verified destinations, and unavailable guides have no fake action button.
+
+## Final destination correction
+
+The first direct contract-address explorer route returned HTTP 404 during external-destination validation. It was removed rather than left as a broken link. The deployed portal now uses the verified explorer home (`https://explorer.alkebuleum.com`) and instructs developers to copy the verified contract address into the explorer search field. The final production view shows **Open Explorer** and no unverified direct-address destination.

@@ -59,8 +59,8 @@
 - [x] Rebuild builders.html only, using the official symbol, no emoji icons, contained decoration, and the requested contribution/opportunity structure.
 - [x] Validate Builders page at 360px, 390px, 412px, 430px, and desktop for overlap, overflow, card spacing, controls, and working links.
 - [x] Deploy the Builders rebuild and publish the requested claims, QA, and planned-functionality report.
-- [ ] Audit developers.html technical claims and independently verify each currently displayed network, contract, RPC, explorer, GitHub, wallet, guide, and integration destination.
-- [ ] Define the Developers portal around verified available resources and clearly labeled Coming Soon items for every unavailable capability.
-- [ ] Rebuild developers.html only, retaining correct network/contract facts and adding safe copy controls, quick-start guidance, GitHub/support treatment, and contained mobile-safe decoration.
-- [ ] Test every visible interactive element, external destination, network/contract value, and layout at 360px, 390px, 412px, 430px, and desktop.
-- [ ] Deploy the Developer Resources portal and publish the requested technical-resource, correction, and QA report.
+- [x] Audit developers.html technical claims and independently verify each currently displayed network, contract, RPC, explorer, GitHub, wallet, guide, and integration destination.
+- [x] Define the Developers portal around verified available resources and clearly labeled Coming Soon items for every unavailable capability.
+- [x] Rebuild developers.html only, retaining correct network/contract facts and adding safe copy controls, quick-start guidance, GitHub/support treatment, and contained mobile-safe decoration.
+- [x] Test every visible interactive element, external destination, network/contract value, and layout at 360px, 390px, 412px, 430px, and desktop.
+- [x] Deploy the Developer Resources portal and publish the requested technical-resource, correction, and QA report.
