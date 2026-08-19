@@ -64,3 +64,6 @@
 - [x] Rebuild developers.html only, retaining correct network/contract facts and adding safe copy controls, quick-start guidance, GitHub/support treatment, and contained mobile-safe decoration.
 - [x] Test every visible interactive element, external destination, network/contract value, and layout at 360px, 390px, 412px, 430px, and desktop.
 - [x] Deploy the Developer Resources portal and publish the requested technical-resource, correction, and QA report.
+- [x] Inventory every legacy Google Analytics measurement-ID reference and determine the public pages that load the analytics snippet.
+- [x] Replace the legacy Google tag with the supplied `G-919TN7SSYC` measurement ID across all applicable public pages.
+- [x] Verify no stale measurement ID remains in source or production, deploy the replacement, and report completion.
