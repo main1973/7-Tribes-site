@@ -49,8 +49,8 @@
 - [x] Remove unverified Nuru identity/wallet/account UI and implement the focused public ecosystem Dashboard without altering external applications.
 - [x] Test Dashboard at 360px, 390px, 412px, 430px, and desktop for live technical data, true empty states, navigation, links, console health, and overflow.
 - [x] Deploy the Dashboard redesign and publish the requested files/data-sources/features report.
-- [ ] Re-audit Dashboard structure and verified data sources against the compact Live Blockchain and Ecosystem Productivity specification.
-- [ ] Replace repeated public-reporting explanations with one compact productivity notice and remove oversized empty-state sections.
-- [ ] Preserve the working block-height RPC, contract address, copy action, explorer, JollofSwap, Transparency, Loop, Connect, and Nuru utility links.
-- [ ] Validate compact Dashboard behavior at 360px, 390px, 412px, 430px, and desktop with no fake metrics or horizontal overflow.
-- [ ] Deploy the simplified Dashboard and document removed sections, connected blockchain metrics, available productivity data, and unavailable integrations.
+- [x] Re-audit Dashboard structure and verified data sources against the compact Live Blockchain and Ecosystem Productivity specification.
+- [x] Replace repeated public-reporting explanations with one compact productivity notice and remove oversized empty-state sections.
+- [x] Preserve the working block-height RPC, contract address, copy action, explorer, JollofSwap, Transparency, Loop, Connect, and Nuru utility links.
+- [x] Validate compact Dashboard behavior at 360px, 390px, 412px, 430px, and desktop with no fake metrics or horizontal overflow.
+- [x] Deploy the simplified Dashboard and document removed sections, connected blockchain metrics, available productivity data, and unavailable integrations.
