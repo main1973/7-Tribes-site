@@ -44,3 +44,8 @@
 - [x] Apply only verified factual, terminology, status, navigation, footer, icon, CTA, and responsive corrections without redesigning the site or changing verified blockchain data.
 - [x] Run a final cross-site search and production audit for factual consistency, valid links, current copyright, unified mobile navigation, and true zero/pending states.
 - [x] Publish the concise accuracy and consistency change report with founder-review items.
+- [ ] Audit Dashboard HTML, CSS, JavaScript, blockchain/RPC calls, data files, navigation, map behavior, and existing responsive rules.
+- [ ] Define a verified-data ecosystem Dashboard hierarchy with omitted or explicit empty states for unconnected metrics.
+- [ ] Remove unverified Nuru identity/wallet/account UI and implement the focused public ecosystem Dashboard without altering external applications.
+- [ ] Test Dashboard at 360px, 390px, 412px, 430px, and desktop for live technical data, true empty states, navigation, links, console health, and overflow.
+- [ ] Deploy the Dashboard redesign and publish the requested files/data-sources/features report.
