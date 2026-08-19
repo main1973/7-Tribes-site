@@ -44,6 +44,7 @@
 
   
     
+    @media (max-width: 992px) {
       /* Header spacing */
       .top-nav, nav.top-nav, header > nav, .site-header > nav {
         padding: 0;
@@ -84,7 +85,7 @@
       /* Full-width buttons */
       .btn, button:not(.menu-toggle):not(.close-btn), [class*="btn"]:not(.menu-toggle):not(.close-btn), a.btn, input[type="submit"] {
         display: block !important;
-        width: calc(100% - 32px) !important;
+        width: 100% !important;
         max-width: 400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
@@ -131,7 +132,7 @@
       <h1 style="margin:0">Referrals Leaderboard</h1>
       <a href="index.html">← Back</a>
     </div>
-    <p style="color:#a1a1a6">Counts by flyer/source tag (e.g., <code>?src=barbershop</code>). Update <code>data/referrals.json</code> to refresh.</p>
+    <p style="color:#a1a1a6">Development preview for source-tag tracking. This page does not report live referral rewards or verified ecosystem totals.</p>
 
     <div class="card">
       <div class="row" style="margin-bottom:8px">
@@ -198,7 +199,7 @@
         q.addEventListener('input', render);
         render();
       }catch(e){
-        rows.innerHTML = `<tr><td colspan="4">⚠️ ${e.message}</td></tr>`;
+        rows.innerHTML = `<tr><td colspan="4">Preview unavailable: ${e.message}</td></tr>`;
       }
     }
     load();
@@ -206,5 +207,6 @@
   </script>
 
 <script src="js/nav.js?v=mobile-nav-af42b44"></script>
+  <script src="js/site-chrome.js?v=accuracy-20260819"></script>
 </body>
 </html>

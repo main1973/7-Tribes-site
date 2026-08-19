@@ -459,7 +459,7 @@
       /* Full-width buttons */
       .btn, button:not(.menu-toggle):not(.close-btn), [class*="btn"]:not(.menu-toggle):not(.close-btn), a.btn, input[type="submit"] {
         display: block !important;
-        width: calc(100% - 32px) !important;
+        width: 100% !important;
         max-width: 400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
@@ -529,7 +529,7 @@
     <div class="hero-banner">
       <div class="banner-text">
         <h1>The 7Tribes Ecosystem</h1>
-        <p>Community, Marketplace, Identity, and Infrastructure — working as one.</p>
+        <p>Community, marketplace, external wallet access, and infrastructure — being rolled out in stages.</p>
 
         <div class="hero-actions">
           <a href="#loop" class="btn gold">Explore Loop</a>
@@ -549,7 +549,7 @@
 
         <div class="grid two">
           <article class="box ecosystem-card">
-            <div class="icon">🔄</div>
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="svg/icons.svg#icon-circle"></use></svg></div>
             <h3>Learn → Organize → Build → Circulate</h3>
             <p class="muted">
               This is the journey every member takes. Start with education, organize your tribe, build projects, and circulate value back into the community.
@@ -557,10 +557,10 @@
           </article>
 
           <article class="box ecosystem-card">
-            <div class="icon">🌍</div>
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="svg/icons.svg#icon-networking"></use></svg></div>
             <h3>One Network, Four Tools</h3>
             <p class="muted">
-              Loop handles community and governance. Connect powers the marketplace. Nuru manages identity and rewards. Alkebuleum provides the blockchain foundation.
+              Loop is the live community town hall. Connect is the live profiles and commerce layer. Nuru provides external wallet/Web3 access while 7Tribes-specific integration is in development. Alkebuleum provides the blockchain foundation.
             </p>
           </article>
         </div>
@@ -582,7 +582,7 @@
           <article class="box">
             <h3 style="margin-top:0;color:var(--gold-bright);">What is Loop?</h3>
             <p class="muted">
-              Loop is the heartbeat of 7Tribes. It's where members gather, discuss ideas, vote on proposals, and track community progress. Loop is the town hall, the voting floor, and the activity feed — all in one.
+              Loop is the live community town hall where members gather, discuss ideas, post updates, and organize. Formal 7Tribes governance and voting mechanisms are planned.
             </p>
 
             <div class="divider"></div>
@@ -590,10 +590,10 @@
             <h3 style="color:var(--gold-bright);">Key Features</h3>
             <ul class="muted" style="margin:0 0 0 18px;">
               <li><b>Town Hall:</b> Weekly/bi-weekly community calls and updates.</li>
-              <li><b>Proposals & Voting:</b> Members propose projects, vote on funding, and track delivery.</li>
-              <li><b>Activity Feed:</b> Real-time updates on new members, referrals, and ecosystem activity.</li>
+              <li><b>Community participation:</b> Members can discuss ideas and organize. Formal proposals and voting are planned.</li>
+              <li><b>Activity Feed:</b> Community updates are available through Loop; referral and rewards features remain in development.</li>
               <li><b>Transparency:</b> The Transparency Hub identifies tracked categories and links members to current ecosystem information.</li>
-              <li><b>Rewards:</b> Participation badges, referral bounties, and governance incentives.</li>
+              <li><b>Future rewards:</b> Participation, referral, and governance incentives are being developed.</li>
             </ul>
           </article>
 
@@ -629,15 +629,15 @@
           <article class="box">
             <h3 style="margin-top:0;color:var(--gold-bright);">What is Connect?</h3>
             <p class="muted">
-              Connect is the marketplace where people find each other, businesses showcase services, and value circulates. It's a network of profiles, storefronts, referrals, and real economic activity.
+              Connect is the live profiles, marketplace, and commerce layer. Merchant onboarding and 7TRB payment acceptance are currently being tested; referrals remain in development.
             </p>
 
             <div class="divider"></div>
 
             <h3 style="color:var(--gold-bright);">Key Features</h3>
             <ul class="muted" style="margin:0 0 0 18px;">
-              <li><b>People Profiles:</b> Build your reputation, show your work, connect with others.</li>
-              <li><b>Business Storefronts:</b> Merchants list services, set prices, accept 7TRB payments.</li>
+              <li><b>People Profiles:</b> Create a profile, show your work, and connect with others. Reputation features are being developed.</li>
+              <li><b>Business Storefronts:</b> Merchants can prepare listings and participate in onboarding; 7TRB payment acceptance is being tested.</li>
               <li><b>Referral System:</b> Earn bounties for bringing new members and businesses.</li>
               <li><b>Reputation & Ratings:</b> Trust built through reviews, completed transactions, and community feedback.</li>
               <li><b>Messaging:</b> Direct communication between buyers, sellers, and collaborators.</li>
@@ -669,13 +669,13 @@
     <!-- NURU -->
     <section class="section" id="nuru">
       <div class="wrap">
-        <h2 class="title">Nuru — Wallet, Identity & Rewards</h2>
+        <h2 class="title">Nuru — External Wallet & Web3 Access</h2>
 
         <div class="grid two" style="align-items:flex-start;">
           <article class="box">
             <h3 style="margin-top:0;color:var(--gold-bright);">What is Nuru?</h3>
             <p class="muted">
-              Nuru is your identity and wallet in the 7Tribes ecosystem. It's where you hold 7TRB, manage your reputation, access rewards, and browse the dApp ecosystem. Nuru is built on Alkebuleum and integrates with Alkebuleum.
+              Nuru is an external wallet and Web3 access layer that can be used with the ecosystem. 7Tribes-specific wallet, identity, reputation, and rewards integration is in development.
             </p>
 
             <div class="divider"></div>
@@ -683,9 +683,9 @@
             <h3 style="color:var(--gold-bright);">Key Features</h3>
             <ul class="muted" style="margin:0 0 0 18px;">
               <li><b>Wallet:</b> Hold, send, and receive 7TRB securely.</li>
-              <li><b>Identity:</b> Your on-chain profile linked to Loop and Connect.</li>
-              <li><b>Reputation Score:</b> Built from transactions, votes, and community participation.</li>
-              <li><b>Rewards:</b> Earn 7TRB from referrals, governance, and ecosystem participation.</li>
+              <li><b>Identity:</b> 7Tribes-specific identity linking is in development.</li>
+              <li><b>Reputation Score:</b> Reputation features are in development.</li>
+              <li><b>Future rewards:</b> Referral, governance, and participation rewards are in development.</li>
               <li><b>dApp Browser:</b> Access JollofSwap and compatible ecosystem tools.</li>
             </ul>
           </article>
@@ -693,11 +693,11 @@
           <article class="box">
             <h3 style="margin-top:0;color:var(--gold-bright);">Get Started with Nuru</h3>
             <p class="muted">
-              Create a wallet. Connect your identity. Start earning. Nuru is your key to the entire ecosystem.
+              Explore external Nuru wallet/Web3 access where available. 7Tribes-specific identity and rewards integration is still being developed.
             </p>
 
             <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
-              <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn gold">Download Nuru</a>
+              <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn gold">View Nuru Access</a>
               <a href="https://jollofswap.com" target="_blank" rel="noopener" class="btn ghost">Open JollofSwap</a>
               <a href="dashboard.html" class="btn ghost">View Dashboard</a>
             </div>
@@ -705,7 +705,7 @@
             <div class="divider"></div>
 
             <p class="muted" style="font-size:.95rem;">
-              <b>Nuru Philosophy:</b> Your wallet, your identity, your rewards. On-chain, transparent, yours.
+              <b>Nuru status:</b> External wallet/Web3 access may be available; 7Tribes-specific identity and rewards integration is in development.
             </p>
           </article>
         </div>
@@ -768,21 +768,21 @@
             <div>
               <h3 style="color:var(--gold-bright);margin-top:0;">1. Join</h3>
               <p class="muted">
-                Create a profile on Connect. Set up your Nuru wallet. Join Loop. You're now part of the ecosystem.
+                Create a profile on Connect, join Loop, and follow the Transparency Hub for staged access to wallet and utility features.
               </p>
             </div>
 
             <div>
               <h3 style="color:var(--gold-bright);margin-top:0;">2. Participate</h3>
               <p class="muted">
-                Vote on proposals in Loop. Earn 7TRB through referrals and participation. Build your reputation on Connect.
+                Join discussions in Loop. Formal governance, referrals, rewards, and reputation features are being developed or planned.
               </p>
             </div>
 
             <div>
               <h3 style="color:var(--gold-bright);margin-top:0;">3. Circulate</h3>
               <p class="muted">
-                Spend 7TRB at merchants on Connect. Support builders through Loop. Stake and trade on Alkebuleum.
+                Follow merchant testing opportunities through Connect, support builders through Loop, and use the Transparency Hub for current network and utility status. Staking is not currently active.
               </p>
             </div>
           </div>
@@ -821,7 +821,7 @@
     <div class="wrap" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:10px;">
         <img src="images/7trb_symbol.png" alt="7TRB small" style="width:42px;height:42px;border-radius:50%;" />
-        <span class="muted">© 2025 7Tribes • Mainhouse Oasis LLC</span>
+        <span class="muted">© 2026 7Tribes • Mainhouse Oasis LLC</span>
       </div>
 
       <div style="display:flex;gap:14px;flex-wrap:wrap;">

@@ -120,8 +120,8 @@
     setText("lastRefreshed", state.lastRefreshed ? new Date(state.lastRefreshed).toLocaleString() : "—");
     setText("balanceStatus", state.totalBalance.status === "partial" ? "Partial" : state.totalBalance.status === "available" ? "Live" : state.totalBalance.status === "wrong-network" ? "Wrong network" : "Unavailable");
     setText("verificationStatus", state.ain || state.primaryHandle ? "Nuru identity loaded" : "Identity unavailable");
-    setText("reputationScore", "Integration Pending");
-    setText("referralRewards", "Integration Pending");
+    setText("reputationScore", "In Development");
+    setText("referralRewards", "In Development");
 
     setDot("walletDot", "#35c759");
     setDot("networkDot", onCorrectNetwork ? "#35c759" : "#ffcc00");
@@ -191,9 +191,9 @@
 
   function setPendingMetrics() {
     setText("holders", "Unavailable");
-    setText("active", "Integration Pending");
-    setText("treasury", "Integration Pending");
-    setText("referrals", "Integration Pending");
+    setText("active", "In Development");
+    setText("treasury", "In Development");
+    setText("referrals", "In Development");
     const holdersBar = el("holdersBar");
     const treasuryBar = el("treasuryBar");
     if (holdersBar) holdersBar.style.width = "0%";

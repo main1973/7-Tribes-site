@@ -83,7 +83,7 @@
       /* Full-width buttons */
       .btn, button:not(.menu-toggle):not(.close-btn), [class*="btn"]:not(.menu-toggle):not(.close-btn), a.btn, input[type="submit"] {
         display: block !important;
-        width: calc(100% - 32px) !important;
+        width: 100% !important;
         max-width: 400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
@@ -130,7 +130,7 @@
       <h1 style="margin:0">7Tribes Merchants</h1>
       <a href="index.html">← Back</a>
     </div>
-    <p style="color:#a1a1a6">Shops and services that accept 7TRB.</p>
+    <p style="color:#a1a1a6">Merchant onboarding and 7TRB payment acceptance are currently in testing. Confirm availability directly with each business.</p>
 
     <div class="card">
       <div class="row" style="margin-bottom:8px">
@@ -145,7 +145,7 @@
       </div>
 
       <table aria-describedby="dirNote">
-        <caption class="sr-only">Directory of 7TRB-accepting merchants</caption>
+        <caption class="sr-only">Testing directory for merchant onboarding and 7TRB payment acceptance</caption>
         <thead>
           <tr>
             <th data-key="name">Name</th>
@@ -159,7 +159,7 @@
       <p id="dirNote" class="sr-only">Sortable table. Click headers to sort.</p>
     </div>
 
-    <p style="margin-top:12px">Want to join the directory? <a href="propose.html">Apply to accept 7TRB →</a></p>
+    <p style="margin-top:12px">Want to join merchant testing? <a href="propose.html">Apply for onboarding →</a></p>
   </div>
 
   <script>
@@ -179,7 +179,7 @@
         if(!r.ok) throw new Error('data/merchants.json not found');
         return await r.json();
       }catch(e){
-        rows.innerHTML = `<tr><td colspan="4">⚠️ ${e.message}</td></tr>`;
+        rows.innerHTML = `<tr><td colspan="4">Directory unavailable: ${e.message}</td></tr>`;
         return [];
       }
     }
@@ -254,5 +254,6 @@
   </script>
 
 <script src="js/nav.js?v=mobile-nav-af42b44"></script>
+  <script src="js/site-chrome.js?v=accuracy-20260819"></script>
 </body>
 </html>

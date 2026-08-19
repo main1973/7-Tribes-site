@@ -323,12 +323,12 @@
       }
     }
 
-    @media (max-width:min(1100px, calc(100vw - 32px))){
+    @media (max-width: 1100px){
       .cards{grid-template-columns:repeat(2,1fr)}
       .nuru-info{grid-template-columns:1fr}
     }
 
-    @media (max-width:min(900px, calc(100vw - 32px))){
+    @media (max-width: 900px){
       .heroGrid,
       .grid{
         grid-template-columns:1fr;
@@ -430,7 +430,7 @@
       /* Full-width buttons */
       .btn, button:not(.menu-toggle):not(.close-btn), [class*="btn"]:not(.menu-toggle):not(.close-btn), a.btn, input[type="submit"] {
         display: block !important;
-        width: calc(100% - 32px) !important;
+        width: 100% !important;
         max-width: 400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
@@ -497,7 +497,7 @@
         </div>
 
         <div class="actions">
-          <button id="connectBtn" class="btn btn-primary">Connect Nuru</button>
+          <button id="connectBtn" class="btn btn-primary">Open in Nuru</button>
         </div>
       </div>
 
@@ -525,7 +525,7 @@
 
     <section class="heroGrid">
       <div class="card">
-        <div class="label">Nuru Identity</div>
+        <div class="label">Nuru Access</div>
         <div class="subvalue" id="walletBalance">Not Connected</div>
         <div class="subvalue" id="nuruHandle">Handle: —</div>
         <div class="subvalue" id="nuruAin">AIN: —</div>
@@ -591,12 +591,12 @@
 
       <div class="card">
         <div class="label">Reputation Score</div>
-        <div class="value" id="reputationScore">—</div>
+        <div class="value" id="reputationScore">In Development</div>
       </div>
 
       <div class="card">
         <div class="label">Referral Rewards</div>
-        <div class="value" id="referralRewards">—</div>
+        <div class="value" id="referralRewards">In Development</div>
       </div>
     </section>
 
@@ -614,13 +614,13 @@
 
       <div class="card">
         <div class="label">Treasury 7TRB</div>
-        <div class="value" id="treasury">—</div>
+        <div class="value" id="treasury">Reporting In Development</div>
         <div class="bar"><i id="treasuryBar"></i></div>
       </div>
 
       <div class="card">
         <div class="label">Referrals (30d)</div>
-        <div class="value" id="referrals">—</div>
+        <div class="value" id="referrals">In Development</div>
       </div>
     </section>
 

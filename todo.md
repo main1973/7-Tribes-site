@@ -39,3 +39,8 @@
 - [x] Perform only proven-safe cleanup and non-destructive consolidation after complete reference verification.
 - [x] Validate live routes, links, visual consistency, responsive behavior, and true data/zero states after cleanup.
 - [x] Publish the requested final kept/removed/merged/renamed/fixed/technical-debt inventory.
+- [x] Extract current feature statuses and verified token facts from Transparency Hub and inventory every active public page.
+- [x] Audit all active pages for status conflicts, Nuru/feature overstatements, old terminology, placeholder data, CTA destinations, navigation, footer, emoji icons, and mobile risks.
+- [x] Apply only verified factual, terminology, status, navigation, footer, icon, CTA, and responsive corrections without redesigning the site or changing verified blockchain data.
+- [ ] Run a final cross-site search and production audit for factual consistency, valid links, current copyright, unified mobile navigation, and true zero/pending states.
+- [x] Publish the concise accuracy and consistency change report with founder-review items.
