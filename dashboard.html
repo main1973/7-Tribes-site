@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="The public 7Tribes Ecosystem Dashboard: verified network status and transparent ecosystem activity reporting.">
-  <title>7TRB Ecosystem Dashboard | 7Tribes</title>
+  <meta name="description" content="7TRB Dashboard: live Alkebuleum network status and verified 7Tribes ecosystem productivity reporting.">
+  <title>7TRB Dashboard | 7Tribes</title>
   <link rel="icon" href="images/7trb_symbol.png">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ENCBC9RT3"></script>
   <script>
@@ -14,53 +14,17 @@
     gtag('config', 'G-3ENCBC9RT3');
   </script>
   <style>
-    /* Design reminder: public ecosystem visibility, not a wallet/account dashboard. */
-    :root{--dash-ink:#fff6e4;--dash-cream:#eadfc8;--dash-muted:#baad98;--dash-gold:#e7b852;--dash-gold-bright:#ffdd7a;--dash-line:rgba(255,215,122,.23);--dash-panel:#101827;--dash-panel-2:#0a0d15;--dash-shadow:0 18px 52px rgba(0,0,0,.34)}
-    *{box-sizing:border-box}
-    html{background:#070a10}
-    body{margin:0;background:radial-gradient(ellipse 72% 50% at 14% -8%,rgba(58,88,151,.24),transparent 65%),linear-gradient(155deg,#101827 0%,#080b12 56%,#070906 100%);color:var(--dash-ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
-    a{color:inherit;text-decoration:none}
-    .mainNav{display:flex;justify-content:center;gap:8px 18px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--dash-line);background:rgba(5,7,12,.91)}
-    .mainNav a{color:var(--dash-cream);font-size:.82rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:7px 6px;border-radius:8px}
-    .mainNav a:hover,.mainNav a.active{color:var(--dash-gold-bright);background:rgba(255,215,122,.08)}
-    .shell{width:min(1160px,calc(100% - 40px));margin:0 auto}
-    .dashboard-hero{padding:28px 0 22px;border-bottom:1px solid rgba(255,215,122,.12)}
-    .brand-row{display:flex;align-items:center;gap:14px;min-width:0}
-    .brand-row img{width:52px;height:52px;object-fit:contain;flex:0 0 auto}
-    .eyebrow,.section-kicker{margin:0 0 6px;color:var(--dash-gold);font-size:.75rem;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
-    h1{margin:0;color:var(--dash-gold-bright);font-size:clamp(1.65rem,5.8vw,2.7rem);line-height:1.08;letter-spacing:.02em}
-    .hero-copy{margin:18px 0 0;max-width:67ch;color:var(--dash-cream);font-size:clamp(.98rem,2.6vw,1.12rem)}
-    .hero-line{margin:7px 0 0;color:var(--dash-muted);font-size:.92rem;letter-spacing:.035em}
-    .journey{display:flex;flex-wrap:wrap;gap:7px 11px;margin:18px 0 0;color:var(--dash-gold-bright);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
-    .journey span:not(:last-child)::after{content:"→";margin-left:11px;color:rgba(255,215,122,.48)}
-    main{padding:26px 0 56px}
-    .section{padding:28px 0;border-bottom:1px solid rgba(255,215,122,.1)}
-    .section:last-child{border-bottom:0}
-    .section-title{margin:0;color:var(--dash-ink);font-size:clamp(1.3rem,3.7vw,1.75rem);line-height:1.15}
-    .section-intro{margin:8px 0 0;max-width:72ch;color:var(--dash-muted)}
-    .status-grid,.network-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
-    .panel{min-width:0;padding:17px;border:1px solid var(--dash-line);border-radius:18px;background:linear-gradient(145deg,rgba(27,41,70,.83),rgba(9,12,19,.88));box-shadow:var(--dash-shadow)}
-    .panel-label{margin:0;color:var(--dash-muted);font-size:.76rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
-    .panel-value{margin:9px 0 0;color:var(--dash-ink);font-size:1.05rem;font-weight:800;overflow-wrap:anywhere}
-    .panel-detail{margin:7px 0 0;color:var(--dash-muted);font-size:.88rem}
-    .status-note{margin:16px 0 0;padding:15px 17px;border:1px dashed rgba(255,215,122,.28);border-radius:15px;background:rgba(5,8,14,.32);color:var(--dash-cream)}
-    .status-note strong{color:var(--dash-gold-bright)}
-    .empty-state{margin-top:16px;padding:22px;border:1px dashed rgba(255,215,122,.3);border-radius:18px;background:linear-gradient(145deg,rgba(18,28,48,.62),rgba(7,9,14,.72));color:var(--dash-cream)}
-    .empty-state p{margin:7px 0 0;color:var(--dash-muted)}
-    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 16px;border:1px solid rgba(255,215,122,.42);border-radius:12px;color:var(--dash-ink);font-weight:850;transition:transform .16s ease,background .16s ease,border-color .16s ease}
-    .btn:hover{transform:translateY(-1px);border-color:var(--dash-gold-bright)}
-    .btn:active{transform:scale(.97)}
-    .btn-primary{border-color:transparent;background:linear-gradient(100deg,var(--dash-gold-bright),var(--dash-gold),#b67b1d);color:#160d03}
-    .contract{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
-    code{max-width:100%;padding:7px 9px;border-radius:8px;background:rgba(0,0,0,.28);color:var(--dash-gold-bright);font-size:.8rem;overflow-wrap:anywhere}
-    .mini-btn{min-height:36px;padding:7px 10px;border:1px solid rgba(255,215,122,.35);border-radius:8px;background:transparent;color:var(--dash-ink);font:inherit;font-size:.8rem;font-weight:800;cursor:pointer}
-    .live{color:#88d49a}.pending{color:var(--dash-gold-bright)}
-    footer{border-top:1px solid rgba(255,215,122,.17);background:linear-gradient(145deg,rgba(10,12,18,.98),rgba(4,5,8,.99));padding:28px 0;color:var(--dash-muted);font-size:.85rem}
-    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .footer-links{display:flex;flex-wrap:wrap;gap:8px 14px}.footer-links a{color:var(--dash-cream)}.footer-links a:hover{color:var(--dash-gold-bright)}
-    @media (max-width:800px){.status-grid,.network-grid{grid-template-columns:1fr 1fr}.mainNav{display:none}.dashboard-hero{padding-top:20px}}
-    @media (max-width:560px){.shell{width:min(100% - 32px,560px)}.dashboard-hero{padding-bottom:18px}.brand-row img{width:44px;height:44px}.journey{font-size:.73rem;gap:6px}.journey span:not(:last-child)::after{margin-left:6px}.section{padding:24px 0}.status-grid,.network-grid{grid-template-columns:1fr}.panel,.empty-state{padding:16px}.actions{flex-direction:column}.btn{width:100%}.footer-inner{justify-content:center;text-align:center}.footer-links{justify-content:center}}
+    /* Design reminder: a compact operational activity panel; verified data only. */
+    :root{--dash-ink:#fff6e4;--dash-cream:#eadfc8;--dash-muted:#b5ad9c;--dash-gold:#e7b852;--dash-gold-bright:#ffdd7a;--dash-line:rgba(255,215,122,.23);--dash-panel:#111a2a;--dash-panel-2:#090d15;--dash-shadow:0 14px 38px rgba(0,0,0,.28)}
+    *{box-sizing:border-box}html{background:#070a10}body{margin:0;background:radial-gradient(ellipse 68% 38% at 18% -6%,rgba(57,85,146,.25),transparent 68%),linear-gradient(155deg,#101827 0%,#080b12 58%,#070906 100%);color:var(--dash-ink);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}
+    .mainNav{display:flex;justify-content:center;gap:8px 18px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--dash-line);background:rgba(5,7,12,.91)}.mainNav a{color:var(--dash-cream);font-size:.82rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:7px 6px;border-radius:8px}.mainNav a:hover,.mainNav a.active{color:var(--dash-gold-bright);background:rgba(255,215,122,.08)}
+    .shell{width:min(1080px,calc(100% - 40px));margin:0 auto}.dashboard-header{display:flex;align-items:center;gap:13px;padding:22px 0 18px;border-bottom:1px solid rgba(255,215,122,.12)}.dashboard-mark{width:42px;height:42px;object-fit:contain;flex:0 0 auto}.eyebrow{margin:0;color:var(--dash-gold);font-size:.73rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}h1{margin:2px 0 0;color:var(--dash-gold-bright);font-size:clamp(1.45rem,5.4vw,2.25rem);line-height:1.08;letter-spacing:.025em}.subheading{margin:5px 0 0;color:var(--dash-cream);font-size:.95rem}.small-line{margin:3px 0 0;color:var(--dash-muted);font-size:.82rem}
+    main{padding:22px 0 38px}.section{padding:20px 0;border-bottom:1px solid rgba(255,215,122,.11)}.section:last-child{border-bottom:0}.section-kicker{margin:0 0 4px;color:var(--dash-gold);font-size:.73rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}.section-title{margin:0;color:var(--dash-ink);font-size:clamp(1.18rem,3.8vw,1.55rem);line-height:1.18}.section-note{margin:7px 0 0;color:var(--dash-muted);font-size:.9rem}
+    .blockchain-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.panel{min-width:0;padding:16px;border:1px solid var(--dash-line);border-radius:16px;background:linear-gradient(145deg,rgba(27,41,70,.88),rgba(9,12,19,.92));box-shadow:var(--dash-shadow)}.panel-label{margin:0;color:var(--dash-muted);font-size:.72rem;font-weight:850;letter-spacing:.105em;text-transform:uppercase}.panel-value{margin:8px 0 0;color:var(--dash-ink);font-size:clamp(1.06rem,3.7vw,1.45rem);font-weight:850;overflow-wrap:anywhere}.panel-value.live{color:#91dca0}.panel-detail{margin:6px 0 0;color:var(--dash-muted);font-size:.83rem}.contract{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}code{display:block;max-width:100%;padding:7px 8px;border-radius:7px;background:rgba(0,0,0,.28);color:var(--dash-gold-bright);font-size:.76rem;overflow-wrap:anywhere}.mini-btn{min-height:34px;padding:7px 9px;border:1px solid rgba(255,215,122,.35);border-radius:8px;background:transparent;color:var(--dash-ink);font:inherit;font-size:.78rem;font-weight:800;cursor:pointer}
+    .compact-status{display:flex;align-items:flex-start;gap:12px;margin-top:14px;padding:15px 16px;border:1px dashed rgba(255,215,122,.32);border-radius:15px;background:linear-gradient(145deg,rgba(18,28,48,.55),rgba(7,9,14,.7))}.status-dot{width:9px;height:9px;margin-top:7px;border-radius:50%;background:var(--dash-gold);box-shadow:0 0 14px rgba(255,215,122,.55);flex:0 0 auto}.compact-status strong{display:block;color:var(--dash-ink)}.compact-status p{margin:4px 0 0;color:var(--dash-muted);font-size:.9rem}
+    .quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}.quick-link{display:flex;align-items:center;justify-content:center;min-height:44px;padding:9px 10px;border:1px solid rgba(255,215,122,.32);border-radius:11px;background:rgba(12,16,25,.6);color:var(--dash-cream);font-size:.84rem;font-weight:850;text-align:center;transition:transform .16s ease,border-color .16s ease,background .16s ease}.quick-link:hover{transform:translateY(-1px);border-color:var(--dash-gold-bright);background:rgba(255,215,122,.08)}.quick-link:active{transform:scale(.97)}
+    footer{border-top:1px solid rgba(255,215,122,.17);background:linear-gradient(145deg,rgba(10,12,18,.98),rgba(4,5,8,.99));padding:24px 0;color:var(--dash-muted);font-size:.84rem}.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.footer-links{display:flex;flex-wrap:wrap;gap:8px 14px}.footer-links a{color:var(--dash-cream)}.footer-links a:hover{color:var(--dash-gold-bright)}
+    @media (max-width:800px){.mainNav{display:none}.dashboard-header{padding-top:18px}.dashboard-mark{display:none}}@media (max-width:560px){.shell{width:min(100% - 32px,560px)}main{padding-top:18px}.dashboard-header{padding-bottom:15px}.blockchain-grid{gap:10px}.panel{padding:14px}.quick-grid{grid-template-columns:1fr 1fr;gap:8px}.quick-link{font-size:.81rem}.footer-inner{justify-content:center;text-align:center}.footer-links{justify-content:center}}
   </style>
   <link rel="stylesheet" href="css/global-responsive.css">
   <link rel="stylesheet" href="css/unity-platform.css">
@@ -70,74 +34,40 @@
     <nav class="mainNav" aria-label="Primary navigation">
       <a href="index.html">Home</a><a href="ecosystem.html">Ecosystem</a><a href="learn.html">Learn</a><a href="learn-7trb.html">How 7TRB Works</a><a href="https://loop.7trb.com">Loop</a><a href="https://connect.7trb.com">Connect</a><a href="transparency.html">Transparency</a><a href="dashboard.html" class="active" aria-current="page">Dashboard</a>
     </nav>
-    <div class="shell dashboard-hero">
-      <div class="brand-row">
-        <img src="images/7trb_symbol.png" alt="7TRB symbol">
-        <div>
-          <p class="eyebrow">Public ecosystem visibility</p>
-          <h1>7TRB ECOSYSTEM DASHBOARD</h1>
-        </div>
-      </div>
-      <p class="hero-copy">See what the 7Tribes community is building, doing, and circulating.</p>
-      <p class="hero-line">Community • Commerce • Participation • Circulation • Infrastructure</p>
-      <div class="journey" aria-label="7Tribes ecosystem journey"><span>Organize</span><span>Connect</span><span>Participate</span><span>Circulate</span><span>Build</span></div>
+    <div class="shell dashboard-header">
+      <img class="dashboard-mark" src="images/7trb_symbol.png" alt="7TRB symbol">
+      <div><p class="eyebrow">Operational activity panel</p><h1>7TRB DASHBOARD</h1><p class="subheading">Blockchain + Ecosystem Activity</p><p class="small-line">Live network status and community productivity.</p></div>
     </div>
   </header>
 
   <main class="shell">
-    <section class="section" aria-labelledby="snapshot-title">
-      <p class="section-kicker">Public reporting</p>
-      <h2 class="section-title" id="snapshot-title">ECOSYSTEM SNAPSHOT</h2>
-      <p class="section-intro">The Dashboard only presents ecosystem measurements when a verified 7Tribes-controlled source is connected. Member, referral, project, and circulation counts are not currently available for public reporting.</p>
-      <div class="status-grid">
-        <article class="panel"><p class="panel-label">Community records</p><p class="panel-value">Data source not connected</p><p class="panel-detail">Member and activity counts will appear when a verified source is connected.</p></article>
-        <article class="panel"><p class="panel-label">Commerce records</p><p class="panel-value">Data source not connected</p><p class="panel-detail">Verified participating-merchant reporting is not available yet.</p></article>
-        <article class="panel"><p class="panel-label">Circulation records</p><p class="panel-value">Data source not connected</p><p class="panel-detail">No transaction or reward total is shown without verified ecosystem analytics.</p></article>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="activity-title">
-      <p class="section-kicker">Community activity</p>
-      <h2 class="section-title" id="activity-title">WHAT’S HAPPENING</h2>
-      <div class="empty-state"><strong>No community activity recorded yet.</strong><p>Newest members, posts, referrals, businesses, and project activity will appear here when Loop, Connect, or another verified 7Tribes-controlled source is connected.</p><div class="actions"><a class="btn btn-primary" href="https://loop.7trb.com">Enter Loop</a><a class="btn" href="https://connect.7trb.com">Explore Connect</a></div></div>
-    </section>
-
-    <section class="section" aria-labelledby="commerce-title">
-      <p class="section-kicker">Commerce</p>
-      <h2 class="section-title" id="commerce-title">7TRIBES COMMERCE</h2>
-      <div class="empty-state"><strong>No participating merchants yet.</strong><p>The current site dataset contains no verified merchant participation, category, 7TRB-acceptance, or location records suitable for Dashboard reporting. Merchant records will appear when Connect or another verified source provides them.</p><div class="actions"><a class="btn btn-primary" href="https://connect.7trb.com">Explore Connect</a></div></div>
-    </section>
-
-    <section class="section" aria-labelledby="circulation-title">
-      <p class="section-kicker">Circulation</p>
-      <h2 class="section-title" id="circulation-title">7TRB CIRCULATION</h2>
-      <div class="empty-state"><strong>Circulation reporting is not connected.</strong><p>Circulation reporting will appear here when verified ecosystem transaction data is connected. No transaction total, merchant total, reward total, or trend is displayed until it can be measured accurately.</p><div class="actions"><a class="btn" href="transparency.html">Open Transparency Hub</a></div></div>
-    </section>
-
-    <section class="section" aria-labelledby="projects-title">
-      <p class="section-kicker">Community projects</p>
-      <h2 class="section-title" id="projects-title">BUILDING TOGETHER</h2>
-      <div class="empty-state"><strong>No community projects have been published yet.</strong><p>Proposed, voting, approved, building, and completed projects will appear here when verified community-project records are available.</p><div class="actions"><a class="btn btn-primary" href="https://loop.7trb.com">Open Loop</a></div></div>
-    </section>
-
-    <section class="section" aria-labelledby="network-title">
-      <p class="section-kicker">Technical information</p>
-      <h2 class="section-title" id="network-title">NETWORK STATUS</h2>
-      <p class="section-intro">Technical details are shown separately from community activity. Only the current Alkebuleum block height is read live in this Dashboard.</p>
-      <div class="network-grid">
-        <article class="panel"><p class="panel-label">7TRB Contract</p><p class="panel-value live">Live on Alkebuleum Mainnet</p><div class="contract"><code>0x991df36e5b0bb596a83dee6a840f78bAa40450e0</code><button class="mini-btn" id="copyContract" type="button">Copy address</button></div></article>
+    <section class="section" aria-labelledby="blockchain-title">
+      <p class="section-kicker">Verified technical data</p><h2 class="section-title" id="blockchain-title">LIVE BLOCKCHAIN</h2>
+      <div class="blockchain-grid">
         <article class="panel"><p class="panel-label">Current block height</p><p class="panel-value" id="blockNumber">Loading…</p><p class="panel-detail" id="blockStatus">Checking the Alkebuleum RPC.</p></article>
-        <article class="panel"><p class="panel-label">Ecosystem access</p><p class="panel-value">External destinations</p><p class="panel-detail">Loop: community • Connect: commerce • Nuru: external Web3 tool • JollofSwap: DEX access.</p></article>
+        <article class="panel"><p class="panel-label">7TRB Contract</p><p class="panel-value live">Live on Alkebuleum Mainnet</p><div class="contract"><code>0x991df36e5b0bb596a83dee6a840f78bAa40450e0</code><button class="mini-btn" id="copyContract" type="button">Copy address</button></div></article>
       </div>
-      <div class="actions"><a class="btn" href="https://explorer.alkebuleum.com" target="_blank" rel="noopener">Open Explorer</a><a class="btn" href="transparency.html">Transparency Hub</a><a class="btn" href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener">View Nuru Access</a><a class="btn" href="https://t.me/SevenTribeowner" target="_blank" rel="noopener">Telegram</a></div>
+    </section>
+
+    <section class="section" aria-labelledby="productivity-title">
+      <p class="section-kicker">Verified ecosystem records</p><h2 class="section-title" id="productivity-title">ECOSYSTEM PRODUCTIVITY</h2>
+      <div class="compact-status"><span class="status-dot" aria-hidden="true"></span><div><strong>Community productivity reporting will appear here as verified Loop and Connect data becomes available.</strong><p>Members, businesses, posts, referrals, projects, and recent activity are intentionally omitted until a real source is connected.</p></div></div>
+    </section>
+
+    <section class="section" aria-labelledby="recent-title">
+      <p class="section-kicker">Verified records only</p><h2 class="section-title" id="recent-title">RECENT PRODUCTIVITY</h2>
+      <div class="compact-status"><span class="status-dot" aria-hidden="true"></span><div><strong>No verified productivity activity available yet.</strong><p>New members, businesses, projects, referrals, posts, merchant activity, and builder milestones will appear only when independently verifiable records are available.</p></div></div>
+    </section>
+
+    <section class="section" aria-labelledby="quick-title">
+      <p class="section-kicker">Utility links</p><h2 class="section-title" id="quick-title">QUICK ACCESS</h2>
+      <div class="quick-grid"><a class="quick-link" href="https://explorer.alkebuleum.com" target="_blank" rel="noopener">Explorer</a><a class="quick-link" href="https://jollofswap.com" target="_blank" rel="noopener">JollofSwap</a><a class="quick-link" href="transparency.html">Transparency</a><a class="quick-link" href="https://loop.7trb.com">Loop</a><a class="quick-link" href="https://connect.7trb.com">Connect</a><a class="quick-link" href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener">Nuru</a></div>
     </section>
   </main>
 
-  <footer>
-    <div class="shell footer-inner"><div class="footer-links"><a href="index.html">Home</a><a href="ecosystem.html">Ecosystem</a><a href="learn.html">Learn</a><a href="learn-7trb.html">How 7TRB Works</a><a href="https://loop.7trb.com">Loop</a><a href="https://connect.7trb.com">Connect</a><a href="transparency.html">Transparency</a></div><span>© 2026 7Tribes • Mainhouse Oasis LLC • <span id="visitor-count">Your visits: —</span></span></div>
-  </footer>
+  <footer><div class="shell footer-inner"><div class="footer-links"><a href="index.html">Home</a><a href="ecosystem.html">Ecosystem</a><a href="learn.html">Learn</a><a href="learn-7trb.html">How 7TRB Works</a><a href="https://loop.7trb.com">Loop</a><a href="https://connect.7trb.com">Connect</a><a href="transparency.html">Transparency</a></div><span>© 2026 7Tribes • Mainhouse Oasis LLC • <span id="visitor-count">Your visits: —</span></span></div></footer>
 
-  <script src="dashboard.js?v=ecosystem-dashboard-20260819"></script>
+  <script src="dashboard.js?v=compact-dashboard-20260819"></script>
   <script src="js/visitor-counter.js?v=device-visits-20260817"></script>
   <script src="js/nav.js?v=mobile-nav-af42b44"></script>
 </body>
