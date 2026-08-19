@@ -34,8 +34,8 @@
 - [x] Audit homepage section selectors, existing dark environments, and ecosystem/role-card mobile layout risks.
 - [x] Apply richer low-saturation section environments, atmospheric dividers, and elevated card surfaces without changing content or behavior.
 - [x] Verify homepage section reflow and horizontal containment at phone widths, deploy, and document the visual refinement.
-- [ ] Produce a read-only inventory of all routes, assets, CSS, JavaScript, references, and potential duplicates in main1973/7-Tribes-site.
-- [ ] Classify repository findings into Safe to remove, Needs review, Must preserve, Needs consolidation, and Needs correction.
-- [ ] Perform only proven-safe cleanup and non-destructive consolidation after complete reference verification.
-- [ ] Validate live routes, links, visual consistency, responsive behavior, and true data/zero states after cleanup.
-- [ ] Publish the requested final kept/removed/merged/renamed/fixed/technical-debt inventory.
+- [x] Produce a read-only inventory of all routes, assets, CSS, JavaScript, references, and potential duplicates in main1973/7-Tribes-site.
+- [x] Classify repository findings into Safe to remove, Needs review, Must preserve, Needs consolidation, and Needs correction.
+- [x] Perform only proven-safe cleanup and non-destructive consolidation after complete reference verification.
+- [x] Validate live routes, links, visual consistency, responsive behavior, and true data/zero states after cleanup.
+- [x] Publish the requested final kept/removed/merged/renamed/fixed/technical-debt inventory.
