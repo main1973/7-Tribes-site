@@ -6,7 +6,7 @@
 |---|---|---|
 | Alkebuleum Mainnet | Official network documentation lists Mainnet, chain ID `237422`, RPC `https://rpc.alkebuleum.com`, currency `ALKE`, 18 decimals, explorer, WebSocket RPC, and EIP-1559 support.[1] | Available now |
 | EVM tooling | Official developer documentation states that Alkebuleum is EVM-compatible and documents ethers.js, viem, Hardhat, Foundry, Remix, standard JSON-RPC methods, and Solidity deployment.[1] | Available now |
-| Explorer | `https://explorer.alkebuleum.com` returned HTTP 200 during the portal audit. | Available now |
+| Explorer | `https://explorer.alkebuleum.com` returned HTTP 200 during the portal audit. Its direct contract-address route did not return successfully as a direct request, so the portal opens the verified explorer home and provides a copyable contract address for search. | Available now |
 | 7TRB deployment | RPC returned chain ID `0x39f6e` (decimal `237422`), non-empty contract bytecode at `0x991df36e5b0bb596a83dee6a840f78bAa40450e0`, token name `7Tribes`, and symbol `7TRB`. | Available now |
 | Official docs | `https://docs.alkebuleum.org` returned HTTP 200 and is linked from the official Alkebuleum website.[1] | Available now |
 | Official developer GitHub | `https://github.com/Alkebuleum` returned HTTP 200. Its public repositories include `alkenetwork`, `docs`, and `jollofswap`.[2] | Available now |
