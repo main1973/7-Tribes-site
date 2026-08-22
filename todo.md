@@ -155,4 +155,4 @@
 - [x] Add a lightweight public three-question Life Academy preview using only approved Lesson 1 concepts, in-memory score state, and no account or database writes.
 - [x] Provide immediate educational feedback, a post-three-question result, and clear Academy CTAs without fake statistics, rewards, or learner claims.
 - [x] Verify the challenge at mobile and desktop widths for stacked answers, no horizontal overflow, keyboard access, restrained motion, and preserved homepage interactions.
-- [ ] Commit, deploy, and live-test the public Academy doorway, then report the exact files and behavior added.
+- [x] Commit, deploy, and live-test the public Academy doorway, then report the exact files and behavior added.
