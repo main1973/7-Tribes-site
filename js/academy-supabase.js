@@ -19,14 +19,10 @@ export async function academySession() {
 }
 
 export async function academyRole() {
-  const { data, error } = await academySupabase.rpc('is_academy_founder');
-  if (error) return 'learner';
-  return data === true ? 'founder_admin' : 'learner';
-}
-
-export async function sendAcademyMagicLink(email, displayName) {
-  const options = { emailRedirectTo: ACADEMY_CONFIG.redirectTo };
-  if (displayName) options.data = { display_name: displayName };
-  const { error } = await academySupabase.auth.signInWithOtp({ email, options });
-  if (error) throw error;
+  const { data, error } = await academySupabase
+    .from('academy_user_roles')
+    .select('role')
+    .maybeSingle();
+  if (error || !data?.role) return 'member';
+  return data.role;
 }

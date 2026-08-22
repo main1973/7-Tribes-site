@@ -27,6 +27,15 @@
 
   ensureVisitorCounter();
 
+  function ensureAccountNavigation() {
+    if (window.__7trbAccountNavigationLoaded) return;
+    window.__7trbAccountNavigationLoaded = true;
+    var script = document.createElement('script');
+    script.type = 'module';
+    script.src = '/js/account-nav.js?v=7tribes-account-v2';
+    document.body.appendChild(script);
+  }
+
   // Navigation links — edit here to update across all pages.
   // The sections intentionally distinguish the public platform, community,
   // and resources rather than treating Loop as the entire ecosystem.
@@ -99,6 +108,7 @@
         existingDrawer.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeExistingMenu); });
       }
     }
+    ensureAccountNavigation();
     return;
   }
 
@@ -158,6 +168,7 @@
   // Append to body
   document.body.appendChild(overlay);
   document.body.appendChild(drawer);
+  ensureAccountNavigation();
 
   // --- Event handlers ---
   function openMenu() {

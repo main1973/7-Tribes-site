@@ -65,3 +65,23 @@ The Supabase authentication configuration now persists `https://7trb.com/` as th
 The founder-controls migration executed successfully with no rows returned. The database now includes role-gated founder metrics and recent-learner functions, both executable only by authenticated users and both returning records only when the caller has the `founder_admin` role.
 
 Local static-route verification confirmed that `/academy/` renders the Academy landing with the Module 1 roadmap and secure sign-in entry, while `/academy/lesson-1.html` renders the reusable Lesson 1 flow, scenario, private capability exercise, three-question knowledge check, and authenticated completion gate. Both routes retain their official branding and contained responsive layout.
+
+The deployed Academy landing page at `https://7trb.com/academy/` loads successfully after the Phase 1 release. Its browser console reported no client, Supabase, or navigation errors in the public signed-out state.
+
+The deployed Lesson 1 route renders the approved public lesson content, private capability fields, knowledge check, and completion gate. The signed-out private-response action was exercised without any learner session; no learner record or local-progress substitute was created.
+
+A read-only authorized lookup for the founder-designated Academy email was submitted in the Supabase SQL Editor. No role assignment has been attempted or made pending confirmation that the authentication account exists.
+
+The initial lookup returned no account. After the designated founder reported completing the Academy magic-link sign-in, a second read-only lookup was submitted. Founder-role assignment remains pending confirmation of that account record and an explicit database-change confirmation.
+
+The combined 7Tribes Account migration exposed PostgreSQL’s enum-transaction rule: newly added enum values cannot be referenced by dependent functions within the same transaction. The migration was split into a role-enum step and a dependent account-auth step; the first transaction-safe role-enum step has been submitted under the user-approved database change.
+
+The separate role-enum transaction succeeded. The dependent profile-metadata, default-member-role, founder-check, and private account-overview migration has now been submitted as a separate authorized transaction.
+
+The dependent account-auth migration succeeded. The user-confirmed update assigning the verified founder account the `founder_admin` database role returned exactly one resulting role: `founder_admin`. No other account role was changed.
+
+Supabase Auth URL Configuration was verified after the Account rollout. The Site URL remains `https://7trb.com/`. The approved redirect allow-list now contains three entries: `https://7trb.com/academy/`, `https://7trb.com/account/login.html`, and `https://7trb.com/account/reset-password.html`. The dashboard confirmed that two Account URLs were added successfully.
+
+Read-only provider inspection confirms that new user signups are enabled, Email authentication is enabled, and email confirmation is enabled. Manual linking and anonymous sign-ins remain disabled. No confirmation or email-delivery policy was changed; the Account UI must retain its confirmation-aware success state and email delivery should not be claimed until a configured sender is verified.
+
+A read-only SQL inspection confirms that `on_auth_user_created_academy` remains active as an `AFTER INSERT` trigger on `auth.users` and invokes `handle_new_academy_user()`. Therefore, new password signups receive their private profile and database-controlled default `member` role through the trigger rather than through browser-side insertion.

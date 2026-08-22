@@ -60,6 +60,6 @@ console.log("Latest block:", block);</pre></div></section>
     document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{const value=button.dataset.copy;try{await navigator.clipboard.writeText(value);}catch(_){const field=document.createElement('textarea');field.value=value;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();document.execCommand('copy');field.remove();}const label=button.textContent;button.textContent='Copied';setTimeout(()=>{button.textContent=label;},1600);}));
   </script>
   <script src="js/visitor-counter.js?v=device-visits-20260817"></script>
-  <script src="js/nav.js?v=life-academy-phase1"></script>
+  <script src="js/nav.js?v=7tribes-account-v2"></script>
 </body>
 </html>

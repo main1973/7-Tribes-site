@@ -80,3 +80,21 @@
 - [ ] Verify the supplied Supabase publishable key against the specified project and use a browser-compatible client rather than Next.js SSR helpers or middleware.
 - [ ] Configure approved Supabase redirect URLs and secure email authentication for the GitHub Pages `7trb.com` deployment.
 - [ ] Correct the Supabase production redirect configuration from the mistakenly entered base HTTP URL to `https://7trb.com/academy/` and verify the saved setting.
+- [ ] Audit the existing Academy auth client, RLS schema, founder bootstrap, navigation, and redirect configuration against the full 7Tribes Account requirements.
+- [ ] Build branded account creation, password login, password recovery, password update, logout, and account-return flows using Supabase as the session authority.
+- [ ] Add My Account, private profile/capability entry points, account settings, and clear logged-out/logged-in navigation states without exposing user email publicly.
+- [ ] Extend RLS-backed account profile fields and role policies so only a database-controlled founder can grant founder/admin privileges.
+- [ ] Gate Academy persistence behind the new account flow while preserving a visitor’s lesson location through the allowed redirect path.
+- [ ] Complete production-safe QA without retaining fake accounts or fake progress, including learner isolation, founder access, mobile layouts, and real email-flow configuration.
+
+## 7Tribes Account delivery control
+
+| Original request | Promised completion | Current implementation state | Push/deployment/live verification | Remaining defect or action |
+|---|---|---|---|---|
+| Secure, branded password-based 7Tribes Account for Academy and future first-party services | Password signup/login/reset/logout, private My Account, database roles, RLS persistence gates, mobile-safe account navigation, and live GitHub Pages verification | Supabase roles/auth metadata migration, verified auth redirects, confirmed new-user trigger, founder-admin assignment, Account pages, navigation, Academy gates, and local read-only QA are complete locally | **Pending** commit, push, GitHub Pages completion, and production route/auth validation | Deploy and verify without creating QA accounts or learner data; confirm sender/domain delivery separately before claiming production email delivery |
+
+- [ ] Review the complete Account diff, documentation, and static-route references before the release commit.
+- [ ] Commit and push the Account implementation to `main` in the connected `main1973/7-Tribes-site` repository.
+- [ ] Confirm GitHub Pages serves the Account routes and refreshed shared navigation on `https://7trb.com`.
+- [ ] Re-run signed-out production gates, public RLS checks, and allowed redirect checks; use the real founder only with explicit authorization for authenticated founder-flow validation.
+- [ ] Publish the final Account completion report only after production verification succeeds.

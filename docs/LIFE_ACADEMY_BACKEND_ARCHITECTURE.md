@@ -6,9 +6,9 @@ The existing 7trb.com deployment is a GitHub Pages static site with custom domai
 
 ## Authentication flow
 
-Academy users will sign in through Supabase Auth with email magic links. The static Academy client sends an OTP link to the user’s email with the Academy route as `emailRedirectTo`. When the user returns, the Supabase browser client restores the authenticated session. Browser session storage supports authentication only; it is not the source of truth for learner progress, private responses, completion records, capability profiles, or roles.
+Academy uses the shared password-based **7Tribes Account**. Account creation collects email, password, display name, and required terms/privacy acceptance; Supabase Email confirmation remains enabled. Password login creates the authoritative Supabase session, while secure password-recovery links return to the static reset route. Browser session storage supports authentication only; it is not the source of truth for learner progress, private responses, completion records, capability profiles, or roles.
 
-The Supabase project must allow `https://7trb.com/academy/` as an authentication redirect URL before production rollout. Local testing may additionally allow the explicit local Academy URL. Founder access is assigned only inside the database after a founder account exists; no browser-side flag or URL grants founder privileges.
+The production Site URL is `https://7trb.com/`, and the Supabase allow-list includes `https://7trb.com/academy/`, `https://7trb.com/account/login.html`, and `https://7trb.com/account/reset-password.html`. Founder access is assigned only inside the database after a founder account exists; no browser-side flag or URL grants founder privileges. `SEVEN_TRIBES_ACCOUNT_ARCHITECTURE.md` is the canonical record for Account routes and roles.
 
 ## Data model
 

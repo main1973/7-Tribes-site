@@ -1,12 +1,21 @@
 /* 7TRIBES LIFE ACADEMY — Shared public/authenticated learning interactions.
    Private work persists only through Supabase RLS-backed tables. */
-import { academySupabase, academySession, academyRole, sendAcademyMagicLink } from './academy-supabase.js';
+import { academySupabase, academySession, academyRole } from './academy-supabase.js';
 
 const lessonKey = 'understand-the-system';
 const state = { session: null, role: 'learner', lesson: null, capabilitySaved: false, quizPassed: false };
 
 function message(node, text, tone) { if (!node) return; node.textContent = text; node.dataset.tone = tone || ''; }
 function setText(selector, value) { const node = document.querySelector(selector); if (node) node.textContent = value; }
+function escapeHtml(value) { return String(value || '').replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]); }
+
+function requireAccount(status, anchor) {
+  const returnTo = `${location.pathname}${anchor || location.hash || ''}`;
+  if (status) {
+    status.dataset.tone = 'error';
+    status.innerHTML = `Save your progress <a href="/account/signup.html?returnTo=${encodeURIComponent(returnTo)}">Create a free 7Tribes account</a> to continue your Life Academy journey and return where you left off. <a href="/account/login.html?returnTo=${encodeURIComponent(returnTo)}">Log In</a>`;
+  }
+}
 
 async function touchLessonProgress(currentSection) {
   if (!state.session || !state.lesson?.id) return;
@@ -29,25 +38,7 @@ async function loadSessionUI() {
   document.querySelectorAll('[data-academy-guest-only]').forEach((node) => node.classList.toggle('academy-hidden', !!state.session));
   setText('[data-academy-user-label]', state.session?.user?.email || 'Guest learner');
   const adminLink = document.querySelector('[data-academy-admin-link]');
-  if (adminLink) adminLink.classList.toggle('academy-hidden', state.role !== 'founder_admin');
-}
-
-function setupAuth() {
-  const form = document.querySelector('[data-academy-auth-form]');
-  if (!form) return;
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const button = form.querySelector('button[type="submit"]');
-    const status = form.querySelector('[data-academy-auth-status]');
-    const email = form.querySelector('[name="email"]')?.value.trim();
-    const displayName = form.querySelector('[name="display_name"]')?.value.trim();
-    if (!email) return message(status, 'Enter an email address to continue.', 'error');
-    button.disabled = true;
-    message(status, 'Sending your secure sign-in link…');
-    try { await sendAcademyMagicLink(email, displayName); message(status, 'Check your email for a secure Academy sign-in link.', 'success'); }
-    catch (error) { message(status, error.message || 'Sign-in link could not be sent.'); }
-    finally { button.disabled = false; }
-  });
+  if (adminLink) adminLink.classList.toggle('academy-hidden', !['admin', 'founder_admin'].includes(state.role));
 }
 
 function setupScenario() {
@@ -78,7 +69,7 @@ function setupCapability() {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const status = form.querySelector('[data-capability-status]');
-    if (!state.session) return message(status, 'Sign in to save this private response.', 'error');
+    if (!state.session) return requireAccount(status, '#capability');
     if (!state.lesson?.id) return message(status, 'Lesson records are being prepared. Your response was not saved.', 'error');
     const response = { system_to_understand: form.querySelector('[name="system_to_understand"]').value.trim(), strength_to_contribute: form.querySelector('[name="strength_to_contribute"]').value.trim() };
     if (!response.system_to_understand || !response.strength_to_contribute) return message(status, 'Answer both prompts before saving.', 'error');
@@ -103,7 +94,7 @@ function setupQuiz() {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const status = form.querySelector('[data-quiz-status]');
-    if (!state.session) return message(status, 'Sign in to record a real completion.', 'error');
+    if (!state.session) return requireAccount(status, '#knowledge-check');
     if (!state.lesson?.id) return message(status, 'Lesson records are being prepared. Quiz results are not stored yet.', 'error');
     const answers = Object.fromEntries(new FormData(form).entries());
     if (Object.keys(answers).length < 3) return message(status, 'Answer all three questions before submitting.', 'error');
@@ -120,7 +111,7 @@ function setupCompletion() {
   if (!button) return;
   button.addEventListener('click', async () => {
     const status = document.querySelector('[data-completion-status]');
-    if (!state.session) return message(status, 'Sign in to record a real completion.', 'error');
+    if (!state.session) return requireAccount(status, '#complete');
     if (!state.lesson?.id) return message(status, 'Lesson records are being prepared.', 'error');
     button.disabled = true;
     const { error } = await academySupabase.rpc('complete_academy_lesson', { p_lesson_id: state.lesson.id });
@@ -132,7 +123,7 @@ function setupCompletion() {
 async function setupAdmin() {
   const holder = document.querySelector('[data-founder-console]');
   if (!holder) return;
-  if (!state.session || state.role !== 'founder_admin') { holder.innerHTML = '<p class="academy-status">Founder access is required. This page does not expose learner records to other users.</p>'; return; }
+  if (!state.session || !['admin', 'founder_admin'].includes(state.role)) { holder.innerHTML = '<p class="academy-status">Founder or administrator access is required. This page does not expose learner records to other users.</p>'; return; }
   const [{ data, error }, { data: learners, error: learnerError }] = await Promise.all([
     academySupabase.rpc('academy_founder_metrics'),
     academySupabase.rpc('academy_founder_recent_learners')
@@ -140,14 +131,14 @@ async function setupAdmin() {
   if (error || !data?.[0]) { holder.innerHTML = '<p class="academy-status">Founder metrics are unavailable.</p>'; return; }
   const metrics = data[0];
   const learnerList = !learnerError && learners?.length
-    ? `<ul class="academy-admin-list">${learners.map((learner) => `<li><strong>${learner.display_name || 'Private learner'}</strong><span>${learner.completion_count} completion${learner.completion_count === 1 ? '' : 's'} · ${new Date(learner.joined_at).toLocaleDateString()}</span></li>`).join('')}</ul>`
+    ? `<ul class="academy-admin-list">${learners.map((learner) => `<li><strong>${escapeHtml(learner.display_name || 'Private learner')}</strong><span>${learner.completion_count} completion${learner.completion_count === 1 ? '' : 's'} · ${new Date(learner.joined_at).toLocaleDateString()}</span></li>`).join('')}</ul>`
     : '<p class="academy-status">No learner records yet. Metrics remain true zero until real activity exists.</p>';
   holder.innerHTML = `<div class="academy-admin-grid"><div class="academy-stat"><strong>${metrics.learner_count}</strong><span>Learners</span></div><div class="academy-stat"><strong>${metrics.completion_count}</strong><span>Lesson completions</span></div><div class="academy-stat"><strong>${metrics.capability_response_count}</strong><span>Capability responses</span></div><div class="academy-stat"><strong>${metrics.published_lesson_count}</strong><span>Published lessons</span></div></div><section class="academy-admin-section"><h2>Recent learners</h2>${learnerList}</section><p class="academy-status">Metrics are based only on real Academy records. Founder review is role-gated by Supabase RLS; no learner record is exposed to other users.</p>`;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadSessionUI();
-  setupAuth(); setupScenario(); setupCapability(); setupQuiz(); setupCompletion();
+  setupScenario(); setupCapability(); setupQuiz(); setupCompletion();
   if (document.body.dataset.academyPage === 'lesson') { try { await loadLessonRecord(); } catch (_) {} }
   if (document.body.dataset.academyPage === 'admin') await setupAdmin();
 });
