@@ -67,3 +67,16 @@
 - [x] Inventory every legacy Google Analytics measurement-ID reference and determine the public pages that load the analytics snippet.
 - [x] Replace the legacy Google tag with the supplied `G-919TN7SSYC` measurement ID across all applicable public pages.
 - [x] Verify no stale measurement ID remains in source or production, deploy the replacement, and report completion.
+- [ ] Audit current 7trb.com pages, Control Center, authentication, and data capabilities for an Academy implementation path.
+- [ ] Define the Life Academy content architecture, privacy model, learner progress rules, capability profile fields, and founder-control requirements.
+- [ ] Prepare the project for authenticated private learner data and founder Academy administration without creating a disconnected administrator system.
+- [ ] Build the Academy landing page, How America Works module roadmap, and the complete Lesson 1 learning, exercise, knowledge-check, and completion experience.
+- [ ] Implement authentic private learner progress, private capability responses, future capability-profile fields, and founder management controls.
+- [ ] Test public, authenticated, learner, and founder states; privacy defaults; true-zero metrics; responsive behavior; links; and completion persistence.
+- [ ] Deploy Life Academy Phase 1 and publish the implementation, data-model, privacy, and QA report.
+- [ ] Inspect the existing static hosting/deployment configuration and document the least-disruptive Supabase integration path before architectural changes.
+- [ ] Provision Supabase authentication, private Academy tables, real progress/completion records, capability profile storage, founder-role architecture, and row-level security.
+- [ ] Configure only the required environment variables and production deployment changes while preserving unrelated 7trb.com routes and behavior.
+- [ ] Verify the supplied Supabase publishable key against the specified project and use a browser-compatible client rather than Next.js SSR helpers or middleware.
+- [ ] Configure approved Supabase redirect URLs and secure email authentication for the GitHub Pages `7trb.com` deployment.
+- [ ] Correct the Supabase production redirect configuration from the mistakenly entered base HTTP URL to `https://7trb.com/academy/` and verify the saved setting.

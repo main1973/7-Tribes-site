@@ -34,6 +34,7 @@
     { title: 'Platform', links: [
       { label: 'Home', href: 'index.html' },
       { label: 'Learn', href: 'learn.html' },
+      { label: 'Academy', href: 'academy/' },
       { label: 'Ecosystem', href: 'ecosystem.html' },
       { label: 'Transparency', href: 'transparency.html' }
     ]},

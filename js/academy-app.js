@@ -1,0 +1,153 @@
+/* 7TRIBES LIFE ACADEMY — Shared public/authenticated learning interactions.
+   Private work persists only through Supabase RLS-backed tables. */
+import { academySupabase, academySession, academyRole, sendAcademyMagicLink } from './academy-supabase.js';
+
+const lessonKey = 'understand-the-system';
+const state = { session: null, role: 'learner', lesson: null, capabilitySaved: false, quizPassed: false };
+
+function message(node, text, tone) { if (!node) return; node.textContent = text; node.dataset.tone = tone || ''; }
+function setText(selector, value) { const node = document.querySelector(selector); if (node) node.textContent = value; }
+
+async function touchLessonProgress(currentSection) {
+  if (!state.session || !state.lesson?.id) return;
+  await academySupabase.from('academy_lesson_progress').upsert({
+    user_id: state.session.user.id,
+    lesson_id: state.lesson.id,
+    current_section: currentSection,
+    last_seen_at: new Date().toISOString()
+  }, { onConflict: 'user_id,lesson_id' });
+}
+
+async function loadSessionUI() {
+  try {
+    state.session = await academySession();
+    state.role = state.session ? await academyRole() : 'learner';
+  } catch (_) { state.session = null; state.role = 'learner'; }
+  document.documentElement.dataset.academyAuth = state.session ? 'signed-in' : 'signed-out';
+  document.documentElement.dataset.academyRole = state.role;
+  document.querySelectorAll('[data-academy-auth-only]').forEach((node) => node.classList.toggle('academy-hidden', !state.session));
+  document.querySelectorAll('[data-academy-guest-only]').forEach((node) => node.classList.toggle('academy-hidden', !!state.session));
+  setText('[data-academy-user-label]', state.session?.user?.email || 'Guest learner');
+  const adminLink = document.querySelector('[data-academy-admin-link]');
+  if (adminLink) adminLink.classList.toggle('academy-hidden', state.role !== 'founder_admin');
+}
+
+function setupAuth() {
+  const form = document.querySelector('[data-academy-auth-form]');
+  if (!form) return;
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const button = form.querySelector('button[type="submit"]');
+    const status = form.querySelector('[data-academy-auth-status]');
+    const email = form.querySelector('[name="email"]')?.value.trim();
+    const displayName = form.querySelector('[name="display_name"]')?.value.trim();
+    if (!email) return message(status, 'Enter an email address to continue.', 'error');
+    button.disabled = true;
+    message(status, 'Sending your secure sign-in link…');
+    try { await sendAcademyMagicLink(email, displayName); message(status, 'Check your email for a secure Academy sign-in link.', 'success'); }
+    catch (error) { message(status, error.message || 'Sign-in link could not be sent.'); }
+    finally { button.disabled = false; }
+  });
+}
+
+function setupScenario() {
+  document.querySelectorAll('[data-scenario]').forEach((scenario) => {
+    const feedback = scenario.querySelector('[data-scenario-feedback]');
+    scenario.querySelectorAll('[data-scenario-option]').forEach((button) => button.addEventListener('click', async () => {
+      scenario.querySelectorAll('[data-scenario-option]').forEach((item) => item.setAttribute('aria-pressed', 'false'));
+      button.setAttribute('aria-pressed', 'true');
+      message(feedback, button.dataset.feedback, button.dataset.correct === 'true' ? 'success' : '');
+      if (!state.session || !state.lesson?.id) return;
+      await academySupabase.from('academy_scenario_responses').upsert({ user_id: state.session.user.id, lesson_id: state.lesson.id, scenario_key: scenario.dataset.scenario, selected_option: button.dataset.option }, { onConflict: 'user_id,lesson_id,scenario_key' });
+      await touchLessonProgress('scenario');
+    }));
+  });
+}
+
+async function loadLessonRecord() {
+  const { data, error } = await academySupabase.from('academy_lessons').select('id,title,lesson_content,status').eq('slug', lessonKey).maybeSingle();
+  if (error) throw error;
+  state.lesson = data;
+  if (state.session && data?.id) await touchLessonProgress('opening');
+  return data;
+}
+
+function setupCapability() {
+  const form = document.querySelector('[data-capability-form]');
+  if (!form) return;
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const status = form.querySelector('[data-capability-status]');
+    if (!state.session) return message(status, 'Sign in to save this private response.', 'error');
+    if (!state.lesson?.id) return message(status, 'Lesson records are being prepared. Your response was not saved.', 'error');
+    const response = { system_to_understand: form.querySelector('[name="system_to_understand"]').value.trim(), strength_to_contribute: form.querySelector('[name="strength_to_contribute"]').value.trim() };
+    if (!response.system_to_understand || !response.strength_to_contribute) return message(status, 'Answer both prompts before saving.', 'error');
+    const { error } = await academySupabase.from('academy_capability_responses').upsert({ user_id: state.session.user.id, lesson_id: state.lesson.id, response }, { onConflict: 'user_id,lesson_id' });
+    if (error) return message(status, error.message, 'error');
+    state.capabilitySaved = true;
+    message(status, 'Saved privately to your Capability Profile.', 'success');
+    const profile = {
+      user_id: state.session.user.id,
+      community_strengths: [response.strength_to_contribute],
+      interests: [response.system_to_understand],
+      collaboration_preferences: response.strength_to_contribute
+    };
+    await academySupabase.from('academy_capability_profiles').upsert(profile, { onConflict: 'user_id' });
+    await touchLessonProgress('capability-exercise');
+  });
+}
+
+function setupQuiz() {
+  const form = document.querySelector('[data-quiz-form]');
+  if (!form) return;
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const status = form.querySelector('[data-quiz-status]');
+    if (!state.session) return message(status, 'Sign in to record a real completion.', 'error');
+    if (!state.lesson?.id) return message(status, 'Lesson records are being prepared. Quiz results are not stored yet.', 'error');
+    const answers = Object.fromEntries(new FormData(form).entries());
+    if (Object.keys(answers).length < 3) return message(status, 'Answer all three questions before submitting.', 'error');
+    const { data, error } = await academySupabase.rpc('submit_academy_quiz', { p_lesson_id: state.lesson.id, p_answers: answers });
+    if (error) return message(status, error.message, 'error');
+    state.quizPassed = data.passed === true;
+    message(status, data.passed ? `Passed: ${data.score}/3 correct. Complete your capability exercise to finish Lesson 1.` : `Score: ${data.score}/3. Review the lesson and try again.`, data.passed ? 'success' : 'error');
+    await touchLessonProgress('knowledge-check');
+  });
+}
+
+function setupCompletion() {
+  const button = document.querySelector('[data-complete-lesson]');
+  if (!button) return;
+  button.addEventListener('click', async () => {
+    const status = document.querySelector('[data-completion-status]');
+    if (!state.session) return message(status, 'Sign in to record a real completion.', 'error');
+    if (!state.lesson?.id) return message(status, 'Lesson records are being prepared.', 'error');
+    button.disabled = true;
+    const { error } = await academySupabase.rpc('complete_academy_lesson', { p_lesson_id: state.lesson.id });
+    if (error) message(status, error.message, 'error'); else message(status, 'Lesson 1 completed. Your progress has been saved.', 'success');
+    button.disabled = false;
+  });
+}
+
+async function setupAdmin() {
+  const holder = document.querySelector('[data-founder-console]');
+  if (!holder) return;
+  if (!state.session || state.role !== 'founder_admin') { holder.innerHTML = '<p class="academy-status">Founder access is required. This page does not expose learner records to other users.</p>'; return; }
+  const [{ data, error }, { data: learners, error: learnerError }] = await Promise.all([
+    academySupabase.rpc('academy_founder_metrics'),
+    academySupabase.rpc('academy_founder_recent_learners')
+  ]);
+  if (error || !data?.[0]) { holder.innerHTML = '<p class="academy-status">Founder metrics are unavailable.</p>'; return; }
+  const metrics = data[0];
+  const learnerList = !learnerError && learners?.length
+    ? `<ul class="academy-admin-list">${learners.map((learner) => `<li><strong>${learner.display_name || 'Private learner'}</strong><span>${learner.completion_count} completion${learner.completion_count === 1 ? '' : 's'} · ${new Date(learner.joined_at).toLocaleDateString()}</span></li>`).join('')}</ul>`
+    : '<p class="academy-status">No learner records yet. Metrics remain true zero until real activity exists.</p>';
+  holder.innerHTML = `<div class="academy-admin-grid"><div class="academy-stat"><strong>${metrics.learner_count}</strong><span>Learners</span></div><div class="academy-stat"><strong>${metrics.completion_count}</strong><span>Lesson completions</span></div><div class="academy-stat"><strong>${metrics.capability_response_count}</strong><span>Capability responses</span></div><div class="academy-stat"><strong>${metrics.published_lesson_count}</strong><span>Published lessons</span></div></div><section class="academy-admin-section"><h2>Recent learners</h2>${learnerList}</section><p class="academy-status">Metrics are based only on real Academy records. Founder review is role-gated by Supabase RLS; no learner record is exposed to other users.</p>`;
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadSessionUI();
+  setupAuth(); setupScenario(); setupCapability(); setupQuiz(); setupCompletion();
+  if (document.body.dataset.academyPage === 'lesson') { try { await loadLessonRecord(); } catch (_) {} }
+  if (document.body.dataset.academyPage === 'admin') await setupAdmin();
+});
