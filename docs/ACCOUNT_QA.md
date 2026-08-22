@@ -34,4 +34,6 @@ The live shared drawer opened successfully and supplied the signed-out Account a
 
 Live HTTP checks returned 200 for all nine release routes: five Account pages, the Account root and settings routes, the Academy public routes, and the Academy administration route. Authentication-specific actions that require a real user session—successful password login, email confirmation receipt, password-reset email receipt, private Account rendering, and founder-console data—were not executed with a fabricated account or an unapproved founder session. Email provider and confirmation policy were verified in the authorized dashboard, but sender-domain deliverability remains an operational configuration item rather than a claimed test result.
 
+After final deployment, the existing browser session was verified as signed out. No private account record, founder role, Academy progress, or user email was read during this check. Authenticated production validation therefore remains blocked pending explicit founder-session authorization or a user-completed login.
+
 The remaining local checks cover the login, reset, Academy entry, and signed-out Academy persistence gates at the requested phone widths, followed by desktop and production verification after deployment.
