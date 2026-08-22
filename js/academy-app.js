@@ -1,4 +1,4 @@
-/* 7TRIBES LIFE ACADEMY — Shared public/authenticated learning interactions.
+/* 7TRIBES LIFE ACADEMY — Single Module V1 roadmap with private learning interactions.
    Private work persists only through Supabase RLS-backed tables. */
 import { academySupabase, academySession, academyRole } from './academy-supabase.js';
 
@@ -61,6 +61,20 @@ async function loadLessonRecord() {
   state.lesson = data;
   if (state.session && data?.id) await touchLessonProgress('opening');
   return data;
+}
+
+async function loadLandingRoadmap() {
+  const statusNode = document.querySelector('[data-lesson-one-status]');
+  if (!statusNode) return;
+  const { data: lesson, error: lessonError } = await academySupabase.from('academy_lessons').select('id').eq('slug', lessonKey).maybeSingle();
+  if (lessonError || !lesson?.id || !state.session) return;
+  const [{ data: completion }, { data: progress }] = await Promise.all([
+    academySupabase.from('academy_completions').select('lesson_id').eq('lesson_id', lesson.id).maybeSingle(),
+    academySupabase.from('academy_lesson_progress').select('lesson_id').eq('lesson_id', lesson.id).maybeSingle()
+  ]);
+  const label = completion ? 'Completed' : progress ? 'In Progress' : 'Available';
+  statusNode.textContent = label;
+  statusNode.setAttribute('aria-label', `${label}: Lesson 1, Who Actually Runs What?`);
 }
 
 function setupCapability() {
@@ -138,6 +152,7 @@ async function setupAdmin() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadSessionUI();
+  if (document.body.dataset.academyPage === 'landing') await loadLandingRoadmap();
   setupScenario(); setupCapability(); setupQuiz(); setupCompletion();
   if (document.body.dataset.academyPage === 'lesson') { try { await loadLessonRecord(); } catch (_) {} }
   if (document.body.dataset.academyPage === 'admin') await setupAdmin();

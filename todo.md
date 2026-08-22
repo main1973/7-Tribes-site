@@ -137,3 +137,12 @@
 - [x] Confirm the current founder Auth account is present and confirmed, then distinguish the intentional duplicate-signup response from a genuine profile-creation or password-reset defect.
 - [x] Verify the reset-link handoff to the deployed reset-password route and document the exact user action needed before any code change is considered.
 - [x] Correct only the confirmed cause of the password-login failure and verify private Account access plus logout with the existing founder account.
+
+## Academy V1 hierarchy correction
+
+- [x] Inventory current Academy modules, lessons, publication states, and any progress/completion dependencies before changing curriculum records. The database contains one published Module 1 and one published Lesson 1.
+- [x] Preserve the existing Module 1 and legitimate Lesson 1 learner data; remove only unapproved placeholder modules after confirming they have no learner dependencies. No placeholder Module 2+ database record exists, so no module removal is required.
+- [x] Establish exactly seven Lesson records under Module 1, with only Lesson 1 published and Lessons 2–7 visible as Coming Soon without curriculum or learner data.
+- [x] Rename the existing published Lesson 1 database title to “Who Actually Runs What?” without changing its slug, content, learner progress, or related records.
+- [x] Update the Academy roadmap copy and disabled Lesson 2–7 treatment without changing authentication or responsive layout rules.
+- [ ] Verify the database and production learner-facing roadmap both show Academy → Module 1 → seven lessons, then report changed records.
