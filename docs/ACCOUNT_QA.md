@@ -59,3 +59,5 @@ Extended 430 px and 1280 px views confirmed the entire Module 1 list renders exa
 The final production-database verification confirms the learner-facing roadmap aligns with the stored hierarchy: one Module 1, seven lessons, the approved Module 1 description, the renamed published Lesson 1, and six empty Coming Soon records. The signed-out roadmap uses the public Available state; authenticated learner status is derived only from the owner’s RLS-protected progress and completion rows.
 
 The existing Lesson 1 static page was then aligned to the same approved label in its browser document title and visible heading. The lesson’s body, scenario, capability exercise, quiz, completion gate, authentication checks, and responsive CSS were not changed.
+
+After the final GitHub Pages deployment, the live Academy roadmap was inspected at 390 px using a cache-busting production request. It displays Module 1, the approved description, and exactly seven contained lesson rows; Lesson 1 is available and Lessons 2–7 are disabled Coming Soon. The final live Lesson 1 request confirms the visible heading and document title use “Who Actually Runs What?”.

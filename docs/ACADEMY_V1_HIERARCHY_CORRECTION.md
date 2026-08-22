@@ -25,4 +25,4 @@ The following safe, idempotent migration files document the deployed database ch
 
 ## Final verification
 
-The authorized database verification returned seven rows under `how-america-works`. Lesson 1 is published at position 1 and retains non-empty existing content. Each of the six subsequent lessons is `coming_soon` with empty content. The frontend roadmap was reviewed at 320 px, 430 px, and 1280 px widths; it displays the approved hierarchy without horizontal overflow.
+The authorized database verification returned seven rows under `how-america-works`. Lesson 1 is published at position 1 and retains non-empty existing content. Each of the six subsequent lessons is `coming_soon` with empty content. The frontend roadmap was reviewed at 320 px, 430 px, and 1280 px widths; it displays the approved hierarchy without horizontal overflow. GitHub Pages deployments `32602809925` and `32602915233` completed successfully for commits `cd8da99` and `b2912eb`; the final live Academy roadmap and Lesson 1 page were verified with cache-busting production requests.
