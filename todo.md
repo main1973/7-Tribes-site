@@ -145,4 +145,5 @@
 - [x] Establish exactly seven Lesson records under Module 1, with only Lesson 1 published and Lessons 2–7 visible as Coming Soon without curriculum or learner data.
 - [x] Rename the existing published Lesson 1 database title to “Who Actually Runs What?” without changing its slug, content, learner progress, or related records.
 - [x] Update the Academy roadmap copy and disabled Lesson 2–7 treatment without changing authentication or responsive layout rules.
+- [x] Align the existing Lesson 1 static-page title and document title to “Who Actually Runs What?” while leaving its established lesson content and private learning logic unchanged.
 - [ ] Verify the database and production learner-facing roadmap both show Academy → Module 1 → seven lessons, then report changed records.

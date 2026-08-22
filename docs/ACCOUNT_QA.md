@@ -57,3 +57,5 @@ The corrected Academy landing roadmap was visually reviewed at 320 px and 430 px
 Extended 430 px and 1280 px views confirmed the entire Module 1 list renders exactly seven rows. Lesson 1 is the only linked, available lesson; Lessons 2–7 remain visibly disabled and marked Coming Soon, with no curriculum copy exposed. The existing responsive header, Account cards, spacing, and button behavior remain unchanged and no horizontal overflow was observed.
 
 The final production-database verification confirms the learner-facing roadmap aligns with the stored hierarchy: one Module 1, seven lessons, the approved Module 1 description, the renamed published Lesson 1, and six empty Coming Soon records. The signed-out roadmap uses the public Available state; authenticated learner status is derived only from the owner’s RLS-protected progress and completion rows.
+
+The existing Lesson 1 static page was then aligned to the same approved label in its browser document title and visible heading. The lesson’s body, scenario, capability exercise, quiz, completion gate, authentication checks, and responsive CSS were not changed.
