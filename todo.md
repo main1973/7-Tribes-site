@@ -98,3 +98,36 @@
 - [x] Confirm GitHub Pages serves the Account routes and refreshed shared navigation on `https://7trb.com`.
 - [x] Re-run signed-out production gates, public RLS checks, and allowed redirect checks; use the real founder only with explicit authorization for authenticated founder-flow validation.
 - [ ] Publish the final Account completion report only after production verification succeeds.
+
+## Verification-email delivery blocker
+
+- [x] Inspect the Supabase Auth email settings, templates, logs, rate limits, and delivery configuration for the missing Account confirmation email.
+- [x] Confirm whether delivery is limited by the default Supabase sender, a provider restriction, rate limit, spam filtering, or an unverified custom sender domain. The project uses built-in SMTP with the fixed two-email-per-hour limit; custom SMTP is disabled.
+- [x] Apply only a user-approved sender or delivery configuration change; custom SMTP is now enabled with verified `no-reply@7trb.com` as the Auth sender and `7Tribes` as the sender name. Confirmation email remains enabled.
+- [ ] Obtain a valid Resend key or authenticated provider session with access to a verified sending domain; the uploaded Resend keys were rejected by the provider and were not retained.
+- [x] Confirm availability of a verified sending domain for the remediation: `7trb.com` is verified in the authenticated Resend dashboard.
+- [ ] Verify an Account confirmation email and authenticated founder flow without fabricating a learner account or exposing credentials.
+- [x] Verify the existing founder account’s confirmation state in the authorized dashboard; it is already confirmed, so no redundant confirmation email was sent.
+- [x] Verify production Auth email delivery with one authorized password-recovery message; Supabase accepted the request and Resend reported the message delivered.
+
+## Password-login verification blocker
+
+- [ ] Capture the exact live password-login failure without exposing credentials, then inspect the authenticated Supabase account record, provider settings, and client error path.
+- [x] Identify that the browser is returning the generic duplicate-signup confirmation response for an established confirmed Account; this does not set a password. Use the delivered password-recovery flow instead of repeated signup.
+
+## Founder profile creation blocker
+
+- [x] Inspect the existing founder’s Academy profile row, role row, and new-user trigger behavior using only authorized read-only database access. The profile exists and the database role remains `founder_admin`.
+- [x] Determine whether a founder-profile repair is required. No repair was applied because the profile is present and role data is correct.
+
+## Password-recovery receipt blocker
+
+- [ ] Inspect the existing provider-delivery event and the Supabase password-recovery redirect configuration to distinguish inbox placement from an authentication configuration defect.
+- [ ] Apply only an approved correction if the delivery event or redirect configuration identifies a concrete fault; otherwise document the verified delivery status and recovery steps.
+- [x] Verify that Supabase’s allowed password-recovery redirect exactly matches the deployed `/account/reset-password.html` route. It is already allow-listed; no change was needed.
+
+## Existing-account flow clarification
+
+- [x] Confirm the current founder Auth account is present and confirmed, then distinguish the intentional duplicate-signup response from a genuine profile-creation or password-reset defect.
+- [x] Verify the reset-link handoff to the deployed reset-password route and document the exact user action needed before any code change is considered.
+- [ ] Correct only the confirmed cause of the password-login failure and verify private Account access plus logout with the existing founder account.

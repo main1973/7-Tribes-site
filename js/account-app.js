@@ -46,7 +46,7 @@ function bindSignup() {
       });
       if (error) throw error;
       if (data.session) window.location.assign(returnTo);
-      else setStatus(status, 'Account created. Check your email to verify your address, then sign in.', 'success');
+      else setStatus(status, 'Check your email to verify your address. If you have used 7Tribes before, reset your password instead—creating another account does not replace an existing password.', 'success');
     } catch (error) {
       const duplicate = /already registered|already exists/i.test(error.message || '');
       setStatus(status, duplicate ? 'An account already exists for this email. Try Log In or Forgot Password.' : (error.message || 'Account could not be created.'), 'error');

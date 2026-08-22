@@ -85,3 +85,39 @@ Supabase Auth URL Configuration was verified after the Account rollout. The Site
 Read-only provider inspection confirms that new user signups are enabled, Email authentication is enabled, and email confirmation is enabled. Manual linking and anonymous sign-ins remain disabled. No confirmation or email-delivery policy was changed; the Account UI must retain its confirmation-aware success state and email delivery should not be claimed until a configured sender is verified.
 
 A read-only SQL inspection confirms that `on_auth_user_created_academy` remains active as an `AFTER INSERT` trigger on `auth.users` and invokes `handle_new_academy_user()`. Therefore, new password signups receive their private profile and database-controlled default `member` role through the trigger rather than through browser-side insertion.
+
+Following a live confirmation-email delivery report, a read-only Auth → Emails inspection confirmed that Supabase is using its default templates and that custom SMTP has not been configured. The dashboard requires custom SMTP before the project can edit templates or use a verified custom sender. No sender, template, confirmation, or rate-limit setting was changed during this inspection.
+
+The dedicated Auth SMTP page confirms that custom SMTP is disabled. The Auth Rate Limits page exposes the project email-per-hour control alongside token, verification, and sign-in limits. Its exact configured email value is being inspected separately; no limits or IP-forwarding behavior were changed.
+
+The read-only rate-limit form reports `RATE_LIMIT_EMAIL_SENT = 2`. This matches the current Supabase documentation: built-in SMTP is restricted to two combined Auth emails per hour, may send only to pre-authorized project-team addresses, has no delivery SLA, and cannot have its email rate raised without custom SMTP. The same documentation explicitly advises retaining confirmation-email protection and using a custom SMTP sender for production delivery. Authoritative references: https://supabase.com/docs/guides/auth/auth-smtp, https://supabase.com/docs/guides/auth/rate-limits, and https://supabase.com/docs/guides/troubleshooting/not-receiving-auth-emails-from-the-supabase-project-OFSNzw.
+
+The project Auth Logs view currently shows no rows and warns that data may take up to 24 hours to refresh, so it cannot attribute the specific confirmation request to a delivery error in real time. The documented production remedy remains custom SMTP with a verified sender; no available log evidence supports changing confirmation policy or making any other Auth setting change.
+
+The user supplied a Resend API-key CSV for remediation. Each listed credential was tested only against Resend’s domain-list endpoint with no secret output or configuration mutation. Every supplied key returned HTTP 400 with `API key is invalid`, so no verified sending domain or SMTP configuration could be retrieved. The credentials were not copied into the repository, browser, project settings, or documentation.
+
+The user then authenticated in the Resend dashboard. Its Domains view confirms that `7trb.com` is verified and can serve as the sending domain for the proposed production Auth sender. No Resend API key or Supabase SMTP setting has yet been created or changed.
+
+The user supplied a replacement Resend credential for the approved SMTP configuration. It was validated without outputting its value: the Resend domains endpoint returned HTTP 200 and reported `7trb.com` as verified. The credential remains only in a temporary, non-repository file pending entry into Supabase’s encrypted SMTP setting.
+
+With explicit user approval, the Supabase SMTP form was prepared for a single save using sender `no-reply@7trb.com`, sender name `7Tribes`, host `smtp.resend.com`, port 465, username `resend`, and the validated Resend credential. The credential value is omitted from this record. Email confirmation remains enabled; the production save is the next pending action.
+
+The initial dashboard save control was invoked, but the SMTP form remained visible after the request with its entered non-secret values. Persistence is being checked before any authentication email is retried; no interpretation is made from the masked password field alone.
+
+The form’s save control was confirmed enabled and invoked a second time. No success or error toast was exposed by the dashboard, so the settings will be reloaded independently to distinguish a persisted configuration from unsaved in-page state.
+
+The dashboard was navigated away from and back to the SMTP settings page for an independent persistence check. Its initial loading state again presents the Custom SMTP control; a completed render check is required before recording a final saved-or-unsaved conclusion.
+
+The independent reload confirms custom SMTP is enabled and the non-secret configuration persists as `no-reply@7trb.com` / `7Tribes` / `smtp.resend.com` / port 465 / username `resend`. The password field is blank on reload, as expected for a stored encrypted secret. The temporary credential files were deleted immediately after persistence verification. The authorized founder account is present in Auth Users; no private profile, role, progress, or password value was read from the user list.
+
+The existing founder Auth record was inspected in the authorized dashboard to determine whether a confirmation resend was necessary. Its account email is already confirmed, so no additional confirmation email was sent. This explains why a new confirmation message is not a valid prerequisite for password login on that established account. A password-recovery send remains available if the user wants an explicit delivery test through the new verified SMTP sender; it does not change a password unless the recipient follows the recovery flow.
+
+At the user’s explicit request, one password-recovery email was sent to the already confirmed founder account. The Supabase dashboard reported that the recovery link is valid for 60 minutes, and the authenticated Resend dashboard independently reported the corresponding “Reset your password” message as **Delivered**. This verifies production handoff and delivery through the newly configured sender without changing the account password.
+
+To investigate the reported missing profile, a single read-only SQL query was prepared in the authorized editor. It checks only whether the founder Auth row and `academy_profiles` row exist and returns the database role label; it does not select email, password, progress, capability, or other profile data.
+
+The first read-only execution failed safely because the profile table uses `id` rather than `user_id`. The query was corrected using the repository schema definition; it remains existence-only and does not mutate any database row.
+
+The corrected query returned one row confirming: the founder Auth account exists, the matching `academy_profiles` row exists, and the database role is `founder_admin`. Therefore, no profile-creation repair or role reassignment is required. The reported profile symptom is an unauthenticated client-access issue, not an absent profile record.
+
+The authorized URL configuration was rechecked against the deployed account client. The site URL is `https://7trb.com/`, and the exact deployed password-recovery return route `https://7trb.com/account/reset-password.html` is already present in the allow-list alongside the Account login and Academy routes. No redirect configuration mismatch or change was found.

@@ -36,4 +36,8 @@ Live HTTP checks returned 200 for all nine release routes: five Account pages, t
 
 After final deployment, the existing browser session was verified as signed out. No private account record, founder role, Academy progress, or user email was read during this check. Authenticated production validation therefore remains blocked pending explicit founder-session authorization or a user-completed login.
 
+During password-login investigation, the browser showed another signup attempt against the already established Account rather than a successful password-login session. Supabase returned the deliberately generic confirmation-success response used to avoid account enumeration; it does not establish, replace, or change the existing account password. The secure resolution is the already-delivered password-recovery link, followed by login—not another signup submission. No entered credential was retained in this record.
+
+The founder Account has since been verified as present, confirmed, and linked to its private Academy profile and database-controlled founder role. The client sends password-recovery links to `/account/reset-password.html`, and the exact HTTPS route is present in Supabase’s redirect allow-list. The authenticated mailbox search also located the delivered 7Tribes password-recovery message in Inbox. The remaining user action is to open that message’s reset link, choose a password, and then use Log In; another Create Account submission intentionally cannot replace the existing password.
+
 The remaining local checks cover the login, reset, Academy entry, and signed-out Academy persistence gates at the requested phone widths, followed by desktop and production verification after deployment.
