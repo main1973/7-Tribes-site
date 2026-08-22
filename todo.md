@@ -147,3 +147,12 @@
 - [x] Update the Academy roadmap copy and disabled Lesson 2–7 treatment without changing authentication or responsive layout rules.
 - [x] Align the existing Lesson 1 static-page title and document title to “Who Actually Runs What?” while leaving its established lesson content and private learning logic unchanged.
 - [x] Verify the database and production learner-facing roadmap both show Academy → Module 1 → seven lessons, then report changed records.
+
+## Public Life Academy homepage challenge
+
+- [ ] Audit the current homepage structure, visual system, and JavaScript interaction hooks to place the Academy challenge without disturbing existing behavior.
+- [x] Audit the current homepage structure, visual system, and JavaScript interaction hooks to place the Academy challenge without disturbing existing behavior.
+- [x] Add a lightweight public three-question Life Academy preview using only approved Lesson 1 concepts, in-memory score state, and no account or database writes.
+- [x] Provide immediate educational feedback, a post-three-question result, and clear Academy CTAs without fake statistics, rewards, or learner claims.
+- [x] Verify the challenge at mobile and desktop widths for stacked answers, no horizontal overflow, keyboard access, restrained motion, and preserved homepage interactions.
+- [ ] Commit, deploy, and live-test the public Academy doorway, then report the exact files and behavior added.

@@ -1350,10 +1350,42 @@
     .layer-row{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:8px 4px;border-bottom:1px solid rgba(255,215,122,.08)}
     .layer-row:last-child{border-bottom:0}
     .layer-row strong{color:var(--ink);font-size:1rem}.layer-row span{color:var(--muted);font-size:.88rem;text-align:right}
+    /* LIFE ACADEMY CHALLENGE: a public, in-memory doorway into approved Lesson 1 concepts. */
+    .academy-challenge-section{order:4;position:relative;overflow:hidden;padding:82px 0;background:radial-gradient(circle at 85% 20%,rgba(231,184,82,.16),transparent 28%),linear-gradient(135deg,#170d05 0%,#0b0804 56%,#161007 100%)}
+    .academy-challenge-section::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;background-image:linear-gradient(90deg,rgba(255,215,122,.1) 1px,transparent 1px),linear-gradient(rgba(255,215,122,.07) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(90deg,transparent,black 16%,black 84%,transparent)}
+    .academy-challenge-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:34px;align-items:stretch}
+    .academy-challenge-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:20px 0}
+    .academy-challenge-copy h2{max-width:12ch;margin:0;color:var(--ink);font-size:clamp(38px,5.2vw,64px);line-height:1.01;letter-spacing:-.04em}
+    .academy-challenge-copy>p:not(.academy-challenge-eyebrow){max-width:48ch;margin:22px 0 0;color:var(--muted);font-size:1.06rem}
+    .academy-challenge-eyebrow{margin:0 0 14px;color:var(--gold-bright);font-size:.76rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+    .academy-challenge-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .academy-challenge-actions .btn{min-width:200px}
+    .academy-challenge-stage{position:relative;display:flex;flex-direction:column;min-height:440px;padding:26px;border:1px solid rgba(255,215,122,.28);border-radius:22px;background:linear-gradient(145deg,rgba(31,22,11,.96),rgba(12,9,5,.9));box-shadow:0 24px 70px rgba(0,0,0,.4)}
+    .academy-challenge-stage::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;border:1px solid rgba(255,221,122,.07)}
+    .academy-challenge-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px;color:var(--muted);font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .academy-challenge-meta strong{color:var(--gold-bright);font-size:.76rem}
+    .academy-challenge-question{margin:0;color:var(--ink);font-size:clamp(22px,3vw,31px);line-height:1.18}
+    .academy-challenge-options{display:grid;gap:10px;margin:24px 0 18px}
+    .academy-challenge-option{width:100%;padding:15px 16px;border:1px solid rgba(255,215,122,.2);border-radius:12px;background:rgba(255,215,122,.035);color:var(--ink);font:inherit;font-weight:700;line-height:1.35;text-align:left;cursor:pointer;transition:transform .18s cubic-bezier(.23,1,.32,1),border-color .18s ease,background-color .18s ease,box-shadow .18s ease}
+    .academy-challenge-option:hover:not(:disabled),.academy-challenge-option:focus-visible{transform:translateY(-2px);border-color:rgba(255,215,122,.7);background:rgba(255,215,122,.09);box-shadow:0 10px 28px rgba(231,184,82,.11);outline:none}
+    .academy-challenge-option:focus-visible{box-shadow:0 0 0 3px rgba(255,221,122,.26),0 10px 28px rgba(231,184,82,.11)}
+    .academy-challenge-option:disabled{cursor:default;opacity:.72}
+    .academy-challenge-option.is-correct{border-color:rgba(144,226,167,.72);background:rgba(72,157,96,.16);color:#f1fff3}
+    .academy-challenge-option.is-incorrect{border-color:rgba(255,150,116,.7);background:rgba(175,65,43,.15);color:#fff2eb}
+    .academy-challenge-feedback{display:flex;align-items:flex-start;gap:10px;min-height:72px;margin-top:auto;padding:15px 16px;border-left:2px solid rgba(255,215,122,.8);background:rgba(255,215,122,.055);color:var(--muted);line-height:1.55}
+    .academy-challenge-feedback[hidden]{display:none!important}
+    .academy-challenge-feedback strong{color:var(--gold-bright)}
+    .academy-challenge-next{align-self:flex-start;margin-top:16px}
+    .academy-challenge-next[hidden]{display:none!important}
+    .academy-challenge-result{display:flex;flex:1;flex-direction:column;justify-content:center;align-items:flex-start;min-height:300px}
+    .academy-challenge-result[hidden]{display:none!important}
+    .academy-challenge-score{margin:0;color:var(--gold-bright);font-size:clamp(44px,6vw,68px);font-weight:900;line-height:1}
+    .academy-challenge-result h3{margin:18px 0 0;color:var(--ink);font-size:clamp(24px,3vw,34px);line-height:1.12}
+    .academy-challenge-result p{max-width:44ch;margin:16px 0 0;color:var(--muted)}
     #ecosystem-map{order:2}#role-selector{order:3}#why-struggle{order:10}#organize{order:11}#build{order:12}#circulate{order:13}#blueprint{order:14}#simulator{order:15}#detroit{order:16}#closing{order:17}
     .illustrative-note{max-width:760px;margin:20px auto 0;padding:12px 16px;border-left:2px solid var(--gold);background:rgba(231,184,82,.07);color:var(--muted);font-size:.9rem;text-align:left}
     .detroit-stat-value.is-qualitative{font-size:clamp(18px,2.6vw,30px);line-height:1.15;color:var(--gold-bright)}
-    @media(max-width:760px){.unity-platform-section{padding:48px 0 38px}.unity-platform-inner{grid-template-columns:1fr;gap:24px}.unity-platform-copy h2{max-width:none}.unity-platform-actions{display:grid;grid-template-columns:1fr}.unity-platform-actions .btn{width:100%;min-width:0}.layer-row{align-items:flex-start;flex-direction:column;gap:2px}.layer-row span{text-align:left}}
+    @media(max-width:760px){.unity-platform-section{padding:48px 0 38px}.unity-platform-inner{grid-template-columns:1fr;gap:24px}.unity-platform-copy h2{max-width:none}.unity-platform-actions{display:grid;grid-template-columns:1fr}.unity-platform-actions .btn{width:100%;min-width:0}.layer-row{align-items:flex-start;flex-direction:column;gap:2px}.layer-row span{text-align:left}.academy-challenge-section{padding:58px 0}.academy-challenge-grid{grid-template-columns:1fr;gap:20px}.academy-challenge-copy{padding:0}.academy-challenge-copy h2{max-width:none}.academy-challenge-actions{display:grid;width:100%;grid-template-columns:1fr}.academy-challenge-actions .btn{width:100%;min-width:0}.academy-challenge-stage{min-height:0;padding:20px}.academy-challenge-meta{margin-bottom:20px}.academy-challenge-options{gap:9px;margin:20px 0 16px}.academy-challenge-option{padding:14px}.academy-challenge-feedback{min-height:88px}.academy-challenge-result{min-height:270px}}
   </style>
   <link rel="stylesheet" href="css/global-responsive.css">
   <link rel="stylesheet" href="css/unity-platform.css">
@@ -1515,6 +1547,38 @@
           <div class="layer-row"><strong>Nuru</strong><span>Identity + Web3</span></div>
           <div class="layer-row"><strong>7TRB</strong><span>Utility + Circulation</span></div>
           <div class="layer-row"><strong>Alkebuleum</strong><span>Blockchain infrastructure</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLIC LIFE ACADEMY CHALLENGE: no account, database, score storage, or rewards. -->
+    <section class="section academy-challenge-section" id="academy-challenge" aria-labelledby="academy-challenge-title">
+      <div class="wrap academy-challenge-grid">
+        <div class="academy-challenge-copy" data-animate="fade-up">
+          <p class="academy-challenge-eyebrow">7TRIBES LIFE ACADEMY</p>
+          <h2 id="academy-challenge-title">Think You Know How America Works?</h2>
+          <p>You live in the system every day. But do you know who controls what, where the money goes, how ownership works, and what it takes for a community to build for itself?</p>
+          <div class="academy-challenge-actions">
+            <button class="btn gold premium-btn" type="button" data-challenge-start>TEST WHAT YOU KNOW</button>
+            <a class="btn ghost premium-btn" href="academy/">EXPLORE LIFE ACADEMY</a>
+          </div>
+        </div>
+
+        <div class="academy-challenge-stage" data-academy-challenge aria-labelledby="academy-challenge-question" data-animate="fade-up" data-delay="100">
+          <div data-challenge-run>
+            <div class="academy-challenge-meta"><span>Public preview · Nothing is saved</span><strong data-challenge-count>Question 1 of 3</strong></div>
+            <h3 class="academy-challenge-question" id="academy-challenge-question" data-challenge-question></h3>
+            <div class="academy-challenge-options" data-challenge-options aria-label="Choose one answer"></div>
+            <p class="academy-challenge-feedback" data-challenge-feedback role="status" aria-live="polite" hidden></p>
+            <button class="btn ghost academy-challenge-next" type="button" data-challenge-next hidden>Next question</button>
+          </div>
+          <div class="academy-challenge-result" data-challenge-result role="status" aria-live="polite" hidden>
+            <p class="academy-challenge-eyebrow">That’s only the beginning.</p>
+            <p class="academy-challenge-score" data-challenge-score>You got 0 of 3.</p>
+            <h3>Knowing the answer is useful. Knowing how the whole system works is power.</h3>
+            <p>Learn how the systems around you actually work.</p>
+            <div class="academy-challenge-actions"><a class="btn gold premium-btn" href="academy/">CONTINUE IN LIFE ACADEMY</a><button class="btn ghost" type="button" data-challenge-restart>Try the preview again</button></div>
+          </div>
         </div>
       </div>
     </section>
@@ -2101,6 +2165,110 @@
     }, { threshold: 0.3 });
     const detroitStats = document.querySelector('.detroit-stats');
     if (detroitStats) counterObserver.observe(detroitStats);
+
+    // Public Life Academy challenge. This is intentionally in-memory only: no
+    // account, local storage, analytics event, database record, reward, or score claim.
+    (function setupAcademyChallenge() {
+      const stage = document.querySelector('[data-academy-challenge]');
+      if (!stage) return;
+
+      const questions = [
+        {
+          prompt: 'Your neighborhood has an abandoned building creating problems. Who should you investigate first?',
+          options: ['The President', 'The Governor', 'The property owner and local authorities', 'Congress'],
+          correctIndex: 2,
+          explanation: 'Start with the people and local decision paths closest to the issue: the property owner, local code enforcement, and the relevant municipal authorities.'
+        },
+        {
+          prompt: 'Who normally controls local zoning decisions?',
+          options: ['A local zoning or planning process', 'Congress', 'A national bank', 'The President'],
+          correctIndex: 0,
+          explanation: 'Zoning is usually decided through local government processes, including planning, zoning, and elected local authorities.'
+        },
+        {
+          prompt: 'What is the most useful first step when dealing with an abandoned property?',
+          options: ['Announce a solution immediately', 'Map the owner, local rules, and current decision paths', 'Wait for a national policy change', 'Assume one institution controls everything'],
+          correctIndex: 1,
+          explanation: 'Before proposing a fix, map the people, rules, resources, and decision points that shape the situation.'
+        }
+      ];
+
+      const run = stage.querySelector('[data-challenge-run]');
+      const result = stage.querySelector('[data-challenge-result]');
+      const count = stage.querySelector('[data-challenge-count]');
+      const prompt = stage.querySelector('[data-challenge-question]');
+      const options = stage.querySelector('[data-challenge-options]');
+      const feedback = stage.querySelector('[data-challenge-feedback]');
+      const next = stage.querySelector('[data-challenge-next]');
+      const score = stage.querySelector('[data-challenge-score]');
+      let index = 0;
+      let correct = 0;
+      let answered = false;
+
+      function renderQuestion() {
+        const question = questions[index];
+        answered = false;
+        count.textContent = `Question ${index + 1} of ${questions.length}`;
+        prompt.textContent = question.prompt;
+        options.replaceChildren();
+        feedback.hidden = true;
+        feedback.textContent = '';
+        next.hidden = true;
+        question.options.forEach((label, optionIndex) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'academy-challenge-option';
+          button.textContent = label;
+          button.addEventListener('click', () => answerQuestion(optionIndex));
+          options.append(button);
+        });
+      }
+
+      function answerQuestion(optionIndex) {
+        if (answered) return;
+        answered = true;
+        const question = questions[index];
+        const isCorrect = optionIndex === question.correctIndex;
+        if (isCorrect) correct += 1;
+        [...options.querySelectorAll('button')].forEach((button, buttonIndex) => {
+          button.disabled = true;
+          button.setAttribute('aria-disabled', 'true');
+          if (buttonIndex === question.correctIndex) button.classList.add('is-correct');
+          if (buttonIndex === optionIndex && !isCorrect) button.classList.add('is-incorrect');
+        });
+        feedback.textContent = `${isCorrect ? 'Correct.' : 'Not quite.'} ${question.explanation}`;
+        feedback.hidden = false;
+        next.textContent = index === questions.length - 1 ? 'See your result' : 'Next question';
+        next.hidden = false;
+        next.focus();
+      }
+
+      function showNext() {
+        if (!answered) return;
+        if (index < questions.length - 1) {
+          index += 1;
+          renderQuestion();
+          return;
+        }
+        run.hidden = true;
+        score.textContent = `You got ${correct} of ${questions.length}.`;
+        result.hidden = false;
+      }
+
+      function startChallenge() {
+        index = 0;
+        correct = 0;
+        result.hidden = true;
+        run.hidden = false;
+        renderQuestion();
+        stage.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+        requestAnimationFrame(() => options.querySelector('button')?.focus());
+      }
+
+      next.addEventListener('click', showNext);
+      document.querySelectorAll('[data-challenge-start], [data-challenge-restart]').forEach((control) => control.addEventListener('click', startChallenge));
+      renderQuestion();
+    })();
 
   </script>
   <script src="js/visitor-counter.js?v=device-visits-20260817"></script>
