@@ -40,4 +40,14 @@ During password-login investigation, the browser showed another signup attempt a
 
 The founder Account has since been verified as present, confirmed, and linked to its private Academy profile and database-controlled founder role. The client sends password-recovery links to `/account/reset-password.html`, and the exact HTTPS route is present in Supabase’s redirect allow-list. The authenticated mailbox search also located the delivered 7Tribes password-recovery message in Inbox. The remaining user action is to open that message’s reset link, choose a password, and then use Log In; another Create Account submission intentionally cannot replace the existing password.
 
+A direct Gmail search for the verified `no-reply@7trb.com` sender surfaced the password-recovery conversation in the authenticated mailbox. The message is neither absent from the mailbox nor in Spam; the remaining step is to open the matching conversation and select its reset link.
+
+The dashboard-generated message was found to use the site-root fallback target. The live public Account recovery form was opened with the existing confirmed account email; its browser client explicitly requests the deployed `/account/reset-password.html` recovery route. The form is prepared for one replacement recovery request through the verified SMTP sender.
+
+The Account recovery form accepted the request and Gmail immediately displayed a new unread 7Tribes recovery message in Inbox. The next check is limited to verifying the message’s non-secret redirect destination before the user opens the reset action.
+
+The latest Account-initiated recovery link was inspected with token exclusion. Its only recorded redirect destination is `https://7trb.com/account/reset-password.html`, confirming that the public Account recovery form avoids the dashboard-send site-root fallback and hands recovery to the deployed reset page.
+
+The user completed the Account-initiated password reset and successfully authenticated on the live production login route. The signed-in My Account page rendered the private account summary, Academy progress zero state, Capability Profile status, settings entry, and the founder-only Academy administration link. The Academy administration route loaded under the database-controlled founder role. Secure logout returned the browser to `https://7trb.com/`, and a subsequent direct `/account/` request redirected to password login, confirming that private Account content is not accessible after logout. No learner progress, quiz attempt, capability response, completion, profile value, or role value was changed during this validation.
+
 The remaining local checks cover the login, reset, Academy entry, and signed-out Academy persistence gates at the requested phone widths, followed by desktop and production verification after deployment.

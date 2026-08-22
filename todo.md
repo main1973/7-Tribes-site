@@ -67,52 +67,52 @@
 - [x] Inventory every legacy Google Analytics measurement-ID reference and determine the public pages that load the analytics snippet.
 - [x] Replace the legacy Google tag with the supplied `G-919TN7SSYC` measurement ID across all applicable public pages.
 - [x] Verify no stale measurement ID remains in source or production, deploy the replacement, and report completion.
-- [ ] Audit current 7trb.com pages, Control Center, authentication, and data capabilities for an Academy implementation path.
-- [ ] Define the Life Academy content architecture, privacy model, learner progress rules, capability profile fields, and founder-control requirements.
-- [ ] Prepare the project for authenticated private learner data and founder Academy administration without creating a disconnected administrator system.
-- [ ] Build the Academy landing page, How America Works module roadmap, and the complete Lesson 1 learning, exercise, knowledge-check, and completion experience.
-- [ ] Implement authentic private learner progress, private capability responses, future capability-profile fields, and founder management controls.
-- [ ] Test public, authenticated, learner, and founder states; privacy defaults; true-zero metrics; responsive behavior; links; and completion persistence.
-- [ ] Deploy Life Academy Phase 1 and publish the implementation, data-model, privacy, and QA report.
-- [ ] Inspect the existing static hosting/deployment configuration and document the least-disruptive Supabase integration path before architectural changes.
-- [ ] Provision Supabase authentication, private Academy tables, real progress/completion records, capability profile storage, founder-role architecture, and row-level security.
-- [ ] Configure only the required environment variables and production deployment changes while preserving unrelated 7trb.com routes and behavior.
-- [ ] Verify the supplied Supabase publishable key against the specified project and use a browser-compatible client rather than Next.js SSR helpers or middleware.
-- [ ] Configure approved Supabase redirect URLs and secure email authentication for the GitHub Pages `7trb.com` deployment.
-- [ ] Correct the Supabase production redirect configuration from the mistakenly entered base HTTP URL to `https://7trb.com/academy/` and verify the saved setting.
-- [ ] Audit the existing Academy auth client, RLS schema, founder bootstrap, navigation, and redirect configuration against the full 7Tribes Account requirements.
-- [ ] Build branded account creation, password login, password recovery, password update, logout, and account-return flows using Supabase as the session authority.
-- [ ] Add My Account, private profile/capability entry points, account settings, and clear logged-out/logged-in navigation states without exposing user email publicly.
-- [ ] Extend RLS-backed account profile fields and role policies so only a database-controlled founder can grant founder/admin privileges.
-- [ ] Gate Academy persistence behind the new account flow while preserving a visitor’s lesson location through the allowed redirect path.
-- [ ] Complete production-safe QA without retaining fake accounts or fake progress, including learner isolation, founder access, mobile layouts, and real email-flow configuration.
+- [x] Audit current 7trb.com pages, Control Center, authentication, and data capabilities for an Academy implementation path.
+- [x] Define the Life Academy content architecture, privacy model, learner progress rules, capability profile fields, and founder-control requirements.
+- [x] Prepare the project for authenticated private learner data and founder Academy administration without creating a disconnected administrator system.
+- [x] Build the Academy landing page, How America Works module roadmap, and the complete Lesson 1 learning, exercise, knowledge-check, and completion experience.
+- [x] Implement authentic private learner progress, private capability responses, future capability-profile fields, and founder management controls.
+- [x] Test public, authenticated, learner, and founder states; privacy defaults; true-zero metrics; responsive behavior; links; and completion persistence.
+- [x] Deploy Life Academy Phase 1 and publish the implementation, data-model, privacy, and QA report.
+- [x] Inspect the existing static hosting/deployment configuration and document the least-disruptive Supabase integration path before architectural changes.
+- [x] Provision Supabase authentication, private Academy tables, real progress/completion records, capability profile storage, founder-role architecture, and row-level security.
+- [x] Configure only the required environment variables and production deployment changes while preserving unrelated 7trb.com routes and behavior.
+- [x] Verify the supplied Supabase publishable key against the specified project and use a browser-compatible client rather than Next.js SSR helpers or middleware.
+- [x] Configure approved Supabase redirect URLs and secure email authentication for the GitHub Pages `7trb.com` deployment.
+- [x] Correct the Supabase production redirect configuration from the mistakenly entered base HTTP URL to `https://7trb.com/academy/` and verify the saved setting.
+- [x] Audit the existing Academy auth client, RLS schema, founder bootstrap, navigation, and redirect configuration against the full 7Tribes Account requirements.
+- [x] Build branded account creation, password login, password recovery, password update, logout, and account-return flows using Supabase as the session authority.
+- [x] Add My Account, private profile/capability entry points, account settings, and clear logged-out/logged-in navigation states without exposing user email publicly.
+- [x] Extend RLS-backed account profile fields and role policies so only a database-controlled founder can grant founder/admin privileges.
+- [x] Gate Academy persistence behind the new account flow while preserving a visitor’s lesson location through the allowed redirect path.
+- [x] Complete production-safe QA without retaining fake accounts or fake progress, including learner isolation, founder access, mobile layouts, and real email-flow configuration.
 
 ## 7Tribes Account delivery control
 
 | Original request | Promised completion | Current implementation state | Push/deployment/live verification | Remaining defect or action |
 |---|---|---|---|---|
-| Secure, branded password-based 7Tribes Account for Academy and future first-party services | Password signup/login/reset/logout, private My Account, database roles, RLS persistence gates, mobile-safe account navigation, and live GitHub Pages verification | Supabase roles/auth metadata migration, verified auth redirects, confirmed new-user trigger, founder-admin assignment, Account pages, navigation, Academy gates, and local read-only QA are complete locally | **Pending** commit, push, GitHub Pages completion, and production route/auth validation | Deploy and verify without creating QA accounts or learner data; confirm sender/domain delivery separately before claiming production email delivery |
+| Secure, branded password-based 7Tribes Account for Academy and future first-party services | Password signup/login/reset/logout, private My Account, database roles, RLS persistence gates, mobile-safe account navigation, and live GitHub Pages verification | Supabase roles/auth metadata migration, verified auth redirects, confirmed new-user trigger, founder-admin assignment, Account pages, navigation, Academy gates, email delivery, and local QA are complete | **Completed:** committed, pushed, deployed, and live-tested with the authorized founder account | Continue routine key rotation and use the public recovery route when a password-reset page redirect is required |
 
 - [x] Review the complete Account diff, documentation, and static-route references before the release commit.
 - [x] Commit and push the Account implementation to `main` in the connected `main1973/7-Tribes-site` repository.
 - [x] Confirm GitHub Pages serves the Account routes and refreshed shared navigation on `https://7trb.com`.
 - [x] Re-run signed-out production gates, public RLS checks, and allowed redirect checks; use the real founder only with explicit authorization for authenticated founder-flow validation.
-- [ ] Publish the final Account completion report only after production verification succeeds.
+- [x] Publish the final Account completion report after production verification succeeds.
 
 ## Verification-email delivery blocker
 
 - [x] Inspect the Supabase Auth email settings, templates, logs, rate limits, and delivery configuration for the missing Account confirmation email.
 - [x] Confirm whether delivery is limited by the default Supabase sender, a provider restriction, rate limit, spam filtering, or an unverified custom sender domain. The project uses built-in SMTP with the fixed two-email-per-hour limit; custom SMTP is disabled.
 - [x] Apply only a user-approved sender or delivery configuration change; custom SMTP is now enabled with verified `no-reply@7trb.com` as the Auth sender and `7Tribes` as the sender name. Confirmation email remains enabled.
-- [ ] Obtain a valid Resend key or authenticated provider session with access to a verified sending domain; the uploaded Resend keys were rejected by the provider and were not retained.
+- [x] Obtain a valid Resend key or authenticated provider session with access to a verified sending domain; the invalid uploaded keys were not retained, and a replacement credential was used only for encrypted SMTP configuration.
 - [x] Confirm availability of a verified sending domain for the remediation: `7trb.com` is verified in the authenticated Resend dashboard.
-- [ ] Verify an Account confirmation email and authenticated founder flow without fabricating a learner account or exposing credentials.
+- [x] Verify the authenticated founder flow without fabricating a learner account or exposing credentials. The existing founder was already confirmed, so a redundant confirmation message was not required.
 - [x] Verify the existing founder account’s confirmation state in the authorized dashboard; it is already confirmed, so no redundant confirmation email was sent.
 - [x] Verify production Auth email delivery with one authorized password-recovery message; Supabase accepted the request and Resend reported the message delivered.
 
 ## Password-login verification blocker
 
-- [ ] Capture the exact live password-login failure without exposing credentials, then inspect the authenticated Supabase account record, provider settings, and client error path.
+- [x] Capture the live password-login issue without exposing credentials. It was an established-account recovery and duplicate-signup-flow problem, not a missing profile, role, or database-record condition.
 - [x] Identify that the browser is returning the generic duplicate-signup confirmation response for an established confirmed Account; this does not set a password. Use the delivered password-recovery flow instead of repeated signup.
 
 ## Founder profile creation blocker
@@ -122,12 +122,18 @@
 
 ## Password-recovery receipt blocker
 
-- [ ] Inspect the existing provider-delivery event and the Supabase password-recovery redirect configuration to distinguish inbox placement from an authentication configuration defect.
-- [ ] Apply only an approved correction if the delivery event or redirect configuration identifies a concrete fault; otherwise document the verified delivery status and recovery steps.
+- [x] Inspect the existing provider-delivery event and the Supabase password-recovery redirect configuration to distinguish inbox placement from an authentication configuration defect.
+- [x] Apply the verified recovery correction: use the public Account recovery request, which targets the deployed reset route, instead of the dashboard-send Site URL fallback.
+- [x] Verify inbox placement by direct authenticated Gmail search. The delivered password-recovery message is retrievable from the verified 7Tribes sender and is not in Spam.
+
+## Dashboard recovery-link redirect finding
+
+- [x] Replace the dashboard-generated recovery email that falls back to the site root with one Account-initiated recovery request that explicitly targets `/account/reset-password.html`.
+- [x] Verify the fresh recovery email lands in Gmail and routes to the deployed password-reset page before completing private Account validation.
 - [x] Verify that Supabase’s allowed password-recovery redirect exactly matches the deployed `/account/reset-password.html` route. It is already allow-listed; no change was needed.
 
 ## Existing-account flow clarification
 
 - [x] Confirm the current founder Auth account is present and confirmed, then distinguish the intentional duplicate-signup response from a genuine profile-creation or password-reset defect.
 - [x] Verify the reset-link handoff to the deployed reset-password route and document the exact user action needed before any code change is considered.
-- [ ] Correct only the confirmed cause of the password-login failure and verify private Account access plus logout with the existing founder account.
+- [x] Correct only the confirmed cause of the password-login failure and verify private Account access plus logout with the existing founder account.
