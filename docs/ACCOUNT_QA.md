@@ -24,4 +24,14 @@ The 360 px Login page preserved a contained, readable password form and visible 
 
 All nine release routes returned HTTP 200 from the plain static server: the five Account routes, both Academy public routes, and the Academy administration route. Authenticated behavior for My Account, settings, and Academy administration remains intentionally server-gated and was not tested with an unapproved or fabricated user account.
 
+## Production verification
+
+GitHub Pages workflow `32592318406` completed successfully for commit `618f7f8`. Live `https://7trb.com/account/signup.html` renders the branded Account signup form. Live `https://7trb.com/account/` redirects signed-out access to `https://7trb.com/account/login.html?returnTo=%2Faccount%2F` and does not disclose private account information.
+
+Live `https://7trb.com/academy/lesson-1.html#capability` displays the approved Account gate after a signed-out private-response action. Both action links preserve `/academy/lesson-1.html#capability` through their encoded `returnTo` values, and no learner response was submitted.
+
+The live shared drawer opened successfully and supplied the signed-out Account actions `Log In` and `Create Account`, with their intended `/account/login.html` and `/account/signup.html` destinations. The account-navigation cache revision is therefore active in production.
+
+Live HTTP checks returned 200 for all nine release routes: five Account pages, the Account root and settings routes, the Academy public routes, and the Academy administration route. Authentication-specific actions that require a real user session—successful password login, email confirmation receipt, password-reset email receipt, private Account rendering, and founder-console data—were not executed with a fabricated account or an unapproved founder session. Email provider and confirmation policy were verified in the authorized dashboard, but sender-domain deliverability remains an operational configuration item rather than a claimed test result.
+
 The remaining local checks cover the login, reset, Academy entry, and signed-out Academy persistence gates at the requested phone widths, followed by desktop and production verification after deployment.

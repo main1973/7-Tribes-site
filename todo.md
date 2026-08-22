@@ -93,8 +93,8 @@
 |---|---|---|---|---|
 | Secure, branded password-based 7Tribes Account for Academy and future first-party services | Password signup/login/reset/logout, private My Account, database roles, RLS persistence gates, mobile-safe account navigation, and live GitHub Pages verification | Supabase roles/auth metadata migration, verified auth redirects, confirmed new-user trigger, founder-admin assignment, Account pages, navigation, Academy gates, and local read-only QA are complete locally | **Pending** commit, push, GitHub Pages completion, and production route/auth validation | Deploy and verify without creating QA accounts or learner data; confirm sender/domain delivery separately before claiming production email delivery |
 
-- [ ] Review the complete Account diff, documentation, and static-route references before the release commit.
-- [ ] Commit and push the Account implementation to `main` in the connected `main1973/7-Tribes-site` repository.
-- [ ] Confirm GitHub Pages serves the Account routes and refreshed shared navigation on `https://7trb.com`.
-- [ ] Re-run signed-out production gates, public RLS checks, and allowed redirect checks; use the real founder only with explicit authorization for authenticated founder-flow validation.
+- [x] Review the complete Account diff, documentation, and static-route references before the release commit.
+- [x] Commit and push the Account implementation to `main` in the connected `main1973/7-Tribes-site` repository.
+- [x] Confirm GitHub Pages serves the Account routes and refreshed shared navigation on `https://7trb.com`.
+- [x] Re-run signed-out production gates, public RLS checks, and allowed redirect checks; use the real founder only with explicit authorization for authenticated founder-flow validation.
 - [ ] Publish the final Account completion report only after production verification succeeds.
