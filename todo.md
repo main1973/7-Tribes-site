@@ -94,7 +94,7 @@
 - [x] Consolidate repeated copy, duplicate ecosystem explanations, redundant CTA blocks, and excessive vertical spacing without visual redesign or invented metrics.
 - [x] Ensure all scenario-generated values are visibly labeled illustrative and retain the educational—not-live-metrics disclaimer.
 - [x] Verify the consolidated homepage at 360–430 px and desktop for touch controls, working hamburger navigation, no overflow, natural card fit, usable sliders, challenge interaction, footer fit, and valid destination links.
-- [ ] Commit, deploy, live-test, and report exactly which sections were retained, consolidated, removed, or changed.
+- [x] Commit, deploy, live-test, and report exactly which sections were retained, consolidated, removed, or changed.
 
 ## Life Academy Lesson 2 — Follow the Money
 
