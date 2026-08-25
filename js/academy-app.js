@@ -64,17 +64,23 @@ async function loadLessonRecord() {
 }
 
 async function loadLandingRoadmap() {
-  const statusNode = document.querySelector('[data-lesson-one-status]');
-  if (!statusNode) return;
-  const { data: lesson, error: lessonError } = await academySupabase.from('academy_lessons').select('id').eq('slug', lessonKey).maybeSingle();
-  if (lessonError || !lesson?.id || !state.session) return;
-  const [{ data: completion }, { data: progress }] = await Promise.all([
-    academySupabase.from('academy_completions').select('lesson_id').eq('lesson_id', lesson.id).maybeSingle(),
-    academySupabase.from('academy_lesson_progress').select('lesson_id').eq('lesson_id', lesson.id).maybeSingle()
-  ]);
-  const label = completion ? 'Completed' : progress ? 'In Progress' : 'Available';
-  statusNode.textContent = label;
-  statusNode.setAttribute('aria-label', `${label}: Lesson 1, Who Actually Runs What?`);
+  const lessons = [
+    { slug: 'understand-the-system', selector: '[data-lesson-one-status]', label: 'Lesson 1, Who Actually Runs What?' },
+    { slug: 'follow-the-money', selector: '[data-lesson-two-status]', label: 'Lesson 2, Follow the Money' }
+  ];
+  await Promise.all(lessons.map(async (entry) => {
+    const statusNode = document.querySelector(entry.selector);
+    if (!statusNode) return;
+    const { data: lesson, error } = await academySupabase.from('academy_lessons').select('id').eq('slug', entry.slug).maybeSingle();
+    if (error || !lesson?.id || !state.session) return;
+    const [{ data: completion }, { data: progress }] = await Promise.all([
+      academySupabase.from('academy_completions').select('lesson_id').eq('lesson_id', lesson.id).maybeSingle(),
+      academySupabase.from('academy_lesson_progress').select('lesson_id').eq('lesson_id', lesson.id).maybeSingle()
+    ]);
+    const label = completion ? 'Completed' : progress ? 'In Progress' : 'Available';
+    statusNode.textContent = label;
+    statusNode.setAttribute('aria-label', `${label}: ${entry.label}`);
+  }));
 }
 
 function setupCapability() {

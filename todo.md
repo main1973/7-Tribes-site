@@ -87,6 +87,18 @@
 - [x] Gate Academy persistence behind the new account flow while preserving a visitor’s lesson location through the allowed redirect path.
 - [x] Complete production-safe QA without retaining fake accounts or fake progress, including learner isolation, founder access, mobile layouts, and real email-flow configuration.
 
+## Life Academy Lesson 2 — Follow the Money
+
+- [ ] Review the full approved Lesson 2 brief and inspect the existing Lesson 1 schema, RLS policies, progress/completion functions, quiz model, and private capability-response patterns.
+- [x] Review the full approved Lesson 2 brief and inspect the existing Lesson 1 schema, RLS policies, progress/completion functions, quiz model, and private capability-response patterns.
+- [x] Add only the secure Lesson 2 curriculum records, private supply-chain and capability-gap data structures, and role-aware policies required by the approved scope.
+- [x] Revoke anonymous execution from Academy private SECURITY DEFINER RPCs—including Lesson 2 section tracking, quiz submission, and completion—while retaining the required authenticated grants and existing server-side auth checks.
+- [ ] Restore only the safe anonymous founder-check helper required by published-curriculum RLS policies, then re-verify that public lessons load while private completion, tracking, quiz submission, and account data remain anonymous-denied.
+- [ ] Build the public-readable Lesson 2 journey, including payroll concepts, revenue-versus-profit, the $100 Journey, circulation, trade, supply-chain thinking, and the required interactive exercises.
+- [ ] Require an authenticated account only for private responses, saved progress, the household supply-chain exercise, the capability-gap exercise, quiz attempt, and lesson completion; preserve return location and use no private browser storage.
+- [ ] Verify owner-only private data access, no fabricated learner data, public lesson readability, lesson completion persistence, founder access, mobile behavior, accessibility, and no change to Lesson 1 or unrelated services.
+- [ ] Commit, deploy, live-test, and report the precise Lesson 2 records, tables, policies, routes, and remaining manual configuration.
+
 ## 7Tribes Account delivery control
 
 | Original request | Promised completion | Current implementation state | Push/deployment/live verification | Remaining defect or action |
