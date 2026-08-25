@@ -25,3 +25,7 @@ The database security-advisor review found pre-existing anonymous execution gran
 After restoring the null-safe `is_academy_founder()` helper used by the existing published-curriculum RLS policies, the public Lesson 2 record and all eight Knowledge Check prompts load correctly again. A signed-out Knowledge Check submit displays the Account gate and creates no attempt. The local Academy roadmap shows one Module 1 with Lesson 1 and Lesson 2 available, while Lessons 3–7 remain Coming Soon. The signed-out founder-administration route exposes no learner records or editor fields and explains that the existing database-controlled founder role is required.
 
 The deployed Lesson 2 route was loaded through a cache-busting production request. It rendered the complete public lesson, the five-entry supply-chain form, eight public prompts, and the signed-out Account gate on quiz submission. No database record was created by the production public-path checks.
+
+## User-provided mobile production evidence
+
+The user supplied a production mobile screenshot of the Academy roadmap. It confirms the responsive single-module presentation on a phone: Module 1 is titled **How America Works**, the **7 Lessons** count is visible, Lesson 1 (**Who Actually Runs What?**) is available, Lesson 2 (**Follow the Money**) is available, and Lesson 3 begins below in the retained Coming Soon sequence. The screenshot shows the lesson cards remaining vertically stacked and readable; no responsive layout change was made after this evidence was provided.
