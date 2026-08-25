@@ -89,7 +89,8 @@ async function loadLessonRecord() {
 async function loadLandingRoadmap() {
   const lessons = [
     { slug: 'understand-the-system', selector: '[data-lesson-one-status]', label: 'Lesson 1, Who Actually Runs What?' },
-    { slug: 'follow-the-money', selector: '[data-lesson-two-status]', label: 'Lesson 2, Follow the Money' }
+    { slug: 'follow-the-money', selector: '[data-lesson-two-status]', label: 'Lesson 2, Follow the Money' },
+    { slug: 'how-work-actually-works', selector: '[data-lesson-three-status]', label: 'Lesson 3, How Work Actually Works' }
   ];
   await Promise.all(lessons.map(async (entry) => {
     const statusNode = document.querySelector(entry.selector);
