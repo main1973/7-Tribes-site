@@ -107,6 +107,15 @@
 - [ ] Verify owner-only private data access, no fabricated learner data, public lesson readability, lesson completion persistence, founder access, mobile behavior, accessibility, and no change to Lesson 1 or unrelated services.
 - [ ] Commit, deploy, live-test, and report the precise Lesson 2 records, tables, policies, routes, and remaining manual configuration.
 
+## Lesson 1 persistent completion continuation
+
+- [ ] Inspect the existing Lesson 1 completion RPC, persisted completion row, lesson-page state renderer, and Academy roadmap status logic to identify why a completed learner can still see a repeat completion action.
+- [x] Inspect the existing Lesson 1 completion RPC, persisted completion row, lesson-page state renderer, and Academy roadmap status logic to identify why a completed learner can still see a repeat completion action. The database completion is idempotent; the lesson-page renderer did not hydrate it.
+- [x] Make the Lesson 1 completion action idempotent and render a completed state with a single **Continue to Lesson 2 →** link once the database confirms completion.
+- [x] Ensure a returning completed learner immediately sees **COMPLETED ✓** on Lesson 1 and **AVAILABLE** on Lesson 2 without resetting progress, quiz, capability, or completion data.
+- [ ] Verify the signed-out, in-progress, completed, return-visit, and Academy-roadmap states without creating fake learner records.
+- [ ] Commit, deploy, and production-verify the completion-state correction.
+
 ## 7Tribes Account delivery control
 
 | Original request | Promised completion | Current implementation state | Push/deployment/live verification | Remaining defect or action |

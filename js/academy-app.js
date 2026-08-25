@@ -3,7 +3,7 @@
 import { academySupabase, academySession, academyRole } from './academy-supabase.js';
 
 const lessonKey = 'understand-the-system';
-const state = { session: null, role: 'learner', lesson: null, capabilitySaved: false, quizPassed: false };
+const state = { session: null, role: 'learner', lesson: null, capabilitySaved: false, quizPassed: false, completed: false };
 
 function message(node, text, tone) { if (!node) return; node.textContent = text; node.dataset.tone = tone || ''; }
 function setText(selector, value) { const node = document.querySelector(selector); if (node) node.textContent = value; }
@@ -25,6 +25,20 @@ async function touchLessonProgress(currentSection) {
     current_section: currentSection,
     last_seen_at: new Date().toISOString()
   }, { onConflict: 'user_id,lesson_id' });
+}
+
+function setCompletedLessonUI(completed) {
+  if (!completed) return;
+  const button = document.querySelector('[data-complete-lesson]');
+  const continueLink = document.querySelector('[data-continue-lesson]');
+  const heading = document.querySelector('[data-completion-heading]');
+  const copy = document.querySelector('[data-completion-copy]');
+  const status = document.querySelector('[data-completion-status]');
+  if (button) button.classList.add('academy-hidden');
+  if (continueLink) continueLink.classList.remove('academy-hidden');
+  if (heading) heading.textContent = 'Lesson 1 completed';
+  if (copy) copy.textContent = 'Your completion is saved privately. Continue when you are ready—your completed lesson, quiz, and capability response will remain intact.';
+  message(status, 'COMPLETED ✓ Lesson 1 is saved. Continue to Lesson 2 when you are ready.', 'success');
 }
 
 async function loadSessionUI() {
@@ -59,7 +73,16 @@ async function loadLessonRecord() {
   const { data, error } = await academySupabase.from('academy_lessons').select('id,title,lesson_content,status').eq('slug', lessonKey).maybeSingle();
   if (error) throw error;
   state.lesson = data;
-  if (state.session && data?.id) await touchLessonProgress('opening');
+  if (state.session && data?.id) {
+    const { data: completion } = await academySupabase
+      .from('academy_completions')
+      .select('completed_at')
+      .eq('lesson_id', data.id)
+      .maybeSingle();
+    state.completed = Boolean(completion?.completed_at);
+    if (state.completed) setCompletedLessonUI(true);
+    await touchLessonProgress('opening');
+  }
   return data;
 }
 
@@ -77,7 +100,7 @@ async function loadLandingRoadmap() {
       academySupabase.from('academy_completions').select('lesson_id').eq('lesson_id', lesson.id).maybeSingle(),
       academySupabase.from('academy_lesson_progress').select('lesson_id').eq('lesson_id', lesson.id).maybeSingle()
     ]);
-    const label = completion ? 'Completed' : progress ? 'In Progress' : 'Available';
+    const label = completion ? 'Completed ✓' : progress ? 'In Progress' : 'Available';
     statusNode.textContent = label;
     statusNode.setAttribute('aria-label', `${label}: ${entry.label}`);
   }));
@@ -133,9 +156,15 @@ function setupCompletion() {
     const status = document.querySelector('[data-completion-status]');
     if (!state.session) return requireAccount(status, '#complete');
     if (!state.lesson?.id) return message(status, 'Lesson records are being prepared.', 'error');
+    if (state.completed) return setCompletedLessonUI(true);
     button.disabled = true;
     const { error } = await academySupabase.rpc('complete_academy_lesson', { p_lesson_id: state.lesson.id });
-    if (error) message(status, error.message, 'error'); else message(status, 'Lesson 1 completed. Your progress has been saved.', 'success');
+    if (error) {
+      message(status, error.message, 'error');
+    } else {
+      state.completed = true;
+      setCompletedLessonUI(true);
+    }
     button.disabled = false;
   });
 }

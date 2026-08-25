@@ -51,6 +51,10 @@ a.academy-roadmap-title:hover { color:var(--academy-gold); }.academy-roadmap-les
 a.academy-roadmap-status:hover { color:#161109; background:var(--academy-gold); }.academy-roadmap-status[aria-disabled="true"] { border-color:rgba(245,240,229,.13); color:#8e897f; cursor:not-allowed; }
 .academy-roadmap-lesson--locked .academy-roadmap-number,.academy-roadmap-lesson--locked .academy-roadmap-title { color:#b0ab9f; }
 .academy-callout { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin-top:28px; padding:25px; border-left:3px solid var(--academy-gold); background:linear-gradient(90deg,rgba(231,184,77,.1),transparent); }
+.academy-completion-actions { display:flex; flex-direction:column; gap:10px; min-width:min(100%,17rem); }
+.academy-completion-actions .academy-next-lesson { display:inline-flex; align-items:center; justify-content:center; min-height:45px; margin-top:0; padding:12px 16px; border-color:var(--academy-gold); color:#1d1608; background:var(--academy-gold); font:800 13px/1 Arial,sans-serif; letter-spacing:.04em; text-decoration:none; text-transform:none; }
+.academy-completion-actions .academy-next-lesson:hover { color:#1d1608; background:#f2c963; transform:translateY(-1px); }
+.academy-completion-actions .academy-next-lesson span { color:inherit; font:inherit; letter-spacing:inherit; }
 .academy-callout h3 { margin:0 0 8px; font-size:20px; }.academy-callout p { margin:0; color:var(--academy-muted); line-height:1.55; }
 .academy-footer { width:min(1120px,calc(100% - 32px)); margin:0 auto; padding:30px 0 42px; color:#8d897f; font-size:12px; }
 .academy-footer a { color:var(--academy-muted); text-decoration:none; }
