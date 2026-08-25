@@ -87,9 +87,17 @@
 - [x] Gate Academy persistence behind the new account flow while preserving a visitor’s lesson location through the allowed redirect path.
 - [x] Complete production-safe QA without retaining fake accounts or fake progress, including learner isolation, founder access, mobile layouts, and real email-flow configuration.
 
+## Homepage information-architecture consolidation
+
+- [x] Inventory every homepage section, CTA, interactive function, scenario label, ecosystem explanation, and footer link to distinguish unique utility from duplicated messaging.
+- [x] Retain the approved hero, ecosystem entry, one primary five-layer explanation, roles, public Academy challenge, Community Scenario Lab, Detroit focus, final CTA, footer, and all unique functional tools.
+- [x] Consolidate repeated copy, duplicate ecosystem explanations, redundant CTA blocks, and excessive vertical spacing without visual redesign or invented metrics.
+- [x] Ensure all scenario-generated values are visibly labeled illustrative and retain the educational—not-live-metrics disclaimer.
+- [x] Verify the consolidated homepage at 360–430 px and desktop for touch controls, working hamburger navigation, no overflow, natural card fit, usable sliders, challenge interaction, footer fit, and valid destination links.
+- [ ] Commit, deploy, live-test, and report exactly which sections were retained, consolidated, removed, or changed.
+
 ## Life Academy Lesson 2 — Follow the Money
 
-- [ ] Review the full approved Lesson 2 brief and inspect the existing Lesson 1 schema, RLS policies, progress/completion functions, quiz model, and private capability-response patterns.
 - [x] Review the full approved Lesson 2 brief and inspect the existing Lesson 1 schema, RLS policies, progress/completion functions, quiz model, and private capability-response patterns.
 - [x] Add only the secure Lesson 2 curriculum records, private supply-chain and capability-gap data structures, and role-aware policies required by the approved scope.
 - [x] Revoke anonymous execution from Academy private SECURITY DEFINER RPCs—including Lesson 2 section tracking, quiz submission, and completion—while retaining the required authenticated grants and existing server-side auth checks.

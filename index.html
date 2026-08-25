@@ -1382,10 +1382,14 @@
     .academy-challenge-score{margin:0;color:var(--gold-bright);font-size:clamp(44px,6vw,68px);font-weight:900;line-height:1}
     .academy-challenge-result h3{margin:18px 0 0;color:var(--ink);font-size:clamp(24px,3vw,34px);line-height:1.12}
     .academy-challenge-result p{max-width:44ch;margin:16px 0 0;color:var(--muted)}
-    #ecosystem-map{order:2}#role-selector{order:3}#why-struggle{order:10}#organize{order:11}#build{order:12}#circulate{order:13}#blueprint{order:14}#simulator{order:15}#detroit{order:16}#closing{order:17}
+    /* Consolidated homepage journey: what it is → how it works → where I fit → learn → why → scenario → Detroit → join. */
+    .unity-platform-section .layer-ledger,#organize,#build,#circulate,#blueprint{display:none}
+    .unity-platform-section .unity-platform-inner{grid-template-columns:minmax(0,760px);justify-content:center}
+    #ecosystem-map{order:2}#role-selector{order:3}#academy-challenge{order:4}#why-struggle{order:5}#simulator{order:6}#detroit{order:7}#closing{order:8}
+    .sim-disclaimer{margin:0 0 20px;color:var(--gold-bright);font-size:.78rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;text-align:center}
     .illustrative-note{max-width:760px;margin:20px auto 0;padding:12px 16px;border-left:2px solid var(--gold);background:rgba(231,184,82,.07);color:var(--muted);font-size:.9rem;text-align:left}
     .detroit-stat-value.is-qualitative{font-size:clamp(18px,2.6vw,30px);line-height:1.15;color:var(--gold-bright)}
-    @media(max-width:760px){.unity-platform-section{padding:48px 0 38px}.unity-platform-inner{grid-template-columns:1fr;gap:24px}.unity-platform-copy h2{max-width:none}.unity-platform-actions{display:grid;grid-template-columns:1fr}.unity-platform-actions .btn{width:100%;min-width:0}.layer-row{align-items:flex-start;flex-direction:column;gap:2px}.layer-row span{text-align:left}.academy-challenge-section{padding:58px 0}.academy-challenge-grid{grid-template-columns:1fr;gap:20px}.academy-challenge-copy{padding:0}.academy-challenge-copy h2{max-width:none}.academy-challenge-actions{display:grid;width:100%;grid-template-columns:1fr}.academy-challenge-actions .btn{width:100%;min-width:0}.academy-challenge-stage{min-height:0;padding:20px}.academy-challenge-meta{margin-bottom:20px}.academy-challenge-options{gap:9px;margin:20px 0 16px}.academy-challenge-option{padding:14px}.academy-challenge-feedback{min-height:88px}.academy-challenge-result{min-height:270px}}
+    @media(max-width:760px){main>.section{padding-top:54px;padding-bottom:54px}.unity-platform-section{padding:48px 0 38px}.unity-platform-inner{grid-template-columns:1fr;gap:24px}.unity-platform-copy h2{max-width:none}.unity-platform-actions{display:grid;grid-template-columns:1fr}.unity-platform-actions .btn{width:100%;min-width:0}.layer-row{align-items:flex-start;flex-direction:column;gap:2px}.layer-row span{text-align:left}.academy-challenge-section{padding:58px 0}.academy-challenge-grid{grid-template-columns:1fr;gap:20px}.academy-challenge-copy{padding:0}.academy-challenge-copy h2{max-width:none}.academy-challenge-actions{display:grid;width:100%;grid-template-columns:1fr}.academy-challenge-actions .btn{width:100%;min-width:0}.academy-challenge-stage{min-height:0;padding:20px}.academy-challenge-meta{margin-bottom:20px}.academy-challenge-options{gap:9px;margin:20px 0 16px}.academy-challenge-option{padding:14px}.academy-challenge-feedback{min-height:88px}.academy-challenge-result{min-height:270px}}
   </style>
   <link rel="stylesheet" href="css/global-responsive.css">
   <link rel="stylesheet" href="css/unity-platform.css">
@@ -1534,19 +1538,11 @@
         <div class="unity-platform-copy" data-animate="fade-up">
           <p class="unity-eyebrow">The ecosystem entry point</p>
           <h2>One community. One network. An economy we build together.</h2>
-          <p>7TRIBES connects community, commerce, identity, utility, and infrastructure so people can organize, businesses can grow, and value can move through the ecosystem.</p>
+          <p>7TRIBES gives people one entry point to organize community, connect commerce, access identity tools, and build shared economic infrastructure.</p>
           <div class="unity-platform-actions">
             <a class="btn gold" href="join/">Join 7Tribes</a>
             <a class="btn ghost" href="https://loop.7trb.com">Enter Loop</a>
           </div>
-        </div>
-        <div class="layer-ledger" aria-label="7Tribes ecosystem layers" data-animate="fade-up">
-          <div class="layer-ledger-header"><img src="images/7trb_symbol.png" alt="">Ecosystem layers</div>
-          <div class="layer-row"><strong>Loop</strong><span>Community</span></div>
-          <div class="layer-row"><strong>Connect</strong><span>Commerce</span></div>
-          <div class="layer-row"><strong>Nuru</strong><span>Identity + Web3</span></div>
-          <div class="layer-row"><strong>7TRB</strong><span>Utility + Circulation</span></div>
-          <div class="layer-row"><strong>Alkebuleum</strong><span>Blockchain infrastructure</span></div>
         </div>
       </div>
     </section>
@@ -1587,6 +1583,7 @@
     <section class="section struggle-section" id="why-struggle">
       <div class="wrap">
         <h2 class="premium-title">Why Communities Struggle</h2>
+        <p class="premium-subtitle" data-animate="fade-up">Disconnected people and businesses, weak circulation, uncoordinated projects, and missing shared infrastructure make it harder to build durable local capacity.</p>
         <div class="premium-cards-grid">
           <div class="premium-card" data-animate="fade-up">
             <div class="premium-card-icon">
@@ -1599,7 +1596,7 @@
               </svg>
             </div>
             <h3>Disconnected People</h3>
-            <p>Without connection, people cannot collaborate, share resources, or build together. Isolation prevents collective power.</p>
+            <p>When people cannot find one another, share information, or coordinate, useful capacity stays isolated.</p>
           </div>
           <div class="premium-card" data-animate="fade-up" data-delay="100">
             <div class="premium-card-icon">
@@ -1609,8 +1606,8 @@
                 <line x1="20" y1="30" x2="28" y2="26" stroke-dasharray="3 3" opacity="0.4"/>
               </svg>
             </div>
-            <h3>Businesses Without Networks</h3>
-            <p>Local businesses struggle without a community ecosystem to support them. No network means no customers, no referrals, no growth.</p>
+            <h3>Disconnected Businesses</h3>
+            <p>Businesses need trusted relationships, referrals, customers, and suppliers—not isolated transactions.</p>
           </div>
           <div class="premium-card" data-animate="fade-up" data-delay="200">
             <div class="premium-card-icon">
@@ -1621,11 +1618,21 @@
                 <line x1="30" y1="30" x2="40" y2="40" stroke-width="2"/>
               </svg>
             </div>
-            <h3>Money Leaves Too Quickly</h3>
-            <p>Wealth flows out of communities faster than it circulates locally. Without internal circulation, economies weaken from within.</p>
+            <h3>Weak Circulation</h3>
+            <p>Value can leave before it supports local workers, suppliers, useful services, or future capacity.</p>
+          </div>
+          <div class="premium-card" data-animate="fade-up" data-delay="300">
+            <div class="premium-card-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="10" width="32" height="28" rx="3"/><path d="M16 20h16M16 28h10"/><circle cx="35" cy="31" r="4"/></svg></div>
+            <h3>Uncoordinated Projects</h3>
+            <p>Good ideas lose momentum when people cannot turn shared needs into visible, organized work.</p>
+          </div>
+          <div class="premium-card" data-animate="fade-up" data-delay="400">
+            <div class="premium-card-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 38V18l14-8 14 8v20"/><path d="M18 38V28h12v10M16 20h4m8 0h4"/></svg></div>
+            <h3>Missing Shared Infrastructure</h3>
+            <p>Communities need practical systems for communication, commerce, learning, and collaboration.</p>
           </div>
         </div>
-        <p class="premium-conclusion" data-animate="fade-up">There is another way. Organized communities create stronger economies.</p>
+        <p class="premium-conclusion" data-animate="fade-up">There is another way: organized participation can turn shared capacity into stronger local systems.</p>
       </div>
     </section>
 
@@ -1850,7 +1857,7 @@
               <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="3"/><circle cx="16" cy="22" r="3"/></svg>
             </div>
             <h3>Nuru</h3>
-            <p>External wallet + Web3 access</p>
+            <p>Identity + Web3 access</p>
             <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="eco-map-link">View Nuru Access &rarr;</a>
           </div>
           <div class="eco-map-card" onclick="selectEcosystem(this, 4)">
@@ -1869,7 +1876,7 @@
     <section class="section role-section" id="role-selector">
       <div class="wrap">
         <h2 class="premium-title" data-animate="fade-up">Choose Your Role</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Everyone has a place in the ecosystem</p>
+        <p class="premium-subtitle" data-animate="fade-up">Where do you fit? Choose a practical way to participate.</p>
         <div class="role-cards-grid" data-animate="fade-up">
           <div class="role-card">
             <div class="role-card-icon">
@@ -1967,6 +1974,7 @@
       <div class="wrap">
         <h2 class="premium-title" data-animate="fade-up">Community Scenario Lab</h2>
         <p class="premium-subtitle" data-animate="fade-up">Explore an illustrative model of organized community activity</p>
+        <p class="sim-disclaimer">Illustrative scenario · Generated values are not live metrics</p>
         <div class="sim-dashboard" data-animate="fade-up">
           <div class="sim-controls">
             <div class="sim-slider-group">
@@ -2005,7 +2013,7 @@
             </div>
           </div>
         </div>
-        <p class="illustrative-note">This scenario tool uses the settings selected above. It is educational and does not represent live 7Tribes ecosystem metrics.</p>
+        <p class="illustrative-note">This scenario tool is educational and does not represent live 7Tribes ecosystem metrics.</p>
       </div>
     </section>
 
@@ -2013,7 +2021,7 @@
     <section class="section detroit-section" id="detroit">
       <div class="wrap">
         <h2 class="premium-title" data-animate="fade-up">Detroit: Community Focus</h2>
-        <p class="premium-subtitle" data-animate="fade-up">A place to organize people, connect commerce, and build local infrastructure</p>
+        <p class="premium-subtitle" data-animate="fade-up">Detroit is an initial city-community focus: one example of how people can move from Community → Commerce → Projects → Circulation. 7Tribes is built for communities beyond Detroit, too.</p>
         <div class="detroit-stats" data-animate="fade-up">
           <div class="detroit-stat">
             <span class="detroit-stat-value is-qualitative">Community</span>
@@ -2045,7 +2053,9 @@
         <p class="premium-subtitle" data-animate="fade-up">Join the ecosystem. Start organizing. Build something real.</p>
         <div class="closing-ctas" data-animate="fade-up">
           <a href="join/" class="btn gold premium-btn">Join 7Tribes</a>
+          <a href="https://loop.7trb.com" class="btn ghost premium-btn">Enter Loop</a>
           <a href="https://connect.7trb.com" class="btn ghost premium-btn">Explore Connect</a>
+          <a href="academy/" class="btn ghost premium-btn">Explore Life Academy</a>
           <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn ghost premium-btn">View Nuru Access</a>
           <a href="learn.html" class="btn ghost premium-btn">Read Blueprint</a>
         </div>
@@ -2071,9 +2081,11 @@
         <div class="footer-col">
           <h4>Resources</h4>
           <a href="learn.html">Learn</a>
+          <a href="academy/">Life Academy</a>
           <a href="ecosystem.html">Ecosystem</a>
           <a href="transparency.html">Transparency</a>
           <a href="dashboard.html">Dashboard</a>
+          <a href="https://gumroad.com" target="_blank" rel="noopener">Get the Book</a>
         </div>
         <div class="footer-col">
           <h4>Community</h4>
