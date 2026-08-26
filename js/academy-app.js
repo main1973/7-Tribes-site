@@ -91,7 +91,8 @@ async function loadLandingRoadmap() {
     { slug: 'understand-the-system', selector: '[data-lesson-one-status]', label: 'Lesson 1, Who Actually Runs What?' },
     { slug: 'follow-the-money', selector: '[data-lesson-two-status]', label: 'Lesson 2, Follow the Money' },
     { slug: 'how-work-actually-works', selector: '[data-lesson-three-status]', label: 'Lesson 3, How Work Actually Works' },
-    { slug: 'how-business-actually-works', selector: '[data-lesson-four-status]', label: 'Lesson 4, How Business Actually Works' }
+    { slug: 'how-business-actually-works', selector: '[data-lesson-four-status]', label: 'Lesson 4, How Business Actually Works' },
+    { slug: 'how-ownership-actually-works', selector: '[data-lesson-five-status]', label: 'Lesson 5, How Ownership Actually Works' }
   ];
   await Promise.all(lessons.map(async (entry) => {
     const statusNode = document.querySelector(entry.selector);

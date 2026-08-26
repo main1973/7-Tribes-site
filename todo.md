@@ -158,6 +158,19 @@
 - [x] Diagnose and correct the reported mobile Lesson 4 inability to reach the private exercise, Knowledge Check, and completion controls at the bottom of the page; preserve all content and saved learner data. The deployed direct-action navigator reaches the `#complete` target through the browser’s smooth-scroll path, and no learner data was touched by the repair.
 - [ ] Commit, deploy, live-test, and report all Lesson 4 files, migration(s), route, quiz, simulator, completion behavior, founder authorization, mobile QA, and remaining issues.
 
+## Life Academy Lesson 5 — How Ownership Actually Works
+
+- [ ] Inspect Lessons 1–4, the shared Academy migration/RLS/RPC patterns, roadmap behavior, and founder editor to preserve the existing architecture.
+- [ ] Add only the secure Lesson 5 curriculum, private Map What You Control and Own exercise structure, RLS policies, and server-validated completion requirements approved by the completed brief.
+- [ ] Create the public Lesson 5 route with all ten ownership sections, interactive relationship examples, assets-versus-liabilities and debt/equity diagrams, entity ownership explanations, ownership percentage tool, neighborhood framework, ownership ladder, and collective ownership guidance.
+- [ ] Build the educational Ownership Analyzer with no persistence or public metric creation; include the required non-legal, non-financial, non-tax, non-title, and non-investment disclaimer.
+- [ ] Require authentication and RLS-backed storage only for the private capability exercise, section progress, quiz submission, and completion; create no simulated learner data or browser-authoritative private state.
+- [ ] Add an eight-question protected Knowledge Check with explanations, a passing score of six, and no public answer key.
+- [ ] Extend the existing database-role-gated founder editor for Lesson 5 title, summary, publication status, sections, examples, diagrams, Ownership Analyzer configuration, capability exercise, quiz configuration, answer key, and passing score without exposing private learner responses.
+- [ ] Publish Lesson 5 on the single Module 1 roadmap, keep Lessons 1–4 intact, and leave Lessons 6–7 Coming Soon.
+- [ ] Verify public/private boundaries, role-gated founder behavior, completion persistence with authentic user input only, all requested 320–430 px mobile widths, desktop layout, no answer-key exposure, and no horizontal overflow.
+- [ ] Commit, deploy, live-test, and report the exact Lesson 5 files, migration(s), route, interactive components, completion behavior, founder authorization, mobile QA, and remaining issues.
+
 ## 7Tribes Account delivery control
 
 | Original request | Promised completion | Current implementation state | Push/deployment/live verification | Remaining defect or action |
