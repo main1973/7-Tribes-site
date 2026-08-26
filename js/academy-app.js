@@ -1,6 +1,6 @@
 /* 7TRIBES LIFE ACADEMY — Single Module V1 roadmap with private learning interactions.
    Private work persists only through Supabase RLS-backed tables. */
-import { academySupabase, academySession, academyRole } from './academy-supabase.js';
+import { academySupabase, academySession, academyRole } from './academy-supabase.js?v=role-scope-20260826';
 
 const lessonKey = 'understand-the-system';
 const state = { session: null, role: 'learner', lesson: null, capabilitySaved: false, quizPassed: false, completed: false };

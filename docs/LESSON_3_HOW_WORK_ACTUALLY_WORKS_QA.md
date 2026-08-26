@@ -30,7 +30,7 @@ The generalized Academy administration route now includes protected Lesson 2 and
 
 The deployed Academy administration route was also checked with an authenticated ordinary-member session. It returns the same role-required messages for both Lesson 2 and Lesson 3, exposing no editor fields, curriculum JSON, answer key, save action, learner record, or role record. This validates that route access is not granted by mere sign-in.
 
-A minimal authorized database check confirms the designated founder account retains the `founder_admin` role. During the final founder-session check, the old shared browser helper queried the roles table without a user filter and received PostgREST `PGRST116` because its single-row request observed multiple visible rows. The helper has been corrected locally to query only `user_id = session.user.id`; the founder-editor display check remains pending its production deployment. No role, learner, curriculum, or account data was changed by this diagnosis.
+A minimal authorized database check confirms the designated founder account retains the `founder_admin` role. During the final founder-session check, the old shared browser helper queried the roles table without a user filter and received PostgREST `PGRST116` because its single-row request observed multiple visible rows. The deployed helper now queries only `user_id = session.user.id` and returns `founder_admin` for the authenticated founder session. The production Academy administration page visibly rendered the protected Lesson 3 title, summary, publication-status, structured-content, Knowledge Check, private answer-key, passing-score, and Save controls. No field was edited, saved, or submitted; no learner record was opened.
 
 ## Public Knowledge Check verification
 
