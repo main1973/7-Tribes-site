@@ -31,3 +31,7 @@ In the confirmed database-role-gated founder session, the production Academy adm
 ## Module roadmap review
 
 The authenticated production Module 1 roadmap renders Lesson 5 as **Available** and links it to the published route. Lessons 1–4 remain accessible. Lessons 6 and 7 continue to display **Coming Soon** and remain non-clickable. The review did not open Lesson 5 or create any Lesson 5 learner progress.
+
+## Real-data validation limitation
+
+The user confirmed they cannot complete the private Lesson 5 map, quiz, and completion flow in the current browser session. No substitute learner response, quiz attempt, section progress, or completion record was created. The end-to-end authenticated persistence journey remains a voluntary real-user validation item; all public rendering, server-side prerequisite rules, RLS denial, founder access, and mobile presentation checks above are complete.
