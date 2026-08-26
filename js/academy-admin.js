@@ -1,5 +1,5 @@
 /* 7TRIBES LIFE ACADEMY — database-role-gated curriculum editors for published Academy lessons. */
-import { academySupabase, academySession, academyRole } from './academy-supabase.js';
+import { academySupabase, academySession, academyRole } from './academy-supabase.js?v=role-scope-20260826';
 
 const holders = [...document.querySelectorAll('[data-academy-admin-editor]')];
 const lessons = {
