@@ -143,15 +143,17 @@
 
 ## Uploaded site-instruction set
 
-- [ ] Inspect Lessons 1–3, the shared Academy schema/RLS/RPC patterns, roadmap behavior, and founder editor before adding Lesson 4.
-- [ ] Add only the secure Lesson 4 curriculum, private Map a Real Business exercise structure, RLS policies, and server-validated completion conditions required for the approved scope.
-- [ ] Explicitly revoke anonymous execution for the security-definer Lesson 3 and Lesson 4 completion RPCs while retaining authenticated completion access; verify the post-migration security boundary.
-- [ ] Create the public Lesson 4 route with all nine business-economics sections, educational diagrams, interactive money/dependency flows, the T-shirt supply chain, and the non-persistent Business Health Dashboard simulator.
-- [ ] Require authentication and RLS-backed storage only for the private exercise, section progress, quiz submission, and completion; create no simulated learner data or browser-authoritative private state.
-- [ ] Add an eight-question protected Knowledge Check with explanations, a passing score of six, and no public answer key.
-- [ ] Extend the existing database-role-gated founder editor for Lesson 4 curriculum, quiz configuration, answer key, passing score, and publication status without exposing private learner responses.
-- [ ] Publish Lesson 4 on the single Module 1 roadmap, keep Lessons 1–3 intact, leave Lesson 5 uncompleted, and preserve the existing Academy responsive design.
-- [ ] Verify public/private boundaries, role-gated founder behavior, completion persistence without fabricated learner data, all requested 320–430 px mobile widths, desktop layout, and no answer-key exposure.
+- [x] Inspect Lessons 1–3, the shared Academy schema/RLS/RPC patterns, roadmap behavior, and founder editor before adding Lesson 4.
+- [x] Add only the secure Lesson 4 curriculum, private Map a Real Business exercise structure, RLS policies, and server-validated completion conditions required for the approved scope. Applied migration `20260826101000_life_academy_lesson4_how_business_actually_works.sql` created no learner rows.
+- [x] Explicitly revoke anonymous execution for the security-definer Lesson 3 and Lesson 4 completion RPCs while retaining authenticated completion access; verify the post-migration security boundary. The advisor no longer reports either anonymous completion RPC, and anonymous Lesson 4 completion returns HTTP 401.
+- [x] Create the public Lesson 4 route with all nine business-economics sections, educational diagrams, interactive money/dependency flows, the T-shirt supply chain, and the non-persistent Business Health Dashboard simulator.
+- [x] Require authentication and RLS-backed storage only for the private exercise, section progress, quiz submission, and completion; create no simulated learner data or browser-authoritative private state. Anonymous Map a Real Business writes are RLS-denied before insertion.
+- [x] Add an eight-question protected Knowledge Check with explanations, a passing score of six, and no public answer key. The anonymous public quiz helper returns eight prompts with no `answer_key` field.
+- [x] Extend the existing database-role-gated founder editor for Lesson 4 curriculum, quiz configuration, answer key, passing score, and publication status without exposing private learner responses. Production founder rendering was verified without opening or saving learner content.
+- [x] Publish Lesson 4 on the single Module 1 roadmap, keep Lessons 1–3 intact, leave Lesson 5 uncompleted, and preserve the existing Academy responsive design. Production roadmap verifies Lesson 4 is Available and Lesson 5 is Coming Soon.
+- [x] Remove the unintended Lesson 4 progress created by the founder-session visual test, confirming the targeted record is test-only and leaving all legitimate learner records unchanged. Post-cleanup counts are zero for the founder’s Lesson 4 progress, completion, quiz-attempt, and exercise rows.
+- [x] Verify public/private boundaries, role-gated founder behavior, all requested 320–430 px mobile widths, desktop layout, and no answer-key exposure. No fabricated learner record remains.
+- [ ] Complete a real user-led private Map a Real Business save, eight-question submission, and completion flow with authentic learner input before claiming end-to-end persistence has been personally exercised. No artificial learner entry will be used.
 - [ ] Commit, deploy, live-test, and report all Lesson 4 files, migration(s), route, quiz, simulator, completion behavior, founder authorization, mobile QA, and remaining issues.
 
 ## 7Tribes Account delivery control
