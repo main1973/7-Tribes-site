@@ -139,7 +139,7 @@
 - [x] Replace that CTA with the existing account terminology and route for authenticated visitors, without adding a second registration system. A real authenticated production session showed **My Account** linked to `/account/`.
 - [x] Verify the two hero actions at 320 px, 360 px, 375 px, 390 px, 412 px, 430 px, and desktop without horizontal overflow or a change to hero proportions. Requested phone-width captures all show a contained full-width stack; desktop preserves the prior horizontal composition.
 - [x] Reconcile the upstream `main` changes that arrived before the homepage CTA release push, preserving both the new remote work and this focused hero update. The upstream metrics-refresh commit was rebased beneath the homepage CTA commit without conflict.
-- [ ] Commit, deploy, live-test, and report the exact CTA, route, authenticated behavior, mobile results, and files modified.
+- [x] Commit, deploy, live-test, and report the exact CTA, route, authenticated behavior, mobile results, and files modified. `5194b80` delivered the feature and passed live route/session/mobile checks; `b5df602` recorded the evidence and GitHub Pages workflow `32955579879` completed successfully.
 
 ## 7Tribes Account delivery control
 
