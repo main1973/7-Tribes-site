@@ -198,6 +198,7 @@
 - [ ] Extend the existing database-role-gated founder editor for Lesson 7 title, summary, publication state, sections, capability categories, plan questions, planner configuration, quiz, answer key, passing score, module completion message, and badge/certificate settings without exposing learner plans.
 - [ ] Publish Lesson 7 on the single Module 1 roadmap, keep Lessons 1–6 intact, use actual learner states for all seven lessons, and remove the Lesson 7 Coming Soon state.
 - [ ] Verify public/private boundaries, module-completion prerequisites, planner behavior, role-gated founder access, authentic-user persistence only, all requested mobile widths, no answer-key exposure, no public capability counts, and no horizontal overflow.
+- [ ] Correct the Lesson 7 320 px header and direct-action navigation wrapping discovered during signed-out mobile QA, without changing capstone content or private data behavior.
 - [ ] Commit, deploy, live-test, and report all Lesson 7 files, migration(s), capstone tools, privacy/RLS, founder authorization, roadmap, module completion, badge, mobile QA, and remaining limitations; do not begin Module 2.
 
 ## 7Tribes Account delivery control

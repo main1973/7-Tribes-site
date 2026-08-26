@@ -13,3 +13,9 @@ Module 1 completion is server-validated only after all seven published Module 1 
 ## Pending production checks
 
 Production QA will record public-route behavior, anonymous read/write boundaries, module-RPC boundaries, founder-only Lesson 7 editor rendering, roadmap state, mobile widths, and any genuine-user persistence limitation without retaining private plan content.
+
+## Initial production findings
+
+The deployed public Lesson 7 artifact contains the capstone title, Community Build Plan surface, Community Project Economics planner, and Module 1 completion controls. The project planner is client-side educational input only; it has no database write path.
+
+In the existing database-confirmed founder session, the Academy administration page rendered the protected Lesson 7 title, summary, publication status, structured-content JSON, ten-question Knowledge Check configuration, founder-only answer key, passing-score field, and save control. No curriculum field was edited or saved, and no learner plan was opened.
