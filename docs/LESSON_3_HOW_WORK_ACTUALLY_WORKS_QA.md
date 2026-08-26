@@ -28,6 +28,14 @@ The full lesson uses the existing black-and-gold Academy system, native buttons 
 
 The generalized Academy administration route now includes protected Lesson 2 and Lesson 3 editor holders. A signed-out local visit renders only the role-required messages and exposes no title, summary, structured-content JSON, quiz prompt, answer-key, save-control, learner-record, or role-record field. The Lesson 3 editor’s founder-session view remains an authorized production check; no editor content has been saved or modified in this QA pass.
 
+The deployed Academy administration route was also checked with an authenticated ordinary-member session. It returns the same role-required messages for both Lesson 2 and Lesson 3, exposing no editor fields, curriculum JSON, answer key, save action, learner record, or role record. This validates that route access is not granted by mere sign-in.
+
+A minimal authorized database check confirms the designated founder account retains the `founder_admin` role. During the final founder-session check, the old shared browser helper queried the roles table without a user filter and received PostgREST `PGRST116` because its single-row request observed multiple visible rows. The helper has been corrected locally to query only `user_id = session.user.id`; the founder-editor display check remains pending its production deployment. No role, learner, curriculum, or account data was changed by this diagnosis.
+
 ## Public Knowledge Check verification
 
 The initial production check used a selector that did not match the Lesson 3 quiz form and therefore reported zero inputs incorrectly. A direct public prompt-RPC check returned an array of five published Lesson 3 questions without error. The deployed form renders all five prompts with 18 radio options using its actual `data-l3-quiz-form` selector. No quiz answers were submitted and no learner data was written during this verification.
+
+## User-provided mobile production evidence
+
+The user provided three signed-in mobile production screenshots. They show Lesson 1 as **COMPLETED ✓**, Lesson 2 and Lesson 3 as **IN PROGRESS** from actual saved activity, and Lessons 4–7 as **COMING SOON**. The final screenshot also confirms the updated public-learning callout, fully visible **Begin Lesson 3** action, contained card width, wrapped copy, and no observed horizontal page overflow. No learner state was changed to obtain these screenshots.

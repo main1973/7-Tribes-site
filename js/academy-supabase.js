@@ -19,10 +19,20 @@ export async function academySession() {
 }
 
 export async function academyRole() {
-  const { data, error } = await academySupabase
-    .from('academy_user_roles')
-    .select('role')
-    .maybeSingle();
-  if (error || !data?.role) return 'member';
-  return data.role;
+  try {
+    const session = await academySession();
+    const userId = session?.user?.id;
+    if (!userId) return 'member';
+
+    const { data, error } = await academySupabase
+      .from('academy_user_roles')
+      .select('role')
+      .eq('user_id', userId)
+      .maybeSingle();
+
+    if (error || !data?.role) return 'member';
+    return data.role;
+  } catch {
+    return 'member';
+  }
 }

@@ -123,11 +123,12 @@
 - [x] Add only the secure Lesson 3 curriculum, private work-audit and capability-challenge data structures, RLS policies, and server-side completion conditions needed for the approved scope.
 - [x] Correct the Lesson 3 public scenario selector mismatch so immediate educational feedback and section tracking execute without authentication or private-data writes.
 - [x] Verify the public Lesson 3 Knowledge Check loading contract. All five published prompts render for signed-out and authenticated learners before private quiz submission; no code correction was required.
+- [ ] Scope the shared browser Academy role query to the authenticated user ID so a real founder role is not hidden by a multiple-row response, then verify the protected Lesson 3 editor renders for the founder session.
 - [ ] Extend the existing database-role-gated Academy founder editor to load and save Lesson 3 metadata, structured content, quiz prompts, answer key, passing score, and publication status without exposing learner data.
 - [x] Build the public-readable Lesson 3 journey covering work exchange, four economic positions, active versus leveraged income, ownership, the ownership ladder, and required interactive scenarios.
 - [x] Require an authenticated account only for private personal-work-audit and capability-challenge responses, quiz submission, progress, and completion; preserve return location and create no private browser storage.
-- [x] Preserve Lessons 1–2 content and real learner data; make Lesson 3 status reflect real Available, In Progress, or Completed state, and leave Lesson 4 Coming Soon.
-- [x] Fix the actual Academy roadmap mobile layout at 320–430 px so titles, descriptions, buttons, and cards remain fully visible without horizontal page scrolling or hidden overflow.
+- [x] Preserve Lessons 1–2 content and real learner data; make Lesson 3 status reflect real Available, In Progress, or Completed state, and leave Lesson 4 Coming Soon. User-provided production evidence confirms truthful Completed, In Progress, and Coming Soon labels.
+- [x] Fix the actual Academy roadmap mobile layout at 320–430 px so titles, descriptions, buttons, and cards remain fully visible without horizontal page scrolling or hidden overflow. User-provided mobile production evidence confirms contained lesson cards and the Lesson 3 entry action.
 - [ ] Verify public/private boundaries, real completion state, founder controls, required mobile widths, desktop layout, and accessibility without creating fake learner data.
 - [ ] Commit, deploy, live-test, and report the precise Lesson 3 changes and remaining manual verification.
 
