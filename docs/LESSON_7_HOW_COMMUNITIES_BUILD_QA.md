@@ -19,3 +19,11 @@ Production QA will record public-route behavior, anonymous read/write boundaries
 The deployed public Lesson 7 artifact contains the capstone title, Community Build Plan surface, Community Project Economics planner, and Module 1 completion controls. The project planner is client-side educational input only; it has no database write path.
 
 In the existing database-confirmed founder session, the Academy administration page rendered the protected Lesson 7 title, summary, publication status, structured-content JSON, ten-question Knowledge Check configuration, founder-only answer key, passing-score field, and save control. No curriculum field was edited or saved, and no learner plan was opened.
+
+## Roadmap and responsive review
+
+The production roadmap now exposes Lesson 7 as the final available Module 1 lesson and retains the published Lesson 1–6 links. The original 320 px signed-out capture exposed an overloaded header and unstyled action row. The focused repair replaces those elements with the established compact Academy header and direct-action navigation. The repaired cache-busted 320 px production capture shows the brand, **Save plan** control, Project planner, Private plan, and Complete Module 1 actions fully contained; the title and opening content remain readable with no observed horizontal overflow. The initial signed-out captures at 360, 375, 390, 412, and 430 px provide the wider requested responsive review.
+
+## Remaining real-data validation
+
+No private Community Build Plan, individual contribution, quiz attempt, Lesson 7 completion, or Module 1 completion was created for QA. A real signed-in learner must submit genuine information to exercise the complete private journey; no artificial learner record will be used as a substitute.
