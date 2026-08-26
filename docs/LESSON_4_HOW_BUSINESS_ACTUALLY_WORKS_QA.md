@@ -33,3 +33,7 @@ A read-only anonymous call to the established public quiz helper returned **eigh
 An unauthenticated completion-RPC request received **HTTP 401** with `permission denied for function complete_academy_lesson4`. This confirms the corrected function grant prevents anonymous completion writes.
 
 An anonymous Map a Real Business insert attempt was denied with **HTTP 401** and an RLS-policy error before any private exercise row was created. This verifies that the private exercise storage path is authenticated and owner-protected.
+
+## Real-completion reconciliation
+
+After the user reported a real Lesson 4 save, the automation browser confirmed that it was authenticated but, through its own RLS-scoped view, found no Lesson 4 completion, passed quiz, or `map-real-business` exercise row. No private response content was selected. This is consistent with the user completing the work in a different authenticated browser/session or the completion action not having finished in the current session. The completion UI was therefore not marked as verified, and no record was changed during this diagnostic.
