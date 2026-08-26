@@ -132,6 +132,15 @@
 - [x] Verify public/private boundaries, real completion state, founder controls, required mobile widths, desktop layout, and accessibility without creating fake learner data. Evidence includes anonymous/member denials, founder-only editor rendering, public prompt behavior, full lesson/roadmap responsive reviews, and user-provided signed-in mobile production captures.
 - [ ] Commit, deploy, live-test, and report the precise Lesson 3 changes and remaining manual verification.
 
+## Homepage hero account CTA
+
+- [ ] Inspect the existing homepage hero actions and the established 7Tribes Account routes/session helper; preserve the current visual composition.
+- [ ] Replace the hero’s primary account CTA with **Create Profile** for signed-out visitors, using the existing account creation route and return location.
+- [ ] Replace that CTA with the existing account terminology and route for authenticated visitors, without adding a second registration system.
+- [ ] Verify the two hero actions at 320 px, 360 px, 375 px, 390 px, 412 px, 430 px, and desktop without horizontal overflow or a change to hero proportions.
+- [ ] Reconcile the upstream `main` changes that arrived before the homepage CTA release push, preserving both the new remote work and this focused hero update.
+- [ ] Commit, deploy, live-test, and report the exact CTA, route, authenticated behavior, mobile results, and files modified.
+
 ## 7Tribes Account delivery control
 
 | Original request | Promised completion | Current implementation state | Push/deployment/live verification | Remaining defect or action |
