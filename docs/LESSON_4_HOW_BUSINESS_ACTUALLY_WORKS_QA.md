@@ -37,3 +37,9 @@ An anonymous Map a Real Business insert attempt was denied with **HTTP 401** and
 ## Real-completion reconciliation
 
 After the user reported a real Lesson 4 save, the automation browser confirmed that it was authenticated but, through its own RLS-scoped view, found no Lesson 4 completion, passed quiz, or `map-real-business` exercise row. No private response content was selected. This is consistent with the user completing the work in a different authenticated browser/session or the completion action not having finished in the current session. The completion UI was therefore not marked as verified, and no record was changed during this diagnostic.
+
+## Mobile bottom-reach repair
+
+The reported inability to reach the lower Lesson 4 controls was addressed with explicit vertical touch scrolling, safe-area bottom padding, corrected target offsets, and a compact action navigator for **Map a business**, **Knowledge Check**, and **Complete Lesson 4**. The deployed page exposes all three direct action links. The initial automated anchor click required a follow-up smooth-scroll timing check because the browser environment applies a multi-second smooth-scroll transition; no form or learner data was touched during this test.
+
+After allowing that transition to complete, the browser reported a nonzero page scroll position and placed the `#complete` target within the viewport. This confirms the direct navigator can reach the final controls without requiring the learner to manually traverse the entire lesson.

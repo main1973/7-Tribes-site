@@ -155,7 +155,7 @@
 - [x] Verify public/private boundaries, role-gated founder behavior, all requested 320–430 px mobile widths, desktop layout, and no answer-key exposure. No fabricated learner record remains.
 - [ ] Complete a real user-led private Map a Real Business save, eight-question submission, and completion flow with authentic learner input before claiming end-to-end persistence has been personally exercised. No artificial learner entry will be used.
 - [ ] Reconcile the user-reported Lesson 4 completion with the authenticated browser’s initial non-completed rendering, verifying only the completion state and without reading private exercise content.
-- [ ] Diagnose and correct the reported mobile Lesson 4 inability to reach the private exercise, Knowledge Check, and completion controls at the bottom of the page; preserve all content and saved learner data.
+- [x] Diagnose and correct the reported mobile Lesson 4 inability to reach the private exercise, Knowledge Check, and completion controls at the bottom of the page; preserve all content and saved learner data. The deployed direct-action navigator reaches the `#complete` target through the browser’s smooth-scroll path, and no learner data was touched by the repair.
 - [ ] Commit, deploy, live-test, and report all Lesson 4 files, migration(s), route, quiz, simulator, completion behavior, founder authorization, mobile QA, and remaining issues.
 
 ## 7Tribes Account delivery control
