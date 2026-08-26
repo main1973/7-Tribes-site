@@ -174,15 +174,16 @@
 
 ## Life Academy Lesson 6
 
-- [ ] Inspect Lessons 1–5 and the shared Academy migration/RLS/RPC, lesson-controller, founder-editor, and roadmap patterns before adding Lesson 6.
-- [ ] Add only the secure Lesson 6 curriculum, private Follow Your Own Money exercise structure, RLS policies, and server-validated completion requirements approved by the completed brief.
-- [ ] Create the public Lesson 6 route with all eleven wealth-transfer sections, interactive transaction and ownership-destination flows, consumption-versus-asset, renting-versus-owning, debt/interest, intergenerational capability, circulation, and community-capacity learning components.
-- [ ] Build the educational Follow $100 simulator with learner-adjustable illustrative allocations that always reconcile to exactly 100%, never persist inputs, and never create ecosystem metrics.
-- [ ] Require authentication and RLS-backed storage only for the private capability exercise, section progress, quiz submission, and completion; create no simulated learner data or browser-authoritative private state.
-- [ ] Add an eight-question protected Knowledge Check with explanations, a passing score of six, and no public answer key.
-- [ ] Extend the existing database-role-gated founder editor for Lesson 6 title, summary, publication status, sections, examples, diagrams, Follow $100 simulator configuration, capability exercise, quiz configuration, answer key, and passing score without exposing private learner responses.
-- [ ] Publish Lesson 6 on the single Module 1 roadmap, keep Lessons 1–5 intact, and leave Lesson 7 Coming Soon.
-- [ ] Verify public/private boundaries, simulator reconciliation, role-gated founder behavior, authentic-user persistence only, all requested 320–430 px mobile widths, desktop layout, no answer-key exposure, and no horizontal overflow.
+- [x] Inspect Lessons 1–5 and the shared Academy migration/RLS/RPC, lesson-controller, founder-editor, and roadmap patterns before adding Lesson 6.
+- [x] Add only the secure Lesson 6 curriculum, private Follow Your Own Money exercise structure, RLS policies, and server-validated completion requirements approved by the completed brief. Applied migration `20260826130000_life_academy_lesson6_how_wealth_transfers.sql` created no learner rows.
+- [x] Create the public Lesson 6 route with all eleven wealth-transfer sections, interactive transaction and ownership-destination flows, consumption-versus-asset, renting-versus-owning, debt/interest, intergenerational capability, circulation, and community-capacity learning components.
+- [x] Build the educational Follow $100 simulator with learner-adjustable illustrative allocations that always reconcile to exactly 100%, never persist inputs, and never create ecosystem metrics. The remainder auto-balances the six illustrative allocation values to 100% without storage.
+- [x] Require authentication and RLS-backed storage only for the private capability exercise, section progress, quiz submission, and completion; create no simulated learner data or browser-authoritative private state. Anonymous private-map insertion and anonymous completion both return HTTP 401.
+- [x] Add an eight-question protected Knowledge Check with explanations, a passing score of six, and no public answer key. The anonymous public helper returns eight prompts and no answer key.
+- [x] Extend the existing database-role-gated founder editor for Lesson 6 title, summary, publication status, sections, examples, diagrams, Follow $100 simulator configuration, capability exercise, quiz configuration, answer key, and passing score without exposing private learner responses. Founder-only production rendering was verified without opening or saving learner data.
+- [x] Publish Lesson 6 on the single Module 1 roadmap, keep Lessons 1–5 intact, and leave Lesson 7 Coming Soon. Production roadmap review confirms the required states.
+- [x] Verify public/private boundaries, simulator reconciliation, role-gated founder behavior, all requested 320–430 px mobile widths, desktop layout, no answer-key exposure, and no horizontal overflow. No test learner data was created.
+- [ ] Complete a real user-led private money-map save, eight-question submission, and completion flow with authentic learner input before claiming end-to-end persistence has been personally exercised. No artificial learner entry will be used.
 - [ ] Commit, deploy, live-test, and report the exact Lesson 6 files, migration(s), simulator, route, quiz, completion behavior, founder authorization, mobile QA, and remaining issues.
 
 ## 7Tribes Account delivery control
