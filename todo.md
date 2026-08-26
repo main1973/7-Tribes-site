@@ -141,6 +141,19 @@
 - [x] Reconcile the upstream `main` changes that arrived before the homepage CTA release push, preserving both the new remote work and this focused hero update. The upstream metrics-refresh commit was rebased beneath the homepage CTA commit without conflict.
 - [x] Commit, deploy, live-test, and report the exact CTA, route, authenticated behavior, mobile results, and files modified. `5194b80` delivered the feature and passed live route/session/mobile checks; `b5df602` recorded the evidence and GitHub Pages workflow `32955579879` completed successfully.
 
+## Uploaded site-instruction set
+
+- [ ] Inspect Lessons 1–3, the shared Academy schema/RLS/RPC patterns, roadmap behavior, and founder editor before adding Lesson 4.
+- [ ] Add only the secure Lesson 4 curriculum, private Map a Real Business exercise structure, RLS policies, and server-validated completion conditions required for the approved scope.
+- [ ] Explicitly revoke anonymous execution for the security-definer Lesson 3 and Lesson 4 completion RPCs while retaining authenticated completion access; verify the post-migration security boundary.
+- [ ] Create the public Lesson 4 route with all nine business-economics sections, educational diagrams, interactive money/dependency flows, the T-shirt supply chain, and the non-persistent Business Health Dashboard simulator.
+- [ ] Require authentication and RLS-backed storage only for the private exercise, section progress, quiz submission, and completion; create no simulated learner data or browser-authoritative private state.
+- [ ] Add an eight-question protected Knowledge Check with explanations, a passing score of six, and no public answer key.
+- [ ] Extend the existing database-role-gated founder editor for Lesson 4 curriculum, quiz configuration, answer key, passing score, and publication status without exposing private learner responses.
+- [ ] Publish Lesson 4 on the single Module 1 roadmap, keep Lessons 1–3 intact, leave Lesson 5 uncompleted, and preserve the existing Academy responsive design.
+- [ ] Verify public/private boundaries, role-gated founder behavior, completion persistence without fabricated learner data, all requested 320–430 px mobile widths, desktop layout, and no answer-key exposure.
+- [ ] Commit, deploy, live-test, and report all Lesson 4 files, migration(s), route, quiz, simulator, completion behavior, founder authorization, mobile QA, and remaining issues.
+
 ## 7Tribes Account delivery control
 
 | Original request | Promised completion | Current implementation state | Push/deployment/live verification | Remaining defect or action |

@@ -5,6 +5,7 @@ const holders = [...document.querySelectorAll('[data-academy-admin-editor]')];
 const lessons = {
   'follow-the-money': { number: '2', name: 'Follow the Money' },
   'how-work-actually-works': { number: '3', name: 'How Work Actually Works' },
+  'how-business-actually-works': { number: '4', name: 'How Business Actually Works' },
 };
 const escapeHtml = (value) => String(value || '').replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
 const setStatus = (node, value, tone = '') => { if (node) { node.textContent = value; node.dataset.tone = tone; } };
