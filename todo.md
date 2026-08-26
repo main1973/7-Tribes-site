@@ -186,6 +186,20 @@
 - [ ] Complete a real user-led private money-map save, eight-question submission, and completion flow with authentic learner input before claiming end-to-end persistence has been personally exercised. The user cannot complete this in the current browser session; no artificial learner entry will be used as a substitute.
 - [ ] Commit, deploy, live-test, and report the exact Lesson 6 files, migration(s), simulator, route, quiz, completion behavior, founder authorization, mobile QA, and remaining issues.
 
+## Life Academy Lesson 7 — How Communities Build
+
+- [ ] Inspect Lessons 1–6 plus shared Academy migration/RLS/RPC, controller, founder editor, and roadmap patterns before adding the capstone.
+- [ ] Add only the secure Lesson 7 curriculum, private Community Build Plan and individual contribution structure, RLS policies, server-validated Lesson 7 completion, and server-validated Module 1 completion requirements approved by the brief.
+- [ ] Create the public Lesson 7 route with all twelve capstone sections: complaints-to-problems, authority, capability before capital, capability map, gap detection, businesses as infrastructure, ownership, sustainability, educational project planner, coordination cycle, ecosystem connection, and private build plan.
+- [ ] Build the Community Project Planner with user-entered hypothetical inputs, clear non-financial/non-accounting/non-investment/non-legal/non-engineering/non-development disclaimer language, no persistence, and no ecosystem statistics.
+- [ ] Require authentication and RLS-backed storage only for the private Community Build Plan, individual contribution, section progress, quiz submission, Lesson 7 completion, and Module 1 completion; create no simulated learner data or browser-authoritative private state.
+- [ ] Add a ten-question protected Knowledge Check with explanations, a passing score of eight, and no public answer key.
+- [ ] Add truthful private Module 1 completion summary and platform completion badge/certificate language; never describe it as accredited, licensed, government-certified, college credit, or professional certification.
+- [ ] Extend the existing database-role-gated founder editor for Lesson 7 title, summary, publication state, sections, capability categories, plan questions, planner configuration, quiz, answer key, passing score, module completion message, and badge/certificate settings without exposing learner plans.
+- [ ] Publish Lesson 7 on the single Module 1 roadmap, keep Lessons 1–6 intact, use actual learner states for all seven lessons, and remove the Lesson 7 Coming Soon state.
+- [ ] Verify public/private boundaries, module-completion prerequisites, planner behavior, role-gated founder access, authentic-user persistence only, all requested mobile widths, no answer-key exposure, no public capability counts, and no horizontal overflow.
+- [ ] Commit, deploy, live-test, and report all Lesson 7 files, migration(s), capstone tools, privacy/RLS, founder authorization, roadmap, module completion, badge, mobile QA, and remaining limitations; do not begin Module 2.
+
 ## 7Tribes Account delivery control
 
 | Original request | Promised completion | Current implementation state | Push/deployment/live verification | Remaining defect or action |
