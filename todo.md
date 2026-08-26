@@ -134,11 +134,11 @@
 
 ## Homepage hero account CTA
 
-- [ ] Inspect the existing homepage hero actions and the established 7Tribes Account routes/session helper; preserve the current visual composition.
-- [ ] Replace the hero’s primary account CTA with **Create Profile** for signed-out visitors, using the existing account creation route and return location.
-- [ ] Replace that CTA with the existing account terminology and route for authenticated visitors, without adding a second registration system.
-- [ ] Verify the two hero actions at 320 px, 360 px, 375 px, 390 px, 412 px, 430 px, and desktop without horizontal overflow or a change to hero proportions.
-- [ ] Reconcile the upstream `main` changes that arrived before the homepage CTA release push, preserving both the new remote work and this focused hero update.
+- [x] Inspect the existing homepage hero actions and the established 7Tribes Account routes/session helper; preserve the current visual composition.
+- [x] Replace the hero’s primary account CTA with **Create Profile** for signed-out visitors, using the existing account creation route and return location. The production CTA opens `/account/signup.html`.
+- [x] Replace that CTA with the existing account terminology and route for authenticated visitors, without adding a second registration system. A real authenticated production session showed **My Account** linked to `/account/`.
+- [x] Verify the two hero actions at 320 px, 360 px, 375 px, 390 px, 412 px, 430 px, and desktop without horizontal overflow or a change to hero proportions. Requested phone-width captures all show a contained full-width stack; desktop preserves the prior horizontal composition.
+- [x] Reconcile the upstream `main` changes that arrived before the homepage CTA release push, preserving both the new remote work and this focused hero update. The upstream metrics-refresh commit was rebased beneath the homepage CTA commit without conflict.
 - [ ] Commit, deploy, live-test, and report the exact CTA, route, authenticated behavior, mobile results, and files modified.
 
 ## 7Tribes Account delivery control
