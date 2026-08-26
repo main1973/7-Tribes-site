@@ -183,7 +183,7 @@
 - [x] Extend the existing database-role-gated founder editor for Lesson 6 title, summary, publication status, sections, examples, diagrams, Follow $100 simulator configuration, capability exercise, quiz configuration, answer key, and passing score without exposing private learner responses. Founder-only production rendering was verified without opening or saving learner data.
 - [x] Publish Lesson 6 on the single Module 1 roadmap, keep Lessons 1–5 intact, and leave Lesson 7 Coming Soon. Production roadmap review confirms the required states.
 - [x] Verify public/private boundaries, simulator reconciliation, role-gated founder behavior, all requested 320–430 px mobile widths, desktop layout, no answer-key exposure, and no horizontal overflow. No test learner data was created.
-- [ ] Complete a real user-led private money-map save, eight-question submission, and completion flow with authentic learner input before claiming end-to-end persistence has been personally exercised. No artificial learner entry will be used.
+- [ ] Complete a real user-led private money-map save, eight-question submission, and completion flow with authentic learner input before claiming end-to-end persistence has been personally exercised. The user cannot complete this in the current browser session; no artificial learner entry will be used as a substitute.
 - [ ] Commit, deploy, live-test, and report the exact Lesson 6 files, migration(s), simulator, route, quiz, completion behavior, founder authorization, mobile QA, and remaining issues.
 
 ## 7Tribes Account delivery control

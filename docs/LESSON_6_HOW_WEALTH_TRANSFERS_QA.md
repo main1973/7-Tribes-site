@@ -33,3 +33,7 @@ In the existing authenticated founder session, the production Academy administra
 ### Roadmap state
 
 The deployed Module 1 roadmap renders Lesson 6 as **Available** with its production route. Lessons 1–5 remain accessible, and Lesson 7 remains **Coming Soon**. The read-only roadmap review did not open the Lesson 6 learning route or create Lesson 6 progress.
+
+## Authentic private-flow validation
+
+The user confirmed that the current browser cannot complete the private Follow Your Own Money, quiz, and completion journey. No substitute learner record was created. The end-to-end authenticated persistence check therefore remains a voluntary follow-up for a browser session where the learner can provide genuine private input; public reading, simulator reconciliation, anonymous denials, founder administration, roadmap publication, and required responsive widths have been verified live.
