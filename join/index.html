@@ -43,36 +43,50 @@
     (function () {
       var params = new URLSearchParams(window.location.search);
       var referral = (params.get('ref') || '').trim();
-      var validReferral = /^[A-Za-z0-9_-]{1,64}$/.test(referral) ? referral : '';
+      var validReferral = /^[A-Za-z0-9-]{6,48}$/.test(referral) ? referral.toUpperCase() : '';
       if (!validReferral) return;
-      try { window.sessionStorage.setItem('7trb_referral_code', validReferral); } catch (error) {}
       document.getElementById('ref-note').classList.add('visible');
-      var addReferral = function (id, target, appStore) {
+      var referralVisitor = '';
+      try {
+        referralVisitor = window.localStorage.getItem('7trb_referral_visitor') || '';
+        if (!/^[A-Za-z0-9_-]{16,128}$/.test(referralVisitor)) {
+          var bytes = new Uint8Array(24);
+          window.crypto.getRandomValues(bytes);
+          referralVisitor = Array.prototype.map.call(bytes, function (byte) { return byte.toString(16).padStart(2, '0'); }).join('');
+          window.localStorage.setItem('7trb_referral_visitor', referralVisitor);
+        }
+      } catch (error) {
+        referralVisitor = '';
+      }
+      if (!referralVisitor) return;
+      var secureHandoffUrl = function (targetApp) {
+        var bridge = new URL('https://loop.7trb.com/api/referral/start');
+        bridge.searchParams.set('ref', validReferral);
+        bridge.searchParams.set('v', referralVisitor);
+        bridge.searchParams.set('from', '7trb');
+        bridge.searchParams.set('target', targetApp);
+        bridge.searchParams.set('source', params.get('source') || 'direct-share');
+        if (params.get('campaign')) bridge.searchParams.set('campaign', params.get('campaign'));
+        return bridge.toString();
+      };
+      var addSecureHandoff = function (id, targetApp) {
         var link = document.getElementById(id);
         if (!link) return;
-        if (appStore) {
-          link.href = target + '&referrer=' + encodeURIComponent('ref=' + validReferral);
-          return;
-        }
-        var url = new URL(target);
-        url.searchParams.set('ref', validReferral);
-        link.href = url.toString();
+        link.href = secureHandoffUrl(targetApp);
       };
       var buildAndroidIntent = function () {
         var fallback = new URL('https://7trb.com/join/');
-        fallback.searchParams.set('ref', validReferral);
         fallback.searchParams.set('app', 'not-installed');
-        return 'intent://register?ref=' + encodeURIComponent(validReferral) +
+        return 'intent://register' +
           '#Intent;scheme=manusecosystem;package=com.seventribes.ecosystem;S.browser_fallback_url=' +
           encodeURIComponent(fallback.toString()) + ';end';
       };
       var mobileRegister = document.getElementById('mobile-register-action');
       var androidIntent = buildAndroidIntent();
       if (mobileRegister) mobileRegister.href = androidIntent;
-      addReferral('join-action', 'https://loop.7trb.com/');
-      addReferral('loop-action', 'https://loop.7trb.com/');
-      addReferral('connect-action', 'https://connect.7trb.com/');
-      addReferral('app-action', 'https://play.google.com/store/apps/details?id=com.alkebuleum.nuru', true);
+      addSecureHandoff('join-action', 'loop');
+      addSecureHandoff('loop-action', 'loop');
+      addSecureHandoff('connect-action', 'connect');
       if (params.get('app') === 'not-installed') {
         document.getElementById('app-fallback').classList.add('visible');
         return;
