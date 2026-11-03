@@ -20,8 +20,8 @@ async function updateHomepageAccountCta() {
   }
 
   cta.href = '/account/signup.html';
-  cta.textContent = 'Create Profile';
-  cta.setAttribute('aria-label', 'Create your 7Tribes profile');
+  cta.textContent = 'Create Academy Account';
+  cta.setAttribute('aria-label', 'Create a private Life Academy account');
 }
 
 if (document.readyState === 'loading') {

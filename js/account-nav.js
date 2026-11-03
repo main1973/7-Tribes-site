@@ -19,7 +19,7 @@ async function updateAccountLinks() {
   const section = accountSection(drawer);
   let session = null;
   try { session = await academySession(); } catch (_) { session = null; }
-  section.innerHTML = `<span class="drawer-section-title">Account</span>${session ? '<a href="/account/">My Account</a>' : '<a href="/account/login.html">Log In</a><a href="/account/signup.html">Create Account</a>'}`;
+  section.innerHTML = `<span class="drawer-section-title">Account</span>${session ? '<a href="/account/">My Account</a>' : '<a href="/account/login.html">Log In</a><a href="/account/signup.html">Create Academy Account</a>'}`;
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateAccountLinks);
