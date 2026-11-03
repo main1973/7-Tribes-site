@@ -50,7 +50,7 @@
     { title: 'Community', links: [
       { label: 'Loop', href: 'https://loop.7trb.com' },
       { label: 'Connect', href: 'https://connect.7trb.com' },
-      { label: 'Telegram', href: 'https://t.me/SevenTribeowner' }
+      { label: 'Telegram', href: 'https://t.me/SevenTribesCrypto' }
     ]},
     { title: 'Resources', links: [
       { label: 'Builders', href: 'builders.html' },
@@ -162,7 +162,7 @@
     }
     drawerHTML += '</div>';
   }
-  drawerHTML += '</div><div class="drawer-footer"><a class="drawer-cta" href="join/">Enter the Ecosystem</a></div>';
+  drawerHTML += '</div><div class="drawer-footer"><a class="drawer-cta" href="https://manus.im/app-auth?appId=YuPg8Y4NgWiboAN2ycZ9Jv&amp;redirectUri=https%3A%2F%2Floop.7trb.com%2Fapi%2Foauth%2Fcallback&amp;state=aHR0cHM6Ly9sb29wLjd0cmIuY29tL2FwaS9vYXV0aC9jYWxsYmFja3wvbG9vcC1wcm9maWxl&amp;type=signIn">Join Loop Free</a></div>';
   drawer.innerHTML = drawerHTML;
 
   // Append to body

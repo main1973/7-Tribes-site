@@ -1,4 +1,4 @@
-/* 7TRIBES HOMEPAGE — Preserve the existing black-and-gold hero while exposing the established Account flow. */
+/* 7TRIBES HOMEPAGE — Preserve the existing black-and-gold hero while exposing the Academy Account flow. */
 import { academySession } from './academy-supabase.js';
 
 async function updateHomepageAccountCta() {
@@ -14,14 +14,14 @@ async function updateHomepageAccountCta() {
 
   if (session) {
     cta.href = '/account/';
-    cta.textContent = 'My Account';
-    cta.setAttribute('aria-label', 'Open My Account');
+    cta.textContent = 'My Academy Account';
+    cta.setAttribute('aria-label', 'Open My Academy Account');
     return;
   }
 
-  cta.href = '/account/signup.html';
-  cta.textContent = 'Create Profile';
-  cta.setAttribute('aria-label', 'Create your 7Tribes profile');
+  cta.href = '/account/signup.html?returnTo=%2Facademy%2F';
+  cta.textContent = 'Create Academy Account';
+  cta.setAttribute('aria-label', 'Create a private Life Academy account');
 }
 
 if (document.readyState === 'loading') {
