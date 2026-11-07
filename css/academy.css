@@ -83,3 +83,35 @@ a.academy-roadmap-status:hover { color:#161109; background:var(--academy-gold); 
 @media (max-width:480px) { .academy-header { min-height:64px; padding:10px 16px; }.academy-brand img { width:34px; height:34px; }.academy-brand span { font-size:11px; }.academy-main { width:min(100% - 28px,1120px); padding-top:30px; padding-bottom:max(132px,calc(90px + env(safe-area-inset-bottom))); }.academy-lesson-jumps { position:sticky; top:64px; z-index:25; width:100%; margin:0; padding:8px 14px; border-right:0; border-left:0; background:rgba(8,9,13,.97); }.academy-lesson-jumps a { min-height:38px; padding:9px 6px; font-size:10px; }.academy-lesson-jumps + .academy-main { padding-top:30px; }.academy-hero { padding:22px 0 38px; }.academy-hero p { font-size:16px; }.academy-roadmap-heading { align-items:flex-start; flex-direction:column; gap:11px; }.academy-roadmap-lessons,.academy-roadmap-lesson,.academy-roadmap-lesson > * { min-width:0; max-width:100%; }.academy-roadmap-lesson { grid-template-columns:34px minmax(0,1fr); gap:12px; padding:16px 14px; width:100%; }.academy-roadmap-title,.academy-roadmap-lesson p { overflow-wrap:anywhere; word-break:normal; }.academy-roadmap-status { grid-column:2; justify-self:start; min-width:0; max-width:100%; }.academy-roadmap-title { font-size:16px; }.academy-callout { flex-direction:column; gap:17px; }.academy-button { width:100%; }.academy-account-actions { display:grid; grid-template-columns:1fr; }.academy-lesson-header { padding-top:26px; }.lesson-block { margin-bottom:36px; }.academy-quiz,.academy-scenario,.academy-private-form,.academy-simulator { padding:18px; }.academy-admin-list li { display:block; }.academy-admin-list li span { display:block; margin-top:4px; }.lesson-flow { display:grid; grid-template-columns:1fr; }.lesson-flow b { justify-self:center; transform:rotate(90deg); }.journey-allocation-grid,.community-comparison,.supply-chain-diagram,.academy-check-grid,.academy-position-grid,.academy-business-grid,.academy-business-example,.academy-money-branches,.academy-dependency-grid,.academy-simulator-fields,.academy-simulator-metrics { grid-template-columns:1fr; } }
 @media (max-width:480px) { .academy-ownership-terms,.academy-asset-grid,.academy-collective-grid,.academy-balance-example,.academy-share-inputs,.academy-share-output,.academy-analyzer-grid,.academy-infrastructure-grid { grid-template-columns:1fr; }.academy-balance-example .academy-balance-result,.academy-share-output .academy-status { grid-column:auto; }.academy-equity-stack { display:grid; grid-template-columns:1fr; }.academy-equity-stack > b { justify-self:center; transform:rotate(90deg); }.academy-ownership-calculator,.academy-analyzer { padding:18px; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; } }
+
+/* 2026-11-07: Give the mobile Academy landing page a compact first screen
+   without touching lesson state, account flows or progress records. */
+@media (max-width:480px) {
+  .academy-page[data-academy-page="landing"] .academy-main {
+    padding-top: 16px;
+  }
+  .academy-page[data-academy-page="landing"] .academy-hero {
+    gap: 16px;
+    padding: 17px 0 28px;
+  }
+  .academy-page[data-academy-page="landing"] .academy-hero h1 {
+    font-size: clamp(34px, 8.8vw, 42px);
+    letter-spacing: -.04em;
+    line-height: 1.04;
+    margin: 12px 0 14px;
+  }
+  .academy-page[data-academy-page="landing"] .academy-hero p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .academy-page[data-academy-page="landing"] .academy-auth-card {
+    padding: 18px;
+  }
+  .academy-page[data-academy-page="landing"] .academy-account-actions {
+    margin-top: 14px;
+    gap: 9px;
+  }
+  .academy-page[data-academy-page="landing"] .academy-account-actions .academy-button {
+    min-height: 46px;
+  }
+}
