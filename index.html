@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>7TRIBES — The Unity Platform</title>
   <meta name="google-site-verification" content="J13STEzRChDz488QqKA5yP2eoiZ-FQNDUzuok6B2RHM" />
-  <meta name="description" content="7TRIBES — The Unity Platform. One community, one network, and an economy we build together." />
+  <meta name="description" content="7Tribes connects Detroit communities, local businesses, and ideas. Organize, build, and circulate together. Start with Loop, Connect, and the 7Tribes Academy." />
   <link rel="icon" href="images/7trb_symbol.png" />
 
   <style>
@@ -1394,6 +1394,57 @@
   <link rel="stylesheet" href="css/global-responsive.css">
   <link rel="stylesheet" href="css/unity-platform.css">
   <link rel="stylesheet" href="svg/icons.svg">
+
+  <style id="site-simplification">
+    /* 2026-11-07: Purposeful, low-cognitive-load public entry page. */
+    .hero{min-height:clamp(450px,65svh,660px)}
+    .hero-content{padding:72px 20px 45px}
+    .hero-headline{font-size:clamp(54px,10vw,96px);letter-spacing:.1em;margin-bottom:12px}
+    .hero-subheadline{font-weight:800;font-size:clamp(23px,3.5vw,35px);line-height:1.4;margin-bottom:25px}
+    .hero-subheadline span{display:inline-block;font-size:clamp(15px,1.9vw,20px);font-weight:400;color:var(--muted);margin-top:10px}
+    .hero-actions{margin-bottom:12px}
+    .scroll-indicator{bottom:12px}
+    .simple-eyebrow{text-transform:uppercase;letter-spacing:.17em;color:var(--gold-bright);font-size:.76rem;font-weight:900;margin:0 0 12px}
+    main .section{padding:clamp(44px,6vw,74px) 0}
+    main h2{font-size:clamp(28px,4.2vw,43px);line-height:1.18;color:var(--ink);margin:0 0 17px}
+    .simple-centered{text-align:center;max-width:850px}
+    .simple-centered p:not(.simple-eyebrow){font-size:clamp(16px,2vw,19px);color:var(--muted);line-height:1.7}
+    .simple-intro{background:rgba(231,184,82,.035)}
+    .simple-section-title{text-align:center}
+    .simple-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
+    .simple-card{background:linear-gradient(160deg,rgba(36,24,9,.98),rgba(17,11,6,.97));padding:30px 24px;border:1px solid rgba(231,184,82,.22);border-radius:20px;min-width:0}
+    .simple-step-number{display:block;color:var(--gold-bright);font-weight:900;font-size:.85rem;letter-spacing:.08em;margin-bottom:22px}
+    .simple-card h3{color:var(--gold-bright);font-size:1.6rem;margin:0 0 10px}
+    .simple-card p{color:var(--muted);margin:0 0 24px;min-height:75px;line-height:1.55}
+    .simple-card a{font-weight:800;color:var(--gold-bright);text-decoration:underline;text-underline-offset:4px}
+    .simple-progress-note{color:var(--muted);max-width:730px;text-align:center;font-size:.89rem;margin:26px auto 0}
+    .simple-nuru{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(231,184,82,.045)}
+    .simple-nuru-inner{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(200px,.6fr);align-items:center;gap:42px}
+    .simple-nuru .simple-section-title{text-align:left}
+    .simple-nuru p:not(.simple-eyebrow){color:var(--muted);max-width:650px;line-height:1.7;margin:0 0 14px}
+    .simple-nuru .simple-secondary{font-size:.92rem}
+    .simple-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:23px}
+    .simple-nuru-symbol{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:26px;border:1px solid rgba(231,184,82,.2);border-radius:24px;background:radial-gradient(circle,rgba(231,184,82,.1),transparent 65%)}
+    .simple-nuru-symbol img{max-width:150px;max-height:150px;object-fit:contain}
+    .simple-nuru-symbol span{text-align:center;color:var(--gold-bright);font-size:.85rem;font-weight:700}
+    .simple-final{background:rgba(231,184,82,.025)}
+    .simple-centered-actions{justify-content:center}
+    @media(max-width:760px){
+      .hero{min-height:clamp(430px,68svh,580px)}
+      .hero-content{padding:54px 20px 30px}
+      .hero-headline{font-size:clamp(44px,12vw,66px)}
+      .hero-actions{display:flex;flex-direction:column;max-width:330px}
+      .hero-actions .btn{width:100%}
+      .simple-card-grid,.simple-nuru-inner{grid-template-columns:1fr}
+      .simple-card{padding:23px}
+      .simple-card p{min-height:0}
+      .simple-nuru-symbol{display:none}
+      .simple-actions{flex-direction:column}
+      .simple-actions .btn{width:100%}
+      .simple-nuru .simple-section-title{text-align:left}
+    }
+    @media(prefers-reduced-motion:reduce){.hero-headline,.hero-subheadline,.hero-actions{animation:none}}
+  </style>
 </head>
 
 <body data-unity-env="education">
@@ -1514,12 +1565,12 @@
     </div>
 
     <div class="hero-content">
-      <h1 class="hero-headline">7TRIBES — THE UNITY PLATFORM</h1>
-      <p class="hero-subheadline">One Community. One Network. An Economy We Build Together.<br>Organize people. Connect businesses. Create opportunities. Circulate value.</p>
-
+      <p class="simple-eyebrow">Detroit made. Built for community.</p>
+      <h1 class="hero-headline">7TRIBES</h1>
+      <p class="hero-subheadline">Organize. Build. Circulate.<br><span>People and local businesses moving forward together.</span></p>
       <div class="hero-actions">
         <a href="/account/signup.html" class="btn gold" data-home-account-cta>Create Profile</a>
-        <a href="#unity-platform" class="btn ghost">Enter the Ecosystem</a>
+        <a href="https://loop.7trb.com" class="btn ghost">Explore Loop</a>
       </div>
     </div>
 
@@ -1530,534 +1581,69 @@
     </div>
   </section>
 
-  <main>
-
-    <!-- UNITY PLATFORM ENTRY LAYER -->
-    <section class="section unity-platform-section" id="unity-platform">
-      <div class="wrap unity-platform-inner">
-        <div class="unity-platform-copy" data-animate="fade-up">
-          <p class="unity-eyebrow">The ecosystem entry point</p>
-          <h2>One community. One network. An economy we build together.</h2>
-          <p>7TRIBES gives people one entry point to organize community, connect commerce, access identity tools, and build shared economic infrastructure.</p>
-          <div class="unity-platform-actions">
-            <a class="btn gold" href="join/">Join 7Tribes</a>
-            <a class="btn ghost" href="https://loop.7trb.com">Enter Loop</a>
-          </div>
-        </div>
+  <main id="unity-platform">
+    <section class="section simple-intro" aria-labelledby="simple-intro-title">
+      <div class="wrap simple-centered">
+        <p class="simple-eyebrow">One community. One network.</p>
+        <h2 id="simple-intro-title">More than a website. A way to work together.</h2>
+        <p>7Tribes connects people, neighborhood businesses, and local ideas. We start in Detroit and build through participation—not promises.</p>
       </div>
     </section>
 
-    <!-- PUBLIC LIFE ACADEMY CHALLENGE: no account, database, score storage, or rewards. -->
-    <section class="section academy-challenge-section" id="academy-challenge" aria-labelledby="academy-challenge-title">
-      <div class="wrap academy-challenge-grid">
-        <div class="academy-challenge-copy" data-animate="fade-up">
-          <p class="academy-challenge-eyebrow">7TRIBES LIFE ACADEMY</p>
-          <h2 id="academy-challenge-title">Think You Know How America Works?</h2>
-          <p>You live in the system every day. But do you know who controls what, where the money goes, how ownership works, and what it takes for a community to build for itself?</p>
-          <div class="academy-challenge-actions">
-            <button class="btn gold premium-btn" type="button" data-challenge-start>TEST WHAT YOU KNOW</button>
-            <a class="btn ghost premium-btn" href="academy/">EXPLORE LIFE ACADEMY</a>
-          </div>
-        </div>
-
-        <div class="academy-challenge-stage" data-academy-challenge aria-labelledby="academy-challenge-question" data-animate="fade-up" data-delay="100">
-          <div data-challenge-run>
-            <div class="academy-challenge-meta"><span>Public preview · Nothing is saved</span><strong data-challenge-count>Question 1 of 3</strong></div>
-            <h3 class="academy-challenge-question" id="academy-challenge-question" data-challenge-question></h3>
-            <div class="academy-challenge-options" data-challenge-options aria-label="Choose one answer"></div>
-            <p class="academy-challenge-feedback" data-challenge-feedback role="status" aria-live="polite" hidden></p>
-            <button class="btn ghost academy-challenge-next" type="button" data-challenge-next hidden>Next question</button>
-          </div>
-          <div class="academy-challenge-result" data-challenge-result role="status" aria-live="polite" hidden>
-            <p class="academy-challenge-eyebrow">That’s only the beginning.</p>
-            <p class="academy-challenge-score" data-challenge-score>You got 0 of 3.</p>
-            <h3>Knowing the answer is useful. Knowing how the whole system works is power.</h3>
-            <p>Learn how the systems around you actually work.</p>
-            <div class="academy-challenge-actions"><a class="btn gold premium-btn" href="academy/">CONTINUE IN LIFE ACADEMY</a><button class="btn ghost" type="button" data-challenge-restart>Try the preview again</button></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY COMMUNITIES STRUGGLE -->
-    <section class="section struggle-section" id="why-struggle">
+    <section class="section simple-journey" aria-labelledby="simple-journey-title">
       <div class="wrap">
-        <h2 class="premium-title">Why Communities Struggle</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Disconnected people and businesses, weak circulation, uncoordinated projects, and missing shared infrastructure make it harder to build durable local capacity.</p>
-        <div class="premium-cards-grid">
-          <div class="premium-card" data-animate="fade-up">
-            <div class="premium-card-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="16" cy="16" r="6"/>
-                <circle cx="32" cy="16" r="6"/>
-                <circle cx="24" cy="34" r="6"/>
-                <line x1="16" y1="22" x2="24" y2="28" stroke-dasharray="3 3" opacity="0.4"/>
-                <line x1="32" y1="22" x2="24" y2="28" stroke-dasharray="3 3" opacity="0.4"/>
-              </svg>
-            </div>
-            <h3>Disconnected People</h3>
-            <p>When people cannot find one another, share information, or coordinate, useful capacity stays isolated.</p>
-          </div>
-          <div class="premium-card" data-animate="fade-up" data-delay="100">
-            <div class="premium-card-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="8" y="20" width="12" height="18" rx="2"/>
-                <rect x="28" y="14" width="12" height="24" rx="2"/>
-                <line x1="20" y1="30" x2="28" y2="26" stroke-dasharray="3 3" opacity="0.4"/>
-              </svg>
-            </div>
-            <h3>Disconnected Businesses</h3>
-            <p>Businesses need trusted relationships, referrals, customers, and suppliers—not isolated transactions.</p>
-          </div>
-          <div class="premium-card" data-animate="fade-up" data-delay="200">
-            <div class="premium-card-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="24" cy="24" r="16"/>
-                <path d="M24 8 L24 14 M24 34 L24 40" stroke-dasharray="2 2"/>
-                <path d="M16 24 C16 24 20 16 28 20 C36 24 32 32 24 32 C16 32 12 28 16 24" opacity="0.6"/>
-                <line x1="30" y1="30" x2="40" y2="40" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3>Weak Circulation</h3>
-            <p>Value can leave before it supports local workers, suppliers, useful services, or future capacity.</p>
-          </div>
-          <div class="premium-card" data-animate="fade-up" data-delay="300">
-            <div class="premium-card-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="10" width="32" height="28" rx="3"/><path d="M16 20h16M16 28h10"/><circle cx="35" cy="31" r="4"/></svg></div>
-            <h3>Uncoordinated Projects</h3>
-            <p>Good ideas lose momentum when people cannot turn shared needs into visible, organized work.</p>
-          </div>
-          <div class="premium-card" data-animate="fade-up" data-delay="400">
-            <div class="premium-card-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 38V18l14-8 14 8v20"/><path d="M18 38V28h12v10M16 20h4m8 0h4"/></svg></div>
-            <h3>Missing Shared Infrastructure</h3>
-            <p>Communities need practical systems for communication, commerce, learning, and collaboration.</p>
-          </div>
+        <h2 id="simple-journey-title" class="simple-section-title">Your starting point</h2>
+        <div class="simple-card-grid">
+          <article class="simple-card">
+            <span class="simple-step-number" aria-hidden="true">01</span>
+            <h3>Organize</h3>
+            <p>Meet people, share ideas, and take part in community conversations.</p>
+            <a href="https://loop.7trb.com">Enter Loop &rarr;</a>
+          </article>
+          <article class="simple-card">
+            <span class="simple-step-number" aria-hidden="true">02</span>
+            <h3>Build</h3>
+            <p>Find neighborhood businesses and help local commerce grow.</p>
+            <a href="https://connect.7trb.com">Explore Connect &rarr;</a>
+          </article>
+          <article class="simple-card">
+            <span class="simple-step-number" aria-hidden="true">03</span>
+            <h3>Circulate</h3>
+            <p>Learn how participation and the 7TRB token could support community activity.</p>
+            <a href="learn.html">Understand 7TRB &rarr;</a>
+          </article>
         </div>
-        <p class="premium-conclusion" data-animate="fade-up">There is another way: organized participation can turn shared capacity into stronger local systems.</p>
+        <p class="simple-progress-note">7Tribes is growing in stages. Merchant payments, referrals, and reward features are being tested or developed.</p>
       </div>
     </section>
 
-    <!-- ORGANIZE SECTION -->
-    <section class="section organize-section" id="organize">
-      <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">Organize</h2>
-        <p class="premium-subtitle" data-animate="fade-up">People Must Connect Before They Can Build</p>
-        <div class="network-viz" data-animate="fade-up">
-          <svg viewBox="0 0 600 400" class="network-interactive" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <filter id="node-glow">
-                <feGaussianBlur stdDeviation="4" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <radialGradient id="hub-gradient" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="rgba(255,215,122,0.4)"/>
-                <stop offset="100%" stop-color="rgba(255,215,122,0)"/>
-              </radialGradient>
-            </defs>
-            <!-- Connection lines (animated) -->
-            <g class="connection-lines" opacity="0.6">
-              <line x1="300" y1="200" x2="150" y2="100" class="conn-line"/>
-              <line x1="300" y1="200" x2="450" y2="100" class="conn-line"/>
-              <line x1="300" y1="200" x2="120" y2="300" class="conn-line"/>
-              <line x1="300" y1="200" x2="480" y2="300" class="conn-line"/>
-              <line x1="300" y1="200" x2="300" y2="60" class="conn-line"/>
-            </g>
-            <!-- Center hub glow -->
-            <circle cx="300" cy="200" r="60" fill="url(#hub-gradient)" class="hub-pulse"/>
-            <!-- Center hub -->
-            <circle cx="300" cy="200" r="36" fill="rgba(255,215,122,0.15)" stroke="rgba(255,215,122,0.8)" stroke-width="2" filter="url(#node-glow)" class="center-hub"/>
-            <text x="300" y="195" text-anchor="middle" fill="#FFD77A" font-size="11" font-weight="700">COMMUNITY</text>
-            <text x="300" y="210" text-anchor="middle" fill="#FFD77A" font-size="11" font-weight="700">HUB</text>
-            <!-- Outer nodes -->
-            <g class="network-node" data-label="Create your profile, share your skills, and become discoverable.">
-              <circle cx="150" cy="100" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
-              <text x="150" y="104" text-anchor="middle" fill="#FFD77A" font-size="9" font-weight="600">Create Profile</text>
-            </g>
-            <g class="network-node" data-label="Discover members in your city and connect with like-minded people.">
-              <circle cx="450" cy="100" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
-              <text x="450" y="104" text-anchor="middle" fill="#FFD77A" font-size="9" font-weight="600">Meet Members</text>
-            </g>
-            <g class="network-node" data-label="Join discussions, share ideas, and participate in community decisions.">
-              <circle cx="120" cy="300" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
-              <text x="120" y="296" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Join</text>
-              <text x="120" y="308" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Conversations</text>
-            </g>
-            <g class="network-node" data-label="Find your city, your community, your people. Build relationships.">
-              <circle cx="480" cy="300" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
-              <text x="480" y="296" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Find Your</text>
-              <text x="480" y="308" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Tribe</text>
-            </g>
-            <g class="network-node" data-label="Coordinate projects, events, and initiatives with your community.">
-              <circle cx="300" cy="60" r="24" fill="rgba(255,215,122,0.08)" stroke="rgba(255,215,122,0.5)" stroke-width="1.5"/>
-              <text x="300" y="56" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Organize</text>
-              <text x="300" y="68" text-anchor="middle" fill="#FFD77A" font-size="8" font-weight="600">Together</text>
-            </g>
-          </svg>
-          <div class="network-tooltip" id="network-tooltip"></div>
+    <section class="section simple-nuru" id="nuru" aria-labelledby="simple-nuru-title">
+      <div class="wrap simple-nuru-inner">
+        <div>
+          <p class="simple-eyebrow">Wallet access</p>
+          <h2 id="simple-nuru-title" class="simple-section-title">Meet Nuru</h2>
+          <p>Nuru is a separate wallet app from Alkebuleum Technology. It helps you manage your digital identity and assets and open supported Web3 sites.</p>
+          <p class="simple-secondary">The Nuru app is available now. 7Tribes wallet integration is still being refined; no wallet is required to browse this site.</p>
+          <div class="simple-actions">
+            <a href="https://nuruai.org/" target="_blank" rel="noopener noreferrer" class="btn gold">Get Nuru</a>
+            <a href="transparency.html" class="btn ghost">See current status</a>
+          </div>
         </div>
-        <p class="premium-description" data-animate="fade-up">
-          <strong>Loop</strong> is the community town hall where members create profiles, organize, discuss, post updates, join city conversations, and start participating in the 7Tribes ecosystem.
-        </p>
-        <div class="premium-cta" data-animate="fade-up">
-          <a href="https://loop.7trb.com" class="btn gold premium-btn">Enter Loop</a>
+        <div class="simple-nuru-symbol" aria-hidden="true">
+          <img src="images/7trb_symbol.png" alt="" loading="lazy">
+          <span>Identity. Participation. Choice.</span>
         </div>
       </div>
     </section>
 
-    <!-- BUILD SECTION -->
-    <section class="section build-section" id="build">
-      <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">Build</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Community Powers Businesses</p>
-        <div class="build-cards-grid">
-          <div class="build-card" data-animate="fade-up">
-            <div class="build-card-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="24" cy="14" r="6"/>
-                <circle cx="12" cy="34" r="5"/>
-                <circle cx="36" cy="34" r="5"/>
-                <line x1="24" y1="20" x2="12" y2="29"/>
-                <line x1="24" y1="20" x2="36" y2="29"/>
-                <line x1="12" y1="34" x2="36" y2="34" stroke-dasharray="3 3" opacity="0.5"/>
-              </svg>
-            </div>
-            <h3>Community</h3>
-            <p>Members organize around shared goals and mutual support.</p>
-            <span class="build-card-arrow">&rarr;</span>
-          </div>
-          <div class="build-card" data-animate="fade-up" data-delay="80">
-            <div class="build-card-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="10" y="16" width="28" height="22" rx="3"/>
-                <line x1="10" y1="24" x2="38" y2="24"/>
-                <rect x="14" y="28" width="8" height="6" rx="1"/>
-                <rect x="26" y="28" width="8" height="6" rx="1"/>
-              </svg>
-            </div>
-            <h3>Businesses</h3>
-            <p>Entrepreneurs create products and services for the community.</p>
-            <span class="build-card-arrow">&rarr;</span>
-          </div>
-          <div class="build-card" data-animate="fade-up" data-delay="160">
-            <div class="build-card-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M8 38 L8 18 L24 8 L40 18 L40 38"/>
-                <rect x="18" y="26" width="12" height="12"/>
-                <line x1="24" y1="26" x2="24" y2="38"/>
-              </svg>
-            </div>
-            <h3>Storefronts</h3>
-            <p>Businesses become discoverable within the ecosystem.</p>
-            <span class="build-card-arrow">&rarr;</span>
-          </div>
-          <div class="build-card" data-animate="fade-up" data-delay="240">
-            <div class="build-card-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="10" y="10" width="28" height="28" rx="4"/>
-                <line x1="10" y1="20" x2="38" y2="20"/>
-                <circle cx="24" cy="32" r="4"/>
-                <path d="M20 32 L28 32"/>
-              </svg>
-            </div>
-            <h3>Projects</h3>
-            <p>Economic circulation funds community growth initiatives.</p>
-            <span class="build-card-arrow">&rarr;</span>
-          </div>
-          <div class="build-card" data-animate="fade-up" data-delay="320">
-            <div class="build-card-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M24 8 L24 16"/>
-                <path d="M16 12 L24 16 L32 12"/>
-                <rect x="12" y="16" width="24" height="24" rx="3"/>
-                <path d="M18 26 L22 30 L30 22"/>
-              </svg>
-            </div>
-            <h3>Builders</h3>
-            <p>Developers and creators build tools that strengthen the ecosystem.</p>
-            <span class="build-card-arrow">&rarr;</span>
-          </div>
-        </div>
-        <p class="premium-description" data-animate="fade-up">
-          <strong>Connect</strong> is the marketplace where merchants, creators, developers, and service providers exchange value using 7TRB. Build your business. Find your customers. Grow together.
-        </p>
-        <div class="premium-cta" data-animate="fade-up">
-          <a href="https://connect.7trb.com" class="btn gold premium-btn">Explore Connect</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CIRCULATE SECTION -->
-    <section class="section circulate-section" id="circulate">
-      <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">Circulate</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Value Moves Through the Entire Ecosystem</p>
-        <div class="orbit-container" data-animate="fade-up">
-          <div class="orbit-center">
-            <img src="images/7trb_symbol.png" alt="7TRB" class="orbit-logo"/>
-            <div class="orbit-pulse"></div>
-          </div>
-          <div class="orbit-ring orbit-ring-1">
-            <div class="orbit-node" data-label="Members"><span>Members</span></div>
-            <div class="orbit-node" data-label="Businesses"><span>Businesses</span></div>
-            <div class="orbit-node" data-label="Merchants"><span>Merchants</span></div>
-            <div class="orbit-node" data-label="Builders"><span>Builders</span></div>
-          </div>
-          <div class="orbit-ring orbit-ring-2">
-            <div class="orbit-node" data-label="Creators"><span>Creators</span></div>
-            <div class="orbit-node" data-label="Future Rewards"><span>Future Rewards</span></div>
-            <div class="orbit-node" data-label="Projects"><span>Projects</span></div>
-            <div class="orbit-node" data-label="Future Referrals"><span>Future Referrals</span></div>
-          </div>
-          <svg class="orbit-lines" viewBox="0 0 400 400">
-            <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(255,215,122,0.2)" stroke-width="1" stroke-dasharray="4 4"/>
-            <circle cx="200" cy="200" r="170" fill="none" stroke="rgba(255,215,122,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
-            <circle cx="200" cy="200" r="40" fill="none" stroke="rgba(255,215,122,0.4)" stroke-width="1.5" class="orbit-energy"/>
-          </svg>
-        </div>
-        <p class="premium-description" data-animate="fade-up">
-          7TRB is designed for community utility and participation. Merchant tools are being tested, while referrals and rewards are being developed. The ecosystem is being built and rolled out in stages.
-        </p>
-        <div class="premium-cta" data-animate="fade-up">
-          <a href="learn.html" class="btn gold premium-btn">Learn About 7TRB</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ECOSYSTEM MAP -->
-    <section class="section ecosystem-map-section" id="ecosystem-map">
-      <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">Explore the Unity Platform</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Five layers working together</p>
-        <div class="eco-map-grid" data-animate="fade-up">
-          <div class="eco-map-card active" onclick="selectEcosystem(this, 0)">
-            <div class="eco-map-icon">
-              <img src="images/7trb_symbol.png" alt="7TRB" style="width:32px;height:32px;"/>
-            </div>
-            <h3>7TRB</h3>
-            <p>Utility + circulation</p>
-            <a href="learn.html" class="eco-map-link">Learn More &rarr;</a>
-          </div>
-          <div class="eco-map-card" onclick="selectEcosystem(this, 1)">
-            <div class="eco-map-icon">
-              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="12"/><path d="M10 16 L14 20 L22 12"/></svg>
-            </div>
-            <h3>Loop</h3>
-            <p>Community</p>
-            <a href="https://loop.7trb.com" class="eco-map-link">Enter Loop &rarr;</a>
-          </div>
-          <div class="eco-map-card" onclick="selectEcosystem(this, 2)">
-            <div class="eco-map-icon">
-              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="24" height="16" rx="3"/><line x1="4" y1="14" x2="28" y2="14"/></svg>
-            </div>
-            <h3>Connect</h3>
-            <p>Commerce</p>
-            <a href="https://connect.7trb.com" class="eco-map-link">Explore Connect &rarr;</a>
-          </div>
-          <div class="eco-map-card" onclick="selectEcosystem(this, 3)">
-            <div class="eco-map-icon">
-              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="3"/><circle cx="16" cy="22" r="3"/></svg>
-            </div>
-            <h3>Nuru</h3>
-            <p>Identity + Web3 access</p>
-            <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="eco-map-link">View Nuru Access &rarr;</a>
-          </div>
-          <div class="eco-map-card" onclick="selectEcosystem(this, 4)">
-            <div class="eco-map-icon">
-              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="24" height="16" rx="2"/><path d="M4 14 L28 14"/><circle cx="8" cy="11" r="1.5" fill="currentColor"/><circle cx="13" cy="11" r="1.5" fill="currentColor"/></svg>
-            </div>
-            <h3>Alkebuleum</h3>
-            <p>Blockchain infrastructure</p>
-            <a href="ecosystem.html" class="eco-map-link">Learn More &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ROLE SELECTOR -->
-    <section class="section role-section" id="role-selector">
-      <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">Choose Your Role</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Where do you fit? Choose a practical way to participate.</p>
-        <div class="role-cards-grid" data-animate="fade-up">
-          <div class="role-card">
-            <div class="role-card-icon">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="14" r="6"/><path d="M8 36 C8 28 14 24 20 24 C26 24 32 28 32 36"/></svg>
-            </div>
-            <h3>Member</h3>
-            <p>Join the community, build your profile, participate.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-card-icon">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="12" width="28" height="20" rx="3"/><line x1="6" y1="20" x2="34" y2="20"/><path d="M14 26 L18 30 L26 22"/></svg>
-            </div>
-            <h3>Merchant</h3>
-            <p>Prepare your storefront for merchant testing and future 7TRB commerce tools.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-card-icon">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="24" height="24" rx="3"/><path d="M14 20 L20 14 L26 20 L20 26 Z"/></svg>
-            </div>
-            <h3>Builder</h3>
-            <p>Create tools, apps, and services for the ecosystem.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-card-icon">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 32 L8 12 L16 8 L24 12 L24 8 L32 12 L32 32"/><line x1="8" y1="32" x2="32" y2="32"/></svg>
-            </div>
-            <h3>Developer</h3>
-            <p>Build on Alkebuleum, integrate APIs, ship code.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-card-icon">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="20" r="12"/><path d="M14 20 L18 24 L26 16"/></svg>
-            </div>
-            <h3>Creator</h3>
-            <p>Produce content, art, music, and media for the community.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-card-icon">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="16" r="6"/><circle cx="10" cy="28" r="4"/><circle cx="30" cy="28" r="4"/><line x1="20" y1="22" x2="10" y2="24"/><line x1="20" y1="22" x2="30" y2="24"/></svg>
-            </div>
-            <h3>Organizer</h3>
-            <p>Lead initiatives, coordinate events, build movements.</p>
-          </div>
-          <div class="role-card">
-            <div class="role-card-icon">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 8 L24 16 L32 17 L26 23 L28 32 L20 28 L12 32 L14 23 L8 17 L16 16 Z"/></svg>
-            </div>
-            <h3>Supporter</h3>
-            <p>Support the vision, learn the model, and follow verified development updates.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BLUEPRINT SECTION -->
-    <section class="section blueprint-section" id="blueprint">
-      <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">The Blueprint Behind 7Tribes</h2>
-        <p class="premium-subtitle" data-animate="fade-up">A practical guide to building community economies</p>
-        <div class="blueprint-showcase" data-animate="fade-up">
-          <div class="blueprint-book">
-            <div class="book-glow"></div>
-            <div class="book-visual">
-              <img src="images/ebook-cover.png" alt="7Tribes Blueprint" class="book-cover-img"/>
-            </div>
-          </div>
-          <div class="blueprint-chapters">
-            <div class="chapter-card">
-              <span class="chapter-num">01</span>
-              <h4>Organize</h4>
-              <p>Connect people, build networks, form community.</p>
-            </div>
-            <div class="chapter-card">
-              <span class="chapter-num">02</span>
-              <h4>Build</h4>
-              <p>Create businesses, storefronts, and projects.</p>
-            </div>
-            <div class="chapter-card">
-              <span class="chapter-num">03</span>
-              <h4>Circulate</h4>
-              <p>Move value through the ecosystem continuously.</p>
-            </div>
-          </div>
-        </div>
-        <div class="blueprint-ctas" data-animate="fade-up">
-          <a href="https://gumroad.com" target="_blank" rel="noopener" class="btn gold premium-btn">Buy Book</a>
-          <a href="learn.html" class="btn ghost premium-btn">Read Field Manual</a>
-          <a href="learn.html" class="btn ghost premium-btn">Learn More</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMMUNITY GROWTH SIMULATOR -->
-    <section class="section simulator-section" id="simulator">
-      <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">Community Scenario Lab</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Explore an illustrative model of organized community activity</p>
-        <p class="sim-disclaimer">Illustrative scenario · Generated values are not live metrics</p>
-        <div class="sim-dashboard" data-animate="fade-up">
-          <div class="sim-controls">
-            <div class="sim-slider-group">
-              <label>Members <span id="members-value">500</span></label>
-              <input type="range" id="members-slider" min="10" max="10000" value="500" oninput="updateSimulator()"/>
-            </div>
-            <div class="sim-slider-group">
-              <label>Businesses <span id="businesses-value">25</span></label>
-              <input type="range" id="businesses-slider" min="1" max="500" value="25" oninput="updateSimulator()"/>
-            </div>
-            <div class="sim-slider-group">
-              <label>Builders <span id="builders-value">10</span></label>
-              <input type="range" id="builders-slider" min="1" max="200" value="10" oninput="updateSimulator()"/>
-            </div>
-            <div class="sim-slider-group">
-              <label>Creators <span id="creators-value">15</span></label>
-              <input type="range" id="creators-slider" min="1" max="200" value="15" oninput="updateSimulator()"/>
-            </div>
-            <div class="sim-slider-group">
-              <label>Referral Rate <span id="referrals-value">20%</span></label>
-              <input type="range" id="referrals-slider" min="5" max="80" value="20" oninput="updateSimulator()"/>
-            </div>
-          </div>
-          <div class="sim-results">
-            <div class="sim-stat">
-              <span class="sim-stat-value" id="connections-result">12,375</span>
-              <span class="sim-stat-label">Illustrative connections</span>
-            </div>
-            <div class="sim-stat">
-              <span class="sim-stat-value" id="active-businesses-result">25</span>
-              <span class="sim-stat-label">Illustrative active businesses</span>
-            </div>
-            <div class="sim-stat">
-              <span class="sim-stat-value" id="participation-result">10%</span>
-              <span class="sim-stat-label">Illustrative participation score</span>
-            </div>
-          </div>
-        </div>
-        <p class="illustrative-note">This scenario tool is educational and does not represent live 7Tribes ecosystem metrics.</p>
-      </div>
-    </section>
-
-    <!-- DETROIT SECTION -->
-    <section class="section detroit-section" id="detroit">
-      <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">Detroit: Community Focus</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Detroit is an initial city-community focus: one example of how people can move from Community → Commerce → Projects → Circulation. 7Tribes is built for communities beyond Detroit, too.</p>
-        <div class="detroit-stats" data-animate="fade-up">
-          <div class="detroit-stat">
-            <span class="detroit-stat-value is-qualitative">Community</span>
-            <span class="detroit-stat-label">Member networks</span>
-          </div>
-          <div class="detroit-stat">
-            <span class="detroit-stat-value is-qualitative">Commerce</span>
-            <span class="detroit-stat-label">Merchant collaboration</span>
-          </div>
-          <div class="detroit-stat">
-            <span class="detroit-stat-value is-qualitative">Projects</span>
-            <span class="detroit-stat-label">Community initiatives</span>
-          </div>
-          <div class="detroit-stat">
-            <span class="detroit-stat-value is-qualitative">Circulation</span>
-            <span class="detroit-stat-label">Local opportunity</span>
-          </div>
-        </div>
-        <div class="premium-cta" data-animate="fade-up">
-          <a href="https://loop.7trb.com" class="btn gold premium-btn">Join Detroit in Loop</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CLOSING SECTION -->
-    <section class="section closing-section" id="closing">
-      <div class="wrap">
-        <h2 class="premium-title" data-animate="fade-up">The Unity Platform Is Live and Growing</h2>
-        <p class="premium-subtitle" data-animate="fade-up">Join the ecosystem. Start organizing. Build something real.</p>
-        <div class="closing-ctas" data-animate="fade-up">
-          <a href="join/" class="btn gold premium-btn">Join 7Tribes</a>
-          <a href="https://loop.7trb.com" class="btn ghost premium-btn">Enter Loop</a>
-          <a href="https://connect.7trb.com" class="btn ghost premium-btn">Explore Connect</a>
-          <a href="academy/" class="btn ghost premium-btn">Explore Life Academy</a>
-          <a href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener" class="btn ghost premium-btn">View Nuru Access</a>
-          <a href="learn.html" class="btn ghost premium-btn">Read Blueprint</a>
+    <section class="section simple-final" aria-labelledby="simple-final-title">
+      <div class="wrap simple-centered">
+        <p class="simple-eyebrow">Detroit is where we begin.</p>
+        <h2 id="simple-final-title">A stronger community starts with showing up.</h2>
+        <p>Join the conversation. Support a business. Bring an idea.</p>
+        <div class="simple-actions simple-centered-actions">
+          <a href="join/" class="btn gold">Join 7Tribes</a>
+          <a href="academy/" class="btn ghost">Explore the Academy</a>
         </div>
       </div>
     </section>
@@ -2101,188 +1687,6 @@
     </div>
   </footer>
 
-  <script>
-    // Premium scroll animations
-    const animObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-    document.querySelectorAll('[data-animate]').forEach(el => animObserver.observe(el));
-
-    // Ecosystem map selection
-    function selectEcosystem(card, index) {
-      document.querySelectorAll('.eco-map-card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-    }
-
-    // Network node tooltip
-    document.querySelectorAll('.network-node').forEach(node => {
-      node.addEventListener('click', function() {
-        const tooltip = document.getElementById('network-tooltip');
-        const label = this.getAttribute('data-label');
-        if (tooltip && label) {
-          tooltip.textContent = label;
-          tooltip.classList.toggle('visible');
-          setTimeout(() => tooltip.classList.remove('visible'), 3000);
-        }
-      });
-    });
-
-    // Community Growth Simulator
-    function updateSimulator() {
-      const members = parseInt(document.getElementById('members-slider').value);
-      const businesses = parseInt(document.getElementById('businesses-slider').value);
-      const builders = parseInt(document.getElementById('builders-slider').value);
-      const creators = parseInt(document.getElementById('creators-slider').value);
-      const referrals = parseInt(document.getElementById('referrals-slider').value);
-      document.getElementById('members-value').textContent = members.toLocaleString();
-      document.getElementById('businesses-value').textContent = businesses;
-      document.getElementById('builders-value').textContent = builders;
-      document.getElementById('creators-value').textContent = creators;
-      document.getElementById('referrals-value').textContent = referrals + '%';
-      const connections = Math.floor(members * (members - 1) / 2 * 0.1);
-      const participation = Math.floor((businesses + builders + creators) / (members / 100));
-      const activeBusinesses = Math.min(businesses, Math.floor(members / 20));
-      document.getElementById('connections-result').textContent = connections.toLocaleString();
-      document.getElementById('active-businesses-result').textContent = activeBusinesses;
-      document.getElementById('participation-result').textContent = Math.min(100, participation) + '%';
-    }
-    updateSimulator();
-
-    // Detroit animated counters
-    const counterObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const counters = entry.target.querySelectorAll('[data-count]');
-          counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-count'));
-            let current = 0;
-            const increment = target / 40;
-            const timer = setInterval(() => {
-              current += increment;
-              if (current >= target) {
-                counter.textContent = target;
-                clearInterval(timer);
-              } else {
-                counter.textContent = Math.floor(current);
-              }
-            }, 30);
-          });
-          counterObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    const detroitStats = document.querySelector('.detroit-stats');
-    if (detroitStats) counterObserver.observe(detroitStats);
-
-    // Public Life Academy challenge. This is intentionally in-memory only: no
-    // account, local storage, analytics event, database record, reward, or score claim.
-    (function setupAcademyChallenge() {
-      const stage = document.querySelector('[data-academy-challenge]');
-      if (!stage) return;
-
-      const questions = [
-        {
-          prompt: 'Your neighborhood has an abandoned building creating problems. Who should you investigate first?',
-          options: ['The President', 'The Governor', 'The property owner and local authorities', 'Congress'],
-          correctIndex: 2,
-          explanation: 'Start with the people and local decision paths closest to the issue: the property owner, local code enforcement, and the relevant municipal authorities.'
-        },
-        {
-          prompt: 'Who normally controls local zoning decisions?',
-          options: ['A local zoning or planning process', 'Congress', 'A national bank', 'The President'],
-          correctIndex: 0,
-          explanation: 'Zoning is usually decided through local government processes, including planning, zoning, and elected local authorities.'
-        },
-        {
-          prompt: 'What is the most useful first step when dealing with an abandoned property?',
-          options: ['Announce a solution immediately', 'Map the owner, local rules, and current decision paths', 'Wait for a national policy change', 'Assume one institution controls everything'],
-          correctIndex: 1,
-          explanation: 'Before proposing a fix, map the people, rules, resources, and decision points that shape the situation.'
-        }
-      ];
-
-      const run = stage.querySelector('[data-challenge-run]');
-      const result = stage.querySelector('[data-challenge-result]');
-      const count = stage.querySelector('[data-challenge-count]');
-      const prompt = stage.querySelector('[data-challenge-question]');
-      const options = stage.querySelector('[data-challenge-options]');
-      const feedback = stage.querySelector('[data-challenge-feedback]');
-      const next = stage.querySelector('[data-challenge-next]');
-      const score = stage.querySelector('[data-challenge-score]');
-      let index = 0;
-      let correct = 0;
-      let answered = false;
-
-      function renderQuestion() {
-        const question = questions[index];
-        answered = false;
-        count.textContent = `Question ${index + 1} of ${questions.length}`;
-        prompt.textContent = question.prompt;
-        options.replaceChildren();
-        feedback.hidden = true;
-        feedback.textContent = '';
-        next.hidden = true;
-        question.options.forEach((label, optionIndex) => {
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'academy-challenge-option';
-          button.textContent = label;
-          button.addEventListener('click', () => answerQuestion(optionIndex));
-          options.append(button);
-        });
-      }
-
-      function answerQuestion(optionIndex) {
-        if (answered) return;
-        answered = true;
-        const question = questions[index];
-        const isCorrect = optionIndex === question.correctIndex;
-        if (isCorrect) correct += 1;
-        [...options.querySelectorAll('button')].forEach((button, buttonIndex) => {
-          button.disabled = true;
-          button.setAttribute('aria-disabled', 'true');
-          if (buttonIndex === question.correctIndex) button.classList.add('is-correct');
-          if (buttonIndex === optionIndex && !isCorrect) button.classList.add('is-incorrect');
-        });
-        feedback.textContent = `${isCorrect ? 'Correct.' : 'Not quite.'} ${question.explanation}`;
-        feedback.hidden = false;
-        next.textContent = index === questions.length - 1 ? 'See your result' : 'Next question';
-        next.hidden = false;
-        next.focus();
-      }
-
-      function showNext() {
-        if (!answered) return;
-        if (index < questions.length - 1) {
-          index += 1;
-          renderQuestion();
-          return;
-        }
-        run.hidden = true;
-        score.textContent = `You got ${correct} of ${questions.length}.`;
-        result.hidden = false;
-      }
-
-      function startChallenge() {
-        index = 0;
-        correct = 0;
-        result.hidden = true;
-        run.hidden = false;
-        renderQuestion();
-        stage.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
-        requestAnimationFrame(() => options.querySelector('button')?.focus());
-      }
-
-      next.addEventListener('click', showNext);
-      document.querySelectorAll('[data-challenge-start], [data-challenge-restart]').forEach((control) => control.addEventListener('click', startChallenge));
-      renderQuestion();
-    })();
-
-  </script>
   <script src="js/visitor-counter.js?v=device-visits-20260817"></script>
   <script type="module" src="js/home-account-cta.js?v=homepage-profile-cta-20260826"></script>
   <script>
