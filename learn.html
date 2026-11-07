@@ -375,6 +375,93 @@
   </style>
   <link rel="stylesheet" href="css/global-responsive.css">
   <link rel="stylesheet" href="css/unity-platform.css">
+  <style id="learn-mobile-layout-fix">
+    /* Learn-only overrides: keep the brand/navigation row independent of the centered hero copy.
+       The shared responsive stylesheet sets .banner-text to position:relative, which caused
+       mobile screenshots to show the headline off-screen. */
+    @media (max-width: 992px) {
+      .site-header .hero-banner {
+        display: block !important;
+        position: relative;
+        min-height: 330px !important;
+        height: auto !important;
+        padding: 0 !important;
+        overflow: hidden;
+      }
+      .site-header .hero-banner .header-inner {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        min-height: 68px;
+        padding: 10px 16px !important;
+        box-sizing: border-box;
+      }
+      .site-header .hero-banner .banner-text {
+        position: absolute !important;
+        inset: auto 16px 22px !important;
+        left: 16px !important;
+        right: 16px !important;
+        bottom: 22px !important;
+        transform: none !important;
+        width: auto !important;
+        max-width: none !important;
+        box-sizing: border-box;
+        padding: 0;
+        text-align: center;
+        overflow-wrap: anywhere;
+      }
+      .site-header .banner-text h1 {
+        margin: 0;
+        font-size: clamp(26px, 6vw, 35px) !important;
+        letter-spacing: .06em;
+        line-height: 1.18 !important;
+        white-space: normal;
+        text-wrap: balance;
+      }
+      .site-header .banner-text p {
+        width: 100%;
+        max-width: 37ch;
+        margin: 12px auto 0;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        overflow-wrap: break-word;
+      }
+      /* An old blanket [class*="section"] rule was adding a full section's
+         top/bottom padding to every navigation drawer subsection. */
+      .mobile-drawer .drawer-section {
+        padding: 0 !important;
+        margin: 0 0 12px !important;
+      }
+      .mobile-drawer .drawer-content {
+        padding: 14px 18px !important;
+      }
+      .mobile-drawer .drawer-section a {
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        padding: 8px 10px;
+      }
+      .mobile-drawer .drawer-header {
+        min-height: 66px;
+        padding: 10px 16px !important;
+      }
+    }
+    @media (max-width: 430px) {
+      .site-header .hero-banner {
+        min-height: 320px !important;
+      }
+      .site-header .hero-banner .banner-text {
+        bottom: 20px !important;
+      }
+      .site-header .banner-text h1 {
+        font-size: clamp(25px, 6.8vw, 30px) !important;
+      }
+    }
+  </style>
 </head>
 
 <body data-unity-env="education">
