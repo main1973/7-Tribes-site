@@ -12,8 +12,8 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Learn (Basics) — Crypto 101</title>
-  <meta name="description" content="Crypto basics, real risks, wallets, gas, liquidity, and why circulation matters — so you can understand 7TRB with clarity." />
+  <title>Learn | How 7TRB Works, Nuru Wallet &amp; Crypto 101</title>
+  <meta name="description" content="Learn how 7TRB works, how the Nuru wallet works, and Crypto 101: blockchains, wallets, gas, swaps, liquidity, and safety." />
   <link rel="icon" href="images/logo.png" />
 
   <style>
@@ -462,6 +462,55 @@
       }
     }
   </style>
+  <style id="learn-guide-v2">
+    /* Nov 2026 content-first, mobile-friendly learning layout; keep existing mobile hero fix. */
+    .learn-guide .section{padding:clamp(28px,5vw,52px) 0 !important}
+    .learn-guide .box{padding:clamp(19px,4vw,32px);max-width:100%;overflow-wrap:break-word}
+    .learn-guide .title{font-size:clamp(24px,3.5vw,35px);letter-spacing:.035em;line-height:1.15}
+    .guide-kicker{color:var(--gold-bright);font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.77rem;margin:0 0 10px}
+    .guide-lead{font-size:clamp(16px,2vw,19px);line-height:1.66;color:var(--ink);max-width:78ch;margin:0 0 20px}
+    .guide-intro-copy{text-align:center;max-width:760px;margin:0 auto 24px}
+    .guide-intro-copy h2{font-size:clamp(28px,5vw,40px);line-height:1.1;margin:0 0 12px}
+    .guide-intro-copy>p:last-child{color:var(--muted);margin:0;font-size:clamp(15px,2vw,18px)}
+    .guide-topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .guide-topics a{display:flex;align-items:center;gap:12px;min-width:0;padding:16px;border:1px solid rgba(255,215,122,.3);border-radius:13px;background:rgba(255,215,122,.065);font-weight:800;color:var(--ink)}
+    .guide-topics a span{color:var(--gold-bright)}
+    .guide-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0 12px}
+    .guide-flow div{border-left:3px solid var(--gold);background:rgba(255,215,122,.055);padding:15px;min-width:0}
+    .guide-flow strong,.guide-flow span{display:block}
+    .guide-flow strong{font-size:1.1rem;color:var(--gold-bright)}
+    .guide-flow span{font-size:.88rem;color:var(--muted);margin-top:5px}
+    .guide-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+    .guide-facts div{padding:15px;background:rgba(0,0,0,.22);border:1px solid rgba(255,215,122,.14);border-radius:12px}
+    .guide-facts span,.guide-facts strong{display:block}
+    .guide-facts span{font-size:.8rem;color:var(--muted)}
+    .guide-facts strong{margin-top:4px;font-size:1.05rem;color:var(--ink)}
+    .guide-caption{font-size:.87rem;color:var(--muted);line-height:1.6}
+    .learn-guide details{margin-top:12px}
+    .learn-guide details p{padding:0 3px;margin:12px 0 2px;line-height:1.65}
+    .learn-guide details summary{line-height:1.4}
+    .guide-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .guide-actions .btn{justify-content:center;text-align:center;min-height:46px;white-space:normal}
+    .guide-alt{background:rgba(231,184,82,.028)}
+    .guide-steps{counter-reset:guide;list-style:none;margin:18px 0;padding:0;display:grid;gap:13px}
+    .guide-steps li{counter-increment:guide;display:grid;grid-template-columns:34px minmax(0,1fr);gap:0 12px;border-bottom:1px solid rgba(255,215,122,.14);padding-bottom:12px}
+    .guide-steps li:before{content:counter(guide,decimal-leading-zero);grid-row:span 2;color:var(--gold-bright);font-weight:900}
+    .guide-steps strong{display:block;color:var(--ink);line-height:1.4}
+    .guide-steps span{display:block;color:var(--muted);font-size:.95rem;line-height:1.55;margin-top:4px}
+    .guide-note{background:rgba(231,184,82,.09);border-left:3px solid var(--gold);padding:16px;color:var(--muted);margin:20px 0;line-height:1.6}
+    .guide-note strong{color:var(--ink)}
+    .guide-checks{margin:10px 0 15px;padding-left:22px;color:var(--muted)}
+    .guide-checks li{margin-bottom:12px;line-height:1.55}
+    .learn-guide a:not(.btn):not(.guide-topics a){text-decoration:underline;text-underline-offset:3px}
+    .learn-guide section[id]{scroll-margin-top:20px}
+    @media(max-width:760px){
+      .guide-topics,.guide-flow{grid-template-columns:1fr}
+      .guide-topics a{padding:13px 16px}
+      .guide-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .guide-actions{flex-direction:column}
+      .guide-actions .btn{width:100%;max-width:none!important;min-width:0}
+    }
+  </style>
 </head>
 
 <body data-unity-env="education">
@@ -485,188 +534,161 @@
     </div>
 
     <div class="banner-text">
-      <h1>Learn (Basics)</h1>
-      <p>Crypto 101 — money, wallets, risks, and why circulation matters. Learn here, then apply it in the 7TRB Field Manual.</p>
+      <h1>Learn 7TRB &amp; Crypto</h1>
+      <p>Plain-language lessons on 7TRB, Nuru wallet, and crypto basics.</p>
     </div>
   </div>
 
   <div class="header-row">
     <div class="header-row-inner">
       <a class="btn ghost" href="index.html">← Back to Home</a>
-      <span class="muted" style="text-transform:uppercase;letter-spacing:.08em">No hype • Just fundamentals</span>
+      <span class="muted" style="text-transform:uppercase;letter-spacing:.08em">Clear answers • Real risks</span>
       <a class="btn gold" href="learn-7trb.html">How 7TRB Works →</a>
     </div>
   </div>
 </header>
 
-<main>
+<main class="learn-guide" id="start">
+  <section class="section guide-intro" aria-labelledby="guide-title">
+    <div class="wrap">
+      <div class="guide-intro-copy">
+        <p class="guide-kicker">Start here</p>
+        <h2 id="guide-title">Three things to understand</h2>
+        <p>7TRB is the community token. Nuru is a separate wallet app. Crypto is the technology that allows supported tokens to move on a blockchain. You can learn and join the conversation without buying a token.</p>
+      </div>
+      <nav class="guide-topics" aria-label="Learn topics">
+        <a href="#how-7trb-works"><span>01</span> How 7TRB works</a>
+        <a href="#how-nuru-works"><span>02</span> How Nuru works</a>
+        <a href="#crypto-101"><span>03</span> Crypto 101</a>
+      </nav>
+    </div>
+  </section>
 
-  <!-- ROUTER NOTE -->
-  <section class="section">
+  <section class="section" id="how-7trb-works" aria-labelledby="token-heading">
     <div class="wrap">
       <div class="box">
-        <h2 class="title" style="margin-top:0">Before We Start</h2>
-        <p class="muted" style="max-width:92ch;margin:0">
-          This page teaches fundamentals. If you want the <b>7TRB operating system</b> (wallets, treasury, tribes, merchants, circulation),
-          go to <a href="learn-7trb.html"><b>How 7TRB Works</b></a>.
-        </p>
+        <p class="guide-kicker">01 / The purpose</p>
+        <h2 class="title" id="token-heading">How 7TRB Works</h2>
+        <p class="guide-lead">7TRB is the 7Tribes community utility token on Alkebuleum. Its intended role is to support participation and exchange within a growing network of people, local businesses, and projects.</p>
+        <div class="guide-flow" aria-label="Planned participation cycle">
+          <div><strong>Organize</strong><span>People connect in Loop</span></div>
+          <div><strong>Build</strong><span>Businesses and ideas connect</span></div>
+          <div><strong>Circulate</strong><span>Members may use 7TRB when supported</span></div>
+        </div>
+        <p class="guide-caption">This is the intended community model, not a report of completed transactions or an automatic increase in token value.</p>
+        <div class="guide-facts">
+          <div><span>Token</span><strong>7TRB</strong></div>
+          <div><span>Network</span><strong>Alkebuleum</strong></div>
+          <div><span>Published supply</span><strong>7 billion</strong></div>
+        </div>
+        <details>
+          <summary>What can I actually do today?</summary>
+          <p class="muted">Explore <a href="https://loop.7trb.com">Loop</a>, visit <a href="https://connect.7trb.com">Connect</a>, read the token details, and use a compatible wallet to review on-chain 7TRB activity. Some wallet and community features are accessible while merchant payments, rewards, and referrals remain in testing or development.</p>
+        </details>
+        <details>
+          <summary>Does circulating 7TRB make it more valuable?</summary>
+          <p class="muted">No automatic price increase comes from moving a token. Market value depends on actual willing buyers and sellers, available liquidity, demand, supply, and risk. Sending tokens between wallets does not itself create new money or guarantee a buyer.</p>
+        </details>
+        <details>
+          <summary>How is 7TRB different from ALKE?</summary>
+          <p class="muted"><strong>7TRB</strong> is the 7Tribes token. <strong>ALKE</strong> is the network's native asset used to pay blockchain transaction fees on Alkebuleum. Having 7TRB does not automatically mean you have ALKE for gas.</p>
+        </details>
+        <div class="guide-actions">
+          <a class="btn gold" href="learn-7trb.html">Read the 7TRB Field Guide</a>
+          <a class="btn ghost" href="transparency.html#token">Verify token details</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- BEST PRACTICE -->
-  <section class="section">
+  <section class="section guide-alt" id="how-nuru-works" aria-labelledby="nuru-heading">
     <div class="wrap">
       <div class="box">
-        <h2 class="title" style="margin-top:0">Best Practice</h2>
-        <ul class="muted" style="margin:0 0 0 18px">
-          <li><b>Test small first:</b> send a tiny transaction before doing anything big.</li>
-          <li><b>Protect the keys:</b> store seed phrase offline. Never screenshot. Never DM it.</li>
-          <li><b>Verify contracts:</b> use the official explorer link from this website — don’t trust random DMs.</li>
-        </ul>
-        <div class="divider"></div>
-        <p class="muted" style="margin:0">
-          If you can’t verify it, don’t trust it. That’s the whole survival rule.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW CRYPTO WORKS -->
-  <section class="section">
-    <div class="wrap">
-      <div class="box">
-        <h2 class="title" style="margin-top:0">Crypto 101 — The Core Ideas</h2>
-
-        <details open>
-          <summary>1) What is crypto?</summary>
-          <p class="muted">Cryptocurrency is a digital asset that can be recorded and transferred on a blockchain network. Instead of a bank keeping the records, a network can maintain the shared record.</p>
-        </details>
-
-        <details>
-          <summary>2) What is a blockchain?</summary>
-          <p class="muted">A blockchain is a public database of transactions. Once recorded, it’s extremely hard to change. That’s the “trust layer.”</p>
-        </details>
-
-        <details>
-          <summary>3) What makes a coin go up or down?</summary>
-          <ul class="muted" style="margin:8px 0 0 18px">
-            <li><b>Supply + demand</b> is the main driver.</li>
-            <li>Thin liquidity = price can move wildly.</li>
-            <li>Utility (real use), trust (transparency), and distribution (not whale-owned) matter long term.</li>
-          </ul>
-        </details>
-
-        <details>
-          <summary>4) What’s “gas”?</summary>
-          <p class="muted">Gas is the small network fee to process transactions. Every chain has a gas token (ETH on Ethereum, $AKE on Alkebuleum).</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW TO USE 7TRB (BASICS VERSION) -->
-  <section class="section">
-    <div class="wrap">
-      <div class="box">
-        <h2 class="title" style="margin-top:0">How to Use 7TRB (Basics)</h2>
-        <p class="muted" style="margin-top:0;max-width:92ch">
-          This is the “quick start.” The full setup (treasury rules, merchants, redemption) is in the Field Manual page.
-        </p>
-
-        <ol class="muted" style="margin:10px 0 0 20px">
-          <li><b>Wallet access:</b> Nuru is an available wallet app from Alkebuleum Technology. 7Tribes-specific integration is still being tested. <a href="transparency.html#nuru">See current status</a>.</li>
-          <li><b>Add the right network:</b> make sure you’re on the chain where 7TRB lives.</li>
-          <li><b>Get gas:</b> keep a little gas token for transactions (example: $AKE on Alkebuleum).</li>
-          <li><b>Add 7TRB token:</b> use the official contract address from the <a href="transparency.html#token"><b>Transparency</b></a> page and verify it in the explorer.</li>
-          <li><b>Check availability:</b> merchant payments, referrals, and rewards are being tested or developed. Do not assume they are active.</li>
+        <p class="guide-kicker">02 / Your wallet</p>
+        <h2 class="title" id="nuru-heading">How Nuru Works</h2>
+        <p class="guide-lead"><strong>Nuru</strong> is a separate mobile app developed by <strong>Alkebuleum Technology</strong>. It combines a self-custody wallet, identity tools, and an AI guide that explains wallet actions. Its availability does not mean every 7Tribes integration is active.</p>
+        <ol class="guide-steps">
+          <li><strong>Get the official app.</strong><span>Install Nuru from its developer's official app listing, not an unsolicited link.</span></li>
+          <li><strong>Create or restore your wallet.</strong><span>Follow the app's identity and security setup. Carefully secure the Security Key, password, passcode, and any recovery information it provides.</span></li>
+          <li><strong>Review your wallet.</strong><span>Check the account, network, token, and transaction details. A wallet address is for receiving compatible assets; never send to an unverified destination.</span></li>
+          <li><strong>Explore supported Web3 tools.</strong><span>Where the Nuru browser supports a site, open it and approve only connections or transactions you understand. A site loading does not mean all of its features are integrated.</span></li>
         </ol>
-
-        <div class="divider"></div>
-
-        <p class="muted" style="margin:0">
-          Want the real operating system? Go here: <a href="learn-7trb.html"><b>How 7TRB Works →</b></a>
-        </p>
+        <div class="guide-note"><strong>For 7Tribes members:</strong> You can browse 7trb.com, Loop, and Connect without connecting a wallet. Nuru-browser access and wallet connections have been tested, while full 7Tribes wallet, merchant, and rewards integration is still being refined. <a href="transparency.html#nuru">See current status</a>.</div>
+        <details>
+          <summary>What is Nuru's AI Guide?</summary>
+          <p class="muted">Nuru's built-in AI Guide explains app features, wallet activity, swap concepts, security, and recovery steps in plain language. It is educational assistance, not a guarantee or personalized financial advice.</p>
+        </details>
+        <details>
+          <summary>Does Nuru hold my money like a bank?</summary>
+          <p class="muted">No. The developer describes Nuru as a self-custody wallet, not a bank or broker. Digital tokens are recorded on a blockchain, and your wallet controls the credentials used to access them. Recovery is subject to the wallet's actual security setup.</p>
+        </details>
+        <div class="guide-actions">
+          <a class="btn gold" href="https://play.google.com/store/apps/details?id=com.alkebuleum.nuru" target="_blank" rel="noopener noreferrer">Nuru for Android</a>
+          <a class="btn ghost" href="https://apps.apple.com/us/app/nuru-web3-intelligence/id6776738107" target="_blank" rel="noopener noreferrer">Nuru for iPhone</a>
+          <a class="btn ghost" href="https://nuruai.org/" target="_blank" rel="noopener noreferrer">Nuru official website</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- MYTHS + SAFETY -->
-  <section class="section">
-    <div class="wrap">
-      <div class="grid two">
-
-        <div class="box">
-          <h2 class="title" style="margin-top:0">Safety & Wallet Security</h2>
-
-          <h3 style="margin:10px 0 6px;color:var(--gold-bright)">Seed Phrase Rules</h3>
-          <ul class="muted" style="margin:0 0 0 18px">
-            <li>Write it on paper. Store offline. Never screenshot.</li>
-            <li>Never share it. No admin, no support, nobody needs it.</li>
-            <li>Consider 2 copies in separate safe places.</li>
-          </ul>
-
-          <h3 style="margin:12px 0 6px;color:var(--gold-bright)">Scam Radar</h3>
-          <ul class="muted" style="margin:0 0 0 18px">
-            <li>Random DMs offering “help.”</li>
-            <li>Fake airdrops / fake support forms.</li>
-            <li>Clone websites — always check the URL.</li>
-          </ul>
-        </div>
-
-        <div class="box">
-          <h2 class="title" style="margin-top:0">Common Myths</h2>
-
-          <details open>
-            <summary>“Crypto is all scams.”</summary>
-            <p class="muted">Scams are real. The defense is verification + transparency. If you can’t verify it, don’t touch it.</p>
-          </details>
-
-          <details>
-            <summary>“If I lose my phone, I lose my crypto.”</summary>
-            <p class="muted">You recover the wallet with your seed phrase. Phone lost ≠ coins lost.</p>
-          </details>
-
-          <details>
-            <summary>“It’s anonymous crime money.”</summary>
-            <p class="muted">Most chains are public ledgers. Transactions are traceable. Don’t confuse “addresses” with “invisible.”</p>
-          </details>
-
-          <details>
-            <summary>“Crypto is illegal.”</summary>
-            <p class="muted">Rules vary by country/state. This isn’t legal/tax advice — you’re responsible for local compliance.</p>
-          </details>
-
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- GLOSSARY -->
-  <section class="section">
+  <section class="section" id="crypto-101" aria-labelledby="crypto-heading">
     <div class="wrap">
       <div class="box">
-        <h2 class="title" style="margin-top:0">Glossary (Plain Language)</h2>
-        <p class="muted"><b>Wallet</b> — An app that holds your keys (your access). Protect the seed phrase.</p>
-        <p class="muted"><b>Gas</b> — Network fee to run transactions.</p>
-        <p class="muted"><b>DEX / CEX</b> — Places to trade (decentralized vs centralized exchange).</p>
-        <p class="muted"><b>Liquidity</b> — How easily something buys/sells without wild price changes.</p>
-        <p class="muted"><b>Treasury</b> — Reporting and allocation visibility are in development; verify current information in the Transparency Hub.</p>
-        <p class="muted"><b>DAO</b> — Governance and voting are planned, not currently active 7Tribes features.</p>
-
-        <div class="divider"></div>
-
-        <h3 style="margin:0 0 6px;color:var(--gold-bright)">Risk Disclosure</h3>
-        <ul class="muted" style="margin:0 0 0 18px">
-          <li><b>No promises:</b> value can go up or down.</li>
-          <li><b>Not financial advice:</b> do your own research.</li>
-          <li><b>You are your own bank:</b> security is your responsibility.</li>
-        </ul>
+        <p class="guide-kicker">03 / The basics</p>
+        <h2 class="title" id="crypto-heading">Crypto 101</h2>
+        <p class="guide-lead">You don't need to become a trader to understand digital assets. Start with what a token is, how wallets work, what fees mean, and what can go wrong.</p>
+        <details open>
+          <summary>What is cryptocurrency or a token?</summary>
+          <p class="muted">A crypto asset is a digital asset whose ownership or transfers can be recorded on blockchain technology. Some assets are native coins used by a network; others are tokens created on that network. They are not all money, and their usefulness and risks vary.</p>
+        </details>
+        <details>
+          <summary>What is a blockchain?</summary>
+          <p class="muted">A blockchain is a shared digital ledger. It can let people independently inspect transactions and addresses, but a transaction record does <strong>not</strong> prove a business promise, a token's market value, or the identity of a person behind an address.</p>
+        </details>
+        <details>
+          <summary>What is a wallet and a private key?</summary>
+          <p class="muted">A wallet is an app or device that manages the credentials needed to access crypto assets. Your public address may be shared to receive assets. A private key, Security Key, or recovery credential must be protected; whoever gets control of it may control your funds. Follow your wallet's specific recovery instructions.</p>
+        </details>
+        <details>
+          <summary>What are network fees (gas)?</summary>
+          <p class="muted">A blockchain charges fees to process certain actions. On Alkebuleum the network fee is paid in ALKE. Fees and transaction success can vary; check what the wallet shows before confirming.</p>
+        </details>
+        <details>
+          <summary>How do swaps, liquidity, and prices work?</summary>
+          <p class="muted">A swap exchanges one supported asset for another. Liquidity is how much trading capacity is available at a given price. With little liquidity, even a small trade can move the price sharply or fail. A quoted price is not a guaranteed cash-out value. Verify the actual trading pair, fees, and price impact on the exchange.</p>
+        </details>
+        <details>
+          <summary>Can I undo a transaction?</summary>
+          <p class="muted">Many confirmed blockchain transfers cannot be reversed. Confirm the receiving address, network, token, amount, and fee. A small test transfer can reduce mistakes, but it does not eliminate risk.</p>
+        </details>
+        <details>
+          <summary>Why should I care about circulation?</summary>
+          <p class="muted">Circulation means value being used and exchanged among people and businesses. It can help a community when real goods, services, and opportunities are involved. Moving tokens around without genuine demand or real activity does not guarantee economic growth.</p>
+        </details>
+        <p class="guide-caption">More background: <a href="https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/crypto-asset-custody-basics-retail-investors-investor-bulletin-0" target="_blank" rel="noopener noreferrer">U.S. SEC investor guide to crypto wallets and custody</a>.</p>
       </div>
     </div>
   </section>
 
+  <section class="section guide-alt" id="stay-safe" aria-labelledby="safety-heading">
+    <div class="wrap">
+      <div class="box">
+        <p class="guide-kicker">Before any transaction</p>
+        <h2 class="title" id="safety-heading">Protect yourself first</h2>
+        <ul class="guide-checks">
+          <li>Never send anyone your Nuru Security Key, private keys, password, recovery phrase, or verification code.</li>
+          <li>Use official app listings and confirm the 7TRB contract through <a href="transparency.html#token">Transparency</a> and the network explorer.</li>
+          <li>Verify the network, recipient, asset, and fee. Test with a small amount when appropriate.</li>
+          <li>Be skeptical of guaranteed returns, unsolicited token offers, and promises of instant redemption.</li>
+        </ul>
+        <p class="guide-caption">Education only; not financial, legal, tax, or investment advice. Token prices and liquidity can change, and funds may be lost.</p>
+        <div class="guide-actions">
+          <a class="btn gold" href="learn-7trb.html">Go deeper: How 7TRB Works</a>
+          <a class="btn ghost" href="academy/">Explore Life Academy</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="bg-footer-texture">
