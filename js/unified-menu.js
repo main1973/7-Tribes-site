@@ -149,7 +149,7 @@
     // Replace only old site-wide navigation. Preserve topic tabs, account sign-out,
     // Academy lesson controls, referral links and checkout actions.
     document.querySelectorAll(
-      'nav.top-nav, nav.mainNav, nav.nav-links, nav.topnav, .site-header .header-inner'
+      'nav.top-nav, nav.mainNav, nav.nav-links, .site-header .header-inner'
     ).forEach(function (old) {
       if (old !== header && !old.closest('#seven-nav-bar') && !old.closest('#mobile-drawer')) {
         old.classList.add('seven-nav-legacy');
