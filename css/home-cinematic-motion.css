@@ -1,0 +1,316 @@
+/* 7Tribes animated Detroit homepage hero, November 2026.
+   No remote scripts, no changes to authentication or navigation.
+   Motion is decorative and disabled for reduced-motion preferences. */
+
+.hero.hero-motion {
+  isolation:isolate;
+  padding:0!important;
+  min-height:clamp(710px,92svh,940px) !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background-color:#080604;
+  overflow:hidden;
+}
+.hero.hero-motion:before {
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.27) 32%,rgba(0,0,0,.79) 87%,#090604 100%);
+}
+.hero.hero-motion:after {
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  opacity:.36;
+  background:
+    radial-gradient(circle at 14% 38%,rgba(255,199,81,.2) 0,transparent 12%),
+    radial-gradient(circle at 78% 23%,rgba(255,210,97,.23) 0,transparent 18%),
+    radial-gradient(circle at 64% 58%,rgba(215,143,29,.16) 0,transparent 26%);
+  animation:detroitCityGlow 11s ease-in-out infinite alternate;
+}
+.hero.hero-motion .hero-bg{z-index:0!important;opacity:.19!important}
+.hero.hero-motion > .hero-motion-scene {
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  pointer-events:none;
+  overflow:hidden;
+}
+.hero-motion-scene .city-beacon {
+  position:absolute;top:17%;left:7%;height:3px;width:3px;
+  border-radius:50%;background:#ffdd7a;
+  box-shadow:0 0 11px 4px rgba(255,202,97,.58);
+  opacity:.65;animation:detroitBeacon 7s ease-in-out infinite alternate;
+}
+.hero-motion-scene .city-beacon:nth-of-type(2){top:31%;left:83%;animation-delay:-3s}
+.hero-motion-scene .city-beacon:nth-of-type(3){top:22%;left:56%;animation-delay:-5s}
+.hero-motion-scene .city-beacon:nth-of-type(4){top:47%;left:17%;animation-delay:-1.4s}
+.hero-motion-rail {
+  position:absolute;top:23%;left:-8%;width:116%;height:8px;
+  background:linear-gradient(180deg,rgba(255,200,92,.65) 0 1px,rgba(35,39,41,.9) 1px 4px,rgba(236,181,62,.35) 5px 7px,transparent 7px);
+  transform:rotate(-3deg);
+  opacity:.83;
+  box-shadow:0 4px 11px rgba(0,0,0,.55);
+}
+.hero-motion-rail:after{
+  content:"";position:absolute;inset:-2px 0 1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,227,147,.7) 45%,transparent 53%);
+  animation:detroitRailLights 7s linear infinite;
+}
+.hero-motion-train {
+  position:absolute;
+  top:calc(23% - 49px);left:-540px;
+  width:430px;height:61px;
+  transform:skewX(-7deg);
+  animation:detroitTrainCross 19s linear infinite;
+  filter:drop-shadow(0 9px 6px rgba(0,0,0,.75));
+}
+.hero-motion-train .train-body{
+  position:absolute;inset:2px 0 10px;
+  border-radius:24px 10px 4px 7px;
+  border:1px solid rgba(242,245,237,.6);
+  background:linear-gradient(180deg,#d6d9d6 0%,#74818b 13%,#c5c8c9 24%,#3d454e 28%,#252d34 67%,#a7a8a7 80%,#23262b 100%);
+  box-shadow:inset 0 1px 2px #faf5df,0 0 2px #a59b83;
+  overflow:hidden;
+}
+.hero-motion-train .train-body:before {
+  content:"";position:absolute;top:11px;left:15px;right:19px;height:22px;
+  background:repeating-linear-gradient(90deg,
+   #0e202b 0px,#1a3a4e 17px,#f9d785 22px,#1d2e3c 25px,#0b1720 35px,
+   #5c6b77 36px,#5c6b77 40px,#141d25 41px,#182b39 52px);
+  border:2px solid rgba(7,14,23,.85);border-radius:4px;
+  box-shadow:inset 0 0 7px rgba(249,202,107,.55);
+}
+.hero-motion-train .train-body:after{
+  content:"";position:absolute;bottom:3px;left:0;width:100%;height:5px;
+  background:linear-gradient(90deg,#e8bc54,#b07f32,#e8bc54);
+}
+.hero-motion-train .train-headlight{
+  position:absolute;right:-2px;top:13px;width:16px;height:19px;
+  background:#fff0ac;border-radius:50%;box-shadow:0 0 16px 5px rgba(255,214,112,.72);
+  opacity:.87;
+}
+.hero-motion-train .train-headlight:after{
+  content:"";position:absolute;left:10px;top:-5px;width:66px;height:35px;
+  background:linear-gradient(90deg,rgba(255,233,160,.48),transparent);
+  filter:blur(9px);
+}
+.hero-motion-train .train-wheel{position:absolute;bottom:0;left:22%;width:16%;height:8px;border-radius:0 0 8px 8px;background:#17191d;box-shadow:195px 0 0 #17191d}
+.hero-motion-content {
+  position:relative;z-index:3!important;
+  width:min(100%,1120px)!important;
+  padding:clamp(82px,9vw,135px) 20px 82px!important;
+  box-sizing:border-box;
+  text-shadow:0 3px 12px rgba(0,0,0,.52);
+}
+.hero-detroit-orbit{
+  position:relative;
+  isolation:isolate;overflow:hidden;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:999px;
+  padding:2px;
+  min-height:40px;
+  margin:0 auto 24px;
+  max-width:min(100%,500px);
+  background:rgba(18,11,4,.8);
+}
+.hero-detroit-orbit:before {
+  content:"";position:absolute;z-index:0;left:-85%;top:-310%;
+  width:270%;height:720%;
+  background:conic-gradient(from 0deg,
+      transparent 0 35%,rgba(255,213,90,.02) 45%,
+      #ffdd7a 49%,#fff5c2 51%,rgba(255,187,49,.28) 55%,
+      transparent 70% 100%);
+  animation:detroitGoldOrbit 7s linear infinite;
+}
+.hero-detroit-orbit span{
+  position:relative;z-index:1;
+  display:block;padding:10px clamp(12px,3vw,22px);
+  border-radius:999px;background:#1b1209;
+  color:#ffdd7a;font-size:clamp(.64rem,1.4vw,.84rem);
+  letter-spacing:clamp(.065em,.28vw,.17em);
+  line-height:1.35;font-weight:900;text-transform:uppercase;
+}
+.hero-motion-crest{
+  display:block!important;
+  width:clamp(74px,11vw,120px)!important;
+  height:clamp(74px,11vw,120px)!important;
+  margin:0 auto 12px!important;padding:0!important;
+  object-fit:contain!important;flex-shrink:0;
+  filter:drop-shadow(0 0 12px rgba(233,178,67,.31));
+}
+.hero.hero-motion .hero-headline{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(43px,7.5vw,94px)!important;
+  letter-spacing:clamp(.035em,.6vw,.12em)!important;
+  line-height:1.02!important;
+  font-weight:800;
+  margin:0 0 10px!important;
+  text-shadow:0 3px 17px #000,0 0 18px rgba(215,147,30,.21);
+}
+.hero-motion .hero-headline .hero-loop-word{
+  color:#e7b852;
+  background:linear-gradient(115deg,#fbe0a0,#e0a83c,#fff0ad,#b57e22,#ffe29a);
+  background-size:250% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:detroitGoldSheen 9s ease-in-out infinite alternate;
+}
+.hero-motion .hero-headline .hero-connect-word{
+  display:block;margin-top:7px;
+  color:#e5b451;
+  font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  font-weight:850;font-size:.47em;letter-spacing:.36em;
+  padding-left:.36em;
+}
+.hero-motion .hero-motto{
+  margin:14px auto 8px!important;
+  max-width:850px!important;
+  font-size:clamp(.93rem,2.2vw,1.38rem)!important;
+  letter-spacing:.035em;
+  color:#fff5db!important;
+  font-weight:900;
+  line-height:1.45;
+}
+.hero-motion .hero-subheadline{
+  color:#ffdd7a!important;
+  font-weight:850!important;
+  font-size:clamp(1rem,2.3vw,1.5rem)!important;
+  letter-spacing:.045em;
+  margin:14px auto 27px!important;
+  line-height:1.4;
+}
+.hero.hero-motion .hero-actions{
+  display:grid!important;
+  width:min(100%,800px)!important;
+  max-width:800px!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:stretch;gap:12px!important;
+  margin:0 auto 16px!important;
+  animation:none!important;
+}
+.hero.hero-motion .hero-actions .btn{
+  position:relative;min-width:0!important;
+  min-height:58px!important;
+  width:100%!important;max-width:none!important;
+  padding:14px 12px!important;
+  display:flex!important;align-items:center;justify-content:center;
+  gap:8px!important;text-align:center;
+  text-decoration:none!important;
+  border-radius:14px!important;
+  font-size:clamp(.9rem,1.4vw,1.05rem)!important;
+  line-height:1.25!important;
+  text-shadow:none;
+}
+.hero.hero-motion .hero-actions .btn:focus-visible{
+  outline:3px solid #fff3b5!important;outline-offset:3px!important;
+}
+.hero.hero-motion .hero-actions .btn img{
+  width:26px!important;height:26px!important;object-fit:contain!important;
+  flex:0 0 26px!important;margin:0!important;border-radius:6px;
+}
+.hero.hero-motion .hero-actions .loop-light-box{
+  isolation:isolate;overflow:hidden;background:#100c07!important;
+  color:#fff5dc!important;border:none!important;
+  box-shadow:0 0 22px rgba(235,186,73,.16);
+}
+.hero.hero-motion .hero-actions .loop-light-box:before{
+  content:"";position:absolute;z-index:0;left:-70%;top:-250%;
+  width:240%;height:600%;
+  background:conic-gradient(from 0deg,transparent 0 39%,#ffdd7a 46%,#fff7d4 50%,#e09b1d 54%,transparent 61% 100%);
+  animation:detroitGoldOrbit 5s linear infinite;
+}
+.hero.hero-motion .hero-actions .loop-light-box:after{
+  content:"";position:absolute;z-index:1;inset:2px;
+  border-radius:12px;background:linear-gradient(125deg,#100a05,#241508 65%,#0c0a07);
+}
+.hero.hero-motion .hero-actions .loop-light-box > *{position:relative;z-index:2}
+.hero.hero-motion .hero-actions .connect-button{
+  background:rgba(10,8,5,.83)!important;
+  border:1px solid rgba(248,196,75,.8)!important;
+  color:#fff2ce!important;
+}
+.hero.hero-motion .hero-actions .connect-button:hover{background:#2b1c0d!important}
+.hero-motion-caption{
+  margin:3px 0 0;color:rgba(245,228,194,.8);
+  font-size:.78rem;line-height:1.6;letter-spacing:.03em;
+}
+.hero.hero-motion .scroll-indicator{z-index:3!important;bottom:14px!important}
+
+@keyframes detroitCityGlow {
+  from{opacity:.15;filter:hue-rotate(-6deg)}
+  to{opacity:.48;filter:hue-rotate(12deg)}
+}
+@keyframes detroitBeacon {
+  0%,100%{opacity:.24;transform:scale(.7)}
+  45%{opacity:.88;transform:scale(1.6)}
+}
+@keyframes detroitRailLights {
+  from{transform:translateX(-90%)}
+  to{transform:translateX(100%)}
+}
+@keyframes detroitTrainCross {
+  0%{transform:translate3d(0,0,0) skewX(-7deg)}
+  100%{transform:translate3d(calc(100vw + 600px),-18px,0) skewX(-7deg)}
+}
+@keyframes detroitGoldOrbit {to{transform:rotate(360deg)}}
+@keyframes detroitGoldSheen {
+  from{background-position:0 50%}to{background-position:100% 50%}
+}
+@media(max-width:780px){
+  .hero.hero-motion{min-height:830px!important}
+  .hero-motion-content{padding:88px 18px 72px!important}
+  .hero-motion-train{top:calc(18% - 25px);transform-origin:center;width:310px;height:48px}
+  .hero-motion-train .train-body{inset:1px 0 8px}
+  .hero-motion-train .train-body:before{top:8px;height:17px}
+  .hero-motion-rail{top:18%}
+  .hero-motion .hero-motto{max-width:27ch!important}
+  .hero.hero-motion .hero-headline{font-size:clamp(46px,11.5vw,76px)!important}
+  .hero.hero-motion .hero-actions{grid-template-columns:1fr!important;max-width:360px!important}
+  .hero.hero-motion .hero-actions .btn{min-height:51px!important}
+  .hero-detroit-orbit{margin-bottom:17px}
+  .hero-motion-crest{margin-bottom:10px!important}
+}
+@media(max-width:430px){
+  .hero.hero-motion{min-height:795px!important}
+  .hero-motion-content{padding:85px 15px 67px!important}
+  .hero-motion .hero-headline .hero-connect-word{letter-spacing:.24em;padding-left:.24em}
+  .hero-motion .hero-motto{font-size:1rem!important}
+  .hero-motion .hero-subheadline{margin-bottom:20px!important}
+  .hero.hero-motion .hero-actions .btn{font-size:.96rem!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero.hero-motion *,
+  .hero.hero-motion::before,
+  .hero.hero-motion::after {animation:none!important;transition:none!important}
+  .hero-motion-train{display:none!important}
+  .hero-motion-scene .city-beacon{opacity:.5}
+  .hero-motion-rail:after{display:none}
+}
+
+/* The older .bg-section direct-child rule must not put the rail in document flow. */
+.hero.hero-motion > .hero-motion-content{position:relative!important;z-index:3!important}
+.hero.hero-motion > .hero-bg{position:absolute!important;inset:0!important;z-index:0!important}
+
+
+/* Matching rotating gold outline on the actual Loop card lower on the homepage. */
+.simple-journey .simple-card:first-child{
+  position:relative!important;isolation:isolate;overflow:hidden;
+  border-color:rgba(239,194,90,.7);
+}
+.simple-journey .simple-card:first-child:before{
+  content:"";position:absolute;z-index:0;left:-75%;top:-170%;
+  width:250%;height:440%;
+  background:conic-gradient(from 0deg,
+    transparent 0 30%,rgba(255,224,134,.05) 40%,#e5a82e 48%,
+    #fff1b0 51%,rgba(220,145,15,.28) 56%,transparent 66% 100%);
+  animation:detroitGoldOrbit 8s linear infinite;
+}
+.simple-journey .simple-card:first-child:after{
+  content:"";position:absolute;inset:2px;z-index:1;
+  border-radius:18px;background:linear-gradient(160deg,#241809,#110b06);
+}
+.simple-journey .simple-card:first-child > *{
+  position:relative;z-index:2;
+}
+@media(prefers-reduced-motion:reduce){
+  .simple-journey .simple-card:first-child:before{animation:none!important}
+}

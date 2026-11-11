@@ -12,9 +12,9 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7TRIBES — The Unity Platform</title>
+  <title>7Tribes — Real Needs. Real Opportunities. Real Connections.</title>
   <meta name="google-site-verification" content="J13STEzRChDz488QqKA5yP2eoiZ-FQNDUzuok6B2RHM" />
-  <meta name="description" content="7Tribes connects Detroit communities, local businesses, and ideas. Organize, build, and circulate together. Start with Loop, Connect, and the 7Tribes Academy." />
+  <meta name="description" content="Real needs. Real opportunities. Real connections. 7Tribes brings people and local businesses together through Loop, Connect and community circulation in Detroit." />
   <link rel="icon" href="images/7trb_symbol.png" />
 
   <style>
@@ -1446,29 +1446,18 @@
     @media(prefers-reduced-motion:reduce){.hero-headline,.hero-subheadline,.hero-actions{animation:none}}
   </style>
   <link rel="stylesheet" href="/css/unified-menu.css?v=20261110">
+  <link rel="stylesheet" href="css/home-cinematic-motion.css?v=20261111">
 </head>
 
 <body data-unity-env="education">
 
   <!-- Shared 7Tribes menu -->
 
-  <!-- HERO SECTION -->
-  <section class="hero bg-section bg-hero-img">
-    <div class="hero-bg">
+  <!-- CINEMATIC 7TRIBES INTRO: live CSS movement, no video or plugin needed. -->
+  <section class="hero bg-section bg-hero-img hero-motion" aria-labelledby="home-hero-title">
+    <div class="hero-bg" aria-hidden="true">
       <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-        <!-- Animated background with dots and connections -->
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-
-        <!-- City skyline outline (subtle) -->
-        <g opacity="0.2" class="building">
+        <g opacity=".2">
           <rect x="100" y="400" width="80" height="300"/>
           <rect x="200" y="350" width="100" height="350"/>
           <rect x="350" y="300" width="120" height="400"/>
@@ -1476,42 +1465,46 @@
           <rect x="800" y="320" width="110" height="380"/>
           <rect x="950" y="350" width="90" height="350"/>
         </g>
-
-        <!-- Animated dots and connections -->
-        <g class="network" filter="url(#glow)">
-          <circle cx="200" cy="150" r="6" class="dot" style="animation:fadeInScale .5s ease-out"/>
-          <circle cx="400" cy="200" r="6" class="dot" style="animation:fadeInScale .5s ease-out .1s both"/>
-          <circle cx="600" cy="120" r="6" class="dot" style="animation:fadeInScale .5s ease-out .2s both"/>
-          <circle cx="800" cy="180" r="6" class="dot" style="animation:fadeInScale .5s ease-out .3s both"/>
-          <circle cx="1000" cy="150" r="6" class="dot" style="animation:fadeInScale .5s ease-out .4s both"/>
-          
-          <!-- Connecting lines -->
-          <line x1="200" y1="150" x2="400" y2="200" class="dot-line" style="animation:drawLine 1s ease-out .5s both"/>
-          <line x1="400" y1="200" x2="600" y2="120" class="dot-line" style="animation:drawLine 1s ease-out .6s both"/>
-          <line x1="600" y1="120" x2="800" y2="180" class="dot-line" style="animation:drawLine 1s ease-out .7s both"/>
-          <line x1="800" y1="180" x2="1000" y2="150" class="dot-line" style="animation:drawLine 1s ease-out .8s both"/>
+        <g class="network">
+          <circle cx="200" cy="150" r="6" class="dot"/>
+          <circle cx="400" cy="200" r="6" class="dot"/>
+          <circle cx="600" cy="120" r="6" class="dot"/>
+          <circle cx="800" cy="180" r="6" class="dot"/>
+          <circle cx="1000" cy="150" r="6" class="dot"/>
+          <line x1="200" y1="150" x2="400" y2="200" class="dot-line"/>
+          <line x1="400" y1="200" x2="600" y2="120" class="dot-line"/>
+          <line x1="600" y1="120" x2="800" y2="180" class="dot-line"/>
+          <line x1="800" y1="180" x2="1000" y2="150" class="dot-line"/>
         </g>
       </svg>
-
-      <style>
-        @keyframes drawLine{
-          from{stroke-dasharray:200;stroke-dashoffset:200}
-          to{stroke-dasharray:200;stroke-dashoffset:0}
-        }
-      </style>
     </div>
-
-    <div class="hero-content">
-      <p class="simple-eyebrow">Detroit made. Built for community.</p>
-      <h1 class="hero-headline">7TRIBES</h1>
-      <p class="hero-subheadline">Organize. Build. Circulate.<br><span>People and local businesses moving forward together.</span></p>
-      <div class="hero-actions">
-        <a href="/account/signup.html" class="btn gold" data-home-account-cta>Create Profile</a>
-        <a href="https://loop.7trb.com" class="btn ghost app-logo-btn"><img class="app-brand-mark" src="https://loop.7trb.com/favicon.png" alt="" width="22" height="22" decoding="async" onerror="this.hidden=true"><span>Explore Loop</span></a>
+    <div class="hero-motion-scene" aria-hidden="true">
+      <span class="city-beacon"></span>
+      <span class="city-beacon"></span>
+      <span class="city-beacon"></span>
+      <span class="city-beacon"></span>
+      <div class="hero-motion-rail"></div>
+      <div class="hero-motion-train">
+        <div class="train-body"></div>
+        <div class="train-headlight"></div>
+        <div class="train-wheel"></div>
       </div>
     </div>
 
-    <div class="scroll-indicator">
+    <div class="hero-content hero-motion-content">
+      <div class="hero-detroit-orbit"><span>Detroit Made. Built for Community.</span></div>
+      <img src="images/7trb_symbol_256.png" width="120" height="120" class="hero-motion-crest" alt="7TRB emblem" decoding="async">
+      <h1 class="hero-headline" id="home-hero-title">THE <span class="hero-loop-word">LOOP</span><span class="hero-connect-word">CONNECT</span></h1>
+      <p class="hero-motto">Real Needs. Real Opportunities. Real Connections.</p>
+      <p class="hero-subheadline">Organize &bull; Build &bull; Circulate</p>
+      <div class="hero-actions">
+        <a href="/account/signup.html" class="btn gold" data-home-account-cta>Create Profile</a>
+        <a href="https://loop.7trb.com" class="btn ghost app-logo-btn loop-light-box"><img class="app-brand-mark" src="https://loop.7trb.com/favicon.png" alt="" width="26" height="26" decoding="async" onerror="this.hidden=true"><span>Explore Loop</span></a>
+        <a href="https://connect.7trb.com" class="btn ghost app-logo-btn connect-button"><img class="app-brand-mark" src="https://connect.7trb.com/manus-storage/connect-7tribes-icon_ebcb6f78.png" alt="" width="26" height="26" decoding="async" onerror="this.hidden=true"><span>Join Connect</span></a>
+      </div>
+      <p class="hero-motion-caption">A community to connect people, needs, ideas, and local businesses.</p>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
       <svg viewBox="0 0 24 24">
         <polyline points="6 9 12 15 18 9"></polyline>
       </svg>
