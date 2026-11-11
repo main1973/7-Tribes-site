@@ -4,6 +4,7 @@
 
 .hero.hero-motion {
   isolation:isolate;
+  padding:0!important;
   min-height:clamp(710px,92svh,940px) !important;
   display:flex;
   align-items:center;
