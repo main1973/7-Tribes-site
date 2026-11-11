@@ -12,7 +12,7 @@
     ]},
     {title:'Community', links:[
       ['Loop','https://loop.7trb.com'], ['Connect','https://connect.7trb.com'],
-      ['Telegram','https://t.me/SevenTribeowner']
+      ['Nuru','https://nuruai.org/'], ['Telegram','https://t.me/SevenTribeowner']
     ]},
     {title:'Resources', links:[
       ['Builders','/builders.html'], ['Developers','/developers.html'],
@@ -21,7 +21,8 @@
   ];
   var QUICK = [
     ['Home','/'], ['Ecosystem','/ecosystem.html'], ['Learn','/learn.html'],
-    ['Loop','https://loop.7trb.com'], ['Connect','https://connect.7trb.com']
+    ['Loop','https://loop.7trb.com'], ['Connect','https://connect.7trb.com'],
+    ['Nuru','https://nuruai.org/']
   ];
 
   function current(href) {
@@ -32,11 +33,31 @@
     return path === href;
   }
 
+  // Official public app favicons: Loop and Connect from their respective site
+  // assets, Nuru from its developer's website. Text remains visible if an icon fails.
+  var APP_ICON_URLS = {
+    'Loop': 'https://loop.7trb.com/favicon.png',
+    'Connect': 'https://connect.7trb.com/favicon.ico',
+    'Nuru': 'https://nuruai.org/favicon.ico'
+  };
   function link(label, href, className) {
     var a = document.createElement('a');
-    a.textContent = label;
     a.href = href;
     if (className) a.className = className;
+    if (APP_ICON_URLS[label]) {
+      var icon = document.createElement('img');
+      icon.src = APP_ICON_URLS[label];
+      icon.className = 'seven-app-icon';
+      icon.alt = '';
+      icon.width = 22;
+      icon.height = 22;
+      icon.decoding = 'async';
+      icon.addEventListener('error', function () { icon.hidden = true; });
+      a.appendChild(icon);
+    }
+    var text = document.createElement('span');
+    text.textContent = label;
+    a.appendChild(text);
     if (current(href)) a.setAttribute('aria-current', 'page');
     return a;
   }
