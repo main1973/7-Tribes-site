@@ -96,7 +96,14 @@
 
     var drawerHeader = document.createElement('div');
     drawerHeader.className = 'drawer-header';
-    drawerHeader.appendChild(link('7TRIBES', '/', 'seven-drawer-brand'));
+    var drawerBrand = link('7TRIBES', '/', 'seven-drawer-brand');
+    var drawerLogo = document.createElement('img');
+    drawerLogo.src = '/images/7trb_symbol.png';
+    drawerLogo.alt = '';
+    drawerLogo.width = 32;
+    drawerLogo.height = 32;
+    drawerBrand.insertBefore(drawerLogo, drawerBrand.firstChild);
+    drawerHeader.appendChild(drawerBrand);
     var closeButton = document.createElement('button');
     closeButton.id = 'close-menu';
     closeButton.type = 'button';
