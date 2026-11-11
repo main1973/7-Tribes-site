@@ -288,3 +288,28 @@
 /* The older .bg-section direct-child rule must not put the rail in document flow. */
 .hero.hero-motion > .hero-motion-content{position:relative!important;z-index:3!important}
 .hero.hero-motion > .hero-bg{position:absolute!important;inset:0!important;z-index:0!important}
+
+
+/* Matching rotating gold outline on the actual Loop card lower on the homepage. */
+.simple-journey .simple-card:first-child{
+  position:relative!important;isolation:isolate;overflow:hidden;
+  border-color:rgba(239,194,90,.7);
+}
+.simple-journey .simple-card:first-child:before{
+  content:"";position:absolute;z-index:0;left:-75%;top:-170%;
+  width:250%;height:440%;
+  background:conic-gradient(from 0deg,
+    transparent 0 30%,rgba(255,224,134,.05) 40%,#e5a82e 48%,
+    #fff1b0 51%,rgba(220,145,15,.28) 56%,transparent 66% 100%);
+  animation:detroitGoldOrbit 8s linear infinite;
+}
+.simple-journey .simple-card:first-child:after{
+  content:"";position:absolute;inset:2px;z-index:1;
+  border-radius:18px;background:linear-gradient(160deg,#241809,#110b06);
+}
+.simple-journey .simple-card:first-child > *{
+  position:relative;z-index:2;
+}
+@media(prefers-reduced-motion:reduce){
+  .simple-journey .simple-card:first-child:before{animation:none!important}
+}
