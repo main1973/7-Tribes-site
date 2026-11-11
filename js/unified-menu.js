@@ -150,9 +150,12 @@
     });
     var path = window.location.pathname;
     if (path === '/earn.html' || path === '/digital.html') {
-      var plainNav = document.body.querySelector('nav');
+      var plainNav = Array.prototype.find.call(document.querySelectorAll('nav'), function (node) {
+        return !node.closest('#seven-nav-bar') && !node.closest('#mobile-drawer');
+      });
       if (plainNav && !plainNav.closest('#seven-nav-bar')) plainNav.classList.add('seven-nav-legacy');
     }
+    if (path === '/wallet.html') document.body.classList.add('seven-nav-wallet');
     document.body.classList.add('seven-nav-ready');
 
     var priorFocus = null;
