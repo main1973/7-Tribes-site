@@ -177,3 +177,16 @@ body.seven-nav-ready.academy-page .academy-header{top:0}
 /* Keep the standalone Nuru wallet gateway centered below the common header. */
 body.seven-nav-ready.seven-nav-wallet{display:block!important;min-height:100vh!important;margin:0!important;padding:0!important}
 body.seven-nav-ready.seven-nav-wallet > main{margin:clamp(24px,6vh,64px) auto!important;width:min(620px,calc(100% - 32px))!important}
+
+/* Consistent logo treatment even on legacy pages with global img margins. */
+#seven-nav-bar .seven-nav-brand img,#mobile-drawer .seven-drawer-brand img{
+  display:block!important;
+  width:34px!important;height:34px!important;
+  margin:0!important;padding:0!important;
+  border:0!important;border-radius:50%!important;box-shadow:none!important;
+  object-fit:contain!important;flex-shrink:0!important;
+}
+#mobile-drawer .seven-drawer-brand{
+  display:inline-flex!important;align-items:center!important;gap:10px!important;
+  margin:0!important;padding:0!important;text-decoration:none!important;
+}
