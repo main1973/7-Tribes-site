@@ -1445,75 +1445,12 @@
     }
     @media(prefers-reduced-motion:reduce){.hero-headline,.hero-subheadline,.hero-actions{animation:none}}
   </style>
+  <link rel="stylesheet" href="/css/unified-menu.css?v=20261110">
 </head>
 
 <body data-unity-env="education">
 
-  <!-- NAVIGATION -->
-  <nav class="top-nav">
-    <div class="top-nav-inner">
-      <a class="nav-brand" href="index.html">
-        <img src="images/7trb_symbol.png" alt="7TRB logo">
-        <span>7TRB</span>
-      </a>
-
-      <div class="main-nav">
-        <a href="index.html" aria-current="page">Home</a>
-        <a href="learn.html">Learn</a>
-        <a href="academy/">Academy</a>
-        <a href="https://loop.7trb.com">Loop</a>
-        <a href="ecosystem.html">Ecosystem</a>
-        <a href="transparency.html">Transparency</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="builders.html">Builders</a>
-        <a href="developers.html">Developers</a>
-      </div>
-      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu"><span class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
-    </div>
-
-  <!-- Mobile Menu Overlay -->
-  <div class="menu-overlay" id="menu-overlay"></div>
-
-  <!-- Mobile Menu Drawer -->
-  <div class="mobile-drawer" id="mobile-drawer">
-    <div class="drawer-header">
-      <a class="nav-brand" href="index.html">
-        <img src="images/7trb_symbol.png" alt="7TRB logo">
-        <span>7TRB</span>
-      </a>
-      <button class="close-btn" id="close-menu">✕</button>
-    </div>
-
-    <div class="drawer-content">
-      <div class="drawer-section">
-        <span class="drawer-section-title">Platform</span>
-        <a href="index.html" aria-current="page">Home</a>
-        <a href="learn.html">Learn</a>
-        <a href="academy/">Academy</a>
-        <a href="ecosystem.html">Ecosystem</a>
-        <a href="transparency.html">Transparency</a>
-      </div>
-
-      <div class="drawer-section">
-        <span class="drawer-section-title">Community</span>
-        <a href="https://loop.7trb.com">Loop</a>
-        <a href="https://connect.7trb.com">Connect</a>
-        <a href="https://t.me/SevenTribeowner">Telegram</a>
-      </div>
-
-      <div class="drawer-section">
-        <span class="drawer-section-title">Resources</span>
-        <a href="builders.html">Builders</a>
-        <a href="developers.html">Developers</a>
-        <a href="dashboard.html">Dashboard</a>
-      </div>
-
-    </div>
-
-    <div class="drawer-footer">
-      <button class="drawer-cta" onclick="window.location.href='join/'">Enter the Ecosystem</button>
-    </div>
-  </div>
+  <!-- Shared 7Tribes menu -->
 
   <!-- HERO SECTION -->
   <section class="hero bg-section bg-hero-img">
@@ -1689,34 +1626,6 @@
 
   <script src="js/visitor-counter.js?v=device-visits-20260817"></script>
   <script type="module" src="js/home-account-cta.js?v=homepage-profile-cta-20260826"></script>
-  <script>
-    // Mobile Menu Toggle
-    const menuToggle = document.getElementById("menu-toggle");
-    const closeMenu = document.getElementById("close-menu");
-    const mobileDrawer = document.getElementById("mobile-drawer");
-    const menuOverlay = document.getElementById("menu-overlay");
-    if (menuToggle && mobileDrawer && menuOverlay) {
-      const drawerLinks = mobileDrawer.querySelectorAll("a");
-      function openMenu() {
-        mobileDrawer.classList.add("active");
-        menuOverlay.classList.add("active");
-        document.body.classList.add("menu-open");
-      }
-      function closeMenuDrawer() {
-        mobileDrawer.classList.remove("active");
-        menuOverlay.classList.remove("active");
-        document.body.classList.remove("menu-open");
-      }
-      menuToggle.addEventListener("click", openMenu);
-      if (closeMenu) closeMenu.addEventListener("click", closeMenuDrawer);
-      menuOverlay.addEventListener("click", closeMenuDrawer);
-      drawerLinks.forEach(link => {
-        link.addEventListener("click", () => {
-          if (link.target !== "_blank") closeMenuDrawer();
-        });
-      });
-    }
-  </script>
-  <script src="js/nav.js?v=7tribes-account-v2"></script>
+  <script defer src="/js/unified-menu.js?v=20261110"></script>
 </body>
 </html>
