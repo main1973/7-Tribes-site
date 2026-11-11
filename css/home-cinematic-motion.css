@@ -25,10 +25,10 @@
   animation:detroitCityGlow 11s ease-in-out infinite alternate;
 }
 .hero.hero-motion .hero-bg{z-index:0!important;opacity:.19!important}
-.hero-motion-scene {
-  position:absolute;
-  inset:0;
-  z-index:1;
+.hero.hero-motion > .hero-motion-scene {
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
   pointer-events:none;
   overflow:hidden;
 }
@@ -284,3 +284,7 @@
   .hero-motion-scene .city-beacon{opacity:.5}
   .hero-motion-rail:after{display:none}
 }
+
+/* The older .bg-section direct-child rule must not put the rail in document flow. */
+.hero.hero-motion > .hero-motion-content{position:relative!important;z-index:3!important}
+.hero.hero-motion > .hero-bg{position:absolute!important;inset:0!important;z-index:0!important}
