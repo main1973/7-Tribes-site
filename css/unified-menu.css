@@ -207,3 +207,33 @@ body.seven-nav-ready.seven-nav-wallet > main{margin:clamp(24px,6vh,64px) auto!im
   #seven-nav-bar .seven-nav-quick{gap:8px!important}
   #seven-nav-bar .seven-nav-quick a{font-size:.78rem!important;gap:6px!important}
 }
+
+/* Official Loop / Connect / Nuru marks in prominent action links. */
+.app-brand-mark{
+  display:inline-block!important;
+  width:22px!important;height:22px!important;
+  min-width:22px!important;
+  margin:0!important;padding:0!important;
+  vertical-align:middle!important;object-fit:contain!important;
+  border-radius:5px!important;box-shadow:none!important;flex-shrink:0!important;
+}
+.app-brand-mark[hidden]{display:none!important}
+a.app-logo-btn,
+a.app-logo-link,
+a.eco-feature-link:has(> .app-brand-mark),
+a.eco-role a:has(> .app-brand-mark){
+  display:inline-flex!important;align-items:center!important;justify-content:center;
+  gap:9px!important;
+}
+a.app-logo-btn{white-space:normal!important;text-align:center}
+a.app-logo-link{justify-content:flex-start}
+a.eco-feature-link:has(> .app-brand-mark),
+a.eco-role a:has(> .app-brand-mark){justify-content:flex-start}
+.app-action-title{
+  display:inline-flex!important;align-items:center!important;gap:10px!important;
+  font-weight:inherit;
+}
+@media(max-width:760px){
+  .app-logo-btn .app-brand-mark,.app-logo-link .app-brand-mark{width:23px!important;height:23px!important;min-width:23px!important}
+  .app-action-title{max-width:100%}
+}
