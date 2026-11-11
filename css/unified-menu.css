@@ -190,3 +190,20 @@ body.seven-nav-ready.seven-nav-wallet > main{margin:clamp(24px,6vh,64px) auto!im
   display:inline-flex!important;align-items:center!important;gap:10px!important;
   margin:0!important;padding:0!important;text-decoration:none!important;
 }
+
+
+/* Official brand icons for Loop, Connect, and Nuru in the shared navigation. */
+#seven-nav-bar .seven-nav-quick a{display:inline-flex!important;align-items:center!important;gap:8px!important}
+#seven-nav-bar .seven-app-icon,
+#mobile-drawer .seven-app-icon{
+  display:block!important;width:22px!important;height:22px!important;min-width:22px!important;
+  margin:0!important;padding:0!important;object-fit:contain!important;
+  border-radius:5px!important;box-shadow:none!important;flex-shrink:0!important;
+}
+#seven-nav-bar .seven-app-icon[hidden],
+#mobile-drawer .seven-app-icon[hidden]{display:none!important}
+#mobile-drawer .drawer-section a .seven-app-icon{margin-right:8px!important}
+@media(min-width:921px) and (max-width:1100px){
+  #seven-nav-bar .seven-nav-quick{gap:8px!important}
+  #seven-nav-bar .seven-nav-quick a{font-size:.78rem!important;gap:6px!important}
+}
