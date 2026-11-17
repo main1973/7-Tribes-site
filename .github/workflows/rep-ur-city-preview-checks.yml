@@ -1,0 +1,39 @@
+name: Rep Ur City isolated preview checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  demo-only:
+    if: github.event_name != 'pull_request' || github.head_ref == 'feat/rep-ur-city-isolated-staging-preview-20261116'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check rep-ur-city-preview/app.mjs
+      - run: node --check rep-ur-city-preview/game-rules.mjs
+      - run: node --test rep-ur-city-preview/game-rules.test.mjs
+      - name: Verify staging preview has no network or credential integration
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          const html = readFileSync('rep-ur-city-preview/index.html','utf8');
+          const js = readFileSync('rep-ur-city-preview/app.mjs','utf8');
+          assert.ok(html.includes('STAGING PREVIEW'));
+          assert.ok(html.includes('noindex,nofollow,noarchive'));
+          assert.ok(html.includes('No live users, real merchants, receipt collection'));
+          assert.ok(!/\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage|eth_requestAccounts/.test(js));
+          assert.ok(html.includes('./app.mjs'));
+          assert.ok(html.includes('./styles.css'));
+          console.log('Isolated staging preview safety assertions passed.');
+          NODE
