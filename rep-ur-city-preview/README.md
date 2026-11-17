@@ -17,7 +17,7 @@ The score lab accepts a **manual East/West team selection**, one sample multipli
 
 ## Hosting safety gate (must be satisfied before publication)
 
-The original `staging.7trb.com` deployment/provider and DNS mapping **could not be independently verified** from the tools available at creation. Do not repoint the domain or replace an existing staging project. Before publishing:
+Original deployment records identify `staging.7trb.com` as **an existing protected Manus staging project** (resource `wdp_00ff7fb070bde2ed4ee33604`, app `bejJD8cgUjAHVNWTqrQd7S`, historical DNS `staging → cname.manus.space`). Actual current live state and a restorable backup remain unverified. **Do not merge this separate GitHub main-site PR or overwrite the existing staging project.** Use `MANUS_STAGING_HANDOFF.md` for the non-destructive additive-route plan. Before publishing:
 1. Identify the actual provider, project, current branch, domain mapping, database, and deployment source for `staging.7trb.com`.
 2. Record a restorable backup/snapshot of its existing state and confirm ownership. Never overwrite original test or live data.
 3. If staging is already occupied, use a namespaced path or an isolated alternate preview first; never overwrite it by assumption.
