@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#101013">
+  <meta name="description" content="Isolated, non-production Rep Ur City prototype for the 7Tribes Detroit pilot. No real receipts, member accounts or rewards.">
+  <title>REP UR CITY — Staging Preview | 7Tribes</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a href="https://7trb.com/" class="brand" aria-label="7Tribes main site">7<span>TRB</span><small> / REP UR CITY</small></a>
+      <span class="environment">STAGING PREVIEW · DEMO ONLY</span>
+      <nav aria-label="Related ecosystem sites" class="ecosystem-links">
+        <a href="https://loop.7trb.com/">Loop</a>
+        <a href="https://connect.7trb.com/">Connect</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <p class="eyebrow">DETROIT PILOT / ORGANIZE · BUILD · CIRCULATE</p>
+      <h1 id="hero-title">REP <em>UR</em> CITY<span class="period">.</span></h1>
+      <h2>The game board is your city.</h2>
+      <p class="hero-copy">Turn local support into visible community action. Discover participating merchants, submit purchase proof when the pilot opens, and help your side of Detroit climb the board.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#score-lab">Try the score demo <span aria-hidden="true">↘</span></a>
+        <a class="btn ghost" href="#how-it-works">How it works</a>
+      </div>
+      <p class="clear-notice"><strong>Prototype only.</strong> No live users, real merchants, receipt collection, CP awards, cash payments, or 7TRB transfers are active here.</p>
+    </section>
+
+    <section class="shell" id="how-it-works" aria-labelledby="how-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE PLAYBOOK</p><h2 id="how-title">Spend → Scan → Score → Rep</h2></div>
+        <span class="micro">Community commerce, verified action</span>
+      </div>
+      <ol class="four-steps">
+        <li><span class="step-num">01</span><h3>Spend</h3><p>Support a participating Detroit business.</p></li>
+        <li><span class="step-num">02</span><h3>Scan</h3><p>Submit a receipt or supported proof after the pilot launches.</p></li>
+        <li><span class="step-num">03</span><h3>Score</h3><p>Earn Circulation Points only after eligible activity is verified.</p></li>
+        <li><span class="step-num">04</span><h3>Rep</h3><p>See your neighborhood and city team move up verified leaderboards.</p></li>
+      </ol>
+    </section>
+
+    <section class="shell score-grid" id="score-lab" aria-labelledby="lab-title">
+      <div class="score-panel">
+        <p class="eyebrow">INTERACTIVE · SAMPLE DATA ONLY</p>
+        <h2 id="lab-title">Test the Score Lab</h2>
+        <p class="soft">Choose a team and one multiplier. The example always starts at <strong>100 hypothetical base CP</strong>. The official base-point conversion and multiplier-stacking rules are not approved yet.</p>
+        <form id="demo-form" novalidate>
+          <label for="team">City team</label>
+          <select id="team" name="team">
+            <option value="East">Detroit East</option>
+            <option value="West">Detroit West</option>
+          </select>
+          <label for="multiplier">Example activity</label>
+          <select id="multiplier" name="multiplier"></select>
+          <div class="result">
+            <span>Illustrative points</span>
+            <strong id="preview-points" aria-live="polite">100 CP</strong>
+          </div>
+          <button class="btn primary wide" type="submit">Simulate one demo activity</button>
+          <p class="fine-print">This button adds only a temporary sample entry on this screen. It does not upload a receipt or credit a wallet.</p>
+        </form>
+      </div>
+      <div class="board-panel">
+        <div class="board-head"><p class="eyebrow">DETROIT CITY BOARD</p><span class="chip">DEMO · NOT LIVE</span></div>
+        <h2>East <span>vs.</span> West</h2>
+        <div class="vs-grid">
+          <div class="side"><span>EAST SIDE</span><strong id="east-score">0</strong><small>Sample CP</small></div>
+          <div class="versus">VS</div>
+          <div class="side"><span>WEST SIDE</span><strong id="west-score">0</strong><small>Sample CP</small></div>
+        </div>
+        <div class="board-foot">
+          <p><span id="demo-count">0</span> simulated actions this session. Refreshing clears the demo.</p>
+          <button class="btn tiny" id="reset-demo" type="button">Reset demo board</button>
+        </div>
+        <p class="fine-print">Team affiliation is selected manually here for illustration. Real Detroit ZIP / team mapping must be verified before launch.</p>
+      </div>
+    </section>
+
+    <section class="shell" id="rules" aria-labelledby="rule-title">
+      <div class="section-heading"><div><p class="eyebrow">SCORING DESIGN</p><h2 id="rule-title">Proposed CP multipliers</h2></div><span class="micro">Under review</span></div>
+      <div class="multiplier-table">
+        <div class="table-row header"><span>Eligible example</span><span>Multiplier</span></div>
+        <div class="table-row"><span>Detroit ZIP purchase</span><strong>×1.0</strong></div>
+        <div class="table-row"><span>Black-owned Detroit business</span><strong>×1.5</strong></div>
+        <div class="table-row"><span>7Tribes-verified business</span><strong>×2.0</strong></div>
+        <div class="table-row"><span>First-time visit</span><strong>×2.5</strong></div>
+        <div class="table-row"><span>Mission-critical business of the week</span><strong>×3.0</strong></div>
+      </div>
+      <p class="fine-print">A purchase may meet multiple criteria. This preview intentionally applies one multiplier at a time; stacking, eligibility, merchant verification, anti-fraud rules, and CP economics require approval.</p>
+    </section>
+
+    <section class="shell readiness" id="pilot" aria-labelledby="pilot-title">
+      <p class="eyebrow">BEFORE WE INVITE PLAYERS</p>
+      <h2 id="pilot-title">What still needs building</h2>
+      <div class="readiness-list">
+        <div><span>01</span><p><strong>Resident sign-in and team choice</strong><small>Separate access from Loop/Connect until identity handoff is verified</small></p><b>NOT CONNECTED</b></div>
+        <div><span>02</span><p><strong>Verified merchant directory</strong><small>Use consented listings; do not copy Connect production data into staging</small></p><b>NOT CONNECTED</b></div>
+        <div><span>03</span><p><strong>Receipt submission and review</strong><small>Secure storage, private proof, replay prevention, and moderation</small></p><b>NOT CONNECTED</b></div>
+        <div><span>04</span><p><strong>Verified CP ledger and leaderboard</strong><small>Server-calculated totals with appeal and rollback procedures</small></p><b>NOT CONNECTED</b></div>
+        <div><span>05</span><p><strong>Nuru / 7TRB optional layer</strong><small>Only after supported wallet and token participation are separately verified</small></p><b>NOT CONNECTED</b></div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="shell footer-content"><strong>REP UR CITY</strong><span>7Tribes · Detroit pilot prototype · No production data</span><a href="https://7trb.com/">7trb.com</a></div></footer>
+</body>
+</html>
