@@ -10,8 +10,10 @@ A responsive, dependency-free, keyboard-accessible static preview in this direct
 - `index.html` + `styles.css` + `app.mjs`
 - `game-rules.mjs`: pure, testable sample CP calculations and team totals
 - `game-rules.test.mjs`: test data and no-ledger assertions
+- `demo-review.mjs`: fictional proof-submission queue, one-time token checks, simulated approval/rejection and reversible demonstration scores
+- `demo-review.test.mjs`: negative tests for unknown tokens, duplicate proof reuse, unauthorized score transitions and double awards
 
-The score lab accepts a **manual East/West team selection**, one sample multiplier, and 100 hypothetical base CP. Users can simulate actions and reset this session's totals. All values start at zero and exist **only in browser memory**; nothing is uploaded, stored, or credited to any wallet.
+The score lab accepts a **manual East/West team selection**, one multiplier, and 100 hypothetical base CP. A user selects from **six preloaded fictional DEMO proof tokens** (not a free-text field) and submits for **simulated review**. Scores begin at **0/0** and update **only after clicking simulated approval**. Rejection gives zero CP; reversal removes approved CP; reusing any already-submitted token is rejected until the demo is reset. Everything exists **only in browser memory** and resets on refresh; nothing is uploaded, saved or credited to any wallet. All six demonstration merchants are fictional and must never be presented as Connect listings.
 
 **Not implemented:** accounts, Connect merchant sync, receipt uploads, proof verification, CP ledger, ZIP mapping, Nuru authentication, real 7TRB, Stripe, leaderboards with real users, payouts or awards. The preview must never be described as any of those features being live.
 
@@ -51,6 +53,8 @@ Original deployment records identify `staging.7trb.com` as **an existing protect
 node --check rep-ur-city-preview/app.mjs
 node --check rep-ur-city-preview/game-rules.mjs
 node --test rep-ur-city-preview/game-rules.test.mjs
+node --check rep-ur-city-preview/demo-review.mjs
+node --test rep-ur-city-preview/demo-review.test.mjs
 ```
 
 This is planning and demo code, not authority to publish, change DNS, migrate databases, issue CP/7TRB, or sign up real people.
