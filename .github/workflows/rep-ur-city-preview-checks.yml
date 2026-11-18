@@ -22,6 +22,8 @@ jobs:
       - run: node --check rep-ur-city-preview/app.mjs
       - run: node --check rep-ur-city-preview/game-rules.mjs
       - run: node --test rep-ur-city-preview/game-rules.test.mjs
+      - run: node --check rep-ur-city-preview/demo-review.mjs
+      - run: node --test rep-ur-city-preview/demo-review.test.mjs
       - name: Verify staging preview has no network or credential integration
         run: |
           node --input-type=module <<'NODE'
