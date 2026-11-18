@@ -53,8 +53,11 @@
       <div class="score-panel">
         <p class="eyebrow">INTERACTIVE · SAMPLE DATA ONLY</p>
         <h2 id="lab-title">Test the Score Lab</h2>
-        <p class="soft">Choose a team and one multiplier. The example always starts at <strong>100 hypothetical base CP</strong>. The official base-point conversion and multiplier-stacking rules are not approved yet.</p>
+        <p class="soft">Follow an entirely fictional sample proof from submission to review. <strong>Only a simulated approval updates the demo board.</strong> Each example uses 100 hypothetical base CP and one multiplier; final CP rules are not approved.</p>
         <form id="demo-form" novalidate>
+          <label for="proof-token">Fictional sample proof</label>
+          <select id="proof-token" name="proof-token" aria-describedby="proof-help"></select>
+          <p id="proof-help" class="fine-print">Choose a preloaded DEMO token. Do not enter or upload any actual receipt or personal information.</p>
           <label for="team">City team</label>
           <select id="team" name="team">
             <option value="East">Detroit East</option>
@@ -66,8 +69,9 @@
             <span>Illustrative points</span>
             <strong id="preview-points" aria-live="polite">100 CP</strong>
           </div>
-          <button class="btn primary wide" type="submit">Simulate one demo activity</button>
-          <p class="fine-print">This button adds only a temporary sample entry on this screen. It does not upload a receipt or credit a wallet.</p>
+          <button class="btn primary wide" type="submit">Submit fictional proof for demo review</button>
+          <p id="demo-message" class="fine-print" role="status" aria-live="polite">Choose a sample token and submit to see a pending review.</p>
+          <p class="fine-print">No real receipt upload, account change, wallet credit, verification or CP award takes place.</p>
         </form>
       </div>
       <div class="board-panel">
@@ -79,10 +83,18 @@
           <div class="side"><span>WEST SIDE</span><strong id="west-score">0</strong><small>Sample CP</small></div>
         </div>
         <div class="board-foot">
-          <p><span id="demo-count">0</span> simulated actions this session. Refreshing clears the demo.</p>
+          <p><span id="demo-count">0</span> approved fictional actions · <span id="demo-pending">0</span> pending · <span id="demo-rejected">0</span> rejected · <span id="demo-reversed">0</span> reversed. Refresh clears the demo.</p>
           <button class="btn tiny" id="reset-demo" type="button">Reset demo board</button>
         </div>
-        <p class="fine-print">Team affiliation is selected manually here for illustration. Real Detroit ZIP / team mapping must be verified before launch.</p>
+        <p class="fine-print">Only approved fictional entries count here. Team affiliation is selected manually; real ZIP mapping and verification must be tested before launch.</p>
+      </div>
+    </section>
+
+    <section class="shell" id="review-queue" aria-labelledby="review-heading">
+      <div class="section-heading"><div><p class="eyebrow">SCAN → REVIEW → SCORE</p><h2 id="review-heading">Simulated proof review</h2></div><span class="micro">No real data · no real approvals</span></div>
+      <p class="soft">Every demo submission starts pending. You can simulate approval, rejection, or reversal to see how an accountable scoring process could work. A used token is blocked from being submitted again until the entire demonstration is reset.</p>
+      <div id="review-list" class="review-list" aria-live="polite" aria-relevant="additions text">
+        <div class="review-empty">No fictional proofs submitted yet.</div>
       </div>
     </section>
 
