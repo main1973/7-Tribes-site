@@ -39,7 +39,7 @@ The `rep-ur-city-preview/` folder in this **draft** GitHub PR is merely a propos
 3. Preserve original staging routes, owner profile, city preference, educational progress, synthetic posts/listings, tester accounts, bug reports and access protections. Keep the auto-publish toggle off.
 4. Add an authenticated **Rep Ur City** entry point as a new additive route, e.g. `/rep-ur-city`, with an optional menu link inside the existing staging design. Do not replace Home or Dashboard.
 5. Implement only the **demonstration view** from `rep-ur-city-preview/` behind the **existing staging server authentication gate**, not as an unprotected public standalone page. Do not copy real Connect merchant data or Nuru credentials.
-6. Use **only synthetic** demo names and data. Keep score computations local and ephemeral; **0** initial East/West values. No receipt images/uploads, public user signup, payments, real 7TRB, wallet connections, rewards, smart contracts, GPS/location calls, third-party APIs, or messaging.
+6. Use **only synthetic** demo names and data. Keep score computations local and ephemeral; **0** initial East/West values. The preview now includes **six fictional DEMO proof tokens**, a pending-only review queue and explicit **simulate approval/rejection/reversal** controls. A used demo token cannot be resubmitted in that session; rejected/reversed examples do not contribute to the board. All statuses are **client-only demonstrations, NOT receipt checks, purchases, actual moderation or financial awards**. No receipt images/uploads, public user signup, payments, real 7TRB, wallet connections, rewards, smart contracts, GPS/location calls, third-party APIs, or messaging.
 7. Keep the mobile app's six existing non-financial pilot missions intact, and label the new points score lab separately as *Illustrative CP — under review*, not verified production scoring.
 8. Run local/preview tests without saving or changing production data: login; anonymous access denied; direct `/rep-ur-city` denied when unauthenticated; same-window internal navigation; mobile Nuru and Chrome layout; keyboard interactions; simulation and reset; logout/session revocation; no external calls; existing Profile/Loop/Connect still work and retain data after reload.
 9. Present an explicit file diff, backup ID (not sensitive details), test evidence, and publication plan for owner review **before** publishing anything. Publish only after explicit approval and available Manus credits. Keep prod and DNS unchanged.
@@ -60,6 +60,6 @@ The `rep-ur-city-preview/` folder in this **draft** GitHub PR is merely a propos
 - [ ] All existing routes, owner settings, tester slots, and synthetic records preserved
 - [ ] Desktop and Nuru mobile rendering; no forced refresh / wallet methods
 - [ ] Sample CP exact 100/150/200/250/300 for one selected sample multiplier, no stacking
-- [ ] East/West board starts 0/0, only increases after local simulation, resets, refresh clears
+- [ ] East/West board starts 0/0; proof submission stays pending and earns zero points, simulated approval credits only once, rejection credits zero, reversal deducts once, duplicate-token submission blocked, reset/refresh clears
 - [ ] No production API, external integrations, tokens, receipts, signup or payment flows
 - [ ] Explicit permission before publishing; rollback tested
